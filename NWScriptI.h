@@ -1,4 +1,4 @@
-// Generated on Fri Aug 14 13:43:27 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Fri Aug 14 21:16:45 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 #include "FunctionHooks.h"
 #include "NWNStructures.h"
@@ -201,9 +201,9 @@ class NWScriptI : public NWN::NWScript {
     virtual NWN::NWEffect effectSkillIncrease(Ice::Int nSkill, Ice::Int nValue, const Ice::Current&);
     virtual NWN::NWEffect effectSleep(const Ice::Current&);
     virtual NWN::NWEffect effectSlow(const Ice::Current&);
-    virtual NWN::NWEffect effectSpellFailure(Ice::Int nPercent, Ice::Int nSpellSchool, const Ice::Current&);
+    virtual NWN::NWEffect effectSpellFailure(Ice::Int nPercent, NWN::SpellSchool tSpellSchool, const Ice::Current&);
     virtual NWN::NWEffect effectSpellImmunity(Ice::Int nImmunityToSpell, const Ice::Current&);
-    virtual NWN::NWEffect effectSpellLevelAbsorption(Ice::Int nMaxSpellLevelAbsorbed, Ice::Int nTotalSpellLevelsAbsorbed, Ice::Int nSpellSchool, const Ice::Current&);
+    virtual NWN::NWEffect effectSpellLevelAbsorption(Ice::Int nMaxSpellLevelAbsorbed, Ice::Int nTotalSpellLevelsAbsorbed, NWN::SpellSchool tSpellSchool, const Ice::Current&);
     virtual NWN::NWEffect effectSpellResistanceDecrease(Ice::Int nValue, const Ice::Current&);
     virtual NWN::NWEffect effectSpellResistanceIncrease(Ice::Int nValue, const Ice::Current&);
     virtual NWN::NWEffect effectStunned(const Ice::Current&);

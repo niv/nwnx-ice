@@ -1,4 +1,4 @@
-// Generated on Fri Aug 14 13:43:27 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Fri Aug 14 21:16:45 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 // Not exported:
 //   getFirstEffect getFirstFactionMember getFirstItemInInventory getFirstItemProperty getFirstInPersistentObject getFirstObjectInArea getFirstObjectInShape getFirstPC
@@ -43,6 +43,7 @@ module NWN {
   enum ShapeType { SpellCylinderShape, ConeShape, CubeShape, SpellConeShape, SphereShape };
   enum AttackResult { MissedAttack, HitAttack, CriticalHitAttack };
   enum MetaMagic { NoneMeta, EmpowerMeta, ExtendMeta, MaximizeMeta, QuickenMeta, SilentMeta, StillMeta, AnyMeta };
+  enum SpellSchool { GeneralSchool, AbjurationSchool, ConjurationSchool, DivinationSchool, EnchantmentSchool, EvocationSchool, IllusionSchool, NecromancySchool, TransmutationSchool };
 
   sequence<int> IntSeq;
 
@@ -65,6 +66,7 @@ module NWN {
   sequence<byte> Persistable;
   exception StateNotAvailableException {};
 
+  exception InvalidObjectException {};
   exception InvalidEffectException {};
   exception InvalidItemPropertyException {};
 
@@ -349,9 +351,9 @@ module NWN {
     idempotent NWEffect effectSkillIncrease(int nSkill, int nValue) throws NotInContextException;
     idempotent NWEffect effectSleep() throws NotInContextException;
     idempotent NWEffect effectSlow() throws NotInContextException;
-    idempotent NWEffect effectSpellFailure(int nPercent, int nSpellSchool) throws NotInContextException;
+    idempotent NWEffect effectSpellFailure(int nPercent, SpellSchool tSpellSchool) throws NotInContextException;
     idempotent NWEffect effectSpellImmunity(int nImmunityToSpell) throws NotInContextException;
-    idempotent NWEffect effectSpellLevelAbsorption(int nMaxSpellLevelAbsorbed, int nTotalSpellLevelsAbsorbed, int nSpellSchool) throws NotInContextException;
+    idempotent NWEffect effectSpellLevelAbsorption(int nMaxSpellLevelAbsorbed, int nTotalSpellLevelsAbsorbed, SpellSchool tSpellSchool) throws NotInContextException;
     idempotent NWEffect effectSpellResistanceDecrease(int nValue) throws NotInContextException;
     idempotent NWEffect effectSpellResistanceIncrease(int nValue) throws NotInContextException;
     idempotent NWEffect effectStunned() throws NotInContextException;
