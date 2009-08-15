@@ -1,4 +1,4 @@
-// Generated on Fri Aug 14 21:16:45 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Sat Aug 15 13:59:11 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 #include "FunctionHooks.h"
 #include "NWNStructures.h"
@@ -82,7 +82,7 @@ class NWScriptI : public NWN::NWScript {
     virtual void addItemProperty(NWN::DurationType tDurationType, const NWN::NWItemProperty& ipProperty, const NWN::NWObject& oItem, Ice::Double fDuration, const Ice::Current&);
     virtual void addJournalQuestEntry(const std::string& szPlotID, Ice::Int nState, const NWN::NWObject& oCreature, bool bAllPartyMembers, bool bAllPlayers, bool bAllowOverrideHigher, const Ice::Current&);
     virtual void addToParty(const NWN::NWObject& oPC, const NWN::NWObject& oPartyLeader, const Ice::Current&);
-    virtual void adjustAlignment(const NWN::NWObject& oSubject, Ice::Int nAlignment, Ice::Int nShift, bool bAllPartyMembers, const Ice::Current&);
+    virtual void adjustAlignment(const NWN::NWObject& oSubject, NWN::Alignment tAlignment, Ice::Int nShift, bool bAllPartyMembers, const Ice::Current&);
     virtual void adjustReputation(const NWN::NWObject& oTarget, const NWN::NWObject& oSourceFactionMember, Ice::Int nAdjustment, const Ice::Current&);
     virtual void ambientSoundChangeDay(const NWN::NWObject& oArea, Ice::Int nTrack, const Ice::Current&);
     virtual void ambientSoundChangeNight(const NWN::NWObject& oArea, Ice::Int nTrack, const Ice::Current&);
@@ -109,8 +109,8 @@ class NWScriptI : public NWN::NWScript {
     virtual Ice::Double cos(Ice::Double fValue, const Ice::Current&);
     virtual NWN::NWObject createItemOnObject(const std::string& sItemTemplate, const NWN::NWObject& oTarget, Ice::Int nStackSize, const std::string& sNewTag, const Ice::Current&);
     virtual NWN::NWObject createObject(NWN::ObjectType tObjectType, const std::string& sTemplate, const NWN::NWLocation& lLocation, bool bUseAppearAnimation, const std::string& sNewTag, const Ice::Current&);
-    virtual NWN::NWObject createTrapAtLocation(Ice::Int nTrapType, const NWN::NWLocation& lLocation, Ice::Double fSize, const std::string& sTag, NWN::StandardFaction tStandardFaction, const std::string& sOnDisarmScript, const std::string& sOnTrapTriggeredScript, const Ice::Current&);
-    virtual void createTrapOnObject(Ice::Int nTrapType, const NWN::NWObject& oObject, NWN::StandardFaction tStandardFaction, const std::string& sOnDisarmScript, const std::string& sOnTrapTriggeredScript, const Ice::Current&);
+    virtual NWN::NWObject createTrapAtLocation(NWN::TrapType tTrapType, const NWN::NWLocation& lLocation, Ice::Double fSize, const std::string& sTag, NWN::StandardFaction tStandardFaction, const std::string& sOnDisarmScript, const std::string& sOnTrapTriggeredScript, const Ice::Current&);
+    virtual void createTrapOnObject(NWN::TrapType tTrapType, const NWN::NWObject& oObject, NWN::StandardFaction tStandardFaction, const std::string& sOnDisarmScript, const std::string& sOnTrapTriggeredScript, const Ice::Current&);
     virtual Ice::Int d10(Ice::Int nNumDice, const Ice::Current&);
     virtual Ice::Int d100(Ice::Int nNumDice, const Ice::Current&);
     virtual Ice::Int d12(Ice::Int nNumDice, const Ice::Current&);
@@ -135,8 +135,8 @@ class NWScriptI : public NWN::NWScript {
     virtual void doPlaceableObjectAction(const NWN::NWObject& oPlaceable, NWN::PlaceableAction tPlaceableAction, const Ice::Current&);
     virtual void doSinglePlayerAutoSave(const Ice::Current&);
     virtual void doWhirlwindAttack(bool bDisplayFeedback, bool bImproved, const Ice::Current&);
-    virtual NWN::NWEffect effectACDecrease(Ice::Int nValue, Ice::Int nModifyType, Ice::Int nDamageType, const Ice::Current&);
-    virtual NWN::NWEffect effectACIncrease(Ice::Int nValue, Ice::Int nModifyType, Ice::Int nDamageType, const Ice::Current&);
+    virtual NWN::NWEffect effectACDecrease(Ice::Int nValue, NWN::ACModifyType tACModifyType, NWN::DamageType tDamageType, const Ice::Current&);
+    virtual NWN::NWEffect effectACIncrease(Ice::Int nValue, NWN::ACModifyType tACModifyType, NWN::DamageType tDamageType, const Ice::Current&);
     virtual NWN::NWEffect effectAbilityDecrease(NWN::Ability tAbility, Ice::Int nModifyBy, const Ice::Current&);
     virtual NWN::NWEffect effectAbilityIncrease(NWN::Ability tAbility, Ice::Int nModifyBy, const Ice::Current&);
     virtual NWN::NWEffect effectAppear(Ice::Int nAnimation, const Ice::Current&);
@@ -146,21 +146,21 @@ class NWScriptI : public NWN::NWScript {
     virtual NWN::NWEffect effectBeam(Ice::Int nBeamVisualEffect, const NWN::NWObject& oEffector, Ice::Int nBodyPart, bool bMissEffect, const Ice::Current&);
     virtual NWN::NWEffect effectBlindness(const Ice::Current&);
     virtual NWN::NWEffect effectCharmed(const Ice::Current&);
-    virtual NWN::NWEffect effectConcealment(Ice::Int nPercentage, Ice::Int nMissType, const Ice::Current&);
+    virtual NWN::NWEffect effectConcealment(Ice::Int nPercentage, NWN::MissChanceType tMissChanceType, const Ice::Current&);
     virtual NWN::NWEffect effectConfused(const Ice::Current&);
     virtual NWN::NWEffect effectCurse(Ice::Int nStrMod, Ice::Int nDexMod, Ice::Int nConMod, Ice::Int nIntMod, Ice::Int nWisMod, Ice::Int nChaMod, const Ice::Current&);
     virtual NWN::NWEffect effectCutsceneDominated(const Ice::Current&);
     virtual NWN::NWEffect effectCutsceneGhost(const Ice::Current&);
     virtual NWN::NWEffect effectCutsceneImmobilize(const Ice::Current&);
     virtual NWN::NWEffect effectCutsceneParalyze(const Ice::Current&);
-    virtual NWN::NWEffect effectDamage(Ice::Int nDamageAmount, Ice::Int nDamageType, Ice::Int nDamagePower, const Ice::Current&);
-    virtual NWN::NWEffect effectDamageDecrease(Ice::Int nPenalty, Ice::Int nDamageType, const Ice::Current&);
-    virtual NWN::NWEffect effectDamageImmunityDecrease(Ice::Int nDamageType, Ice::Int nPercentImmunity, const Ice::Current&);
-    virtual NWN::NWEffect effectDamageImmunityIncrease(Ice::Int nDamageType, Ice::Int nPercentImmunity, const Ice::Current&);
-    virtual NWN::NWEffect effectDamageIncrease(Ice::Int nBonus, Ice::Int nDamageType, const Ice::Current&);
-    virtual NWN::NWEffect effectDamageReduction(Ice::Int nAmount, Ice::Int nDamagePower, Ice::Int nLimit, const Ice::Current&);
-    virtual NWN::NWEffect effectDamageResistance(Ice::Int nDamageType, Ice::Int nAmount, Ice::Int nLimit, const Ice::Current&);
-    virtual NWN::NWEffect effectDamageShield(Ice::Int nDamageAmount, Ice::Int nRandomAmount, Ice::Int nDamageType, const Ice::Current&);
+    virtual NWN::NWEffect effectDamage(Ice::Int nDamageAmount, NWN::DamageType tDamageType, NWN::DamagePower tDamagePower, const Ice::Current&);
+    virtual NWN::NWEffect effectDamageDecrease(Ice::Int nPenalty, NWN::DamageType tDamageType, const Ice::Current&);
+    virtual NWN::NWEffect effectDamageImmunityDecrease(NWN::DamageType tDamageType, Ice::Int nPercentImmunity, const Ice::Current&);
+    virtual NWN::NWEffect effectDamageImmunityIncrease(NWN::DamageType tDamageType, Ice::Int nPercentImmunity, const Ice::Current&);
+    virtual NWN::NWEffect effectDamageIncrease(Ice::Int nBonus, NWN::DamageType tDamageType, const Ice::Current&);
+    virtual NWN::NWEffect effectDamageReduction(Ice::Int nAmount, NWN::DamagePower tDamagePower, Ice::Int nLimit, const Ice::Current&);
+    virtual NWN::NWEffect effectDamageResistance(NWN::DamageType tDamageType, Ice::Int nAmount, Ice::Int nLimit, const Ice::Current&);
+    virtual NWN::NWEffect effectDamageShield(Ice::Int nDamageAmount, Ice::Int nRandomAmount, NWN::DamageType tDamageType, const Ice::Current&);
     virtual NWN::NWEffect effectDarkness(const Ice::Current&);
     virtual NWN::NWEffect effectDazed(const Ice::Current&);
     virtual NWN::NWEffect effectDeaf(const Ice::Current&);
@@ -181,7 +181,7 @@ class NWScriptI : public NWN::NWScript {
     virtual NWN::NWEffect effectInvisibility(Ice::Int nInvisibilityType, const Ice::Current&);
     virtual NWN::NWEffect effectKnockdown(const Ice::Current&);
     virtual NWN::NWEffect effectLinkEffects(const NWN::NWEffect& eChildEffect, const NWN::NWEffect& eParentEffect, const Ice::Current&);
-    virtual NWN::NWEffect effectMissChance(Ice::Int nPercentage, Ice::Int nMissChanceType, const Ice::Current&);
+    virtual NWN::NWEffect effectMissChance(Ice::Int nPercentage, NWN::MissChanceType tMissChanceType, const Ice::Current&);
     virtual NWN::NWEffect effectModifyAttacks(Ice::Int nAttacks, const Ice::Current&);
     virtual NWN::NWEffect effectMovementSpeedDecrease(Ice::Int nPercentChange, const Ice::Current&);
     virtual NWN::NWEffect effectMovementSpeedIncrease(Ice::Int nPercentChange, const Ice::Current&);
@@ -208,7 +208,7 @@ class NWScriptI : public NWN::NWScript {
     virtual NWN::NWEffect effectSpellResistanceIncrease(Ice::Int nValue, const Ice::Current&);
     virtual NWN::NWEffect effectStunned(const Ice::Current&);
     virtual NWN::NWEffect effectSummonCreature(const std::string& sCreatureResref, Ice::Int nVisualEffectId, Ice::Double fDelaySeconds, bool bUseAppearAnimation, const Ice::Current&);
-    virtual NWN::NWEffect effectSwarm(Ice::Int nLooping, const std::string& sCreatureTemplate1, const std::string& sCreatureTemplate2, const std::string& sCreatureTemplate3, const std::string& sCreatureTemplate4, const Ice::Current&);
+    virtual NWN::NWEffect effectSwarm(bool bLooping, const std::string& sCreatureTemplate1, const std::string& sCreatureTemplate2, const std::string& sCreatureTemplate3, const std::string& sCreatureTemplate4, const Ice::Current&);
     virtual NWN::NWEffect effectTemporaryHitpoints(Ice::Int nHitPoints, const Ice::Current&);
     virtual NWN::NWEffect effectTimeStop(const Ice::Current&);
     virtual NWN::NWEffect effectTrueSeeing(const Ice::Current&);
@@ -241,8 +241,8 @@ class NWScriptI : public NWN::NWScript {
     virtual Ice::Int getAbilityScore(const NWN::NWObject& oCreature, NWN::Ability tAbility, bool bBaseAbilityScore, const Ice::Current&);
     virtual bool getActionMode(const NWN::NWObject& oCreature, NWN::ActionMode tActionMode, const Ice::Current&);
     virtual Ice::Int getAge(const NWN::NWObject& oCreature, const Ice::Current&);
-    virtual Ice::Int getAlignmentGoodEvil(const NWN::NWObject& oCreature, const Ice::Current&);
-    virtual Ice::Int getAlignmentLawChaos(const NWN::NWObject& oCreature, const Ice::Current&);
+    virtual NWN::Alignment getAlignmentGoodEvil(const NWN::NWObject& oCreature, const Ice::Current&);
+    virtual NWN::Alignment getAlignmentLawChaos(const NWN::NWObject& oCreature, const Ice::Current&);
     virtual Ice::Int getAnimalCompanionCreatureType(const NWN::NWObject& oCreature, const Ice::Current&);
     virtual std::string getAnimalCompanionName(const NWN::NWObject& oTarget, const Ice::Current&);
     virtual Ice::Int getAppearanceType(const NWN::NWObject& oCreature, const Ice::Current&);
@@ -282,7 +282,7 @@ class NWScriptI : public NWN::NWScript {
     virtual Ice::Int getCurrentHitPoints(const NWN::NWObject& oObject, const Ice::Current&);
     virtual Ice::Double getCutsceneCameraMoveRate(const NWN::NWObject& oCreature, const Ice::Current&);
     virtual bool getCutsceneMode(const NWN::NWObject& oCreature, const Ice::Current&);
-    virtual Ice::Int getDamageDealtByType(Ice::Int nDamageType, const Ice::Current&);
+    virtual Ice::Int getDamageDealtByType(NWN::DamageType tDamageType, const Ice::Current&);
     virtual Ice::Int getDefensiveCastingMode(const NWN::NWObject& oCreature, const Ice::Current&);
     virtual std::string getDeity(const NWN::NWObject& oCreature, const Ice::Current&);
     virtual std::string getDescription(const NWN::NWObject& oObject, bool bOriginalDescription, bool bIdentifiedDescription, const Ice::Current&);
@@ -590,17 +590,17 @@ class NWScriptI : public NWN::NWScript {
     virtual std::string intToString(Ice::Int nInteger, const Ice::Current&);
     virtual bool isInConversation(const NWN::NWObject& oObject, const Ice::Current&);
     virtual NWN::NWItemProperty itemPropertyACBonus(Ice::Int nBonus, const Ice::Current&);
-    virtual NWN::NWItemProperty itemPropertyACBonusVsAlign(Ice::Int nAlignGroup, Ice::Int nACBonus, const Ice::Current&);
-    virtual NWN::NWItemProperty itemPropertyACBonusVsDmgType(Ice::Int nDamageType, Ice::Int nACBonus, const Ice::Current&);
+    virtual NWN::NWItemProperty itemPropertyACBonusVsAlign(NWN::IPAlignGroup tIPAlignGroup, Ice::Int nACBonus, const Ice::Current&);
+    virtual NWN::NWItemProperty itemPropertyACBonusVsDmgType(NWN::IPDamageType tIPDamageType, Ice::Int nACBonus, const Ice::Current&);
     virtual NWN::NWItemProperty itemPropertyACBonusVsRace(NWN::IPRacialType tIPRacialType, Ice::Int nACBonus, const Ice::Current&);
-    virtual NWN::NWItemProperty itemPropertyACBonusVsSAlign(Ice::Int nAlign, Ice::Int nACBonus, const Ice::Current&);
+    virtual NWN::NWItemProperty itemPropertyACBonusVsSAlign(NWN::Alignment tAlignment, Ice::Int nACBonus, const Ice::Current&);
     virtual NWN::NWItemProperty itemPropertyAbilityBonus(NWN::Ability tAbility, Ice::Int nBonus, const Ice::Current&);
     virtual NWN::NWItemProperty itemPropertyAdditional(Ice::Int nAdditionalProperty, const Ice::Current&);
     virtual NWN::NWItemProperty itemPropertyArcaneSpellFailure(Ice::Int nModLevel, const Ice::Current&);
     virtual NWN::NWItemProperty itemPropertyAttackBonus(Ice::Int nBonus, const Ice::Current&);
-    virtual NWN::NWItemProperty itemPropertyAttackBonusVsAlign(Ice::Int nAlignGroup, Ice::Int nBonus, const Ice::Current&);
+    virtual NWN::NWItemProperty itemPropertyAttackBonusVsAlign(NWN::IPAlignGroup tIPAlignGroup, Ice::Int nBonus, const Ice::Current&);
     virtual NWN::NWItemProperty itemPropertyAttackBonusVsRace(NWN::IPRacialType tIPRacialType, Ice::Int nBonus, const Ice::Current&);
-    virtual NWN::NWItemProperty itemPropertyAttackBonusVsSAlign(Ice::Int nAlignment, Ice::Int nBonus, const Ice::Current&);
+    virtual NWN::NWItemProperty itemPropertyAttackBonusVsSAlign(NWN::Alignment tAlignment, Ice::Int nBonus, const Ice::Current&);
     virtual NWN::NWItemProperty itemPropertyAttackPenalty(Ice::Int nPenalty, const Ice::Current&);
     virtual NWN::NWItemProperty itemPropertyBonusFeat(Ice::Int nFeat, const Ice::Current&);
     virtual NWN::NWItemProperty itemPropertyBonusLevelSpell(Ice::Int nClass, Ice::Int nSpellLevel, const Ice::Current&);
@@ -609,26 +609,26 @@ class NWScriptI : public NWN::NWScript {
     virtual NWN::NWItemProperty itemPropertyBonusSpellResistance(Ice::Int nBonus, const Ice::Current&);
     virtual NWN::NWItemProperty itemPropertyCastSpell(Ice::Int nSpell, Ice::Int nNumUses, const Ice::Current&);
     virtual NWN::NWItemProperty itemPropertyContainerReducedWeight(Ice::Int nContainerType, const Ice::Current&);
-    virtual NWN::NWItemProperty itemPropertyDamageBonus(Ice::Int nDamageType, Ice::Int nDamage, const Ice::Current&);
-    virtual NWN::NWItemProperty itemPropertyDamageBonusVsAlign(Ice::Int nAlignGroup, Ice::Int nDamageType, Ice::Int nDamage, const Ice::Current&);
-    virtual NWN::NWItemProperty itemPropertyDamageBonusVsRace(NWN::IPRacialType tIPRacialType, Ice::Int nDamageType, Ice::Int nDamage, const Ice::Current&);
-    virtual NWN::NWItemProperty itemPropertyDamageBonusVsSAlign(Ice::Int nAlign, Ice::Int nDamageType, Ice::Int nDamage, const Ice::Current&);
-    virtual NWN::NWItemProperty itemPropertyDamageImmunity(Ice::Int nDamageType, Ice::Int nImmuneBonus, const Ice::Current&);
+    virtual NWN::NWItemProperty itemPropertyDamageBonus(NWN::IPDamageType tIPDamageType, Ice::Int nDamage, const Ice::Current&);
+    virtual NWN::NWItemProperty itemPropertyDamageBonusVsAlign(NWN::IPAlignGroup tIPAlignGroup, NWN::IPDamageType tIPDamageType, Ice::Int nDamage, const Ice::Current&);
+    virtual NWN::NWItemProperty itemPropertyDamageBonusVsRace(NWN::IPRacialType tIPRacialType, NWN::IPDamageType tIPDamageType, Ice::Int nDamage, const Ice::Current&);
+    virtual NWN::NWItemProperty itemPropertyDamageBonusVsSAlign(NWN::Alignment tAlignment, NWN::IPDamageType tIPDamageType, Ice::Int nDamage, const Ice::Current&);
+    virtual NWN::NWItemProperty itemPropertyDamageImmunity(NWN::IPDamageType tIPDamageType, Ice::Int nImmuneBonus, const Ice::Current&);
     virtual NWN::NWItemProperty itemPropertyDamagePenalty(Ice::Int nPenalty, const Ice::Current&);
     virtual NWN::NWItemProperty itemPropertyDamageReduction(Ice::Int nEnhancement, Ice::Int nHPSoak, const Ice::Current&);
-    virtual NWN::NWItemProperty itemPropertyDamageResistance(Ice::Int nDamageType, Ice::Int nHPResist, const Ice::Current&);
-    virtual NWN::NWItemProperty itemPropertyDamageVulnerability(Ice::Int nDamageType, Ice::Int nVulnerability, const Ice::Current&);
+    virtual NWN::NWItemProperty itemPropertyDamageResistance(NWN::IPDamageType tIPDamageType, Ice::Int nHPResist, const Ice::Current&);
+    virtual NWN::NWItemProperty itemPropertyDamageVulnerability(NWN::IPDamageType tIPDamageType, Ice::Int nVulnerability, const Ice::Current&);
     virtual NWN::NWItemProperty itemPropertyDarkvision(const Ice::Current&);
     virtual NWN::NWItemProperty itemPropertyDecreaseAC(Ice::Int nModifierType, Ice::Int nPenalty, const Ice::Current&);
     virtual NWN::NWItemProperty itemPropertyDecreaseAbility(NWN::Ability tAbility, Ice::Int nModifier, const Ice::Current&);
     virtual NWN::NWItemProperty itemPropertyDecreaseSkill(Ice::Int nSkill, Ice::Int nPenalty, const Ice::Current&);
     virtual NWN::NWItemProperty itemPropertyEnhancementBonus(Ice::Int nEnhancementBonus, const Ice::Current&);
-    virtual NWN::NWItemProperty itemPropertyEnhancementBonusVsAlign(Ice::Int nAlignGroup, Ice::Int nBonus, const Ice::Current&);
+    virtual NWN::NWItemProperty itemPropertyEnhancementBonusVsAlign(NWN::IPAlignGroup tIPAlignGroup, Ice::Int nBonus, const Ice::Current&);
     virtual NWN::NWItemProperty itemPropertyEnhancementBonusVsRace(NWN::IPRacialType tIPRacialType, Ice::Int nBonus, const Ice::Current&);
-    virtual NWN::NWItemProperty itemPropertyEnhancementBonusVsSAlign(Ice::Int nAlign, Ice::Int nBonus, const Ice::Current&);
+    virtual NWN::NWItemProperty itemPropertyEnhancementBonusVsSAlign(NWN::Alignment tAlignment, Ice::Int nBonus, const Ice::Current&);
     virtual NWN::NWItemProperty itemPropertyEnhancementPenalty(Ice::Int nPenalty, const Ice::Current&);
-    virtual NWN::NWItemProperty itemPropertyExtraMeleeDamageType(Ice::Int nDamageType, const Ice::Current&);
-    virtual NWN::NWItemProperty itemPropertyExtraRangeDamageType(Ice::Int nDamageType, const Ice::Current&);
+    virtual NWN::NWItemProperty itemPropertyExtraMeleeDamageType(NWN::IPDamageType tIPDamageType, const Ice::Current&);
+    virtual NWN::NWItemProperty itemPropertyExtraRangeDamageType(NWN::IPDamageType tIPDamageType, const Ice::Current&);
     virtual NWN::NWItemProperty itemPropertyFreeAction(const Ice::Current&);
     virtual NWN::NWItemProperty itemPropertyHaste(const Ice::Current&);
     virtual NWN::NWItemProperty itemPropertyHealersKit(Ice::Int nModifier, const Ice::Current&);
@@ -638,10 +638,10 @@ class NWScriptI : public NWN::NWScript {
     virtual NWN::NWItemProperty itemPropertyImprovedEvasion(const Ice::Current&);
     virtual NWN::NWItemProperty itemPropertyKeen(const Ice::Current&);
     virtual NWN::NWItemProperty itemPropertyLight(Ice::Int nBrightness, Ice::Int nColor, const Ice::Current&);
-    virtual NWN::NWItemProperty itemPropertyLimitUseByAlign(Ice::Int nAlignGroup, const Ice::Current&);
+    virtual NWN::NWItemProperty itemPropertyLimitUseByAlign(NWN::IPAlignGroup tIPAlignGroup, const Ice::Current&);
     virtual NWN::NWItemProperty itemPropertyLimitUseByClass(Ice::Int nClass, const Ice::Current&);
     virtual NWN::NWItemProperty itemPropertyLimitUseByRace(NWN::IPRacialType tIPRacialType, const Ice::Current&);
-    virtual NWN::NWItemProperty itemPropertyLimitUseBySAlign(Ice::Int nAlignment, const Ice::Current&);
+    virtual NWN::NWItemProperty itemPropertyLimitUseBySAlign(NWN::Alignment tAlignment, const Ice::Current&);
     virtual NWN::NWItemProperty itemPropertyMassiveCritical(Ice::Int nDamage, const Ice::Current&);
     virtual NWN::NWItemProperty itemPropertyMaterial(Ice::Int nMaterialType, const Ice::Current&);
     virtual NWN::NWItemProperty itemPropertyMaxRangeStrengthMod(Ice::Int nModifier, const Ice::Current&);
@@ -659,7 +659,7 @@ class NWScriptI : public NWN::NWScript {
     virtual NWN::NWItemProperty itemPropertySpellImmunitySchool(Ice::Int nSchool, const Ice::Current&);
     virtual NWN::NWItemProperty itemPropertySpellImmunitySpecific(Ice::Int nSpell, const Ice::Current&);
     virtual NWN::NWItemProperty itemPropertyThievesTools(Ice::Int nModifier, const Ice::Current&);
-    virtual NWN::NWItemProperty itemPropertyTrap(Ice::Int nTrapLevel, Ice::Int nTrapType, const Ice::Current&);
+    virtual NWN::NWItemProperty itemPropertyTrap(Ice::Int nTrapLevel, NWN::IPTrapType tIPTrapType, const Ice::Current&);
     virtual NWN::NWItemProperty itemPropertyTrueSeeing(const Ice::Current&);
     virtual NWN::NWItemProperty itemPropertyTurnResistance(Ice::Int nModifier, const Ice::Current&);
     virtual NWN::NWItemProperty itemPropertyUnlimitedAmmo(Ice::Int nAmmoDamage, const Ice::Current&);

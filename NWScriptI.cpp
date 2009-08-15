@@ -1,4 +1,4 @@
-// Generated on Fri Aug 14 21:16:45 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Sat Aug 15 13:59:11 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 #include "NWScriptI.h"
 #include <iostream>
@@ -754,12 +754,18 @@ unlock("addToParty");
   
 };
 
-void NWScriptI::adjustAlignment(const NWN::NWObject& oSubject, Ice::Int nAlignment, Ice::Int nShift, bool bAllPartyMembers, const Ice::Current& ice) {
+void NWScriptI::adjustAlignment(const NWN::NWObject& oSubject, NWN::Alignment tAlignment, Ice::Int nShift, bool bAllPartyMembers, const Ice::Current& ice) {
   if (oSubject.id < 0) throw NWN::InvalidObjectException();
   lock("adjustAlignment"); callCounter += 1;
   StackPushInteger(bAllPartyMembers == true ? 1 : 0);
   StackPushInteger(nShift);
-  StackPushInteger(nAlignment);
+  if (tAlignment == NWN::Evil) StackPushInteger(5);
+   else if (tAlignment == NWN::Any) StackPushInteger(0);
+   else if (tAlignment == NWN::Neutral) StackPushInteger(1);
+   else if (tAlignment == NWN::Lawful) StackPushInteger(2);
+   else if (tAlignment == NWN::Chaotic) StackPushInteger(3);
+   else if (tAlignment == NWN::Good) StackPushInteger(4);
+   else throw "fail: invalid struct value passed, internal API error";
   StackPushObject(oSubject.id);
 
   VM_ExecuteCommand(201, 4);
@@ -1178,7 +1184,7 @@ NWN::NWObject NWScriptI::createObject(NWN::ObjectType tObjectType, const std::st
   return no;
 };
 
-NWN::NWObject NWScriptI::createTrapAtLocation(Ice::Int nTrapType, const NWN::NWLocation& lLocation, Ice::Double fSize, const std::string& sTag, NWN::StandardFaction tStandardFaction, const std::string& sOnDisarmScript, const std::string& sOnTrapTriggeredScript, const Ice::Current& ice) {
+NWN::NWObject NWScriptI::createTrapAtLocation(NWN::TrapType tTrapType, const NWN::NWLocation& lLocation, Ice::Double fSize, const std::string& sTag, NWN::StandardFaction tStandardFaction, const std::string& sOnDisarmScript, const std::string& sOnTrapTriggeredScript, const Ice::Current& ice) {
   if (lLocation.area.id < 0) throw NWN::InvalidObjectException();
   lock("createTrapAtLocation"); callCounter += 1;
   StackPushString(sOnTrapTriggeredScript.c_str());
@@ -1199,7 +1205,55 @@ NWN::NWObject NWScriptI::createTrapAtLocation(Ice::Int nTrapType, const NWN::NWL
   lLocation_ptr->OrientationZ = lLocation.orientationZ;
   lLocation_ptr->AreaID = lLocation.area.id;
   StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, lLocation_ptr);
-  StackPushInteger(nTrapType);
+  if (tTrapType == NWN::StrongSonicTrap) StackPushInteger(38);
+   else if (tTrapType == NWN::DeadlyGasTrap) StackPushInteger(27);
+   else if (tTrapType == NWN::MinorFireTrap) StackPushInteger(16);
+   else if (tTrapType == NWN::AverageHolyTrap) StackPushInteger(5);
+   else if (tTrapType == NWN::EpicElectricalTrap) StackPushInteger(44);
+   else if (tTrapType == NWN::AverageNegativeTrap) StackPushInteger(33);
+   else if (tTrapType == NWN::StrongElectricalTrap) StackPushInteger(22);
+   else if (tTrapType == NWN::DeadlyTangleTrap) StackPushInteger(11);
+   else if (tTrapType == NWN::MinorSpikeTrap) StackPushInteger(0);
+   else if (tTrapType == NWN::DeadlySonicTrap) StackPushInteger(39);
+   else if (tTrapType == NWN::MinorFrostTrap) StackPushInteger(28);
+   else if (tTrapType == NWN::AverageFireTrap) StackPushInteger(17);
+   else if (tTrapType == NWN::StrongHolyTrap) StackPushInteger(6);
+   else if (tTrapType == NWN::EpicFireTrap) StackPushInteger(45);
+   else if (tTrapType == NWN::StrongNegativeTrap) StackPushInteger(34);
+   else if (tTrapType == NWN::DeadlyElectricalTrap) StackPushInteger(23);
+   else if (tTrapType == NWN::MinorAcidTrap) StackPushInteger(12);
+   else if (tTrapType == NWN::AverageSpikeTrap) StackPushInteger(1);
+   else if (tTrapType == NWN::MinorAcidSplashTrap) StackPushInteger(40);
+   else if (tTrapType == NWN::AverageFrostTrap) StackPushInteger(29);
+   else if (tTrapType == NWN::StrongFireTrap) StackPushInteger(18);
+   else if (tTrapType == NWN::DeadlyHolyTrap) StackPushInteger(7);
+   else if (tTrapType == NWN::EpicFrostTrap) StackPushInteger(46);
+   else if (tTrapType == NWN::DeadlyNegativeTrap) StackPushInteger(35);
+   else if (tTrapType == NWN::MinorGasTrap) StackPushInteger(24);
+   else if (tTrapType == NWN::AverageAcidTrap) StackPushInteger(13);
+   else if (tTrapType == NWN::StrongSpikeTrap) StackPushInteger(2);
+   else if (tTrapType == NWN::AverageAcidSplashTrap) StackPushInteger(41);
+   else if (tTrapType == NWN::StrongFrostTrap) StackPushInteger(30);
+   else if (tTrapType == NWN::DeadlyFireTrap) StackPushInteger(19);
+   else if (tTrapType == NWN::MinorTangleTrap) StackPushInteger(8);
+   else if (tTrapType == NWN::EpicSonicTrap) StackPushInteger(47);
+   else if (tTrapType == NWN::MinorSonicTrap) StackPushInteger(36);
+   else if (tTrapType == NWN::AverageGasTrap) StackPushInteger(25);
+   else if (tTrapType == NWN::StrongAcidTrap) StackPushInteger(14);
+   else if (tTrapType == NWN::DeadlySpikeTrap) StackPushInteger(3);
+   else if (tTrapType == NWN::StrongAcidSplashTrap) StackPushInteger(42);
+   else if (tTrapType == NWN::DeadlyFrostTrap) StackPushInteger(31);
+   else if (tTrapType == NWN::MinorElectricalTrap) StackPushInteger(20);
+   else if (tTrapType == NWN::AverageTangleTrap) StackPushInteger(9);
+   else if (tTrapType == NWN::AverageSonicTrap) StackPushInteger(37);
+   else if (tTrapType == NWN::StrongGasTrap) StackPushInteger(26);
+   else if (tTrapType == NWN::DeadlyAcidTrap) StackPushInteger(15);
+   else if (tTrapType == NWN::MinorHolyTrap) StackPushInteger(4);
+   else if (tTrapType == NWN::DeadlyAcidSplashTrap) StackPushInteger(43);
+   else if (tTrapType == NWN::MinorNegativeTrap) StackPushInteger(32);
+   else if (tTrapType == NWN::AverageElectricalTrap) StackPushInteger(21);
+   else if (tTrapType == NWN::StrongTangleTrap) StackPushInteger(10);
+   else throw "fail: invalid struct value passed, internal API error";
 
   VM_ExecuteCommand(809, 7);
 
@@ -1211,7 +1265,7 @@ NWN::NWObject NWScriptI::createTrapAtLocation(Ice::Int nTrapType, const NWN::NWL
   return no;
 };
 
-void NWScriptI::createTrapOnObject(Ice::Int nTrapType, const NWN::NWObject& oObject, NWN::StandardFaction tStandardFaction, const std::string& sOnDisarmScript, const std::string& sOnTrapTriggeredScript, const Ice::Current& ice) {
+void NWScriptI::createTrapOnObject(NWN::TrapType tTrapType, const NWN::NWObject& oObject, NWN::StandardFaction tStandardFaction, const std::string& sOnDisarmScript, const std::string& sOnTrapTriggeredScript, const Ice::Current& ice) {
   if (oObject.id < 0) throw NWN::InvalidObjectException();
   lock("createTrapOnObject"); callCounter += 1;
   StackPushString(sOnTrapTriggeredScript.c_str());
@@ -1222,7 +1276,55 @@ void NWScriptI::createTrapOnObject(Ice::Int nTrapType, const NWN::NWObject& oObj
    else if (tStandardFaction == NWN::Defender) StackPushInteger(3);
    else throw "fail: invalid struct value passed, internal API error";
   StackPushObject(oObject.id);
-  StackPushInteger(nTrapType);
+  if (tTrapType == NWN::StrongSonicTrap) StackPushInteger(38);
+   else if (tTrapType == NWN::DeadlyGasTrap) StackPushInteger(27);
+   else if (tTrapType == NWN::MinorFireTrap) StackPushInteger(16);
+   else if (tTrapType == NWN::AverageHolyTrap) StackPushInteger(5);
+   else if (tTrapType == NWN::EpicElectricalTrap) StackPushInteger(44);
+   else if (tTrapType == NWN::AverageNegativeTrap) StackPushInteger(33);
+   else if (tTrapType == NWN::StrongElectricalTrap) StackPushInteger(22);
+   else if (tTrapType == NWN::DeadlyTangleTrap) StackPushInteger(11);
+   else if (tTrapType == NWN::MinorSpikeTrap) StackPushInteger(0);
+   else if (tTrapType == NWN::DeadlySonicTrap) StackPushInteger(39);
+   else if (tTrapType == NWN::MinorFrostTrap) StackPushInteger(28);
+   else if (tTrapType == NWN::AverageFireTrap) StackPushInteger(17);
+   else if (tTrapType == NWN::StrongHolyTrap) StackPushInteger(6);
+   else if (tTrapType == NWN::EpicFireTrap) StackPushInteger(45);
+   else if (tTrapType == NWN::StrongNegativeTrap) StackPushInteger(34);
+   else if (tTrapType == NWN::DeadlyElectricalTrap) StackPushInteger(23);
+   else if (tTrapType == NWN::MinorAcidTrap) StackPushInteger(12);
+   else if (tTrapType == NWN::AverageSpikeTrap) StackPushInteger(1);
+   else if (tTrapType == NWN::MinorAcidSplashTrap) StackPushInteger(40);
+   else if (tTrapType == NWN::AverageFrostTrap) StackPushInteger(29);
+   else if (tTrapType == NWN::StrongFireTrap) StackPushInteger(18);
+   else if (tTrapType == NWN::DeadlyHolyTrap) StackPushInteger(7);
+   else if (tTrapType == NWN::EpicFrostTrap) StackPushInteger(46);
+   else if (tTrapType == NWN::DeadlyNegativeTrap) StackPushInteger(35);
+   else if (tTrapType == NWN::MinorGasTrap) StackPushInteger(24);
+   else if (tTrapType == NWN::AverageAcidTrap) StackPushInteger(13);
+   else if (tTrapType == NWN::StrongSpikeTrap) StackPushInteger(2);
+   else if (tTrapType == NWN::AverageAcidSplashTrap) StackPushInteger(41);
+   else if (tTrapType == NWN::StrongFrostTrap) StackPushInteger(30);
+   else if (tTrapType == NWN::DeadlyFireTrap) StackPushInteger(19);
+   else if (tTrapType == NWN::MinorTangleTrap) StackPushInteger(8);
+   else if (tTrapType == NWN::EpicSonicTrap) StackPushInteger(47);
+   else if (tTrapType == NWN::MinorSonicTrap) StackPushInteger(36);
+   else if (tTrapType == NWN::AverageGasTrap) StackPushInteger(25);
+   else if (tTrapType == NWN::StrongAcidTrap) StackPushInteger(14);
+   else if (tTrapType == NWN::DeadlySpikeTrap) StackPushInteger(3);
+   else if (tTrapType == NWN::StrongAcidSplashTrap) StackPushInteger(42);
+   else if (tTrapType == NWN::DeadlyFrostTrap) StackPushInteger(31);
+   else if (tTrapType == NWN::MinorElectricalTrap) StackPushInteger(20);
+   else if (tTrapType == NWN::AverageTangleTrap) StackPushInteger(9);
+   else if (tTrapType == NWN::AverageSonicTrap) StackPushInteger(37);
+   else if (tTrapType == NWN::StrongGasTrap) StackPushInteger(26);
+   else if (tTrapType == NWN::DeadlyAcidTrap) StackPushInteger(15);
+   else if (tTrapType == NWN::MinorHolyTrap) StackPushInteger(4);
+   else if (tTrapType == NWN::DeadlyAcidSplashTrap) StackPushInteger(43);
+   else if (tTrapType == NWN::MinorNegativeTrap) StackPushInteger(32);
+   else if (tTrapType == NWN::AverageElectricalTrap) StackPushInteger(21);
+   else if (tTrapType == NWN::StrongTangleTrap) StackPushInteger(10);
+   else throw "fail: invalid struct value passed, internal API error";
 
   VM_ExecuteCommand(810, 5);
 
@@ -1522,10 +1624,29 @@ unlock("doWhirlwindAttack");
   
 };
 
-NWN::NWEffect NWScriptI::effectACDecrease(Ice::Int nValue, Ice::Int nModifyType, Ice::Int nDamageType, const Ice::Current& ice) {
+NWN::NWEffect NWScriptI::effectACDecrease(Ice::Int nValue, NWN::ACModifyType tACModifyType, NWN::DamageType tDamageType, const Ice::Current& ice) {
   lock("effectACDecrease"); callCounter += 1;
-  StackPushInteger(nDamageType);
-  StackPushInteger(nModifyType);
+  if (tDamageType == NWN::AcidDamage) StackPushInteger(16);
+   else if (tDamageType == NWN::ACVsAllDamage) StackPushInteger(4103);
+   else if (tDamageType == NWN::NegativeDamage) StackPushInteger(512);
+   else if (tDamageType == NWN::PositiveDamage) StackPushInteger(1024);
+   else if (tDamageType == NWN::BludgeoningDamage) StackPushInteger(1);
+   else if (tDamageType == NWN::ElectricalDamage) StackPushInteger(128);
+   else if (tDamageType == NWN::SonicDamage) StackPushInteger(2048);
+   else if (tDamageType == NWN::PiercingDamage) StackPushInteger(2);
+   else if (tDamageType == NWN::MagicalDamage) StackPushInteger(8);
+   else if (tDamageType == NWN::FireDamage) StackPushInteger(256);
+   else if (tDamageType == NWN::DivineDamage) StackPushInteger(64);
+   else if (tDamageType == NWN::BaseDamage) StackPushInteger(4096);
+   else if (tDamageType == NWN::SlashingDamage) StackPushInteger(4);
+   else if (tDamageType == NWN::ColdDamage) StackPushInteger(32);
+   else throw "fail: invalid struct value passed, internal API error";
+  if (tACModifyType == NWN::ACDodgeBonus) StackPushInteger(0);
+   else if (tACModifyType == NWN::ACNaturalBonus) StackPushInteger(1);
+   else if (tACModifyType == NWN::ACArmorEnchantmentBonus) StackPushInteger(2);
+   else if (tACModifyType == NWN::ACShieldEnchantmentBonus) StackPushInteger(3);
+   else if (tACModifyType == NWN::ACDeflectionBonus) StackPushInteger(4);
+   else throw "fail: invalid struct value passed, internal API error";
   StackPushInteger(nValue);
 
   VM_ExecuteCommand(450, 3);
@@ -1544,10 +1665,29 @@ NWN::NWEffect NWScriptI::effectACDecrease(Ice::Int nValue, Ice::Int nModifyType,
   return e;
 };
 
-NWN::NWEffect NWScriptI::effectACIncrease(Ice::Int nValue, Ice::Int nModifyType, Ice::Int nDamageType, const Ice::Current& ice) {
+NWN::NWEffect NWScriptI::effectACIncrease(Ice::Int nValue, NWN::ACModifyType tACModifyType, NWN::DamageType tDamageType, const Ice::Current& ice) {
   lock("effectACIncrease"); callCounter += 1;
-  StackPushInteger(nDamageType);
-  StackPushInteger(nModifyType);
+  if (tDamageType == NWN::AcidDamage) StackPushInteger(16);
+   else if (tDamageType == NWN::ACVsAllDamage) StackPushInteger(4103);
+   else if (tDamageType == NWN::NegativeDamage) StackPushInteger(512);
+   else if (tDamageType == NWN::PositiveDamage) StackPushInteger(1024);
+   else if (tDamageType == NWN::BludgeoningDamage) StackPushInteger(1);
+   else if (tDamageType == NWN::ElectricalDamage) StackPushInteger(128);
+   else if (tDamageType == NWN::SonicDamage) StackPushInteger(2048);
+   else if (tDamageType == NWN::PiercingDamage) StackPushInteger(2);
+   else if (tDamageType == NWN::MagicalDamage) StackPushInteger(8);
+   else if (tDamageType == NWN::FireDamage) StackPushInteger(256);
+   else if (tDamageType == NWN::DivineDamage) StackPushInteger(64);
+   else if (tDamageType == NWN::BaseDamage) StackPushInteger(4096);
+   else if (tDamageType == NWN::SlashingDamage) StackPushInteger(4);
+   else if (tDamageType == NWN::ColdDamage) StackPushInteger(32);
+   else throw "fail: invalid struct value passed, internal API error";
+  if (tACModifyType == NWN::ACDodgeBonus) StackPushInteger(0);
+   else if (tACModifyType == NWN::ACNaturalBonus) StackPushInteger(1);
+   else if (tACModifyType == NWN::ACArmorEnchantmentBonus) StackPushInteger(2);
+   else if (tACModifyType == NWN::ACShieldEnchantmentBonus) StackPushInteger(3);
+   else if (tACModifyType == NWN::ACDeflectionBonus) StackPushInteger(4);
+   else throw "fail: invalid struct value passed, internal API error";
   StackPushInteger(nValue);
 
   VM_ExecuteCommand(115, 3);
@@ -1767,9 +1907,12 @@ NWN::NWEffect NWScriptI::effectCharmed(const Ice::Current& ice) {
   return e;
 };
 
-NWN::NWEffect NWScriptI::effectConcealment(Ice::Int nPercentage, Ice::Int nMissType, const Ice::Current& ice) {
+NWN::NWEffect NWScriptI::effectConcealment(Ice::Int nPercentage, NWN::MissChanceType tMissChanceType, const Ice::Current& ice) {
   lock("effectConcealment"); callCounter += 1;
-  StackPushInteger(nMissType);
+  if (tMissChanceType == NWN::MissChanceVSAll) StackPushInteger(0);
+   else if (tMissChanceType == NWN::MissChanceVSRanged) StackPushInteger(1);
+   else if (tMissChanceType == NWN::MissChanceVSMelee) StackPushInteger(2);
+   else throw "fail: invalid struct value passed, internal API error";
   StackPushInteger(nPercentage);
 
   VM_ExecuteCommand(458, 2);
@@ -1908,10 +2051,46 @@ NWN::NWEffect NWScriptI::effectCutsceneParalyze(const Ice::Current& ice) {
   return e;
 };
 
-NWN::NWEffect NWScriptI::effectDamage(Ice::Int nDamageAmount, Ice::Int nDamageType, Ice::Int nDamagePower, const Ice::Current& ice) {
+NWN::NWEffect NWScriptI::effectDamage(Ice::Int nDamageAmount, NWN::DamageType tDamageType, NWN::DamagePower tDamagePower, const Ice::Current& ice) {
   lock("effectDamage"); callCounter += 1;
-  StackPushInteger(nDamagePower);
-  StackPushInteger(nDamageType);
+  if (tDamagePower == NWN::PlusFifteenDamage) StackPushInteger(16);
+   else if (tDamagePower == NWN::PlusFiveDamage) StackPushInteger(5);
+   else if (tDamagePower == NWN::PlusTenDamage) StackPushInteger(11);
+   else if (tDamagePower == NWN::NormalDamage) StackPushInteger(0);
+   else if (tDamagePower == NWN::PlusSixteenDamage) StackPushInteger(17);
+   else if (tDamagePower == NWN::EnergyDamage) StackPushInteger(6);
+   else if (tDamagePower == NWN::PlusElevenDamage) StackPushInteger(12);
+   else if (tDamagePower == NWN::PlusOneDamage) StackPushInteger(1);
+   else if (tDamagePower == NWN::PlusSeventeenDamage) StackPushInteger(18);
+   else if (tDamagePower == NWN::PlusSixDamage) StackPushInteger(7);
+   else if (tDamagePower == NWN::PlusTwelveDamage) StackPushInteger(13);
+   else if (tDamagePower == NWN::PlusTwoDamage) StackPushInteger(2);
+   else if (tDamagePower == NWN::PlusEighteenDamage) StackPushInteger(19);
+   else if (tDamagePower == NWN::PlusSevenDamage) StackPushInteger(8);
+   else if (tDamagePower == NWN::PlusThirteenDamage) StackPushInteger(14);
+   else if (tDamagePower == NWN::PlusThreeDamage) StackPushInteger(3);
+   else if (tDamagePower == NWN::PlusNinteenDamage) StackPushInteger(20);
+   else if (tDamagePower == NWN::PlusEightDamage) StackPushInteger(9);
+   else if (tDamagePower == NWN::PlusFourteenDamage) StackPushInteger(15);
+   else if (tDamagePower == NWN::PlusFourDamage) StackPushInteger(4);
+   else if (tDamagePower == NWN::PlusTwentyDamage) StackPushInteger(21);
+   else if (tDamagePower == NWN::PlusNineDamage) StackPushInteger(10);
+   else throw "fail: invalid struct value passed, internal API error";
+  if (tDamageType == NWN::AcidDamage) StackPushInteger(16);
+   else if (tDamageType == NWN::ACVsAllDamage) StackPushInteger(4103);
+   else if (tDamageType == NWN::NegativeDamage) StackPushInteger(512);
+   else if (tDamageType == NWN::PositiveDamage) StackPushInteger(1024);
+   else if (tDamageType == NWN::BludgeoningDamage) StackPushInteger(1);
+   else if (tDamageType == NWN::ElectricalDamage) StackPushInteger(128);
+   else if (tDamageType == NWN::SonicDamage) StackPushInteger(2048);
+   else if (tDamageType == NWN::PiercingDamage) StackPushInteger(2);
+   else if (tDamageType == NWN::MagicalDamage) StackPushInteger(8);
+   else if (tDamageType == NWN::FireDamage) StackPushInteger(256);
+   else if (tDamageType == NWN::DivineDamage) StackPushInteger(64);
+   else if (tDamageType == NWN::BaseDamage) StackPushInteger(4096);
+   else if (tDamageType == NWN::SlashingDamage) StackPushInteger(4);
+   else if (tDamageType == NWN::ColdDamage) StackPushInteger(32);
+   else throw "fail: invalid struct value passed, internal API error";
   StackPushInteger(nDamageAmount);
 
   VM_ExecuteCommand(79, 3);
@@ -1930,9 +2109,23 @@ NWN::NWEffect NWScriptI::effectDamage(Ice::Int nDamageAmount, Ice::Int nDamageTy
   return e;
 };
 
-NWN::NWEffect NWScriptI::effectDamageDecrease(Ice::Int nPenalty, Ice::Int nDamageType, const Ice::Current& ice) {
+NWN::NWEffect NWScriptI::effectDamageDecrease(Ice::Int nPenalty, NWN::DamageType tDamageType, const Ice::Current& ice) {
   lock("effectDamageDecrease"); callCounter += 1;
-  StackPushInteger(nDamageType);
+  if (tDamageType == NWN::AcidDamage) StackPushInteger(16);
+   else if (tDamageType == NWN::ACVsAllDamage) StackPushInteger(4103);
+   else if (tDamageType == NWN::NegativeDamage) StackPushInteger(512);
+   else if (tDamageType == NWN::PositiveDamage) StackPushInteger(1024);
+   else if (tDamageType == NWN::BludgeoningDamage) StackPushInteger(1);
+   else if (tDamageType == NWN::ElectricalDamage) StackPushInteger(128);
+   else if (tDamageType == NWN::SonicDamage) StackPushInteger(2048);
+   else if (tDamageType == NWN::PiercingDamage) StackPushInteger(2);
+   else if (tDamageType == NWN::MagicalDamage) StackPushInteger(8);
+   else if (tDamageType == NWN::FireDamage) StackPushInteger(256);
+   else if (tDamageType == NWN::DivineDamage) StackPushInteger(64);
+   else if (tDamageType == NWN::BaseDamage) StackPushInteger(4096);
+   else if (tDamageType == NWN::SlashingDamage) StackPushInteger(4);
+   else if (tDamageType == NWN::ColdDamage) StackPushInteger(32);
+   else throw "fail: invalid struct value passed, internal API error";
   StackPushInteger(nPenalty);
 
   VM_ExecuteCommand(448, 2);
@@ -1951,10 +2144,24 @@ NWN::NWEffect NWScriptI::effectDamageDecrease(Ice::Int nPenalty, Ice::Int nDamag
   return e;
 };
 
-NWN::NWEffect NWScriptI::effectDamageImmunityDecrease(Ice::Int nDamageType, Ice::Int nPercentImmunity, const Ice::Current& ice) {
+NWN::NWEffect NWScriptI::effectDamageImmunityDecrease(NWN::DamageType tDamageType, Ice::Int nPercentImmunity, const Ice::Current& ice) {
   lock("effectDamageImmunityDecrease"); callCounter += 1;
   StackPushInteger(nPercentImmunity);
-  StackPushInteger(nDamageType);
+  if (tDamageType == NWN::AcidDamage) StackPushInteger(16);
+   else if (tDamageType == NWN::ACVsAllDamage) StackPushInteger(4103);
+   else if (tDamageType == NWN::NegativeDamage) StackPushInteger(512);
+   else if (tDamageType == NWN::PositiveDamage) StackPushInteger(1024);
+   else if (tDamageType == NWN::BludgeoningDamage) StackPushInteger(1);
+   else if (tDamageType == NWN::ElectricalDamage) StackPushInteger(128);
+   else if (tDamageType == NWN::SonicDamage) StackPushInteger(2048);
+   else if (tDamageType == NWN::PiercingDamage) StackPushInteger(2);
+   else if (tDamageType == NWN::MagicalDamage) StackPushInteger(8);
+   else if (tDamageType == NWN::FireDamage) StackPushInteger(256);
+   else if (tDamageType == NWN::DivineDamage) StackPushInteger(64);
+   else if (tDamageType == NWN::BaseDamage) StackPushInteger(4096);
+   else if (tDamageType == NWN::SlashingDamage) StackPushInteger(4);
+   else if (tDamageType == NWN::ColdDamage) StackPushInteger(32);
+   else throw "fail: invalid struct value passed, internal API error";
 
   VM_ExecuteCommand(449, 2);
 
@@ -1972,10 +2179,24 @@ NWN::NWEffect NWScriptI::effectDamageImmunityDecrease(Ice::Int nDamageType, Ice:
   return e;
 };
 
-NWN::NWEffect NWScriptI::effectDamageImmunityIncrease(Ice::Int nDamageType, Ice::Int nPercentImmunity, const Ice::Current& ice) {
+NWN::NWEffect NWScriptI::effectDamageImmunityIncrease(NWN::DamageType tDamageType, Ice::Int nPercentImmunity, const Ice::Current& ice) {
   lock("effectDamageImmunityIncrease"); callCounter += 1;
   StackPushInteger(nPercentImmunity);
-  StackPushInteger(nDamageType);
+  if (tDamageType == NWN::AcidDamage) StackPushInteger(16);
+   else if (tDamageType == NWN::ACVsAllDamage) StackPushInteger(4103);
+   else if (tDamageType == NWN::NegativeDamage) StackPushInteger(512);
+   else if (tDamageType == NWN::PositiveDamage) StackPushInteger(1024);
+   else if (tDamageType == NWN::BludgeoningDamage) StackPushInteger(1);
+   else if (tDamageType == NWN::ElectricalDamage) StackPushInteger(128);
+   else if (tDamageType == NWN::SonicDamage) StackPushInteger(2048);
+   else if (tDamageType == NWN::PiercingDamage) StackPushInteger(2);
+   else if (tDamageType == NWN::MagicalDamage) StackPushInteger(8);
+   else if (tDamageType == NWN::FireDamage) StackPushInteger(256);
+   else if (tDamageType == NWN::DivineDamage) StackPushInteger(64);
+   else if (tDamageType == NWN::BaseDamage) StackPushInteger(4096);
+   else if (tDamageType == NWN::SlashingDamage) StackPushInteger(4);
+   else if (tDamageType == NWN::ColdDamage) StackPushInteger(32);
+   else throw "fail: invalid struct value passed, internal API error";
 
   VM_ExecuteCommand(275, 2);
 
@@ -1993,9 +2214,23 @@ NWN::NWEffect NWScriptI::effectDamageImmunityIncrease(Ice::Int nDamageType, Ice:
   return e;
 };
 
-NWN::NWEffect NWScriptI::effectDamageIncrease(Ice::Int nBonus, Ice::Int nDamageType, const Ice::Current& ice) {
+NWN::NWEffect NWScriptI::effectDamageIncrease(Ice::Int nBonus, NWN::DamageType tDamageType, const Ice::Current& ice) {
   lock("effectDamageIncrease"); callCounter += 1;
-  StackPushInteger(nDamageType);
+  if (tDamageType == NWN::AcidDamage) StackPushInteger(16);
+   else if (tDamageType == NWN::ACVsAllDamage) StackPushInteger(4103);
+   else if (tDamageType == NWN::NegativeDamage) StackPushInteger(512);
+   else if (tDamageType == NWN::PositiveDamage) StackPushInteger(1024);
+   else if (tDamageType == NWN::BludgeoningDamage) StackPushInteger(1);
+   else if (tDamageType == NWN::ElectricalDamage) StackPushInteger(128);
+   else if (tDamageType == NWN::SonicDamage) StackPushInteger(2048);
+   else if (tDamageType == NWN::PiercingDamage) StackPushInteger(2);
+   else if (tDamageType == NWN::MagicalDamage) StackPushInteger(8);
+   else if (tDamageType == NWN::FireDamage) StackPushInteger(256);
+   else if (tDamageType == NWN::DivineDamage) StackPushInteger(64);
+   else if (tDamageType == NWN::BaseDamage) StackPushInteger(4096);
+   else if (tDamageType == NWN::SlashingDamage) StackPushInteger(4);
+   else if (tDamageType == NWN::ColdDamage) StackPushInteger(32);
+   else throw "fail: invalid struct value passed, internal API error";
   StackPushInteger(nBonus);
 
   VM_ExecuteCommand(120, 2);
@@ -2014,10 +2249,32 @@ NWN::NWEffect NWScriptI::effectDamageIncrease(Ice::Int nBonus, Ice::Int nDamageT
   return e;
 };
 
-NWN::NWEffect NWScriptI::effectDamageReduction(Ice::Int nAmount, Ice::Int nDamagePower, Ice::Int nLimit, const Ice::Current& ice) {
+NWN::NWEffect NWScriptI::effectDamageReduction(Ice::Int nAmount, NWN::DamagePower tDamagePower, Ice::Int nLimit, const Ice::Current& ice) {
   lock("effectDamageReduction"); callCounter += 1;
   StackPushInteger(nLimit);
-  StackPushInteger(nDamagePower);
+  if (tDamagePower == NWN::PlusFifteenDamage) StackPushInteger(16);
+   else if (tDamagePower == NWN::PlusFiveDamage) StackPushInteger(5);
+   else if (tDamagePower == NWN::PlusTenDamage) StackPushInteger(11);
+   else if (tDamagePower == NWN::NormalDamage) StackPushInteger(0);
+   else if (tDamagePower == NWN::PlusSixteenDamage) StackPushInteger(17);
+   else if (tDamagePower == NWN::EnergyDamage) StackPushInteger(6);
+   else if (tDamagePower == NWN::PlusElevenDamage) StackPushInteger(12);
+   else if (tDamagePower == NWN::PlusOneDamage) StackPushInteger(1);
+   else if (tDamagePower == NWN::PlusSeventeenDamage) StackPushInteger(18);
+   else if (tDamagePower == NWN::PlusSixDamage) StackPushInteger(7);
+   else if (tDamagePower == NWN::PlusTwelveDamage) StackPushInteger(13);
+   else if (tDamagePower == NWN::PlusTwoDamage) StackPushInteger(2);
+   else if (tDamagePower == NWN::PlusEighteenDamage) StackPushInteger(19);
+   else if (tDamagePower == NWN::PlusSevenDamage) StackPushInteger(8);
+   else if (tDamagePower == NWN::PlusThirteenDamage) StackPushInteger(14);
+   else if (tDamagePower == NWN::PlusThreeDamage) StackPushInteger(3);
+   else if (tDamagePower == NWN::PlusNinteenDamage) StackPushInteger(20);
+   else if (tDamagePower == NWN::PlusEightDamage) StackPushInteger(9);
+   else if (tDamagePower == NWN::PlusFourteenDamage) StackPushInteger(15);
+   else if (tDamagePower == NWN::PlusFourDamage) StackPushInteger(4);
+   else if (tDamagePower == NWN::PlusTwentyDamage) StackPushInteger(21);
+   else if (tDamagePower == NWN::PlusNineDamage) StackPushInteger(10);
+   else throw "fail: invalid struct value passed, internal API error";
   StackPushInteger(nAmount);
 
   VM_ExecuteCommand(119, 3);
@@ -2036,11 +2293,25 @@ NWN::NWEffect NWScriptI::effectDamageReduction(Ice::Int nAmount, Ice::Int nDamag
   return e;
 };
 
-NWN::NWEffect NWScriptI::effectDamageResistance(Ice::Int nDamageType, Ice::Int nAmount, Ice::Int nLimit, const Ice::Current& ice) {
+NWN::NWEffect NWScriptI::effectDamageResistance(NWN::DamageType tDamageType, Ice::Int nAmount, Ice::Int nLimit, const Ice::Current& ice) {
   lock("effectDamageResistance"); callCounter += 1;
   StackPushInteger(nLimit);
   StackPushInteger(nAmount);
-  StackPushInteger(nDamageType);
+  if (tDamageType == NWN::AcidDamage) StackPushInteger(16);
+   else if (tDamageType == NWN::ACVsAllDamage) StackPushInteger(4103);
+   else if (tDamageType == NWN::NegativeDamage) StackPushInteger(512);
+   else if (tDamageType == NWN::PositiveDamage) StackPushInteger(1024);
+   else if (tDamageType == NWN::BludgeoningDamage) StackPushInteger(1);
+   else if (tDamageType == NWN::ElectricalDamage) StackPushInteger(128);
+   else if (tDamageType == NWN::SonicDamage) StackPushInteger(2048);
+   else if (tDamageType == NWN::PiercingDamage) StackPushInteger(2);
+   else if (tDamageType == NWN::MagicalDamage) StackPushInteger(8);
+   else if (tDamageType == NWN::FireDamage) StackPushInteger(256);
+   else if (tDamageType == NWN::DivineDamage) StackPushInteger(64);
+   else if (tDamageType == NWN::BaseDamage) StackPushInteger(4096);
+   else if (tDamageType == NWN::SlashingDamage) StackPushInteger(4);
+   else if (tDamageType == NWN::ColdDamage) StackPushInteger(32);
+   else throw "fail: invalid struct value passed, internal API error";
 
   VM_ExecuteCommand(81, 3);
 
@@ -2058,9 +2329,23 @@ NWN::NWEffect NWScriptI::effectDamageResistance(Ice::Int nDamageType, Ice::Int n
   return e;
 };
 
-NWN::NWEffect NWScriptI::effectDamageShield(Ice::Int nDamageAmount, Ice::Int nRandomAmount, Ice::Int nDamageType, const Ice::Current& ice) {
+NWN::NWEffect NWScriptI::effectDamageShield(Ice::Int nDamageAmount, Ice::Int nRandomAmount, NWN::DamageType tDamageType, const Ice::Current& ice) {
   lock("effectDamageShield"); callCounter += 1;
-  StackPushInteger(nDamageType);
+  if (tDamageType == NWN::AcidDamage) StackPushInteger(16);
+   else if (tDamageType == NWN::ACVsAllDamage) StackPushInteger(4103);
+   else if (tDamageType == NWN::NegativeDamage) StackPushInteger(512);
+   else if (tDamageType == NWN::PositiveDamage) StackPushInteger(1024);
+   else if (tDamageType == NWN::BludgeoningDamage) StackPushInteger(1);
+   else if (tDamageType == NWN::ElectricalDamage) StackPushInteger(128);
+   else if (tDamageType == NWN::SonicDamage) StackPushInteger(2048);
+   else if (tDamageType == NWN::PiercingDamage) StackPushInteger(2);
+   else if (tDamageType == NWN::MagicalDamage) StackPushInteger(8);
+   else if (tDamageType == NWN::FireDamage) StackPushInteger(256);
+   else if (tDamageType == NWN::DivineDamage) StackPushInteger(64);
+   else if (tDamageType == NWN::BaseDamage) StackPushInteger(4096);
+   else if (tDamageType == NWN::SlashingDamage) StackPushInteger(4);
+   else if (tDamageType == NWN::ColdDamage) StackPushInteger(32);
+   else throw "fail: invalid struct value passed, internal API error";
   StackPushInteger(nRandomAmount);
   StackPushInteger(nDamageAmount);
 
@@ -2489,9 +2774,12 @@ NWN::NWEffect NWScriptI::effectLinkEffects(const NWN::NWEffect& eChildEffect, co
   return e;
 };
 
-NWN::NWEffect NWScriptI::effectMissChance(Ice::Int nPercentage, Ice::Int nMissChanceType, const Ice::Current& ice) {
+NWN::NWEffect NWScriptI::effectMissChance(Ice::Int nPercentage, NWN::MissChanceType tMissChanceType, const Ice::Current& ice) {
   lock("effectMissChance"); callCounter += 1;
-  StackPushInteger(nMissChanceType);
+  if (tMissChanceType == NWN::MissChanceVSAll) StackPushInteger(0);
+   else if (tMissChanceType == NWN::MissChanceVSRanged) StackPushInteger(1);
+   else if (tMissChanceType == NWN::MissChanceVSMelee) StackPushInteger(2);
+   else throw "fail: invalid struct value passed, internal API error";
   StackPushInteger(nPercentage);
 
   VM_ExecuteCommand(477, 2);
@@ -3095,13 +3383,13 @@ NWN::NWEffect NWScriptI::effectSummonCreature(const std::string& sCreatureResref
   return e;
 };
 
-NWN::NWEffect NWScriptI::effectSwarm(Ice::Int nLooping, const std::string& sCreatureTemplate1, const std::string& sCreatureTemplate2, const std::string& sCreatureTemplate3, const std::string& sCreatureTemplate4, const Ice::Current& ice) {
+NWN::NWEffect NWScriptI::effectSwarm(bool bLooping, const std::string& sCreatureTemplate1, const std::string& sCreatureTemplate2, const std::string& sCreatureTemplate3, const std::string& sCreatureTemplate4, const Ice::Current& ice) {
   lock("effectSwarm"); callCounter += 1;
   StackPushString(sCreatureTemplate4.c_str());
   StackPushString(sCreatureTemplate3.c_str());
   StackPushString(sCreatureTemplate2.c_str());
   StackPushString(sCreatureTemplate1.c_str());
-  StackPushInteger(nLooping);
+  StackPushInteger(bLooping == true ? 1 : 0);
 
   VM_ExecuteCommand(510, 5);
 
@@ -3641,7 +3929,7 @@ Ice::Int NWScriptI::getAge(const NWN::NWObject& oCreature, const Ice::Current& i
   return nRetVal;
 };
 
-Ice::Int NWScriptI::getAlignmentGoodEvil(const NWN::NWObject& oCreature, const Ice::Current& ice) {
+NWN::Alignment NWScriptI::getAlignmentGoodEvil(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0) throw NWN::InvalidObjectException();
   lock("getAlignmentGoodEvil"); callCounter += 1;
   StackPushObject(oCreature.id);
@@ -3651,10 +3939,16 @@ Ice::Int NWScriptI::getAlignmentGoodEvil(const NWN::NWObject& oCreature, const I
   int nRetVal;
   StackPopInteger(&nRetVal);
   unlock("getAlignmentGoodEvil");
-  return nRetVal;
+  if (nRetVal == 5) return NWN::Evil;
+  if (nRetVal == 0) return NWN::Any;
+  if (nRetVal == 1) return NWN::Neutral;
+  if (nRetVal == 2) return NWN::Lawful;
+  if (nRetVal == 3) return NWN::Chaotic;
+  if (nRetVal == 4) return NWN::Good;
+  throw "Error: Unmapped enum return type";
 };
 
-Ice::Int NWScriptI::getAlignmentLawChaos(const NWN::NWObject& oCreature, const Ice::Current& ice) {
+NWN::Alignment NWScriptI::getAlignmentLawChaos(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0) throw NWN::InvalidObjectException();
   lock("getAlignmentLawChaos"); callCounter += 1;
   StackPushObject(oCreature.id);
@@ -3664,7 +3958,13 @@ Ice::Int NWScriptI::getAlignmentLawChaos(const NWN::NWObject& oCreature, const I
   int nRetVal;
   StackPopInteger(&nRetVal);
   unlock("getAlignmentLawChaos");
-  return nRetVal;
+  if (nRetVal == 5) return NWN::Evil;
+  if (nRetVal == 0) return NWN::Any;
+  if (nRetVal == 1) return NWN::Neutral;
+  if (nRetVal == 2) return NWN::Lawful;
+  if (nRetVal == 3) return NWN::Chaotic;
+  if (nRetVal == 4) return NWN::Good;
+  throw "Error: Unmapped enum return type";
 };
 
 Ice::Int NWScriptI::getAnimalCompanionCreatureType(const NWN::NWObject& oCreature, const Ice::Current& ice) {
@@ -4259,9 +4559,23 @@ bool NWScriptI::getCutsceneMode(const NWN::NWObject& oCreature, const Ice::Curre
   return nRetVal != 0;
 };
 
-Ice::Int NWScriptI::getDamageDealtByType(Ice::Int nDamageType, const Ice::Current& ice) {
+Ice::Int NWScriptI::getDamageDealtByType(NWN::DamageType tDamageType, const Ice::Current& ice) {
   lock("getDamageDealtByType"); callCounter += 1;
-  StackPushInteger(nDamageType);
+  if (tDamageType == NWN::AcidDamage) StackPushInteger(16);
+   else if (tDamageType == NWN::ACVsAllDamage) StackPushInteger(4103);
+   else if (tDamageType == NWN::NegativeDamage) StackPushInteger(512);
+   else if (tDamageType == NWN::PositiveDamage) StackPushInteger(1024);
+   else if (tDamageType == NWN::BludgeoningDamage) StackPushInteger(1);
+   else if (tDamageType == NWN::ElectricalDamage) StackPushInteger(128);
+   else if (tDamageType == NWN::SonicDamage) StackPushInteger(2048);
+   else if (tDamageType == NWN::PiercingDamage) StackPushInteger(2);
+   else if (tDamageType == NWN::MagicalDamage) StackPushInteger(8);
+   else if (tDamageType == NWN::FireDamage) StackPushInteger(256);
+   else if (tDamageType == NWN::DivineDamage) StackPushInteger(64);
+   else if (tDamageType == NWN::BaseDamage) StackPushInteger(4096);
+   else if (tDamageType == NWN::SlashingDamage) StackPushInteger(4);
+   else if (tDamageType == NWN::ColdDamage) StackPushInteger(32);
+   else throw "fail: invalid struct value passed, internal API error";
 
   VM_ExecuteCommand(344, 1);
 
@@ -8975,10 +9289,16 @@ NWN::NWItemProperty NWScriptI::itemPropertyACBonus(Ice::Int nBonus, const Ice::C
   return e;
 };
 
-NWN::NWItemProperty NWScriptI::itemPropertyACBonusVsAlign(Ice::Int nAlignGroup, Ice::Int nACBonus, const Ice::Current& ice) {
+NWN::NWItemProperty NWScriptI::itemPropertyACBonusVsAlign(NWN::IPAlignGroup tIPAlignGroup, Ice::Int nACBonus, const Ice::Current& ice) {
   lock("itemPropertyACBonusVsAlign"); callCounter += 1;
   StackPushInteger(nACBonus);
-  StackPushInteger(nAlignGroup);
+  if (tIPAlignGroup == NWN::EvilAlignGroup) StackPushInteger(5);
+   else if (tIPAlignGroup == NWN::AllAlignGroup) StackPushInteger(0);
+   else if (tIPAlignGroup == NWN::NeutralAlignGroup) StackPushInteger(1);
+   else if (tIPAlignGroup == NWN::LawfulAlignGroup) StackPushInteger(2);
+   else if (tIPAlignGroup == NWN::ChaoticAlignGroup) StackPushInteger(3);
+   else if (tIPAlignGroup == NWN::GoodAlignGroup) StackPushInteger(4);
+   else throw "fail: invalid struct value passed, internal API error";
 
   VM_ExecuteCommand(618, 2);
 
@@ -8996,10 +9316,24 @@ NWN::NWItemProperty NWScriptI::itemPropertyACBonusVsAlign(Ice::Int nAlignGroup, 
   return e;
 };
 
-NWN::NWItemProperty NWScriptI::itemPropertyACBonusVsDmgType(Ice::Int nDamageType, Ice::Int nACBonus, const Ice::Current& ice) {
+NWN::NWItemProperty NWScriptI::itemPropertyACBonusVsDmgType(NWN::IPDamageType tIPDamageType, Ice::Int nACBonus, const Ice::Current& ice) {
   lock("itemPropertyACBonusVsDmgType"); callCounter += 1;
   StackPushInteger(nACBonus);
-  StackPushInteger(nDamageType);
+  if (tIPDamageType == NWN::MagicalIPDamage) StackPushInteger(5);
+   else if (tIPDamageType == NWN::NegativeIPDamage) StackPushInteger(11);
+   else if (tIPDamageType == NWN::BludgeoningIPDamage) StackPushInteger(0);
+   else if (tIPDamageType == NWN::AcidIPDamage) StackPushInteger(6);
+   else if (tIPDamageType == NWN::PositiveIPDamage) StackPushInteger(12);
+   else if (tIPDamageType == NWN::PiercingIPDamage) StackPushInteger(1);
+   else if (tIPDamageType == NWN::ColdIPDamage) StackPushInteger(7);
+   else if (tIPDamageType == NWN::SonicIPDamage) StackPushInteger(13);
+   else if (tIPDamageType == NWN::SlashingIPDamage) StackPushInteger(2);
+   else if (tIPDamageType == NWN::DivineIPDamage) StackPushInteger(8);
+   else if (tIPDamageType == NWN::SubdualIPDamage) StackPushInteger(3);
+   else if (tIPDamageType == NWN::ElectricalIPDamage) StackPushInteger(9);
+   else if (tIPDamageType == NWN::PhysicalIPDamage) StackPushInteger(4);
+   else if (tIPDamageType == NWN::FireIPDamage) StackPushInteger(10);
+   else throw "fail: invalid struct value passed, internal API error";
 
   VM_ExecuteCommand(619, 2);
 
@@ -9062,10 +9396,16 @@ NWN::NWItemProperty NWScriptI::itemPropertyACBonusVsRace(NWN::IPRacialType tIPRa
   return e;
 };
 
-NWN::NWItemProperty NWScriptI::itemPropertyACBonusVsSAlign(Ice::Int nAlign, Ice::Int nACBonus, const Ice::Current& ice) {
+NWN::NWItemProperty NWScriptI::itemPropertyACBonusVsSAlign(NWN::Alignment tAlignment, Ice::Int nACBonus, const Ice::Current& ice) {
   lock("itemPropertyACBonusVsSAlign"); callCounter += 1;
   StackPushInteger(nACBonus);
-  StackPushInteger(nAlign);
+  if (tAlignment == NWN::Evil) StackPushInteger(5);
+   else if (tAlignment == NWN::Any) StackPushInteger(0);
+   else if (tAlignment == NWN::Neutral) StackPushInteger(1);
+   else if (tAlignment == NWN::Lawful) StackPushInteger(2);
+   else if (tAlignment == NWN::Chaotic) StackPushInteger(3);
+   else if (tAlignment == NWN::Good) StackPushInteger(4);
+   else throw "fail: invalid struct value passed, internal API error";
 
   VM_ExecuteCommand(621, 2);
 
@@ -9170,10 +9510,16 @@ NWN::NWItemProperty NWScriptI::itemPropertyAttackBonus(Ice::Int nBonus, const Ic
   return e;
 };
 
-NWN::NWItemProperty NWScriptI::itemPropertyAttackBonusVsAlign(Ice::Int nAlignGroup, Ice::Int nBonus, const Ice::Current& ice) {
+NWN::NWItemProperty NWScriptI::itemPropertyAttackBonusVsAlign(NWN::IPAlignGroup tIPAlignGroup, Ice::Int nBonus, const Ice::Current& ice) {
   lock("itemPropertyAttackBonusVsAlign"); callCounter += 1;
   StackPushInteger(nBonus);
-  StackPushInteger(nAlignGroup);
+  if (tIPAlignGroup == NWN::EvilAlignGroup) StackPushInteger(5);
+   else if (tIPAlignGroup == NWN::AllAlignGroup) StackPushInteger(0);
+   else if (tIPAlignGroup == NWN::NeutralAlignGroup) StackPushInteger(1);
+   else if (tIPAlignGroup == NWN::LawfulAlignGroup) StackPushInteger(2);
+   else if (tIPAlignGroup == NWN::ChaoticAlignGroup) StackPushInteger(3);
+   else if (tIPAlignGroup == NWN::GoodAlignGroup) StackPushInteger(4);
+   else throw "fail: invalid struct value passed, internal API error";
 
   VM_ExecuteCommand(667, 2);
 
@@ -9236,10 +9582,16 @@ NWN::NWItemProperty NWScriptI::itemPropertyAttackBonusVsRace(NWN::IPRacialType t
   return e;
 };
 
-NWN::NWItemProperty NWScriptI::itemPropertyAttackBonusVsSAlign(Ice::Int nAlignment, Ice::Int nBonus, const Ice::Current& ice) {
+NWN::NWItemProperty NWScriptI::itemPropertyAttackBonusVsSAlign(NWN::Alignment tAlignment, Ice::Int nBonus, const Ice::Current& ice) {
   lock("itemPropertyAttackBonusVsSAlign"); callCounter += 1;
   StackPushInteger(nBonus);
-  StackPushInteger(nAlignment);
+  if (tAlignment == NWN::Evil) StackPushInteger(5);
+   else if (tAlignment == NWN::Any) StackPushInteger(0);
+   else if (tAlignment == NWN::Neutral) StackPushInteger(1);
+   else if (tAlignment == NWN::Lawful) StackPushInteger(2);
+   else if (tAlignment == NWN::Chaotic) StackPushInteger(3);
+   else if (tAlignment == NWN::Good) StackPushInteger(4);
+   else throw "fail: invalid struct value passed, internal API error";
 
   VM_ExecuteCommand(669, 2);
 
@@ -9421,10 +9773,24 @@ NWN::NWItemProperty NWScriptI::itemPropertyContainerReducedWeight(Ice::Int nCont
   return e;
 };
 
-NWN::NWItemProperty NWScriptI::itemPropertyDamageBonus(Ice::Int nDamageType, Ice::Int nDamage, const Ice::Current& ice) {
+NWN::NWItemProperty NWScriptI::itemPropertyDamageBonus(NWN::IPDamageType tIPDamageType, Ice::Int nDamage, const Ice::Current& ice) {
   lock("itemPropertyDamageBonus"); callCounter += 1;
   StackPushInteger(nDamage);
-  StackPushInteger(nDamageType);
+  if (tIPDamageType == NWN::MagicalIPDamage) StackPushInteger(5);
+   else if (tIPDamageType == NWN::NegativeIPDamage) StackPushInteger(11);
+   else if (tIPDamageType == NWN::BludgeoningIPDamage) StackPushInteger(0);
+   else if (tIPDamageType == NWN::AcidIPDamage) StackPushInteger(6);
+   else if (tIPDamageType == NWN::PositiveIPDamage) StackPushInteger(12);
+   else if (tIPDamageType == NWN::PiercingIPDamage) StackPushInteger(1);
+   else if (tIPDamageType == NWN::ColdIPDamage) StackPushInteger(7);
+   else if (tIPDamageType == NWN::SonicIPDamage) StackPushInteger(13);
+   else if (tIPDamageType == NWN::SlashingIPDamage) StackPushInteger(2);
+   else if (tIPDamageType == NWN::DivineIPDamage) StackPushInteger(8);
+   else if (tIPDamageType == NWN::SubdualIPDamage) StackPushInteger(3);
+   else if (tIPDamageType == NWN::ElectricalIPDamage) StackPushInteger(9);
+   else if (tIPDamageType == NWN::PhysicalIPDamage) StackPushInteger(4);
+   else if (tIPDamageType == NWN::FireIPDamage) StackPushInteger(10);
+   else throw "fail: invalid struct value passed, internal API error";
 
   VM_ExecuteCommand(631, 2);
 
@@ -9442,11 +9808,31 @@ NWN::NWItemProperty NWScriptI::itemPropertyDamageBonus(Ice::Int nDamageType, Ice
   return e;
 };
 
-NWN::NWItemProperty NWScriptI::itemPropertyDamageBonusVsAlign(Ice::Int nAlignGroup, Ice::Int nDamageType, Ice::Int nDamage, const Ice::Current& ice) {
+NWN::NWItemProperty NWScriptI::itemPropertyDamageBonusVsAlign(NWN::IPAlignGroup tIPAlignGroup, NWN::IPDamageType tIPDamageType, Ice::Int nDamage, const Ice::Current& ice) {
   lock("itemPropertyDamageBonusVsAlign"); callCounter += 1;
   StackPushInteger(nDamage);
-  StackPushInteger(nDamageType);
-  StackPushInteger(nAlignGroup);
+  if (tIPDamageType == NWN::MagicalIPDamage) StackPushInteger(5);
+   else if (tIPDamageType == NWN::NegativeIPDamage) StackPushInteger(11);
+   else if (tIPDamageType == NWN::BludgeoningIPDamage) StackPushInteger(0);
+   else if (tIPDamageType == NWN::AcidIPDamage) StackPushInteger(6);
+   else if (tIPDamageType == NWN::PositiveIPDamage) StackPushInteger(12);
+   else if (tIPDamageType == NWN::PiercingIPDamage) StackPushInteger(1);
+   else if (tIPDamageType == NWN::ColdIPDamage) StackPushInteger(7);
+   else if (tIPDamageType == NWN::SonicIPDamage) StackPushInteger(13);
+   else if (tIPDamageType == NWN::SlashingIPDamage) StackPushInteger(2);
+   else if (tIPDamageType == NWN::DivineIPDamage) StackPushInteger(8);
+   else if (tIPDamageType == NWN::SubdualIPDamage) StackPushInteger(3);
+   else if (tIPDamageType == NWN::ElectricalIPDamage) StackPushInteger(9);
+   else if (tIPDamageType == NWN::PhysicalIPDamage) StackPushInteger(4);
+   else if (tIPDamageType == NWN::FireIPDamage) StackPushInteger(10);
+   else throw "fail: invalid struct value passed, internal API error";
+  if (tIPAlignGroup == NWN::EvilAlignGroup) StackPushInteger(5);
+   else if (tIPAlignGroup == NWN::AllAlignGroup) StackPushInteger(0);
+   else if (tIPAlignGroup == NWN::NeutralAlignGroup) StackPushInteger(1);
+   else if (tIPAlignGroup == NWN::LawfulAlignGroup) StackPushInteger(2);
+   else if (tIPAlignGroup == NWN::ChaoticAlignGroup) StackPushInteger(3);
+   else if (tIPAlignGroup == NWN::GoodAlignGroup) StackPushInteger(4);
+   else throw "fail: invalid struct value passed, internal API error";
 
   VM_ExecuteCommand(632, 3);
 
@@ -9464,10 +9850,24 @@ NWN::NWItemProperty NWScriptI::itemPropertyDamageBonusVsAlign(Ice::Int nAlignGro
   return e;
 };
 
-NWN::NWItemProperty NWScriptI::itemPropertyDamageBonusVsRace(NWN::IPRacialType tIPRacialType, Ice::Int nDamageType, Ice::Int nDamage, const Ice::Current& ice) {
+NWN::NWItemProperty NWScriptI::itemPropertyDamageBonusVsRace(NWN::IPRacialType tIPRacialType, NWN::IPDamageType tIPDamageType, Ice::Int nDamage, const Ice::Current& ice) {
   lock("itemPropertyDamageBonusVsRace"); callCounter += 1;
   StackPushInteger(nDamage);
-  StackPushInteger(nDamageType);
+  if (tIPDamageType == NWN::MagicalIPDamage) StackPushInteger(5);
+   else if (tIPDamageType == NWN::NegativeIPDamage) StackPushInteger(11);
+   else if (tIPDamageType == NWN::BludgeoningIPDamage) StackPushInteger(0);
+   else if (tIPDamageType == NWN::AcidIPDamage) StackPushInteger(6);
+   else if (tIPDamageType == NWN::PositiveIPDamage) StackPushInteger(12);
+   else if (tIPDamageType == NWN::PiercingIPDamage) StackPushInteger(1);
+   else if (tIPDamageType == NWN::ColdIPDamage) StackPushInteger(7);
+   else if (tIPDamageType == NWN::SonicIPDamage) StackPushInteger(13);
+   else if (tIPDamageType == NWN::SlashingIPDamage) StackPushInteger(2);
+   else if (tIPDamageType == NWN::DivineIPDamage) StackPushInteger(8);
+   else if (tIPDamageType == NWN::SubdualIPDamage) StackPushInteger(3);
+   else if (tIPDamageType == NWN::ElectricalIPDamage) StackPushInteger(9);
+   else if (tIPDamageType == NWN::PhysicalIPDamage) StackPushInteger(4);
+   else if (tIPDamageType == NWN::FireIPDamage) StackPushInteger(10);
+   else throw "fail: invalid struct value passed, internal API error";
   if (tIPRacialType == NWN::ElementalIPRace) StackPushInteger(16);
    else if (tIPRacialType == NWN::HalforcIPRace) StackPushInteger(5);
    else if (tIPRacialType == NWN::DragonIPRace) StackPushInteger(11);
@@ -9510,11 +9910,31 @@ NWN::NWItemProperty NWScriptI::itemPropertyDamageBonusVsRace(NWN::IPRacialType t
   return e;
 };
 
-NWN::NWItemProperty NWScriptI::itemPropertyDamageBonusVsSAlign(Ice::Int nAlign, Ice::Int nDamageType, Ice::Int nDamage, const Ice::Current& ice) {
+NWN::NWItemProperty NWScriptI::itemPropertyDamageBonusVsSAlign(NWN::Alignment tAlignment, NWN::IPDamageType tIPDamageType, Ice::Int nDamage, const Ice::Current& ice) {
   lock("itemPropertyDamageBonusVsSAlign"); callCounter += 1;
   StackPushInteger(nDamage);
-  StackPushInteger(nDamageType);
-  StackPushInteger(nAlign);
+  if (tIPDamageType == NWN::MagicalIPDamage) StackPushInteger(5);
+   else if (tIPDamageType == NWN::NegativeIPDamage) StackPushInteger(11);
+   else if (tIPDamageType == NWN::BludgeoningIPDamage) StackPushInteger(0);
+   else if (tIPDamageType == NWN::AcidIPDamage) StackPushInteger(6);
+   else if (tIPDamageType == NWN::PositiveIPDamage) StackPushInteger(12);
+   else if (tIPDamageType == NWN::PiercingIPDamage) StackPushInteger(1);
+   else if (tIPDamageType == NWN::ColdIPDamage) StackPushInteger(7);
+   else if (tIPDamageType == NWN::SonicIPDamage) StackPushInteger(13);
+   else if (tIPDamageType == NWN::SlashingIPDamage) StackPushInteger(2);
+   else if (tIPDamageType == NWN::DivineIPDamage) StackPushInteger(8);
+   else if (tIPDamageType == NWN::SubdualIPDamage) StackPushInteger(3);
+   else if (tIPDamageType == NWN::ElectricalIPDamage) StackPushInteger(9);
+   else if (tIPDamageType == NWN::PhysicalIPDamage) StackPushInteger(4);
+   else if (tIPDamageType == NWN::FireIPDamage) StackPushInteger(10);
+   else throw "fail: invalid struct value passed, internal API error";
+  if (tAlignment == NWN::Evil) StackPushInteger(5);
+   else if (tAlignment == NWN::Any) StackPushInteger(0);
+   else if (tAlignment == NWN::Neutral) StackPushInteger(1);
+   else if (tAlignment == NWN::Lawful) StackPushInteger(2);
+   else if (tAlignment == NWN::Chaotic) StackPushInteger(3);
+   else if (tAlignment == NWN::Good) StackPushInteger(4);
+   else throw "fail: invalid struct value passed, internal API error";
 
   VM_ExecuteCommand(634, 3);
 
@@ -9532,10 +9952,24 @@ NWN::NWItemProperty NWScriptI::itemPropertyDamageBonusVsSAlign(Ice::Int nAlign, 
   return e;
 };
 
-NWN::NWItemProperty NWScriptI::itemPropertyDamageImmunity(Ice::Int nDamageType, Ice::Int nImmuneBonus, const Ice::Current& ice) {
+NWN::NWItemProperty NWScriptI::itemPropertyDamageImmunity(NWN::IPDamageType tIPDamageType, Ice::Int nImmuneBonus, const Ice::Current& ice) {
   lock("itemPropertyDamageImmunity"); callCounter += 1;
   StackPushInteger(nImmuneBonus);
-  StackPushInteger(nDamageType);
+  if (tIPDamageType == NWN::MagicalIPDamage) StackPushInteger(5);
+   else if (tIPDamageType == NWN::NegativeIPDamage) StackPushInteger(11);
+   else if (tIPDamageType == NWN::BludgeoningIPDamage) StackPushInteger(0);
+   else if (tIPDamageType == NWN::AcidIPDamage) StackPushInteger(6);
+   else if (tIPDamageType == NWN::PositiveIPDamage) StackPushInteger(12);
+   else if (tIPDamageType == NWN::PiercingIPDamage) StackPushInteger(1);
+   else if (tIPDamageType == NWN::ColdIPDamage) StackPushInteger(7);
+   else if (tIPDamageType == NWN::SonicIPDamage) StackPushInteger(13);
+   else if (tIPDamageType == NWN::SlashingIPDamage) StackPushInteger(2);
+   else if (tIPDamageType == NWN::DivineIPDamage) StackPushInteger(8);
+   else if (tIPDamageType == NWN::SubdualIPDamage) StackPushInteger(3);
+   else if (tIPDamageType == NWN::ElectricalIPDamage) StackPushInteger(9);
+   else if (tIPDamageType == NWN::PhysicalIPDamage) StackPushInteger(4);
+   else if (tIPDamageType == NWN::FireIPDamage) StackPushInteger(10);
+   else throw "fail: invalid struct value passed, internal API error";
 
   VM_ExecuteCommand(635, 2);
 
@@ -9594,10 +10028,24 @@ NWN::NWItemProperty NWScriptI::itemPropertyDamageReduction(Ice::Int nEnhancement
   return e;
 };
 
-NWN::NWItemProperty NWScriptI::itemPropertyDamageResistance(Ice::Int nDamageType, Ice::Int nHPResist, const Ice::Current& ice) {
+NWN::NWItemProperty NWScriptI::itemPropertyDamageResistance(NWN::IPDamageType tIPDamageType, Ice::Int nHPResist, const Ice::Current& ice) {
   lock("itemPropertyDamageResistance"); callCounter += 1;
   StackPushInteger(nHPResist);
-  StackPushInteger(nDamageType);
+  if (tIPDamageType == NWN::MagicalIPDamage) StackPushInteger(5);
+   else if (tIPDamageType == NWN::NegativeIPDamage) StackPushInteger(11);
+   else if (tIPDamageType == NWN::BludgeoningIPDamage) StackPushInteger(0);
+   else if (tIPDamageType == NWN::AcidIPDamage) StackPushInteger(6);
+   else if (tIPDamageType == NWN::PositiveIPDamage) StackPushInteger(12);
+   else if (tIPDamageType == NWN::PiercingIPDamage) StackPushInteger(1);
+   else if (tIPDamageType == NWN::ColdIPDamage) StackPushInteger(7);
+   else if (tIPDamageType == NWN::SonicIPDamage) StackPushInteger(13);
+   else if (tIPDamageType == NWN::SlashingIPDamage) StackPushInteger(2);
+   else if (tIPDamageType == NWN::DivineIPDamage) StackPushInteger(8);
+   else if (tIPDamageType == NWN::SubdualIPDamage) StackPushInteger(3);
+   else if (tIPDamageType == NWN::ElectricalIPDamage) StackPushInteger(9);
+   else if (tIPDamageType == NWN::PhysicalIPDamage) StackPushInteger(4);
+   else if (tIPDamageType == NWN::FireIPDamage) StackPushInteger(10);
+   else throw "fail: invalid struct value passed, internal API error";
 
   VM_ExecuteCommand(638, 2);
 
@@ -9615,10 +10063,24 @@ NWN::NWItemProperty NWScriptI::itemPropertyDamageResistance(Ice::Int nDamageType
   return e;
 };
 
-NWN::NWItemProperty NWScriptI::itemPropertyDamageVulnerability(Ice::Int nDamageType, Ice::Int nVulnerability, const Ice::Current& ice) {
+NWN::NWItemProperty NWScriptI::itemPropertyDamageVulnerability(NWN::IPDamageType tIPDamageType, Ice::Int nVulnerability, const Ice::Current& ice) {
   lock("itemPropertyDamageVulnerability"); callCounter += 1;
   StackPushInteger(nVulnerability);
-  StackPushInteger(nDamageType);
+  if (tIPDamageType == NWN::MagicalIPDamage) StackPushInteger(5);
+   else if (tIPDamageType == NWN::NegativeIPDamage) StackPushInteger(11);
+   else if (tIPDamageType == NWN::BludgeoningIPDamage) StackPushInteger(0);
+   else if (tIPDamageType == NWN::AcidIPDamage) StackPushInteger(6);
+   else if (tIPDamageType == NWN::PositiveIPDamage) StackPushInteger(12);
+   else if (tIPDamageType == NWN::PiercingIPDamage) StackPushInteger(1);
+   else if (tIPDamageType == NWN::ColdIPDamage) StackPushInteger(7);
+   else if (tIPDamageType == NWN::SonicIPDamage) StackPushInteger(13);
+   else if (tIPDamageType == NWN::SlashingIPDamage) StackPushInteger(2);
+   else if (tIPDamageType == NWN::DivineIPDamage) StackPushInteger(8);
+   else if (tIPDamageType == NWN::SubdualIPDamage) StackPushInteger(3);
+   else if (tIPDamageType == NWN::ElectricalIPDamage) StackPushInteger(9);
+   else if (tIPDamageType == NWN::PhysicalIPDamage) StackPushInteger(4);
+   else if (tIPDamageType == NWN::FireIPDamage) StackPushInteger(10);
+   else throw "fail: invalid struct value passed, internal API error";
 
   VM_ExecuteCommand(639, 2);
 
@@ -9744,10 +10206,16 @@ NWN::NWItemProperty NWScriptI::itemPropertyEnhancementBonus(Ice::Int nEnhancemen
   return e;
 };
 
-NWN::NWItemProperty NWScriptI::itemPropertyEnhancementBonusVsAlign(Ice::Int nAlignGroup, Ice::Int nBonus, const Ice::Current& ice) {
+NWN::NWItemProperty NWScriptI::itemPropertyEnhancementBonusVsAlign(NWN::IPAlignGroup tIPAlignGroup, Ice::Int nBonus, const Ice::Current& ice) {
   lock("itemPropertyEnhancementBonusVsAlign"); callCounter += 1;
   StackPushInteger(nBonus);
-  StackPushInteger(nAlignGroup);
+  if (tIPAlignGroup == NWN::EvilAlignGroup) StackPushInteger(5);
+   else if (tIPAlignGroup == NWN::AllAlignGroup) StackPushInteger(0);
+   else if (tIPAlignGroup == NWN::NeutralAlignGroup) StackPushInteger(1);
+   else if (tIPAlignGroup == NWN::LawfulAlignGroup) StackPushInteger(2);
+   else if (tIPAlignGroup == NWN::ChaoticAlignGroup) StackPushInteger(3);
+   else if (tIPAlignGroup == NWN::GoodAlignGroup) StackPushInteger(4);
+   else throw "fail: invalid struct value passed, internal API error";
 
   VM_ExecuteCommand(623, 2);
 
@@ -9810,10 +10278,16 @@ NWN::NWItemProperty NWScriptI::itemPropertyEnhancementBonusVsRace(NWN::IPRacialT
   return e;
 };
 
-NWN::NWItemProperty NWScriptI::itemPropertyEnhancementBonusVsSAlign(Ice::Int nAlign, Ice::Int nBonus, const Ice::Current& ice) {
+NWN::NWItemProperty NWScriptI::itemPropertyEnhancementBonusVsSAlign(NWN::Alignment tAlignment, Ice::Int nBonus, const Ice::Current& ice) {
   lock("itemPropertyEnhancementBonusVsSAlign"); callCounter += 1;
   StackPushInteger(nBonus);
-  StackPushInteger(nAlign);
+  if (tAlignment == NWN::Evil) StackPushInteger(5);
+   else if (tAlignment == NWN::Any) StackPushInteger(0);
+   else if (tAlignment == NWN::Neutral) StackPushInteger(1);
+   else if (tAlignment == NWN::Lawful) StackPushInteger(2);
+   else if (tAlignment == NWN::Chaotic) StackPushInteger(3);
+   else if (tAlignment == NWN::Good) StackPushInteger(4);
+   else throw "fail: invalid struct value passed, internal API error";
 
   VM_ExecuteCommand(625, 2);
 
@@ -9851,9 +10325,23 @@ NWN::NWItemProperty NWScriptI::itemPropertyEnhancementPenalty(Ice::Int nPenalty,
   return e;
 };
 
-NWN::NWItemProperty NWScriptI::itemPropertyExtraMeleeDamageType(Ice::Int nDamageType, const Ice::Current& ice) {
+NWN::NWItemProperty NWScriptI::itemPropertyExtraMeleeDamageType(NWN::IPDamageType tIPDamageType, const Ice::Current& ice) {
   lock("itemPropertyExtraMeleeDamageType"); callCounter += 1;
-  StackPushInteger(nDamageType);
+  if (tIPDamageType == NWN::MagicalIPDamage) StackPushInteger(5);
+   else if (tIPDamageType == NWN::NegativeIPDamage) StackPushInteger(11);
+   else if (tIPDamageType == NWN::BludgeoningIPDamage) StackPushInteger(0);
+   else if (tIPDamageType == NWN::AcidIPDamage) StackPushInteger(6);
+   else if (tIPDamageType == NWN::PositiveIPDamage) StackPushInteger(12);
+   else if (tIPDamageType == NWN::PiercingIPDamage) StackPushInteger(1);
+   else if (tIPDamageType == NWN::ColdIPDamage) StackPushInteger(7);
+   else if (tIPDamageType == NWN::SonicIPDamage) StackPushInteger(13);
+   else if (tIPDamageType == NWN::SlashingIPDamage) StackPushInteger(2);
+   else if (tIPDamageType == NWN::DivineIPDamage) StackPushInteger(8);
+   else if (tIPDamageType == NWN::SubdualIPDamage) StackPushInteger(3);
+   else if (tIPDamageType == NWN::ElectricalIPDamage) StackPushInteger(9);
+   else if (tIPDamageType == NWN::PhysicalIPDamage) StackPushInteger(4);
+   else if (tIPDamageType == NWN::FireIPDamage) StackPushInteger(10);
+   else throw "fail: invalid struct value passed, internal API error";
 
   VM_ExecuteCommand(645, 1);
 
@@ -9871,9 +10359,23 @@ NWN::NWItemProperty NWScriptI::itemPropertyExtraMeleeDamageType(Ice::Int nDamage
   return e;
 };
 
-NWN::NWItemProperty NWScriptI::itemPropertyExtraRangeDamageType(Ice::Int nDamageType, const Ice::Current& ice) {
+NWN::NWItemProperty NWScriptI::itemPropertyExtraRangeDamageType(NWN::IPDamageType tIPDamageType, const Ice::Current& ice) {
   lock("itemPropertyExtraRangeDamageType"); callCounter += 1;
-  StackPushInteger(nDamageType);
+  if (tIPDamageType == NWN::MagicalIPDamage) StackPushInteger(5);
+   else if (tIPDamageType == NWN::NegativeIPDamage) StackPushInteger(11);
+   else if (tIPDamageType == NWN::BludgeoningIPDamage) StackPushInteger(0);
+   else if (tIPDamageType == NWN::AcidIPDamage) StackPushInteger(6);
+   else if (tIPDamageType == NWN::PositiveIPDamage) StackPushInteger(12);
+   else if (tIPDamageType == NWN::PiercingIPDamage) StackPushInteger(1);
+   else if (tIPDamageType == NWN::ColdIPDamage) StackPushInteger(7);
+   else if (tIPDamageType == NWN::SonicIPDamage) StackPushInteger(13);
+   else if (tIPDamageType == NWN::SlashingIPDamage) StackPushInteger(2);
+   else if (tIPDamageType == NWN::DivineIPDamage) StackPushInteger(8);
+   else if (tIPDamageType == NWN::SubdualIPDamage) StackPushInteger(3);
+   else if (tIPDamageType == NWN::ElectricalIPDamage) StackPushInteger(9);
+   else if (tIPDamageType == NWN::PhysicalIPDamage) StackPushInteger(4);
+   else if (tIPDamageType == NWN::FireIPDamage) StackPushInteger(10);
+   else throw "fail: invalid struct value passed, internal API error";
 
   VM_ExecuteCommand(646, 1);
 
@@ -10067,9 +10569,15 @@ NWN::NWItemProperty NWScriptI::itemPropertyLight(Ice::Int nBrightness, Ice::Int 
   return e;
 };
 
-NWN::NWItemProperty NWScriptI::itemPropertyLimitUseByAlign(Ice::Int nAlignGroup, const Ice::Current& ice) {
+NWN::NWItemProperty NWScriptI::itemPropertyLimitUseByAlign(NWN::IPAlignGroup tIPAlignGroup, const Ice::Current& ice) {
   lock("itemPropertyLimitUseByAlign"); callCounter += 1;
-  StackPushInteger(nAlignGroup);
+  if (tIPAlignGroup == NWN::EvilAlignGroup) StackPushInteger(5);
+   else if (tIPAlignGroup == NWN::AllAlignGroup) StackPushInteger(0);
+   else if (tIPAlignGroup == NWN::NeutralAlignGroup) StackPushInteger(1);
+   else if (tIPAlignGroup == NWN::LawfulAlignGroup) StackPushInteger(2);
+   else if (tIPAlignGroup == NWN::ChaoticAlignGroup) StackPushInteger(3);
+   else if (tIPAlignGroup == NWN::GoodAlignGroup) StackPushInteger(4);
+   else throw "fail: invalid struct value passed, internal API error";
 
   VM_ExecuteCommand(672, 1);
 
@@ -10151,9 +10659,15 @@ NWN::NWItemProperty NWScriptI::itemPropertyLimitUseByRace(NWN::IPRacialType tIPR
   return e;
 };
 
-NWN::NWItemProperty NWScriptI::itemPropertyLimitUseBySAlign(Ice::Int nAlignment, const Ice::Current& ice) {
+NWN::NWItemProperty NWScriptI::itemPropertyLimitUseBySAlign(NWN::Alignment tAlignment, const Ice::Current& ice) {
   lock("itemPropertyLimitUseBySAlign"); callCounter += 1;
-  StackPushInteger(nAlignment);
+  if (tAlignment == NWN::Evil) StackPushInteger(5);
+   else if (tAlignment == NWN::Any) StackPushInteger(0);
+   else if (tAlignment == NWN::Neutral) StackPushInteger(1);
+   else if (tAlignment == NWN::Lawful) StackPushInteger(2);
+   else if (tAlignment == NWN::Chaotic) StackPushInteger(3);
+   else if (tAlignment == NWN::Good) StackPushInteger(4);
+   else throw "fail: invalid struct value passed, internal API error";
 
   VM_ExecuteCommand(675, 1);
 
@@ -10517,9 +11031,20 @@ NWN::NWItemProperty NWScriptI::itemPropertyThievesTools(Ice::Int nModifier, cons
   return e;
 };
 
-NWN::NWItemProperty NWScriptI::itemPropertyTrap(Ice::Int nTrapLevel, Ice::Int nTrapType, const Ice::Current& ice) {
+NWN::NWItemProperty NWScriptI::itemPropertyTrap(Ice::Int nTrapLevel, NWN::IPTrapType tIPTrapType, const Ice::Current& ice) {
   lock("itemPropertyTrap"); callCounter += 1;
-  StackPushInteger(nTrapType);
+  if (tIPTrapType == NWN::FireIPTrap) StackPushInteger(5);
+   else if (tIPTrapType == NWN::NegativeIPTrap) StackPushInteger(11);
+   else if (tIPTrapType == NWN::ElectricalIPTrap) StackPushInteger(6);
+   else if (tIPTrapType == NWN::SpikeIPTrap) StackPushInteger(1);
+   else if (tIPTrapType == NWN::GasIPTrap) StackPushInteger(7);
+   else if (tIPTrapType == NWN::HolyIPTrap) StackPushInteger(2);
+   else if (tIPTrapType == NWN::FrostIPTrap) StackPushInteger(8);
+   else if (tIPTrapType == NWN::TangleIPTrap) StackPushInteger(3);
+   else if (tIPTrapType == NWN::AcidSplashIPTrap) StackPushInteger(9);
+   else if (tIPTrapType == NWN::BlobOfAcidIPTrap) StackPushInteger(4);
+   else if (tIPTrapType == NWN::SonicIPTrap) StackPushInteger(10);
+   else throw "fail: invalid struct value passed, internal API error";
   StackPushInteger(nTrapLevel);
 
   VM_ExecuteCommand(678, 2);
