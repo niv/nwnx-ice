@@ -75,7 +75,7 @@ bool CNWNXICE::OnCreate(gline *config, const char *LogDir)
 		try {
 
 			Ice::InitializationData initData;
-			initData.stringConverter = new Ice::IconvStringConverter<char>("WINDOWS-1250");
+			initData.stringConverter = new Ice::IconvStringConverter<char>("ISO_8859-1");
 			icClient = Ice::initialize(initData);
 
 
@@ -106,8 +106,9 @@ bool CNWNXICE::OnCreate(gline *config, const char *LogDir)
 	// Set up the server ..
 	try {
 		Ice::InitializationData initData;
-		initData.stringConverter = new Ice::IconvStringConverter<char>("WINDOWS-1250");
+		initData.stringConverter = new Ice::IconvStringConverter<char>("ISO_8859-1");
 		icServer = Ice::initialize(initData);
+
 		adapter =
 			icServer->createObjectAdapterWithEndpoints(
 				"NWScriptAdapter", "default -p 5222" /* (*nwnxConfig)[confKey]["server"].c_str() */ );
@@ -147,7 +148,7 @@ char* CNWNXICE::OnRequest (char *gameObject, char* request, char* parameters)
 		return NULL;
 	}
 	if (nwscriptI->inContext)
-		printf("Usage error, do NOT stack ICE events. Will now deadlock.\n");
+		sprintf("Usage error, do NOT stack ICE events. Will now deadlock (blocking request: %s %s\n", request, event);
 
 	dword oid = strtol(oid_c, 0, 16);
 	NWN::NWObject nwobj_self;
