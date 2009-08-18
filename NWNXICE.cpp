@@ -134,7 +134,7 @@ char* CNWNXICE::OnRequest (char *gameObject, char* request, char* parameters)
 	Log(0, "(S) Request: \"%s\"\n", request);
 	Log(0, "(S) Params:  \"%s\"\n", parameters);
 
-	bool ret;
+	int ret = NWN::Continue;
 
 	timeval t1; gettimeofday(&t1, NULL);
 
@@ -187,7 +187,6 @@ char* CNWNXICE::OnRequest (char *gameObject, char* request, char* parameters)
 
 	nwscriptI->resetPerEventMappings();
 
-	// do something with ret.
-
+	sprintf(parameters, "%d", ret);
 	return NULL;
 }

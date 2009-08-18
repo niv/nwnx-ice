@@ -4,7 +4,7 @@
 
 module NWN {
 
-  enum ClientResult { Stop, Suppress, Continue };
+  enum ClientResult { Stop, Suppress, Continue, Error };
 
   interface Client {
     ClientResult event(NWScript* proxy, NWObject self, string evt);
