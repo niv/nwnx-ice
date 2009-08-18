@@ -143,9 +143,11 @@ char* CNWNXICE::OnRequest (char *gameObject, char* request, char* parameters)
 	char* event  = strtok(NULL, " ");
 
 	if (NULL == event) {
-		printf("Usage error, need format: ObjectToString(OBJECT_SELF) event_name");
-		return false;
+		printf("Usage error, need format: ObjectToString(OBJECT_SELF) event_name\n");
+		return NULL;
 	}
+	if (nwscriptI->inContext)
+		printf("Usage error, do NOT stack ICE events. Will now deadlock.\n");
 
 	dword oid = strtol(oid_c, 0, 16);
 	NWN::NWObject nwobj_self;
