@@ -1,4 +1,4 @@
-// Generated on Sat Aug 15 13:59:11 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Tue Aug 18 21:07:11 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 // Not exported:
 //   getFirstEffect getFirstFactionMember getFirstItemInInventory getFirstItemProperty getFirstInPersistentObject getFirstObjectInArea getFirstObjectInShape getFirstPC
@@ -49,6 +49,7 @@ module NWN {
   enum InventorySlot { HeadSlot, ChestSlot, BootsSlot, ArmsSlot, RighthandSlot, LefthandSlot, CloakSlot, LeftringSlot, RightringSlot, NeckSlot, BeltSlot, ArrowsSlot, BulletsSlot, BoltsSlot, CreatureLefthandSlot, CreatureRighthandSlot, CreatureBiteSlot, CreatureArmorSlot };
   enum DoorAction { OpenDoor, UnlockDoor, BashDoor, IgnoreDoor, KnockDoor };
   enum ProjectilePathType { DefaultPath, HomingPath, BallisticPath, HighBallisticPath, AcceleratingPath };
+  enum AILevel { DefaultAI, VeryLowAI, LowAI, NormalAI, HighAI, VeryHighAI };
   enum ShapeType { SpellCylinderShape, ConeShape, CubeShape, SpellConeShape, SphereShape };
   enum AttackResult { MissedAttack, HitAttack, CriticalHitAttack };
   enum MetaMagic { NoneMeta, EmpowerMeta, ExtendMeta, MaximizeMeta, QuickenMeta, SilentMeta, StillMeta, AnyMeta };
@@ -86,7 +87,7 @@ module NWN {
     passing in the requested ID (for example, 0 for module).
   **/
   struct NWObject {
-    long id;
+    int id;
   };
   sequence<NWObject> NWObjectSeq;
 
@@ -391,7 +392,7 @@ module NWN {
     SavingThrowResult fortitudeSave(NWObject oCreature, int nDC, SaveType tSaveType, NWObject oSaveVersus) throws NotInContextException;
     idempotent string get2DAString(string s2DA, string sColumn, int nRow) throws NotInContextException;
     idempotent int getAC(NWObject oObject) throws NotInContextException;
-    idempotent int getAILevel(NWObject oTarget) throws NotInContextException;
+    idempotent AILevel getAILevel(NWObject oTarget) throws NotInContextException;
     idempotent int getAbilityModifier(Ability tAbility, NWObject oCreature) throws NotInContextException;
     idempotent int getAbilityScore(NWObject oCreature, Ability tAbility, bool bBaseAbilityScore) throws NotInContextException;
     idempotent bool getActionMode(NWObject oCreature, ActionMode tActionMode) throws NotInContextException;
@@ -839,8 +840,8 @@ module NWN {
     void sendMessageToAllDMs(string szMessage) throws NotInContextException;
     void sendMessageToPC(NWObject oPlayer, string szMessage) throws NotInContextException;
     void sendMessageToPCByStrRef(NWObject oPlayer, int nStrRef) throws NotInContextException;
-    idempotent void setAILevel(NWObject oTarget, int nAILevel) throws NotInContextException;
-    idempotent void setActionMode(NWObject oCreature, int nMode, int nStatus) throws NotInContextException;
+    idempotent void setAILevel(NWObject oTarget, AILevel tAILevel) throws NotInContextException;
+    idempotent void setActionMode(NWObject oCreature, ActionMode tActionMode, bool bStatus) throws NotInContextException;
     idempotent void setAreaTransitionBMP(int nPredefinedAreaTransition, string sCustomAreaTransitionBMP) throws NotInContextException;
     idempotent void setAssociateListenPatterns(NWObject oTarget) throws NotInContextException;
     idempotent void setBaseAttackBonus(int nBaseAttackBonus, NWObject oCreature) throws NotInContextException;

@@ -1,4 +1,4 @@
-// Generated on Sat Aug 15 13:59:11 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Tue Aug 18 21:07:12 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 #include "FunctionHooks.h"
 #include "NWNStructures.h"
@@ -236,7 +236,7 @@ class NWScriptI : public NWN::NWScript {
     virtual NWN::SavingThrowResult fortitudeSave(const NWN::NWObject& oCreature, Ice::Int nDC, NWN::SaveType tSaveType, const NWN::NWObject& oSaveVersus, const Ice::Current&);
     virtual std::string get2DAString(const std::string& s2DA, const std::string& sColumn, Ice::Int nRow, const Ice::Current&);
     virtual Ice::Int getAC(const NWN::NWObject& oObject, const Ice::Current&);
-    virtual Ice::Int getAILevel(const NWN::NWObject& oTarget, const Ice::Current&);
+    virtual NWN::AILevel getAILevel(const NWN::NWObject& oTarget, const Ice::Current&);
     virtual Ice::Int getAbilityModifier(NWN::Ability tAbility, const NWN::NWObject& oCreature, const Ice::Current&);
     virtual Ice::Int getAbilityScore(const NWN::NWObject& oCreature, NWN::Ability tAbility, bool bBaseAbilityScore, const Ice::Current&);
     virtual bool getActionMode(const NWN::NWObject& oCreature, NWN::ActionMode tActionMode, const Ice::Current&);
@@ -723,8 +723,8 @@ class NWScriptI : public NWN::NWScript {
     virtual void sendMessageToAllDMs(const std::string& szMessage, const Ice::Current&);
     virtual void sendMessageToPC(const NWN::NWObject& oPlayer, const std::string& szMessage, const Ice::Current&);
     virtual void sendMessageToPCByStrRef(const NWN::NWObject& oPlayer, Ice::Int nStrRef, const Ice::Current&);
-    virtual void setAILevel(const NWN::NWObject& oTarget, Ice::Int nAILevel, const Ice::Current&);
-    virtual void setActionMode(const NWN::NWObject& oCreature, Ice::Int nMode, Ice::Int nStatus, const Ice::Current&);
+    virtual void setAILevel(const NWN::NWObject& oTarget, NWN::AILevel tAILevel, const Ice::Current&);
+    virtual void setActionMode(const NWN::NWObject& oCreature, NWN::ActionMode tActionMode, bool bStatus, const Ice::Current&);
     virtual void setAreaTransitionBMP(Ice::Int nPredefinedAreaTransition, const std::string& sCustomAreaTransitionBMP, const Ice::Current&);
     virtual void setAssociateListenPatterns(const NWN::NWObject& oTarget, const Ice::Current&);
     virtual void setBaseAttackBonus(Ice::Int nBaseAttackBonus, const NWN::NWObject& oCreature, const Ice::Current&);
