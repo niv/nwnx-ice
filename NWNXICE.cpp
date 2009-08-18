@@ -73,9 +73,13 @@ bool CNWNXICE::OnCreate(gline *config, const char *LogDir)
 	while (true) {
 		// Set up the client
 		try {
-			ic = Ice::initialize();
 
-			Ice::ObjectPrx base = ic->stringToProxy( "Client:default -p 5223" /*  (*nwnxConfig)[confKey]["client"].c_str() */ );
+			Ice::InitializationData initData;
+			initData.stringConverter = new Ice::IconvStringConverter<char>("WINDOWS-1250");
+			icClient = Ice::initialize(initData);
+
+
+			Ice::ObjectPrx base = icClient->stringToProxy( "Client:default -p 5223" /*  (*nwnxConfig)[confKey]["client"].c_str() */ );
 			if (!base)
 				throw "Could not create proxy.";
 
@@ -101,8 +105,11 @@ bool CNWNXICE::OnCreate(gline *config, const char *LogDir)
 
 	// Set up the server ..
 	try {
+		Ice::InitializationData initData;
+		initData.stringConverter = new Ice::IconvStringConverter<char>("WINDOWS-1250");
+		icServer = Ice::initialize(initData);
 		adapter =
-			ic->createObjectAdapterWithEndpoints(
+			icServer->createObjectAdapterWithEndpoints(
 				"NWScriptAdapter", "default -p 5222" /* (*nwnxConfig)[confKey]["server"].c_str() */ );
 		
 		nwscriptI = new NWScriptI;
@@ -110,7 +117,7 @@ bool CNWNXICE::OnCreate(gline *config, const char *LogDir)
 		// nwscriptI->lock("first lock");
 
 		nwscript_proxy = NWN::NWScriptPrx::checkedCast(
-			adapter->add(object, ic->stringToIdentity("NWScript"))
+			adapter->add(object, icServer->stringToIdentity("NWScript"))
 		);
 		adapter->activate();
 

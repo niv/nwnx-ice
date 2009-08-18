@@ -25,6 +25,7 @@
 #include "NWNStructures.h"
 #include <Ice/Ice.h>
 #include <IceUtil/IceUtil.h>
+#include <Ice/IconvStringConverter.h>
 #include "Client.h"
 #include "NWScriptI.h"
 
@@ -43,7 +44,8 @@ public:
 	int nError;
 
 private:
-	Ice::CommunicatorPtr ic;
+	Ice::CommunicatorPtr icClient;
+	Ice::CommunicatorPtr icServer;
 	Ice::ObjectAdapterPtr adapter;
 
 	NWN::ClientPrx prx_client;
