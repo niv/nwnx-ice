@@ -36,7 +36,7 @@ nwnx_ice.so: FunctionHooks.o NWNXICE.o NWScript.o NWScriptI.o NWScriptIState.o C
 
 .PHONY: client
 client: NWScript.ice Client.ice
-	slice2java --checksum NWN.NWScriptChk -I. -I/usr/share/slice --output-dir java/ NWScript.ice Client.ice
+	slice2java --checksum NWN.NWScriptChk --tie -I. -I/usr/share/slice --output-dir java/ NWScript.ice Client.ice
 
 .PHONY: doc
 doc:
