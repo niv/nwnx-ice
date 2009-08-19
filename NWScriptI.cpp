@@ -1,4 +1,4 @@
-// Generated on Tue Aug 18 21:07:12 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Wed Aug 19 13:51:23 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 #include "NWScriptI.h"
 #include <iostream>
@@ -24,12 +24,12 @@ void NWScriptI::lock(const char* name) {
   if (!inContext)
     throw NWN::NotInContextException();
   
-  // mutex.lock();
+  mutex.lock();
 }
 
 void NWScriptI::unlock(const char* name) {
   
-  // mutex.unlock();
+  mutex.unlock();
 }
 
 void NWScriptI::innerLock(const char* name) {
