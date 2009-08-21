@@ -1,4 +1,4 @@
-// Generated on Fri Aug 21 13:59:18 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Fri Aug 21 15:23:01 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 #include "NWScriptI.h"
 #include <iostream>
@@ -10,7 +10,7 @@ using namespace std;
 
 NWScriptI::NWScriptI() {
   callCounter = 0;
-  inContext = false;
+  contextDepth = 0;
   lastEffectId = 0;
   lastIprpId = 0;
 }
@@ -21,7 +21,7 @@ void NWScriptI::resetPerEventMappings() {
 }
 
 void NWScriptI::lock(IceUtil::Mutex& m, const char* name) {
-  if (!inContext)
+  if (0 == contextDepth)
     throw NWN::NotInContextException();
 #ifdef LOCK_DEBUG
   cout << "lock(" << name << ");" << endl;

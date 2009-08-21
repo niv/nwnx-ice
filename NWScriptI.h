@@ -10,7 +10,7 @@ class NWScriptI : public NWN::NWScript {
     NWScriptI();
     void resetPerEventMappings();
     unsigned long callCounter;
-    bool inContext;
+    unsigned int contextDepth;
     bool hasState(const std::string&, const Ice::Current&);
     NWN::Persistable getState(const std::string&, const Ice::Current&);
     void putState(const std::string&, const NWN::Persistable&, const Ice::Current&);

@@ -113,7 +113,6 @@ bool CNWNXICE::OnCreate(gline *config, const char *LogDir)
 		
 		nwscriptI = new NWScriptI;
 		Ice::ObjectPtr object = nwscriptI;
-		// nwscriptI->lock("first lock");
 
 		nwscript_proxy = NWN::NWScriptPrx::checkedCast(
 			adapter->add(object, ic->stringToIdentity("NWScript"))
@@ -143,19 +142,24 @@ char* CNWNXICE::OnRequest (char *gameObject, char* request, char* parameters)
 
 	if (NULL == event) {
 		printf("Usage error, need format: ObjectToString(OBJECT_SELF) event_name\n");
+		sprintf(parameters, "%d", NWN::Error);
 		return NULL;
 	}
-	
-	bool alreadyInContext = nwscriptI->inContext;
-
-	// if (nwscriptI->inContext)
-	//	printf("Usage error, do NOT stack more than one ICE event. Will now deadlock (blocking request: %s %s)\n", request, event);
 
 	dword oid = strtol(oid_c, 0, 16);
 	NWN::NWObject nwobj_self;
 	nwobj_self.id = oid;
 
-	nwscriptI->inContext = true;
+	unsigned long previousCallCounter = nwscriptI->callCounter;
+
+	/* // comment this in to see pre-call printfs - helps debugging somewhat
+	if (strcmp(request, "EVENT") == 0)
+		printf("e %0.8x %-20s ..\n", oid, event);
+	if (strcmp(request, "TOKEN") == 0)
+		printf("t %0.8x %-20s ..\n", oid, event);
+	*/
+
+	nwscriptI->contextDepth += 1;
 
 	while (true) {
 		try {
@@ -175,22 +179,23 @@ char* CNWNXICE::OnRequest (char *gameObject, char* request, char* parameters)
 		}
 	}
 
-	if (!alreadyInContext) {
-		nwscriptI->inContext = false;
-		unsigned long calls = nwscriptI->callCounter;
-		nwscriptI->callCounter = 0;
+	nwscriptI->contextDepth -= 1;
 
-		timeval t2; gettimeofday(&t2, NULL);
-		long usec = (t2.tv_sec - t1.tv_sec) * 1000000 + (t2.tv_usec - t1.tv_usec);
-		long se = usec / 1000000;
-		long ms = usec % 1000000;
-		if (strcmp(request, "EVENT") == 0)
-			printf("e %0.8x %-20s %6d s %8d u %12d calls\n", oid, event, se, ms, calls);
-		if (strcmp(request, "TOKEN") == 0)
-			printf("t %0.8x %-20s %6d s %8d u %12d calls\n", oid, event, se, ms, calls);
+	unsigned long calls = nwscriptI->callCounter - previousCallCounter;
+	nwscriptI->callCounter = previousCallCounter;
 
+	timeval t2; gettimeofday(&t2, NULL);
+	long usec = (t2.tv_sec - t1.tv_sec) * 1000000 + (t2.tv_usec - t1.tv_usec);
+	long se = usec / 1000000;
+	long ms = usec % 1000000;
+
+	if (nwscriptI->contextDepth == 0)
 		nwscriptI->resetPerEventMappings();
-	}
+
+	if (strcmp(request, "EVENT") == 0)
+		printf("e %0.8x %-20s %6d s %8d u %12d calls\n", oid, event, se, ms, calls);
+	if (strcmp(request, "TOKEN") == 0)
+		printf("t %0.8x %-20s %6d s %8d u %12d calls\n", oid, event, se, ms, calls);
 
 	sprintf(parameters, "%d", ret);
 	return NULL;
