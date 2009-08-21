@@ -81,7 +81,7 @@ bool CNWNXICE::OnCreate(gline *config, const char *LogDir)
 	while (true) {
 		// Set up the client
 		try {
-			Ice::ObjectPrx base = ic->stringToProxy( "Client:default -p 5223" /*  (*nwnxConfig)[confKey]["client"].c_str() */ );
+			Ice::ObjectPrx base = ic->stringToProxy( (*nwnxConfig)[confKey]["client"].c_str() );
 			if (!base)
 				throw "Could not create proxy.";
 
@@ -109,7 +109,7 @@ bool CNWNXICE::OnCreate(gline *config, const char *LogDir)
 	try {
 		adapter =
 			ic->createObjectAdapterWithEndpoints(
-				"NWScriptAdapter", "default -p 5222" /* (*nwnxConfig)[confKey]["server"].c_str() */ );
+				"NWScriptAdapter", (*nwnxConfig)[confKey]["server"].c_str() );
 		
 		nwscriptI = new NWScriptI;
 		Ice::ObjectPtr object = nwscriptI;
