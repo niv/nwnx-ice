@@ -1,4 +1,4 @@
-// Generated on Wed Aug 19 13:51:23 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Fri Aug 21 13:59:18 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 #include "NWScriptI.h"
 #include <iostream>
@@ -10,9 +10,9 @@ using namespace std;
 
 NWScriptI::NWScriptI() {
   callCounter = 0;
-  lockingEnabled = true;
   inContext = false;
-  lastEffectId = 0; lastIprpId = 0;
+  lastEffectId = 0;
+  lastIprpId = 0;
 }
 
 void NWScriptI::resetPerEventMappings() {
@@ -20,65 +20,80 @@ void NWScriptI::resetPerEventMappings() {
   iprpMap.clear();
 }
 
-void NWScriptI::lock(const char* name) {
+void NWScriptI::lock(IceUtil::Mutex& m, const char* name) {
   if (!inContext)
     throw NWN::NotInContextException();
-  
-  mutex.lock();
+#ifdef LOCK_DEBUG
+  cout << "lock(" << name << ");" << endl;
+#endif
+#ifndef LOCK_DISABLE
+  m.lock();
+#endif
 }
 
-void NWScriptI::unlock(const char* name) {
-  
-  mutex.unlock();
+void NWScriptI::unlock(IceUtil::Mutex& m, const char* name) {
+#ifdef LOCK_DEBUG
+  cout << "unlock(" << name << ");" << endl;
+#endif
+#ifndef LOCK_DISABLE
+  m.unlock();
+#endif
 }
 
 void NWScriptI::innerLock(const char* name) {
-  
+#ifdef LOCK_DEBUG
+  cout << "innerLock()" << endl;
+#endif
 }
 
 void NWScriptI::innerUnlock(const char* name) {
-  
+#ifdef LOCK_DEBUG
+  cout << "innerUnlock()" << endl;
+#endif
 }
-
 Ice::Int NWScriptI::abs(Ice::Int nValue, const Ice::Current& ice) {
-  lock("abs"); callCounter += 1;
+  lock(abs_mutex, "abs");
+  callCounter += 1;
   StackPushInteger(nValue);
 
   VM_ExecuteCommand(77, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("abs");
+  unlock(abs_mutex, "abs");
   return nRetVal;
 };
 
 Ice::Double NWScriptI::acos(Ice::Double fValue, const Ice::Current& ice) {
-  lock("acos"); callCounter += 1;
+  lock(acos_mutex, "acos");
+  callCounter += 1;
   StackPushFloat(fValue);
 
   VM_ExecuteCommand(71, 1);
 
   float fRetVal;
   StackPopFloat(&fRetVal);
-  unlock("acos");
+  unlock(acos_mutex, "acos");
   return fRetVal;
 };
 
 void NWScriptI::actionAttack(const NWN::NWObject& oAttackee, bool bPassive, const Ice::Current& ice) {
   if (oAttackee.id < 0 || oAttackee.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("actionAttack"); callCounter += 1;
+  lock(actionAttack_mutex, "actionAttack");
+  callCounter += 1;
   StackPushInteger(bPassive == true ? 1 : 0);
   StackPushObject(oAttackee.id);
 
   VM_ExecuteCommand(37, 2);
 
-unlock("actionAttack");
+unlock(actionAttack_mutex, "actionAttack");
   
 };
 
 void NWScriptI::actionCastFakeSpellAtLocation(Ice::Int nSpell, const NWN::NWLocation& lTarget, NWN::ProjectilePathType tProjectilePathType, const Ice::Current& ice) {
   if (lTarget.area.id < 0) throw NWN::InvalidObjectException();
-  lock("actionCastFakeSpellAtLocation"); callCounter += 1;
+  lock(actionCastFakeSpellAtLocation_mutex, "actionCastFakeSpellAtLocation");
+  callCounter += 1;
   if (tProjectilePathType == NWN::DefaultPath) StackPushInteger(0);
    else if (tProjectilePathType == NWN::HomingPath) StackPushInteger(1);
    else if (tProjectilePathType == NWN::BallisticPath) StackPushInteger(2);
@@ -98,13 +113,14 @@ void NWScriptI::actionCastFakeSpellAtLocation(Ice::Int nSpell, const NWN::NWLoca
 
   VM_ExecuteCommand(502, 3);
 
-unlock("actionCastFakeSpellAtLocation");
+unlock(actionCastFakeSpellAtLocation_mutex, "actionCastFakeSpellAtLocation");
   
 };
 
 void NWScriptI::actionCastFakeSpellAtObject(Ice::Int nSpell, const NWN::NWObject& oTarget, NWN::ProjectilePathType tProjectilePathType, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("actionCastFakeSpellAtObject"); callCounter += 1;
+  lock(actionCastFakeSpellAtObject_mutex, "actionCastFakeSpellAtObject");
+  callCounter += 1;
   if (tProjectilePathType == NWN::DefaultPath) StackPushInteger(0);
    else if (tProjectilePathType == NWN::HomingPath) StackPushInteger(1);
    else if (tProjectilePathType == NWN::BallisticPath) StackPushInteger(2);
@@ -116,13 +132,14 @@ void NWScriptI::actionCastFakeSpellAtObject(Ice::Int nSpell, const NWN::NWObject
 
   VM_ExecuteCommand(501, 3);
 
-unlock("actionCastFakeSpellAtObject");
+unlock(actionCastFakeSpellAtObject_mutex, "actionCastFakeSpellAtObject");
   
 };
 
 void NWScriptI::actionCastSpellAtLocation(Ice::Int nSpell, const NWN::NWLocation& lTargetLocation, NWN::MetaMagic tMetaMagic, bool bCheat, NWN::ProjectilePathType tProjectilePathType, bool bInstantSpell, const Ice::Current& ice) {
   if (lTargetLocation.area.id < 0) throw NWN::InvalidObjectException();
-  lock("actionCastSpellAtLocation"); callCounter += 1;
+  lock(actionCastSpellAtLocation_mutex, "actionCastSpellAtLocation");
+  callCounter += 1;
   StackPushInteger(bInstantSpell == true ? 1 : 0);
   if (tProjectilePathType == NWN::DefaultPath) StackPushInteger(0);
    else if (tProjectilePathType == NWN::HomingPath) StackPushInteger(1);
@@ -153,13 +170,14 @@ void NWScriptI::actionCastSpellAtLocation(Ice::Int nSpell, const NWN::NWLocation
 
   VM_ExecuteCommand(234, 6);
 
-unlock("actionCastSpellAtLocation");
+unlock(actionCastSpellAtLocation_mutex, "actionCastSpellAtLocation");
   
 };
 
 void NWScriptI::actionCastSpellAtObject(Ice::Int nSpell, const NWN::NWObject& oTarget, NWN::MetaMagic tMetaMagic, bool bCheat, Ice::Int nDomainLevel, NWN::ProjectilePathType tProjectilePathType, bool bInstantSpell, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("actionCastSpellAtObject"); callCounter += 1;
+  lock(actionCastSpellAtObject_mutex, "actionCastSpellAtObject");
+  callCounter += 1;
   StackPushInteger(bInstantSpell == true ? 1 : 0);
   if (tProjectilePathType == NWN::DefaultPath) StackPushInteger(0);
    else if (tProjectilePathType == NWN::HomingPath) StackPushInteger(1);
@@ -183,35 +201,38 @@ void NWScriptI::actionCastSpellAtObject(Ice::Int nSpell, const NWN::NWObject& oT
 
   VM_ExecuteCommand(48, 7);
 
-unlock("actionCastSpellAtObject");
+unlock(actionCastSpellAtObject_mutex, "actionCastSpellAtObject");
   
 };
 
 void NWScriptI::actionCloseDoor(const NWN::NWObject& oDoor, const Ice::Current& ice) {
   if (oDoor.id < 0 || oDoor.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("actionCloseDoor"); callCounter += 1;
+  lock(actionCloseDoor_mutex, "actionCloseDoor");
+  callCounter += 1;
   StackPushObject(oDoor.id);
 
   VM_ExecuteCommand(44, 1);
 
-unlock("actionCloseDoor");
+unlock(actionCloseDoor_mutex, "actionCloseDoor");
   
 };
 
 void NWScriptI::actionCounterSpell(const NWN::NWObject& oCounterSpellTarget, const Ice::Current& ice) {
   if (oCounterSpellTarget.id < 0 || oCounterSpellTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("actionCounterSpell"); callCounter += 1;
+  lock(actionCounterSpell_mutex, "actionCounterSpell");
+  callCounter += 1;
   StackPushObject(oCounterSpellTarget.id);
 
   VM_ExecuteCommand(566, 1);
 
-unlock("actionCounterSpell");
+unlock(actionCounterSpell_mutex, "actionCounterSpell");
   
 };
 
 void NWScriptI::actionEquipItem(const NWN::NWObject& oItem, NWN::InventorySlot tInventorySlot, const Ice::Current& ice) {
   if (oItem.id < 0 || oItem.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("actionEquipItem"); callCounter += 1;
+  lock(actionEquipItem_mutex, "actionEquipItem");
+  callCounter += 1;
   if (tInventorySlot == NWN::CreatureBiteSlot) StackPushInteger(16);
    else if (tInventorySlot == NWN::LefthandSlot) StackPushInteger(5);
    else if (tInventorySlot == NWN::ArrowsSlot) StackPushInteger(11);
@@ -235,68 +256,74 @@ void NWScriptI::actionEquipItem(const NWN::NWObject& oItem, NWN::InventorySlot t
 
   VM_ExecuteCommand(32, 2);
 
-unlock("actionEquipItem");
+unlock(actionEquipItem_mutex, "actionEquipItem");
   
 };
 
 void NWScriptI::actionEquipMostDamagingMelee(const NWN::NWObject& oVersus, bool bOffHand, const Ice::Current& ice) {
   if (oVersus.id < 0 || oVersus.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("actionEquipMostDamagingMelee"); callCounter += 1;
+  lock(actionEquipMostDamagingMelee_mutex, "actionEquipMostDamagingMelee");
+  callCounter += 1;
   StackPushInteger(bOffHand == true ? 1 : 0);
   StackPushObject(oVersus.id);
 
   VM_ExecuteCommand(399, 2);
 
-unlock("actionEquipMostDamagingMelee");
+unlock(actionEquipMostDamagingMelee_mutex, "actionEquipMostDamagingMelee");
   
 };
 
 void NWScriptI::actionEquipMostDamagingRanged(const NWN::NWObject& oVersus, const Ice::Current& ice) {
   if (oVersus.id < 0 || oVersus.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("actionEquipMostDamagingRanged"); callCounter += 1;
+  lock(actionEquipMostDamagingRanged_mutex, "actionEquipMostDamagingRanged");
+  callCounter += 1;
   StackPushObject(oVersus.id);
 
   VM_ExecuteCommand(400, 1);
 
-unlock("actionEquipMostDamagingRanged");
+unlock(actionEquipMostDamagingRanged_mutex, "actionEquipMostDamagingRanged");
   
 };
 
 void NWScriptI::actionEquipMostEffectiveArmor(const Ice::Current& ice) {
-  lock("actionEquipMostEffectiveArmor"); callCounter += 1;
+  lock(actionEquipMostEffectiveArmor_mutex, "actionEquipMostEffectiveArmor");
+  callCounter += 1;
 
   VM_ExecuteCommand(404, 0);
 
-unlock("actionEquipMostEffectiveArmor");
+unlock(actionEquipMostEffectiveArmor_mutex, "actionEquipMostEffectiveArmor");
   
 };
 
 void NWScriptI::actionExamine(const NWN::NWObject& oExamine, const Ice::Current& ice) {
   if (oExamine.id < 0 || oExamine.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("actionExamine"); callCounter += 1;
+  lock(actionExamine_mutex, "actionExamine");
+  callCounter += 1;
   StackPushObject(oExamine.id);
 
   VM_ExecuteCommand(738, 1);
 
-unlock("actionExamine");
+unlock(actionExamine_mutex, "actionExamine");
   
 };
 
 void NWScriptI::actionForceFollowObject(const NWN::NWObject& oFollow, Ice::Double fFollowDistance, const Ice::Current& ice) {
   if (oFollow.id < 0 || oFollow.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("actionForceFollowObject"); callCounter += 1;
+  lock(actionForceFollowObject_mutex, "actionForceFollowObject");
+  callCounter += 1;
   StackPushFloat(fFollowDistance);
   StackPushObject(oFollow.id);
 
   VM_ExecuteCommand(167, 2);
 
-unlock("actionForceFollowObject");
+unlock(actionForceFollowObject_mutex, "actionForceFollowObject");
   
 };
 
 void NWScriptI::actionForceMoveToLocation(const NWN::NWLocation& lDestination, bool bRun, Ice::Double fTimeout, const Ice::Current& ice) {
   if (lDestination.area.id < 0) throw NWN::InvalidObjectException();
-  lock("actionForceMoveToLocation"); callCounter += 1;
+  lock(actionForceMoveToLocation_mutex, "actionForceMoveToLocation");
+  callCounter += 1;
   StackPushFloat(fTimeout);
   StackPushInteger(bRun == true ? 1 : 0);
   CScriptLocation *lDestination_ptr;
@@ -311,13 +338,14 @@ void NWScriptI::actionForceMoveToLocation(const NWN::NWLocation& lDestination, b
 
   VM_ExecuteCommand(382, 3);
 
-unlock("actionForceMoveToLocation");
+unlock(actionForceMoveToLocation_mutex, "actionForceMoveToLocation");
   
 };
 
 void NWScriptI::actionForceMoveToObject(const NWN::NWObject& oMoveTo, bool bRun, Ice::Double fRange, Ice::Double fTimeout, const Ice::Current& ice) {
   if (oMoveTo.id < 0 || oMoveTo.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("actionForceMoveToObject"); callCounter += 1;
+  lock(actionForceMoveToObject_mutex, "actionForceMoveToObject");
+  callCounter += 1;
   StackPushFloat(fTimeout);
   StackPushFloat(fRange);
   StackPushInteger(bRun == true ? 1 : 0);
@@ -325,37 +353,40 @@ void NWScriptI::actionForceMoveToObject(const NWN::NWObject& oMoveTo, bool bRun,
 
   VM_ExecuteCommand(383, 4);
 
-unlock("actionForceMoveToObject");
+unlock(actionForceMoveToObject_mutex, "actionForceMoveToObject");
   
 };
 
 void NWScriptI::actionGiveItem(const NWN::NWObject& oItem, const NWN::NWObject& oGiveTo, const Ice::Current& ice) {
   if (oItem.id < 0 || oItem.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (oGiveTo.id < 0 || oGiveTo.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("actionGiveItem"); callCounter += 1;
+  lock(actionGiveItem_mutex, "actionGiveItem");
+  callCounter += 1;
   StackPushObject(oGiveTo.id);
   StackPushObject(oItem.id);
 
   VM_ExecuteCommand(135, 2);
 
-unlock("actionGiveItem");
+unlock(actionGiveItem_mutex, "actionGiveItem");
   
 };
 
 void NWScriptI::actionInteractObject(const NWN::NWObject& oPlaceable, const Ice::Current& ice) {
   if (oPlaceable.id < 0 || oPlaceable.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("actionInteractObject"); callCounter += 1;
+  lock(actionInteractObject_mutex, "actionInteractObject");
+  callCounter += 1;
   StackPushObject(oPlaceable.id);
 
   VM_ExecuteCommand(329, 1);
 
-unlock("actionInteractObject");
+unlock(actionInteractObject_mutex, "actionInteractObject");
   
 };
 
 void NWScriptI::actionJumpToLocation(const NWN::NWLocation& lLocation, const Ice::Current& ice) {
   if (lLocation.area.id < 0) throw NWN::InvalidObjectException();
-  lock("actionJumpToLocation"); callCounter += 1;
+  lock(actionJumpToLocation_mutex, "actionJumpToLocation");
+  callCounter += 1;
   CScriptLocation *lLocation_ptr;
   lLocation_ptr->X = lLocation.x;
   lLocation_ptr->Y = lLocation.y;
@@ -368,36 +399,39 @@ void NWScriptI::actionJumpToLocation(const NWN::NWLocation& lLocation, const Ice
 
   VM_ExecuteCommand(214, 1);
 
-unlock("actionJumpToLocation");
+unlock(actionJumpToLocation_mutex, "actionJumpToLocation");
   
 };
 
 void NWScriptI::actionJumpToObject(const NWN::NWObject& oToJumpTo, bool bWalkStraightLineToPoint, const Ice::Current& ice) {
   if (oToJumpTo.id < 0 || oToJumpTo.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("actionJumpToObject"); callCounter += 1;
+  lock(actionJumpToObject_mutex, "actionJumpToObject");
+  callCounter += 1;
   StackPushInteger(bWalkStraightLineToPoint == true ? 1 : 0);
   StackPushObject(oToJumpTo.id);
 
   VM_ExecuteCommand(196, 2);
 
-unlock("actionJumpToObject");
+unlock(actionJumpToObject_mutex, "actionJumpToObject");
   
 };
 
 void NWScriptI::actionLockObject(const NWN::NWObject& oTarget, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("actionLockObject"); callCounter += 1;
+  lock(actionLockObject_mutex, "actionLockObject");
+  callCounter += 1;
   StackPushObject(oTarget.id);
 
   VM_ExecuteCommand(484, 1);
 
-unlock("actionLockObject");
+unlock(actionLockObject_mutex, "actionLockObject");
   
 };
 
 void NWScriptI::actionMoveAwayFromLocation(const NWN::NWLocation& lMoveAwayFrom, bool bRun, Ice::Double fMoveAwayRange, const Ice::Current& ice) {
   if (lMoveAwayFrom.area.id < 0) throw NWN::InvalidObjectException();
-  lock("actionMoveAwayFromLocation"); callCounter += 1;
+  lock(actionMoveAwayFromLocation_mutex, "actionMoveAwayFromLocation");
+  callCounter += 1;
   StackPushFloat(fMoveAwayRange);
   StackPushInteger(bRun == true ? 1 : 0);
   CScriptLocation *lMoveAwayFrom_ptr;
@@ -412,26 +446,28 @@ void NWScriptI::actionMoveAwayFromLocation(const NWN::NWLocation& lMoveAwayFrom,
 
   VM_ExecuteCommand(360, 3);
 
-unlock("actionMoveAwayFromLocation");
+unlock(actionMoveAwayFromLocation_mutex, "actionMoveAwayFromLocation");
   
 };
 
 void NWScriptI::actionMoveAwayFromObject(const NWN::NWObject& oFleeFrom, bool bRun, Ice::Double fMoveAwayRange, const Ice::Current& ice) {
   if (oFleeFrom.id < 0 || oFleeFrom.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("actionMoveAwayFromObject"); callCounter += 1;
+  lock(actionMoveAwayFromObject_mutex, "actionMoveAwayFromObject");
+  callCounter += 1;
   StackPushFloat(fMoveAwayRange);
   StackPushInteger(bRun == true ? 1 : 0);
   StackPushObject(oFleeFrom.id);
 
   VM_ExecuteCommand(23, 3);
 
-unlock("actionMoveAwayFromObject");
+unlock(actionMoveAwayFromObject_mutex, "actionMoveAwayFromObject");
   
 };
 
 void NWScriptI::actionMoveToLocation(const NWN::NWLocation& lDestination, bool bRun, const Ice::Current& ice) {
   if (lDestination.area.id < 0) throw NWN::InvalidObjectException();
-  lock("actionMoveToLocation"); callCounter += 1;
+  lock(actionMoveToLocation_mutex, "actionMoveToLocation");
+  callCounter += 1;
   StackPushInteger(bRun == true ? 1 : 0);
   CScriptLocation *lDestination_ptr;
   lDestination_ptr->X = lDestination.x;
@@ -445,118 +481,129 @@ void NWScriptI::actionMoveToLocation(const NWN::NWLocation& lDestination, bool b
 
   VM_ExecuteCommand(21, 2);
 
-unlock("actionMoveToLocation");
+unlock(actionMoveToLocation_mutex, "actionMoveToLocation");
   
 };
 
 void NWScriptI::actionMoveToObject(const NWN::NWObject& oMoveTo, bool bRun, Ice::Double fRange, const Ice::Current& ice) {
   if (oMoveTo.id < 0 || oMoveTo.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("actionMoveToObject"); callCounter += 1;
+  lock(actionMoveToObject_mutex, "actionMoveToObject");
+  callCounter += 1;
   StackPushFloat(fRange);
   StackPushInteger(bRun == true ? 1 : 0);
   StackPushObject(oMoveTo.id);
 
   VM_ExecuteCommand(22, 3);
 
-unlock("actionMoveToObject");
+unlock(actionMoveToObject_mutex, "actionMoveToObject");
   
 };
 
 void NWScriptI::actionOpenDoor(const NWN::NWObject& oDoor, const Ice::Current& ice) {
   if (oDoor.id < 0 || oDoor.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("actionOpenDoor"); callCounter += 1;
+  lock(actionOpenDoor_mutex, "actionOpenDoor");
+  callCounter += 1;
   StackPushObject(oDoor.id);
 
   VM_ExecuteCommand(43, 1);
 
-unlock("actionOpenDoor");
+unlock(actionOpenDoor_mutex, "actionOpenDoor");
   
 };
 
 void NWScriptI::actionPauseConversation(const Ice::Current& ice) {
-  lock("actionPauseConversation"); callCounter += 1;
+  lock(actionPauseConversation_mutex, "actionPauseConversation");
+  callCounter += 1;
 
   VM_ExecuteCommand(205, 0);
 
-unlock("actionPauseConversation");
+unlock(actionPauseConversation_mutex, "actionPauseConversation");
   
 };
 
 void NWScriptI::actionPickUpItem(const NWN::NWObject& oItem, const Ice::Current& ice) {
   if (oItem.id < 0 || oItem.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("actionPickUpItem"); callCounter += 1;
+  lock(actionPickUpItem_mutex, "actionPickUpItem");
+  callCounter += 1;
   StackPushObject(oItem.id);
 
   VM_ExecuteCommand(34, 1);
 
-unlock("actionPickUpItem");
+unlock(actionPickUpItem_mutex, "actionPickUpItem");
   
 };
 
 void NWScriptI::actionPlayAnimation(Ice::Int nAnimation, Ice::Double fSpeed, Ice::Double fDurationSeconds, const Ice::Current& ice) {
-  lock("actionPlayAnimation"); callCounter += 1;
+  lock(actionPlayAnimation_mutex, "actionPlayAnimation");
+  callCounter += 1;
   StackPushFloat(fDurationSeconds);
   StackPushFloat(fSpeed);
   StackPushInteger(nAnimation);
 
   VM_ExecuteCommand(40, 3);
 
-unlock("actionPlayAnimation");
+unlock(actionPlayAnimation_mutex, "actionPlayAnimation");
   
 };
 
 void NWScriptI::actionPutDownItem(const NWN::NWObject& oItem, const Ice::Current& ice) {
   if (oItem.id < 0 || oItem.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("actionPutDownItem"); callCounter += 1;
+  lock(actionPutDownItem_mutex, "actionPutDownItem");
+  callCounter += 1;
   StackPushObject(oItem.id);
 
   VM_ExecuteCommand(35, 1);
 
-unlock("actionPutDownItem");
+unlock(actionPutDownItem_mutex, "actionPutDownItem");
   
 };
 
 void NWScriptI::actionRandomWalk(const Ice::Current& ice) {
-  lock("actionRandomWalk"); callCounter += 1;
+  lock(actionRandomWalk_mutex, "actionRandomWalk");
+  callCounter += 1;
 
   VM_ExecuteCommand(20, 0);
 
-unlock("actionRandomWalk");
+unlock(actionRandomWalk_mutex, "actionRandomWalk");
   
 };
 
 void NWScriptI::actionRest(bool bCreatureToEnemyLineOfSightCheck, const Ice::Current& ice) {
-  lock("actionRest"); callCounter += 1;
+  lock(actionRest_mutex, "actionRest");
+  callCounter += 1;
   StackPushInteger(bCreatureToEnemyLineOfSightCheck == true ? 1 : 0);
 
   VM_ExecuteCommand(402, 1);
 
-unlock("actionRest");
+unlock(actionRest_mutex, "actionRest");
   
 };
 
 void NWScriptI::actionResumeConversation(const Ice::Current& ice) {
-  lock("actionResumeConversation"); callCounter += 1;
+  lock(actionResumeConversation_mutex, "actionResumeConversation");
+  callCounter += 1;
 
   VM_ExecuteCommand(206, 0);
 
-unlock("actionResumeConversation");
+unlock(actionResumeConversation_mutex, "actionResumeConversation");
   
 };
 
 void NWScriptI::actionSit(const NWN::NWObject& oChair, const Ice::Current& ice) {
   if (oChair.id < 0 || oChair.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("actionSit"); callCounter += 1;
+  lock(actionSit_mutex, "actionSit");
+  callCounter += 1;
   StackPushObject(oChair.id);
 
   VM_ExecuteCommand(194, 1);
 
-unlock("actionSit");
+unlock(actionSit_mutex, "actionSit");
   
 };
 
 void NWScriptI::actionSpeakString(const std::string& sStringToSpeak, NWN::TalkVolume tTalkVolume, const Ice::Current& ice) {
-  lock("actionSpeakString"); callCounter += 1;
+  lock(actionSpeakString_mutex, "actionSpeakString");
+  callCounter += 1;
   if (tTalkVolume == NWN::PartyVol) StackPushInteger(5);
    else if (tTalkVolume == NWN::TalkVol) StackPushInteger(0);
    else if (tTalkVolume == NWN::TellVol) StackPushInteger(6);
@@ -569,12 +616,13 @@ void NWScriptI::actionSpeakString(const std::string& sStringToSpeak, NWN::TalkVo
 
   VM_ExecuteCommand(39, 2);
 
-unlock("actionSpeakString");
+unlock(actionSpeakString_mutex, "actionSpeakString");
   
 };
 
 void NWScriptI::actionSpeakStringByStrRef(Ice::Int nStrRef, NWN::TalkVolume tTalkVolume, const Ice::Current& ice) {
-  lock("actionSpeakStringByStrRef"); callCounter += 1;
+  lock(actionSpeakStringByStrRef_mutex, "actionSpeakStringByStrRef");
+  callCounter += 1;
   if (tTalkVolume == NWN::PartyVol) StackPushInteger(5);
    else if (tTalkVolume == NWN::TalkVol) StackPushInteger(0);
    else if (tTalkVolume == NWN::TellVol) StackPushInteger(6);
@@ -587,13 +635,14 @@ void NWScriptI::actionSpeakStringByStrRef(Ice::Int nStrRef, NWN::TalkVolume tTal
 
   VM_ExecuteCommand(240, 2);
 
-unlock("actionSpeakStringByStrRef");
+unlock(actionSpeakStringByStrRef_mutex, "actionSpeakStringByStrRef");
   
 };
 
 void NWScriptI::actionStartConversation(const NWN::NWObject& oObjectToConverseWith, const std::string& sDialogResRef, bool bPrivateConversation, bool bPlayHello, const Ice::Current& ice) {
   if (oObjectToConverseWith.id < 0 || oObjectToConverseWith.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("actionStartConversation"); callCounter += 1;
+  lock(actionStartConversation_mutex, "actionStartConversation");
+  callCounter += 1;
   StackPushInteger(bPlayHello == true ? 1 : 0);
   StackPushInteger(bPrivateConversation == true ? 1 : 0);
   StackPushString(sDialogResRef.c_str());
@@ -601,61 +650,66 @@ void NWScriptI::actionStartConversation(const NWN::NWObject& oObjectToConverseWi
 
   VM_ExecuteCommand(204, 4);
 
-unlock("actionStartConversation");
+unlock(actionStartConversation_mutex, "actionStartConversation");
   
 };
 
 void NWScriptI::actionTakeItem(const NWN::NWObject& oItem, const NWN::NWObject& oTakeFrom, const Ice::Current& ice) {
   if (oItem.id < 0 || oItem.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (oTakeFrom.id < 0 || oTakeFrom.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("actionTakeItem"); callCounter += 1;
+  lock(actionTakeItem_mutex, "actionTakeItem");
+  callCounter += 1;
   StackPushObject(oTakeFrom.id);
   StackPushObject(oItem.id);
 
   VM_ExecuteCommand(136, 2);
 
-unlock("actionTakeItem");
+unlock(actionTakeItem_mutex, "actionTakeItem");
   
 };
 
 void NWScriptI::actionUnequipItem(const NWN::NWObject& oItem, const Ice::Current& ice) {
   if (oItem.id < 0 || oItem.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("actionUnequipItem"); callCounter += 1;
+  lock(actionUnequipItem_mutex, "actionUnequipItem");
+  callCounter += 1;
   StackPushObject(oItem.id);
 
   VM_ExecuteCommand(33, 1);
 
-unlock("actionUnequipItem");
+unlock(actionUnequipItem_mutex, "actionUnequipItem");
   
 };
 
 void NWScriptI::actionUnlockObject(const NWN::NWObject& oTarget, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("actionUnlockObject"); callCounter += 1;
+  lock(actionUnlockObject_mutex, "actionUnlockObject");
+  callCounter += 1;
   StackPushObject(oTarget.id);
 
   VM_ExecuteCommand(483, 1);
 
-unlock("actionUnlockObject");
+unlock(actionUnlockObject_mutex, "actionUnlockObject");
   
 };
 
 void NWScriptI::actionUseFeat(Ice::Int nFeat, const NWN::NWObject& oTarget, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("actionUseFeat"); callCounter += 1;
+  lock(actionUseFeat_mutex, "actionUseFeat");
+  callCounter += 1;
   StackPushObject(oTarget.id);
   StackPushInteger(nFeat);
 
   VM_ExecuteCommand(287, 2);
 
-unlock("actionUseFeat");
+unlock(actionUseFeat_mutex, "actionUseFeat");
   
 };
 
 void NWScriptI::actionUseSkill(Ice::Int nSkill, const NWN::NWObject& oTarget, Ice::Int nSubSkill, const NWN::NWObject& oItemUsed, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (oItemUsed.id < 0 || oItemUsed.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("actionUseSkill"); callCounter += 1;
+  lock(actionUseSkill_mutex, "actionUseSkill");
+  callCounter += 1;
   StackPushObject(oItemUsed.id);
   StackPushInteger(nSubSkill);
   StackPushObject(oTarget.id);
@@ -663,23 +717,25 @@ void NWScriptI::actionUseSkill(Ice::Int nSkill, const NWN::NWObject& oTarget, Ic
 
   VM_ExecuteCommand(288, 4);
 
-unlock("actionUseSkill");
+unlock(actionUseSkill_mutex, "actionUseSkill");
   
 };
 
 void NWScriptI::actionWait(Ice::Double fSeconds, const Ice::Current& ice) {
-  lock("actionWait"); callCounter += 1;
+  lock(actionWait_mutex, "actionWait");
+  callCounter += 1;
   StackPushFloat(fSeconds);
 
   VM_ExecuteCommand(202, 1);
 
-unlock("actionWait");
+unlock(actionWait_mutex, "actionWait");
   
 };
 
 void NWScriptI::activatePortal(const NWN::NWObject& oTarget, const std::string& sIPaddress, const std::string& sPassword, const std::string& sWaypointTag, bool bSeemless, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("activatePortal"); callCounter += 1;
+  lock(activatePortal_mutex, "activatePortal");
+  callCounter += 1;
   StackPushInteger(bSeemless == true ? 1 : 0);
   StackPushString(sWaypointTag.c_str());
   StackPushString(sPassword.c_str());
@@ -688,20 +744,21 @@ void NWScriptI::activatePortal(const NWN::NWObject& oTarget, const std::string& 
 
   VM_ExecuteCommand(474, 5);
 
-unlock("activatePortal");
+unlock(activatePortal_mutex, "activatePortal");
   
 };
 
 void NWScriptI::addHenchman(const NWN::NWObject& oMaster, const NWN::NWObject& oHenchman, const Ice::Current& ice) {
   if (oMaster.id < 0 || oMaster.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (oHenchman.id < 0 || oHenchman.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("addHenchman"); callCounter += 1;
+  lock(addHenchman_mutex, "addHenchman");
+  callCounter += 1;
   StackPushObject(oHenchman.id);
   StackPushObject(oMaster.id);
 
   VM_ExecuteCommand(365, 2);
 
-unlock("addHenchman");
+unlock(addHenchman_mutex, "addHenchman");
   
 };
 
@@ -709,7 +766,8 @@ void NWScriptI::addItemProperty(NWN::DurationType tDurationType, const NWN::NWIt
   if (iprpMap.find(ipProperty.id) == iprpMap.end()) throw NWN::InvalidItemPropertyException();
   
   if (oItem.id < 0 || oItem.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("addItemProperty"); callCounter += 1;
+  lock(addItemProperty_mutex, "addItemProperty");
+  callCounter += 1;
   StackPushFloat(fDuration);
   StackPushObject(oItem.id);
   CGameEffect *ipProperty_ptr = iprpMap.find(ipProperty.id)->second;
@@ -721,13 +779,14 @@ void NWScriptI::addItemProperty(NWN::DurationType tDurationType, const NWN::NWIt
 
   VM_ExecuteCommand(609, 4);
 
-unlock("addItemProperty");
+unlock(addItemProperty_mutex, "addItemProperty");
   
 };
 
 void NWScriptI::addJournalQuestEntry(const std::string& szPlotID, Ice::Int nState, const NWN::NWObject& oCreature, bool bAllPartyMembers, bool bAllPlayers, bool bAllowOverrideHigher, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("addJournalQuestEntry"); callCounter += 1;
+  lock(addJournalQuestEntry_mutex, "addJournalQuestEntry");
+  callCounter += 1;
   StackPushInteger(bAllowOverrideHigher == true ? 1 : 0);
   StackPushInteger(bAllPlayers == true ? 1 : 0);
   StackPushInteger(bAllPartyMembers == true ? 1 : 0);
@@ -737,26 +796,28 @@ void NWScriptI::addJournalQuestEntry(const std::string& szPlotID, Ice::Int nStat
 
   VM_ExecuteCommand(367, 6);
 
-unlock("addJournalQuestEntry");
+unlock(addJournalQuestEntry_mutex, "addJournalQuestEntry");
   
 };
 
 void NWScriptI::addToParty(const NWN::NWObject& oPC, const NWN::NWObject& oPartyLeader, const Ice::Current& ice) {
   if (oPC.id < 0 || oPC.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (oPartyLeader.id < 0 || oPartyLeader.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("addToParty"); callCounter += 1;
+  lock(addToParty_mutex, "addToParty");
+  callCounter += 1;
   StackPushObject(oPartyLeader.id);
   StackPushObject(oPC.id);
 
   VM_ExecuteCommand(572, 2);
 
-unlock("addToParty");
+unlock(addToParty_mutex, "addToParty");
   
 };
 
 void NWScriptI::adjustAlignment(const NWN::NWObject& oSubject, NWN::Alignment tAlignment, Ice::Int nShift, bool bAllPartyMembers, const Ice::Current& ice) {
   if (oSubject.id < 0 || oSubject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("adjustAlignment"); callCounter += 1;
+  lock(adjustAlignment_mutex, "adjustAlignment");
+  callCounter += 1;
   StackPushInteger(bAllPartyMembers == true ? 1 : 0);
   StackPushInteger(nShift);
   if (tAlignment == NWN::Evil) StackPushInteger(5);
@@ -770,96 +831,104 @@ void NWScriptI::adjustAlignment(const NWN::NWObject& oSubject, NWN::Alignment tA
 
   VM_ExecuteCommand(201, 4);
 
-unlock("adjustAlignment");
+unlock(adjustAlignment_mutex, "adjustAlignment");
   
 };
 
 void NWScriptI::adjustReputation(const NWN::NWObject& oTarget, const NWN::NWObject& oSourceFactionMember, Ice::Int nAdjustment, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (oSourceFactionMember.id < 0 || oSourceFactionMember.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("adjustReputation"); callCounter += 1;
+  lock(adjustReputation_mutex, "adjustReputation");
+  callCounter += 1;
   StackPushInteger(nAdjustment);
   StackPushObject(oSourceFactionMember.id);
   StackPushObject(oTarget.id);
 
   VM_ExecuteCommand(209, 3);
 
-unlock("adjustReputation");
+unlock(adjustReputation_mutex, "adjustReputation");
   
 };
 
 void NWScriptI::ambientSoundChangeDay(const NWN::NWObject& oArea, Ice::Int nTrack, const Ice::Current& ice) {
   if (oArea.id < 0 || oArea.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("ambientSoundChangeDay"); callCounter += 1;
+  lock(ambientSoundChangeDay_mutex, "ambientSoundChangeDay");
+  callCounter += 1;
   StackPushInteger(nTrack);
   StackPushObject(oArea.id);
 
   VM_ExecuteCommand(435, 2);
 
-unlock("ambientSoundChangeDay");
+unlock(ambientSoundChangeDay_mutex, "ambientSoundChangeDay");
   
 };
 
 void NWScriptI::ambientSoundChangeNight(const NWN::NWObject& oArea, Ice::Int nTrack, const Ice::Current& ice) {
   if (oArea.id < 0 || oArea.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("ambientSoundChangeNight"); callCounter += 1;
+  lock(ambientSoundChangeNight_mutex, "ambientSoundChangeNight");
+  callCounter += 1;
   StackPushInteger(nTrack);
   StackPushObject(oArea.id);
 
   VM_ExecuteCommand(436, 2);
 
-unlock("ambientSoundChangeNight");
+unlock(ambientSoundChangeNight_mutex, "ambientSoundChangeNight");
   
 };
 
 void NWScriptI::ambientSoundPlay(const NWN::NWObject& oArea, const Ice::Current& ice) {
   if (oArea.id < 0 || oArea.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("ambientSoundPlay"); callCounter += 1;
+  lock(ambientSoundPlay_mutex, "ambientSoundPlay");
+  callCounter += 1;
   StackPushObject(oArea.id);
 
   VM_ExecuteCommand(433, 1);
 
-unlock("ambientSoundPlay");
+unlock(ambientSoundPlay_mutex, "ambientSoundPlay");
   
 };
 
 void NWScriptI::ambientSoundSetDayVolume(const NWN::NWObject& oArea, Ice::Int nVolume, const Ice::Current& ice) {
   if (oArea.id < 0 || oArea.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("ambientSoundSetDayVolume"); callCounter += 1;
+  lock(ambientSoundSetDayVolume_mutex, "ambientSoundSetDayVolume");
+  callCounter += 1;
   StackPushInteger(nVolume);
   StackPushObject(oArea.id);
 
   VM_ExecuteCommand(567, 2);
 
-unlock("ambientSoundSetDayVolume");
+unlock(ambientSoundSetDayVolume_mutex, "ambientSoundSetDayVolume");
   
 };
 
 void NWScriptI::ambientSoundSetNightVolume(const NWN::NWObject& oArea, Ice::Int nVolume, const Ice::Current& ice) {
   if (oArea.id < 0 || oArea.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("ambientSoundSetNightVolume"); callCounter += 1;
+  lock(ambientSoundSetNightVolume_mutex, "ambientSoundSetNightVolume");
+  callCounter += 1;
   StackPushInteger(nVolume);
   StackPushObject(oArea.id);
 
   VM_ExecuteCommand(568, 2);
 
-unlock("ambientSoundSetNightVolume");
+unlock(ambientSoundSetNightVolume_mutex, "ambientSoundSetNightVolume");
   
 };
 
 void NWScriptI::ambientSoundStop(const NWN::NWObject& oArea, const Ice::Current& ice) {
   if (oArea.id < 0 || oArea.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("ambientSoundStop"); callCounter += 1;
+  lock(ambientSoundStop_mutex, "ambientSoundStop");
+  callCounter += 1;
   StackPushObject(oArea.id);
 
   VM_ExecuteCommand(434, 1);
 
-unlock("ambientSoundStop");
+unlock(ambientSoundStop_mutex, "ambientSoundStop");
   
 };
 
 NWN::NWVector NWScriptI::angleToVector(Ice::Double fAngle, const Ice::Current& ice) {
-  lock("angleToVector"); callCounter += 1;
+  lock(angleToVector_mutex, "angleToVector");
+  callCounter += 1;
   StackPushFloat(fAngle);
 
   VM_ExecuteCommand(144, 1);
@@ -868,7 +937,7 @@ NWN::NWVector NWScriptI::angleToVector(Ice::Double fAngle, const Ice::Current& i
   StackPopVector(&vRetVal);
   NWN::NWVector nv;
   nv.x = vRetVal.X; nv.y = vRetVal.Y; nv.z = vRetVal.Z;
-  unlock("angleToVector");
+  unlock(angleToVector_mutex, "angleToVector");
   return nv;
 };
 
@@ -876,7 +945,8 @@ void NWScriptI::applyEffectAtLocation(NWN::DurationType tDurationType, const NWN
   if (effectMap.find(eEffect.id) == effectMap.end()) throw NWN::InvalidEffectException();
   
   if (lLocation.area.id < 0) throw NWN::InvalidObjectException();
-  lock("applyEffectAtLocation"); callCounter += 1;
+  lock(applyEffectAtLocation_mutex, "applyEffectAtLocation");
+  callCounter += 1;
   StackPushFloat(fDuration);
   CScriptLocation *lLocation_ptr;
   lLocation_ptr->X = lLocation.x;
@@ -896,7 +966,7 @@ void NWScriptI::applyEffectAtLocation(NWN::DurationType tDurationType, const NWN
 
   VM_ExecuteCommand(216, 4);
 
-unlock("applyEffectAtLocation");
+unlock(applyEffectAtLocation_mutex, "applyEffectAtLocation");
   
 };
 
@@ -904,7 +974,8 @@ void NWScriptI::applyEffectToObject(NWN::DurationType tDurationType, const NWN::
   if (effectMap.find(eEffect.id) == effectMap.end()) throw NWN::InvalidEffectException();
   
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("applyEffectToObject"); callCounter += 1;
+  lock(applyEffectToObject_mutex, "applyEffectToObject");
+  callCounter += 1;
   StackPushFloat(fDuration);
   StackPushObject(oTarget.id);
   CGameEffect *eEffect_ptr = effectMap.find(eEffect.id)->second;
@@ -916,36 +987,39 @@ void NWScriptI::applyEffectToObject(NWN::DurationType tDurationType, const NWN::
 
   VM_ExecuteCommand(220, 4);
 
-unlock("applyEffectToObject");
+unlock(applyEffectToObject_mutex, "applyEffectToObject");
   
 };
 
 Ice::Double NWScriptI::asin(Ice::Double fValue, const Ice::Current& ice) {
-  lock("asin"); callCounter += 1;
+  lock(asin_mutex, "asin");
+  callCounter += 1;
   StackPushFloat(fValue);
 
   VM_ExecuteCommand(72, 1);
 
   float fRetVal;
   StackPopFloat(&fRetVal);
-  unlock("asin");
+  unlock(asin_mutex, "asin");
   return fRetVal;
 };
 
 Ice::Double NWScriptI::atan(Ice::Double fValue, const Ice::Current& ice) {
-  lock("atan"); callCounter += 1;
+  lock(atan_mutex, "atan");
+  callCounter += 1;
   StackPushFloat(fValue);
 
   VM_ExecuteCommand(73, 1);
 
   float fRetVal;
   StackPopFloat(&fRetVal);
-  unlock("atan");
+  unlock(atan_mutex, "atan");
   return fRetVal;
 };
 
 NWN::NWItemProperty NWScriptI::badBadReplaceMeThisDoesNothing(const Ice::Current& ice) {
-  lock("badBadReplaceMeThisDoesNothing"); callCounter += 1;
+  lock(badBadReplaceMeThisDoesNothing_mutex, "badBadReplaceMeThisDoesNothing");
+  callCounter += 1;
 
   VM_ExecuteCommand(676, 0);
 
@@ -959,13 +1033,14 @@ NWN::NWItemProperty NWScriptI::badBadReplaceMeThisDoesNothing(const Ice::Current
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("badBadReplaceMeThisDoesNothing");
+  unlock(badBadReplaceMeThisDoesNothing_mutex, "badBadReplaceMeThisDoesNothing");
   return e;
 };
 
 Ice::Int NWScriptI::beginConversation(const std::string& sResRef, const NWN::NWObject& oObjectToDialog, const Ice::Current& ice) {
   if (oObjectToDialog.id < 0 || oObjectToDialog.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("beginConversation"); callCounter += 1;
+  lock(beginConversation_mutex, "beginConversation");
+  callCounter += 1;
   StackPushObject(oObjectToDialog.id);
   StackPushString(sResRef.c_str());
 
@@ -973,48 +1048,52 @@ Ice::Int NWScriptI::beginConversation(const std::string& sResRef, const NWN::NWO
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("beginConversation");
+  unlock(beginConversation_mutex, "beginConversation");
   return nRetVal;
 };
 
 void NWScriptI::blackScreen(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("blackScreen"); callCounter += 1;
+  lock(blackScreen_mutex, "blackScreen");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(698, 1);
 
-unlock("blackScreen");
+unlock(blackScreen_mutex, "blackScreen");
   
 };
 
 void NWScriptI::bootPC(const NWN::NWObject& oPlayer, const Ice::Current& ice) {
   if (oPlayer.id < 0 || oPlayer.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("bootPC"); callCounter += 1;
+  lock(bootPC_mutex, "bootPC");
+  callCounter += 1;
   StackPushObject(oPlayer.id);
 
   VM_ExecuteCommand(565, 1);
 
-unlock("bootPC");
+unlock(bootPC_mutex, "bootPC");
   
 };
 
 void NWScriptI::changeFaction(const NWN::NWObject& oObjectToChangeFaction, const NWN::NWObject& oMemberOfFactionToJoin, const Ice::Current& ice) {
   if (oObjectToChangeFaction.id < 0 || oObjectToChangeFaction.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (oMemberOfFactionToJoin.id < 0 || oMemberOfFactionToJoin.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("changeFaction"); callCounter += 1;
+  lock(changeFaction_mutex, "changeFaction");
+  callCounter += 1;
   StackPushObject(oMemberOfFactionToJoin.id);
   StackPushObject(oObjectToChangeFaction.id);
 
   VM_ExecuteCommand(173, 2);
 
-unlock("changeFaction");
+unlock(changeFaction_mutex, "changeFaction");
   
 };
 
 void NWScriptI::changeToStandardFaction(const NWN::NWObject& oCreatureToChange, NWN::StandardFaction tStandardFaction, const Ice::Current& ice) {
   if (oCreatureToChange.id < 0 || oCreatureToChange.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("changeToStandardFaction"); callCounter += 1;
+  lock(changeToStandardFaction_mutex, "changeToStandardFaction");
+  callCounter += 1;
   if (tStandardFaction == NWN::Hostile) StackPushInteger(0);
    else if (tStandardFaction == NWN::Commoner) StackPushInteger(1);
    else if (tStandardFaction == NWN::Merchant) StackPushInteger(2);
@@ -1024,37 +1103,40 @@ void NWScriptI::changeToStandardFaction(const NWN::NWObject& oCreatureToChange, 
 
   VM_ExecuteCommand(412, 2);
 
-unlock("changeToStandardFaction");
+unlock(changeToStandardFaction_mutex, "changeToStandardFaction");
   
 };
 
 void NWScriptI::clearAllActions(bool bClearCombatState, const Ice::Current& ice) {
-  lock("clearAllActions"); callCounter += 1;
+  lock(clearAllActions_mutex, "clearAllActions");
+  callCounter += 1;
   StackPushInteger(bClearCombatState == true ? 1 : 0);
 
   VM_ExecuteCommand(9, 1);
 
-unlock("clearAllActions");
+unlock(clearAllActions_mutex, "clearAllActions");
   
 };
 
 void NWScriptI::clearPersonalReputation(const NWN::NWObject& oTarget, const NWN::NWObject& oSource, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (oSource.id < 0 || oSource.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("clearPersonalReputation"); callCounter += 1;
+  lock(clearPersonalReputation_mutex, "clearPersonalReputation");
+  callCounter += 1;
   StackPushObject(oSource.id);
   StackPushObject(oTarget.id);
 
   VM_ExecuteCommand(389, 2);
 
-unlock("clearPersonalReputation");
+unlock(clearPersonalReputation_mutex, "clearPersonalReputation");
   
 };
 
 NWN::NWObject NWScriptI::copyItem(const NWN::NWObject& oItem, const NWN::NWObject& oTargetInventory, bool bCopyVars, const Ice::Current& ice) {
   if (oItem.id < 0 || oItem.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (oTargetInventory.id < 0 || oTargetInventory.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("copyItem"); callCounter += 1;
+  lock(copyItem_mutex, "copyItem");
+  callCounter += 1;
   StackPushInteger(bCopyVars == true ? 1 : 0);
   StackPushObject(oTargetInventory.id);
   StackPushObject(oItem.id);
@@ -1063,7 +1145,7 @@ NWN::NWObject NWScriptI::copyItem(const NWN::NWObject& oItem, const NWN::NWObjec
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("copyItem");
+  unlock(copyItem_mutex, "copyItem");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -1071,7 +1153,8 @@ NWN::NWObject NWScriptI::copyItem(const NWN::NWObject& oItem, const NWN::NWObjec
 
 NWN::NWObject NWScriptI::copyItemAndModify(const NWN::NWObject& oItem, Ice::Int nType, Ice::Int nIndex, Ice::Int nNewValue, bool bCopyVars, const Ice::Current& ice) {
   if (oItem.id < 0 || oItem.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("copyItemAndModify"); callCounter += 1;
+  lock(copyItemAndModify_mutex, "copyItemAndModify");
+  callCounter += 1;
   StackPushInteger(bCopyVars == true ? 1 : 0);
   StackPushInteger(nNewValue);
   StackPushInteger(nIndex);
@@ -1082,7 +1165,7 @@ NWN::NWObject NWScriptI::copyItemAndModify(const NWN::NWObject& oItem, Ice::Int 
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("copyItemAndModify");
+  unlock(copyItemAndModify_mutex, "copyItemAndModify");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -1092,7 +1175,8 @@ NWN::NWObject NWScriptI::copyObject(const NWN::NWObject& oSource, const NWN::NWL
   if (oSource.id < 0 || oSource.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (locLocation.area.id < 0) throw NWN::InvalidObjectException();
   if (oOwner.id < 0 || oOwner.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("copyObject"); callCounter += 1;
+  lock(copyObject_mutex, "copyObject");
+  callCounter += 1;
   StackPushString(sNewTag.c_str());
   StackPushObject(oOwner.id);
   CScriptLocation *locLocation_ptr;
@@ -1110,27 +1194,29 @@ NWN::NWObject NWScriptI::copyObject(const NWN::NWObject& oSource, const NWN::NWL
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("copyObject");
+  unlock(copyObject_mutex, "copyObject");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
 };
 
 Ice::Double NWScriptI::cos(Ice::Double fValue, const Ice::Current& ice) {
-  lock("cos"); callCounter += 1;
+  lock(cos_mutex, "cos");
+  callCounter += 1;
   StackPushFloat(fValue);
 
   VM_ExecuteCommand(68, 1);
 
   float fRetVal;
   StackPopFloat(&fRetVal);
-  unlock("cos");
+  unlock(cos_mutex, "cos");
   return fRetVal;
 };
 
 NWN::NWObject NWScriptI::createItemOnObject(const std::string& sItemTemplate, const NWN::NWObject& oTarget, Ice::Int nStackSize, const std::string& sNewTag, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("createItemOnObject"); callCounter += 1;
+  lock(createItemOnObject_mutex, "createItemOnObject");
+  callCounter += 1;
   StackPushString(sNewTag.c_str());
   StackPushInteger(nStackSize);
   StackPushObject(oTarget.id);
@@ -1140,7 +1226,7 @@ NWN::NWObject NWScriptI::createItemOnObject(const std::string& sItemTemplate, co
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("createItemOnObject");
+  unlock(createItemOnObject_mutex, "createItemOnObject");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -1148,7 +1234,8 @@ NWN::NWObject NWScriptI::createItemOnObject(const std::string& sItemTemplate, co
 
 NWN::NWObject NWScriptI::createObject(NWN::ObjectType tObjectType, const std::string& sTemplate, const NWN::NWLocation& lLocation, bool bUseAppearAnimation, const std::string& sNewTag, const Ice::Current& ice) {
   if (lLocation.area.id < 0) throw NWN::InvalidObjectException();
-  lock("createObject"); callCounter += 1;
+  lock(createObject_mutex, "createObject");
+  callCounter += 1;
   StackPushString(sNewTag.c_str());
   StackPushInteger(bUseAppearAnimation == true ? 1 : 0);
   CScriptLocation *lLocation_ptr;
@@ -1178,7 +1265,7 @@ NWN::NWObject NWScriptI::createObject(NWN::ObjectType tObjectType, const std::st
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("createObject");
+  unlock(createObject_mutex, "createObject");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -1186,7 +1273,8 @@ NWN::NWObject NWScriptI::createObject(NWN::ObjectType tObjectType, const std::st
 
 NWN::NWObject NWScriptI::createTrapAtLocation(NWN::TrapType tTrapType, const NWN::NWLocation& lLocation, Ice::Double fSize, const std::string& sTag, NWN::StandardFaction tStandardFaction, const std::string& sOnDisarmScript, const std::string& sOnTrapTriggeredScript, const Ice::Current& ice) {
   if (lLocation.area.id < 0) throw NWN::InvalidObjectException();
-  lock("createTrapAtLocation"); callCounter += 1;
+  lock(createTrapAtLocation_mutex, "createTrapAtLocation");
+  callCounter += 1;
   StackPushString(sOnTrapTriggeredScript.c_str());
   StackPushString(sOnDisarmScript.c_str());
   if (tStandardFaction == NWN::Hostile) StackPushInteger(0);
@@ -1259,7 +1347,7 @@ NWN::NWObject NWScriptI::createTrapAtLocation(NWN::TrapType tTrapType, const NWN
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("createTrapAtLocation");
+  unlock(createTrapAtLocation_mutex, "createTrapAtLocation");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -1267,7 +1355,8 @@ NWN::NWObject NWScriptI::createTrapAtLocation(NWN::TrapType tTrapType, const NWN
 
 void NWScriptI::createTrapOnObject(NWN::TrapType tTrapType, const NWN::NWObject& oObject, NWN::StandardFaction tStandardFaction, const std::string& sOnDisarmScript, const std::string& sOnTrapTriggeredScript, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("createTrapOnObject"); callCounter += 1;
+  lock(createTrapOnObject_mutex, "createTrapOnObject");
+  callCounter += 1;
   StackPushString(sOnTrapTriggeredScript.c_str());
   StackPushString(sOnDisarmScript.c_str());
   if (tStandardFaction == NWN::Hostile) StackPushInteger(0);
@@ -1328,252 +1417,273 @@ void NWScriptI::createTrapOnObject(NWN::TrapType tTrapType, const NWN::NWObject&
 
   VM_ExecuteCommand(810, 5);
 
-unlock("createTrapOnObject");
+unlock(createTrapOnObject_mutex, "createTrapOnObject");
   
 };
 
 Ice::Int NWScriptI::d10(Ice::Int nNumDice, const Ice::Current& ice) {
-  lock("d10"); callCounter += 1;
+  lock(d10_mutex, "d10");
+  callCounter += 1;
   StackPushInteger(nNumDice);
 
   VM_ExecuteCommand(100, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("d10");
+  unlock(d10_mutex, "d10");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::d100(Ice::Int nNumDice, const Ice::Current& ice) {
-  lock("d100"); callCounter += 1;
+  lock(d100_mutex, "d100");
+  callCounter += 1;
   StackPushInteger(nNumDice);
 
   VM_ExecuteCommand(103, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("d100");
+  unlock(d100_mutex, "d100");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::d12(Ice::Int nNumDice, const Ice::Current& ice) {
-  lock("d12"); callCounter += 1;
+  lock(d12_mutex, "d12");
+  callCounter += 1;
   StackPushInteger(nNumDice);
 
   VM_ExecuteCommand(101, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("d12");
+  unlock(d12_mutex, "d12");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::d2(Ice::Int nNumDice, const Ice::Current& ice) {
-  lock("d2"); callCounter += 1;
+  lock(d2_mutex, "d2");
+  callCounter += 1;
   StackPushInteger(nNumDice);
 
   VM_ExecuteCommand(95, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("d2");
+  unlock(d2_mutex, "d2");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::d20(Ice::Int nNumDice, const Ice::Current& ice) {
-  lock("d20"); callCounter += 1;
+  lock(d20_mutex, "d20");
+  callCounter += 1;
   StackPushInteger(nNumDice);
 
   VM_ExecuteCommand(102, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("d20");
+  unlock(d20_mutex, "d20");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::d3(Ice::Int nNumDice, const Ice::Current& ice) {
-  lock("d3"); callCounter += 1;
+  lock(d3_mutex, "d3");
+  callCounter += 1;
   StackPushInteger(nNumDice);
 
   VM_ExecuteCommand(96, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("d3");
+  unlock(d3_mutex, "d3");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::d4(Ice::Int nNumDice, const Ice::Current& ice) {
-  lock("d4"); callCounter += 1;
+  lock(d4_mutex, "d4");
+  callCounter += 1;
   StackPushInteger(nNumDice);
 
   VM_ExecuteCommand(97, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("d4");
+  unlock(d4_mutex, "d4");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::d6(Ice::Int nNumDice, const Ice::Current& ice) {
-  lock("d6"); callCounter += 1;
+  lock(d6_mutex, "d6");
+  callCounter += 1;
   StackPushInteger(nNumDice);
 
   VM_ExecuteCommand(98, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("d6");
+  unlock(d6_mutex, "d6");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::d8(Ice::Int nNumDice, const Ice::Current& ice) {
-  lock("d8"); callCounter += 1;
+  lock(d8_mutex, "d8");
+  callCounter += 1;
   StackPushInteger(nNumDice);
 
   VM_ExecuteCommand(99, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("d8");
+  unlock(d8_mutex, "d8");
   return nRetVal;
 };
 
 void NWScriptI::dayToNight(const NWN::NWObject& oPlayer, Ice::Double fTransitionTime, const Ice::Current& ice) {
   if (oPlayer.id < 0 || oPlayer.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("dayToNight"); callCounter += 1;
+  lock(dayToNight_mutex, "dayToNight");
+  callCounter += 1;
   StackPushFloat(fTransitionTime);
   StackPushObject(oPlayer.id);
 
   VM_ExecuteCommand(750, 2);
 
-unlock("dayToNight");
+unlock(dayToNight_mutex, "dayToNight");
   
 };
 
 void NWScriptI::decrementRemainingFeatUses(const NWN::NWObject& oCreature, Ice::Int nFeat, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("decrementRemainingFeatUses"); callCounter += 1;
+  lock(decrementRemainingFeatUses_mutex, "decrementRemainingFeatUses");
+  callCounter += 1;
   StackPushInteger(nFeat);
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(580, 2);
 
-unlock("decrementRemainingFeatUses");
+unlock(decrementRemainingFeatUses_mutex, "decrementRemainingFeatUses");
   
 };
 
 void NWScriptI::decrementRemainingSpellUses(const NWN::NWObject& oCreature, Ice::Int nSpell, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("decrementRemainingSpellUses"); callCounter += 1;
+  lock(decrementRemainingSpellUses_mutex, "decrementRemainingSpellUses");
+  callCounter += 1;
   StackPushInteger(nSpell);
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(581, 2);
 
-unlock("decrementRemainingSpellUses");
+unlock(decrementRemainingSpellUses_mutex, "decrementRemainingSpellUses");
   
 };
 
 void NWScriptI::deleteCampaignVariable(const std::string& sCampaignName, const std::string& sVarName, const NWN::NWObject& oPlayer, const Ice::Current& ice) {
   if (oPlayer.id < 0 || oPlayer.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("deleteCampaignVariable"); callCounter += 1;
+  lock(deleteCampaignVariable_mutex, "deleteCampaignVariable");
+  callCounter += 1;
   StackPushObject(oPlayer.id);
   StackPushString(sVarName.c_str());
   StackPushString(sCampaignName.c_str());
 
   VM_ExecuteCommand(601, 3);
 
-unlock("deleteCampaignVariable");
+unlock(deleteCampaignVariable_mutex, "deleteCampaignVariable");
   
 };
 
 void NWScriptI::deleteLocalFloat(const NWN::NWObject& oObject, const std::string& sVarName, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("deleteLocalFloat"); callCounter += 1;
+  lock(deleteLocalFloat_mutex, "deleteLocalFloat");
+  callCounter += 1;
   StackPushString(sVarName.c_str());
   StackPushObject(oObject.id);
 
   VM_ExecuteCommand(266, 2);
 
-unlock("deleteLocalFloat");
+unlock(deleteLocalFloat_mutex, "deleteLocalFloat");
   
 };
 
 void NWScriptI::deleteLocalInt(const NWN::NWObject& oObject, const std::string& sVarName, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("deleteLocalInt"); callCounter += 1;
+  lock(deleteLocalInt_mutex, "deleteLocalInt");
+  callCounter += 1;
   StackPushString(sVarName.c_str());
   StackPushObject(oObject.id);
 
   VM_ExecuteCommand(265, 2);
 
-unlock("deleteLocalInt");
+unlock(deleteLocalInt_mutex, "deleteLocalInt");
   
 };
 
 void NWScriptI::deleteLocalLocation(const NWN::NWObject& oObject, const std::string& sVarName, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("deleteLocalLocation"); callCounter += 1;
+  lock(deleteLocalLocation_mutex, "deleteLocalLocation");
+  callCounter += 1;
   StackPushString(sVarName.c_str());
   StackPushObject(oObject.id);
 
   VM_ExecuteCommand(269, 2);
 
-unlock("deleteLocalLocation");
+unlock(deleteLocalLocation_mutex, "deleteLocalLocation");
   
 };
 
 void NWScriptI::deleteLocalObject(const NWN::NWObject& oObject, const std::string& sVarName, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("deleteLocalObject"); callCounter += 1;
+  lock(deleteLocalObject_mutex, "deleteLocalObject");
+  callCounter += 1;
   StackPushString(sVarName.c_str());
   StackPushObject(oObject.id);
 
   VM_ExecuteCommand(268, 2);
 
-unlock("deleteLocalObject");
+unlock(deleteLocalObject_mutex, "deleteLocalObject");
   
 };
 
 void NWScriptI::deleteLocalString(const NWN::NWObject& oObject, const std::string& sVarName, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("deleteLocalString"); callCounter += 1;
+  lock(deleteLocalString_mutex, "deleteLocalString");
+  callCounter += 1;
   StackPushString(sVarName.c_str());
   StackPushObject(oObject.id);
 
   VM_ExecuteCommand(267, 2);
 
-unlock("deleteLocalString");
+unlock(deleteLocalString_mutex, "deleteLocalString");
   
 };
 
 void NWScriptI::destroyCampaignDatabase(const std::string& sCampaignName, const Ice::Current& ice) {
-  lock("destroyCampaignDatabase"); callCounter += 1;
+  lock(destroyCampaignDatabase_mutex, "destroyCampaignDatabase");
+  callCounter += 1;
   StackPushString(sCampaignName.c_str());
 
   VM_ExecuteCommand(594, 1);
 
-unlock("destroyCampaignDatabase");
+unlock(destroyCampaignDatabase_mutex, "destroyCampaignDatabase");
   
 };
 
 void NWScriptI::destroyObject(const NWN::NWObject& oDestroy, Ice::Double fDelay, const Ice::Current& ice) {
   if (oDestroy.id < 0 || oDestroy.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("destroyObject"); callCounter += 1;
+  lock(destroyObject_mutex, "destroyObject");
+  callCounter += 1;
   StackPushFloat(fDelay);
   StackPushObject(oDestroy.id);
 
   VM_ExecuteCommand(241, 2);
 
-unlock("destroyObject");
+unlock(destroyObject_mutex, "destroyObject");
   
 };
 
 void NWScriptI::doDoorAction(const NWN::NWObject& oTargetDoor, NWN::DoorAction tDoorAction, const Ice::Current& ice) {
   if (oTargetDoor.id < 0 || oTargetDoor.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("doDoorAction"); callCounter += 1;
+  lock(doDoorAction_mutex, "doDoorAction");
+  callCounter += 1;
   if (tDoorAction == NWN::OpenDoor) StackPushInteger(0);
    else if (tDoorAction == NWN::UnlockDoor) StackPushInteger(1);
    else if (tDoorAction == NWN::BashDoor) StackPushInteger(2);
@@ -1584,13 +1694,14 @@ void NWScriptI::doDoorAction(const NWN::NWObject& oTargetDoor, NWN::DoorAction t
 
   VM_ExecuteCommand(338, 2);
 
-unlock("doDoorAction");
+unlock(doDoorAction_mutex, "doDoorAction");
   
 };
 
 void NWScriptI::doPlaceableObjectAction(const NWN::NWObject& oPlaceable, NWN::PlaceableAction tPlaceableAction, const Ice::Current& ice) {
   if (oPlaceable.id < 0 || oPlaceable.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("doPlaceableObjectAction"); callCounter += 1;
+  lock(doPlaceableObjectAction_mutex, "doPlaceableObjectAction");
+  callCounter += 1;
   if (tPlaceableAction == NWN::UsePlaceable) StackPushInteger(0);
    else if (tPlaceableAction == NWN::UnlockPlaceable) StackPushInteger(1);
    else if (tPlaceableAction == NWN::BashPlaceable) StackPushInteger(2);
@@ -1600,32 +1711,35 @@ void NWScriptI::doPlaceableObjectAction(const NWN::NWObject& oPlaceable, NWN::Pl
 
   VM_ExecuteCommand(547, 2);
 
-unlock("doPlaceableObjectAction");
+unlock(doPlaceableObjectAction_mutex, "doPlaceableObjectAction");
   
 };
 
 void NWScriptI::doSinglePlayerAutoSave(const Ice::Current& ice) {
-  lock("doSinglePlayerAutoSave"); callCounter += 1;
+  lock(doSinglePlayerAutoSave_mutex, "doSinglePlayerAutoSave");
+  callCounter += 1;
 
   VM_ExecuteCommand(512, 0);
 
-unlock("doSinglePlayerAutoSave");
+unlock(doSinglePlayerAutoSave_mutex, "doSinglePlayerAutoSave");
   
 };
 
 void NWScriptI::doWhirlwindAttack(bool bDisplayFeedback, bool bImproved, const Ice::Current& ice) {
-  lock("doWhirlwindAttack"); callCounter += 1;
+  lock(doWhirlwindAttack_mutex, "doWhirlwindAttack");
+  callCounter += 1;
   StackPushInteger(bImproved == true ? 1 : 0);
   StackPushInteger(bDisplayFeedback == true ? 1 : 0);
 
   VM_ExecuteCommand(709, 2);
 
-unlock("doWhirlwindAttack");
+unlock(doWhirlwindAttack_mutex, "doWhirlwindAttack");
   
 };
 
 NWN::NWEffect NWScriptI::effectACDecrease(Ice::Int nValue, NWN::ACModifyType tACModifyType, NWN::DamageType tDamageType, const Ice::Current& ice) {
-  lock("effectACDecrease"); callCounter += 1;
+  lock(effectACDecrease_mutex, "effectACDecrease");
+  callCounter += 1;
   if (tDamageType == NWN::AcidDamage) StackPushInteger(16);
    else if (tDamageType == NWN::ACVsAllDamage) StackPushInteger(4103);
    else if (tDamageType == NWN::NegativeDamage) StackPushInteger(512);
@@ -1661,12 +1775,13 @@ NWN::NWEffect NWScriptI::effectACDecrease(Ice::Int nValue, NWN::ACModifyType tAC
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectACDecrease");
+  unlock(effectACDecrease_mutex, "effectACDecrease");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectACIncrease(Ice::Int nValue, NWN::ACModifyType tACModifyType, NWN::DamageType tDamageType, const Ice::Current& ice) {
-  lock("effectACIncrease"); callCounter += 1;
+  lock(effectACIncrease_mutex, "effectACIncrease");
+  callCounter += 1;
   if (tDamageType == NWN::AcidDamage) StackPushInteger(16);
    else if (tDamageType == NWN::ACVsAllDamage) StackPushInteger(4103);
    else if (tDamageType == NWN::NegativeDamage) StackPushInteger(512);
@@ -1702,12 +1817,13 @@ NWN::NWEffect NWScriptI::effectACIncrease(Ice::Int nValue, NWN::ACModifyType tAC
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectACIncrease");
+  unlock(effectACIncrease_mutex, "effectACIncrease");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectAbilityDecrease(NWN::Ability tAbility, Ice::Int nModifyBy, const Ice::Current& ice) {
-  lock("effectAbilityDecrease"); callCounter += 1;
+  lock(effectAbilityDecrease_mutex, "effectAbilityDecrease");
+  callCounter += 1;
   StackPushInteger(nModifyBy);
   if (tAbility == NWN::Charisma) StackPushInteger(5);
    else if (tAbility == NWN::Strength) StackPushInteger(0);
@@ -1729,12 +1845,13 @@ NWN::NWEffect NWScriptI::effectAbilityDecrease(NWN::Ability tAbility, Ice::Int n
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectAbilityDecrease");
+  unlock(effectAbilityDecrease_mutex, "effectAbilityDecrease");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectAbilityIncrease(NWN::Ability tAbility, Ice::Int nModifyBy, const Ice::Current& ice) {
-  lock("effectAbilityIncrease"); callCounter += 1;
+  lock(effectAbilityIncrease_mutex, "effectAbilityIncrease");
+  callCounter += 1;
   StackPushInteger(nModifyBy);
   if (tAbility == NWN::Charisma) StackPushInteger(5);
    else if (tAbility == NWN::Strength) StackPushInteger(0);
@@ -1756,12 +1873,13 @@ NWN::NWEffect NWScriptI::effectAbilityIncrease(NWN::Ability tAbility, Ice::Int n
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectAbilityIncrease");
+  unlock(effectAbilityIncrease_mutex, "effectAbilityIncrease");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectAppear(Ice::Int nAnimation, const Ice::Current& ice) {
-  lock("effectAppear"); callCounter += 1;
+  lock(effectAppear_mutex, "effectAppear");
+  callCounter += 1;
   StackPushInteger(nAnimation);
 
   VM_ExecuteCommand(482, 1);
@@ -1776,12 +1894,13 @@ NWN::NWEffect NWScriptI::effectAppear(Ice::Int nAnimation, const Ice::Current& i
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectAppear");
+  unlock(effectAppear_mutex, "effectAppear");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectAreaOfEffect(Ice::Int nAreaEffectId, const std::string& sOnEnterScript, const std::string& sHeartbeatScript, const std::string& sOnExitScript, const Ice::Current& ice) {
-  lock("effectAreaOfEffect"); callCounter += 1;
+  lock(effectAreaOfEffect_mutex, "effectAreaOfEffect");
+  callCounter += 1;
   StackPushString(sOnExitScript.c_str());
   StackPushString(sHeartbeatScript.c_str());
   StackPushString(sOnEnterScript.c_str());
@@ -1799,12 +1918,13 @@ NWN::NWEffect NWScriptI::effectAreaOfEffect(Ice::Int nAreaEffectId, const std::s
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectAreaOfEffect");
+  unlock(effectAreaOfEffect_mutex, "effectAreaOfEffect");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectAttackDecrease(Ice::Int nPenalty, Ice::Int nModifierType, const Ice::Current& ice) {
-  lock("effectAttackDecrease"); callCounter += 1;
+  lock(effectAttackDecrease_mutex, "effectAttackDecrease");
+  callCounter += 1;
   StackPushInteger(nModifierType);
   StackPushInteger(nPenalty);
 
@@ -1820,12 +1940,13 @@ NWN::NWEffect NWScriptI::effectAttackDecrease(Ice::Int nPenalty, Ice::Int nModif
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectAttackDecrease");
+  unlock(effectAttackDecrease_mutex, "effectAttackDecrease");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectAttackIncrease(Ice::Int nBonus, Ice::Int nModifierType, const Ice::Current& ice) {
-  lock("effectAttackIncrease"); callCounter += 1;
+  lock(effectAttackIncrease_mutex, "effectAttackIncrease");
+  callCounter += 1;
   StackPushInteger(nModifierType);
   StackPushInteger(nBonus);
 
@@ -1841,13 +1962,14 @@ NWN::NWEffect NWScriptI::effectAttackIncrease(Ice::Int nBonus, Ice::Int nModifie
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectAttackIncrease");
+  unlock(effectAttackIncrease_mutex, "effectAttackIncrease");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectBeam(Ice::Int nBeamVisualEffect, const NWN::NWObject& oEffector, Ice::Int nBodyPart, bool bMissEffect, const Ice::Current& ice) {
   if (oEffector.id < 0 || oEffector.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("effectBeam"); callCounter += 1;
+  lock(effectBeam_mutex, "effectBeam");
+  callCounter += 1;
   StackPushInteger(bMissEffect == true ? 1 : 0);
   StackPushInteger(nBodyPart);
   StackPushObject(oEffector.id);
@@ -1865,12 +1987,13 @@ NWN::NWEffect NWScriptI::effectBeam(Ice::Int nBeamVisualEffect, const NWN::NWObj
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectBeam");
+  unlock(effectBeam_mutex, "effectBeam");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectBlindness(const Ice::Current& ice) {
-  lock("effectBlindness"); callCounter += 1;
+  lock(effectBlindness_mutex, "effectBlindness");
+  callCounter += 1;
 
   VM_ExecuteCommand(468, 0);
 
@@ -1884,12 +2007,13 @@ NWN::NWEffect NWScriptI::effectBlindness(const Ice::Current& ice) {
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectBlindness");
+  unlock(effectBlindness_mutex, "effectBlindness");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectCharmed(const Ice::Current& ice) {
-  lock("effectCharmed"); callCounter += 1;
+  lock(effectCharmed_mutex, "effectCharmed");
+  callCounter += 1;
 
   VM_ExecuteCommand(156, 0);
 
@@ -1903,12 +2027,13 @@ NWN::NWEffect NWScriptI::effectCharmed(const Ice::Current& ice) {
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectCharmed");
+  unlock(effectCharmed_mutex, "effectCharmed");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectConcealment(Ice::Int nPercentage, NWN::MissChanceType tMissChanceType, const Ice::Current& ice) {
-  lock("effectConcealment"); callCounter += 1;
+  lock(effectConcealment_mutex, "effectConcealment");
+  callCounter += 1;
   if (tMissChanceType == NWN::MissChanceVSAll) StackPushInteger(0);
    else if (tMissChanceType == NWN::MissChanceVSRanged) StackPushInteger(1);
    else if (tMissChanceType == NWN::MissChanceVSMelee) StackPushInteger(2);
@@ -1927,12 +2052,13 @@ NWN::NWEffect NWScriptI::effectConcealment(Ice::Int nPercentage, NWN::MissChance
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectConcealment");
+  unlock(effectConcealment_mutex, "effectConcealment");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectConfused(const Ice::Current& ice) {
-  lock("effectConfused"); callCounter += 1;
+  lock(effectConfused_mutex, "effectConfused");
+  callCounter += 1;
 
   VM_ExecuteCommand(157, 0);
 
@@ -1946,12 +2072,13 @@ NWN::NWEffect NWScriptI::effectConfused(const Ice::Current& ice) {
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectConfused");
+  unlock(effectConfused_mutex, "effectConfused");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectCurse(Ice::Int nStrMod, Ice::Int nDexMod, Ice::Int nConMod, Ice::Int nIntMod, Ice::Int nWisMod, Ice::Int nChaMod, const Ice::Current& ice) {
-  lock("effectCurse"); callCounter += 1;
+  lock(effectCurse_mutex, "effectCurse");
+  callCounter += 1;
   StackPushInteger(nChaMod);
   StackPushInteger(nWisMod);
   StackPushInteger(nIntMod);
@@ -1971,12 +2098,13 @@ NWN::NWEffect NWScriptI::effectCurse(Ice::Int nStrMod, Ice::Int nDexMod, Ice::In
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectCurse");
+  unlock(effectCurse_mutex, "effectCurse");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectCutsceneDominated(const Ice::Current& ice) {
-  lock("effectCutsceneDominated"); callCounter += 1;
+  lock(effectCutsceneDominated_mutex, "effectCutsceneDominated");
+  callCounter += 1;
 
   VM_ExecuteCommand(604, 0);
 
@@ -1990,12 +2118,13 @@ NWN::NWEffect NWScriptI::effectCutsceneDominated(const Ice::Current& ice) {
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectCutsceneDominated");
+  unlock(effectCutsceneDominated_mutex, "effectCutsceneDominated");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectCutsceneGhost(const Ice::Current& ice) {
-  lock("effectCutsceneGhost"); callCounter += 1;
+  lock(effectCutsceneGhost_mutex, "effectCutsceneGhost");
+  callCounter += 1;
 
   VM_ExecuteCommand(757, 0);
 
@@ -2009,12 +2138,13 @@ NWN::NWEffect NWScriptI::effectCutsceneGhost(const Ice::Current& ice) {
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectCutsceneGhost");
+  unlock(effectCutsceneGhost_mutex, "effectCutsceneGhost");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectCutsceneImmobilize(const Ice::Current& ice) {
-  lock("effectCutsceneImmobilize"); callCounter += 1;
+  lock(effectCutsceneImmobilize_mutex, "effectCutsceneImmobilize");
+  callCounter += 1;
 
   VM_ExecuteCommand(767, 0);
 
@@ -2028,12 +2158,13 @@ NWN::NWEffect NWScriptI::effectCutsceneImmobilize(const Ice::Current& ice) {
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectCutsceneImmobilize");
+  unlock(effectCutsceneImmobilize_mutex, "effectCutsceneImmobilize");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectCutsceneParalyze(const Ice::Current& ice) {
-  lock("effectCutsceneParalyze"); callCounter += 1;
+  lock(effectCutsceneParalyze_mutex, "effectCutsceneParalyze");
+  callCounter += 1;
 
   VM_ExecuteCommand(585, 0);
 
@@ -2047,12 +2178,13 @@ NWN::NWEffect NWScriptI::effectCutsceneParalyze(const Ice::Current& ice) {
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectCutsceneParalyze");
+  unlock(effectCutsceneParalyze_mutex, "effectCutsceneParalyze");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectDamage(Ice::Int nDamageAmount, NWN::DamageType tDamageType, NWN::DamagePower tDamagePower, const Ice::Current& ice) {
-  lock("effectDamage"); callCounter += 1;
+  lock(effectDamage_mutex, "effectDamage");
+  callCounter += 1;
   if (tDamagePower == NWN::PlusFifteenDamage) StackPushInteger(16);
    else if (tDamagePower == NWN::PlusFiveDamage) StackPushInteger(5);
    else if (tDamagePower == NWN::PlusTenDamage) StackPushInteger(11);
@@ -2105,12 +2237,13 @@ NWN::NWEffect NWScriptI::effectDamage(Ice::Int nDamageAmount, NWN::DamageType tD
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectDamage");
+  unlock(effectDamage_mutex, "effectDamage");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectDamageDecrease(Ice::Int nPenalty, NWN::DamageType tDamageType, const Ice::Current& ice) {
-  lock("effectDamageDecrease"); callCounter += 1;
+  lock(effectDamageDecrease_mutex, "effectDamageDecrease");
+  callCounter += 1;
   if (tDamageType == NWN::AcidDamage) StackPushInteger(16);
    else if (tDamageType == NWN::ACVsAllDamage) StackPushInteger(4103);
    else if (tDamageType == NWN::NegativeDamage) StackPushInteger(512);
@@ -2140,12 +2273,13 @@ NWN::NWEffect NWScriptI::effectDamageDecrease(Ice::Int nPenalty, NWN::DamageType
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectDamageDecrease");
+  unlock(effectDamageDecrease_mutex, "effectDamageDecrease");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectDamageImmunityDecrease(NWN::DamageType tDamageType, Ice::Int nPercentImmunity, const Ice::Current& ice) {
-  lock("effectDamageImmunityDecrease"); callCounter += 1;
+  lock(effectDamageImmunityDecrease_mutex, "effectDamageImmunityDecrease");
+  callCounter += 1;
   StackPushInteger(nPercentImmunity);
   if (tDamageType == NWN::AcidDamage) StackPushInteger(16);
    else if (tDamageType == NWN::ACVsAllDamage) StackPushInteger(4103);
@@ -2175,12 +2309,13 @@ NWN::NWEffect NWScriptI::effectDamageImmunityDecrease(NWN::DamageType tDamageTyp
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectDamageImmunityDecrease");
+  unlock(effectDamageImmunityDecrease_mutex, "effectDamageImmunityDecrease");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectDamageImmunityIncrease(NWN::DamageType tDamageType, Ice::Int nPercentImmunity, const Ice::Current& ice) {
-  lock("effectDamageImmunityIncrease"); callCounter += 1;
+  lock(effectDamageImmunityIncrease_mutex, "effectDamageImmunityIncrease");
+  callCounter += 1;
   StackPushInteger(nPercentImmunity);
   if (tDamageType == NWN::AcidDamage) StackPushInteger(16);
    else if (tDamageType == NWN::ACVsAllDamage) StackPushInteger(4103);
@@ -2210,12 +2345,13 @@ NWN::NWEffect NWScriptI::effectDamageImmunityIncrease(NWN::DamageType tDamageTyp
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectDamageImmunityIncrease");
+  unlock(effectDamageImmunityIncrease_mutex, "effectDamageImmunityIncrease");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectDamageIncrease(Ice::Int nBonus, NWN::DamageType tDamageType, const Ice::Current& ice) {
-  lock("effectDamageIncrease"); callCounter += 1;
+  lock(effectDamageIncrease_mutex, "effectDamageIncrease");
+  callCounter += 1;
   if (tDamageType == NWN::AcidDamage) StackPushInteger(16);
    else if (tDamageType == NWN::ACVsAllDamage) StackPushInteger(4103);
    else if (tDamageType == NWN::NegativeDamage) StackPushInteger(512);
@@ -2245,12 +2381,13 @@ NWN::NWEffect NWScriptI::effectDamageIncrease(Ice::Int nBonus, NWN::DamageType t
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectDamageIncrease");
+  unlock(effectDamageIncrease_mutex, "effectDamageIncrease");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectDamageReduction(Ice::Int nAmount, NWN::DamagePower tDamagePower, Ice::Int nLimit, const Ice::Current& ice) {
-  lock("effectDamageReduction"); callCounter += 1;
+  lock(effectDamageReduction_mutex, "effectDamageReduction");
+  callCounter += 1;
   StackPushInteger(nLimit);
   if (tDamagePower == NWN::PlusFifteenDamage) StackPushInteger(16);
    else if (tDamagePower == NWN::PlusFiveDamage) StackPushInteger(5);
@@ -2289,12 +2426,13 @@ NWN::NWEffect NWScriptI::effectDamageReduction(Ice::Int nAmount, NWN::DamagePowe
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectDamageReduction");
+  unlock(effectDamageReduction_mutex, "effectDamageReduction");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectDamageResistance(NWN::DamageType tDamageType, Ice::Int nAmount, Ice::Int nLimit, const Ice::Current& ice) {
-  lock("effectDamageResistance"); callCounter += 1;
+  lock(effectDamageResistance_mutex, "effectDamageResistance");
+  callCounter += 1;
   StackPushInteger(nLimit);
   StackPushInteger(nAmount);
   if (tDamageType == NWN::AcidDamage) StackPushInteger(16);
@@ -2325,12 +2463,13 @@ NWN::NWEffect NWScriptI::effectDamageResistance(NWN::DamageType tDamageType, Ice
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectDamageResistance");
+  unlock(effectDamageResistance_mutex, "effectDamageResistance");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectDamageShield(Ice::Int nDamageAmount, Ice::Int nRandomAmount, NWN::DamageType tDamageType, const Ice::Current& ice) {
-  lock("effectDamageShield"); callCounter += 1;
+  lock(effectDamageShield_mutex, "effectDamageShield");
+  callCounter += 1;
   if (tDamageType == NWN::AcidDamage) StackPushInteger(16);
    else if (tDamageType == NWN::ACVsAllDamage) StackPushInteger(4103);
    else if (tDamageType == NWN::NegativeDamage) StackPushInteger(512);
@@ -2361,12 +2500,13 @@ NWN::NWEffect NWScriptI::effectDamageShield(Ice::Int nDamageAmount, Ice::Int nRa
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectDamageShield");
+  unlock(effectDamageShield_mutex, "effectDamageShield");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectDarkness(const Ice::Current& ice) {
-  lock("effectDarkness"); callCounter += 1;
+  lock(effectDarkness_mutex, "effectDarkness");
+  callCounter += 1;
 
   VM_ExecuteCommand(459, 0);
 
@@ -2380,12 +2520,13 @@ NWN::NWEffect NWScriptI::effectDarkness(const Ice::Current& ice) {
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectDarkness");
+  unlock(effectDarkness_mutex, "effectDarkness");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectDazed(const Ice::Current& ice) {
-  lock("effectDazed"); callCounter += 1;
+  lock(effectDazed_mutex, "effectDazed");
+  callCounter += 1;
 
   VM_ExecuteCommand(160, 0);
 
@@ -2399,12 +2540,13 @@ NWN::NWEffect NWScriptI::effectDazed(const Ice::Current& ice) {
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectDazed");
+  unlock(effectDazed_mutex, "effectDazed");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectDeaf(const Ice::Current& ice) {
-  lock("effectDeaf"); callCounter += 1;
+  lock(effectDeaf_mutex, "effectDeaf");
+  callCounter += 1;
 
   VM_ExecuteCommand(150, 0);
 
@@ -2418,12 +2560,13 @@ NWN::NWEffect NWScriptI::effectDeaf(const Ice::Current& ice) {
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectDeaf");
+  unlock(effectDeaf_mutex, "effectDeaf");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectDeath(bool bSpectacularDeath, bool bDisplayFeedback, const Ice::Current& ice) {
-  lock("effectDeath"); callCounter += 1;
+  lock(effectDeath_mutex, "effectDeath");
+  callCounter += 1;
   StackPushInteger(bDisplayFeedback == true ? 1 : 0);
   StackPushInteger(bSpectacularDeath == true ? 1 : 0);
 
@@ -2439,12 +2582,13 @@ NWN::NWEffect NWScriptI::effectDeath(bool bSpectacularDeath, bool bDisplayFeedba
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectDeath");
+  unlock(effectDeath_mutex, "effectDeath");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectDisappear(Ice::Int nAnimation, const Ice::Current& ice) {
-  lock("effectDisappear"); callCounter += 1;
+  lock(effectDisappear_mutex, "effectDisappear");
+  callCounter += 1;
   StackPushInteger(nAnimation);
 
   VM_ExecuteCommand(481, 1);
@@ -2459,13 +2603,14 @@ NWN::NWEffect NWScriptI::effectDisappear(Ice::Int nAnimation, const Ice::Current
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectDisappear");
+  unlock(effectDisappear_mutex, "effectDisappear");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectDisappearAppear(const NWN::NWLocation& lLocation, Ice::Int nAnimation, const Ice::Current& ice) {
   if (lLocation.area.id < 0) throw NWN::InvalidObjectException();
-  lock("effectDisappearAppear"); callCounter += 1;
+  lock(effectDisappearAppear_mutex, "effectDisappearAppear");
+  callCounter += 1;
   StackPushInteger(nAnimation);
   CScriptLocation *lLocation_ptr;
   lLocation_ptr->X = lLocation.x;
@@ -2489,12 +2634,13 @@ NWN::NWEffect NWScriptI::effectDisappearAppear(const NWN::NWLocation& lLocation,
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectDisappearAppear");
+  unlock(effectDisappearAppear_mutex, "effectDisappearAppear");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectDisease(Ice::Int nDiseaseType, const Ice::Current& ice) {
-  lock("effectDisease"); callCounter += 1;
+  lock(effectDisease_mutex, "effectDisease");
+  callCounter += 1;
   StackPushInteger(nDiseaseType);
 
   VM_ExecuteCommand(251, 1);
@@ -2509,12 +2655,13 @@ NWN::NWEffect NWScriptI::effectDisease(Ice::Int nDiseaseType, const Ice::Current
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectDisease");
+  unlock(effectDisease_mutex, "effectDisease");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectDispelMagicAll(Ice::Int nCasterLevel, const Ice::Current& ice) {
-  lock("effectDispelMagicAll"); callCounter += 1;
+  lock(effectDispelMagicAll_mutex, "effectDispelMagicAll");
+  callCounter += 1;
   StackPushInteger(nCasterLevel);
 
   VM_ExecuteCommand(460, 1);
@@ -2529,12 +2676,13 @@ NWN::NWEffect NWScriptI::effectDispelMagicAll(Ice::Int nCasterLevel, const Ice::
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectDispelMagicAll");
+  unlock(effectDispelMagicAll_mutex, "effectDispelMagicAll");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectDispelMagicBest(Ice::Int nCasterLevel, const Ice::Current& ice) {
-  lock("effectDispelMagicBest"); callCounter += 1;
+  lock(effectDispelMagicBest_mutex, "effectDispelMagicBest");
+  callCounter += 1;
   StackPushInteger(nCasterLevel);
 
   VM_ExecuteCommand(473, 1);
@@ -2549,12 +2697,13 @@ NWN::NWEffect NWScriptI::effectDispelMagicBest(Ice::Int nCasterLevel, const Ice:
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectDispelMagicBest");
+  unlock(effectDispelMagicBest_mutex, "effectDispelMagicBest");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectDominated(const Ice::Current& ice) {
-  lock("effectDominated"); callCounter += 1;
+  lock(effectDominated_mutex, "effectDominated");
+  callCounter += 1;
 
   VM_ExecuteCommand(159, 0);
 
@@ -2568,12 +2717,13 @@ NWN::NWEffect NWScriptI::effectDominated(const Ice::Current& ice) {
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectDominated");
+  unlock(effectDominated_mutex, "effectDominated");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectEntangle(const Ice::Current& ice) {
-  lock("effectEntangle"); callCounter += 1;
+  lock(effectEntangle_mutex, "effectEntangle");
+  callCounter += 1;
 
   VM_ExecuteCommand(130, 0);
 
@@ -2587,12 +2737,13 @@ NWN::NWEffect NWScriptI::effectEntangle(const Ice::Current& ice) {
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectEntangle");
+  unlock(effectEntangle_mutex, "effectEntangle");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectEthereal(const Ice::Current& ice) {
-  lock("effectEthereal"); callCounter += 1;
+  lock(effectEthereal_mutex, "effectEthereal");
+  callCounter += 1;
 
   VM_ExecuteCommand(711, 0);
 
@@ -2606,12 +2757,13 @@ NWN::NWEffect NWScriptI::effectEthereal(const Ice::Current& ice) {
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectEthereal");
+  unlock(effectEthereal_mutex, "effectEthereal");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectFrightened(const Ice::Current& ice) {
-  lock("effectFrightened"); callCounter += 1;
+  lock(effectFrightened_mutex, "effectFrightened");
+  callCounter += 1;
 
   VM_ExecuteCommand(158, 0);
 
@@ -2625,12 +2777,13 @@ NWN::NWEffect NWScriptI::effectFrightened(const Ice::Current& ice) {
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectFrightened");
+  unlock(effectFrightened_mutex, "effectFrightened");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectHaste(const Ice::Current& ice) {
-  lock("effectHaste"); callCounter += 1;
+  lock(effectHaste_mutex, "effectHaste");
+  callCounter += 1;
 
   VM_ExecuteCommand(270, 0);
 
@@ -2644,12 +2797,13 @@ NWN::NWEffect NWScriptI::effectHaste(const Ice::Current& ice) {
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectHaste");
+  unlock(effectHaste_mutex, "effectHaste");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectHeal(Ice::Int nDamageToHeal, const Ice::Current& ice) {
-  lock("effectHeal"); callCounter += 1;
+  lock(effectHeal_mutex, "effectHeal");
+  callCounter += 1;
   StackPushInteger(nDamageToHeal);
 
   VM_ExecuteCommand(78, 1);
@@ -2664,12 +2818,13 @@ NWN::NWEffect NWScriptI::effectHeal(Ice::Int nDamageToHeal, const Ice::Current& 
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectHeal");
+  unlock(effectHeal_mutex, "effectHeal");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectHitPointChangeWhenDying(Ice::Double fHitPointChangePerRound, const Ice::Current& ice) {
-  lock("effectHitPointChangeWhenDying"); callCounter += 1;
+  lock(effectHitPointChangeWhenDying_mutex, "effectHitPointChangeWhenDying");
+  callCounter += 1;
   StackPushFloat(fHitPointChangePerRound);
 
   VM_ExecuteCommand(387, 1);
@@ -2684,12 +2839,13 @@ NWN::NWEffect NWScriptI::effectHitPointChangeWhenDying(Ice::Double fHitPointChan
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectHitPointChangeWhenDying");
+  unlock(effectHitPointChangeWhenDying_mutex, "effectHitPointChangeWhenDying");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectImmunity(Ice::Int nImmunityType, const Ice::Current& ice) {
-  lock("effectImmunity"); callCounter += 1;
+  lock(effectImmunity_mutex, "effectImmunity");
+  callCounter += 1;
   StackPushInteger(nImmunityType);
 
   VM_ExecuteCommand(273, 1);
@@ -2704,12 +2860,13 @@ NWN::NWEffect NWScriptI::effectImmunity(Ice::Int nImmunityType, const Ice::Curre
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectImmunity");
+  unlock(effectImmunity_mutex, "effectImmunity");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectInvisibility(Ice::Int nInvisibilityType, const Ice::Current& ice) {
-  lock("effectInvisibility"); callCounter += 1;
+  lock(effectInvisibility_mutex, "effectInvisibility");
+  callCounter += 1;
   StackPushInteger(nInvisibilityType);
 
   VM_ExecuteCommand(457, 1);
@@ -2724,12 +2881,13 @@ NWN::NWEffect NWScriptI::effectInvisibility(Ice::Int nInvisibilityType, const Ic
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectInvisibility");
+  unlock(effectInvisibility_mutex, "effectInvisibility");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectKnockdown(const Ice::Current& ice) {
-  lock("effectKnockdown"); callCounter += 1;
+  lock(effectKnockdown_mutex, "effectKnockdown");
+  callCounter += 1;
 
   VM_ExecuteCommand(134, 0);
 
@@ -2743,7 +2901,7 @@ NWN::NWEffect NWScriptI::effectKnockdown(const Ice::Current& ice) {
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectKnockdown");
+  unlock(effectKnockdown_mutex, "effectKnockdown");
   return e;
 };
 
@@ -2752,7 +2910,8 @@ NWN::NWEffect NWScriptI::effectLinkEffects(const NWN::NWEffect& eChildEffect, co
   
   if (effectMap.find(eParentEffect.id) == effectMap.end()) throw NWN::InvalidEffectException();
   
-  lock("effectLinkEffects"); callCounter += 1;
+  lock(effectLinkEffects_mutex, "effectLinkEffects");
+  callCounter += 1;
   CGameEffect *eParentEffect_ptr = effectMap.find(eParentEffect.id)->second;
   StackPushEngineStructure(ENGINE_STRUCTURE_EFFECT, eParentEffect_ptr);
   CGameEffect *eChildEffect_ptr = effectMap.find(eChildEffect.id)->second;
@@ -2770,12 +2929,13 @@ NWN::NWEffect NWScriptI::effectLinkEffects(const NWN::NWEffect& eChildEffect, co
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectLinkEffects");
+  unlock(effectLinkEffects_mutex, "effectLinkEffects");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectMissChance(Ice::Int nPercentage, NWN::MissChanceType tMissChanceType, const Ice::Current& ice) {
-  lock("effectMissChance"); callCounter += 1;
+  lock(effectMissChance_mutex, "effectMissChance");
+  callCounter += 1;
   if (tMissChanceType == NWN::MissChanceVSAll) StackPushInteger(0);
    else if (tMissChanceType == NWN::MissChanceVSRanged) StackPushInteger(1);
    else if (tMissChanceType == NWN::MissChanceVSMelee) StackPushInteger(2);
@@ -2794,12 +2954,13 @@ NWN::NWEffect NWScriptI::effectMissChance(Ice::Int nPercentage, NWN::MissChanceT
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectMissChance");
+  unlock(effectMissChance_mutex, "effectMissChance");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectModifyAttacks(Ice::Int nAttacks, const Ice::Current& ice) {
-  lock("effectModifyAttacks"); callCounter += 1;
+  lock(effectModifyAttacks_mutex, "effectModifyAttacks");
+  callCounter += 1;
   StackPushInteger(nAttacks);
 
   VM_ExecuteCommand(485, 1);
@@ -2814,12 +2975,13 @@ NWN::NWEffect NWScriptI::effectModifyAttacks(Ice::Int nAttacks, const Ice::Curre
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectModifyAttacks");
+  unlock(effectModifyAttacks_mutex, "effectModifyAttacks");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectMovementSpeedDecrease(Ice::Int nPercentChange, const Ice::Current& ice) {
-  lock("effectMovementSpeedDecrease"); callCounter += 1;
+  lock(effectMovementSpeedDecrease_mutex, "effectMovementSpeedDecrease");
+  callCounter += 1;
   StackPushInteger(nPercentChange);
 
   VM_ExecuteCommand(451, 1);
@@ -2834,12 +2996,13 @@ NWN::NWEffect NWScriptI::effectMovementSpeedDecrease(Ice::Int nPercentChange, co
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectMovementSpeedDecrease");
+  unlock(effectMovementSpeedDecrease_mutex, "effectMovementSpeedDecrease");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectMovementSpeedIncrease(Ice::Int nPercentChange, const Ice::Current& ice) {
-  lock("effectMovementSpeedIncrease"); callCounter += 1;
+  lock(effectMovementSpeedIncrease_mutex, "effectMovementSpeedIncrease");
+  callCounter += 1;
   StackPushInteger(nPercentChange);
 
   VM_ExecuteCommand(165, 1);
@@ -2854,12 +3017,13 @@ NWN::NWEffect NWScriptI::effectMovementSpeedIncrease(Ice::Int nPercentChange, co
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectMovementSpeedIncrease");
+  unlock(effectMovementSpeedIncrease_mutex, "effectMovementSpeedIncrease");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectNegativeLevel(Ice::Int nNumLevels, bool bHPBonus, const Ice::Current& ice) {
-  lock("effectNegativeLevel"); callCounter += 1;
+  lock(effectNegativeLevel_mutex, "effectNegativeLevel");
+  callCounter += 1;
   StackPushInteger(bHPBonus == true ? 1 : 0);
   StackPushInteger(nNumLevels);
 
@@ -2875,12 +3039,13 @@ NWN::NWEffect NWScriptI::effectNegativeLevel(Ice::Int nNumLevels, bool bHPBonus,
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectNegativeLevel");
+  unlock(effectNegativeLevel_mutex, "effectNegativeLevel");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectParalyze(const Ice::Current& ice) {
-  lock("effectParalyze"); callCounter += 1;
+  lock(effectParalyze_mutex, "effectParalyze");
+  callCounter += 1;
 
   VM_ExecuteCommand(148, 0);
 
@@ -2894,12 +3059,13 @@ NWN::NWEffect NWScriptI::effectParalyze(const Ice::Current& ice) {
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectParalyze");
+  unlock(effectParalyze_mutex, "effectParalyze");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectPetrify(const Ice::Current& ice) {
-  lock("effectPetrify"); callCounter += 1;
+  lock(effectPetrify_mutex, "effectPetrify");
+  callCounter += 1;
 
   VM_ExecuteCommand(583, 0);
 
@@ -2913,12 +3079,13 @@ NWN::NWEffect NWScriptI::effectPetrify(const Ice::Current& ice) {
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectPetrify");
+  unlock(effectPetrify_mutex, "effectPetrify");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectPoison(Ice::Int nPoisonType, const Ice::Current& ice) {
-  lock("effectPoison"); callCounter += 1;
+  lock(effectPoison_mutex, "effectPoison");
+  callCounter += 1;
   StackPushInteger(nPoisonType);
 
   VM_ExecuteCommand(250, 1);
@@ -2933,12 +3100,13 @@ NWN::NWEffect NWScriptI::effectPoison(Ice::Int nPoisonType, const Ice::Current& 
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectPoison");
+  unlock(effectPoison_mutex, "effectPoison");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectPolymorph(Ice::Int nPolymorphSelection, bool bLocked, const Ice::Current& ice) {
-  lock("effectPolymorph"); callCounter += 1;
+  lock(effectPolymorph_mutex, "effectPolymorph");
+  callCounter += 1;
   StackPushInteger(bLocked == true ? 1 : 0);
   StackPushInteger(nPolymorphSelection);
 
@@ -2954,12 +3122,13 @@ NWN::NWEffect NWScriptI::effectPolymorph(Ice::Int nPolymorphSelection, bool bLoc
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectPolymorph");
+  unlock(effectPolymorph_mutex, "effectPolymorph");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectRegenerate(Ice::Int nAmount, Ice::Double fIntervalSeconds, const Ice::Current& ice) {
-  lock("effectRegenerate"); callCounter += 1;
+  lock(effectRegenerate_mutex, "effectRegenerate");
+  callCounter += 1;
   StackPushFloat(fIntervalSeconds);
   StackPushInteger(nAmount);
 
@@ -2975,12 +3144,13 @@ NWN::NWEffect NWScriptI::effectRegenerate(Ice::Int nAmount, Ice::Double fInterva
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectRegenerate");
+  unlock(effectRegenerate_mutex, "effectRegenerate");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectResurrection(const Ice::Current& ice) {
-  lock("effectResurrection"); callCounter += 1;
+  lock(effectResurrection_mutex, "effectResurrection");
+  callCounter += 1;
 
   VM_ExecuteCommand(82, 0);
 
@@ -2994,12 +3164,13 @@ NWN::NWEffect NWScriptI::effectResurrection(const Ice::Current& ice) {
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectResurrection");
+  unlock(effectResurrection_mutex, "effectResurrection");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectSanctuary(Ice::Int nDifficultyClass, const Ice::Current& ice) {
-  lock("effectSanctuary"); callCounter += 1;
+  lock(effectSanctuary_mutex, "effectSanctuary");
+  callCounter += 1;
   StackPushInteger(nDifficultyClass);
 
   VM_ExecuteCommand(464, 1);
@@ -3014,12 +3185,13 @@ NWN::NWEffect NWScriptI::effectSanctuary(Ice::Int nDifficultyClass, const Ice::C
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectSanctuary");
+  unlock(effectSanctuary_mutex, "effectSanctuary");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectSavingThrowDecrease(Ice::Int nSave, Ice::Int nValue, NWN::SaveType tSaveType, const Ice::Current& ice) {
-  lock("effectSavingThrowDecrease"); callCounter += 1;
+  lock(effectSavingThrowDecrease_mutex, "effectSavingThrowDecrease");
+  callCounter += 1;
   if (tSaveType == NWN::GoodSaveType) StackPushInteger(16);
    else if (tSaveType == NWN::SonicSaveType) StackPushInteger(5);
    else if (tSaveType == NWN::DeathSaveType) StackPushInteger(11);
@@ -3056,12 +3228,13 @@ NWN::NWEffect NWScriptI::effectSavingThrowDecrease(Ice::Int nSave, Ice::Int nVal
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectSavingThrowDecrease");
+  unlock(effectSavingThrowDecrease_mutex, "effectSavingThrowDecrease");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectSavingThrowIncrease(Ice::Int nSave, Ice::Int nValue, NWN::SaveType tSaveType, const Ice::Current& ice) {
-  lock("effectSavingThrowIncrease"); callCounter += 1;
+  lock(effectSavingThrowIncrease_mutex, "effectSavingThrowIncrease");
+  callCounter += 1;
   if (tSaveType == NWN::GoodSaveType) StackPushInteger(16);
    else if (tSaveType == NWN::SonicSaveType) StackPushInteger(5);
    else if (tSaveType == NWN::DeathSaveType) StackPushInteger(11);
@@ -3098,12 +3271,13 @@ NWN::NWEffect NWScriptI::effectSavingThrowIncrease(Ice::Int nSave, Ice::Int nVal
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectSavingThrowIncrease");
+  unlock(effectSavingThrowIncrease_mutex, "effectSavingThrowIncrease");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectSeeInvisible(const Ice::Current& ice) {
-  lock("effectSeeInvisible"); callCounter += 1;
+  lock(effectSeeInvisible_mutex, "effectSeeInvisible");
+  callCounter += 1;
 
   VM_ExecuteCommand(466, 0);
 
@@ -3117,12 +3291,13 @@ NWN::NWEffect NWScriptI::effectSeeInvisible(const Ice::Current& ice) {
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectSeeInvisible");
+  unlock(effectSeeInvisible_mutex, "effectSeeInvisible");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectSilence(const Ice::Current& ice) {
-  lock("effectSilence"); callCounter += 1;
+  lock(effectSilence_mutex, "effectSilence");
+  callCounter += 1;
 
   VM_ExecuteCommand(252, 0);
 
@@ -3136,12 +3311,13 @@ NWN::NWEffect NWScriptI::effectSilence(const Ice::Current& ice) {
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectSilence");
+  unlock(effectSilence_mutex, "effectSilence");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectSkillDecrease(Ice::Int nSkill, Ice::Int nValue, const Ice::Current& ice) {
-  lock("effectSkillDecrease"); callCounter += 1;
+  lock(effectSkillDecrease_mutex, "effectSkillDecrease");
+  callCounter += 1;
   StackPushInteger(nValue);
   StackPushInteger(nSkill);
 
@@ -3157,12 +3333,13 @@ NWN::NWEffect NWScriptI::effectSkillDecrease(Ice::Int nSkill, Ice::Int nValue, c
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectSkillDecrease");
+  unlock(effectSkillDecrease_mutex, "effectSkillDecrease");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectSkillIncrease(Ice::Int nSkill, Ice::Int nValue, const Ice::Current& ice) {
-  lock("effectSkillIncrease"); callCounter += 1;
+  lock(effectSkillIncrease_mutex, "effectSkillIncrease");
+  callCounter += 1;
   StackPushInteger(nValue);
   StackPushInteger(nSkill);
 
@@ -3178,12 +3355,13 @@ NWN::NWEffect NWScriptI::effectSkillIncrease(Ice::Int nSkill, Ice::Int nValue, c
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectSkillIncrease");
+  unlock(effectSkillIncrease_mutex, "effectSkillIncrease");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectSleep(const Ice::Current& ice) {
-  lock("effectSleep"); callCounter += 1;
+  lock(effectSleep_mutex, "effectSleep");
+  callCounter += 1;
 
   VM_ExecuteCommand(154, 0);
 
@@ -3197,12 +3375,13 @@ NWN::NWEffect NWScriptI::effectSleep(const Ice::Current& ice) {
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectSleep");
+  unlock(effectSleep_mutex, "effectSleep");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectSlow(const Ice::Current& ice) {
-  lock("effectSlow"); callCounter += 1;
+  lock(effectSlow_mutex, "effectSlow");
+  callCounter += 1;
 
   VM_ExecuteCommand(271, 0);
 
@@ -3216,12 +3395,13 @@ NWN::NWEffect NWScriptI::effectSlow(const Ice::Current& ice) {
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectSlow");
+  unlock(effectSlow_mutex, "effectSlow");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectSpellFailure(Ice::Int nPercent, NWN::SpellSchool tSpellSchool, const Ice::Current& ice) {
-  lock("effectSpellFailure"); callCounter += 1;
+  lock(effectSpellFailure_mutex, "effectSpellFailure");
+  callCounter += 1;
   if (tSpellSchool == NWN::EvocationSchool) StackPushInteger(5);
    else if (tSpellSchool == NWN::GeneralSchool) StackPushInteger(0);
    else if (tSpellSchool == NWN::IllusionSchool) StackPushInteger(6);
@@ -3246,12 +3426,13 @@ NWN::NWEffect NWScriptI::effectSpellFailure(Ice::Int nPercent, NWN::SpellSchool 
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectSpellFailure");
+  unlock(effectSpellFailure_mutex, "effectSpellFailure");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectSpellImmunity(Ice::Int nImmunityToSpell, const Ice::Current& ice) {
-  lock("effectSpellImmunity"); callCounter += 1;
+  lock(effectSpellImmunity_mutex, "effectSpellImmunity");
+  callCounter += 1;
   StackPushInteger(nImmunityToSpell);
 
   VM_ExecuteCommand(149, 1);
@@ -3266,12 +3447,13 @@ NWN::NWEffect NWScriptI::effectSpellImmunity(Ice::Int nImmunityToSpell, const Ic
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectSpellImmunity");
+  unlock(effectSpellImmunity_mutex, "effectSpellImmunity");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectSpellLevelAbsorption(Ice::Int nMaxSpellLevelAbsorbed, Ice::Int nTotalSpellLevelsAbsorbed, NWN::SpellSchool tSpellSchool, const Ice::Current& ice) {
-  lock("effectSpellLevelAbsorption"); callCounter += 1;
+  lock(effectSpellLevelAbsorption_mutex, "effectSpellLevelAbsorption");
+  callCounter += 1;
   if (tSpellSchool == NWN::EvocationSchool) StackPushInteger(5);
    else if (tSpellSchool == NWN::GeneralSchool) StackPushInteger(0);
    else if (tSpellSchool == NWN::IllusionSchool) StackPushInteger(6);
@@ -3297,12 +3479,13 @@ NWN::NWEffect NWScriptI::effectSpellLevelAbsorption(Ice::Int nMaxSpellLevelAbsor
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectSpellLevelAbsorption");
+  unlock(effectSpellLevelAbsorption_mutex, "effectSpellLevelAbsorption");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectSpellResistanceDecrease(Ice::Int nValue, const Ice::Current& ice) {
-  lock("effectSpellResistanceDecrease"); callCounter += 1;
+  lock(effectSpellResistanceDecrease_mutex, "effectSpellResistanceDecrease");
+  callCounter += 1;
   StackPushInteger(nValue);
 
   VM_ExecuteCommand(454, 1);
@@ -3317,12 +3500,13 @@ NWN::NWEffect NWScriptI::effectSpellResistanceDecrease(Ice::Int nValue, const Ic
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectSpellResistanceDecrease");
+  unlock(effectSpellResistanceDecrease_mutex, "effectSpellResistanceDecrease");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectSpellResistanceIncrease(Ice::Int nValue, const Ice::Current& ice) {
-  lock("effectSpellResistanceIncrease"); callCounter += 1;
+  lock(effectSpellResistanceIncrease_mutex, "effectSpellResistanceIncrease");
+  callCounter += 1;
   StackPushInteger(nValue);
 
   VM_ExecuteCommand(212, 1);
@@ -3337,12 +3521,13 @@ NWN::NWEffect NWScriptI::effectSpellResistanceIncrease(Ice::Int nValue, const Ic
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectSpellResistanceIncrease");
+  unlock(effectSpellResistanceIncrease_mutex, "effectSpellResistanceIncrease");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectStunned(const Ice::Current& ice) {
-  lock("effectStunned"); callCounter += 1;
+  lock(effectStunned_mutex, "effectStunned");
+  callCounter += 1;
 
   VM_ExecuteCommand(161, 0);
 
@@ -3356,12 +3541,13 @@ NWN::NWEffect NWScriptI::effectStunned(const Ice::Current& ice) {
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectStunned");
+  unlock(effectStunned_mutex, "effectStunned");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectSummonCreature(const std::string& sCreatureResref, Ice::Int nVisualEffectId, Ice::Double fDelaySeconds, bool bUseAppearAnimation, const Ice::Current& ice) {
-  lock("effectSummonCreature"); callCounter += 1;
+  lock(effectSummonCreature_mutex, "effectSummonCreature");
+  callCounter += 1;
   StackPushInteger(bUseAppearAnimation == true ? 1 : 0);
   StackPushFloat(fDelaySeconds);
   StackPushInteger(nVisualEffectId);
@@ -3379,12 +3565,13 @@ NWN::NWEffect NWScriptI::effectSummonCreature(const std::string& sCreatureResref
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectSummonCreature");
+  unlock(effectSummonCreature_mutex, "effectSummonCreature");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectSwarm(bool bLooping, const std::string& sCreatureTemplate1, const std::string& sCreatureTemplate2, const std::string& sCreatureTemplate3, const std::string& sCreatureTemplate4, const Ice::Current& ice) {
-  lock("effectSwarm"); callCounter += 1;
+  lock(effectSwarm_mutex, "effectSwarm");
+  callCounter += 1;
   StackPushString(sCreatureTemplate4.c_str());
   StackPushString(sCreatureTemplate3.c_str());
   StackPushString(sCreatureTemplate2.c_str());
@@ -3403,12 +3590,13 @@ NWN::NWEffect NWScriptI::effectSwarm(bool bLooping, const std::string& sCreature
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectSwarm");
+  unlock(effectSwarm_mutex, "effectSwarm");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectTemporaryHitpoints(Ice::Int nHitPoints, const Ice::Current& ice) {
-  lock("effectTemporaryHitpoints"); callCounter += 1;
+  lock(effectTemporaryHitpoints_mutex, "effectTemporaryHitpoints");
+  callCounter += 1;
   StackPushInteger(nHitPoints);
 
   VM_ExecuteCommand(314, 1);
@@ -3423,12 +3611,13 @@ NWN::NWEffect NWScriptI::effectTemporaryHitpoints(Ice::Int nHitPoints, const Ice
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectTemporaryHitpoints");
+  unlock(effectTemporaryHitpoints_mutex, "effectTemporaryHitpoints");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectTimeStop(const Ice::Current& ice) {
-  lock("effectTimeStop"); callCounter += 1;
+  lock(effectTimeStop_mutex, "effectTimeStop");
+  callCounter += 1;
 
   VM_ExecuteCommand(467, 0);
 
@@ -3442,12 +3631,13 @@ NWN::NWEffect NWScriptI::effectTimeStop(const Ice::Current& ice) {
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectTimeStop");
+  unlock(effectTimeStop_mutex, "effectTimeStop");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectTrueSeeing(const Ice::Current& ice) {
-  lock("effectTrueSeeing"); callCounter += 1;
+  lock(effectTrueSeeing_mutex, "effectTrueSeeing");
+  callCounter += 1;
 
   VM_ExecuteCommand(465, 0);
 
@@ -3461,12 +3651,13 @@ NWN::NWEffect NWScriptI::effectTrueSeeing(const Ice::Current& ice) {
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectTrueSeeing");
+  unlock(effectTrueSeeing_mutex, "effectTrueSeeing");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectTurnResistanceDecrease(Ice::Int nHitDice, const Ice::Current& ice) {
-  lock("effectTurnResistanceDecrease"); callCounter += 1;
+  lock(effectTurnResistanceDecrease_mutex, "effectTurnResistanceDecrease");
+  callCounter += 1;
   StackPushInteger(nHitDice);
 
   VM_ExecuteCommand(552, 1);
@@ -3481,12 +3672,13 @@ NWN::NWEffect NWScriptI::effectTurnResistanceDecrease(Ice::Int nHitDice, const I
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectTurnResistanceDecrease");
+  unlock(effectTurnResistanceDecrease_mutex, "effectTurnResistanceDecrease");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectTurnResistanceIncrease(Ice::Int nHitDice, const Ice::Current& ice) {
-  lock("effectTurnResistanceIncrease"); callCounter += 1;
+  lock(effectTurnResistanceIncrease_mutex, "effectTurnResistanceIncrease");
+  callCounter += 1;
   StackPushInteger(nHitDice);
 
   VM_ExecuteCommand(553, 1);
@@ -3501,12 +3693,13 @@ NWN::NWEffect NWScriptI::effectTurnResistanceIncrease(Ice::Int nHitDice, const I
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectTurnResistanceIncrease");
+  unlock(effectTurnResistanceIncrease_mutex, "effectTurnResistanceIncrease");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectTurned(const Ice::Current& ice) {
-  lock("effectTurned"); callCounter += 1;
+  lock(effectTurned_mutex, "effectTurned");
+  callCounter += 1;
 
   VM_ExecuteCommand(379, 0);
 
@@ -3520,12 +3713,13 @@ NWN::NWEffect NWScriptI::effectTurned(const Ice::Current& ice) {
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectTurned");
+  unlock(effectTurned_mutex, "effectTurned");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectUltravision(const Ice::Current& ice) {
-  lock("effectUltravision"); callCounter += 1;
+  lock(effectUltravision_mutex, "effectUltravision");
+  callCounter += 1;
 
   VM_ExecuteCommand(461, 0);
 
@@ -3539,12 +3733,13 @@ NWN::NWEffect NWScriptI::effectUltravision(const Ice::Current& ice) {
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectUltravision");
+  unlock(effectUltravision_mutex, "effectUltravision");
   return e;
 };
 
 NWN::NWEffect NWScriptI::effectVisualEffect(Ice::Int nVisualEffectId, bool bMissEffect, const Ice::Current& ice) {
-  lock("effectVisualEffect"); callCounter += 1;
+  lock(effectVisualEffect_mutex, "effectVisualEffect");
+  callCounter += 1;
   StackPushInteger(bMissEffect == true ? 1 : 0);
   StackPushInteger(nVisualEffectId);
 
@@ -3560,70 +3755,76 @@ NWN::NWEffect NWScriptI::effectVisualEffect(Ice::Int nVisualEffectId, bool bMiss
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("effectVisualEffect");
+  unlock(effectVisualEffect_mutex, "effectVisualEffect");
   return e;
 };
 
 void NWScriptI::endGame(const std::string& sEndMovie, const Ice::Current& ice) {
-  lock("endGame"); callCounter += 1;
+  lock(endGame_mutex, "endGame");
+  callCounter += 1;
   StackPushString(sEndMovie.c_str());
 
   VM_ExecuteCommand(564, 1);
 
-unlock("endGame");
+unlock(endGame_mutex, "endGame");
   
 };
 
 void NWScriptI::executeScript(const std::string& sScript, const NWN::NWObject& oTarget, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("executeScript"); callCounter += 1;
+  lock(executeScript_mutex, "executeScript");
+  callCounter += 1;
   StackPushObject(oTarget.id);
   StackPushString(sScript.c_str());
 
   VM_ExecuteCommand(8, 2);
 
-unlock("executeScript");
+unlock(executeScript_mutex, "executeScript");
   
 };
 
 void NWScriptI::exploreAreaForPlayer(const NWN::NWObject& oArea, const NWN::NWObject& oPlayer, bool bExplored, const Ice::Current& ice) {
   if (oArea.id < 0 || oArea.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (oPlayer.id < 0 || oPlayer.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("exploreAreaForPlayer"); callCounter += 1;
+  lock(exploreAreaForPlayer_mutex, "exploreAreaForPlayer");
+  callCounter += 1;
   StackPushInteger(bExplored == true ? 1 : 0);
   StackPushObject(oPlayer.id);
   StackPushObject(oArea.id);
 
   VM_ExecuteCommand(403, 3);
 
-unlock("exploreAreaForPlayer");
+unlock(exploreAreaForPlayer_mutex, "exploreAreaForPlayer");
   
 };
 
 void NWScriptI::exportAllCharacters(const Ice::Current& ice) {
-  lock("exportAllCharacters"); callCounter += 1;
+  lock(exportAllCharacters_mutex, "exportAllCharacters");
+  callCounter += 1;
 
   VM_ExecuteCommand(557, 0);
 
-unlock("exportAllCharacters");
+unlock(exportAllCharacters_mutex, "exportAllCharacters");
   
 };
 
 void NWScriptI::exportSingleCharacter(const NWN::NWObject& oPlayer, const Ice::Current& ice) {
   if (oPlayer.id < 0 || oPlayer.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("exportSingleCharacter"); callCounter += 1;
+  lock(exportSingleCharacter_mutex, "exportSingleCharacter");
+  callCounter += 1;
   StackPushObject(oPlayer.id);
 
   VM_ExecuteCommand(719, 1);
 
-unlock("exportSingleCharacter");
+unlock(exportSingleCharacter_mutex, "exportSingleCharacter");
   
 };
 
 NWN::NWEffect NWScriptI::extraordinaryEffect(const NWN::NWEffect& eEffect, const Ice::Current& ice) {
   if (effectMap.find(eEffect.id) == effectMap.end()) throw NWN::InvalidEffectException();
   
-  lock("extraordinaryEffect"); callCounter += 1;
+  lock(extraordinaryEffect_mutex, "extraordinaryEffect");
+  callCounter += 1;
   CGameEffect *eEffect_ptr = effectMap.find(eEffect.id)->second;
   StackPushEngineStructure(ENGINE_STRUCTURE_EFFECT, eEffect_ptr);
 
@@ -3639,60 +3840,65 @@ NWN::NWEffect NWScriptI::extraordinaryEffect(const NWN::NWEffect& eEffect, const
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("extraordinaryEffect");
+  unlock(extraordinaryEffect_mutex, "extraordinaryEffect");
   return e;
 };
 
 Ice::Double NWScriptI::fabs(Ice::Double fValue, const Ice::Current& ice) {
-  lock("fabs"); callCounter += 1;
+  lock(fabs_mutex, "fabs");
+  callCounter += 1;
   StackPushFloat(fValue);
 
   VM_ExecuteCommand(67, 1);
 
   float fRetVal;
   StackPopFloat(&fRetVal);
-  unlock("fabs");
+  unlock(fabs_mutex, "fabs");
   return fRetVal;
 };
 
 void NWScriptI::fadeFromBlack(const NWN::NWObject& oCreature, Ice::Double fSpeed, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("fadeFromBlack"); callCounter += 1;
+  lock(fadeFromBlack_mutex, "fadeFromBlack");
+  callCounter += 1;
   StackPushFloat(fSpeed);
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(695, 2);
 
-unlock("fadeFromBlack");
+unlock(fadeFromBlack_mutex, "fadeFromBlack");
   
 };
 
 void NWScriptI::fadeToBlack(const NWN::NWObject& oCreature, Ice::Double fSpeed, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("fadeToBlack"); callCounter += 1;
+  lock(fadeToBlack_mutex, "fadeToBlack");
+  callCounter += 1;
   StackPushFloat(fSpeed);
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(696, 2);
 
-unlock("fadeToBlack");
+unlock(fadeToBlack_mutex, "fadeToBlack");
   
 };
 
 Ice::Double NWScriptI::feetToMeters(Ice::Double fFeet, const Ice::Current& ice) {
-  lock("feetToMeters"); callCounter += 1;
+  lock(feetToMeters_mutex, "feetToMeters");
+  callCounter += 1;
   StackPushFloat(fFeet);
 
   VM_ExecuteCommand(218, 1);
 
   float fRetVal;
   StackPopFloat(&fRetVal);
-  unlock("feetToMeters");
+  unlock(feetToMeters_mutex, "feetToMeters");
   return fRetVal;
 };
 
 Ice::Int NWScriptI::findSubString(const std::string& sString, const std::string& sSubString, Ice::Int nStart, const Ice::Current& ice) {
-  lock("findSubString"); callCounter += 1;
+  lock(findSubString_mutex, "findSubString");
+  callCounter += 1;
   StackPushInteger(nStart);
   StackPushString(sSubString.c_str());
   StackPushString(sString.c_str());
@@ -3701,24 +3907,26 @@ Ice::Int NWScriptI::findSubString(const std::string& sString, const std::string&
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("findSubString");
+  unlock(findSubString_mutex, "findSubString");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::floatToInt(Ice::Double fFloat, const Ice::Current& ice) {
-  lock("floatToInt"); callCounter += 1;
+  lock(floatToInt_mutex, "floatToInt");
+  callCounter += 1;
   StackPushFloat(fFloat);
 
   VM_ExecuteCommand(231, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("floatToInt");
+  unlock(floatToInt_mutex, "floatToInt");
   return nRetVal;
 };
 
 std::string NWScriptI::floatToString(Ice::Double fFloat, Ice::Int nWidth, Ice::Int nDecimals, const Ice::Current& ice) {
-  lock("floatToString"); callCounter += 1;
+  lock(floatToString_mutex, "floatToString");
+  callCounter += 1;
   StackPushInteger(nDecimals);
   StackPushInteger(nWidth);
   StackPushFloat(fFloat);
@@ -3727,51 +3935,55 @@ std::string NWScriptI::floatToString(Ice::Double fFloat, Ice::Int nWidth, Ice::I
 
   char* sRetVal;
   StackPopString(&sRetVal);
-  unlock("floatToString");
+  unlock(floatToString_mutex, "floatToString");
   return std::string(sRetVal);
 };
 
 void NWScriptI::floatingTextStrRefOnCreature(Ice::Int nStrRefToDisplay, const NWN::NWObject& oCreatureToFloatAbove, bool bBroadcastToFaction, const Ice::Current& ice) {
   if (oCreatureToFloatAbove.id < 0 || oCreatureToFloatAbove.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("floatingTextStrRefOnCreature"); callCounter += 1;
+  lock(floatingTextStrRefOnCreature_mutex, "floatingTextStrRefOnCreature");
+  callCounter += 1;
   StackPushInteger(bBroadcastToFaction == true ? 1 : 0);
   StackPushObject(oCreatureToFloatAbove.id);
   StackPushInteger(nStrRefToDisplay);
 
   VM_ExecuteCommand(525, 3);
 
-unlock("floatingTextStrRefOnCreature");
+unlock(floatingTextStrRefOnCreature_mutex, "floatingTextStrRefOnCreature");
   
 };
 
 void NWScriptI::floatingTextStringOnCreature(const std::string& sStringToDisplay, const NWN::NWObject& oCreatureToFloatAbove, bool bBroadcastToFaction, const Ice::Current& ice) {
   if (oCreatureToFloatAbove.id < 0 || oCreatureToFloatAbove.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("floatingTextStringOnCreature"); callCounter += 1;
+  lock(floatingTextStringOnCreature_mutex, "floatingTextStringOnCreature");
+  callCounter += 1;
   StackPushInteger(bBroadcastToFaction == true ? 1 : 0);
   StackPushObject(oCreatureToFloatAbove.id);
   StackPushString(sStringToDisplay.c_str());
 
   VM_ExecuteCommand(526, 3);
 
-unlock("floatingTextStringOnCreature");
+unlock(floatingTextStringOnCreature_mutex, "floatingTextStringOnCreature");
   
 };
 
 void NWScriptI::forceRest(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("forceRest"); callCounter += 1;
+  lock(forceRest_mutex, "forceRest");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(775, 1);
 
-unlock("forceRest");
+unlock(forceRest_mutex, "forceRest");
   
 };
 
 NWN::SavingThrowResult NWScriptI::fortitudeSave(const NWN::NWObject& oCreature, Ice::Int nDC, NWN::SaveType tSaveType, const NWN::NWObject& oSaveVersus, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (oSaveVersus.id < 0 || oSaveVersus.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("fortitudeSave"); callCounter += 1;
+  lock(fortitudeSave_mutex, "fortitudeSave");
+  callCounter += 1;
   StackPushObject(oSaveVersus.id);
   if (tSaveType == NWN::GoodSaveType) StackPushInteger(16);
    else if (tSaveType == NWN::SonicSaveType) StackPushInteger(5);
@@ -3801,7 +4013,7 @@ NWN::SavingThrowResult NWScriptI::fortitudeSave(const NWN::NWObject& oCreature, 
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("fortitudeSave");
+  unlock(fortitudeSave_mutex, "fortitudeSave");
   if (nRetVal == 0) return NWN::FailedRoll;
   if (nRetVal == 1) return NWN::SucceededRoll;
   if (nRetVal == 3) return NWN::ImmuneToSaveType;
@@ -3809,7 +4021,8 @@ NWN::SavingThrowResult NWScriptI::fortitudeSave(const NWN::NWObject& oCreature, 
 };
 
 std::string NWScriptI::get2DAString(const std::string& s2DA, const std::string& sColumn, Ice::Int nRow, const Ice::Current& ice) {
-  lock("get2DAString"); callCounter += 1;
+  lock(get2DAString_mutex, "get2DAString");
+  callCounter += 1;
   StackPushInteger(nRow);
   StackPushString(sColumn.c_str());
   StackPushString(s2DA.c_str());
@@ -3818,13 +4031,14 @@ std::string NWScriptI::get2DAString(const std::string& s2DA, const std::string& 
 
   char* sRetVal;
   StackPopString(&sRetVal);
-  unlock("get2DAString");
+  unlock(get2DAString_mutex, "get2DAString");
   return std::string(sRetVal);
 };
 
 Ice::Int NWScriptI::getAC(const NWN::NWObject& oObject, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getAC"); callCounter += 1;
+  lock(getAC_mutex, "getAC");
+  callCounter += 1;
   StackPushInteger(1);
   StackPushObject(oObject.id);
 
@@ -3832,20 +4046,21 @@ Ice::Int NWScriptI::getAC(const NWN::NWObject& oObject, const Ice::Current& ice)
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getAC");
+  unlock(getAC_mutex, "getAC");
   return nRetVal;
 };
 
 NWN::AILevel NWScriptI::getAILevel(const NWN::NWObject& oTarget, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getAILevel"); callCounter += 1;
+  lock(getAILevel_mutex, "getAILevel");
+  callCounter += 1;
   StackPushObject(oTarget.id);
 
   VM_ExecuteCommand(712, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getAILevel");
+  unlock(getAILevel_mutex, "getAILevel");
   if (nRetVal == 0) return NWN::VeryLowAI;
   if (nRetVal == 1) return NWN::LowAI;
   if (nRetVal == -1) return NWN::DefaultAI;
@@ -3857,7 +4072,8 @@ NWN::AILevel NWScriptI::getAILevel(const NWN::NWObject& oTarget, const Ice::Curr
 
 Ice::Int NWScriptI::getAbilityModifier(NWN::Ability tAbility, const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getAbilityModifier"); callCounter += 1;
+  lock(getAbilityModifier_mutex, "getAbilityModifier");
+  callCounter += 1;
   StackPushObject(oCreature.id);
   if (tAbility == NWN::Charisma) StackPushInteger(5);
    else if (tAbility == NWN::Strength) StackPushInteger(0);
@@ -3871,13 +4087,14 @@ Ice::Int NWScriptI::getAbilityModifier(NWN::Ability tAbility, const NWN::NWObjec
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getAbilityModifier");
+  unlock(getAbilityModifier_mutex, "getAbilityModifier");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::getAbilityScore(const NWN::NWObject& oCreature, NWN::Ability tAbility, bool bBaseAbilityScore, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getAbilityScore"); callCounter += 1;
+  lock(getAbilityScore_mutex, "getAbilityScore");
+  callCounter += 1;
   StackPushInteger(bBaseAbilityScore == true ? 1 : 0);
   if (tAbility == NWN::Charisma) StackPushInteger(5);
    else if (tAbility == NWN::Strength) StackPushInteger(0);
@@ -3892,13 +4109,14 @@ Ice::Int NWScriptI::getAbilityScore(const NWN::NWObject& oCreature, NWN::Ability
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getAbilityScore");
+  unlock(getAbilityScore_mutex, "getAbilityScore");
   return nRetVal;
 };
 
 bool NWScriptI::getActionMode(const NWN::NWObject& oCreature, NWN::ActionMode tActionMode, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getActionMode"); callCounter += 1;
+  lock(getActionMode_mutex, "getActionMode");
+  callCounter += 1;
   if (tActionMode == NWN::CounterspellMode) StackPushInteger(5);
    else if (tActionMode == NWN::DirtyFightingMode) StackPushInteger(11);
    else if (tActionMode == NWN::DetectMode) StackPushInteger(0);
@@ -3918,33 +4136,35 @@ bool NWScriptI::getActionMode(const NWN::NWObject& oCreature, NWN::ActionMode tA
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getActionMode");
+  unlock(getActionMode_mutex, "getActionMode");
   return nRetVal != 0;
 };
 
 Ice::Int NWScriptI::getAge(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getAge"); callCounter += 1;
+  lock(getAge_mutex, "getAge");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(495, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getAge");
+  unlock(getAge_mutex, "getAge");
   return nRetVal;
 };
 
 NWN::Alignment NWScriptI::getAlignmentGoodEvil(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getAlignmentGoodEvil"); callCounter += 1;
+  lock(getAlignmentGoodEvil_mutex, "getAlignmentGoodEvil");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(127, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getAlignmentGoodEvil");
+  unlock(getAlignmentGoodEvil_mutex, "getAlignmentGoodEvil");
   if (nRetVal == 5) return NWN::Evil;
   if (nRetVal == 0) return NWN::Any;
   if (nRetVal == 1) return NWN::Neutral;
@@ -3956,14 +4176,15 @@ NWN::Alignment NWScriptI::getAlignmentGoodEvil(const NWN::NWObject& oCreature, c
 
 NWN::Alignment NWScriptI::getAlignmentLawChaos(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getAlignmentLawChaos"); callCounter += 1;
+  lock(getAlignmentLawChaos_mutex, "getAlignmentLawChaos");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(126, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getAlignmentLawChaos");
+  unlock(getAlignmentLawChaos_mutex, "getAlignmentLawChaos");
   if (nRetVal == 5) return NWN::Evil;
   if (nRetVal == 0) return NWN::Any;
   if (nRetVal == 1) return NWN::Neutral;
@@ -3975,66 +4196,71 @@ NWN::Alignment NWScriptI::getAlignmentLawChaos(const NWN::NWObject& oCreature, c
 
 Ice::Int NWScriptI::getAnimalCompanionCreatureType(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getAnimalCompanionCreatureType"); callCounter += 1;
+  lock(getAnimalCompanionCreatureType_mutex, "getAnimalCompanionCreatureType");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(498, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getAnimalCompanionCreatureType");
+  unlock(getAnimalCompanionCreatureType_mutex, "getAnimalCompanionCreatureType");
   return nRetVal;
 };
 
 std::string NWScriptI::getAnimalCompanionName(const NWN::NWObject& oTarget, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getAnimalCompanionName"); callCounter += 1;
+  lock(getAnimalCompanionName_mutex, "getAnimalCompanionName");
+  callCounter += 1;
   StackPushObject(oTarget.id);
 
   VM_ExecuteCommand(500, 1);
 
   char* sRetVal;
   StackPopString(&sRetVal);
-  unlock("getAnimalCompanionName");
+  unlock(getAnimalCompanionName_mutex, "getAnimalCompanionName");
   return std::string(sRetVal);
 };
 
 Ice::Int NWScriptI::getAppearanceType(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getAppearanceType"); callCounter += 1;
+  lock(getAppearanceType_mutex, "getAppearanceType");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(577, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getAppearanceType");
+  unlock(getAppearanceType_mutex, "getAppearanceType");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::getArcaneSpellFailure(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getArcaneSpellFailure"); callCounter += 1;
+  lock(getArcaneSpellFailure_mutex, "getArcaneSpellFailure");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(737, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getArcaneSpellFailure");
+  unlock(getArcaneSpellFailure_mutex, "getArcaneSpellFailure");
   return nRetVal;
 };
 
 NWN::NWObject NWScriptI::getArea(const NWN::NWObject& oTarget, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getArea"); callCounter += 1;
+  lock(getArea_mutex, "getArea");
+  callCounter += 1;
   StackPushObject(oTarget.id);
 
   VM_ExecuteCommand(24, 1);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getArea");
+  unlock(getArea_mutex, "getArea");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -4042,7 +4268,8 @@ NWN::NWObject NWScriptI::getArea(const NWN::NWObject& oTarget, const Ice::Curren
 
 NWN::NWObject NWScriptI::getAreaFromLocation(const NWN::NWLocation& lLocation, const Ice::Current& ice) {
   if (lLocation.area.id < 0) throw NWN::InvalidObjectException();
-  lock("getAreaFromLocation"); callCounter += 1;
+  lock(getAreaFromLocation_mutex, "getAreaFromLocation");
+  callCounter += 1;
   CScriptLocation *lLocation_ptr;
   lLocation_ptr->X = lLocation.x;
   lLocation_ptr->Y = lLocation.y;
@@ -4057,7 +4284,7 @@ NWN::NWObject NWScriptI::getAreaFromLocation(const NWN::NWLocation& lLocation, c
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getAreaFromLocation");
+  unlock(getAreaFromLocation_mutex, "getAreaFromLocation");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -4065,14 +4292,15 @@ NWN::NWObject NWScriptI::getAreaFromLocation(const NWN::NWLocation& lLocation, c
 
 NWN::NWObject NWScriptI::getAreaOfEffectCreator(const NWN::NWObject& oAreaOfEffectObject, const Ice::Current& ice) {
   if (oAreaOfEffectObject.id < 0 || oAreaOfEffectObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getAreaOfEffectCreator"); callCounter += 1;
+  lock(getAreaOfEffectCreator_mutex, "getAreaOfEffectCreator");
+  callCounter += 1;
   StackPushObject(oAreaOfEffectObject.id);
 
   VM_ExecuteCommand(264, 1);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getAreaOfEffectCreator");
+  unlock(getAreaOfEffectCreator_mutex, "getAreaOfEffectCreator");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -4080,7 +4308,8 @@ NWN::NWObject NWScriptI::getAreaOfEffectCreator(const NWN::NWObject& oAreaOfEffe
 
 Ice::Int NWScriptI::getAreaSize(Ice::Int nAreaDimension, const NWN::NWObject& oArea, const Ice::Current& ice) {
   if (oArea.id < 0 || oArea.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getAreaSize"); callCounter += 1;
+  lock(getAreaSize_mutex, "getAreaSize");
+  callCounter += 1;
   StackPushObject(oArea.id);
   StackPushInteger(nAreaDimension);
 
@@ -4088,13 +4317,14 @@ Ice::Int NWScriptI::getAreaSize(Ice::Int nAreaDimension, const NWN::NWObject& oA
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getAreaSize");
+  unlock(getAreaSize_mutex, "getAreaSize");
   return nRetVal;
 };
 
 NWN::NWObject NWScriptI::getAssociate(NWN::AssociateType tAssociateType, const NWN::NWObject& oMaster, Ice::Int nTh, const Ice::Current& ice) {
   if (oMaster.id < 0 || oMaster.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getAssociate"); callCounter += 1;
+  lock(getAssociate_mutex, "getAssociate");
+  callCounter += 1;
   StackPushInteger(nTh);
   StackPushObject(oMaster.id);
   if (tAssociateType == NWN::DominatedAssociate) StackPushInteger(5);
@@ -4109,7 +4339,7 @@ NWN::NWObject NWScriptI::getAssociate(NWN::AssociateType tAssociateType, const N
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getAssociate");
+  unlock(getAssociate_mutex, "getAssociate");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -4117,14 +4347,15 @@ NWN::NWObject NWScriptI::getAssociate(NWN::AssociateType tAssociateType, const N
 
 NWN::AssociateType NWScriptI::getAssociateType(const NWN::NWObject& oAssociate, const Ice::Current& ice) {
   if (oAssociate.id < 0 || oAssociate.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getAssociateType"); callCounter += 1;
+  lock(getAssociateType_mutex, "getAssociateType");
+  callCounter += 1;
   StackPushObject(oAssociate.id);
 
   VM_ExecuteCommand(748, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getAssociateType");
+  unlock(getAssociateType_mutex, "getAssociateType");
   if (nRetVal == 5) return NWN::DominatedAssociate;
   if (nRetVal == 0) return NWN::NoAssociate;
   if (nRetVal == 1) return NWN::HenchmanAssociate;
@@ -4136,40 +4367,43 @@ NWN::AssociateType NWScriptI::getAssociateType(const NWN::NWObject& oAssociate, 
 
 NWN::NWObject NWScriptI::getAttackTarget(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getAttackTarget"); callCounter += 1;
+  lock(getAttackTarget_mutex, "getAttackTarget");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(316, 1);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getAttackTarget");
+  unlock(getAttackTarget_mutex, "getAttackTarget");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
 };
 
 NWN::NWObject NWScriptI::getAttemptedAttackTarget(const Ice::Current& ice) {
-  lock("getAttemptedAttackTarget"); callCounter += 1;
+  lock(getAttemptedAttackTarget_mutex, "getAttemptedAttackTarget");
+  callCounter += 1;
 
   VM_ExecuteCommand(361, 0);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getAttemptedAttackTarget");
+  unlock(getAttemptedAttackTarget_mutex, "getAttemptedAttackTarget");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
 };
 
 NWN::NWObject NWScriptI::getAttemptedSpellTarget(const Ice::Current& ice) {
-  lock("getAttemptedSpellTarget"); callCounter += 1;
+  lock(getAttemptedSpellTarget_mutex, "getAttemptedSpellTarget");
+  callCounter += 1;
 
   VM_ExecuteCommand(375, 0);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getAttemptedSpellTarget");
+  unlock(getAttemptedSpellTarget_mutex, "getAttemptedSpellTarget");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -4177,79 +4411,86 @@ NWN::NWObject NWScriptI::getAttemptedSpellTarget(const Ice::Current& ice) {
 
 Ice::Int NWScriptI::getBaseAttackBonus(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getBaseAttackBonus"); callCounter += 1;
+  lock(getBaseAttackBonus_mutex, "getBaseAttackBonus");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(699, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getBaseAttackBonus");
+  unlock(getBaseAttackBonus_mutex, "getBaseAttackBonus");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::getBaseItemType(const NWN::NWObject& oItem, const Ice::Current& ice) {
   if (oItem.id < 0 || oItem.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getBaseItemType"); callCounter += 1;
+  lock(getBaseItemType_mutex, "getBaseItemType");
+  callCounter += 1;
   StackPushObject(oItem.id);
 
   VM_ExecuteCommand(397, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getBaseItemType");
+  unlock(getBaseItemType_mutex, "getBaseItemType");
   return nRetVal;
 };
 
 NWN::NWObject NWScriptI::getBlockingDoor(const Ice::Current& ice) {
-  lock("getBlockingDoor"); callCounter += 1;
+  lock(getBlockingDoor_mutex, "getBlockingDoor");
+  callCounter += 1;
 
   VM_ExecuteCommand(336, 0);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getBlockingDoor");
+  unlock(getBlockingDoor_mutex, "getBlockingDoor");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
 };
 
 Ice::Int NWScriptI::getCalendarDay(const Ice::Current& ice) {
-  lock("getCalendarDay"); callCounter += 1;
+  lock(getCalendarDay_mutex, "getCalendarDay");
+  callCounter += 1;
 
   VM_ExecuteCommand(15, 0);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getCalendarDay");
+  unlock(getCalendarDay_mutex, "getCalendarDay");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::getCalendarMonth(const Ice::Current& ice) {
-  lock("getCalendarMonth"); callCounter += 1;
+  lock(getCalendarMonth_mutex, "getCalendarMonth");
+  callCounter += 1;
 
   VM_ExecuteCommand(14, 0);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getCalendarMonth");
+  unlock(getCalendarMonth_mutex, "getCalendarMonth");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::getCalendarYear(const Ice::Current& ice) {
-  lock("getCalendarYear"); callCounter += 1;
+  lock(getCalendarYear_mutex, "getCalendarYear");
+  callCounter += 1;
 
   VM_ExecuteCommand(13, 0);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getCalendarYear");
+  unlock(getCalendarYear_mutex, "getCalendarYear");
   return nRetVal;
 };
 
 Ice::Double NWScriptI::getCampaignFloat(const std::string& sCampaignName, const std::string& sVarName, const NWN::NWObject& oPlayer, const Ice::Current& ice) {
   if (oPlayer.id < 0 || oPlayer.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getCampaignFloat"); callCounter += 1;
+  lock(getCampaignFloat_mutex, "getCampaignFloat");
+  callCounter += 1;
   StackPushObject(oPlayer.id);
   StackPushString(sVarName.c_str());
   StackPushString(sCampaignName.c_str());
@@ -4258,13 +4499,14 @@ Ice::Double NWScriptI::getCampaignFloat(const std::string& sCampaignName, const 
 
   float fRetVal;
   StackPopFloat(&fRetVal);
-  unlock("getCampaignFloat");
+  unlock(getCampaignFloat_mutex, "getCampaignFloat");
   return fRetVal;
 };
 
 Ice::Int NWScriptI::getCampaignInt(const std::string& sCampaignName, const std::string& sVarName, const NWN::NWObject& oPlayer, const Ice::Current& ice) {
   if (oPlayer.id < 0 || oPlayer.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getCampaignInt"); callCounter += 1;
+  lock(getCampaignInt_mutex, "getCampaignInt");
+  callCounter += 1;
   StackPushObject(oPlayer.id);
   StackPushString(sVarName.c_str());
   StackPushString(sCampaignName.c_str());
@@ -4273,13 +4515,14 @@ Ice::Int NWScriptI::getCampaignInt(const std::string& sCampaignName, const std::
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getCampaignInt");
+  unlock(getCampaignInt_mutex, "getCampaignInt");
   return nRetVal;
 };
 
 NWN::NWLocation NWScriptI::getCampaignLocation(const std::string& sCampaignName, const std::string& sVarName, const NWN::NWObject& oPlayer, const Ice::Current& ice) {
   if (oPlayer.id < 0 || oPlayer.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getCampaignLocation"); callCounter += 1;
+  lock(getCampaignLocation_mutex, "getCampaignLocation");
+  callCounter += 1;
   StackPushObject(oPlayer.id);
   StackPushString(sVarName.c_str());
   StackPushString(sCampaignName.c_str());
@@ -4296,13 +4539,14 @@ NWN::NWLocation NWScriptI::getCampaignLocation(const std::string& sCampaignName,
   nl.orientationY = pRetVal->OrientationY;
   nl.orientationZ = pRetVal->OrientationZ;
   nl.area.id = pRetVal->AreaID;
-  unlock("getCampaignLocation");
+  unlock(getCampaignLocation_mutex, "getCampaignLocation");
   return nl;
 };
 
 std::string NWScriptI::getCampaignString(const std::string& sCampaignName, const std::string& sVarName, const NWN::NWObject& oPlayer, const Ice::Current& ice) {
   if (oPlayer.id < 0 || oPlayer.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getCampaignString"); callCounter += 1;
+  lock(getCampaignString_mutex, "getCampaignString");
+  callCounter += 1;
   StackPushObject(oPlayer.id);
   StackPushString(sVarName.c_str());
   StackPushString(sCampaignName.c_str());
@@ -4311,13 +4555,14 @@ std::string NWScriptI::getCampaignString(const std::string& sCampaignName, const
 
   char* sRetVal;
   StackPopString(&sRetVal);
-  unlock("getCampaignString");
+  unlock(getCampaignString_mutex, "getCampaignString");
   return std::string(sRetVal);
 };
 
 NWN::NWVector NWScriptI::getCampaignVector(const std::string& sCampaignName, const std::string& sVarName, const NWN::NWObject& oPlayer, const Ice::Current& ice) {
   if (oPlayer.id < 0 || oPlayer.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getCampaignVector"); callCounter += 1;
+  lock(getCampaignVector_mutex, "getCampaignVector");
+  callCounter += 1;
   StackPushObject(oPlayer.id);
   StackPushString(sVarName.c_str());
   StackPushString(sCampaignName.c_str());
@@ -4328,39 +4573,42 @@ NWN::NWVector NWScriptI::getCampaignVector(const std::string& sCampaignName, con
   StackPopVector(&vRetVal);
   NWN::NWVector nv;
   nv.x = vRetVal.X; nv.y = vRetVal.Y; nv.z = vRetVal.Z;
-  unlock("getCampaignVector");
+  unlock(getCampaignVector_mutex, "getCampaignVector");
   return nv;
 };
 
 Ice::Int NWScriptI::getCasterLevel(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getCasterLevel"); callCounter += 1;
+  lock(getCasterLevel_mutex, "getCasterLevel");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(84, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getCasterLevel");
+  unlock(getCasterLevel_mutex, "getCasterLevel");
   return nRetVal;
 };
 
 Ice::Double NWScriptI::getChallengeRating(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getChallengeRating"); callCounter += 1;
+  lock(getChallengeRating_mutex, "getChallengeRating");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(494, 1);
 
   float fRetVal;
   StackPopFloat(&fRetVal);
-  unlock("getChallengeRating");
+  unlock(getChallengeRating_mutex, "getChallengeRating");
   return fRetVal;
 };
 
 Ice::Int NWScriptI::getClassByPosition(Ice::Int nClassPosition, const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getClassByPosition"); callCounter += 1;
+  lock(getClassByPosition_mutex, "getClassByPosition");
+  callCounter += 1;
   StackPushObject(oCreature.id);
   StackPushInteger(nClassPosition);
 
@@ -4368,18 +4616,19 @@ Ice::Int NWScriptI::getClassByPosition(Ice::Int nClassPosition, const NWN::NWObj
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getClassByPosition");
+  unlock(getClassByPosition_mutex, "getClassByPosition");
   return nRetVal;
 };
 
 NWN::NWObject NWScriptI::getClickingObject(const Ice::Current& ice) {
-  lock("getClickingObject"); callCounter += 1;
+  lock(getClickingObject_mutex, "getClickingObject");
+  callCounter += 1;
 
   VM_ExecuteCommand(326, 0);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getClickingObject");
+  unlock(getClickingObject_mutex, "getClickingObject");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -4387,7 +4636,8 @@ NWN::NWObject NWScriptI::getClickingObject(const Ice::Current& ice) {
 
 Ice::Int NWScriptI::getColor(const NWN::NWObject& oObject, Ice::Int nColorChannel, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getColor"); callCounter += 1;
+  lock(getColor_mutex, "getColor");
+  callCounter += 1;
   StackPushInteger(nColorChannel);
   StackPushObject(oObject.id);
 
@@ -4395,26 +4645,28 @@ Ice::Int NWScriptI::getColor(const NWN::NWObject& oObject, Ice::Int nColorChanne
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getColor");
+  unlock(getColor_mutex, "getColor");
   return nRetVal;
 };
 
 bool NWScriptI::getCommandable(const NWN::NWObject& oTarget, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getCommandable"); callCounter += 1;
+  lock(getCommandable_mutex, "getCommandable");
+  callCounter += 1;
   StackPushObject(oTarget.id);
 
   VM_ExecuteCommand(163, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getCommandable");
+  unlock(getCommandable_mutex, "getCommandable");
   return nRetVal != 0;
 };
 
 Ice::Int NWScriptI::getCreatureBodyPart(Ice::Int nPart, const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getCreatureBodyPart"); callCounter += 1;
+  lock(getCreatureBodyPart_mutex, "getCreatureBodyPart");
+  callCounter += 1;
   StackPushObject(oCreature.id);
   StackPushInteger(nPart);
 
@@ -4422,20 +4674,21 @@ Ice::Int NWScriptI::getCreatureBodyPart(Ice::Int nPart, const NWN::NWObject& oCr
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getCreatureBodyPart");
+  unlock(getCreatureBodyPart_mutex, "getCreatureBodyPart");
   return nRetVal;
 };
 
 NWN::CreatureSize NWScriptI::getCreatureSize(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getCreatureSize"); callCounter += 1;
+  lock(getCreatureSize_mutex, "getCreatureSize");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(479, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getCreatureSize");
+  unlock(getCreatureSize_mutex, "getCreatureSize");
   if (nRetVal == 5) return NWN::HugeSize;
   if (nRetVal == 0) return NWN::InvalidSize;
   if (nRetVal == 1) return NWN::TinySize;
@@ -4447,53 +4700,57 @@ NWN::CreatureSize NWScriptI::getCreatureSize(const NWN::NWObject& oCreature, con
 
 Ice::Int NWScriptI::getCreatureStartingPackage(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getCreatureStartingPackage"); callCounter += 1;
+  lock(getCreatureStartingPackage_mutex, "getCreatureStartingPackage");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(766, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getCreatureStartingPackage");
+  unlock(getCreatureStartingPackage_mutex, "getCreatureStartingPackage");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::getCreatureTailType(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getCreatureTailType"); callCounter += 1;
+  lock(getCreatureTailType_mutex, "getCreatureTailType");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(794, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getCreatureTailType");
+  unlock(getCreatureTailType_mutex, "getCreatureTailType");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::getCreatureWingType(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getCreatureWingType"); callCounter += 1;
+  lock(getCreatureWingType_mutex, "getCreatureWingType");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(790, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getCreatureWingType");
+  unlock(getCreatureWingType_mutex, "getCreatureWingType");
   return nRetVal;
 };
 
 NWN::Action NWScriptI::getCurrentAction(const NWN::NWObject& oObject, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getCurrentAction"); callCounter += 1;
+  lock(getCurrentAction_mutex, "getCurrentAction");
+  callCounter += 1;
   StackPushObject(oObject.id);
 
   VM_ExecuteCommand(522, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getCurrentAction");
+  unlock(getCurrentAction_mutex, "getCurrentAction");
   if (nRetVal == 16) return NWN::AnimalEmpathyAction;
   if (nRetVal == 5) return NWN::OpenDoorAction;
   if (nRetVal == 33) return NWN::HealAction;
@@ -4528,45 +4785,49 @@ NWN::Action NWScriptI::getCurrentAction(const NWN::NWObject& oObject, const Ice:
 
 Ice::Int NWScriptI::getCurrentHitPoints(const NWN::NWObject& oObject, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getCurrentHitPoints"); callCounter += 1;
+  lock(getCurrentHitPoints_mutex, "getCurrentHitPoints");
+  callCounter += 1;
   StackPushObject(oObject.id);
 
   VM_ExecuteCommand(49, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getCurrentHitPoints");
+  unlock(getCurrentHitPoints_mutex, "getCurrentHitPoints");
   return nRetVal;
 };
 
 Ice::Double NWScriptI::getCutsceneCameraMoveRate(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getCutsceneCameraMoveRate"); callCounter += 1;
+  lock(getCutsceneCameraMoveRate_mutex, "getCutsceneCameraMoveRate");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(742, 1);
 
   float fRetVal;
   StackPopFloat(&fRetVal);
-  unlock("getCutsceneCameraMoveRate");
+  unlock(getCutsceneCameraMoveRate_mutex, "getCutsceneCameraMoveRate");
   return fRetVal;
 };
 
 bool NWScriptI::getCutsceneMode(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getCutsceneMode"); callCounter += 1;
+  lock(getCutsceneMode_mutex, "getCutsceneMode");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(781, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getCutsceneMode");
+  unlock(getCutsceneMode_mutex, "getCutsceneMode");
   return nRetVal != 0;
 };
 
 Ice::Int NWScriptI::getDamageDealtByType(NWN::DamageType tDamageType, const Ice::Current& ice) {
-  lock("getDamageDealtByType"); callCounter += 1;
+  lock(getDamageDealtByType_mutex, "getDamageDealtByType");
+  callCounter += 1;
   if (tDamageType == NWN::AcidDamage) StackPushInteger(16);
    else if (tDamageType == NWN::ACVsAllDamage) StackPushInteger(4103);
    else if (tDamageType == NWN::NegativeDamage) StackPushInteger(512);
@@ -4587,39 +4848,42 @@ Ice::Int NWScriptI::getDamageDealtByType(NWN::DamageType tDamageType, const Ice:
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getDamageDealtByType");
+  unlock(getDamageDealtByType_mutex, "getDamageDealtByType");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::getDefensiveCastingMode(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getDefensiveCastingMode"); callCounter += 1;
+  lock(getDefensiveCastingMode_mutex, "getDefensiveCastingMode");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(576, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getDefensiveCastingMode");
+  unlock(getDefensiveCastingMode_mutex, "getDefensiveCastingMode");
   return nRetVal;
 };
 
 std::string NWScriptI::getDeity(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getDeity"); callCounter += 1;
+  lock(getDeity_mutex, "getDeity");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(489, 1);
 
   char* sRetVal;
   StackPopString(&sRetVal);
-  unlock("getDeity");
+  unlock(getDeity_mutex, "getDeity");
   return std::string(sRetVal);
 };
 
 std::string NWScriptI::getDescription(const NWN::NWObject& oObject, bool bOriginalDescription, bool bIdentifiedDescription, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getDescription"); callCounter += 1;
+  lock(getDescription_mutex, "getDescription");
+  callCounter += 1;
   StackPushInteger(bIdentifiedDescription == true ? 1 : 0);
   StackPushInteger(bOriginalDescription == true ? 1 : 0);
   StackPushObject(oObject.id);
@@ -4628,39 +4892,42 @@ std::string NWScriptI::getDescription(const NWN::NWObject& oObject, bool bOrigin
 
   char* sRetVal;
   StackPopString(&sRetVal);
-  unlock("getDescription");
+  unlock(getDescription_mutex, "getDescription");
   return std::string(sRetVal);
 };
 
 Ice::Int NWScriptI::getDetectMode(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getDetectMode"); callCounter += 1;
+  lock(getDetectMode_mutex, "getDetectMode");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(575, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getDetectMode");
+  unlock(getDetectMode_mutex, "getDetectMode");
   return nRetVal;
 };
 
 Ice::Double NWScriptI::getDialogSoundLength(Ice::Int nStrRef, const Ice::Current& ice) {
-  lock("getDialogSoundLength"); callCounter += 1;
+  lock(getDialogSoundLength_mutex, "getDialogSoundLength");
+  callCounter += 1;
   StackPushInteger(nStrRef);
 
   VM_ExecuteCommand(694, 1);
 
   float fRetVal;
   StackPopFloat(&fRetVal);
-  unlock("getDialogSoundLength");
+  unlock(getDialogSoundLength_mutex, "getDialogSoundLength");
   return fRetVal;
 };
 
 Ice::Double NWScriptI::getDistanceBetween(const NWN::NWObject& oObjectA, const NWN::NWObject& oObjectB, const Ice::Current& ice) {
   if (oObjectA.id < 0 || oObjectA.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (oObjectB.id < 0 || oObjectB.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getDistanceBetween"); callCounter += 1;
+  lock(getDistanceBetween_mutex, "getDistanceBetween");
+  callCounter += 1;
   StackPushObject(oObjectB.id);
   StackPushObject(oObjectA.id);
 
@@ -4668,14 +4935,15 @@ Ice::Double NWScriptI::getDistanceBetween(const NWN::NWObject& oObjectA, const N
 
   float fRetVal;
   StackPopFloat(&fRetVal);
-  unlock("getDistanceBetween");
+  unlock(getDistanceBetween_mutex, "getDistanceBetween");
   return fRetVal;
 };
 
 Ice::Double NWScriptI::getDistanceBetweenLocations(const NWN::NWLocation& lLocationA, const NWN::NWLocation& lLocationB, const Ice::Current& ice) {
   if (lLocationA.area.id < 0) throw NWN::InvalidObjectException();
   if (lLocationB.area.id < 0) throw NWN::InvalidObjectException();
-  lock("getDistanceBetweenLocations"); callCounter += 1;
+  lock(getDistanceBetweenLocations_mutex, "getDistanceBetweenLocations");
+  callCounter += 1;
   CScriptLocation *lLocationB_ptr;
   lLocationB_ptr->X = lLocationB.x;
   lLocationB_ptr->Y = lLocationB.y;
@@ -4699,40 +4967,43 @@ Ice::Double NWScriptI::getDistanceBetweenLocations(const NWN::NWLocation& lLocat
 
   float fRetVal;
   StackPopFloat(&fRetVal);
-  unlock("getDistanceBetweenLocations");
+  unlock(getDistanceBetweenLocations_mutex, "getDistanceBetweenLocations");
   return fRetVal;
 };
 
 Ice::Double NWScriptI::getDistanceToObject(const NWN::NWObject& oObject, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getDistanceToObject"); callCounter += 1;
+  lock(getDistanceToObject_mutex, "getDistanceToObject");
+  callCounter += 1;
   StackPushObject(oObject.id);
 
   VM_ExecuteCommand(41, 1);
 
   float fRetVal;
   StackPopFloat(&fRetVal);
-  unlock("getDistanceToObject");
+  unlock(getDistanceToObject_mutex, "getDistanceToObject");
   return fRetVal;
 };
 
 bool NWScriptI::getDroppableFlag(const NWN::NWObject& oItem, const Ice::Current& ice) {
   if (oItem.id < 0 || oItem.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getDroppableFlag"); callCounter += 1;
+  lock(getDroppableFlag_mutex, "getDroppableFlag");
+  callCounter += 1;
   StackPushObject(oItem.id);
 
   VM_ExecuteCommand(586, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getDroppableFlag");
+  unlock(getDroppableFlag_mutex, "getDroppableFlag");
   return nRetVal != 0;
 };
 
 NWN::NWObject NWScriptI::getEffectCreator(const NWN::NWEffect& eEffect, const Ice::Current& ice) {
   if (effectMap.find(eEffect.id) == effectMap.end()) throw NWN::InvalidEffectException();
   
-  lock("getEffectCreator"); callCounter += 1;
+  lock(getEffectCreator_mutex, "getEffectCreator");
+  callCounter += 1;
   CGameEffect *eEffect_ptr = effectMap.find(eEffect.id)->second;
   StackPushEngineStructure(ENGINE_STRUCTURE_EFFECT, eEffect_ptr);
 
@@ -4740,7 +5011,7 @@ NWN::NWObject NWScriptI::getEffectCreator(const NWN::NWEffect& eEffect, const Ic
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getEffectCreator");
+  unlock(getEffectCreator_mutex, "getEffectCreator");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -4749,7 +5020,8 @@ NWN::NWObject NWScriptI::getEffectCreator(const NWN::NWEffect& eEffect, const Ic
 NWN::DurationType NWScriptI::getEffectDurationType(const NWN::NWEffect& eEffect, const Ice::Current& ice) {
   if (effectMap.find(eEffect.id) == effectMap.end()) throw NWN::InvalidEffectException();
   
-  lock("getEffectDurationType"); callCounter += 1;
+  lock(getEffectDurationType_mutex, "getEffectDurationType");
+  callCounter += 1;
   CGameEffect *eEffect_ptr = effectMap.find(eEffect.id)->second;
   StackPushEngineStructure(ENGINE_STRUCTURE_EFFECT, eEffect_ptr);
 
@@ -4757,7 +5029,7 @@ NWN::DurationType NWScriptI::getEffectDurationType(const NWN::NWEffect& eEffect,
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getEffectDurationType");
+  unlock(getEffectDurationType_mutex, "getEffectDurationType");
   if (nRetVal == 0) return NWN::Instant;
   if (nRetVal == 1) return NWN::Temporary;
   if (nRetVal == 2) return NWN::Permanent;
@@ -4767,7 +5039,8 @@ NWN::DurationType NWScriptI::getEffectDurationType(const NWN::NWEffect& eEffect,
 Ice::Int NWScriptI::getEffectSpellId(const NWN::NWEffect& eSpellEffect, const Ice::Current& ice) {
   if (effectMap.find(eSpellEffect.id) == effectMap.end()) throw NWN::InvalidEffectException();
   
-  lock("getEffectSpellId"); callCounter += 1;
+  lock(getEffectSpellId_mutex, "getEffectSpellId");
+  callCounter += 1;
   CGameEffect *eSpellEffect_ptr = effectMap.find(eSpellEffect.id)->second;
   StackPushEngineStructure(ENGINE_STRUCTURE_EFFECT, eSpellEffect_ptr);
 
@@ -4775,14 +5048,15 @@ Ice::Int NWScriptI::getEffectSpellId(const NWN::NWEffect& eSpellEffect, const Ic
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getEffectSpellId");
+  unlock(getEffectSpellId_mutex, "getEffectSpellId");
   return nRetVal;
 };
 
 NWN::EffectSubType NWScriptI::getEffectSubType(const NWN::NWEffect& eEffect, const Ice::Current& ice) {
   if (effectMap.find(eEffect.id) == effectMap.end()) throw NWN::InvalidEffectException();
   
-  lock("getEffectSubType"); callCounter += 1;
+  lock(getEffectSubType_mutex, "getEffectSubType");
+  callCounter += 1;
   CGameEffect *eEffect_ptr = effectMap.find(eEffect.id)->second;
   StackPushEngineStructure(ENGINE_STRUCTURE_EFFECT, eEffect_ptr);
 
@@ -4790,7 +5064,7 @@ NWN::EffectSubType NWScriptI::getEffectSubType(const NWN::NWEffect& eEffect, con
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getEffectSubType");
+  unlock(getEffectSubType_mutex, "getEffectSubType");
   if (nRetVal == 16) return NWN::SupernaturalSubType;
   if (nRetVal == 24) return NWN::ExtraordinarySubType;
   if (nRetVal == 8) return NWN::MagicalSubType;
@@ -4800,7 +5074,8 @@ NWN::EffectSubType NWScriptI::getEffectSubType(const NWN::NWEffect& eEffect, con
 NWN::EffectType NWScriptI::getEffectType(const NWN::NWEffect& eEffect, const Ice::Current& ice) {
   if (effectMap.find(eEffect.id) == effectMap.end()) throw NWN::InvalidEffectException();
   
-  lock("getEffectType"); callCounter += 1;
+  lock(getEffectType_mutex, "getEffectType");
+  callCounter += 1;
   CGameEffect *eEffect_ptr = effectMap.find(eEffect.id)->second;
   StackPushEngineStructure(ENGINE_STRUCTURE_EFFECT, eEffect_ptr);
 
@@ -4808,7 +5083,7 @@ NWN::EffectType NWScriptI::getEffectType(const NWN::NWEffect& eEffect, const Ice
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getEffectType");
+  unlock(getEffectType_mutex, "getEffectType");
   if (nRetVal == 9) return NWN::TemporaryHitpointsEffect;
   if (nRetVal == 47) return NWN::ACDecreaseEffect;
   if (nRetVal == 28) return NWN::DazedEffect;
@@ -4890,77 +5165,83 @@ NWN::EffectType NWScriptI::getEffectType(const NWN::NWEffect& eEffect, const Ice
 
 Ice::Int NWScriptI::getEncounterActive(const NWN::NWObject& oEncounter, const Ice::Current& ice) {
   if (oEncounter.id < 0 || oEncounter.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getEncounterActive"); callCounter += 1;
+  lock(getEncounterActive_mutex, "getEncounterActive");
+  callCounter += 1;
   StackPushObject(oEncounter.id);
 
   VM_ExecuteCommand(276, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getEncounterActive");
+  unlock(getEncounterActive_mutex, "getEncounterActive");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::getEncounterDifficulty(const NWN::NWObject& oEncounter, const Ice::Current& ice) {
   if (oEncounter.id < 0 || oEncounter.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getEncounterDifficulty"); callCounter += 1;
+  lock(getEncounterDifficulty_mutex, "getEncounterDifficulty");
+  callCounter += 1;
   StackPushObject(oEncounter.id);
 
   VM_ExecuteCommand(297, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getEncounterDifficulty");
+  unlock(getEncounterDifficulty_mutex, "getEncounterDifficulty");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::getEncounterSpawnsCurrent(const NWN::NWObject& oEncounter, const Ice::Current& ice) {
   if (oEncounter.id < 0 || oEncounter.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getEncounterSpawnsCurrent"); callCounter += 1;
+  lock(getEncounterSpawnsCurrent_mutex, "getEncounterSpawnsCurrent");
+  callCounter += 1;
   StackPushObject(oEncounter.id);
 
   VM_ExecuteCommand(280, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getEncounterSpawnsCurrent");
+  unlock(getEncounterSpawnsCurrent_mutex, "getEncounterSpawnsCurrent");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::getEncounterSpawnsMax(const NWN::NWObject& oEncounter, const Ice::Current& ice) {
   if (oEncounter.id < 0 || oEncounter.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getEncounterSpawnsMax"); callCounter += 1;
+  lock(getEncounterSpawnsMax_mutex, "getEncounterSpawnsMax");
+  callCounter += 1;
   StackPushObject(oEncounter.id);
 
   VM_ExecuteCommand(278, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getEncounterSpawnsMax");
+  unlock(getEncounterSpawnsMax_mutex, "getEncounterSpawnsMax");
   return nRetVal;
 };
 
 NWN::NWObject NWScriptI::getEnteringObject(const Ice::Current& ice) {
-  lock("getEnteringObject"); callCounter += 1;
+  lock(getEnteringObject_mutex, "getEnteringObject");
+  callCounter += 1;
 
   VM_ExecuteCommand(25, 0);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getEnteringObject");
+  unlock(getEnteringObject_mutex, "getEnteringObject");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
 };
 
 NWN::NWObject NWScriptI::getExitingObject(const Ice::Current& ice) {
-  lock("getExitingObject"); callCounter += 1;
+  lock(getExitingObject_mutex, "getExitingObject");
+  callCounter += 1;
 
   VM_ExecuteCommand(26, 0);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getExitingObject");
+  unlock(getExitingObject_mutex, "getExitingObject");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -4968,20 +5249,22 @@ NWN::NWObject NWScriptI::getExitingObject(const Ice::Current& ice) {
 
 Ice::Double NWScriptI::getFacing(const NWN::NWObject& oTarget, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getFacing"); callCounter += 1;
+  lock(getFacing_mutex, "getFacing");
+  callCounter += 1;
   StackPushObject(oTarget.id);
 
   VM_ExecuteCommand(28, 1);
 
   float fRetVal;
   StackPopFloat(&fRetVal);
-  unlock("getFacing");
+  unlock(getFacing_mutex, "getFacing");
   return fRetVal;
 };
 
 Ice::Double NWScriptI::getFacingFromLocation(const NWN::NWLocation& lLocation, const Ice::Current& ice) {
   if (lLocation.area.id < 0) throw NWN::InvalidObjectException();
-  lock("getFacingFromLocation"); callCounter += 1;
+  lock(getFacingFromLocation_mutex, "getFacingFromLocation");
+  callCounter += 1;
   CScriptLocation *lLocation_ptr;
   lLocation_ptr->X = lLocation.x;
   lLocation_ptr->Y = lLocation.y;
@@ -4996,53 +5279,57 @@ Ice::Double NWScriptI::getFacingFromLocation(const NWN::NWLocation& lLocation, c
 
   float fRetVal;
   StackPopFloat(&fRetVal);
-  unlock("getFacingFromLocation");
+  unlock(getFacingFromLocation_mutex, "getFacingFromLocation");
   return fRetVal;
 };
 
 Ice::Int NWScriptI::getFactionAverageGoodEvilAlignment(const NWN::NWObject& oFactionMember, const Ice::Current& ice) {
   if (oFactionMember.id < 0 || oFactionMember.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getFactionAverageGoodEvilAlignment"); callCounter += 1;
+  lock(getFactionAverageGoodEvilAlignment_mutex, "getFactionAverageGoodEvilAlignment");
+  callCounter += 1;
   StackPushObject(oFactionMember.id);
 
   VM_ExecuteCommand(187, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getFactionAverageGoodEvilAlignment");
+  unlock(getFactionAverageGoodEvilAlignment_mutex, "getFactionAverageGoodEvilAlignment");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::getFactionAverageLawChaosAlignment(const NWN::NWObject& oFactionMember, const Ice::Current& ice) {
   if (oFactionMember.id < 0 || oFactionMember.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getFactionAverageLawChaosAlignment"); callCounter += 1;
+  lock(getFactionAverageLawChaosAlignment_mutex, "getFactionAverageLawChaosAlignment");
+  callCounter += 1;
   StackPushObject(oFactionMember.id);
 
   VM_ExecuteCommand(188, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getFactionAverageLawChaosAlignment");
+  unlock(getFactionAverageLawChaosAlignment_mutex, "getFactionAverageLawChaosAlignment");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::getFactionAverageLevel(const NWN::NWObject& oFactionMember, const Ice::Current& ice) {
   if (oFactionMember.id < 0 || oFactionMember.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getFactionAverageLevel"); callCounter += 1;
+  lock(getFactionAverageLevel_mutex, "getFactionAverageLevel");
+  callCounter += 1;
   StackPushObject(oFactionMember.id);
 
   VM_ExecuteCommand(189, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getFactionAverageLevel");
+  unlock(getFactionAverageLevel_mutex, "getFactionAverageLevel");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::getFactionAverageReputation(const NWN::NWObject& oSourceFactionMember, const NWN::NWObject& oTarget, const Ice::Current& ice) {
   if (oSourceFactionMember.id < 0 || oSourceFactionMember.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getFactionAverageReputation"); callCounter += 1;
+  lock(getFactionAverageReputation_mutex, "getFactionAverageReputation");
+  callCounter += 1;
   StackPushObject(oTarget.id);
   StackPushObject(oSourceFactionMember.id);
 
@@ -5050,26 +5337,28 @@ Ice::Int NWScriptI::getFactionAverageReputation(const NWN::NWObject& oSourceFact
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getFactionAverageReputation");
+  unlock(getFactionAverageReputation_mutex, "getFactionAverageReputation");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::getFactionAverageXP(const NWN::NWObject& oFactionMember, const Ice::Current& ice) {
   if (oFactionMember.id < 0 || oFactionMember.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getFactionAverageXP"); callCounter += 1;
+  lock(getFactionAverageXP_mutex, "getFactionAverageXP");
+  callCounter += 1;
   StackPushObject(oFactionMember.id);
 
   VM_ExecuteCommand(190, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getFactionAverageXP");
+  unlock(getFactionAverageXP_mutex, "getFactionAverageXP");
   return nRetVal;
 };
 
 NWN::NWObject NWScriptI::getFactionBestAC(const NWN::NWObject& oFactionMember, bool bMustBeVisible, const Ice::Current& ice) {
   if (oFactionMember.id < 0 || oFactionMember.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getFactionBestAC"); callCounter += 1;
+  lock(getFactionBestAC_mutex, "getFactionBestAC");
+  callCounter += 1;
   StackPushInteger(bMustBeVisible == true ? 1 : 0);
   StackPushObject(oFactionMember.id);
 
@@ -5077,7 +5366,7 @@ NWN::NWObject NWScriptI::getFactionBestAC(const NWN::NWObject& oFactionMember, b
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getFactionBestAC");
+  unlock(getFactionBestAC_mutex, "getFactionBestAC");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -5086,7 +5375,8 @@ NWN::NWObject NWScriptI::getFactionBestAC(const NWN::NWObject& oFactionMember, b
 bool NWScriptI::getFactionEqual(const NWN::NWObject& oFirstObject, const NWN::NWObject& oSecondObject, const Ice::Current& ice) {
   if (oFirstObject.id < 0 || oFirstObject.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (oSecondObject.id < 0 || oSecondObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getFactionEqual"); callCounter += 1;
+  lock(getFactionEqual_mutex, "getFactionEqual");
+  callCounter += 1;
   StackPushObject(oSecondObject.id);
   StackPushObject(oFirstObject.id);
 
@@ -5094,33 +5384,35 @@ bool NWScriptI::getFactionEqual(const NWN::NWObject& oFirstObject, const NWN::NW
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getFactionEqual");
+  unlock(getFactionEqual_mutex, "getFactionEqual");
   return nRetVal != 0;
 };
 
 Ice::Int NWScriptI::getFactionGold(const NWN::NWObject& oFactionMember, const Ice::Current& ice) {
   if (oFactionMember.id < 0 || oFactionMember.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getFactionGold"); callCounter += 1;
+  lock(getFactionGold_mutex, "getFactionGold");
+  callCounter += 1;
   StackPushObject(oFactionMember.id);
 
   VM_ExecuteCommand(185, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getFactionGold");
+  unlock(getFactionGold_mutex, "getFactionGold");
   return nRetVal;
 };
 
 NWN::NWObject NWScriptI::getFactionLeader(const NWN::NWObject& oMemberOfFaction, const Ice::Current& ice) {
   if (oMemberOfFaction.id < 0 || oMemberOfFaction.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getFactionLeader"); callCounter += 1;
+  lock(getFactionLeader_mutex, "getFactionLeader");
+  callCounter += 1;
   StackPushObject(oMemberOfFaction.id);
 
   VM_ExecuteCommand(562, 1);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getFactionLeader");
+  unlock(getFactionLeader_mutex, "getFactionLeader");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -5128,7 +5420,8 @@ NWN::NWObject NWScriptI::getFactionLeader(const NWN::NWObject& oMemberOfFaction,
 
 NWN::NWObject NWScriptI::getFactionLeastDamagedMember(const NWN::NWObject& oFactionMember, bool bMustBeVisible, const Ice::Current& ice) {
   if (oFactionMember.id < 0 || oFactionMember.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getFactionLeastDamagedMember"); callCounter += 1;
+  lock(getFactionLeastDamagedMember_mutex, "getFactionLeastDamagedMember");
+  callCounter += 1;
   StackPushInteger(bMustBeVisible == true ? 1 : 0);
   StackPushObject(oFactionMember.id);
 
@@ -5136,7 +5429,7 @@ NWN::NWObject NWScriptI::getFactionLeastDamagedMember(const NWN::NWObject& oFact
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getFactionLeastDamagedMember");
+  unlock(getFactionLeastDamagedMember_mutex, "getFactionLeastDamagedMember");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -5144,7 +5437,8 @@ NWN::NWObject NWScriptI::getFactionLeastDamagedMember(const NWN::NWObject& oFact
 
 NWN::NWObject NWScriptI::getFactionMostDamagedMember(const NWN::NWObject& oFactionMember, bool bMustBeVisible, const Ice::Current& ice) {
   if (oFactionMember.id < 0 || oFactionMember.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getFactionMostDamagedMember"); callCounter += 1;
+  lock(getFactionMostDamagedMember_mutex, "getFactionMostDamagedMember");
+  callCounter += 1;
   StackPushInteger(bMustBeVisible == true ? 1 : 0);
   StackPushObject(oFactionMember.id);
 
@@ -5152,7 +5446,7 @@ NWN::NWObject NWScriptI::getFactionMostDamagedMember(const NWN::NWObject& oFacti
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getFactionMostDamagedMember");
+  unlock(getFactionMostDamagedMember_mutex, "getFactionMostDamagedMember");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -5160,20 +5454,22 @@ NWN::NWObject NWScriptI::getFactionMostDamagedMember(const NWN::NWObject& oFacti
 
 Ice::Int NWScriptI::getFactionMostFrequentClass(const NWN::NWObject& oFactionMember, const Ice::Current& ice) {
   if (oFactionMember.id < 0 || oFactionMember.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getFactionMostFrequentClass"); callCounter += 1;
+  lock(getFactionMostFrequentClass_mutex, "getFactionMostFrequentClass");
+  callCounter += 1;
   StackPushObject(oFactionMember.id);
 
   VM_ExecuteCommand(191, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getFactionMostFrequentClass");
+  unlock(getFactionMostFrequentClass_mutex, "getFactionMostFrequentClass");
   return nRetVal;
 };
 
 NWN::NWObject NWScriptI::getFactionStrongestMember(const NWN::NWObject& oFactionMember, bool bMustBeVisible, const Ice::Current& ice) {
   if (oFactionMember.id < 0 || oFactionMember.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getFactionStrongestMember"); callCounter += 1;
+  lock(getFactionStrongestMember_mutex, "getFactionStrongestMember");
+  callCounter += 1;
   StackPushInteger(bMustBeVisible == true ? 1 : 0);
   StackPushObject(oFactionMember.id);
 
@@ -5181,7 +5477,7 @@ NWN::NWObject NWScriptI::getFactionStrongestMember(const NWN::NWObject& oFaction
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getFactionStrongestMember");
+  unlock(getFactionStrongestMember_mutex, "getFactionStrongestMember");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -5189,7 +5485,8 @@ NWN::NWObject NWScriptI::getFactionStrongestMember(const NWN::NWObject& oFaction
 
 NWN::NWObject NWScriptI::getFactionWeakestMember(const NWN::NWObject& oFactionMember, bool bMustBeVisible, const Ice::Current& ice) {
   if (oFactionMember.id < 0 || oFactionMember.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getFactionWeakestMember"); callCounter += 1;
+  lock(getFactionWeakestMember_mutex, "getFactionWeakestMember");
+  callCounter += 1;
   StackPushInteger(bMustBeVisible == true ? 1 : 0);
   StackPushObject(oFactionMember.id);
 
@@ -5197,7 +5494,7 @@ NWN::NWObject NWScriptI::getFactionWeakestMember(const NWN::NWObject& oFactionMe
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getFactionWeakestMember");
+  unlock(getFactionWeakestMember_mutex, "getFactionWeakestMember");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -5205,7 +5502,8 @@ NWN::NWObject NWScriptI::getFactionWeakestMember(const NWN::NWObject& oFactionMe
 
 NWN::NWObject NWScriptI::getFactionWorstAC(const NWN::NWObject& oFactionMember, bool bMustBeVisible, const Ice::Current& ice) {
   if (oFactionMember.id < 0 || oFactionMember.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getFactionWorstAC"); callCounter += 1;
+  lock(getFactionWorstAC_mutex, "getFactionWorstAC");
+  callCounter += 1;
   StackPushInteger(bMustBeVisible == true ? 1 : 0);
   StackPushObject(oFactionMember.id);
 
@@ -5213,7 +5511,7 @@ NWN::NWObject NWScriptI::getFactionWorstAC(const NWN::NWObject& oFactionMember, 
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getFactionWorstAC");
+  unlock(getFactionWorstAC_mutex, "getFactionWorstAC");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -5221,33 +5519,36 @@ NWN::NWObject NWScriptI::getFactionWorstAC(const NWN::NWObject& oFactionMember, 
 
 Ice::Int NWScriptI::getFamiliarCreatureType(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getFamiliarCreatureType"); callCounter += 1;
+  lock(getFamiliarCreatureType_mutex, "getFamiliarCreatureType");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(497, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getFamiliarCreatureType");
+  unlock(getFamiliarCreatureType_mutex, "getFamiliarCreatureType");
   return nRetVal;
 };
 
 std::string NWScriptI::getFamiliarName(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getFamiliarName"); callCounter += 1;
+  lock(getFamiliarName_mutex, "getFamiliarName");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(499, 1);
 
   char* sRetVal;
   StackPopString(&sRetVal);
-  unlock("getFamiliarName");
+  unlock(getFamiliarName_mutex, "getFamiliarName");
   return std::string(sRetVal);
 };
 
 NWN::NWEffect NWScriptI::getFirstEffect(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getFirstEffect"); callCounter += 1;
+  lock(getFirstEffect_mutex, "getFirstEffect");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(85, 1);
@@ -5262,13 +5563,14 @@ NWN::NWEffect NWScriptI::getFirstEffect(const NWN::NWObject& oCreature, const Ic
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("getFirstEffect");
+  unlock(getFirstEffect_mutex, "getFirstEffect");
   return e;
 };
 
 NWN::NWObject NWScriptI::getFirstFactionMember(const NWN::NWObject& oMemberOfFaction, bool bPCOnly, const Ice::Current& ice) {
   if (oMemberOfFaction.id < 0 || oMemberOfFaction.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getFirstFactionMember"); callCounter += 1;
+  lock(getFirstFactionMember_mutex, "getFirstFactionMember");
+  callCounter += 1;
   StackPushInteger(bPCOnly == true ? 1 : 0);
   StackPushObject(oMemberOfFaction.id);
 
@@ -5276,7 +5578,7 @@ NWN::NWObject NWScriptI::getFirstFactionMember(const NWN::NWObject& oMemberOfFac
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getFirstFactionMember");
+  unlock(getFirstFactionMember_mutex, "getFirstFactionMember");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -5284,7 +5586,8 @@ NWN::NWObject NWScriptI::getFirstFactionMember(const NWN::NWObject& oMemberOfFac
 
 NWN::NWObject NWScriptI::getFirstInPersistentObject(const NWN::NWObject& oPersistentObject, Ice::Int nResidentObjectType, Ice::Int nPersistentZone, const Ice::Current& ice) {
   if (oPersistentObject.id < 0 || oPersistentObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getFirstInPersistentObject"); callCounter += 1;
+  lock(getFirstInPersistentObject_mutex, "getFirstInPersistentObject");
+  callCounter += 1;
   StackPushInteger(nPersistentZone);
   StackPushInteger(nResidentObjectType);
   StackPushObject(oPersistentObject.id);
@@ -5293,7 +5596,7 @@ NWN::NWObject NWScriptI::getFirstInPersistentObject(const NWN::NWObject& oPersis
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getFirstInPersistentObject");
+  unlock(getFirstInPersistentObject_mutex, "getFirstInPersistentObject");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -5301,14 +5604,15 @@ NWN::NWObject NWScriptI::getFirstInPersistentObject(const NWN::NWObject& oPersis
 
 NWN::NWObject NWScriptI::getFirstItemInInventory(const NWN::NWObject& oTarget, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getFirstItemInInventory"); callCounter += 1;
+  lock(getFirstItemInInventory_mutex, "getFirstItemInInventory");
+  callCounter += 1;
   StackPushObject(oTarget.id);
 
   VM_ExecuteCommand(339, 1);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getFirstItemInInventory");
+  unlock(getFirstItemInInventory_mutex, "getFirstItemInInventory");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -5316,7 +5620,8 @@ NWN::NWObject NWScriptI::getFirstItemInInventory(const NWN::NWObject& oTarget, c
 
 NWN::NWItemProperty NWScriptI::getFirstItemProperty(const NWN::NWObject& oItem, const Ice::Current& ice) {
   if (oItem.id < 0 || oItem.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getFirstItemProperty"); callCounter += 1;
+  lock(getFirstItemProperty_mutex, "getFirstItemProperty");
+  callCounter += 1;
   StackPushObject(oItem.id);
 
   VM_ExecuteCommand(612, 1);
@@ -5331,20 +5636,21 @@ NWN::NWItemProperty NWScriptI::getFirstItemProperty(const NWN::NWObject& oItem, 
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("getFirstItemProperty");
+  unlock(getFirstItemProperty_mutex, "getFirstItemProperty");
   return e;
 };
 
 NWN::NWObject NWScriptI::getFirstObjectInArea(const NWN::NWObject& oArea, const Ice::Current& ice) {
   if (oArea.id < 0 || oArea.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getFirstObjectInArea"); callCounter += 1;
+  lock(getFirstObjectInArea_mutex, "getFirstObjectInArea");
+  callCounter += 1;
   StackPushObject(oArea.id);
 
   VM_ExecuteCommand(93, 1);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getFirstObjectInArea");
+  unlock(getFirstObjectInArea_mutex, "getFirstObjectInArea");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -5352,7 +5658,8 @@ NWN::NWObject NWScriptI::getFirstObjectInArea(const NWN::NWObject& oArea, const 
 
 NWN::NWObject NWScriptI::getFirstObjectInShape(NWN::ShapeType tShapeType, Ice::Double fSize, const NWN::NWLocation& lTarget, bool bLineOfSight, Ice::Int nObjectFilter, const NWN::NWVector& vOrigin, const Ice::Current& ice) {
   if (lTarget.area.id < 0) throw NWN::InvalidObjectException();
-  lock("getFirstObjectInShape"); callCounter += 1;
+  lock(getFirstObjectInShape_mutex, "getFirstObjectInShape");
+  callCounter += 1;
   Vector vvOrigin;
   vvOrigin.X = vOrigin.x; vvOrigin.Y = vOrigin.y; vvOrigin.Z = vOrigin.z;
   StackPushVector(vvOrigin);
@@ -5379,20 +5686,21 @@ NWN::NWObject NWScriptI::getFirstObjectInShape(NWN::ShapeType tShapeType, Ice::D
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getFirstObjectInShape");
+  unlock(getFirstObjectInShape_mutex, "getFirstObjectInShape");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
 };
 
 NWN::NWObject NWScriptI::getFirstPC(const Ice::Current& ice) {
-  lock("getFirstPC"); callCounter += 1;
+  lock(getFirstPC_mutex, "getFirstPC");
+  callCounter += 1;
 
   VM_ExecuteCommand(548, 0);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getFirstPC");
+  unlock(getFirstPC_mutex, "getFirstPC");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -5400,7 +5708,8 @@ NWN::NWObject NWScriptI::getFirstPC(const Ice::Current& ice) {
 
 Ice::Int NWScriptI::getFogAmount(Ice::Int nFogType, const NWN::NWObject& oArea, const Ice::Current& ice) {
   if (oArea.id < 0 || oArea.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getFogAmount"); callCounter += 1;
+  lock(getFogAmount_mutex, "getFogAmount");
+  callCounter += 1;
   StackPushObject(oArea.id);
   StackPushInteger(nFogType);
 
@@ -5408,13 +5717,14 @@ Ice::Int NWScriptI::getFogAmount(Ice::Int nFogType, const NWN::NWObject& oArea, 
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getFogAmount");
+  unlock(getFogAmount_mutex, "getFogAmount");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::getFogColor(Ice::Int nFogType, const NWN::NWObject& oArea, const Ice::Current& ice) {
   if (oArea.id < 0 || oArea.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getFogColor"); callCounter += 1;
+  lock(getFogColor_mutex, "getFogColor");
+  callCounter += 1;
   StackPushObject(oArea.id);
   StackPushInteger(nFogType);
 
@@ -5422,57 +5732,61 @@ Ice::Int NWScriptI::getFogColor(Ice::Int nFogType, const NWN::NWObject& oArea, c
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getFogColor");
+  unlock(getFogColor_mutex, "getFogColor");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::getFootstepType(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getFootstepType"); callCounter += 1;
+  lock(getFootstepType_mutex, "getFootstepType");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(788, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getFootstepType");
+  unlock(getFootstepType_mutex, "getFootstepType");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::getFortitudeSavingThrow(const NWN::NWObject& oTarget, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getFortitudeSavingThrow"); callCounter += 1;
+  lock(getFortitudeSavingThrow_mutex, "getFortitudeSavingThrow");
+  callCounter += 1;
   StackPushObject(oTarget.id);
 
   VM_ExecuteCommand(491, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getFortitudeSavingThrow");
+  unlock(getFortitudeSavingThrow_mutex, "getFortitudeSavingThrow");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::getGameDifficulty(const Ice::Current& ice) {
-  lock("getGameDifficulty"); callCounter += 1;
+  lock(getGameDifficulty_mutex, "getGameDifficulty");
+  callCounter += 1;
 
   VM_ExecuteCommand(513, 0);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getGameDifficulty");
+  unlock(getGameDifficulty_mutex, "getGameDifficulty");
   return nRetVal;
 };
 
 NWN::Gender NWScriptI::getGender(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getGender"); callCounter += 1;
+  lock(getGender_mutex, "getGender");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(358, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getGender");
+  unlock(getGender_mutex, "getGender");
   if (nRetVal == 0) return NWN::MaleGender;
   if (nRetVal == 1) return NWN::Female;
   if (nRetVal == 2) return NWN::BothGender;
@@ -5483,14 +5797,15 @@ NWN::Gender NWScriptI::getGender(const NWN::NWObject& oCreature, const Ice::Curr
 
 NWN::NWObject NWScriptI::getGoingToBeAttackedBy(const NWN::NWObject& oTarget, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getGoingToBeAttackedBy"); callCounter += 1;
+  lock(getGoingToBeAttackedBy_mutex, "getGoingToBeAttackedBy");
+  callCounter += 1;
   StackPushObject(oTarget.id);
 
   VM_ExecuteCommand(211, 1);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getGoingToBeAttackedBy");
+  unlock(getGoingToBeAttackedBy_mutex, "getGoingToBeAttackedBy");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -5498,59 +5813,64 @@ NWN::NWObject NWScriptI::getGoingToBeAttackedBy(const NWN::NWObject& oTarget, co
 
 Ice::Int NWScriptI::getGold(const NWN::NWObject& oTarget, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getGold"); callCounter += 1;
+  lock(getGold_mutex, "getGold");
+  callCounter += 1;
   StackPushObject(oTarget.id);
 
   VM_ExecuteCommand(418, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getGold");
+  unlock(getGold_mutex, "getGold");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::getGoldPieceValue(const NWN::NWObject& oItem, const Ice::Current& ice) {
   if (oItem.id < 0 || oItem.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getGoldPieceValue"); callCounter += 1;
+  lock(getGoldPieceValue_mutex, "getGoldPieceValue");
+  callCounter += 1;
   StackPushObject(oItem.id);
 
   VM_ExecuteCommand(311, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getGoldPieceValue");
+  unlock(getGoldPieceValue_mutex, "getGoldPieceValue");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::getGoodEvilValue(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getGoodEvilValue"); callCounter += 1;
+  lock(getGoodEvilValue_mutex, "getGoodEvilValue");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(125, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getGoodEvilValue");
+  unlock(getGoodEvilValue_mutex, "getGoodEvilValue");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::getHardness(const NWN::NWObject& oObject, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getHardness"); callCounter += 1;
+  lock(getHardness_mutex, "getHardness");
+  callCounter += 1;
   StackPushObject(oObject.id);
 
   VM_ExecuteCommand(796, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getHardness");
+  unlock(getHardness_mutex, "getHardness");
   return nRetVal;
 };
 
 bool NWScriptI::getHasFeat(Ice::Int nFeat, const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getHasFeat"); callCounter += 1;
+  lock(getHasFeat_mutex, "getHasFeat");
+  callCounter += 1;
   StackPushObject(oCreature.id);
   StackPushInteger(nFeat);
 
@@ -5558,13 +5878,14 @@ bool NWScriptI::getHasFeat(Ice::Int nFeat, const NWN::NWObject& oCreature, const
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getHasFeat");
+  unlock(getHasFeat_mutex, "getHasFeat");
   return nRetVal != 0;
 };
 
 bool NWScriptI::getHasFeatEffect(Ice::Int nFeat, const NWN::NWObject& oObject, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getHasFeatEffect"); callCounter += 1;
+  lock(getHasFeatEffect_mutex, "getHasFeatEffect");
+  callCounter += 1;
   StackPushObject(oObject.id);
   StackPushInteger(nFeat);
 
@@ -5572,26 +5893,28 @@ bool NWScriptI::getHasFeatEffect(Ice::Int nFeat, const NWN::NWObject& oObject, c
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getHasFeatEffect");
+  unlock(getHasFeatEffect_mutex, "getHasFeatEffect");
   return nRetVal != 0;
 };
 
 bool NWScriptI::getHasInventory(const NWN::NWObject& oObject, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getHasInventory"); callCounter += 1;
+  lock(getHasInventory_mutex, "getHasInventory");
+  callCounter += 1;
   StackPushObject(oObject.id);
 
   VM_ExecuteCommand(570, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getHasInventory");
+  unlock(getHasInventory_mutex, "getHasInventory");
   return nRetVal != 0;
 };
 
 bool NWScriptI::getHasSkill(Ice::Int nSkill, const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getHasSkill"); callCounter += 1;
+  lock(getHasSkill_mutex, "getHasSkill");
+  callCounter += 1;
   StackPushObject(oCreature.id);
   StackPushInteger(nSkill);
 
@@ -5599,13 +5922,14 @@ bool NWScriptI::getHasSkill(Ice::Int nSkill, const NWN::NWObject& oCreature, con
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getHasSkill");
+  unlock(getHasSkill_mutex, "getHasSkill");
   return nRetVal != 0;
 };
 
 bool NWScriptI::getHasSpell(Ice::Int nSpell, const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getHasSpell"); callCounter += 1;
+  lock(getHasSpell_mutex, "getHasSpell");
+  callCounter += 1;
   StackPushObject(oCreature.id);
   StackPushInteger(nSpell);
 
@@ -5613,13 +5937,14 @@ bool NWScriptI::getHasSpell(Ice::Int nSpell, const NWN::NWObject& oCreature, con
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getHasSpell");
+  unlock(getHasSpell_mutex, "getHasSpell");
   return nRetVal != 0;
 };
 
 bool NWScriptI::getHasSpellEffect(Ice::Int nSpell, const NWN::NWObject& oObject, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getHasSpellEffect"); callCounter += 1;
+  lock(getHasSpellEffect_mutex, "getHasSpellEffect");
+  callCounter += 1;
   StackPushObject(oObject.id);
   StackPushInteger(nSpell);
 
@@ -5627,13 +5952,14 @@ bool NWScriptI::getHasSpellEffect(Ice::Int nSpell, const NWN::NWObject& oObject,
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getHasSpellEffect");
+  unlock(getHasSpellEffect_mutex, "getHasSpellEffect");
   return nRetVal != 0;
 };
 
 NWN::NWObject NWScriptI::getHenchman(const NWN::NWObject& oMaster, Ice::Int nNth, const Ice::Current& ice) {
   if (oMaster.id < 0 || oMaster.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getHenchman"); callCounter += 1;
+  lock(getHenchman_mutex, "getHenchman");
+  callCounter += 1;
   StackPushInteger(nNth);
   StackPushObject(oMaster.id);
 
@@ -5641,7 +5967,7 @@ NWN::NWObject NWScriptI::getHenchman(const NWN::NWObject& oMaster, Ice::Int nNth
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getHenchman");
+  unlock(getHenchman_mutex, "getHenchman");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -5649,196 +5975,212 @@ NWN::NWObject NWScriptI::getHenchman(const NWN::NWObject& oMaster, Ice::Int nNth
 
 Ice::Int NWScriptI::getHitDice(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getHitDice"); callCounter += 1;
+  lock(getHitDice_mutex, "getHitDice");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(166, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getHitDice");
+  unlock(getHitDice_mutex, "getHitDice");
   return nRetVal;
 };
 
 bool NWScriptI::getIdentified(const NWN::NWObject& oItem, const Ice::Current& ice) {
   if (oItem.id < 0 || oItem.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getIdentified"); callCounter += 1;
+  lock(getIdentified_mutex, "getIdentified");
+  callCounter += 1;
   StackPushObject(oItem.id);
 
   VM_ExecuteCommand(332, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getIdentified");
+  unlock(getIdentified_mutex, "getIdentified");
   return nRetVal != 0;
 };
 
 bool NWScriptI::getImmortal(const NWN::NWObject& oTarget, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getImmortal"); callCounter += 1;
+  lock(getImmortal_mutex, "getImmortal");
+  callCounter += 1;
   StackPushObject(oTarget.id);
 
   VM_ExecuteCommand(708, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getImmortal");
+  unlock(getImmortal_mutex, "getImmortal");
   return nRetVal != 0;
 };
 
 bool NWScriptI::getInfiniteFlag(const NWN::NWObject& oItem, const Ice::Current& ice) {
   if (oItem.id < 0 || oItem.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getInfiniteFlag"); callCounter += 1;
+  lock(getInfiniteFlag_mutex, "getInfiniteFlag");
+  callCounter += 1;
   StackPushObject(oItem.id);
 
   VM_ExecuteCommand(827, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getInfiniteFlag");
+  unlock(getInfiniteFlag_mutex, "getInfiniteFlag");
   return nRetVal != 0;
 };
 
 NWN::NWObject NWScriptI::getInventoryDisturbItem(const Ice::Current& ice) {
-  lock("getInventoryDisturbItem"); callCounter += 1;
+  lock(getInventoryDisturbItem_mutex, "getInventoryDisturbItem");
+  callCounter += 1;
 
   VM_ExecuteCommand(353, 0);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getInventoryDisturbItem");
+  unlock(getInventoryDisturbItem_mutex, "getInventoryDisturbItem");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
 };
 
 Ice::Int NWScriptI::getInventoryDisturbType(const Ice::Current& ice) {
-  lock("getInventoryDisturbType"); callCounter += 1;
+  lock(getInventoryDisturbType_mutex, "getInventoryDisturbType");
+  callCounter += 1;
 
   VM_ExecuteCommand(352, 0);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getInventoryDisturbType");
+  unlock(getInventoryDisturbType_mutex, "getInventoryDisturbType");
   return nRetVal;
 };
 
 bool NWScriptI::getIsAreaAboveGround(const NWN::NWObject& oArea, const Ice::Current& ice) {
   if (oArea.id < 0 || oArea.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getIsAreaAboveGround"); callCounter += 1;
+  lock(getIsAreaAboveGround_mutex, "getIsAreaAboveGround");
+  callCounter += 1;
   StackPushObject(oArea.id);
 
   VM_ExecuteCommand(726, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getIsAreaAboveGround");
+  unlock(getIsAreaAboveGround_mutex, "getIsAreaAboveGround");
   return nRetVal != 0;
 };
 
 bool NWScriptI::getIsAreaInterior(const NWN::NWObject& oArea, const Ice::Current& ice) {
   if (oArea.id < 0 || oArea.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getIsAreaInterior"); callCounter += 1;
+  lock(getIsAreaInterior_mutex, "getIsAreaInterior");
+  callCounter += 1;
   StackPushObject(oArea.id);
 
   VM_ExecuteCommand(716, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getIsAreaInterior");
+  unlock(getIsAreaInterior_mutex, "getIsAreaInterior");
   return nRetVal != 0;
 };
 
 bool NWScriptI::getIsAreaNatural(const NWN::NWObject& oArea, const Ice::Current& ice) {
   if (oArea.id < 0 || oArea.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getIsAreaNatural"); callCounter += 1;
+  lock(getIsAreaNatural_mutex, "getIsAreaNatural");
+  callCounter += 1;
   StackPushObject(oArea.id);
 
   VM_ExecuteCommand(725, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getIsAreaNatural");
+  unlock(getIsAreaNatural_mutex, "getIsAreaNatural");
   return nRetVal != 0;
 };
 
 bool NWScriptI::getIsCreatureDisarmable(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getIsCreatureDisarmable"); callCounter += 1;
+  lock(getIsCreatureDisarmable_mutex, "getIsCreatureDisarmable");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(773, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getIsCreatureDisarmable");
+  unlock(getIsCreatureDisarmable_mutex, "getIsCreatureDisarmable");
   return nRetVal != 0;
 };
 
 bool NWScriptI::getIsDM(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getIsDM"); callCounter += 1;
+  lock(getIsDM_mutex, "getIsDM");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(420, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getIsDM");
+  unlock(getIsDM_mutex, "getIsDM");
   return nRetVal != 0;
 };
 
 bool NWScriptI::getIsDMPossessed(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getIsDMPossessed"); callCounter += 1;
+  lock(getIsDMPossessed_mutex, "getIsDMPossessed");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(723, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getIsDMPossessed");
+  unlock(getIsDMPossessed_mutex, "getIsDMPossessed");
   return nRetVal != 0;
 };
 
 bool NWScriptI::getIsDawn(const Ice::Current& ice) {
-  lock("getIsDawn"); callCounter += 1;
+  lock(getIsDawn_mutex, "getIsDawn");
+  callCounter += 1;
 
   VM_ExecuteCommand(407, 0);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getIsDawn");
+  unlock(getIsDawn_mutex, "getIsDawn");
   return nRetVal != 0;
 };
 
 bool NWScriptI::getIsDay(const Ice::Current& ice) {
-  lock("getIsDay"); callCounter += 1;
+  lock(getIsDay_mutex, "getIsDay");
+  callCounter += 1;
 
   VM_ExecuteCommand(405, 0);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getIsDay");
+  unlock(getIsDay_mutex, "getIsDay");
   return nRetVal != 0;
 };
 
 bool NWScriptI::getIsDead(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getIsDead"); callCounter += 1;
+  lock(getIsDead_mutex, "getIsDead");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(140, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getIsDead");
+  unlock(getIsDead_mutex, "getIsDead");
   return nRetVal != 0;
 };
 
 bool NWScriptI::getIsDoorActionPossible(const NWN::NWObject& oTargetDoor, NWN::DoorAction tDoorAction, const Ice::Current& ice) {
   if (oTargetDoor.id < 0 || oTargetDoor.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getIsDoorActionPossible"); callCounter += 1;
+  lock(getIsDoorActionPossible_mutex, "getIsDoorActionPossible");
+  callCounter += 1;
   if (tDoorAction == NWN::OpenDoor) StackPushInteger(0);
    else if (tDoorAction == NWN::UnlockDoor) StackPushInteger(1);
    else if (tDoorAction == NWN::BashDoor) StackPushInteger(2);
@@ -5851,25 +6193,27 @@ bool NWScriptI::getIsDoorActionPossible(const NWN::NWObject& oTargetDoor, NWN::D
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getIsDoorActionPossible");
+  unlock(getIsDoorActionPossible_mutex, "getIsDoorActionPossible");
   return nRetVal != 0;
 };
 
 bool NWScriptI::getIsDusk(const Ice::Current& ice) {
-  lock("getIsDusk"); callCounter += 1;
+  lock(getIsDusk_mutex, "getIsDusk");
+  callCounter += 1;
 
   VM_ExecuteCommand(408, 0);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getIsDusk");
+  unlock(getIsDusk_mutex, "getIsDusk");
   return nRetVal != 0;
 };
 
 bool NWScriptI::getIsEffectValid(const NWN::NWEffect& eEffect, const Ice::Current& ice) {
   if (effectMap.find(eEffect.id) == effectMap.end()) throw NWN::InvalidEffectException();
   
-  lock("getIsEffectValid"); callCounter += 1;
+  lock(getIsEffectValid_mutex, "getIsEffectValid");
+  callCounter += 1;
   CGameEffect *eEffect_ptr = effectMap.find(eEffect.id)->second;
   StackPushEngineStructure(ENGINE_STRUCTURE_EFFECT, eEffect_ptr);
 
@@ -5877,27 +6221,29 @@ bool NWScriptI::getIsEffectValid(const NWN::NWEffect& eEffect, const Ice::Curren
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getIsEffectValid");
+  unlock(getIsEffectValid_mutex, "getIsEffectValid");
   return nRetVal != 0;
 };
 
 bool NWScriptI::getIsEncounterCreature(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getIsEncounterCreature"); callCounter += 1;
+  lock(getIsEncounterCreature_mutex, "getIsEncounterCreature");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(409, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getIsEncounterCreature");
+  unlock(getIsEncounterCreature_mutex, "getIsEncounterCreature");
   return nRetVal != 0;
 };
 
 bool NWScriptI::getIsEnemy(const NWN::NWObject& oTarget, const NWN::NWObject& oSource, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (oSource.id < 0 || oSource.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getIsEnemy"); callCounter += 1;
+  lock(getIsEnemy_mutex, "getIsEnemy");
+  callCounter += 1;
   StackPushObject(oSource.id);
   StackPushObject(oTarget.id);
 
@@ -5905,14 +6251,15 @@ bool NWScriptI::getIsEnemy(const NWN::NWObject& oTarget, const NWN::NWObject& oS
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getIsEnemy");
+  unlock(getIsEnemy_mutex, "getIsEnemy");
   return nRetVal != 0;
 };
 
 bool NWScriptI::getIsFriend(const NWN::NWObject& oTarget, const NWN::NWObject& oSource, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (oSource.id < 0 || oSource.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getIsFriend"); callCounter += 1;
+  lock(getIsFriend_mutex, "getIsFriend");
+  callCounter += 1;
   StackPushObject(oSource.id);
   StackPushObject(oTarget.id);
 
@@ -5920,14 +6267,15 @@ bool NWScriptI::getIsFriend(const NWN::NWObject& oTarget, const NWN::NWObject& o
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getIsFriend");
+  unlock(getIsFriend_mutex, "getIsFriend");
   return nRetVal != 0;
 };
 
 bool NWScriptI::getIsImmune(const NWN::NWObject& oCreature, Ice::Int nImmunityType, const NWN::NWObject& oVersus, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (oVersus.id < 0 || oVersus.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getIsImmune"); callCounter += 1;
+  lock(getIsImmune_mutex, "getIsImmune");
+  callCounter += 1;
   StackPushObject(oVersus.id);
   StackPushInteger(nImmunityType);
   StackPushObject(oCreature.id);
@@ -5936,27 +6284,29 @@ bool NWScriptI::getIsImmune(const NWN::NWObject& oCreature, Ice::Int nImmunityTy
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getIsImmune");
+  unlock(getIsImmune_mutex, "getIsImmune");
   return nRetVal != 0;
 };
 
 bool NWScriptI::getIsInCombat(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getIsInCombat"); callCounter += 1;
+  lock(getIsInCombat_mutex, "getIsInCombat");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(320, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getIsInCombat");
+  unlock(getIsInCombat_mutex, "getIsInCombat");
   return nRetVal != 0;
 };
 
 bool NWScriptI::getIsInSubArea(const NWN::NWObject& oCreature, const NWN::NWObject& oSubArea, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (oSubArea.id < 0 || oSubArea.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getIsInSubArea"); callCounter += 1;
+  lock(getIsInSubArea_mutex, "getIsInSubArea");
+  callCounter += 1;
   StackPushObject(oSubArea.id);
   StackPushObject(oCreature.id);
 
@@ -5964,14 +6314,15 @@ bool NWScriptI::getIsInSubArea(const NWN::NWObject& oCreature, const NWN::NWObje
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getIsInSubArea");
+  unlock(getIsInSubArea_mutex, "getIsInSubArea");
   return nRetVal != 0;
 };
 
 bool NWScriptI::getIsItemPropertyValid(const NWN::NWItemProperty& ipProperty, const Ice::Current& ice) {
   if (iprpMap.find(ipProperty.id) == iprpMap.end()) throw NWN::InvalidItemPropertyException();
   
-  lock("getIsItemPropertyValid"); callCounter += 1;
+  lock(getIsItemPropertyValid_mutex, "getIsItemPropertyValid");
+  callCounter += 1;
   CGameEffect *ipProperty_ptr = iprpMap.find(ipProperty.id)->second;
   StackPushEngineStructure(ENGINE_STRUCTURE_ITEMPROPERTY, ipProperty_ptr);
 
@@ -5979,27 +6330,29 @@ bool NWScriptI::getIsItemPropertyValid(const NWN::NWItemProperty& ipProperty, co
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getIsItemPropertyValid");
+  unlock(getIsItemPropertyValid_mutex, "getIsItemPropertyValid");
   return nRetVal != 0;
 };
 
 bool NWScriptI::getIsListening(const NWN::NWObject& oObject, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getIsListening"); callCounter += 1;
+  lock(getIsListening_mutex, "getIsListening");
+  callCounter += 1;
   StackPushObject(oObject.id);
 
   VM_ExecuteCommand(174, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getIsListening");
+  unlock(getIsListening_mutex, "getIsListening");
   return nRetVal != 0;
 };
 
 bool NWScriptI::getIsNeutral(const NWN::NWObject& oTarget, const NWN::NWObject& oSource, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (oSource.id < 0 || oSource.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getIsNeutral"); callCounter += 1;
+  lock(getIsNeutral_mutex, "getIsNeutral");
+  callCounter += 1;
   StackPushObject(oSource.id);
   StackPushObject(oTarget.id);
 
@@ -6007,63 +6360,68 @@ bool NWScriptI::getIsNeutral(const NWN::NWObject& oTarget, const NWN::NWObject& 
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getIsNeutral");
+  unlock(getIsNeutral_mutex, "getIsNeutral");
   return nRetVal != 0;
 };
 
 bool NWScriptI::getIsNight(const Ice::Current& ice) {
-  lock("getIsNight"); callCounter += 1;
+  lock(getIsNight_mutex, "getIsNight");
+  callCounter += 1;
 
   VM_ExecuteCommand(406, 0);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getIsNight");
+  unlock(getIsNight_mutex, "getIsNight");
   return nRetVal != 0;
 };
 
 bool NWScriptI::getIsObjectValid(const NWN::NWObject& oObject, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getIsObjectValid"); callCounter += 1;
+  lock(getIsObjectValid_mutex, "getIsObjectValid");
+  callCounter += 1;
   StackPushObject(oObject.id);
 
   VM_ExecuteCommand(42, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getIsObjectValid");
+  unlock(getIsObjectValid_mutex, "getIsObjectValid");
   return nRetVal != 0;
 };
 
 bool NWScriptI::getIsOpen(const NWN::NWObject& oObject, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getIsOpen"); callCounter += 1;
+  lock(getIsOpen_mutex, "getIsOpen");
+  callCounter += 1;
   StackPushObject(oObject.id);
 
   VM_ExecuteCommand(443, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getIsOpen");
+  unlock(getIsOpen_mutex, "getIsOpen");
   return nRetVal != 0;
 };
 
 bool NWScriptI::getIsPC(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getIsPC"); callCounter += 1;
+  lock(getIsPC_mutex, "getIsPC");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(217, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getIsPC");
+  unlock(getIsPC_mutex, "getIsPC");
   return nRetVal != 0;
 };
 
 bool NWScriptI::getIsPlaceableObjectActionPossible(const NWN::NWObject& oPlaceable, NWN::PlaceableAction tPlaceableAction, const Ice::Current& ice) {
   if (oPlaceable.id < 0 || oPlaceable.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getIsPlaceableObjectActionPossible"); callCounter += 1;
+  lock(getIsPlaceableObjectActionPossible_mutex, "getIsPlaceableObjectActionPossible");
+  callCounter += 1;
   if (tPlaceableAction == NWN::UsePlaceable) StackPushInteger(0);
    else if (tPlaceableAction == NWN::UnlockPlaceable) StackPushInteger(1);
    else if (tPlaceableAction == NWN::BashPlaceable) StackPushInteger(2);
@@ -6075,40 +6433,43 @@ bool NWScriptI::getIsPlaceableObjectActionPossible(const NWN::NWObject& oPlaceab
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getIsPlaceableObjectActionPossible");
+  unlock(getIsPlaceableObjectActionPossible_mutex, "getIsPlaceableObjectActionPossible");
   return nRetVal != 0;
 };
 
 bool NWScriptI::getIsPlayableRacialType(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getIsPlayableRacialType"); callCounter += 1;
+  lock(getIsPlayableRacialType_mutex, "getIsPlayableRacialType");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(312, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getIsPlayableRacialType");
+  unlock(getIsPlayableRacialType_mutex, "getIsPlayableRacialType");
   return nRetVal != 0;
 };
 
 bool NWScriptI::getIsPossessedFamiliar(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getIsPossessedFamiliar"); callCounter += 1;
+  lock(getIsPossessedFamiliar_mutex, "getIsPossessedFamiliar");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(714, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getIsPossessedFamiliar");
+  unlock(getIsPossessedFamiliar_mutex, "getIsPossessedFamiliar");
   return nRetVal != 0;
 };
 
 bool NWScriptI::getIsReactionTypeFriendly(const NWN::NWObject& oTarget, const NWN::NWObject& oSource, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (oSource.id < 0 || oSource.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getIsReactionTypeFriendly"); callCounter += 1;
+  lock(getIsReactionTypeFriendly_mutex, "getIsReactionTypeFriendly");
+  callCounter += 1;
   StackPushObject(oSource.id);
   StackPushObject(oTarget.id);
 
@@ -6116,14 +6477,15 @@ bool NWScriptI::getIsReactionTypeFriendly(const NWN::NWObject& oTarget, const NW
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getIsReactionTypeFriendly");
+  unlock(getIsReactionTypeFriendly_mutex, "getIsReactionTypeFriendly");
   return nRetVal != 0;
 };
 
 bool NWScriptI::getIsReactionTypeHostile(const NWN::NWObject& oTarget, const NWN::NWObject& oSource, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (oSource.id < 0 || oSource.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getIsReactionTypeHostile"); callCounter += 1;
+  lock(getIsReactionTypeHostile_mutex, "getIsReactionTypeHostile");
+  callCounter += 1;
   StackPushObject(oSource.id);
   StackPushObject(oTarget.id);
 
@@ -6131,14 +6493,15 @@ bool NWScriptI::getIsReactionTypeHostile(const NWN::NWObject& oTarget, const NWN
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getIsReactionTypeHostile");
+  unlock(getIsReactionTypeHostile_mutex, "getIsReactionTypeHostile");
   return nRetVal != 0;
 };
 
 bool NWScriptI::getIsReactionTypeNeutral(const NWN::NWObject& oTarget, const NWN::NWObject& oSource, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (oSource.id < 0 || oSource.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getIsReactionTypeNeutral"); callCounter += 1;
+  lock(getIsReactionTypeNeutral_mutex, "getIsReactionTypeNeutral");
+  callCounter += 1;
   StackPushObject(oSource.id);
   StackPushObject(oTarget.id);
 
@@ -6146,26 +6509,28 @@ bool NWScriptI::getIsReactionTypeNeutral(const NWN::NWObject& oTarget, const NWN
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getIsReactionTypeNeutral");
+  unlock(getIsReactionTypeNeutral_mutex, "getIsReactionTypeNeutral");
   return nRetVal != 0;
 };
 
 bool NWScriptI::getIsResting(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getIsResting"); callCounter += 1;
+  lock(getIsResting_mutex, "getIsResting");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(505, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getIsResting");
+  unlock(getIsResting_mutex, "getIsResting");
   return nRetVal != 0;
 };
 
 bool NWScriptI::getIsSkillSuccessful(const NWN::NWObject& oTarget, Ice::Int nSkill, Ice::Int nDifficulty, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getIsSkillSuccessful"); callCounter += 1;
+  lock(getIsSkillSuccessful_mutex, "getIsSkillSuccessful");
+  callCounter += 1;
   StackPushInteger(nDifficulty);
   StackPushInteger(nSkill);
   StackPushObject(oTarget.id);
@@ -6174,26 +6539,28 @@ bool NWScriptI::getIsSkillSuccessful(const NWN::NWObject& oTarget, Ice::Int nSki
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getIsSkillSuccessful");
+  unlock(getIsSkillSuccessful_mutex, "getIsSkillSuccessful");
   return nRetVal != 0;
 };
 
 bool NWScriptI::getIsTrapped(const NWN::NWObject& oObject, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getIsTrapped"); callCounter += 1;
+  lock(getIsTrapped_mutex, "getIsTrapped");
+  callCounter += 1;
   StackPushObject(oObject.id);
 
   VM_ExecuteCommand(551, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getIsTrapped");
+  unlock(getIsTrapped_mutex, "getIsTrapped");
   return nRetVal != 0;
 };
 
 bool NWScriptI::getIsWeaponEffective(const NWN::NWObject& oVersus, bool bOffHand, const Ice::Current& ice) {
   if (oVersus.id < 0 || oVersus.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getIsWeaponEffective"); callCounter += 1;
+  lock(getIsWeaponEffective_mutex, "getIsWeaponEffective");
+  callCounter += 1;
   StackPushInteger(bOffHand == true ? 1 : 0);
   StackPushObject(oVersus.id);
 
@@ -6201,51 +6568,55 @@ bool NWScriptI::getIsWeaponEffective(const NWN::NWObject& oVersus, bool bOffHand
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getIsWeaponEffective");
+  unlock(getIsWeaponEffective_mutex, "getIsWeaponEffective");
   return nRetVal != 0;
 };
 
 Ice::Int NWScriptI::getItemACValue(const NWN::NWObject& oItem, const Ice::Current& ice) {
   if (oItem.id < 0 || oItem.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getItemACValue"); callCounter += 1;
+  lock(getItemACValue_mutex, "getItemACValue");
+  callCounter += 1;
   StackPushObject(oItem.id);
 
   VM_ExecuteCommand(401, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getItemACValue");
+  unlock(getItemACValue_mutex, "getItemACValue");
   return nRetVal;
 };
 
 NWN::NWObject NWScriptI::getItemActivated(const Ice::Current& ice) {
-  lock("getItemActivated"); callCounter += 1;
+  lock(getItemActivated_mutex, "getItemActivated");
+  callCounter += 1;
 
   VM_ExecuteCommand(439, 0);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getItemActivated");
+  unlock(getItemActivated_mutex, "getItemActivated");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
 };
 
 NWN::NWObject NWScriptI::getItemActivatedTarget(const Ice::Current& ice) {
-  lock("getItemActivatedTarget"); callCounter += 1;
+  lock(getItemActivatedTarget_mutex, "getItemActivatedTarget");
+  callCounter += 1;
 
   VM_ExecuteCommand(442, 0);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getItemActivatedTarget");
+  unlock(getItemActivatedTarget_mutex, "getItemActivatedTarget");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
 };
 
 NWN::NWLocation NWScriptI::getItemActivatedTargetLocation(const Ice::Current& ice) {
-  lock("getItemActivatedTargetLocation"); callCounter += 1;
+  lock(getItemActivatedTargetLocation_mutex, "getItemActivatedTargetLocation");
+  callCounter += 1;
 
   VM_ExecuteCommand(441, 0);
 
@@ -6259,18 +6630,19 @@ NWN::NWLocation NWScriptI::getItemActivatedTargetLocation(const Ice::Current& ic
   nl.orientationY = pRetVal->OrientationY;
   nl.orientationZ = pRetVal->OrientationZ;
   nl.area.id = pRetVal->AreaID;
-  unlock("getItemActivatedTargetLocation");
+  unlock(getItemActivatedTargetLocation_mutex, "getItemActivatedTargetLocation");
   return nl;
 };
 
 NWN::NWObject NWScriptI::getItemActivator(const Ice::Current& ice) {
-  lock("getItemActivator"); callCounter += 1;
+  lock(getItemActivator_mutex, "getItemActivator");
+  callCounter += 1;
 
   VM_ExecuteCommand(440, 0);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getItemActivator");
+  unlock(getItemActivator_mutex, "getItemActivator");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -6278,7 +6650,8 @@ NWN::NWObject NWScriptI::getItemActivator(const Ice::Current& ice) {
 
 Ice::Int NWScriptI::getItemAppearance(const NWN::NWObject& oItem, Ice::Int nType, Ice::Int nIndex, const Ice::Current& ice) {
   if (oItem.id < 0 || oItem.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getItemAppearance"); callCounter += 1;
+  lock(getItemAppearance_mutex, "getItemAppearance");
+  callCounter += 1;
   StackPushInteger(nIndex);
   StackPushInteger(nType);
   StackPushObject(oItem.id);
@@ -6287,39 +6660,42 @@ Ice::Int NWScriptI::getItemAppearance(const NWN::NWObject& oItem, Ice::Int nType
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getItemAppearance");
+  unlock(getItemAppearance_mutex, "getItemAppearance");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::getItemCharges(const NWN::NWObject& oItem, const Ice::Current& ice) {
   if (oItem.id < 0 || oItem.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getItemCharges"); callCounter += 1;
+  lock(getItemCharges_mutex, "getItemCharges");
+  callCounter += 1;
   StackPushObject(oItem.id);
 
   VM_ExecuteCommand(607, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getItemCharges");
+  unlock(getItemCharges_mutex, "getItemCharges");
   return nRetVal;
 };
 
 bool NWScriptI::getItemCursedFlag(const NWN::NWObject& oItem, const Ice::Current& ice) {
   if (oItem.id < 0 || oItem.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getItemCursedFlag"); callCounter += 1;
+  lock(getItemCursedFlag_mutex, "getItemCursedFlag");
+  callCounter += 1;
   StackPushObject(oItem.id);
 
   VM_ExecuteCommand(744, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getItemCursedFlag");
+  unlock(getItemCursedFlag_mutex, "getItemCursedFlag");
   return nRetVal != 0;
 };
 
 bool NWScriptI::getItemHasItemProperty(const NWN::NWObject& oItem, Ice::Int nProperty, const Ice::Current& ice) {
   if (oItem.id < 0 || oItem.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getItemHasItemProperty"); callCounter += 1;
+  lock(getItemHasItemProperty_mutex, "getItemHasItemProperty");
+  callCounter += 1;
   StackPushInteger(nProperty);
   StackPushObject(oItem.id);
 
@@ -6327,13 +6703,14 @@ bool NWScriptI::getItemHasItemProperty(const NWN::NWObject& oItem, Ice::Int nPro
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getItemHasItemProperty");
+  unlock(getItemHasItemProperty_mutex, "getItemHasItemProperty");
   return nRetVal != 0;
 };
 
 NWN::NWObject NWScriptI::getItemInSlot(NWN::InventorySlot tInventorySlot, const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getItemInSlot"); callCounter += 1;
+  lock(getItemInSlot_mutex, "getItemInSlot");
+  callCounter += 1;
   StackPushObject(oCreature.id);
   if (tInventorySlot == NWN::CreatureBiteSlot) StackPushInteger(16);
    else if (tInventorySlot == NWN::LefthandSlot) StackPushInteger(5);
@@ -6359,7 +6736,7 @@ NWN::NWObject NWScriptI::getItemInSlot(NWN::InventorySlot tInventorySlot, const 
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getItemInSlot");
+  unlock(getItemInSlot_mutex, "getItemInSlot");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -6367,7 +6744,8 @@ NWN::NWObject NWScriptI::getItemInSlot(NWN::InventorySlot tInventorySlot, const 
 
 NWN::NWObject NWScriptI::getItemPossessedBy(const NWN::NWObject& oCreature, const std::string& sItemTag, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getItemPossessedBy"); callCounter += 1;
+  lock(getItemPossessedBy_mutex, "getItemPossessedBy");
+  callCounter += 1;
   StackPushString(sItemTag.c_str());
   StackPushObject(oCreature.id);
 
@@ -6375,7 +6753,7 @@ NWN::NWObject NWScriptI::getItemPossessedBy(const NWN::NWObject& oCreature, cons
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getItemPossessedBy");
+  unlock(getItemPossessedBy_mutex, "getItemPossessedBy");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -6383,14 +6761,15 @@ NWN::NWObject NWScriptI::getItemPossessedBy(const NWN::NWObject& oCreature, cons
 
 NWN::NWObject NWScriptI::getItemPossessor(const NWN::NWObject& oItem, const Ice::Current& ice) {
   if (oItem.id < 0 || oItem.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getItemPossessor"); callCounter += 1;
+  lock(getItemPossessor_mutex, "getItemPossessor");
+  callCounter += 1;
   StackPushObject(oItem.id);
 
   VM_ExecuteCommand(29, 1);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getItemPossessor");
+  unlock(getItemPossessor_mutex, "getItemPossessor");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -6399,7 +6778,8 @@ NWN::NWObject NWScriptI::getItemPossessor(const NWN::NWObject& oItem, const Ice:
 Ice::Int NWScriptI::getItemPropertyCostTable(const NWN::NWItemProperty& iProp, const Ice::Current& ice) {
   if (iprpMap.find(iProp.id) == iprpMap.end()) throw NWN::InvalidItemPropertyException();
   
-  lock("getItemPropertyCostTable"); callCounter += 1;
+  lock(getItemPropertyCostTable_mutex, "getItemPropertyCostTable");
+  callCounter += 1;
   CGameEffect *iProp_ptr = iprpMap.find(iProp.id)->second;
   StackPushEngineStructure(ENGINE_STRUCTURE_ITEMPROPERTY, iProp_ptr);
 
@@ -6407,14 +6787,15 @@ Ice::Int NWScriptI::getItemPropertyCostTable(const NWN::NWItemProperty& iProp, c
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getItemPropertyCostTable");
+  unlock(getItemPropertyCostTable_mutex, "getItemPropertyCostTable");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::getItemPropertyCostTableValue(const NWN::NWItemProperty& iProp, const Ice::Current& ice) {
   if (iprpMap.find(iProp.id) == iprpMap.end()) throw NWN::InvalidItemPropertyException();
   
-  lock("getItemPropertyCostTableValue"); callCounter += 1;
+  lock(getItemPropertyCostTableValue_mutex, "getItemPropertyCostTableValue");
+  callCounter += 1;
   CGameEffect *iProp_ptr = iprpMap.find(iProp.id)->second;
   StackPushEngineStructure(ENGINE_STRUCTURE_ITEMPROPERTY, iProp_ptr);
 
@@ -6422,14 +6803,15 @@ Ice::Int NWScriptI::getItemPropertyCostTableValue(const NWN::NWItemProperty& iPr
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getItemPropertyCostTableValue");
+  unlock(getItemPropertyCostTableValue_mutex, "getItemPropertyCostTableValue");
   return nRetVal;
 };
 
 NWN::DurationType NWScriptI::getItemPropertyDurationType(const NWN::NWItemProperty& ip, const Ice::Current& ice) {
   if (iprpMap.find(ip.id) == iprpMap.end()) throw NWN::InvalidItemPropertyException();
   
-  lock("getItemPropertyDurationType"); callCounter += 1;
+  lock(getItemPropertyDurationType_mutex, "getItemPropertyDurationType");
+  callCounter += 1;
   CGameEffect *ip_ptr = iprpMap.find(ip.id)->second;
   StackPushEngineStructure(ENGINE_STRUCTURE_ITEMPROPERTY, ip_ptr);
 
@@ -6437,7 +6819,7 @@ NWN::DurationType NWScriptI::getItemPropertyDurationType(const NWN::NWItemProper
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getItemPropertyDurationType");
+  unlock(getItemPropertyDurationType_mutex, "getItemPropertyDurationType");
   if (nRetVal == 0) return NWN::Instant;
   if (nRetVal == 1) return NWN::Temporary;
   if (nRetVal == 2) return NWN::Permanent;
@@ -6447,7 +6829,8 @@ NWN::DurationType NWScriptI::getItemPropertyDurationType(const NWN::NWItemProper
 Ice::Int NWScriptI::getItemPropertyParam1(const NWN::NWItemProperty& iProp, const Ice::Current& ice) {
   if (iprpMap.find(iProp.id) == iprpMap.end()) throw NWN::InvalidItemPropertyException();
   
-  lock("getItemPropertyParam1"); callCounter += 1;
+  lock(getItemPropertyParam1_mutex, "getItemPropertyParam1");
+  callCounter += 1;
   CGameEffect *iProp_ptr = iprpMap.find(iProp.id)->second;
   StackPushEngineStructure(ENGINE_STRUCTURE_ITEMPROPERTY, iProp_ptr);
 
@@ -6455,14 +6838,15 @@ Ice::Int NWScriptI::getItemPropertyParam1(const NWN::NWItemProperty& iProp, cons
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getItemPropertyParam1");
+  unlock(getItemPropertyParam1_mutex, "getItemPropertyParam1");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::getItemPropertyParam1Value(const NWN::NWItemProperty& iProp, const Ice::Current& ice) {
   if (iprpMap.find(iProp.id) == iprpMap.end()) throw NWN::InvalidItemPropertyException();
   
-  lock("getItemPropertyParam1Value"); callCounter += 1;
+  lock(getItemPropertyParam1Value_mutex, "getItemPropertyParam1Value");
+  callCounter += 1;
   CGameEffect *iProp_ptr = iprpMap.find(iProp.id)->second;
   StackPushEngineStructure(ENGINE_STRUCTURE_ITEMPROPERTY, iProp_ptr);
 
@@ -6470,14 +6854,15 @@ Ice::Int NWScriptI::getItemPropertyParam1Value(const NWN::NWItemProperty& iProp,
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getItemPropertyParam1Value");
+  unlock(getItemPropertyParam1Value_mutex, "getItemPropertyParam1Value");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::getItemPropertySubType(const NWN::NWItemProperty& iProperty, const Ice::Current& ice) {
   if (iprpMap.find(iProperty.id) == iprpMap.end()) throw NWN::InvalidItemPropertyException();
   
-  lock("getItemPropertySubType"); callCounter += 1;
+  lock(getItemPropertySubType_mutex, "getItemPropertySubType");
+  callCounter += 1;
   CGameEffect *iProperty_ptr = iprpMap.find(iProperty.id)->second;
   StackPushEngineStructure(ENGINE_STRUCTURE_ITEMPROPERTY, iProperty_ptr);
 
@@ -6485,14 +6870,15 @@ Ice::Int NWScriptI::getItemPropertySubType(const NWN::NWItemProperty& iProperty,
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getItemPropertySubType");
+  unlock(getItemPropertySubType_mutex, "getItemPropertySubType");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::getItemPropertyType(const NWN::NWItemProperty& ip, const Ice::Current& ice) {
   if (iprpMap.find(ip.id) == iprpMap.end()) throw NWN::InvalidItemPropertyException();
   
-  lock("getItemPropertyType"); callCounter += 1;
+  lock(getItemPropertyType_mutex, "getItemPropertyType");
+  callCounter += 1;
   CGameEffect *ip_ptr = iprpMap.find(ip.id)->second;
   StackPushEngineStructure(ENGINE_STRUCTURE_ITEMPROPERTY, ip_ptr);
 
@@ -6500,58 +6886,62 @@ Ice::Int NWScriptI::getItemPropertyType(const NWN::NWItemProperty& ip, const Ice
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getItemPropertyType");
+  unlock(getItemPropertyType_mutex, "getItemPropertyType");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::getItemStackSize(const NWN::NWObject& oItem, const Ice::Current& ice) {
   if (oItem.id < 0 || oItem.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getItemStackSize"); callCounter += 1;
+  lock(getItemStackSize_mutex, "getItemStackSize");
+  callCounter += 1;
   StackPushObject(oItem.id);
 
   VM_ExecuteCommand(605, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getItemStackSize");
+  unlock(getItemStackSize_mutex, "getItemStackSize");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::getJournalQuestExperience(const std::string& szPlotID, const Ice::Current& ice) {
-  lock("getJournalQuestExperience"); callCounter += 1;
+  lock(getJournalQuestExperience_mutex, "getJournalQuestExperience");
+  callCounter += 1;
   StackPushString(szPlotID.c_str());
 
   VM_ExecuteCommand(384, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getJournalQuestExperience");
+  unlock(getJournalQuestExperience_mutex, "getJournalQuestExperience");
   return nRetVal;
 };
 
 std::string NWScriptI::getKeyRequiredFeedback(const NWN::NWObject& oObject, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getKeyRequiredFeedback"); callCounter += 1;
+  lock(getKeyRequiredFeedback_mutex, "getKeyRequiredFeedback");
+  callCounter += 1;
   StackPushObject(oObject.id);
 
   VM_ExecuteCommand(819, 1);
 
   char* sRetVal;
   StackPopString(&sRetVal);
-  unlock("getKeyRequiredFeedback");
+  unlock(getKeyRequiredFeedback_mutex, "getKeyRequiredFeedback");
   return std::string(sRetVal);
 };
 
 NWN::AssociateCommand NWScriptI::getLastAssociateCommand(const NWN::NWObject& oAssociate, const Ice::Current& ice) {
   if (oAssociate.id < 0 || oAssociate.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getLastAssociateCommand"); callCounter += 1;
+  lock(getLastAssociateCommand_mutex, "getLastAssociateCommand");
+  callCounter += 1;
   StackPushObject(oAssociate.id);
 
   VM_ExecuteCommand(321, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getLastAssociateCommand");
+  unlock(getLastAssociateCommand_mutex, "getLastAssociateCommand");
   if (nRetVal == -19) return NWN::InventoryCommand;
   if (nRetVal == -8) return NWN::UnsummonFamiliarCommand;
   if (nRetVal == -13) return NWN::UnpossessFamiliarCommand;
@@ -6579,14 +6969,15 @@ NWN::AssociateCommand NWScriptI::getLastAssociateCommand(const NWN::NWObject& oA
 
 NWN::CombatMode NWScriptI::getLastAttackMode(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getLastAttackMode"); callCounter += 1;
+  lock(getLastAttackMode_mutex, "getLastAttackMode");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(318, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getLastAttackMode");
+  unlock(getLastAttackMode_mutex, "getLastAttackMode");
   if (nRetVal == 5) return NWN::RapidShotCombatMode;
   if (nRetVal == 0) return NWN::InvalidCombatMode;
   if (nRetVal == 6) return NWN::ExpertiseCombatMode;
@@ -6603,14 +6994,15 @@ NWN::CombatMode NWScriptI::getLastAttackMode(const NWN::NWObject& oCreature, con
 
 NWN::SpecialAttack NWScriptI::getLastAttackType(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getLastAttackType"); callCounter += 1;
+  lock(getLastAttackType_mutex, "getLastAttackType");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(317, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getLastAttackType");
+  unlock(getLastAttackType_mutex, "getLastAttackType");
   if (nRetVal == 5) return NWN::ImprovedDisarmSpecialAttack;
   if (nRetVal == 0) return NWN::InvalidSpecialAttack;
   if (nRetVal == 6) return NWN::KnockdownSpecialAttack;
@@ -6627,27 +7019,29 @@ NWN::SpecialAttack NWScriptI::getLastAttackType(const NWN::NWObject& oCreature, 
 
 NWN::NWObject NWScriptI::getLastAttacker(const NWN::NWObject& oAttackee, const Ice::Current& ice) {
   if (oAttackee.id < 0 || oAttackee.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getLastAttacker"); callCounter += 1;
+  lock(getLastAttacker_mutex, "getLastAttacker");
+  callCounter += 1;
   StackPushObject(oAttackee.id);
 
   VM_ExecuteCommand(36, 1);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getLastAttacker");
+  unlock(getLastAttacker_mutex, "getLastAttacker");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
 };
 
 NWN::NWObject NWScriptI::getLastClosedBy(const Ice::Current& ice) {
-  lock("getLastClosedBy"); callCounter += 1;
+  lock(getLastClosedBy_mutex, "getLastClosedBy");
+  callCounter += 1;
 
   VM_ExecuteCommand(260, 0);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getLastClosedBy");
+  unlock(getLastClosedBy_mutex, "getLastClosedBy");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -6655,40 +7049,43 @@ NWN::NWObject NWScriptI::getLastClosedBy(const Ice::Current& ice) {
 
 NWN::NWObject NWScriptI::getLastDamager(const NWN::NWObject& oObject, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getLastDamager"); callCounter += 1;
+  lock(getLastDamager_mutex, "getLastDamager");
+  callCounter += 1;
   StackPushObject(oObject.id);
 
   VM_ExecuteCommand(346, 1);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getLastDamager");
+  unlock(getLastDamager_mutex, "getLastDamager");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
 };
 
 NWN::NWObject NWScriptI::getLastDisarmed(const Ice::Current& ice) {
-  lock("getLastDisarmed"); callCounter += 1;
+  lock(getLastDisarmed_mutex, "getLastDisarmed");
+  callCounter += 1;
 
   VM_ExecuteCommand(347, 0);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getLastDisarmed");
+  unlock(getLastDisarmed_mutex, "getLastDisarmed");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
 };
 
 NWN::NWObject NWScriptI::getLastDisturbed(const Ice::Current& ice) {
-  lock("getLastDisturbed"); callCounter += 1;
+  lock(getLastDisturbed_mutex, "getLastDisturbed");
+  callCounter += 1;
 
   VM_ExecuteCommand(348, 0);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getLastDisturbed");
+  unlock(getLastDisturbed_mutex, "getLastDisturbed");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -6696,286 +7093,309 @@ NWN::NWObject NWScriptI::getLastDisturbed(const Ice::Current& ice) {
 
 NWN::NWObject NWScriptI::getLastHostileActor(const NWN::NWObject& oVictim, const Ice::Current& ice) {
   if (oVictim.id < 0 || oVictim.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getLastHostileActor"); callCounter += 1;
+  lock(getLastHostileActor_mutex, "getLastHostileActor");
+  callCounter += 1;
   StackPushObject(oVictim.id);
 
   VM_ExecuteCommand(556, 1);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getLastHostileActor");
+  unlock(getLastHostileActor_mutex, "getLastHostileActor");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
 };
 
 NWN::NWObject NWScriptI::getLastKiller(const Ice::Current& ice) {
-  lock("getLastKiller"); callCounter += 1;
+  lock(getLastKiller_mutex, "getLastKiller");
+  callCounter += 1;
 
   VM_ExecuteCommand(437, 0);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getLastKiller");
+  unlock(getLastKiller_mutex, "getLastKiller");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
 };
 
 NWN::NWObject NWScriptI::getLastLocked(const Ice::Current& ice) {
-  lock("getLastLocked"); callCounter += 1;
+  lock(getLastLocked_mutex, "getLastLocked");
+  callCounter += 1;
 
   VM_ExecuteCommand(349, 0);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getLastLocked");
+  unlock(getLastLocked_mutex, "getLastLocked");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
 };
 
 NWN::NWObject NWScriptI::getLastOpenedBy(const Ice::Current& ice) {
-  lock("getLastOpenedBy"); callCounter += 1;
+  lock(getLastOpenedBy_mutex, "getLastOpenedBy");
+  callCounter += 1;
 
   VM_ExecuteCommand(376, 0);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getLastOpenedBy");
+  unlock(getLastOpenedBy_mutex, "getLastOpenedBy");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
 };
 
 NWN::NWObject NWScriptI::getLastPCRested(const Ice::Current& ice) {
-  lock("getLastPCRested"); callCounter += 1;
+  lock(getLastPCRested_mutex, "getLastPCRested");
+  callCounter += 1;
 
   VM_ExecuteCommand(506, 0);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getLastPCRested");
+  unlock(getLastPCRested_mutex, "getLastPCRested");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
 };
 
 NWN::NWObject NWScriptI::getLastPCToCancelCutscene(const Ice::Current& ice) {
-  lock("getLastPCToCancelCutscene"); callCounter += 1;
+  lock(getLastPCToCancelCutscene_mutex, "getLastPCToCancelCutscene");
+  callCounter += 1;
 
   VM_ExecuteCommand(693, 0);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getLastPCToCancelCutscene");
+  unlock(getLastPCToCancelCutscene_mutex, "getLastPCToCancelCutscene");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
 };
 
 NWN::NWObject NWScriptI::getLastPerceived(const Ice::Current& ice) {
-  lock("getLastPerceived"); callCounter += 1;
+  lock(getLastPerceived_mutex, "getLastPerceived");
+  callCounter += 1;
 
   VM_ExecuteCommand(256, 0);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getLastPerceived");
+  unlock(getLastPerceived_mutex, "getLastPerceived");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
 };
 
 bool NWScriptI::getLastPerceptionHeard(const Ice::Current& ice) {
-  lock("getLastPerceptionHeard"); callCounter += 1;
+  lock(getLastPerceptionHeard_mutex, "getLastPerceptionHeard");
+  callCounter += 1;
 
   VM_ExecuteCommand(257, 0);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getLastPerceptionHeard");
+  unlock(getLastPerceptionHeard_mutex, "getLastPerceptionHeard");
   return nRetVal != 0;
 };
 
 bool NWScriptI::getLastPerceptionInaudible(const Ice::Current& ice) {
-  lock("getLastPerceptionInaudible"); callCounter += 1;
+  lock(getLastPerceptionInaudible_mutex, "getLastPerceptionInaudible");
+  callCounter += 1;
 
   VM_ExecuteCommand(258, 0);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getLastPerceptionInaudible");
+  unlock(getLastPerceptionInaudible_mutex, "getLastPerceptionInaudible");
   return nRetVal != 0;
 };
 
 bool NWScriptI::getLastPerceptionSeen(const Ice::Current& ice) {
-  lock("getLastPerceptionSeen"); callCounter += 1;
+  lock(getLastPerceptionSeen_mutex, "getLastPerceptionSeen");
+  callCounter += 1;
 
   VM_ExecuteCommand(259, 0);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getLastPerceptionSeen");
+  unlock(getLastPerceptionSeen_mutex, "getLastPerceptionSeen");
   return nRetVal != 0;
 };
 
 bool NWScriptI::getLastPerceptionVanished(const Ice::Current& ice) {
-  lock("getLastPerceptionVanished"); callCounter += 1;
+  lock(getLastPerceptionVanished_mutex, "getLastPerceptionVanished");
+  callCounter += 1;
 
   VM_ExecuteCommand(261, 0);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getLastPerceptionVanished");
+  unlock(getLastPerceptionVanished_mutex, "getLastPerceptionVanished");
   return nRetVal != 0;
 };
 
 NWN::NWObject NWScriptI::getLastPlayerDied(const Ice::Current& ice) {
-  lock("getLastPlayerDied"); callCounter += 1;
+  lock(getLastPlayerDied_mutex, "getLastPlayerDied");
+  callCounter += 1;
 
   VM_ExecuteCommand(291, 0);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getLastPlayerDied");
+  unlock(getLastPlayerDied_mutex, "getLastPlayerDied");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
 };
 
 NWN::NWObject NWScriptI::getLastPlayerDying(const Ice::Current& ice) {
-  lock("getLastPlayerDying"); callCounter += 1;
+  lock(getLastPlayerDying_mutex, "getLastPlayerDying");
+  callCounter += 1;
 
   VM_ExecuteCommand(410, 0);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getLastPlayerDying");
+  unlock(getLastPlayerDying_mutex, "getLastPlayerDying");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
 };
 
 NWN::NWObject NWScriptI::getLastRespawnButtonPresser(const Ice::Current& ice) {
-  lock("getLastRespawnButtonPresser"); callCounter += 1;
+  lock(getLastRespawnButtonPresser_mutex, "getLastRespawnButtonPresser");
+  callCounter += 1;
 
   VM_ExecuteCommand(419, 0);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getLastRespawnButtonPresser");
+  unlock(getLastRespawnButtonPresser_mutex, "getLastRespawnButtonPresser");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
 };
 
 Ice::Int NWScriptI::getLastRestEventType(const Ice::Current& ice) {
-  lock("getLastRestEventType"); callCounter += 1;
+  lock(getLastRestEventType_mutex, "getLastRestEventType");
+  callCounter += 1;
 
   VM_ExecuteCommand(508, 0);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getLastRestEventType");
+  unlock(getLastRestEventType_mutex, "getLastRestEventType");
   return nRetVal;
 };
 
 NWN::NWObject NWScriptI::getLastSpeaker(const Ice::Current& ice) {
-  lock("getLastSpeaker"); callCounter += 1;
+  lock(getLastSpeaker_mutex, "getLastSpeaker");
+  callCounter += 1;
 
   VM_ExecuteCommand(254, 0);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getLastSpeaker");
+  unlock(getLastSpeaker_mutex, "getLastSpeaker");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
 };
 
 Ice::Int NWScriptI::getLastSpell(const Ice::Current& ice) {
-  lock("getLastSpell"); callCounter += 1;
+  lock(getLastSpell_mutex, "getLastSpell");
+  callCounter += 1;
 
   VM_ExecuteCommand(246, 0);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getLastSpell");
+  unlock(getLastSpell_mutex, "getLastSpell");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::getLastSpellCastClass(const Ice::Current& ice) {
-  lock("getLastSpellCastClass"); callCounter += 1;
+  lock(getLastSpellCastClass_mutex, "getLastSpellCastClass");
+  callCounter += 1;
 
   VM_ExecuteCommand(754, 0);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getLastSpellCastClass");
+  unlock(getLastSpellCastClass_mutex, "getLastSpellCastClass");
   return nRetVal;
 };
 
 NWN::NWObject NWScriptI::getLastSpellCaster(const Ice::Current& ice) {
-  lock("getLastSpellCaster"); callCounter += 1;
+  lock(getLastSpellCaster_mutex, "getLastSpellCaster");
+  callCounter += 1;
 
   VM_ExecuteCommand(245, 0);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getLastSpellCaster");
+  unlock(getLastSpellCaster_mutex, "getLastSpellCaster");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
 };
 
 bool NWScriptI::getLastSpellHarmful(const Ice::Current& ice) {
-  lock("getLastSpellHarmful"); callCounter += 1;
+  lock(getLastSpellHarmful_mutex, "getLastSpellHarmful");
+  callCounter += 1;
 
   VM_ExecuteCommand(423, 0);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getLastSpellHarmful");
+  unlock(getLastSpellHarmful_mutex, "getLastSpellHarmful");
   return nRetVal != 0;
 };
 
 NWN::NWObject NWScriptI::getLastTrapDetected(const NWN::NWObject& oTarget, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getLastTrapDetected"); callCounter += 1;
+  lock(getLastTrapDetected_mutex, "getLastTrapDetected");
+  callCounter += 1;
   StackPushObject(oTarget.id);
 
   VM_ExecuteCommand(486, 1);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getLastTrapDetected");
+  unlock(getLastTrapDetected_mutex, "getLastTrapDetected");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
 };
 
 NWN::NWObject NWScriptI::getLastUnlocked(const Ice::Current& ice) {
-  lock("getLastUnlocked"); callCounter += 1;
+  lock(getLastUnlocked_mutex, "getLastUnlocked");
+  callCounter += 1;
 
   VM_ExecuteCommand(350, 0);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getLastUnlocked");
+  unlock(getLastUnlocked_mutex, "getLastUnlocked");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
 };
 
 NWN::NWObject NWScriptI::getLastUsedBy(const Ice::Current& ice) {
-  lock("getLastUsedBy"); callCounter += 1;
+  lock(getLastUsedBy_mutex, "getLastUsedBy");
+  callCounter += 1;
 
   VM_ExecuteCommand(330, 0);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getLastUsedBy");
+  unlock(getLastUsedBy_mutex, "getLastUsedBy");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -6983,14 +7403,15 @@ NWN::NWObject NWScriptI::getLastUsedBy(const Ice::Current& ice) {
 
 NWN::NWObject NWScriptI::getLastWeaponUsed(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getLastWeaponUsed"); callCounter += 1;
+  lock(getLastWeaponUsed_mutex, "getLastWeaponUsed");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(328, 1);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getLastWeaponUsed");
+  unlock(getLastWeaponUsed_mutex, "getLastWeaponUsed");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -6998,20 +7419,22 @@ NWN::NWObject NWScriptI::getLastWeaponUsed(const NWN::NWObject& oCreature, const
 
 Ice::Int NWScriptI::getLawChaosValue(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getLawChaosValue"); callCounter += 1;
+  lock(getLawChaosValue_mutex, "getLawChaosValue");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(124, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getLawChaosValue");
+  unlock(getLawChaosValue_mutex, "getLawChaosValue");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::getLevelByClass(Ice::Int nClassType, const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getLevelByClass"); callCounter += 1;
+  lock(getLevelByClass_mutex, "getLevelByClass");
+  callCounter += 1;
   StackPushObject(oCreature.id);
   StackPushInteger(nClassType);
 
@@ -7019,13 +7442,14 @@ Ice::Int NWScriptI::getLevelByClass(Ice::Int nClassType, const NWN::NWObject& oC
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getLevelByClass");
+  unlock(getLevelByClass_mutex, "getLevelByClass");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::getLevelByPosition(Ice::Int nClassPosition, const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getLevelByPosition"); callCounter += 1;
+  lock(getLevelByPosition_mutex, "getLevelByPosition");
+  callCounter += 1;
   StackPushObject(oCreature.id);
   StackPushInteger(nClassPosition);
 
@@ -7033,24 +7457,26 @@ Ice::Int NWScriptI::getLevelByPosition(Ice::Int nClassPosition, const NWN::NWObj
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getLevelByPosition");
+  unlock(getLevelByPosition_mutex, "getLevelByPosition");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::getListenPatternNumber(const Ice::Current& ice) {
-  lock("getListenPatternNumber"); callCounter += 1;
+  lock(getListenPatternNumber_mutex, "getListenPatternNumber");
+  callCounter += 1;
 
   VM_ExecuteCommand(195, 0);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getListenPatternNumber");
+  unlock(getListenPatternNumber_mutex, "getListenPatternNumber");
   return nRetVal;
 };
 
 Ice::Double NWScriptI::getLocalFloat(const NWN::NWObject& oObject, const std::string& sVarName, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getLocalFloat"); callCounter += 1;
+  lock(getLocalFloat_mutex, "getLocalFloat");
+  callCounter += 1;
   StackPushString(sVarName.c_str());
   StackPushObject(oObject.id);
 
@@ -7058,13 +7484,14 @@ Ice::Double NWScriptI::getLocalFloat(const NWN::NWObject& oObject, const std::st
 
   float fRetVal;
   StackPopFloat(&fRetVal);
-  unlock("getLocalFloat");
+  unlock(getLocalFloat_mutex, "getLocalFloat");
   return fRetVal;
 };
 
 Ice::Int NWScriptI::getLocalInt(const NWN::NWObject& oObject, const std::string& sVarName, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getLocalInt"); callCounter += 1;
+  lock(getLocalInt_mutex, "getLocalInt");
+  callCounter += 1;
   StackPushString(sVarName.c_str());
   StackPushObject(oObject.id);
 
@@ -7072,13 +7499,14 @@ Ice::Int NWScriptI::getLocalInt(const NWN::NWObject& oObject, const std::string&
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getLocalInt");
+  unlock(getLocalInt_mutex, "getLocalInt");
   return nRetVal;
 };
 
 NWN::NWLocation NWScriptI::getLocalLocation(const NWN::NWObject& oObject, const std::string& sVarName, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getLocalLocation"); callCounter += 1;
+  lock(getLocalLocation_mutex, "getLocalLocation");
+  callCounter += 1;
   StackPushString(sVarName.c_str());
   StackPushObject(oObject.id);
 
@@ -7094,13 +7522,14 @@ NWN::NWLocation NWScriptI::getLocalLocation(const NWN::NWObject& oObject, const 
   nl.orientationY = pRetVal->OrientationY;
   nl.orientationZ = pRetVal->OrientationZ;
   nl.area.id = pRetVal->AreaID;
-  unlock("getLocalLocation");
+  unlock(getLocalLocation_mutex, "getLocalLocation");
   return nl;
 };
 
 NWN::NWObject NWScriptI::getLocalObject(const NWN::NWObject& oObject, const std::string& sVarName, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getLocalObject"); callCounter += 1;
+  lock(getLocalObject_mutex, "getLocalObject");
+  callCounter += 1;
   StackPushString(sVarName.c_str());
   StackPushObject(oObject.id);
 
@@ -7108,7 +7537,7 @@ NWN::NWObject NWScriptI::getLocalObject(const NWN::NWObject& oObject, const std:
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getLocalObject");
+  unlock(getLocalObject_mutex, "getLocalObject");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -7116,7 +7545,8 @@ NWN::NWObject NWScriptI::getLocalObject(const NWN::NWObject& oObject, const std:
 
 std::string NWScriptI::getLocalString(const NWN::NWObject& oObject, const std::string& sVarName, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getLocalString"); callCounter += 1;
+  lock(getLocalString_mutex, "getLocalString");
+  callCounter += 1;
   StackPushString(sVarName.c_str());
   StackPushObject(oObject.id);
 
@@ -7124,13 +7554,14 @@ std::string NWScriptI::getLocalString(const NWN::NWObject& oObject, const std::s
 
   char* sRetVal;
   StackPopString(&sRetVal);
-  unlock("getLocalString");
+  unlock(getLocalString_mutex, "getLocalString");
   return std::string(sRetVal);
 };
 
 NWN::NWLocation NWScriptI::getLocation(const NWN::NWObject& oObject, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getLocation"); callCounter += 1;
+  lock(getLocation_mutex, "getLocation");
+  callCounter += 1;
   StackPushObject(oObject.id);
 
   VM_ExecuteCommand(213, 1);
@@ -7145,171 +7576,184 @@ NWN::NWLocation NWScriptI::getLocation(const NWN::NWObject& oObject, const Ice::
   nl.orientationY = pRetVal->OrientationY;
   nl.orientationZ = pRetVal->OrientationZ;
   nl.area.id = pRetVal->AreaID;
-  unlock("getLocation");
+  unlock(getLocation_mutex, "getLocation");
   return nl;
 };
 
 bool NWScriptI::getLockKeyRequired(const NWN::NWObject& oObject, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getLockKeyRequired"); callCounter += 1;
+  lock(getLockKeyRequired_mutex, "getLockKeyRequired");
+  callCounter += 1;
   StackPushObject(oObject.id);
 
   VM_ExecuteCommand(537, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getLockKeyRequired");
+  unlock(getLockKeyRequired_mutex, "getLockKeyRequired");
   return nRetVal != 0;
 };
 
 std::string NWScriptI::getLockKeyTag(const NWN::NWObject& oObject, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getLockKeyTag"); callCounter += 1;
+  lock(getLockKeyTag_mutex, "getLockKeyTag");
+  callCounter += 1;
   StackPushObject(oObject.id);
 
   VM_ExecuteCommand(538, 1);
 
   char* sRetVal;
   StackPopString(&sRetVal);
-  unlock("getLockKeyTag");
+  unlock(getLockKeyTag_mutex, "getLockKeyTag");
   return std::string(sRetVal);
 };
 
 Ice::Int NWScriptI::getLockLockDC(const NWN::NWObject& oObject, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getLockLockDC"); callCounter += 1;
+  lock(getLockLockDC_mutex, "getLockLockDC");
+  callCounter += 1;
   StackPushObject(oObject.id);
 
   VM_ExecuteCommand(541, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getLockLockDC");
+  unlock(getLockLockDC_mutex, "getLockLockDC");
   return nRetVal;
 };
 
 bool NWScriptI::getLockLockable(const NWN::NWObject& oObject, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getLockLockable"); callCounter += 1;
+  lock(getLockLockable_mutex, "getLockLockable");
+  callCounter += 1;
   StackPushObject(oObject.id);
 
   VM_ExecuteCommand(539, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getLockLockable");
+  unlock(getLockLockable_mutex, "getLockLockable");
   return nRetVal != 0;
 };
 
 Ice::Int NWScriptI::getLockUnlockDC(const NWN::NWObject& oObject, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getLockUnlockDC"); callCounter += 1;
+  lock(getLockUnlockDC_mutex, "getLockUnlockDC");
+  callCounter += 1;
   StackPushObject(oObject.id);
 
   VM_ExecuteCommand(540, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getLockUnlockDC");
+  unlock(getLockUnlockDC_mutex, "getLockUnlockDC");
   return nRetVal;
 };
 
 bool NWScriptI::getLocked(const NWN::NWObject& oTarget, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getLocked"); callCounter += 1;
+  lock(getLocked_mutex, "getLocked");
+  callCounter += 1;
   StackPushObject(oTarget.id);
 
   VM_ExecuteCommand(325, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getLocked");
+  unlock(getLocked_mutex, "getLocked");
   return nRetVal != 0;
 };
 
 bool NWScriptI::getLootable(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getLootable"); callCounter += 1;
+  lock(getLootable_mutex, "getLootable");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(741, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getLootable");
+  unlock(getLootable_mutex, "getLootable");
   return nRetVal != 0;
 };
 
 NWN::NWObject NWScriptI::getMaster(const NWN::NWObject& oAssociate, const Ice::Current& ice) {
   if (oAssociate.id < 0 || oAssociate.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getMaster"); callCounter += 1;
+  lock(getMaster_mutex, "getMaster");
+  callCounter += 1;
   StackPushObject(oAssociate.id);
 
   VM_ExecuteCommand(319, 1);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getMaster");
+  unlock(getMaster_mutex, "getMaster");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
 };
 
 std::string NWScriptI::getMatchedSubstring(Ice::Int nString, const Ice::Current& ice) {
-  lock("getMatchedSubstring"); callCounter += 1;
+  lock(getMatchedSubstring_mutex, "getMatchedSubstring");
+  callCounter += 1;
   StackPushInteger(nString);
 
   VM_ExecuteCommand(178, 1);
 
   char* sRetVal;
   StackPopString(&sRetVal);
-  unlock("getMatchedSubstring");
+  unlock(getMatchedSubstring_mutex, "getMatchedSubstring");
   return std::string(sRetVal);
 };
 
 Ice::Int NWScriptI::getMatchedSubstringsCount(const Ice::Current& ice) {
-  lock("getMatchedSubstringsCount"); callCounter += 1;
+  lock(getMatchedSubstringsCount_mutex, "getMatchedSubstringsCount");
+  callCounter += 1;
 
   VM_ExecuteCommand(179, 0);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getMatchedSubstringsCount");
+  unlock(getMatchedSubstringsCount_mutex, "getMatchedSubstringsCount");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::getMaxHenchmen(const Ice::Current& ice) {
-  lock("getMaxHenchmen"); callCounter += 1;
+  lock(getMaxHenchmen_mutex, "getMaxHenchmen");
+  callCounter += 1;
 
   VM_ExecuteCommand(747, 0);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getMaxHenchmen");
+  unlock(getMaxHenchmen_mutex, "getMaxHenchmen");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::getMaxHitPoints(const NWN::NWObject& oObject, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getMaxHitPoints"); callCounter += 1;
+  lock(getMaxHitPoints_mutex, "getMaxHitPoints");
+  callCounter += 1;
   StackPushObject(oObject.id);
 
   VM_ExecuteCommand(50, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getMaxHitPoints");
+  unlock(getMaxHitPoints_mutex, "getMaxHitPoints");
   return nRetVal;
 };
 
 NWN::MetaMagic NWScriptI::getMetaMagicFeat(const Ice::Current& ice) {
-  lock("getMetaMagicFeat"); callCounter += 1;
+  lock(getMetaMagicFeat_mutex, "getMetaMagicFeat");
+  callCounter += 1;
 
   VM_ExecuteCommand(105, 0);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getMetaMagicFeat");
+  unlock(getMetaMagicFeat_mutex, "getMetaMagicFeat");
   if (nRetVal == 16) return NWN::SilentMeta;
   if (nRetVal == 0) return NWN::NoneMeta;
   if (nRetVal == 1) return NWN::EmpowerMeta;
@@ -7322,132 +7766,143 @@ NWN::MetaMagic NWScriptI::getMetaMagicFeat(const Ice::Current& ice) {
 };
 
 NWN::NWObject NWScriptI::getModule(const Ice::Current& ice) {
-  lock("getModule"); callCounter += 1;
+  lock(getModule_mutex, "getModule");
+  callCounter += 1;
 
   VM_ExecuteCommand(242, 0);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getModule");
+  unlock(getModule_mutex, "getModule");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
 };
 
 NWN::NWObject NWScriptI::getModuleItemAcquired(const Ice::Current& ice) {
-  lock("getModuleItemAcquired"); callCounter += 1;
+  lock(getModuleItemAcquired_mutex, "getModuleItemAcquired");
+  callCounter += 1;
 
   VM_ExecuteCommand(282, 0);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getModuleItemAcquired");
+  unlock(getModuleItemAcquired_mutex, "getModuleItemAcquired");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
 };
 
 NWN::NWObject NWScriptI::getModuleItemAcquiredBy(const Ice::Current& ice) {
-  lock("getModuleItemAcquiredBy"); callCounter += 1;
+  lock(getModuleItemAcquiredBy_mutex, "getModuleItemAcquiredBy");
+  callCounter += 1;
 
   VM_ExecuteCommand(707, 0);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getModuleItemAcquiredBy");
+  unlock(getModuleItemAcquiredBy_mutex, "getModuleItemAcquiredBy");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
 };
 
 NWN::NWObject NWScriptI::getModuleItemAcquiredFrom(const Ice::Current& ice) {
-  lock("getModuleItemAcquiredFrom"); callCounter += 1;
+  lock(getModuleItemAcquiredFrom_mutex, "getModuleItemAcquiredFrom");
+  callCounter += 1;
 
   VM_ExecuteCommand(283, 0);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getModuleItemAcquiredFrom");
+  unlock(getModuleItemAcquiredFrom_mutex, "getModuleItemAcquiredFrom");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
 };
 
 Ice::Int NWScriptI::getModuleItemAcquiredStackSize(const Ice::Current& ice) {
-  lock("getModuleItemAcquiredStackSize"); callCounter += 1;
+  lock(getModuleItemAcquiredStackSize_mutex, "getModuleItemAcquiredStackSize");
+  callCounter += 1;
 
   VM_ExecuteCommand(579, 0);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getModuleItemAcquiredStackSize");
+  unlock(getModuleItemAcquiredStackSize_mutex, "getModuleItemAcquiredStackSize");
   return nRetVal;
 };
 
 NWN::NWObject NWScriptI::getModuleItemLost(const Ice::Current& ice) {
-  lock("getModuleItemLost"); callCounter += 1;
+  lock(getModuleItemLost_mutex, "getModuleItemLost");
+  callCounter += 1;
 
   VM_ExecuteCommand(292, 0);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getModuleItemLost");
+  unlock(getModuleItemLost_mutex, "getModuleItemLost");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
 };
 
 NWN::NWObject NWScriptI::getModuleItemLostBy(const Ice::Current& ice) {
-  lock("getModuleItemLostBy"); callCounter += 1;
+  lock(getModuleItemLostBy_mutex, "getModuleItemLostBy");
+  callCounter += 1;
 
   VM_ExecuteCommand(293, 0);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getModuleItemLostBy");
+  unlock(getModuleItemLostBy_mutex, "getModuleItemLostBy");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
 };
 
 std::string NWScriptI::getModuleName(const Ice::Current& ice) {
-  lock("getModuleName"); callCounter += 1;
+  lock(getModuleName_mutex, "getModuleName");
+  callCounter += 1;
 
   VM_ExecuteCommand(561, 0);
 
   char* sRetVal;
   StackPopString(&sRetVal);
-  unlock("getModuleName");
+  unlock(getModuleName_mutex, "getModuleName");
   return std::string(sRetVal);
 };
 
 Ice::Int NWScriptI::getModuleXPScale(const Ice::Current& ice) {
-  lock("getModuleXPScale"); callCounter += 1;
+  lock(getModuleXPScale_mutex, "getModuleXPScale");
+  callCounter += 1;
 
   VM_ExecuteCommand(817, 0);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getModuleXPScale");
+  unlock(getModuleXPScale_mutex, "getModuleXPScale");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::getMovementRate(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getMovementRate"); callCounter += 1;
+  lock(getMovementRate_mutex, "getMovementRate");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(496, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getMovementRate");
+  unlock(getMovementRate_mutex, "getMovementRate");
   return nRetVal;
 };
 
 std::string NWScriptI::getName(const NWN::NWObject& oObject, bool bOriginalName, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getName"); callCounter += 1;
+  lock(getName_mutex, "getName");
+  callCounter += 1;
   StackPushInteger(bOriginalName == true ? 1 : 0);
   StackPushObject(oObject.id);
 
@@ -7455,13 +7910,14 @@ std::string NWScriptI::getName(const NWN::NWObject& oObject, bool bOriginalName,
 
   char* sRetVal;
   StackPopString(&sRetVal);
-  unlock("getName");
+  unlock(getName_mutex, "getName");
   return std::string(sRetVal);
 };
 
 NWN::NWObject NWScriptI::getNearestCreature(Ice::Int nFirstCriteriaType, Ice::Int nFirstCriteriaValue, const NWN::NWObject& oTarget, Ice::Int nNth, Ice::Int nSecondCriteriaType, Ice::Int nSecondCriteriaValue, Ice::Int nThirdCriteriaType, Ice::Int nThirdCriteriaValue, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getNearestCreature"); callCounter += 1;
+  lock(getNearestCreature_mutex, "getNearestCreature");
+  callCounter += 1;
   StackPushInteger(nThirdCriteriaValue);
   StackPushInteger(nThirdCriteriaType);
   StackPushInteger(nSecondCriteriaValue);
@@ -7475,7 +7931,7 @@ NWN::NWObject NWScriptI::getNearestCreature(Ice::Int nFirstCriteriaType, Ice::In
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getNearestCreature");
+  unlock(getNearestCreature_mutex, "getNearestCreature");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -7483,7 +7939,8 @@ NWN::NWObject NWScriptI::getNearestCreature(Ice::Int nFirstCriteriaType, Ice::In
 
 NWN::NWObject NWScriptI::getNearestCreatureToLocation(Ice::Int nFirstCriteriaType, Ice::Int nFirstCriteriaValue, const NWN::NWLocation& lLocation, Ice::Int nNth, Ice::Int nSecondCriteriaType, Ice::Int nSecondCriteriaValue, Ice::Int nThirdCriteriaType, Ice::Int nThirdCriteriaValue, const Ice::Current& ice) {
   if (lLocation.area.id < 0) throw NWN::InvalidObjectException();
-  lock("getNearestCreatureToLocation"); callCounter += 1;
+  lock(getNearestCreatureToLocation_mutex, "getNearestCreatureToLocation");
+  callCounter += 1;
   StackPushInteger(nThirdCriteriaValue);
   StackPushInteger(nThirdCriteriaType);
   StackPushInteger(nSecondCriteriaValue);
@@ -7505,7 +7962,7 @@ NWN::NWObject NWScriptI::getNearestCreatureToLocation(Ice::Int nFirstCriteriaTyp
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getNearestCreatureToLocation");
+  unlock(getNearestCreatureToLocation_mutex, "getNearestCreatureToLocation");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -7513,7 +7970,8 @@ NWN::NWObject NWScriptI::getNearestCreatureToLocation(Ice::Int nFirstCriteriaTyp
 
 NWN::NWObject NWScriptI::getNearestObject(NWN::ObjectType tObjectType, const NWN::NWObject& oTarget, Ice::Int nNth, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getNearestObject"); callCounter += 1;
+  lock(getNearestObject_mutex, "getNearestObject");
+  callCounter += 1;
   StackPushInteger(nNth);
   StackPushObject(oTarget.id);
   if (tObjectType == NWN::AOE) StackPushInteger(16);
@@ -7533,7 +7991,7 @@ NWN::NWObject NWScriptI::getNearestObject(NWN::ObjectType tObjectType, const NWN
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getNearestObject");
+  unlock(getNearestObject_mutex, "getNearestObject");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -7541,7 +7999,8 @@ NWN::NWObject NWScriptI::getNearestObject(NWN::ObjectType tObjectType, const NWN
 
 NWN::NWObject NWScriptI::getNearestObjectByTag(const std::string& sTag, const NWN::NWObject& oTarget, Ice::Int nNth, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getNearestObjectByTag"); callCounter += 1;
+  lock(getNearestObjectByTag_mutex, "getNearestObjectByTag");
+  callCounter += 1;
   StackPushInteger(nNth);
   StackPushObject(oTarget.id);
   StackPushString(sTag.c_str());
@@ -7550,7 +8009,7 @@ NWN::NWObject NWScriptI::getNearestObjectByTag(const std::string& sTag, const NW
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getNearestObjectByTag");
+  unlock(getNearestObjectByTag_mutex, "getNearestObjectByTag");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -7558,7 +8017,8 @@ NWN::NWObject NWScriptI::getNearestObjectByTag(const std::string& sTag, const NW
 
 NWN::NWObject NWScriptI::getNearestObjectToLocation(NWN::ObjectType tObjectType, const NWN::NWLocation& lLocation, Ice::Int nNth, const Ice::Current& ice) {
   if (lLocation.area.id < 0) throw NWN::InvalidObjectException();
-  lock("getNearestObjectToLocation"); callCounter += 1;
+  lock(getNearestObjectToLocation_mutex, "getNearestObjectToLocation");
+  callCounter += 1;
   StackPushInteger(nNth);
   CScriptLocation *lLocation_ptr;
   lLocation_ptr->X = lLocation.x;
@@ -7586,7 +8046,7 @@ NWN::NWObject NWScriptI::getNearestObjectToLocation(NWN::ObjectType tObjectType,
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getNearestObjectToLocation");
+  unlock(getNearestObjectToLocation_mutex, "getNearestObjectToLocation");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -7594,7 +8054,8 @@ NWN::NWObject NWScriptI::getNearestObjectToLocation(NWN::ObjectType tObjectType,
 
 NWN::NWObject NWScriptI::getNearestTrapToObject(const NWN::NWObject& oTarget, bool bTrapDetected, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getNearestTrapToObject"); callCounter += 1;
+  lock(getNearestTrapToObject_mutex, "getNearestTrapToObject");
+  callCounter += 1;
   StackPushInteger(bTrapDetected == true ? 1 : 0);
   StackPushObject(oTarget.id);
 
@@ -7602,7 +8063,7 @@ NWN::NWObject NWScriptI::getNearestTrapToObject(const NWN::NWObject& oTarget, bo
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getNearestTrapToObject");
+  unlock(getNearestTrapToObject_mutex, "getNearestTrapToObject");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -7610,7 +8071,8 @@ NWN::NWObject NWScriptI::getNearestTrapToObject(const NWN::NWObject& oTarget, bo
 
 NWN::NWEffect NWScriptI::getNextEffect(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getNextEffect"); callCounter += 1;
+  lock(getNextEffect_mutex, "getNextEffect");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(86, 1);
@@ -7625,13 +8087,14 @@ NWN::NWEffect NWScriptI::getNextEffect(const NWN::NWObject& oCreature, const Ice
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("getNextEffect");
+  unlock(getNextEffect_mutex, "getNextEffect");
   return e;
 };
 
 NWN::NWObject NWScriptI::getNextFactionMember(const NWN::NWObject& oMemberOfFaction, bool bPCOnly, const Ice::Current& ice) {
   if (oMemberOfFaction.id < 0 || oMemberOfFaction.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getNextFactionMember"); callCounter += 1;
+  lock(getNextFactionMember_mutex, "getNextFactionMember");
+  callCounter += 1;
   StackPushInteger(bPCOnly == true ? 1 : 0);
   StackPushObject(oMemberOfFaction.id);
 
@@ -7639,7 +8102,7 @@ NWN::NWObject NWScriptI::getNextFactionMember(const NWN::NWObject& oMemberOfFact
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getNextFactionMember");
+  unlock(getNextFactionMember_mutex, "getNextFactionMember");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -7647,7 +8110,8 @@ NWN::NWObject NWScriptI::getNextFactionMember(const NWN::NWObject& oMemberOfFact
 
 NWN::NWObject NWScriptI::getNextInPersistentObject(const NWN::NWObject& oPersistentObject, Ice::Int nResidentObjectType, Ice::Int nPersistentZone, const Ice::Current& ice) {
   if (oPersistentObject.id < 0 || oPersistentObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getNextInPersistentObject"); callCounter += 1;
+  lock(getNextInPersistentObject_mutex, "getNextInPersistentObject");
+  callCounter += 1;
   StackPushInteger(nPersistentZone);
   StackPushInteger(nResidentObjectType);
   StackPushObject(oPersistentObject.id);
@@ -7656,7 +8120,7 @@ NWN::NWObject NWScriptI::getNextInPersistentObject(const NWN::NWObject& oPersist
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getNextInPersistentObject");
+  unlock(getNextInPersistentObject_mutex, "getNextInPersistentObject");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -7664,14 +8128,15 @@ NWN::NWObject NWScriptI::getNextInPersistentObject(const NWN::NWObject& oPersist
 
 NWN::NWObject NWScriptI::getNextItemInInventory(const NWN::NWObject& oTarget, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getNextItemInInventory"); callCounter += 1;
+  lock(getNextItemInInventory_mutex, "getNextItemInInventory");
+  callCounter += 1;
   StackPushObject(oTarget.id);
 
   VM_ExecuteCommand(340, 1);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getNextItemInInventory");
+  unlock(getNextItemInInventory_mutex, "getNextItemInInventory");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -7679,7 +8144,8 @@ NWN::NWObject NWScriptI::getNextItemInInventory(const NWN::NWObject& oTarget, co
 
 NWN::NWItemProperty NWScriptI::getNextItemProperty(const NWN::NWObject& oItem, const Ice::Current& ice) {
   if (oItem.id < 0 || oItem.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getNextItemProperty"); callCounter += 1;
+  lock(getNextItemProperty_mutex, "getNextItemProperty");
+  callCounter += 1;
   StackPushObject(oItem.id);
 
   VM_ExecuteCommand(613, 1);
@@ -7694,20 +8160,21 @@ NWN::NWItemProperty NWScriptI::getNextItemProperty(const NWN::NWObject& oItem, c
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("getNextItemProperty");
+  unlock(getNextItemProperty_mutex, "getNextItemProperty");
   return e;
 };
 
 NWN::NWObject NWScriptI::getNextObjectInArea(const NWN::NWObject& oArea, const Ice::Current& ice) {
   if (oArea.id < 0 || oArea.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getNextObjectInArea"); callCounter += 1;
+  lock(getNextObjectInArea_mutex, "getNextObjectInArea");
+  callCounter += 1;
   StackPushObject(oArea.id);
 
   VM_ExecuteCommand(94, 1);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getNextObjectInArea");
+  unlock(getNextObjectInArea_mutex, "getNextObjectInArea");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -7715,7 +8182,8 @@ NWN::NWObject NWScriptI::getNextObjectInArea(const NWN::NWObject& oArea, const I
 
 NWN::NWObject NWScriptI::getNextObjectInShape(NWN::ShapeType tShapeType, Ice::Double fSize, const NWN::NWLocation& lTarget, bool bLineOfSight, Ice::Int nObjectFilter, const NWN::NWVector& vOrigin, const Ice::Current& ice) {
   if (lTarget.area.id < 0) throw NWN::InvalidObjectException();
-  lock("getNextObjectInShape"); callCounter += 1;
+  lock(getNextObjectInShape_mutex, "getNextObjectInShape");
+  callCounter += 1;
   Vector vvOrigin;
   vvOrigin.X = vOrigin.x; vvOrigin.Y = vOrigin.y; vvOrigin.Z = vOrigin.z;
   StackPushVector(vvOrigin);
@@ -7742,20 +8210,21 @@ NWN::NWObject NWScriptI::getNextObjectInShape(NWN::ShapeType tShapeType, Ice::Do
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getNextObjectInShape");
+  unlock(getNextObjectInShape_mutex, "getNextObjectInShape");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
 };
 
 NWN::NWObject NWScriptI::getNextPC(const Ice::Current& ice) {
-  lock("getNextPC"); callCounter += 1;
+  lock(getNextPC_mutex, "getNextPC");
+  callCounter += 1;
 
   VM_ExecuteCommand(549, 0);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getNextPC");
+  unlock(getNextPC_mutex, "getNextPC");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -7763,19 +8232,21 @@ NWN::NWObject NWScriptI::getNextPC(const Ice::Current& ice) {
 
 Ice::Int NWScriptI::getNumStackedItems(const NWN::NWObject& oItem, const Ice::Current& ice) {
   if (oItem.id < 0 || oItem.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getNumStackedItems"); callCounter += 1;
+  lock(getNumStackedItems_mutex, "getNumStackedItems");
+  callCounter += 1;
   StackPushObject(oItem.id);
 
   VM_ExecuteCommand(475, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getNumStackedItems");
+  unlock(getNumStackedItems_mutex, "getNumStackedItems");
   return nRetVal;
 };
 
 NWN::NWObject NWScriptI::getObjectByTag(const std::string& sTag, Ice::Int nNth, const Ice::Current& ice) {
-  lock("getObjectByTag"); callCounter += 1;
+  lock(getObjectByTag_mutex, "getObjectByTag");
+  callCounter += 1;
   StackPushInteger(nNth);
   StackPushString(sTag.c_str());
 
@@ -7783,7 +8254,7 @@ NWN::NWObject NWScriptI::getObjectByTag(const std::string& sTag, Ice::Int nNth, 
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getObjectByTag");
+  unlock(getObjectByTag_mutex, "getObjectByTag");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -7792,7 +8263,8 @@ NWN::NWObject NWScriptI::getObjectByTag(const std::string& sTag, Ice::Int nNth, 
 bool NWScriptI::getObjectHeard(const NWN::NWObject& oTarget, const NWN::NWObject& oSource, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (oSource.id < 0 || oSource.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getObjectHeard"); callCounter += 1;
+  lock(getObjectHeard_mutex, "getObjectHeard");
+  callCounter += 1;
   StackPushObject(oSource.id);
   StackPushObject(oTarget.id);
 
@@ -7800,14 +8272,15 @@ bool NWScriptI::getObjectHeard(const NWN::NWObject& oTarget, const NWN::NWObject
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getObjectHeard");
+  unlock(getObjectHeard_mutex, "getObjectHeard");
   return nRetVal != 0;
 };
 
 bool NWScriptI::getObjectSeen(const NWN::NWObject& oTarget, const NWN::NWObject& oSource, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (oSource.id < 0 || oSource.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getObjectSeen"); callCounter += 1;
+  lock(getObjectSeen_mutex, "getObjectSeen");
+  callCounter += 1;
   StackPushObject(oSource.id);
   StackPushObject(oTarget.id);
 
@@ -7815,20 +8288,21 @@ bool NWScriptI::getObjectSeen(const NWN::NWObject& oTarget, const NWN::NWObject&
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getObjectSeen");
+  unlock(getObjectSeen_mutex, "getObjectSeen");
   return nRetVal != 0;
 };
 
 NWN::ObjectType NWScriptI::getObjectType(const NWN::NWObject& oTarget, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getObjectType"); callCounter += 1;
+  lock(getObjectType_mutex, "getObjectType");
+  callCounter += 1;
   StackPushObject(oTarget.id);
 
   VM_ExecuteCommand(106, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getObjectType");
+  unlock(getObjectType_mutex, "getObjectType");
   if (nRetVal == 16) return NWN::AOE;
   if (nRetVal == 0) return NWN::InvalidObject;
   if (nRetVal == 1) return NWN::Creature;
@@ -7844,113 +8318,122 @@ NWN::ObjectType NWScriptI::getObjectType(const NWN::NWObject& oTarget, const Ice
 };
 
 std::string NWScriptI::getPCChatMessage(const Ice::Current& ice) {
-  lock("getPCChatMessage"); callCounter += 1;
+  lock(getPCChatMessage_mutex, "getPCChatMessage");
+  callCounter += 1;
 
   VM_ExecuteCommand(839, 0);
 
   char* sRetVal;
   StackPopString(&sRetVal);
-  unlock("getPCChatMessage");
+  unlock(getPCChatMessage_mutex, "getPCChatMessage");
   return std::string(sRetVal);
 };
 
 NWN::NWObject NWScriptI::getPCChatSpeaker(const Ice::Current& ice) {
-  lock("getPCChatSpeaker"); callCounter += 1;
+  lock(getPCChatSpeaker_mutex, "getPCChatSpeaker");
+  callCounter += 1;
 
   VM_ExecuteCommand(838, 0);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getPCChatSpeaker");
+  unlock(getPCChatSpeaker_mutex, "getPCChatSpeaker");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
 };
 
 Ice::Int NWScriptI::getPCChatVolume(const Ice::Current& ice) {
-  lock("getPCChatVolume"); callCounter += 1;
+  lock(getPCChatVolume_mutex, "getPCChatVolume");
+  callCounter += 1;
 
   VM_ExecuteCommand(840, 0);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getPCChatVolume");
+  unlock(getPCChatVolume_mutex, "getPCChatVolume");
   return nRetVal;
 };
 
 std::string NWScriptI::getPCIPAddress(const NWN::NWObject& oPlayer, const Ice::Current& ice) {
   if (oPlayer.id < 0 || oPlayer.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getPCIPAddress"); callCounter += 1;
+  lock(getPCIPAddress_mutex, "getPCIPAddress");
+  callCounter += 1;
   StackPushObject(oPlayer.id);
 
   VM_ExecuteCommand(370, 1);
 
   char* sRetVal;
   StackPopString(&sRetVal);
-  unlock("getPCIPAddress");
+  unlock(getPCIPAddress_mutex, "getPCIPAddress");
   return std::string(sRetVal);
 };
 
 NWN::NWObject NWScriptI::getPCItemLastEquipped(const Ice::Current& ice) {
-  lock("getPCItemLastEquipped"); callCounter += 1;
+  lock(getPCItemLastEquipped_mutex, "getPCItemLastEquipped");
+  callCounter += 1;
 
   VM_ExecuteCommand(727, 0);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getPCItemLastEquipped");
+  unlock(getPCItemLastEquipped_mutex, "getPCItemLastEquipped");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
 };
 
 NWN::NWObject NWScriptI::getPCItemLastEquippedBy(const Ice::Current& ice) {
-  lock("getPCItemLastEquippedBy"); callCounter += 1;
+  lock(getPCItemLastEquippedBy_mutex, "getPCItemLastEquippedBy");
+  callCounter += 1;
 
   VM_ExecuteCommand(728, 0);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getPCItemLastEquippedBy");
+  unlock(getPCItemLastEquippedBy_mutex, "getPCItemLastEquippedBy");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
 };
 
 NWN::NWObject NWScriptI::getPCItemLastUnequipped(const Ice::Current& ice) {
-  lock("getPCItemLastUnequipped"); callCounter += 1;
+  lock(getPCItemLastUnequipped_mutex, "getPCItemLastUnequipped");
+  callCounter += 1;
 
   VM_ExecuteCommand(729, 0);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getPCItemLastUnequipped");
+  unlock(getPCItemLastUnequipped_mutex, "getPCItemLastUnequipped");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
 };
 
 NWN::NWObject NWScriptI::getPCItemLastUnequippedBy(const Ice::Current& ice) {
-  lock("getPCItemLastUnequippedBy"); callCounter += 1;
+  lock(getPCItemLastUnequippedBy_mutex, "getPCItemLastUnequippedBy");
+  callCounter += 1;
 
   VM_ExecuteCommand(730, 0);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getPCItemLastUnequippedBy");
+  unlock(getPCItemLastUnequippedBy_mutex, "getPCItemLastUnequippedBy");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
 };
 
 NWN::NWObject NWScriptI::getPCLevellingUp(const Ice::Current& ice) {
-  lock("getPCLevellingUp"); callCounter += 1;
+  lock(getPCLevellingUp_mutex, "getPCLevellingUp");
+  callCounter += 1;
 
   VM_ExecuteCommand(542, 0);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getPCLevellingUp");
+  unlock(getPCLevellingUp_mutex, "getPCLevellingUp");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -7958,20 +8441,22 @@ NWN::NWObject NWScriptI::getPCLevellingUp(const Ice::Current& ice) {
 
 std::string NWScriptI::getPCPlayerName(const NWN::NWObject& oPlayer, const Ice::Current& ice) {
   if (oPlayer.id < 0 || oPlayer.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getPCPlayerName"); callCounter += 1;
+  lock(getPCPlayerName_mutex, "getPCPlayerName");
+  callCounter += 1;
   StackPushObject(oPlayer.id);
 
   VM_ExecuteCommand(371, 1);
 
   char* sRetVal;
   StackPopString(&sRetVal);
-  unlock("getPCPlayerName");
+  unlock(getPCPlayerName_mutex, "getPCPlayerName");
   return std::string(sRetVal);
 };
 
 std::string NWScriptI::getPCPublicCDKey(const NWN::NWObject& oPlayer, bool bSinglePlayerCDKey, const Ice::Current& ice) {
   if (oPlayer.id < 0 || oPlayer.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getPCPublicCDKey"); callCounter += 1;
+  lock(getPCPublicCDKey_mutex, "getPCPublicCDKey");
+  callCounter += 1;
   StackPushInteger(bSinglePlayerCDKey == true ? 1 : 0);
   StackPushObject(oPlayer.id);
 
@@ -7979,18 +8464,19 @@ std::string NWScriptI::getPCPublicCDKey(const NWN::NWObject& oPlayer, bool bSing
 
   char* sRetVal;
   StackPopString(&sRetVal);
-  unlock("getPCPublicCDKey");
+  unlock(getPCPublicCDKey_mutex, "getPCPublicCDKey");
   return std::string(sRetVal);
 };
 
 NWN::NWObject NWScriptI::getPCSpeaker(const Ice::Current& ice) {
-  lock("getPCSpeaker"); callCounter += 1;
+  lock(getPCSpeaker_mutex, "getPCSpeaker");
+  callCounter += 1;
 
   VM_ExecuteCommand(238, 0);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getPCSpeaker");
+  unlock(getPCSpeaker_mutex, "getPCSpeaker");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -7998,14 +8484,15 @@ NWN::NWObject NWScriptI::getPCSpeaker(const Ice::Current& ice) {
 
 NWN::PhenoType NWScriptI::getPhenoType(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getPhenoType"); callCounter += 1;
+  lock(getPhenoType_mutex, "getPhenoType");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(778, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getPhenoType");
+  unlock(getPhenoType_mutex, "getPhenoType");
   if (nRetVal == 16) return NWN::Custom14PhenoType;
   if (nRetVal == 5) return NWN::Custom3PhenoType;
   if (nRetVal == 11) return NWN::Custom9PhenoType;
@@ -8031,38 +8518,41 @@ NWN::PhenoType NWScriptI::getPhenoType(const NWN::NWObject& oCreature, const Ice
 
 bool NWScriptI::getPickpocketableFlag(const NWN::NWObject& oItem, const Ice::Current& ice) {
   if (oItem.id < 0 || oItem.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getPickpocketableFlag"); callCounter += 1;
+  lock(getPickpocketableFlag_mutex, "getPickpocketableFlag");
+  callCounter += 1;
   StackPushObject(oItem.id);
 
   VM_ExecuteCommand(786, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getPickpocketableFlag");
+  unlock(getPickpocketableFlag_mutex, "getPickpocketableFlag");
   return nRetVal != 0;
 };
 
 Ice::Int NWScriptI::getPlaceableIllumination(const NWN::NWObject& oPlaceable, const Ice::Current& ice) {
   if (oPlaceable.id < 0 || oPlaceable.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getPlaceableIllumination"); callCounter += 1;
+  lock(getPlaceableIllumination_mutex, "getPlaceableIllumination");
+  callCounter += 1;
   StackPushObject(oPlaceable.id);
 
   VM_ExecuteCommand(545, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getPlaceableIllumination");
+  unlock(getPlaceableIllumination_mutex, "getPlaceableIllumination");
   return nRetVal;
 };
 
 NWN::NWObject NWScriptI::getPlaceableLastClickedBy(const Ice::Current& ice) {
-  lock("getPlaceableLastClickedBy"); callCounter += 1;
+  lock(getPlaceableLastClickedBy_mutex, "getPlaceableLastClickedBy");
+  callCounter += 1;
 
   VM_ExecuteCommand(826, 0);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getPlaceableLastClickedBy");
+  unlock(getPlaceableLastClickedBy_mutex, "getPlaceableLastClickedBy");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -8070,46 +8560,50 @@ NWN::NWObject NWScriptI::getPlaceableLastClickedBy(const Ice::Current& ice) {
 
 bool NWScriptI::getPlotFlag(const NWN::NWObject& oTarget, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getPlotFlag"); callCounter += 1;
+  lock(getPlotFlag_mutex, "getPlotFlag");
+  callCounter += 1;
   StackPushObject(oTarget.id);
 
   VM_ExecuteCommand(455, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getPlotFlag");
+  unlock(getPlotFlag_mutex, "getPlotFlag");
   return nRetVal != 0;
 };
 
 Ice::Int NWScriptI::getPortraitId(const NWN::NWObject& oTarget, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getPortraitId"); callCounter += 1;
+  lock(getPortraitId_mutex, "getPortraitId");
+  callCounter += 1;
   StackPushObject(oTarget.id);
 
   VM_ExecuteCommand(831, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getPortraitId");
+  unlock(getPortraitId_mutex, "getPortraitId");
   return nRetVal;
 };
 
 std::string NWScriptI::getPortraitResRef(const NWN::NWObject& oTarget, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getPortraitResRef"); callCounter += 1;
+  lock(getPortraitResRef_mutex, "getPortraitResRef");
+  callCounter += 1;
   StackPushObject(oTarget.id);
 
   VM_ExecuteCommand(833, 1);
 
   char* sRetVal;
   StackPopString(&sRetVal);
-  unlock("getPortraitResRef");
+  unlock(getPortraitResRef_mutex, "getPortraitResRef");
   return std::string(sRetVal);
 };
 
 NWN::NWVector NWScriptI::getPosition(const NWN::NWObject& oTarget, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getPosition"); callCounter += 1;
+  lock(getPosition_mutex, "getPosition");
+  callCounter += 1;
   StackPushObject(oTarget.id);
 
   VM_ExecuteCommand(27, 1);
@@ -8118,13 +8612,14 @@ NWN::NWVector NWScriptI::getPosition(const NWN::NWObject& oTarget, const Ice::Cu
   StackPopVector(&vRetVal);
   NWN::NWVector nv;
   nv.x = vRetVal.X; nv.y = vRetVal.Y; nv.z = vRetVal.Z;
-  unlock("getPosition");
+  unlock(getPosition_mutex, "getPosition");
   return nv;
 };
 
 NWN::NWVector NWScriptI::getPositionFromLocation(const NWN::NWLocation& lLocation, const Ice::Current& ice) {
   if (lLocation.area.id < 0) throw NWN::InvalidObjectException();
-  lock("getPositionFromLocation"); callCounter += 1;
+  lock(getPositionFromLocation_mutex, "getPositionFromLocation");
+  callCounter += 1;
   CScriptLocation *lLocation_ptr;
   lLocation_ptr->X = lLocation.x;
   lLocation_ptr->Y = lLocation.y;
@@ -8141,20 +8636,21 @@ NWN::NWVector NWScriptI::getPositionFromLocation(const NWN::NWLocation& lLocatio
   StackPopVector(&vRetVal);
   NWN::NWVector nv;
   nv.x = vRetVal.X; nv.y = vRetVal.Y; nv.z = vRetVal.Z;
-  unlock("getPositionFromLocation");
+  unlock(getPositionFromLocation_mutex, "getPositionFromLocation");
   return nv;
 };
 
 NWN::RacialType NWScriptI::getRacialType(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getRacialType"); callCounter += 1;
+  lock(getRacialType_mutex, "getRacialType");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(107, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getRacialType");
+  unlock(getRacialType_mutex, "getRacialType");
   if (nRetVal == 16) return NWN::ElementalRace;
   if (nRetVal == 5) return NWN::HalforcRace;
   if (nRetVal == 11) return NWN::DragonRace;
@@ -8187,7 +8683,8 @@ NWN::RacialType NWScriptI::getRacialType(const NWN::NWObject& oCreature, const I
 Ice::Int NWScriptI::getReflexAdjustedDamage(Ice::Int nDamage, const NWN::NWObject& oTarget, Ice::Int nDC, NWN::SaveType tSaveType, const NWN::NWObject& oSaveVersus, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (oSaveVersus.id < 0 || oSaveVersus.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getReflexAdjustedDamage"); callCounter += 1;
+  lock(getReflexAdjustedDamage_mutex, "getReflexAdjustedDamage");
+  callCounter += 1;
   StackPushObject(oSaveVersus.id);
   if (tSaveType == NWN::GoodSaveType) StackPushInteger(16);
    else if (tSaveType == NWN::SonicSaveType) StackPushInteger(5);
@@ -8218,27 +8715,29 @@ Ice::Int NWScriptI::getReflexAdjustedDamage(Ice::Int nDamage, const NWN::NWObjec
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getReflexAdjustedDamage");
+  unlock(getReflexAdjustedDamage_mutex, "getReflexAdjustedDamage");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::getReflexSavingThrow(const NWN::NWObject& oTarget, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getReflexSavingThrow"); callCounter += 1;
+  lock(getReflexSavingThrow_mutex, "getReflexSavingThrow");
+  callCounter += 1;
   StackPushObject(oTarget.id);
 
   VM_ExecuteCommand(493, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getReflexSavingThrow");
+  unlock(getReflexSavingThrow_mutex, "getReflexSavingThrow");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::getReputation(const NWN::NWObject& oSource, const NWN::NWObject& oTarget, const Ice::Current& ice) {
   if (oSource.id < 0 || oSource.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getReputation"); callCounter += 1;
+  lock(getReputation_mutex, "getReputation");
+  callCounter += 1;
   StackPushObject(oTarget.id);
   StackPushObject(oSource.id);
 
@@ -8246,33 +8745,35 @@ Ice::Int NWScriptI::getReputation(const NWN::NWObject& oSource, const NWN::NWObj
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getReputation");
+  unlock(getReputation_mutex, "getReputation");
   return nRetVal;
 };
 
 std::string NWScriptI::getResRef(const NWN::NWObject& oObject, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getResRef"); callCounter += 1;
+  lock(getResRef_mutex, "getResRef");
+  callCounter += 1;
   StackPushObject(oObject.id);
 
   VM_ExecuteCommand(582, 1);
 
   char* sRetVal;
   StackPopString(&sRetVal);
-  unlock("getResRef");
+  unlock(getResRef_mutex, "getResRef");
   return std::string(sRetVal);
 };
 
 NWN::NWObject NWScriptI::getSittingCreature(const NWN::NWObject& oChair, const Ice::Current& ice) {
   if (oChair.id < 0 || oChair.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getSittingCreature"); callCounter += 1;
+  lock(getSittingCreature_mutex, "getSittingCreature");
+  callCounter += 1;
   StackPushObject(oChair.id);
 
   VM_ExecuteCommand(210, 1);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getSittingCreature");
+  unlock(getSittingCreature_mutex, "getSittingCreature");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -8280,7 +8781,8 @@ NWN::NWObject NWScriptI::getSittingCreature(const NWN::NWObject& oChair, const I
 
 Ice::Int NWScriptI::getSkillRank(Ice::Int nSkill, const NWN::NWObject& oTarget, bool bBaseSkillRank, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getSkillRank"); callCounter += 1;
+  lock(getSkillRank_mutex, "getSkillRank");
+  callCounter += 1;
   StackPushInteger(bBaseSkillRank == true ? 1 : 0);
   StackPushObject(oTarget.id);
   StackPushInteger(nSkill);
@@ -8289,73 +8791,79 @@ Ice::Int NWScriptI::getSkillRank(Ice::Int nSkill, const NWN::NWObject& oTarget, 
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getSkillRank");
+  unlock(getSkillRank_mutex, "getSkillRank");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::getSkyBox(const NWN::NWObject& oArea, const Ice::Current& ice) {
   if (oArea.id < 0 || oArea.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getSkyBox"); callCounter += 1;
+  lock(getSkyBox_mutex, "getSkyBox");
+  callCounter += 1;
   StackPushObject(oArea.id);
 
   VM_ExecuteCommand(782, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getSkyBox");
+  unlock(getSkyBox_mutex, "getSkyBox");
   return nRetVal;
 };
 
 NWN::NWObject NWScriptI::getSpellCastItem(const Ice::Current& ice) {
-  lock("getSpellCastItem"); callCounter += 1;
+  lock(getSpellCastItem_mutex, "getSpellCastItem");
+  callCounter += 1;
 
   VM_ExecuteCommand(438, 0);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getSpellCastItem");
+  unlock(getSpellCastItem_mutex, "getSpellCastItem");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
 };
 
 Ice::Int NWScriptI::getSpellId(const Ice::Current& ice) {
-  lock("getSpellId"); callCounter += 1;
+  lock(getSpellId_mutex, "getSpellId");
+  callCounter += 1;
 
   VM_ExecuteCommand(248, 0);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getSpellId");
+  unlock(getSpellId_mutex, "getSpellId");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::getSpellResistance(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getSpellResistance"); callCounter += 1;
+  lock(getSpellResistance_mutex, "getSpellResistance");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(749, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getSpellResistance");
+  unlock(getSpellResistance_mutex, "getSpellResistance");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::getSpellSaveDC(const Ice::Current& ice) {
-  lock("getSpellSaveDC"); callCounter += 1;
+  lock(getSpellSaveDC_mutex, "getSpellSaveDC");
+  callCounter += 1;
 
   VM_ExecuteCommand(111, 0);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getSpellSaveDC");
+  unlock(getSpellSaveDC_mutex, "getSpellSaveDC");
   return nRetVal;
 };
 
 NWN::NWLocation NWScriptI::getSpellTargetLocation(const Ice::Current& ice) {
-  lock("getSpellTargetLocation"); callCounter += 1;
+  lock(getSpellTargetLocation_mutex, "getSpellTargetLocation");
+  callCounter += 1;
 
   VM_ExecuteCommand(222, 0);
 
@@ -8369,18 +8877,19 @@ NWN::NWLocation NWScriptI::getSpellTargetLocation(const Ice::Current& ice) {
   nl.orientationY = pRetVal->OrientationY;
   nl.orientationZ = pRetVal->OrientationZ;
   nl.area.id = pRetVal->AreaID;
-  unlock("getSpellTargetLocation");
+  unlock(getSpellTargetLocation_mutex, "getSpellTargetLocation");
   return nl;
 };
 
 NWN::NWObject NWScriptI::getSpellTargetObject(const Ice::Current& ice) {
-  lock("getSpellTargetObject"); callCounter += 1;
+  lock(getSpellTargetObject_mutex, "getSpellTargetObject");
+  callCounter += 1;
 
   VM_ExecuteCommand(47, 0);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getSpellTargetObject");
+  unlock(getSpellTargetObject_mutex, "getSpellTargetObject");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -8388,7 +8897,8 @@ NWN::NWObject NWScriptI::getSpellTargetObject(const Ice::Current& ice) {
 
 Ice::Int NWScriptI::getStandardFactionReputation(NWN::StandardFaction tStandardFaction, const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getStandardFactionReputation"); callCounter += 1;
+  lock(getStandardFactionReputation_mutex, "getStandardFactionReputation");
+  callCounter += 1;
   StackPushObject(oCreature.id);
   if (tStandardFaction == NWN::Hostile) StackPushInteger(0);
    else if (tStandardFaction == NWN::Commoner) StackPushInteger(1);
@@ -8400,12 +8910,13 @@ Ice::Int NWScriptI::getStandardFactionReputation(NWN::StandardFaction tStandardF
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getStandardFactionReputation");
+  unlock(getStandardFactionReputation_mutex, "getStandardFactionReputation");
   return nRetVal;
 };
 
 NWN::NWLocation NWScriptI::getStartingLocation(const Ice::Current& ice) {
-  lock("getStartingLocation"); callCounter += 1;
+  lock(getStartingLocation_mutex, "getStartingLocation");
+  callCounter += 1;
 
   VM_ExecuteCommand(411, 0);
 
@@ -8419,89 +8930,96 @@ NWN::NWLocation NWScriptI::getStartingLocation(const Ice::Current& ice) {
   nl.orientationY = pRetVal->OrientationY;
   nl.orientationZ = pRetVal->OrientationZ;
   nl.area.id = pRetVal->AreaID;
-  unlock("getStartingLocation");
+  unlock(getStartingLocation_mutex, "getStartingLocation");
   return nl;
 };
 
 Ice::Int NWScriptI::getStealthMode(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getStealthMode"); callCounter += 1;
+  lock(getStealthMode_mutex, "getStealthMode");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(574, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getStealthMode");
+  unlock(getStealthMode_mutex, "getStealthMode");
   return nRetVal;
 };
 
 bool NWScriptI::getStolenFlag(const NWN::NWObject& oStolen, const Ice::Current& ice) {
   if (oStolen.id < 0 || oStolen.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getStolenFlag"); callCounter += 1;
+  lock(getStolenFlag_mutex, "getStolenFlag");
+  callCounter += 1;
   StackPushObject(oStolen.id);
 
   VM_ExecuteCommand(588, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getStolenFlag");
+  unlock(getStolenFlag_mutex, "getStolenFlag");
   return nRetVal != 0;
 };
 
 Ice::Int NWScriptI::getStoreGold(const NWN::NWObject& oidStore, const Ice::Current& ice) {
   if (oidStore.id < 0 || oidStore.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getStoreGold"); callCounter += 1;
+  lock(getStoreGold_mutex, "getStoreGold");
+  callCounter += 1;
   StackPushObject(oidStore.id);
 
   VM_ExecuteCommand(759, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getStoreGold");
+  unlock(getStoreGold_mutex, "getStoreGold");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::getStoreIdentifyCost(const NWN::NWObject& oidStore, const Ice::Current& ice) {
   if (oidStore.id < 0 || oidStore.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getStoreIdentifyCost"); callCounter += 1;
+  lock(getStoreIdentifyCost_mutex, "getStoreIdentifyCost");
+  callCounter += 1;
   StackPushObject(oidStore.id);
 
   VM_ExecuteCommand(763, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getStoreIdentifyCost");
+  unlock(getStoreIdentifyCost_mutex, "getStoreIdentifyCost");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::getStoreMaxBuyPrice(const NWN::NWObject& oidStore, const Ice::Current& ice) {
   if (oidStore.id < 0 || oidStore.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getStoreMaxBuyPrice"); callCounter += 1;
+  lock(getStoreMaxBuyPrice_mutex, "getStoreMaxBuyPrice");
+  callCounter += 1;
   StackPushObject(oidStore.id);
 
   VM_ExecuteCommand(761, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getStoreMaxBuyPrice");
+  unlock(getStoreMaxBuyPrice_mutex, "getStoreMaxBuyPrice");
   return nRetVal;
 };
 
 Ice::Double NWScriptI::getStrRefSoundDuration(Ice::Int nStrRef, const Ice::Current& ice) {
-  lock("getStrRefSoundDuration"); callCounter += 1;
+  lock(getStrRefSoundDuration_mutex, "getStrRefSoundDuration");
+  callCounter += 1;
   StackPushInteger(nStrRef);
 
   VM_ExecuteCommand(571, 1);
 
   float fRetVal;
   StackPopFloat(&fRetVal);
-  unlock("getStrRefSoundDuration");
+  unlock(getStrRefSoundDuration_mutex, "getStrRefSoundDuration");
   return fRetVal;
 };
 
 std::string NWScriptI::getStringByStrRef(Ice::Int nStrRef, NWN::Gender tGender, const Ice::Current& ice) {
-  lock("getStringByStrRef"); callCounter += 1;
+  lock(getStringByStrRef_mutex, "getStringByStrRef");
+  callCounter += 1;
   if (tGender == NWN::MaleGender) StackPushInteger(0);
    else if (tGender == NWN::Female) StackPushInteger(1);
    else if (tGender == NWN::BothGender) StackPushInteger(2);
@@ -8514,12 +9032,13 @@ std::string NWScriptI::getStringByStrRef(Ice::Int nStrRef, NWN::Gender tGender, 
 
   char* sRetVal;
   StackPopString(&sRetVal);
-  unlock("getStringByStrRef");
+  unlock(getStringByStrRef_mutex, "getStringByStrRef");
   return std::string(sRetVal);
 };
 
 std::string NWScriptI::getStringLeft(const std::string& sString, Ice::Int nCount, const Ice::Current& ice) {
-  lock("getStringLeft"); callCounter += 1;
+  lock(getStringLeft_mutex, "getStringLeft");
+  callCounter += 1;
   StackPushInteger(nCount);
   StackPushString(sString.c_str());
 
@@ -8527,36 +9046,39 @@ std::string NWScriptI::getStringLeft(const std::string& sString, Ice::Int nCount
 
   char* sRetVal;
   StackPopString(&sRetVal);
-  unlock("getStringLeft");
+  unlock(getStringLeft_mutex, "getStringLeft");
   return std::string(sRetVal);
 };
 
 Ice::Int NWScriptI::getStringLength(const std::string& sString, const Ice::Current& ice) {
-  lock("getStringLength"); callCounter += 1;
+  lock(getStringLength_mutex, "getStringLength");
+  callCounter += 1;
   StackPushString(sString.c_str());
 
   VM_ExecuteCommand(59, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getStringLength");
+  unlock(getStringLength_mutex, "getStringLength");
   return nRetVal;
 };
 
 std::string NWScriptI::getStringLowerCase(const std::string& sString, const Ice::Current& ice) {
-  lock("getStringLowerCase"); callCounter += 1;
+  lock(getStringLowerCase_mutex, "getStringLowerCase");
+  callCounter += 1;
   StackPushString(sString.c_str());
 
   VM_ExecuteCommand(61, 1);
 
   char* sRetVal;
   StackPopString(&sRetVal);
-  unlock("getStringLowerCase");
+  unlock(getStringLowerCase_mutex, "getStringLowerCase");
   return std::string(sRetVal);
 };
 
 std::string NWScriptI::getStringRight(const std::string& sString, Ice::Int nCount, const Ice::Current& ice) {
-  lock("getStringRight"); callCounter += 1;
+  lock(getStringRight_mutex, "getStringRight");
+  callCounter += 1;
   StackPushInteger(nCount);
   StackPushString(sString.c_str());
 
@@ -8564,37 +9086,40 @@ std::string NWScriptI::getStringRight(const std::string& sString, Ice::Int nCoun
 
   char* sRetVal;
   StackPopString(&sRetVal);
-  unlock("getStringRight");
+  unlock(getStringRight_mutex, "getStringRight");
   return std::string(sRetVal);
 };
 
 std::string NWScriptI::getStringUpperCase(const std::string& sString, const Ice::Current& ice) {
-  lock("getStringUpperCase"); callCounter += 1;
+  lock(getStringUpperCase_mutex, "getStringUpperCase");
+  callCounter += 1;
   StackPushString(sString.c_str());
 
   VM_ExecuteCommand(60, 1);
 
   char* sRetVal;
   StackPopString(&sRetVal);
-  unlock("getStringUpperCase");
+  unlock(getStringUpperCase_mutex, "getStringUpperCase");
   return std::string(sRetVal);
 };
 
 std::string NWScriptI::getSubRace(const NWN::NWObject& oTarget, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getSubRace"); callCounter += 1;
+  lock(getSubRace_mutex, "getSubRace");
+  callCounter += 1;
   StackPushObject(oTarget.id);
 
   VM_ExecuteCommand(490, 1);
 
   char* sRetVal;
   StackPopString(&sRetVal);
-  unlock("getSubRace");
+  unlock(getSubRace_mutex, "getSubRace");
   return std::string(sRetVal);
 };
 
 std::string NWScriptI::getSubString(const std::string& sString, Ice::Int nStart, Ice::Int nCount, const Ice::Current& ice) {
-  lock("getSubString"); callCounter += 1;
+  lock(getSubString_mutex, "getSubString");
+  callCounter += 1;
   StackPushInteger(nCount);
   StackPushInteger(nStart);
   StackPushString(sString.c_str());
@@ -8603,26 +9128,28 @@ std::string NWScriptI::getSubString(const std::string& sString, Ice::Int nStart,
 
   char* sRetVal;
   StackPopString(&sRetVal);
-  unlock("getSubString");
+  unlock(getSubString_mutex, "getSubString");
   return std::string(sRetVal);
 };
 
 std::string NWScriptI::getTag(const NWN::NWObject& oObject, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getTag"); callCounter += 1;
+  lock(getTag_mutex, "getTag");
+  callCounter += 1;
   StackPushObject(oObject.id);
 
   VM_ExecuteCommand(168, 1);
 
   char* sRetVal;
   StackPopString(&sRetVal);
-  unlock("getTag");
+  unlock(getTag_mutex, "getTag");
   return std::string(sRetVal);
 };
 
 NWN::TileMainLightColor NWScriptI::getTileMainLight1Color(const NWN::NWLocation& lTile, const Ice::Current& ice) {
   if (lTile.area.id < 0) throw NWN::InvalidObjectException();
-  lock("getTileMainLight1Color"); callCounter += 1;
+  lock(getTileMainLight1Color_mutex, "getTileMainLight1Color");
+  callCounter += 1;
   CScriptLocation *lTile_ptr;
   lTile_ptr->X = lTile.x;
   lTile_ptr->Y = lTile.y;
@@ -8637,7 +9164,7 @@ NWN::TileMainLightColor NWScriptI::getTileMainLight1Color(const NWN::NWLocation&
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getTileMainLight1Color");
+  unlock(getTileMainLight1Color_mutex, "getTileMainLight1Color");
   if (nRetVal == 27) return NWN::RedTileMainLightColor;
   if (nRetVal == 16) return NWN::PaleDarkBlueTileMainLightColor;
   if (nRetVal == 5) return NWN::DarkYellowTileMainLightColor;
@@ -8675,7 +9202,8 @@ NWN::TileMainLightColor NWScriptI::getTileMainLight1Color(const NWN::NWLocation&
 
 NWN::TileMainLightColor NWScriptI::getTileMainLight2Color(const NWN::NWLocation& lTile, const Ice::Current& ice) {
   if (lTile.area.id < 0) throw NWN::InvalidObjectException();
-  lock("getTileMainLight2Color"); callCounter += 1;
+  lock(getTileMainLight2Color_mutex, "getTileMainLight2Color");
+  callCounter += 1;
   CScriptLocation *lTile_ptr;
   lTile_ptr->X = lTile.x;
   lTile_ptr->Y = lTile.y;
@@ -8690,7 +9218,7 @@ NWN::TileMainLightColor NWScriptI::getTileMainLight2Color(const NWN::NWLocation&
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getTileMainLight2Color");
+  unlock(getTileMainLight2Color_mutex, "getTileMainLight2Color");
   if (nRetVal == 27) return NWN::RedTileMainLightColor;
   if (nRetVal == 16) return NWN::PaleDarkBlueTileMainLightColor;
   if (nRetVal == 5) return NWN::DarkYellowTileMainLightColor;
@@ -8728,7 +9256,8 @@ NWN::TileMainLightColor NWScriptI::getTileMainLight2Color(const NWN::NWLocation&
 
 NWN::TileSourceLightColor NWScriptI::getTileSourceLight1Color(const NWN::NWLocation& lTile, const Ice::Current& ice) {
   if (lTile.area.id < 0) throw NWN::InvalidObjectException();
-  lock("getTileSourceLight1Color"); callCounter += 1;
+  lock(getTileSourceLight1Color_mutex, "getTileSourceLight1Color");
+  callCounter += 1;
   CScriptLocation *lTile_ptr;
   lTile_ptr->X = lTile.x;
   lTile_ptr->Y = lTile.y;
@@ -8743,7 +9272,7 @@ NWN::TileSourceLightColor NWScriptI::getTileSourceLight1Color(const NWN::NWLocat
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getTileSourceLight1Color");
+  unlock(getTileSourceLight1Color_mutex, "getTileSourceLight1Color");
   if (nRetVal == 5) return NWN::PaleGreenTileSourceLightColor;
   if (nRetVal == 11) return NWN::PalePurpleTileSourceLightColor;
   if (nRetVal == 0) return NWN::BlackTileSourceLightColor;
@@ -8765,7 +9294,8 @@ NWN::TileSourceLightColor NWScriptI::getTileSourceLight1Color(const NWN::NWLocat
 
 NWN::TileSourceLightColor NWScriptI::getTileSourceLight2Color(const NWN::NWLocation& lTile, const Ice::Current& ice) {
   if (lTile.area.id < 0) throw NWN::InvalidObjectException();
-  lock("getTileSourceLight2Color"); callCounter += 1;
+  lock(getTileSourceLight2Color_mutex, "getTileSourceLight2Color");
+  callCounter += 1;
   CScriptLocation *lTile_ptr;
   lTile_ptr->X = lTile.x;
   lTile_ptr->Y = lTile.y;
@@ -8780,7 +9310,7 @@ NWN::TileSourceLightColor NWScriptI::getTileSourceLight2Color(const NWN::NWLocat
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getTileSourceLight2Color");
+  unlock(getTileSourceLight2Color_mutex, "getTileSourceLight2Color");
   if (nRetVal == 5) return NWN::PaleGreenTileSourceLightColor;
   if (nRetVal == 11) return NWN::PalePurpleTileSourceLightColor;
   if (nRetVal == 0) return NWN::BlackTileSourceLightColor;
@@ -8802,82 +9332,89 @@ NWN::TileSourceLightColor NWScriptI::getTileSourceLight2Color(const NWN::NWLocat
 
 std::string NWScriptI::getTilesetResRef(const NWN::NWObject& oArea, const Ice::Current& ice) {
   if (oArea.id < 0 || oArea.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getTilesetResRef"); callCounter += 1;
+  lock(getTilesetResRef_mutex, "getTilesetResRef");
+  callCounter += 1;
   StackPushObject(oArea.id);
 
   VM_ExecuteCommand(814, 1);
 
   char* sRetVal;
   StackPopString(&sRetVal);
-  unlock("getTilesetResRef");
+  unlock(getTilesetResRef_mutex, "getTilesetResRef");
   return std::string(sRetVal);
 };
 
 Ice::Int NWScriptI::getTimeHour(const Ice::Current& ice) {
-  lock("getTimeHour"); callCounter += 1;
+  lock(getTimeHour_mutex, "getTimeHour");
+  callCounter += 1;
 
   VM_ExecuteCommand(16, 0);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getTimeHour");
+  unlock(getTimeHour_mutex, "getTimeHour");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::getTimeMillisecond(const Ice::Current& ice) {
-  lock("getTimeMillisecond"); callCounter += 1;
+  lock(getTimeMillisecond_mutex, "getTimeMillisecond");
+  callCounter += 1;
 
   VM_ExecuteCommand(19, 0);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getTimeMillisecond");
+  unlock(getTimeMillisecond_mutex, "getTimeMillisecond");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::getTimeMinute(const Ice::Current& ice) {
-  lock("getTimeMinute"); callCounter += 1;
+  lock(getTimeMinute_mutex, "getTimeMinute");
+  callCounter += 1;
 
   VM_ExecuteCommand(17, 0);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getTimeMinute");
+  unlock(getTimeMinute_mutex, "getTimeMinute");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::getTimeSecond(const Ice::Current& ice) {
-  lock("getTimeSecond"); callCounter += 1;
+  lock(getTimeSecond_mutex, "getTimeSecond");
+  callCounter += 1;
 
   VM_ExecuteCommand(18, 0);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getTimeSecond");
+  unlock(getTimeSecond_mutex, "getTimeSecond");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::getTotalDamageDealt(const Ice::Current& ice) {
-  lock("getTotalDamageDealt"); callCounter += 1;
+  lock(getTotalDamageDealt_mutex, "getTotalDamageDealt");
+  callCounter += 1;
 
   VM_ExecuteCommand(345, 0);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getTotalDamageDealt");
+  unlock(getTotalDamageDealt_mutex, "getTotalDamageDealt");
   return nRetVal;
 };
 
 NWN::NWObject NWScriptI::getTransitionTarget(const NWN::NWObject& oTransition, const Ice::Current& ice) {
   if (oTransition.id < 0 || oTransition.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getTransitionTarget"); callCounter += 1;
+  lock(getTransitionTarget_mutex, "getTransitionTarget");
+  callCounter += 1;
   StackPushObject(oTransition.id);
 
   VM_ExecuteCommand(198, 1);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getTransitionTarget");
+  unlock(getTransitionTarget_mutex, "getTransitionTarget");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -8885,40 +9422,43 @@ NWN::NWObject NWScriptI::getTransitionTarget(const NWN::NWObject& oTransition, c
 
 bool NWScriptI::getTrapActive(const NWN::NWObject& oTrapObject, const Ice::Current& ice) {
   if (oTrapObject.id < 0 || oTrapObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getTrapActive"); callCounter += 1;
+  lock(getTrapActive_mutex, "getTrapActive");
+  callCounter += 1;
   StackPushObject(oTrapObject.id);
 
   VM_ExecuteCommand(821, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getTrapActive");
+  unlock(getTrapActive_mutex, "getTrapActive");
   return nRetVal != 0;
 };
 
 Ice::Int NWScriptI::getTrapBaseType(const NWN::NWObject& oTrapObject, const Ice::Current& ice) {
   if (oTrapObject.id < 0 || oTrapObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getTrapBaseType"); callCounter += 1;
+  lock(getTrapBaseType_mutex, "getTrapBaseType");
+  callCounter += 1;
   StackPushObject(oTrapObject.id);
 
   VM_ExecuteCommand(531, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getTrapBaseType");
+  unlock(getTrapBaseType_mutex, "getTrapBaseType");
   return nRetVal;
 };
 
 NWN::NWObject NWScriptI::getTrapCreator(const NWN::NWObject& oTrapObject, const Ice::Current& ice) {
   if (oTrapObject.id < 0 || oTrapObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getTrapCreator"); callCounter += 1;
+  lock(getTrapCreator_mutex, "getTrapCreator");
+  callCounter += 1;
   StackPushObject(oTrapObject.id);
 
   VM_ExecuteCommand(533, 1);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getTrapCreator");
+  unlock(getTrapCreator_mutex, "getTrapCreator");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -8926,34 +9466,37 @@ NWN::NWObject NWScriptI::getTrapCreator(const NWN::NWObject& oTrapObject, const 
 
 Ice::Int NWScriptI::getTrapDetectDC(const NWN::NWObject& oTrapObject, const Ice::Current& ice) {
   if (oTrapObject.id < 0 || oTrapObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getTrapDetectDC"); callCounter += 1;
+  lock(getTrapDetectDC_mutex, "getTrapDetectDC");
+  callCounter += 1;
   StackPushObject(oTrapObject.id);
 
   VM_ExecuteCommand(536, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getTrapDetectDC");
+  unlock(getTrapDetectDC_mutex, "getTrapDetectDC");
   return nRetVal;
 };
 
 bool NWScriptI::getTrapDetectable(const NWN::NWObject& oTrapObject, const Ice::Current& ice) {
   if (oTrapObject.id < 0 || oTrapObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getTrapDetectable"); callCounter += 1;
+  lock(getTrapDetectable_mutex, "getTrapDetectable");
+  callCounter += 1;
   StackPushObject(oTrapObject.id);
 
   VM_ExecuteCommand(528, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getTrapDetectable");
+  unlock(getTrapDetectable_mutex, "getTrapDetectable");
   return nRetVal != 0;
 };
 
 bool NWScriptI::getTrapDetectedBy(const NWN::NWObject& oTrapObject, const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oTrapObject.id < 0 || oTrapObject.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getTrapDetectedBy"); callCounter += 1;
+  lock(getTrapDetectedBy_mutex, "getTrapDetectedBy");
+  callCounter += 1;
   StackPushObject(oCreature.id);
   StackPushObject(oTrapObject.id);
 
@@ -8961,134 +9504,144 @@ bool NWScriptI::getTrapDetectedBy(const NWN::NWObject& oTrapObject, const NWN::N
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getTrapDetectedBy");
+  unlock(getTrapDetectedBy_mutex, "getTrapDetectedBy");
   return nRetVal != 0;
 };
 
 Ice::Int NWScriptI::getTrapDisarmDC(const NWN::NWObject& oTrapObject, const Ice::Current& ice) {
   if (oTrapObject.id < 0 || oTrapObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getTrapDisarmDC"); callCounter += 1;
+  lock(getTrapDisarmDC_mutex, "getTrapDisarmDC");
+  callCounter += 1;
   StackPushObject(oTrapObject.id);
 
   VM_ExecuteCommand(535, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getTrapDisarmDC");
+  unlock(getTrapDisarmDC_mutex, "getTrapDisarmDC");
   return nRetVal;
 };
 
 bool NWScriptI::getTrapDisarmable(const NWN::NWObject& oTrapObject, const Ice::Current& ice) {
   if (oTrapObject.id < 0 || oTrapObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getTrapDisarmable"); callCounter += 1;
+  lock(getTrapDisarmable_mutex, "getTrapDisarmable");
+  callCounter += 1;
   StackPushObject(oTrapObject.id);
 
   VM_ExecuteCommand(527, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getTrapDisarmable");
+  unlock(getTrapDisarmable_mutex, "getTrapDisarmable");
   return nRetVal != 0;
 };
 
 bool NWScriptI::getTrapFlagged(const NWN::NWObject& oTrapObject, const Ice::Current& ice) {
   if (oTrapObject.id < 0 || oTrapObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getTrapFlagged"); callCounter += 1;
+  lock(getTrapFlagged_mutex, "getTrapFlagged");
+  callCounter += 1;
   StackPushObject(oTrapObject.id);
 
   VM_ExecuteCommand(530, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getTrapFlagged");
+  unlock(getTrapFlagged_mutex, "getTrapFlagged");
   return nRetVal != 0;
 };
 
 std::string NWScriptI::getTrapKeyTag(const NWN::NWObject& oTrapObject, const Ice::Current& ice) {
   if (oTrapObject.id < 0 || oTrapObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getTrapKeyTag"); callCounter += 1;
+  lock(getTrapKeyTag_mutex, "getTrapKeyTag");
+  callCounter += 1;
   StackPushObject(oTrapObject.id);
 
   VM_ExecuteCommand(534, 1);
 
   char* sRetVal;
   StackPopString(&sRetVal);
-  unlock("getTrapKeyTag");
+  unlock(getTrapKeyTag_mutex, "getTrapKeyTag");
   return std::string(sRetVal);
 };
 
 bool NWScriptI::getTrapOneShot(const NWN::NWObject& oTrapObject, const Ice::Current& ice) {
   if (oTrapObject.id < 0 || oTrapObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getTrapOneShot"); callCounter += 1;
+  lock(getTrapOneShot_mutex, "getTrapOneShot");
+  callCounter += 1;
   StackPushObject(oTrapObject.id);
 
   VM_ExecuteCommand(532, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getTrapOneShot");
+  unlock(getTrapOneShot_mutex, "getTrapOneShot");
   return nRetVal != 0;
 };
 
 bool NWScriptI::getTrapRecoverable(const NWN::NWObject& oTrapObject, const Ice::Current& ice) {
   if (oTrapObject.id < 0 || oTrapObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getTrapRecoverable"); callCounter += 1;
+  lock(getTrapRecoverable_mutex, "getTrapRecoverable");
+  callCounter += 1;
   StackPushObject(oTrapObject.id);
 
   VM_ExecuteCommand(815, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getTrapRecoverable");
+  unlock(getTrapRecoverable_mutex, "getTrapRecoverable");
   return nRetVal != 0;
 };
 
 Ice::Int NWScriptI::getTurnResistanceHD(const NWN::NWObject& oUndead, const Ice::Current& ice) {
   if (oUndead.id < 0 || oUndead.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getTurnResistanceHD"); callCounter += 1;
+  lock(getTurnResistanceHD_mutex, "getTurnResistanceHD");
+  callCounter += 1;
   StackPushObject(oUndead.id);
 
   VM_ExecuteCommand(478, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getTurnResistanceHD");
+  unlock(getTurnResistanceHD_mutex, "getTurnResistanceHD");
   return nRetVal;
 };
 
 bool NWScriptI::getUseableFlag(const NWN::NWObject& oObject, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getUseableFlag"); callCounter += 1;
+  lock(getUseableFlag_mutex, "getUseableFlag");
+  callCounter += 1;
   StackPushObject(oObject.id);
 
   VM_ExecuteCommand(587, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getUseableFlag");
+  unlock(getUseableFlag_mutex, "getUseableFlag");
   return nRetVal != 0;
 };
 
 Ice::Int NWScriptI::getUserDefinedEventNumber(const Ice::Current& ice) {
-  lock("getUserDefinedEventNumber"); callCounter += 1;
+  lock(getUserDefinedEventNumber_mutex, "getUserDefinedEventNumber");
+  callCounter += 1;
 
   VM_ExecuteCommand(247, 0);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getUserDefinedEventNumber");
+  unlock(getUserDefinedEventNumber_mutex, "getUserDefinedEventNumber");
   return nRetVal;
 };
 
 NWN::NWObject NWScriptI::getWaypointByTag(const std::string& sWaypointTag, const Ice::Current& ice) {
-  lock("getWaypointByTag"); callCounter += 1;
+  lock(getWaypointByTag_mutex, "getWaypointByTag");
+  callCounter += 1;
   StackPushString(sWaypointTag.c_str());
 
   VM_ExecuteCommand(197, 1);
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("getWaypointByTag");
+  unlock(getWaypointByTag_mutex, "getWaypointByTag");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
@@ -9096,27 +9649,29 @@ NWN::NWObject NWScriptI::getWaypointByTag(const std::string& sWaypointTag, const
 
 bool NWScriptI::getWeaponRanged(const NWN::NWObject& oItem, const Ice::Current& ice) {
   if (oItem.id < 0 || oItem.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getWeaponRanged"); callCounter += 1;
+  lock(getWeaponRanged_mutex, "getWeaponRanged");
+  callCounter += 1;
   StackPushObject(oItem.id);
 
   VM_ExecuteCommand(511, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getWeaponRanged");
+  unlock(getWeaponRanged_mutex, "getWeaponRanged");
   return nRetVal != 0;
 };
 
 NWN::Weather NWScriptI::getWeather(const NWN::NWObject& oArea, const Ice::Current& ice) {
   if (oArea.id < 0 || oArea.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getWeather"); callCounter += 1;
+  lock(getWeather_mutex, "getWeather");
+  callCounter += 1;
   StackPushObject(oArea.id);
 
   VM_ExecuteCommand(724, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getWeather");
+  unlock(getWeather_mutex, "getWeather");
   if (nRetVal == 0) return NWN::ClearWeather;
   if (nRetVal == 1) return NWN::RainWeather;
   if (nRetVal == -1) return NWN::InvalidWeather;
@@ -9127,93 +9682,101 @@ NWN::Weather NWScriptI::getWeather(const NWN::NWObject& oArea, const Ice::Curren
 
 Ice::Int NWScriptI::getWeight(const NWN::NWObject& oTarget, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getWeight"); callCounter += 1;
+  lock(getWeight_mutex, "getWeight");
+  callCounter += 1;
   StackPushObject(oTarget.id);
 
   VM_ExecuteCommand(706, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getWeight");
+  unlock(getWeight_mutex, "getWeight");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::getWillSavingThrow(const NWN::NWObject& oTarget, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getWillSavingThrow"); callCounter += 1;
+  lock(getWillSavingThrow_mutex, "getWillSavingThrow");
+  callCounter += 1;
   StackPushObject(oTarget.id);
 
   VM_ExecuteCommand(492, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getWillSavingThrow");
+  unlock(getWillSavingThrow_mutex, "getWillSavingThrow");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::getXP(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("getXP"); callCounter += 1;
+  lock(getXP_mutex, "getXP");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(395, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("getXP");
+  unlock(getXP_mutex, "getXP");
   return nRetVal;
 };
 
 void NWScriptI::giveGoldToCreature(const NWN::NWObject& oCreature, Ice::Int nGP, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("giveGoldToCreature"); callCounter += 1;
+  lock(giveGoldToCreature_mutex, "giveGoldToCreature");
+  callCounter += 1;
   StackPushInteger(nGP);
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(322, 2);
 
-unlock("giveGoldToCreature");
+unlock(giveGoldToCreature_mutex, "giveGoldToCreature");
   
 };
 
 void NWScriptI::giveXPToCreature(const NWN::NWObject& oCreature, Ice::Int nXpAmount, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("giveXPToCreature"); callCounter += 1;
+  lock(giveXPToCreature_mutex, "giveXPToCreature");
+  callCounter += 1;
   StackPushInteger(nXpAmount);
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(393, 2);
 
-unlock("giveXPToCreature");
+unlock(giveXPToCreature_mutex, "giveXPToCreature");
   
 };
 
 Ice::Double NWScriptI::hoursToSeconds(Ice::Int nHours, const Ice::Current& ice) {
-  lock("hoursToSeconds"); callCounter += 1;
+  lock(hoursToSeconds_mutex, "hoursToSeconds");
+  callCounter += 1;
   StackPushInteger(nHours);
 
   VM_ExecuteCommand(122, 1);
 
   float fRetVal;
   StackPopFloat(&fRetVal);
-  unlock("hoursToSeconds");
+  unlock(hoursToSeconds_mutex, "hoursToSeconds");
   return fRetVal;
 };
 
 void NWScriptI::incrementRemainingFeatUses(const NWN::NWObject& oCreature, Ice::Int nFeat, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("incrementRemainingFeatUses"); callCounter += 1;
+  lock(incrementRemainingFeatUses_mutex, "incrementRemainingFeatUses");
+  callCounter += 1;
   StackPushInteger(nFeat);
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(718, 2);
 
-unlock("incrementRemainingFeatUses");
+unlock(incrementRemainingFeatUses_mutex, "incrementRemainingFeatUses");
   
 };
 
 std::string NWScriptI::insertString(const std::string& sDestination, const std::string& sString, Ice::Int nPosition, const Ice::Current& ice) {
-  lock("insertString"); callCounter += 1;
+  lock(insertString_mutex, "insertString");
+  callCounter += 1;
   StackPushInteger(nPosition);
   StackPushString(sString.c_str());
   StackPushString(sDestination.c_str());
@@ -9222,61 +9785,66 @@ std::string NWScriptI::insertString(const std::string& sDestination, const std::
 
   char* sRetVal;
   StackPopString(&sRetVal);
-  unlock("insertString");
+  unlock(insertString_mutex, "insertString");
   return std::string(sRetVal);
 };
 
 Ice::Double NWScriptI::intToFloat(Ice::Int nInteger, const Ice::Current& ice) {
-  lock("intToFloat"); callCounter += 1;
+  lock(intToFloat_mutex, "intToFloat");
+  callCounter += 1;
   StackPushInteger(nInteger);
 
   VM_ExecuteCommand(230, 1);
 
   float fRetVal;
   StackPopFloat(&fRetVal);
-  unlock("intToFloat");
+  unlock(intToFloat_mutex, "intToFloat");
   return fRetVal;
 };
 
 std::string NWScriptI::intToHexString(Ice::Int nInteger, const Ice::Current& ice) {
-  lock("intToHexString"); callCounter += 1;
+  lock(intToHexString_mutex, "intToHexString");
+  callCounter += 1;
   StackPushInteger(nInteger);
 
   VM_ExecuteCommand(396, 1);
 
   char* sRetVal;
   StackPopString(&sRetVal);
-  unlock("intToHexString");
+  unlock(intToHexString_mutex, "intToHexString");
   return std::string(sRetVal);
 };
 
 std::string NWScriptI::intToString(Ice::Int nInteger, const Ice::Current& ice) {
-  lock("intToString"); callCounter += 1;
+  lock(intToString_mutex, "intToString");
+  callCounter += 1;
   StackPushInteger(nInteger);
 
   VM_ExecuteCommand(92, 1);
 
   char* sRetVal;
   StackPopString(&sRetVal);
-  unlock("intToString");
+  unlock(intToString_mutex, "intToString");
   return std::string(sRetVal);
 };
 
 bool NWScriptI::isInConversation(const NWN::NWObject& oObject, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("isInConversation"); callCounter += 1;
+  lock(isInConversation_mutex, "isInConversation");
+  callCounter += 1;
   StackPushObject(oObject.id);
 
   VM_ExecuteCommand(445, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("isInConversation");
+  unlock(isInConversation_mutex, "isInConversation");
   return nRetVal != 0;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyACBonus(Ice::Int nBonus, const Ice::Current& ice) {
-  lock("itemPropertyACBonus"); callCounter += 1;
+  lock(itemPropertyACBonus_mutex, "itemPropertyACBonus");
+  callCounter += 1;
   StackPushInteger(nBonus);
 
   VM_ExecuteCommand(617, 1);
@@ -9291,12 +9859,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyACBonus(Ice::Int nBonus, const Ice::C
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyACBonus");
+  unlock(itemPropertyACBonus_mutex, "itemPropertyACBonus");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyACBonusVsAlign(NWN::IPAlignGroup tIPAlignGroup, Ice::Int nACBonus, const Ice::Current& ice) {
-  lock("itemPropertyACBonusVsAlign"); callCounter += 1;
+  lock(itemPropertyACBonusVsAlign_mutex, "itemPropertyACBonusVsAlign");
+  callCounter += 1;
   StackPushInteger(nACBonus);
   if (tIPAlignGroup == NWN::EvilAlignGroup) StackPushInteger(5);
    else if (tIPAlignGroup == NWN::AllAlignGroup) StackPushInteger(0);
@@ -9318,12 +9887,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyACBonusVsAlign(NWN::IPAlignGroup tIPA
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyACBonusVsAlign");
+  unlock(itemPropertyACBonusVsAlign_mutex, "itemPropertyACBonusVsAlign");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyACBonusVsDmgType(NWN::IPDamageType tIPDamageType, Ice::Int nACBonus, const Ice::Current& ice) {
-  lock("itemPropertyACBonusVsDmgType"); callCounter += 1;
+  lock(itemPropertyACBonusVsDmgType_mutex, "itemPropertyACBonusVsDmgType");
+  callCounter += 1;
   StackPushInteger(nACBonus);
   if (tIPDamageType == NWN::MagicalIPDamage) StackPushInteger(5);
    else if (tIPDamageType == NWN::NegativeIPDamage) StackPushInteger(11);
@@ -9353,12 +9923,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyACBonusVsDmgType(NWN::IPDamageType tI
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyACBonusVsDmgType");
+  unlock(itemPropertyACBonusVsDmgType_mutex, "itemPropertyACBonusVsDmgType");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyACBonusVsRace(NWN::IPRacialType tIPRacialType, Ice::Int nACBonus, const Ice::Current& ice) {
-  lock("itemPropertyACBonusVsRace"); callCounter += 1;
+  lock(itemPropertyACBonusVsRace_mutex, "itemPropertyACBonusVsRace");
+  callCounter += 1;
   StackPushInteger(nACBonus);
   if (tIPRacialType == NWN::ElementalIPRace) StackPushInteger(16);
    else if (tIPRacialType == NWN::HalforcIPRace) StackPushInteger(5);
@@ -9398,12 +9969,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyACBonusVsRace(NWN::IPRacialType tIPRa
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyACBonusVsRace");
+  unlock(itemPropertyACBonusVsRace_mutex, "itemPropertyACBonusVsRace");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyACBonusVsSAlign(NWN::Alignment tAlignment, Ice::Int nACBonus, const Ice::Current& ice) {
-  lock("itemPropertyACBonusVsSAlign"); callCounter += 1;
+  lock(itemPropertyACBonusVsSAlign_mutex, "itemPropertyACBonusVsSAlign");
+  callCounter += 1;
   StackPushInteger(nACBonus);
   if (tAlignment == NWN::Evil) StackPushInteger(5);
    else if (tAlignment == NWN::Any) StackPushInteger(0);
@@ -9425,12 +9997,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyACBonusVsSAlign(NWN::Alignment tAlign
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyACBonusVsSAlign");
+  unlock(itemPropertyACBonusVsSAlign_mutex, "itemPropertyACBonusVsSAlign");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyAbilityBonus(NWN::Ability tAbility, Ice::Int nBonus, const Ice::Current& ice) {
-  lock("itemPropertyAbilityBonus"); callCounter += 1;
+  lock(itemPropertyAbilityBonus_mutex, "itemPropertyAbilityBonus");
+  callCounter += 1;
   StackPushInteger(nBonus);
   if (tAbility == NWN::Charisma) StackPushInteger(5);
    else if (tAbility == NWN::Strength) StackPushInteger(0);
@@ -9452,12 +10025,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyAbilityBonus(NWN::Ability tAbility, I
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyAbilityBonus");
+  unlock(itemPropertyAbilityBonus_mutex, "itemPropertyAbilityBonus");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyAdditional(Ice::Int nAdditionalProperty, const Ice::Current& ice) {
-  lock("itemPropertyAdditional"); callCounter += 1;
+  lock(itemPropertyAdditional_mutex, "itemPropertyAdditional");
+  callCounter += 1;
   StackPushInteger(nAdditionalProperty);
 
   VM_ExecuteCommand(847, 1);
@@ -9472,12 +10046,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyAdditional(Ice::Int nAdditionalProper
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyAdditional");
+  unlock(itemPropertyAdditional_mutex, "itemPropertyAdditional");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyArcaneSpellFailure(Ice::Int nModLevel, const Ice::Current& ice) {
-  lock("itemPropertyArcaneSpellFailure"); callCounter += 1;
+  lock(itemPropertyArcaneSpellFailure_mutex, "itemPropertyArcaneSpellFailure");
+  callCounter += 1;
   StackPushInteger(nModLevel);
 
   VM_ExecuteCommand(758, 1);
@@ -9492,12 +10067,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyArcaneSpellFailure(Ice::Int nModLevel
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyArcaneSpellFailure");
+  unlock(itemPropertyArcaneSpellFailure_mutex, "itemPropertyArcaneSpellFailure");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyAttackBonus(Ice::Int nBonus, const Ice::Current& ice) {
-  lock("itemPropertyAttackBonus"); callCounter += 1;
+  lock(itemPropertyAttackBonus_mutex, "itemPropertyAttackBonus");
+  callCounter += 1;
   StackPushInteger(nBonus);
 
   VM_ExecuteCommand(666, 1);
@@ -9512,12 +10088,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyAttackBonus(Ice::Int nBonus, const Ic
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyAttackBonus");
+  unlock(itemPropertyAttackBonus_mutex, "itemPropertyAttackBonus");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyAttackBonusVsAlign(NWN::IPAlignGroup tIPAlignGroup, Ice::Int nBonus, const Ice::Current& ice) {
-  lock("itemPropertyAttackBonusVsAlign"); callCounter += 1;
+  lock(itemPropertyAttackBonusVsAlign_mutex, "itemPropertyAttackBonusVsAlign");
+  callCounter += 1;
   StackPushInteger(nBonus);
   if (tIPAlignGroup == NWN::EvilAlignGroup) StackPushInteger(5);
    else if (tIPAlignGroup == NWN::AllAlignGroup) StackPushInteger(0);
@@ -9539,12 +10116,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyAttackBonusVsAlign(NWN::IPAlignGroup 
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyAttackBonusVsAlign");
+  unlock(itemPropertyAttackBonusVsAlign_mutex, "itemPropertyAttackBonusVsAlign");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyAttackBonusVsRace(NWN::IPRacialType tIPRacialType, Ice::Int nBonus, const Ice::Current& ice) {
-  lock("itemPropertyAttackBonusVsRace"); callCounter += 1;
+  lock(itemPropertyAttackBonusVsRace_mutex, "itemPropertyAttackBonusVsRace");
+  callCounter += 1;
   StackPushInteger(nBonus);
   if (tIPRacialType == NWN::ElementalIPRace) StackPushInteger(16);
    else if (tIPRacialType == NWN::HalforcIPRace) StackPushInteger(5);
@@ -9584,12 +10162,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyAttackBonusVsRace(NWN::IPRacialType t
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyAttackBonusVsRace");
+  unlock(itemPropertyAttackBonusVsRace_mutex, "itemPropertyAttackBonusVsRace");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyAttackBonusVsSAlign(NWN::Alignment tAlignment, Ice::Int nBonus, const Ice::Current& ice) {
-  lock("itemPropertyAttackBonusVsSAlign"); callCounter += 1;
+  lock(itemPropertyAttackBonusVsSAlign_mutex, "itemPropertyAttackBonusVsSAlign");
+  callCounter += 1;
   StackPushInteger(nBonus);
   if (tAlignment == NWN::Evil) StackPushInteger(5);
    else if (tAlignment == NWN::Any) StackPushInteger(0);
@@ -9611,12 +10190,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyAttackBonusVsSAlign(NWN::Alignment tA
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyAttackBonusVsSAlign");
+  unlock(itemPropertyAttackBonusVsSAlign_mutex, "itemPropertyAttackBonusVsSAlign");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyAttackPenalty(Ice::Int nPenalty, const Ice::Current& ice) {
-  lock("itemPropertyAttackPenalty"); callCounter += 1;
+  lock(itemPropertyAttackPenalty_mutex, "itemPropertyAttackPenalty");
+  callCounter += 1;
   StackPushInteger(nPenalty);
 
   VM_ExecuteCommand(670, 1);
@@ -9631,12 +10211,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyAttackPenalty(Ice::Int nPenalty, cons
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyAttackPenalty");
+  unlock(itemPropertyAttackPenalty_mutex, "itemPropertyAttackPenalty");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyBonusFeat(Ice::Int nFeat, const Ice::Current& ice) {
-  lock("itemPropertyBonusFeat"); callCounter += 1;
+  lock(itemPropertyBonusFeat_mutex, "itemPropertyBonusFeat");
+  callCounter += 1;
   StackPushInteger(nFeat);
 
   VM_ExecuteCommand(628, 1);
@@ -9651,12 +10232,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyBonusFeat(Ice::Int nFeat, const Ice::
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyBonusFeat");
+  unlock(itemPropertyBonusFeat_mutex, "itemPropertyBonusFeat");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyBonusLevelSpell(Ice::Int nClass, Ice::Int nSpellLevel, const Ice::Current& ice) {
-  lock("itemPropertyBonusLevelSpell"); callCounter += 1;
+  lock(itemPropertyBonusLevelSpell_mutex, "itemPropertyBonusLevelSpell");
+  callCounter += 1;
   StackPushInteger(nSpellLevel);
   StackPushInteger(nClass);
 
@@ -9672,12 +10254,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyBonusLevelSpell(Ice::Int nClass, Ice:
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyBonusLevelSpell");
+  unlock(itemPropertyBonusLevelSpell_mutex, "itemPropertyBonusLevelSpell");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyBonusSavingThrow(Ice::Int nBaseSaveType, Ice::Int nBonus, const Ice::Current& ice) {
-  lock("itemPropertyBonusSavingThrow"); callCounter += 1;
+  lock(itemPropertyBonusSavingThrow_mutex, "itemPropertyBonusSavingThrow");
+  callCounter += 1;
   StackPushInteger(nBonus);
   StackPushInteger(nBaseSaveType);
 
@@ -9693,12 +10276,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyBonusSavingThrow(Ice::Int nBaseSaveTy
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyBonusSavingThrow");
+  unlock(itemPropertyBonusSavingThrow_mutex, "itemPropertyBonusSavingThrow");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyBonusSavingThrowVsX(Ice::Int nBonusType, Ice::Int nBonus, const Ice::Current& ice) {
-  lock("itemPropertyBonusSavingThrowVsX"); callCounter += 1;
+  lock(itemPropertyBonusSavingThrowVsX_mutex, "itemPropertyBonusSavingThrowVsX");
+  callCounter += 1;
   StackPushInteger(nBonus);
   StackPushInteger(nBonusType);
 
@@ -9714,12 +10298,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyBonusSavingThrowVsX(Ice::Int nBonusTy
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyBonusSavingThrowVsX");
+  unlock(itemPropertyBonusSavingThrowVsX_mutex, "itemPropertyBonusSavingThrowVsX");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyBonusSpellResistance(Ice::Int nBonus, const Ice::Current& ice) {
-  lock("itemPropertyBonusSpellResistance"); callCounter += 1;
+  lock(itemPropertyBonusSpellResistance_mutex, "itemPropertyBonusSpellResistance");
+  callCounter += 1;
   StackPushInteger(nBonus);
 
   VM_ExecuteCommand(651, 1);
@@ -9734,12 +10319,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyBonusSpellResistance(Ice::Int nBonus,
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyBonusSpellResistance");
+  unlock(itemPropertyBonusSpellResistance_mutex, "itemPropertyBonusSpellResistance");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyCastSpell(Ice::Int nSpell, Ice::Int nNumUses, const Ice::Current& ice) {
-  lock("itemPropertyCastSpell"); callCounter += 1;
+  lock(itemPropertyCastSpell_mutex, "itemPropertyCastSpell");
+  callCounter += 1;
   StackPushInteger(nNumUses);
   StackPushInteger(nSpell);
 
@@ -9755,12 +10341,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyCastSpell(Ice::Int nSpell, Ice::Int n
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyCastSpell");
+  unlock(itemPropertyCastSpell_mutex, "itemPropertyCastSpell");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyContainerReducedWeight(Ice::Int nContainerType, const Ice::Current& ice) {
-  lock("itemPropertyContainerReducedWeight"); callCounter += 1;
+  lock(itemPropertyContainerReducedWeight_mutex, "itemPropertyContainerReducedWeight");
+  callCounter += 1;
   StackPushInteger(nContainerType);
 
   VM_ExecuteCommand(644, 1);
@@ -9775,12 +10362,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyContainerReducedWeight(Ice::Int nCont
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyContainerReducedWeight");
+  unlock(itemPropertyContainerReducedWeight_mutex, "itemPropertyContainerReducedWeight");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyDamageBonus(NWN::IPDamageType tIPDamageType, Ice::Int nDamage, const Ice::Current& ice) {
-  lock("itemPropertyDamageBonus"); callCounter += 1;
+  lock(itemPropertyDamageBonus_mutex, "itemPropertyDamageBonus");
+  callCounter += 1;
   StackPushInteger(nDamage);
   if (tIPDamageType == NWN::MagicalIPDamage) StackPushInteger(5);
    else if (tIPDamageType == NWN::NegativeIPDamage) StackPushInteger(11);
@@ -9810,12 +10398,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyDamageBonus(NWN::IPDamageType tIPDama
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyDamageBonus");
+  unlock(itemPropertyDamageBonus_mutex, "itemPropertyDamageBonus");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyDamageBonusVsAlign(NWN::IPAlignGroup tIPAlignGroup, NWN::IPDamageType tIPDamageType, Ice::Int nDamage, const Ice::Current& ice) {
-  lock("itemPropertyDamageBonusVsAlign"); callCounter += 1;
+  lock(itemPropertyDamageBonusVsAlign_mutex, "itemPropertyDamageBonusVsAlign");
+  callCounter += 1;
   StackPushInteger(nDamage);
   if (tIPDamageType == NWN::MagicalIPDamage) StackPushInteger(5);
    else if (tIPDamageType == NWN::NegativeIPDamage) StackPushInteger(11);
@@ -9852,12 +10441,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyDamageBonusVsAlign(NWN::IPAlignGroup 
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyDamageBonusVsAlign");
+  unlock(itemPropertyDamageBonusVsAlign_mutex, "itemPropertyDamageBonusVsAlign");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyDamageBonusVsRace(NWN::IPRacialType tIPRacialType, NWN::IPDamageType tIPDamageType, Ice::Int nDamage, const Ice::Current& ice) {
-  lock("itemPropertyDamageBonusVsRace"); callCounter += 1;
+  lock(itemPropertyDamageBonusVsRace_mutex, "itemPropertyDamageBonusVsRace");
+  callCounter += 1;
   StackPushInteger(nDamage);
   if (tIPDamageType == NWN::MagicalIPDamage) StackPushInteger(5);
    else if (tIPDamageType == NWN::NegativeIPDamage) StackPushInteger(11);
@@ -9912,12 +10502,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyDamageBonusVsRace(NWN::IPRacialType t
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyDamageBonusVsRace");
+  unlock(itemPropertyDamageBonusVsRace_mutex, "itemPropertyDamageBonusVsRace");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyDamageBonusVsSAlign(NWN::Alignment tAlignment, NWN::IPDamageType tIPDamageType, Ice::Int nDamage, const Ice::Current& ice) {
-  lock("itemPropertyDamageBonusVsSAlign"); callCounter += 1;
+  lock(itemPropertyDamageBonusVsSAlign_mutex, "itemPropertyDamageBonusVsSAlign");
+  callCounter += 1;
   StackPushInteger(nDamage);
   if (tIPDamageType == NWN::MagicalIPDamage) StackPushInteger(5);
    else if (tIPDamageType == NWN::NegativeIPDamage) StackPushInteger(11);
@@ -9954,12 +10545,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyDamageBonusVsSAlign(NWN::Alignment tA
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyDamageBonusVsSAlign");
+  unlock(itemPropertyDamageBonusVsSAlign_mutex, "itemPropertyDamageBonusVsSAlign");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyDamageImmunity(NWN::IPDamageType tIPDamageType, Ice::Int nImmuneBonus, const Ice::Current& ice) {
-  lock("itemPropertyDamageImmunity"); callCounter += 1;
+  lock(itemPropertyDamageImmunity_mutex, "itemPropertyDamageImmunity");
+  callCounter += 1;
   StackPushInteger(nImmuneBonus);
   if (tIPDamageType == NWN::MagicalIPDamage) StackPushInteger(5);
    else if (tIPDamageType == NWN::NegativeIPDamage) StackPushInteger(11);
@@ -9989,12 +10581,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyDamageImmunity(NWN::IPDamageType tIPD
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyDamageImmunity");
+  unlock(itemPropertyDamageImmunity_mutex, "itemPropertyDamageImmunity");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyDamagePenalty(Ice::Int nPenalty, const Ice::Current& ice) {
-  lock("itemPropertyDamagePenalty"); callCounter += 1;
+  lock(itemPropertyDamagePenalty_mutex, "itemPropertyDamagePenalty");
+  callCounter += 1;
   StackPushInteger(nPenalty);
 
   VM_ExecuteCommand(636, 1);
@@ -10009,12 +10602,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyDamagePenalty(Ice::Int nPenalty, cons
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyDamagePenalty");
+  unlock(itemPropertyDamagePenalty_mutex, "itemPropertyDamagePenalty");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyDamageReduction(Ice::Int nEnhancement, Ice::Int nHPSoak, const Ice::Current& ice) {
-  lock("itemPropertyDamageReduction"); callCounter += 1;
+  lock(itemPropertyDamageReduction_mutex, "itemPropertyDamageReduction");
+  callCounter += 1;
   StackPushInteger(nHPSoak);
   StackPushInteger(nEnhancement);
 
@@ -10030,12 +10624,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyDamageReduction(Ice::Int nEnhancement
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyDamageReduction");
+  unlock(itemPropertyDamageReduction_mutex, "itemPropertyDamageReduction");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyDamageResistance(NWN::IPDamageType tIPDamageType, Ice::Int nHPResist, const Ice::Current& ice) {
-  lock("itemPropertyDamageResistance"); callCounter += 1;
+  lock(itemPropertyDamageResistance_mutex, "itemPropertyDamageResistance");
+  callCounter += 1;
   StackPushInteger(nHPResist);
   if (tIPDamageType == NWN::MagicalIPDamage) StackPushInteger(5);
    else if (tIPDamageType == NWN::NegativeIPDamage) StackPushInteger(11);
@@ -10065,12 +10660,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyDamageResistance(NWN::IPDamageType tI
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyDamageResistance");
+  unlock(itemPropertyDamageResistance_mutex, "itemPropertyDamageResistance");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyDamageVulnerability(NWN::IPDamageType tIPDamageType, Ice::Int nVulnerability, const Ice::Current& ice) {
-  lock("itemPropertyDamageVulnerability"); callCounter += 1;
+  lock(itemPropertyDamageVulnerability_mutex, "itemPropertyDamageVulnerability");
+  callCounter += 1;
   StackPushInteger(nVulnerability);
   if (tIPDamageType == NWN::MagicalIPDamage) StackPushInteger(5);
    else if (tIPDamageType == NWN::NegativeIPDamage) StackPushInteger(11);
@@ -10100,12 +10696,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyDamageVulnerability(NWN::IPDamageType
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyDamageVulnerability");
+  unlock(itemPropertyDamageVulnerability_mutex, "itemPropertyDamageVulnerability");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyDarkvision(const Ice::Current& ice) {
-  lock("itemPropertyDarkvision"); callCounter += 1;
+  lock(itemPropertyDarkvision_mutex, "itemPropertyDarkvision");
+  callCounter += 1;
 
   VM_ExecuteCommand(640, 0);
 
@@ -10119,12 +10716,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyDarkvision(const Ice::Current& ice) {
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyDarkvision");
+  unlock(itemPropertyDarkvision_mutex, "itemPropertyDarkvision");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyDecreaseAC(Ice::Int nModifierType, Ice::Int nPenalty, const Ice::Current& ice) {
-  lock("itemPropertyDecreaseAC"); callCounter += 1;
+  lock(itemPropertyDecreaseAC_mutex, "itemPropertyDecreaseAC");
+  callCounter += 1;
   StackPushInteger(nPenalty);
   StackPushInteger(nModifierType);
 
@@ -10140,12 +10738,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyDecreaseAC(Ice::Int nModifierType, Ic
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyDecreaseAC");
+  unlock(itemPropertyDecreaseAC_mutex, "itemPropertyDecreaseAC");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyDecreaseAbility(NWN::Ability tAbility, Ice::Int nModifier, const Ice::Current& ice) {
-  lock("itemPropertyDecreaseAbility"); callCounter += 1;
+  lock(itemPropertyDecreaseAbility_mutex, "itemPropertyDecreaseAbility");
+  callCounter += 1;
   StackPushInteger(nModifier);
   if (tAbility == NWN::Charisma) StackPushInteger(5);
    else if (tAbility == NWN::Strength) StackPushInteger(0);
@@ -10167,12 +10766,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyDecreaseAbility(NWN::Ability tAbility
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyDecreaseAbility");
+  unlock(itemPropertyDecreaseAbility_mutex, "itemPropertyDecreaseAbility");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyDecreaseSkill(Ice::Int nSkill, Ice::Int nPenalty, const Ice::Current& ice) {
-  lock("itemPropertyDecreaseSkill"); callCounter += 1;
+  lock(itemPropertyDecreaseSkill_mutex, "itemPropertyDecreaseSkill");
+  callCounter += 1;
   StackPushInteger(nPenalty);
   StackPushInteger(nSkill);
 
@@ -10188,12 +10788,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyDecreaseSkill(Ice::Int nSkill, Ice::I
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyDecreaseSkill");
+  unlock(itemPropertyDecreaseSkill_mutex, "itemPropertyDecreaseSkill");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyEnhancementBonus(Ice::Int nEnhancementBonus, const Ice::Current& ice) {
-  lock("itemPropertyEnhancementBonus"); callCounter += 1;
+  lock(itemPropertyEnhancementBonus_mutex, "itemPropertyEnhancementBonus");
+  callCounter += 1;
   StackPushInteger(nEnhancementBonus);
 
   VM_ExecuteCommand(622, 1);
@@ -10208,12 +10809,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyEnhancementBonus(Ice::Int nEnhancemen
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyEnhancementBonus");
+  unlock(itemPropertyEnhancementBonus_mutex, "itemPropertyEnhancementBonus");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyEnhancementBonusVsAlign(NWN::IPAlignGroup tIPAlignGroup, Ice::Int nBonus, const Ice::Current& ice) {
-  lock("itemPropertyEnhancementBonusVsAlign"); callCounter += 1;
+  lock(itemPropertyEnhancementBonusVsAlign_mutex, "itemPropertyEnhancementBonusVsAlign");
+  callCounter += 1;
   StackPushInteger(nBonus);
   if (tIPAlignGroup == NWN::EvilAlignGroup) StackPushInteger(5);
    else if (tIPAlignGroup == NWN::AllAlignGroup) StackPushInteger(0);
@@ -10235,12 +10837,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyEnhancementBonusVsAlign(NWN::IPAlignG
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyEnhancementBonusVsAlign");
+  unlock(itemPropertyEnhancementBonusVsAlign_mutex, "itemPropertyEnhancementBonusVsAlign");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyEnhancementBonusVsRace(NWN::IPRacialType tIPRacialType, Ice::Int nBonus, const Ice::Current& ice) {
-  lock("itemPropertyEnhancementBonusVsRace"); callCounter += 1;
+  lock(itemPropertyEnhancementBonusVsRace_mutex, "itemPropertyEnhancementBonusVsRace");
+  callCounter += 1;
   StackPushInteger(nBonus);
   if (tIPRacialType == NWN::ElementalIPRace) StackPushInteger(16);
    else if (tIPRacialType == NWN::HalforcIPRace) StackPushInteger(5);
@@ -10280,12 +10883,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyEnhancementBonusVsRace(NWN::IPRacialT
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyEnhancementBonusVsRace");
+  unlock(itemPropertyEnhancementBonusVsRace_mutex, "itemPropertyEnhancementBonusVsRace");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyEnhancementBonusVsSAlign(NWN::Alignment tAlignment, Ice::Int nBonus, const Ice::Current& ice) {
-  lock("itemPropertyEnhancementBonusVsSAlign"); callCounter += 1;
+  lock(itemPropertyEnhancementBonusVsSAlign_mutex, "itemPropertyEnhancementBonusVsSAlign");
+  callCounter += 1;
   StackPushInteger(nBonus);
   if (tAlignment == NWN::Evil) StackPushInteger(5);
    else if (tAlignment == NWN::Any) StackPushInteger(0);
@@ -10307,12 +10911,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyEnhancementBonusVsSAlign(NWN::Alignme
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyEnhancementBonusVsSAlign");
+  unlock(itemPropertyEnhancementBonusVsSAlign_mutex, "itemPropertyEnhancementBonusVsSAlign");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyEnhancementPenalty(Ice::Int nPenalty, const Ice::Current& ice) {
-  lock("itemPropertyEnhancementPenalty"); callCounter += 1;
+  lock(itemPropertyEnhancementPenalty_mutex, "itemPropertyEnhancementPenalty");
+  callCounter += 1;
   StackPushInteger(nPenalty);
 
   VM_ExecuteCommand(626, 1);
@@ -10327,12 +10932,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyEnhancementPenalty(Ice::Int nPenalty,
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyEnhancementPenalty");
+  unlock(itemPropertyEnhancementPenalty_mutex, "itemPropertyEnhancementPenalty");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyExtraMeleeDamageType(NWN::IPDamageType tIPDamageType, const Ice::Current& ice) {
-  lock("itemPropertyExtraMeleeDamageType"); callCounter += 1;
+  lock(itemPropertyExtraMeleeDamageType_mutex, "itemPropertyExtraMeleeDamageType");
+  callCounter += 1;
   if (tIPDamageType == NWN::MagicalIPDamage) StackPushInteger(5);
    else if (tIPDamageType == NWN::NegativeIPDamage) StackPushInteger(11);
    else if (tIPDamageType == NWN::BludgeoningIPDamage) StackPushInteger(0);
@@ -10361,12 +10967,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyExtraMeleeDamageType(NWN::IPDamageTyp
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyExtraMeleeDamageType");
+  unlock(itemPropertyExtraMeleeDamageType_mutex, "itemPropertyExtraMeleeDamageType");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyExtraRangeDamageType(NWN::IPDamageType tIPDamageType, const Ice::Current& ice) {
-  lock("itemPropertyExtraRangeDamageType"); callCounter += 1;
+  lock(itemPropertyExtraRangeDamageType_mutex, "itemPropertyExtraRangeDamageType");
+  callCounter += 1;
   if (tIPDamageType == NWN::MagicalIPDamage) StackPushInteger(5);
    else if (tIPDamageType == NWN::NegativeIPDamage) StackPushInteger(11);
    else if (tIPDamageType == NWN::BludgeoningIPDamage) StackPushInteger(0);
@@ -10395,12 +11002,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyExtraRangeDamageType(NWN::IPDamageTyp
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyExtraRangeDamageType");
+  unlock(itemPropertyExtraRangeDamageType_mutex, "itemPropertyExtraRangeDamageType");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyFreeAction(const Ice::Current& ice) {
-  lock("itemPropertyFreeAction"); callCounter += 1;
+  lock(itemPropertyFreeAction_mutex, "itemPropertyFreeAction");
+  callCounter += 1;
 
   VM_ExecuteCommand(683, 0);
 
@@ -10414,12 +11022,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyFreeAction(const Ice::Current& ice) {
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyFreeAction");
+  unlock(itemPropertyFreeAction_mutex, "itemPropertyFreeAction");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyHaste(const Ice::Current& ice) {
-  lock("itemPropertyHaste"); callCounter += 1;
+  lock(itemPropertyHaste_mutex, "itemPropertyHaste");
+  callCounter += 1;
 
   VM_ExecuteCommand(647, 0);
 
@@ -10433,12 +11042,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyHaste(const Ice::Current& ice) {
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyHaste");
+  unlock(itemPropertyHaste_mutex, "itemPropertyHaste");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyHealersKit(Ice::Int nModifier, const Ice::Current& ice) {
-  lock("itemPropertyHealersKit"); callCounter += 1;
+  lock(itemPropertyHealersKit_mutex, "itemPropertyHealersKit");
+  callCounter += 1;
   StackPushInteger(nModifier);
 
   VM_ExecuteCommand(687, 1);
@@ -10453,12 +11063,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyHealersKit(Ice::Int nModifier, const 
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyHealersKit");
+  unlock(itemPropertyHealersKit_mutex, "itemPropertyHealersKit");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyHolyAvenger(const Ice::Current& ice) {
-  lock("itemPropertyHolyAvenger"); callCounter += 1;
+  lock(itemPropertyHolyAvenger_mutex, "itemPropertyHolyAvenger");
+  callCounter += 1;
 
   VM_ExecuteCommand(648, 0);
 
@@ -10472,12 +11083,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyHolyAvenger(const Ice::Current& ice) 
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyHolyAvenger");
+  unlock(itemPropertyHolyAvenger_mutex, "itemPropertyHolyAvenger");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyImmunityMisc(Ice::Int nImmunityType, const Ice::Current& ice) {
-  lock("itemPropertyImmunityMisc"); callCounter += 1;
+  lock(itemPropertyImmunityMisc_mutex, "itemPropertyImmunityMisc");
+  callCounter += 1;
   StackPushInteger(nImmunityType);
 
   VM_ExecuteCommand(649, 1);
@@ -10492,12 +11104,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyImmunityMisc(Ice::Int nImmunityType, 
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyImmunityMisc");
+  unlock(itemPropertyImmunityMisc_mutex, "itemPropertyImmunityMisc");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyImmunityToSpellLevel(Ice::Int nLevel, const Ice::Current& ice) {
-  lock("itemPropertyImmunityToSpellLevel"); callCounter += 1;
+  lock(itemPropertyImmunityToSpellLevel_mutex, "itemPropertyImmunityToSpellLevel");
+  callCounter += 1;
   StackPushInteger(nLevel);
 
   VM_ExecuteCommand(685, 1);
@@ -10512,12 +11125,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyImmunityToSpellLevel(Ice::Int nLevel,
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyImmunityToSpellLevel");
+  unlock(itemPropertyImmunityToSpellLevel_mutex, "itemPropertyImmunityToSpellLevel");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyImprovedEvasion(const Ice::Current& ice) {
-  lock("itemPropertyImprovedEvasion"); callCounter += 1;
+  lock(itemPropertyImprovedEvasion_mutex, "itemPropertyImprovedEvasion");
+  callCounter += 1;
 
   VM_ExecuteCommand(650, 0);
 
@@ -10531,12 +11145,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyImprovedEvasion(const Ice::Current& i
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyImprovedEvasion");
+  unlock(itemPropertyImprovedEvasion_mutex, "itemPropertyImprovedEvasion");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyKeen(const Ice::Current& ice) {
-  lock("itemPropertyKeen"); callCounter += 1;
+  lock(itemPropertyKeen_mutex, "itemPropertyKeen");
+  callCounter += 1;
 
   VM_ExecuteCommand(654, 0);
 
@@ -10550,12 +11165,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyKeen(const Ice::Current& ice) {
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyKeen");
+  unlock(itemPropertyKeen_mutex, "itemPropertyKeen");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyLight(Ice::Int nBrightness, Ice::Int nColor, const Ice::Current& ice) {
-  lock("itemPropertyLight"); callCounter += 1;
+  lock(itemPropertyLight_mutex, "itemPropertyLight");
+  callCounter += 1;
   StackPushInteger(nColor);
   StackPushInteger(nBrightness);
 
@@ -10571,12 +11187,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyLight(Ice::Int nBrightness, Ice::Int 
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyLight");
+  unlock(itemPropertyLight_mutex, "itemPropertyLight");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyLimitUseByAlign(NWN::IPAlignGroup tIPAlignGroup, const Ice::Current& ice) {
-  lock("itemPropertyLimitUseByAlign"); callCounter += 1;
+  lock(itemPropertyLimitUseByAlign_mutex, "itemPropertyLimitUseByAlign");
+  callCounter += 1;
   if (tIPAlignGroup == NWN::EvilAlignGroup) StackPushInteger(5);
    else if (tIPAlignGroup == NWN::AllAlignGroup) StackPushInteger(0);
    else if (tIPAlignGroup == NWN::NeutralAlignGroup) StackPushInteger(1);
@@ -10597,12 +11214,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyLimitUseByAlign(NWN::IPAlignGroup tIP
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyLimitUseByAlign");
+  unlock(itemPropertyLimitUseByAlign_mutex, "itemPropertyLimitUseByAlign");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyLimitUseByClass(Ice::Int nClass, const Ice::Current& ice) {
-  lock("itemPropertyLimitUseByClass"); callCounter += 1;
+  lock(itemPropertyLimitUseByClass_mutex, "itemPropertyLimitUseByClass");
+  callCounter += 1;
   StackPushInteger(nClass);
 
   VM_ExecuteCommand(673, 1);
@@ -10617,12 +11235,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyLimitUseByClass(Ice::Int nClass, cons
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyLimitUseByClass");
+  unlock(itemPropertyLimitUseByClass_mutex, "itemPropertyLimitUseByClass");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyLimitUseByRace(NWN::IPRacialType tIPRacialType, const Ice::Current& ice) {
-  lock("itemPropertyLimitUseByRace"); callCounter += 1;
+  lock(itemPropertyLimitUseByRace_mutex, "itemPropertyLimitUseByRace");
+  callCounter += 1;
   if (tIPRacialType == NWN::ElementalIPRace) StackPushInteger(16);
    else if (tIPRacialType == NWN::HalforcIPRace) StackPushInteger(5);
    else if (tIPRacialType == NWN::DragonIPRace) StackPushInteger(11);
@@ -10661,12 +11280,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyLimitUseByRace(NWN::IPRacialType tIPR
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyLimitUseByRace");
+  unlock(itemPropertyLimitUseByRace_mutex, "itemPropertyLimitUseByRace");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyLimitUseBySAlign(NWN::Alignment tAlignment, const Ice::Current& ice) {
-  lock("itemPropertyLimitUseBySAlign"); callCounter += 1;
+  lock(itemPropertyLimitUseBySAlign_mutex, "itemPropertyLimitUseBySAlign");
+  callCounter += 1;
   if (tAlignment == NWN::Evil) StackPushInteger(5);
    else if (tAlignment == NWN::Any) StackPushInteger(0);
    else if (tAlignment == NWN::Neutral) StackPushInteger(1);
@@ -10687,12 +11307,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyLimitUseBySAlign(NWN::Alignment tAlig
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyLimitUseBySAlign");
+  unlock(itemPropertyLimitUseBySAlign_mutex, "itemPropertyLimitUseBySAlign");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyMassiveCritical(Ice::Int nDamage, const Ice::Current& ice) {
-  lock("itemPropertyMassiveCritical"); callCounter += 1;
+  lock(itemPropertyMassiveCritical_mutex, "itemPropertyMassiveCritical");
+  callCounter += 1;
   StackPushInteger(nDamage);
 
   VM_ExecuteCommand(682, 1);
@@ -10707,12 +11328,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyMassiveCritical(Ice::Int nDamage, con
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyMassiveCritical");
+  unlock(itemPropertyMassiveCritical_mutex, "itemPropertyMassiveCritical");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyMaterial(Ice::Int nMaterialType, const Ice::Current& ice) {
-  lock("itemPropertyMaterial"); callCounter += 1;
+  lock(itemPropertyMaterial_mutex, "itemPropertyMaterial");
+  callCounter += 1;
   StackPushInteger(nMaterialType);
 
   VM_ExecuteCommand(845, 1);
@@ -10727,12 +11349,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyMaterial(Ice::Int nMaterialType, cons
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyMaterial");
+  unlock(itemPropertyMaterial_mutex, "itemPropertyMaterial");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyMaxRangeStrengthMod(Ice::Int nModifier, const Ice::Current& ice) {
-  lock("itemPropertyMaxRangeStrengthMod"); callCounter += 1;
+  lock(itemPropertyMaxRangeStrengthMod_mutex, "itemPropertyMaxRangeStrengthMod");
+  callCounter += 1;
   StackPushInteger(nModifier);
 
   VM_ExecuteCommand(656, 1);
@@ -10747,12 +11370,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyMaxRangeStrengthMod(Ice::Int nModifie
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyMaxRangeStrengthMod");
+  unlock(itemPropertyMaxRangeStrengthMod_mutex, "itemPropertyMaxRangeStrengthMod");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyMonsterDamage(Ice::Int nDamage, const Ice::Current& ice) {
-  lock("itemPropertyMonsterDamage"); callCounter += 1;
+  lock(itemPropertyMonsterDamage_mutex, "itemPropertyMonsterDamage");
+  callCounter += 1;
   StackPushInteger(nDamage);
 
   VM_ExecuteCommand(684, 1);
@@ -10767,12 +11391,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyMonsterDamage(Ice::Int nDamage, const
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyMonsterDamage");
+  unlock(itemPropertyMonsterDamage_mutex, "itemPropertyMonsterDamage");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyNoDamage(const Ice::Current& ice) {
-  lock("itemPropertyNoDamage"); callCounter += 1;
+  lock(itemPropertyNoDamage_mutex, "itemPropertyNoDamage");
+  callCounter += 1;
 
   VM_ExecuteCommand(657, 0);
 
@@ -10786,12 +11411,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyNoDamage(const Ice::Current& ice) {
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyNoDamage");
+  unlock(itemPropertyNoDamage_mutex, "itemPropertyNoDamage");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyOnHitCastSpell(Ice::Int nSpell, Ice::Int nLevel, const Ice::Current& ice) {
-  lock("itemPropertyOnHitCastSpell"); callCounter += 1;
+  lock(itemPropertyOnHitCastSpell_mutex, "itemPropertyOnHitCastSpell");
+  callCounter += 1;
   StackPushInteger(nLevel);
   StackPushInteger(nSpell);
 
@@ -10807,12 +11433,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyOnHitCastSpell(Ice::Int nSpell, Ice::
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyOnHitCastSpell");
+  unlock(itemPropertyOnHitCastSpell_mutex, "itemPropertyOnHitCastSpell");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyOnHitProps(Ice::Int nProperty, Ice::Int nSaveDC, Ice::Int nSpecial, const Ice::Current& ice) {
-  lock("itemPropertyOnHitProps"); callCounter += 1;
+  lock(itemPropertyOnHitProps_mutex, "itemPropertyOnHitProps");
+  callCounter += 1;
   StackPushInteger(nSpecial);
   StackPushInteger(nSaveDC);
   StackPushInteger(nProperty);
@@ -10829,12 +11456,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyOnHitProps(Ice::Int nProperty, Ice::I
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyOnHitProps");
+  unlock(itemPropertyOnHitProps_mutex, "itemPropertyOnHitProps");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyOnMonsterHitProperties(Ice::Int nProperty, Ice::Int nSpecial, const Ice::Current& ice) {
-  lock("itemPropertyOnMonsterHitProperties"); callCounter += 1;
+  lock(itemPropertyOnMonsterHitProperties_mutex, "itemPropertyOnMonsterHitProperties");
+  callCounter += 1;
   StackPushInteger(nSpecial);
   StackPushInteger(nProperty);
 
@@ -10850,12 +11478,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyOnMonsterHitProperties(Ice::Int nProp
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyOnMonsterHitProperties");
+  unlock(itemPropertyOnMonsterHitProperties_mutex, "itemPropertyOnMonsterHitProperties");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyQuality(Ice::Int nQuality, const Ice::Current& ice) {
-  lock("itemPropertyQuality"); callCounter += 1;
+  lock(itemPropertyQuality_mutex, "itemPropertyQuality");
+  callCounter += 1;
   StackPushInteger(nQuality);
 
   VM_ExecuteCommand(846, 1);
@@ -10870,12 +11499,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyQuality(Ice::Int nQuality, const Ice:
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyQuality");
+  unlock(itemPropertyQuality_mutex, "itemPropertyQuality");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyReducedSavingThrow(Ice::Int nBonusType, Ice::Int nPenalty, const Ice::Current& ice) {
-  lock("itemPropertyReducedSavingThrow"); callCounter += 1;
+  lock(itemPropertyReducedSavingThrow_mutex, "itemPropertyReducedSavingThrow");
+  callCounter += 1;
   StackPushInteger(nPenalty);
   StackPushInteger(nBonusType);
 
@@ -10891,12 +11521,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyReducedSavingThrow(Ice::Int nBonusTyp
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyReducedSavingThrow");
+  unlock(itemPropertyReducedSavingThrow_mutex, "itemPropertyReducedSavingThrow");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyReducedSavingThrowVsX(Ice::Int nBaseSaveType, Ice::Int nPenalty, const Ice::Current& ice) {
-  lock("itemPropertyReducedSavingThrowVsX"); callCounter += 1;
+  lock(itemPropertyReducedSavingThrowVsX_mutex, "itemPropertyReducedSavingThrowVsX");
+  callCounter += 1;
   StackPushInteger(nPenalty);
   StackPushInteger(nBaseSaveType);
 
@@ -10912,12 +11543,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyReducedSavingThrowVsX(Ice::Int nBaseS
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyReducedSavingThrowVsX");
+  unlock(itemPropertyReducedSavingThrowVsX_mutex, "itemPropertyReducedSavingThrowVsX");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyRegeneration(Ice::Int nRegenAmount, const Ice::Current& ice) {
-  lock("itemPropertyRegeneration"); callCounter += 1;
+  lock(itemPropertyRegeneration_mutex, "itemPropertyRegeneration");
+  callCounter += 1;
   StackPushInteger(nRegenAmount);
 
   VM_ExecuteCommand(661, 1);
@@ -10932,12 +11564,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyRegeneration(Ice::Int nRegenAmount, c
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyRegeneration");
+  unlock(itemPropertyRegeneration_mutex, "itemPropertyRegeneration");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertySkillBonus(Ice::Int nSkill, Ice::Int nBonus, const Ice::Current& ice) {
-  lock("itemPropertySkillBonus"); callCounter += 1;
+  lock(itemPropertySkillBonus_mutex, "itemPropertySkillBonus");
+  callCounter += 1;
   StackPushInteger(nBonus);
   StackPushInteger(nSkill);
 
@@ -10953,12 +11586,13 @@ NWN::NWItemProperty NWScriptI::itemPropertySkillBonus(Ice::Int nSkill, Ice::Int 
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertySkillBonus");
+  unlock(itemPropertySkillBonus_mutex, "itemPropertySkillBonus");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertySpecialWalk(Ice::Int nWalkType, const Ice::Current& ice) {
-  lock("itemPropertySpecialWalk"); callCounter += 1;
+  lock(itemPropertySpecialWalk_mutex, "itemPropertySpecialWalk");
+  callCounter += 1;
   StackPushInteger(nWalkType);
 
   VM_ExecuteCommand(686, 1);
@@ -10973,12 +11607,13 @@ NWN::NWItemProperty NWScriptI::itemPropertySpecialWalk(Ice::Int nWalkType, const
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertySpecialWalk");
+  unlock(itemPropertySpecialWalk_mutex, "itemPropertySpecialWalk");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertySpellImmunitySchool(Ice::Int nSchool, const Ice::Current& ice) {
-  lock("itemPropertySpellImmunitySchool"); callCounter += 1;
+  lock(itemPropertySpellImmunitySchool_mutex, "itemPropertySpellImmunitySchool");
+  callCounter += 1;
   StackPushInteger(nSchool);
 
   VM_ExecuteCommand(664, 1);
@@ -10993,12 +11628,13 @@ NWN::NWItemProperty NWScriptI::itemPropertySpellImmunitySchool(Ice::Int nSchool,
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertySpellImmunitySchool");
+  unlock(itemPropertySpellImmunitySchool_mutex, "itemPropertySpellImmunitySchool");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertySpellImmunitySpecific(Ice::Int nSpell, const Ice::Current& ice) {
-  lock("itemPropertySpellImmunitySpecific"); callCounter += 1;
+  lock(itemPropertySpellImmunitySpecific_mutex, "itemPropertySpellImmunitySpecific");
+  callCounter += 1;
   StackPushInteger(nSpell);
 
   VM_ExecuteCommand(663, 1);
@@ -11013,12 +11649,13 @@ NWN::NWItemProperty NWScriptI::itemPropertySpellImmunitySpecific(Ice::Int nSpell
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertySpellImmunitySpecific");
+  unlock(itemPropertySpellImmunitySpecific_mutex, "itemPropertySpellImmunitySpecific");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyThievesTools(Ice::Int nModifier, const Ice::Current& ice) {
-  lock("itemPropertyThievesTools"); callCounter += 1;
+  lock(itemPropertyThievesTools_mutex, "itemPropertyThievesTools");
+  callCounter += 1;
   StackPushInteger(nModifier);
 
   VM_ExecuteCommand(665, 1);
@@ -11033,12 +11670,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyThievesTools(Ice::Int nModifier, cons
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyThievesTools");
+  unlock(itemPropertyThievesTools_mutex, "itemPropertyThievesTools");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyTrap(Ice::Int nTrapLevel, NWN::IPTrapType tIPTrapType, const Ice::Current& ice) {
-  lock("itemPropertyTrap"); callCounter += 1;
+  lock(itemPropertyTrap_mutex, "itemPropertyTrap");
+  callCounter += 1;
   if (tIPTrapType == NWN::FireIPTrap) StackPushInteger(5);
    else if (tIPTrapType == NWN::NegativeIPTrap) StackPushInteger(11);
    else if (tIPTrapType == NWN::ElectricalIPTrap) StackPushInteger(6);
@@ -11065,12 +11703,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyTrap(Ice::Int nTrapLevel, NWN::IPTrap
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyTrap");
+  unlock(itemPropertyTrap_mutex, "itemPropertyTrap");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyTrueSeeing(const Ice::Current& ice) {
-  lock("itemPropertyTrueSeeing"); callCounter += 1;
+  lock(itemPropertyTrueSeeing_mutex, "itemPropertyTrueSeeing");
+  callCounter += 1;
 
   VM_ExecuteCommand(679, 0);
 
@@ -11084,12 +11723,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyTrueSeeing(const Ice::Current& ice) {
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyTrueSeeing");
+  unlock(itemPropertyTrueSeeing_mutex, "itemPropertyTrueSeeing");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyTurnResistance(Ice::Int nModifier, const Ice::Current& ice) {
-  lock("itemPropertyTurnResistance"); callCounter += 1;
+  lock(itemPropertyTurnResistance_mutex, "itemPropertyTurnResistance");
+  callCounter += 1;
   StackPushInteger(nModifier);
 
   VM_ExecuteCommand(681, 1);
@@ -11104,12 +11744,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyTurnResistance(Ice::Int nModifier, co
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyTurnResistance");
+  unlock(itemPropertyTurnResistance_mutex, "itemPropertyTurnResistance");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyUnlimitedAmmo(Ice::Int nAmmoDamage, const Ice::Current& ice) {
-  lock("itemPropertyUnlimitedAmmo"); callCounter += 1;
+  lock(itemPropertyUnlimitedAmmo_mutex, "itemPropertyUnlimitedAmmo");
+  callCounter += 1;
   StackPushInteger(nAmmoDamage);
 
   VM_ExecuteCommand(671, 1);
@@ -11124,12 +11765,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyUnlimitedAmmo(Ice::Int nAmmoDamage, c
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyUnlimitedAmmo");
+  unlock(itemPropertyUnlimitedAmmo_mutex, "itemPropertyUnlimitedAmmo");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyVampiricRegeneration(Ice::Int nRegenAmount, const Ice::Current& ice) {
-  lock("itemPropertyVampiricRegeneration"); callCounter += 1;
+  lock(itemPropertyVampiricRegeneration_mutex, "itemPropertyVampiricRegeneration");
+  callCounter += 1;
   StackPushInteger(nRegenAmount);
 
   VM_ExecuteCommand(677, 1);
@@ -11144,12 +11786,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyVampiricRegeneration(Ice::Int nRegenA
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyVampiricRegeneration");
+  unlock(itemPropertyVampiricRegeneration_mutex, "itemPropertyVampiricRegeneration");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyVisualEffect(Ice::Int nEffect, const Ice::Current& ice) {
-  lock("itemPropertyVisualEffect"); callCounter += 1;
+  lock(itemPropertyVisualEffect_mutex, "itemPropertyVisualEffect");
+  callCounter += 1;
   StackPushInteger(nEffect);
 
   VM_ExecuteCommand(739, 1);
@@ -11164,12 +11807,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyVisualEffect(Ice::Int nEffect, const 
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyVisualEffect");
+  unlock(itemPropertyVisualEffect_mutex, "itemPropertyVisualEffect");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyWeightIncrease(Ice::Int nWeight, const Ice::Current& ice) {
-  lock("itemPropertyWeightIncrease"); callCounter += 1;
+  lock(itemPropertyWeightIncrease_mutex, "itemPropertyWeightIncrease");
+  callCounter += 1;
   StackPushInteger(nWeight);
 
   VM_ExecuteCommand(688, 1);
@@ -11184,12 +11828,13 @@ NWN::NWItemProperty NWScriptI::itemPropertyWeightIncrease(Ice::Int nWeight, cons
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyWeightIncrease");
+  unlock(itemPropertyWeightIncrease_mutex, "itemPropertyWeightIncrease");
   return e;
 };
 
 NWN::NWItemProperty NWScriptI::itemPropertyWeightReduction(Ice::Int nReduction, const Ice::Current& ice) {
-  lock("itemPropertyWeightReduction"); callCounter += 1;
+  lock(itemPropertyWeightReduction_mutex, "itemPropertyWeightReduction");
+  callCounter += 1;
   StackPushInteger(nReduction);
 
   VM_ExecuteCommand(627, 1);
@@ -11204,13 +11849,14 @@ NWN::NWItemProperty NWScriptI::itemPropertyWeightReduction(Ice::Int nReduction, 
   if (id == -1)
     { iprpMap[lastIprpId] = pRetVal; id = lastIprpId; lastIprpId += 1; }
   e.id = id;
-  unlock("itemPropertyWeightReduction");
+  unlock(itemPropertyWeightReduction_mutex, "itemPropertyWeightReduction");
   return e;
 };
 
 void NWScriptI::jumpToLocation(const NWN::NWLocation& lDestination, const Ice::Current& ice) {
   if (lDestination.area.id < 0) throw NWN::InvalidObjectException();
-  lock("jumpToLocation"); callCounter += 1;
+  lock(jumpToLocation_mutex, "jumpToLocation");
+  callCounter += 1;
   CScriptLocation *lDestination_ptr;
   lDestination_ptr->X = lDestination.x;
   lDestination_ptr->Y = lDestination.y;
@@ -11223,25 +11869,27 @@ void NWScriptI::jumpToLocation(const NWN::NWLocation& lDestination, const Ice::C
 
   VM_ExecuteCommand(313, 1);
 
-unlock("jumpToLocation");
+unlock(jumpToLocation_mutex, "jumpToLocation");
   
 };
 
 void NWScriptI::jumpToObject(const NWN::NWObject& oToJumpTo, bool bWalkStraightLineToPoint, const Ice::Current& ice) {
   if (oToJumpTo.id < 0 || oToJumpTo.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("jumpToObject"); callCounter += 1;
+  lock(jumpToObject_mutex, "jumpToObject");
+  callCounter += 1;
   StackPushInteger(bWalkStraightLineToPoint == true ? 1 : 0);
   StackPushObject(oToJumpTo.id);
 
   VM_ExecuteCommand(385, 2);
 
-unlock("jumpToObject");
+unlock(jumpToObject_mutex, "jumpToObject");
   
 };
 
 Ice::Int NWScriptI::levelUpHenchman(const NWN::NWObject& oCreature, Ice::Int nClass, bool bReadyAllSpells, Ice::Int nPackage, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("levelUpHenchman"); callCounter += 1;
+  lock(levelUpHenchman_mutex, "levelUpHenchman");
+  callCounter += 1;
   StackPushInteger(nPackage);
   StackPushInteger(bReadyAllSpells == true ? 1 : 0);
   StackPushInteger(nClass);
@@ -11251,14 +11899,15 @@ Ice::Int NWScriptI::levelUpHenchman(const NWN::NWObject& oCreature, Ice::Int nCl
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("levelUpHenchman");
+  unlock(levelUpHenchman_mutex, "levelUpHenchman");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::lineOfSightObject(const NWN::NWObject& oSource, const NWN::NWObject& oTarget, const Ice::Current& ice) {
   if (oSource.id < 0 || oSource.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("lineOfSightObject"); callCounter += 1;
+  lock(lineOfSightObject_mutex, "lineOfSightObject");
+  callCounter += 1;
   StackPushObject(oTarget.id);
   StackPushObject(oSource.id);
 
@@ -11266,12 +11915,13 @@ Ice::Int NWScriptI::lineOfSightObject(const NWN::NWObject& oSource, const NWN::N
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("lineOfSightObject");
+  unlock(lineOfSightObject_mutex, "lineOfSightObject");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::lineOfSightVector(const NWN::NWVector& vSource, const NWN::NWVector& vTarget, const Ice::Current& ice) {
-  lock("lineOfSightVector"); callCounter += 1;
+  lock(lineOfSightVector_mutex, "lineOfSightVector");
+  callCounter += 1;
   Vector vvTarget;
   vvTarget.X = vTarget.x; vvTarget.Y = vTarget.y; vvTarget.Z = vTarget.z;
   StackPushVector(vvTarget);
@@ -11283,13 +11933,14 @@ Ice::Int NWScriptI::lineOfSightVector(const NWN::NWVector& vSource, const NWN::N
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("lineOfSightVector");
+  unlock(lineOfSightVector_mutex, "lineOfSightVector");
   return nRetVal;
 };
 
 NWN::NWLocation NWScriptI::location(const NWN::NWObject& oArea, const NWN::NWVector& vPosition, Ice::Double fOrientation, const Ice::Current& ice) {
   if (oArea.id < 0 || oArea.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("location"); callCounter += 1;
+  lock(location_mutex, "location");
+  callCounter += 1;
   StackPushFloat(fOrientation);
   Vector vvPosition;
   vvPosition.X = vPosition.x; vvPosition.Y = vPosition.y; vvPosition.Z = vPosition.z;
@@ -11308,62 +11959,67 @@ NWN::NWLocation NWScriptI::location(const NWN::NWObject& oArea, const NWN::NWVec
   nl.orientationY = pRetVal->OrientationY;
   nl.orientationZ = pRetVal->OrientationZ;
   nl.area.id = pRetVal->AreaID;
-  unlock("location");
+  unlock(location_mutex, "location");
   return nl;
 };
 
 void NWScriptI::lockCameraDirection(const NWN::NWObject& oPlayer, bool bLocked, const Ice::Current& ice) {
   if (oPlayer.id < 0 || oPlayer.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("lockCameraDirection"); callCounter += 1;
+  lock(lockCameraDirection_mutex, "lockCameraDirection");
+  callCounter += 1;
   StackPushInteger(bLocked == true ? 1 : 0);
   StackPushObject(oPlayer.id);
 
   VM_ExecuteCommand(825, 2);
 
-unlock("lockCameraDirection");
+unlock(lockCameraDirection_mutex, "lockCameraDirection");
   
 };
 
 void NWScriptI::lockCameraDistance(const NWN::NWObject& oPlayer, bool bLocked, const Ice::Current& ice) {
   if (oPlayer.id < 0 || oPlayer.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("lockCameraDistance"); callCounter += 1;
+  lock(lockCameraDistance_mutex, "lockCameraDistance");
+  callCounter += 1;
   StackPushInteger(bLocked == true ? 1 : 0);
   StackPushObject(oPlayer.id);
 
   VM_ExecuteCommand(824, 2);
 
-unlock("lockCameraDistance");
+unlock(lockCameraDistance_mutex, "lockCameraDistance");
   
 };
 
 void NWScriptI::lockCameraPitch(const NWN::NWObject& oPlayer, bool bLocked, const Ice::Current& ice) {
   if (oPlayer.id < 0 || oPlayer.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("lockCameraPitch"); callCounter += 1;
+  lock(lockCameraPitch_mutex, "lockCameraPitch");
+  callCounter += 1;
   StackPushInteger(bLocked == true ? 1 : 0);
   StackPushObject(oPlayer.id);
 
   VM_ExecuteCommand(823, 2);
 
-unlock("lockCameraPitch");
+unlock(lockCameraPitch_mutex, "lockCameraPitch");
   
 };
 
 Ice::Double NWScriptI::log(Ice::Double fValue, const Ice::Current& ice) {
-  lock("log"); callCounter += 1;
+  lock(log_mutex, "log");
+  callCounter += 1;
   StackPushFloat(fValue);
 
   VM_ExecuteCommand(74, 1);
 
   float fRetVal;
   StackPopFloat(&fRetVal);
-  unlock("log");
+  unlock(log_mutex, "log");
   return fRetVal;
 };
 
 NWN::NWEffect NWScriptI::magicalEffect(const NWN::NWEffect& eEffect, const Ice::Current& ice) {
   if (effectMap.find(eEffect.id) == effectMap.end()) throw NWN::InvalidEffectException();
   
-  lock("magicalEffect"); callCounter += 1;
+  lock(magicalEffect_mutex, "magicalEffect");
+  callCounter += 1;
   CGameEffect *eEffect_ptr = effectMap.find(eEffect.id)->second;
   StackPushEngineStructure(ENGINE_STRUCTURE_EFFECT, eEffect_ptr);
 
@@ -11379,183 +12035,198 @@ NWN::NWEffect NWScriptI::magicalEffect(const NWN::NWEffect& eEffect, const Ice::
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("magicalEffect");
+  unlock(magicalEffect_mutex, "magicalEffect");
   return e;
 };
 
 void NWScriptI::musicBackgroundChangeDay(const NWN::NWObject& oArea, Ice::Int nTrack, const Ice::Current& ice) {
   if (oArea.id < 0 || oArea.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("musicBackgroundChangeDay"); callCounter += 1;
+  lock(musicBackgroundChangeDay_mutex, "musicBackgroundChangeDay");
+  callCounter += 1;
   StackPushInteger(nTrack);
   StackPushObject(oArea.id);
 
   VM_ExecuteCommand(428, 2);
 
-unlock("musicBackgroundChangeDay");
+unlock(musicBackgroundChangeDay_mutex, "musicBackgroundChangeDay");
   
 };
 
 void NWScriptI::musicBackgroundChangeNight(const NWN::NWObject& oArea, Ice::Int nTrack, const Ice::Current& ice) {
   if (oArea.id < 0 || oArea.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("musicBackgroundChangeNight"); callCounter += 1;
+  lock(musicBackgroundChangeNight_mutex, "musicBackgroundChangeNight");
+  callCounter += 1;
   StackPushInteger(nTrack);
   StackPushObject(oArea.id);
 
   VM_ExecuteCommand(429, 2);
 
-unlock("musicBackgroundChangeNight");
+unlock(musicBackgroundChangeNight_mutex, "musicBackgroundChangeNight");
   
 };
 
 Ice::Int NWScriptI::musicBackgroundGetBattleTrack(const NWN::NWObject& oArea, const Ice::Current& ice) {
   if (oArea.id < 0 || oArea.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("musicBackgroundGetBattleTrack"); callCounter += 1;
+  lock(musicBackgroundGetBattleTrack_mutex, "musicBackgroundGetBattleTrack");
+  callCounter += 1;
   StackPushObject(oArea.id);
 
   VM_ExecuteCommand(569, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("musicBackgroundGetBattleTrack");
+  unlock(musicBackgroundGetBattleTrack_mutex, "musicBackgroundGetBattleTrack");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::musicBackgroundGetDayTrack(const NWN::NWObject& oArea, const Ice::Current& ice) {
   if (oArea.id < 0 || oArea.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("musicBackgroundGetDayTrack"); callCounter += 1;
+  lock(musicBackgroundGetDayTrack_mutex, "musicBackgroundGetDayTrack");
+  callCounter += 1;
   StackPushObject(oArea.id);
 
   VM_ExecuteCommand(558, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("musicBackgroundGetDayTrack");
+  unlock(musicBackgroundGetDayTrack_mutex, "musicBackgroundGetDayTrack");
   return nRetVal;
 };
 
 Ice::Int NWScriptI::musicBackgroundGetNightTrack(const NWN::NWObject& oArea, const Ice::Current& ice) {
   if (oArea.id < 0 || oArea.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("musicBackgroundGetNightTrack"); callCounter += 1;
+  lock(musicBackgroundGetNightTrack_mutex, "musicBackgroundGetNightTrack");
+  callCounter += 1;
   StackPushObject(oArea.id);
 
   VM_ExecuteCommand(559, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("musicBackgroundGetNightTrack");
+  unlock(musicBackgroundGetNightTrack_mutex, "musicBackgroundGetNightTrack");
   return nRetVal;
 };
 
 void NWScriptI::musicBackgroundPlay(const NWN::NWObject& oArea, const Ice::Current& ice) {
   if (oArea.id < 0 || oArea.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("musicBackgroundPlay"); callCounter += 1;
+  lock(musicBackgroundPlay_mutex, "musicBackgroundPlay");
+  callCounter += 1;
   StackPushObject(oArea.id);
 
   VM_ExecuteCommand(425, 1);
 
-unlock("musicBackgroundPlay");
+unlock(musicBackgroundPlay_mutex, "musicBackgroundPlay");
   
 };
 
 void NWScriptI::musicBackgroundSetDelay(const NWN::NWObject& oArea, Ice::Int nDelay, const Ice::Current& ice) {
   if (oArea.id < 0 || oArea.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("musicBackgroundSetDelay"); callCounter += 1;
+  lock(musicBackgroundSetDelay_mutex, "musicBackgroundSetDelay");
+  callCounter += 1;
   StackPushInteger(nDelay);
   StackPushObject(oArea.id);
 
   VM_ExecuteCommand(427, 2);
 
-unlock("musicBackgroundSetDelay");
+unlock(musicBackgroundSetDelay_mutex, "musicBackgroundSetDelay");
   
 };
 
 void NWScriptI::musicBackgroundStop(const NWN::NWObject& oArea, const Ice::Current& ice) {
   if (oArea.id < 0 || oArea.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("musicBackgroundStop"); callCounter += 1;
+  lock(musicBackgroundStop_mutex, "musicBackgroundStop");
+  callCounter += 1;
   StackPushObject(oArea.id);
 
   VM_ExecuteCommand(426, 1);
 
-unlock("musicBackgroundStop");
+unlock(musicBackgroundStop_mutex, "musicBackgroundStop");
   
 };
 
 void NWScriptI::musicBattleChange(const NWN::NWObject& oArea, Ice::Int nTrack, const Ice::Current& ice) {
   if (oArea.id < 0 || oArea.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("musicBattleChange"); callCounter += 1;
+  lock(musicBattleChange_mutex, "musicBattleChange");
+  callCounter += 1;
   StackPushInteger(nTrack);
   StackPushObject(oArea.id);
 
   VM_ExecuteCommand(432, 2);
 
-unlock("musicBattleChange");
+unlock(musicBattleChange_mutex, "musicBattleChange");
   
 };
 
 void NWScriptI::musicBattlePlay(const NWN::NWObject& oArea, const Ice::Current& ice) {
   if (oArea.id < 0 || oArea.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("musicBattlePlay"); callCounter += 1;
+  lock(musicBattlePlay_mutex, "musicBattlePlay");
+  callCounter += 1;
   StackPushObject(oArea.id);
 
   VM_ExecuteCommand(430, 1);
 
-unlock("musicBattlePlay");
+unlock(musicBattlePlay_mutex, "musicBattlePlay");
   
 };
 
 void NWScriptI::musicBattleStop(const NWN::NWObject& oArea, const Ice::Current& ice) {
   if (oArea.id < 0 || oArea.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("musicBattleStop"); callCounter += 1;
+  lock(musicBattleStop_mutex, "musicBattleStop");
+  callCounter += 1;
   StackPushObject(oArea.id);
 
   VM_ExecuteCommand(431, 1);
 
-unlock("musicBattleStop");
+unlock(musicBattleStop_mutex, "musicBattleStop");
   
 };
 
 void NWScriptI::nightToDay(const NWN::NWObject& oPlayer, Ice::Double fTransitionTime, const Ice::Current& ice) {
   if (oPlayer.id < 0 || oPlayer.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("nightToDay"); callCounter += 1;
+  lock(nightToDay_mutex, "nightToDay");
+  callCounter += 1;
   StackPushFloat(fTransitionTime);
   StackPushObject(oPlayer.id);
 
   VM_ExecuteCommand(751, 2);
 
-unlock("nightToDay");
+unlock(nightToDay_mutex, "nightToDay");
   
 };
 
 std::string NWScriptI::objectToString(const NWN::NWObject& oObject, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("objectToString"); callCounter += 1;
+  lock(objectToString_mutex, "objectToString");
+  callCounter += 1;
   StackPushObject(oObject.id);
 
   VM_ExecuteCommand(272, 1);
 
   char* sRetVal;
   StackPopString(&sRetVal);
-  unlock("objectToString");
+  unlock(objectToString_mutex, "objectToString");
   return std::string(sRetVal);
 };
 
 void NWScriptI::openInventory(const NWN::NWObject& oCreature, const NWN::NWObject& oPlayer, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (oPlayer.id < 0 || oPlayer.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("openInventory"); callCounter += 1;
+  lock(openInventory_mutex, "openInventory");
+  callCounter += 1;
   StackPushObject(oPlayer.id);
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(701, 2);
 
-unlock("openInventory");
+unlock(openInventory_mutex, "openInventory");
   
 };
 
 void NWScriptI::openStore(const NWN::NWObject& oStore, const NWN::NWObject& oPC, Ice::Int nBonusMarkUp, Ice::Int nBonusMarkDown, const Ice::Current& ice) {
   if (oStore.id < 0 || oStore.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (oPC.id < 0 || oPC.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("openStore"); callCounter += 1;
+  lock(openStore_mutex, "openStore");
+  callCounter += 1;
   StackPushInteger(nBonusMarkDown);
   StackPushInteger(nBonusMarkUp);
   StackPushObject(oPC.id);
@@ -11563,58 +12234,63 @@ void NWScriptI::openStore(const NWN::NWObject& oStore, const NWN::NWObject& oPC,
 
   VM_ExecuteCommand(378, 4);
 
-unlock("openStore");
+unlock(openStore_mutex, "openStore");
   
 };
 
 void NWScriptI::playAnimation(Ice::Int nAnimation, Ice::Double fSpeed, Ice::Double fSeconds, const Ice::Current& ice) {
-  lock("playAnimation"); callCounter += 1;
+  lock(playAnimation_mutex, "playAnimation");
+  callCounter += 1;
   StackPushFloat(fSeconds);
   StackPushFloat(fSpeed);
   StackPushInteger(nAnimation);
 
   VM_ExecuteCommand(300, 3);
 
-unlock("playAnimation");
+unlock(playAnimation_mutex, "playAnimation");
   
 };
 
 void NWScriptI::playSound(const std::string& sSoundName, const Ice::Current& ice) {
-  lock("playSound"); callCounter += 1;
+  lock(playSound_mutex, "playSound");
+  callCounter += 1;
   StackPushString(sSoundName.c_str());
 
   VM_ExecuteCommand(46, 1);
 
-unlock("playSound");
+unlock(playSound_mutex, "playSound");
   
 };
 
 void NWScriptI::playSoundByStrRef(Ice::Int nStrRef, Ice::Int nRunAsAction, const Ice::Current& ice) {
-  lock("playSoundByStrRef"); callCounter += 1;
+  lock(playSoundByStrRef_mutex, "playSoundByStrRef");
+  callCounter += 1;
   StackPushInteger(nRunAsAction);
   StackPushInteger(nStrRef);
 
   VM_ExecuteCommand(720, 2);
 
-unlock("playSoundByStrRef");
+unlock(playSoundByStrRef_mutex, "playSoundByStrRef");
   
 };
 
 void NWScriptI::playVoiceChat(Ice::Int nVoiceChatID, const NWN::NWObject& oTarget, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("playVoiceChat"); callCounter += 1;
+  lock(playVoiceChat_mutex, "playVoiceChat");
+  callCounter += 1;
   StackPushObject(oTarget.id);
   StackPushInteger(nVoiceChatID);
 
   VM_ExecuteCommand(421, 2);
 
-unlock("playVoiceChat");
+unlock(playVoiceChat_mutex, "playVoiceChat");
   
 };
 
 void NWScriptI::popUpDeathGUIPanel(const NWN::NWObject& oPC, bool bRespawnButtonEnabled, bool bWaitForHelpButtonEnabled, Ice::Int nHelpStringReference, const std::string& sHelpString, const Ice::Current& ice) {
   if (oPC.id < 0 || oPC.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("popUpDeathGUIPanel"); callCounter += 1;
+  lock(popUpDeathGUIPanel_mutex, "popUpDeathGUIPanel");
+  callCounter += 1;
   StackPushString(sHelpString.c_str());
   StackPushInteger(nHelpStringReference);
   StackPushInteger(bWaitForHelpButtonEnabled == true ? 1 : 0);
@@ -11623,24 +12299,26 @@ void NWScriptI::popUpDeathGUIPanel(const NWN::NWObject& oPC, bool bRespawnButton
 
   VM_ExecuteCommand(554, 5);
 
-unlock("popUpDeathGUIPanel");
+unlock(popUpDeathGUIPanel_mutex, "popUpDeathGUIPanel");
   
 };
 
 void NWScriptI::popUpGUIPanel(const NWN::NWObject& oPC, Ice::Int nGUIPanel, const Ice::Current& ice) {
   if (oPC.id < 0 || oPC.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("popUpGUIPanel"); callCounter += 1;
+  lock(popUpGUIPanel_mutex, "popUpGUIPanel");
+  callCounter += 1;
   StackPushInteger(nGUIPanel);
   StackPushObject(oPC.id);
 
   VM_ExecuteCommand(388, 2);
 
-unlock("popUpGUIPanel");
+unlock(popUpGUIPanel_mutex, "popUpGUIPanel");
   
 };
 
 Ice::Double NWScriptI::pow(Ice::Double fValue, Ice::Double fExponent, const Ice::Current& ice) {
-  lock("pow"); callCounter += 1;
+  lock(pow_mutex, "pow");
+  callCounter += 1;
   StackPushFloat(fExponent);
   StackPushFloat(fValue);
 
@@ -11648,55 +12326,60 @@ Ice::Double NWScriptI::pow(Ice::Double fValue, Ice::Double fExponent, const Ice:
 
   float fRetVal;
   StackPopFloat(&fRetVal);
-  unlock("pow");
+  unlock(pow_mutex, "pow");
   return fRetVal;
 };
 
 void NWScriptI::printFloat(Ice::Double fFloat, Ice::Int nWidth, Ice::Int nDecimals, const Ice::Current& ice) {
-  lock("printFloat"); callCounter += 1;
+  lock(printFloat_mutex, "printFloat");
+  callCounter += 1;
   StackPushInteger(nDecimals);
   StackPushInteger(nWidth);
   StackPushFloat(fFloat);
 
   VM_ExecuteCommand(2, 3);
 
-unlock("printFloat");
+unlock(printFloat_mutex, "printFloat");
   
 };
 
 void NWScriptI::printInteger(Ice::Int nInteger, const Ice::Current& ice) {
-  lock("printInteger"); callCounter += 1;
+  lock(printInteger_mutex, "printInteger");
+  callCounter += 1;
   StackPushInteger(nInteger);
 
   VM_ExecuteCommand(4, 1);
 
-unlock("printInteger");
+unlock(printInteger_mutex, "printInteger");
   
 };
 
 void NWScriptI::printObject(const NWN::NWObject& oObject, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("printObject"); callCounter += 1;
+  lock(printObject_mutex, "printObject");
+  callCounter += 1;
   StackPushObject(oObject.id);
 
   VM_ExecuteCommand(5, 1);
 
-unlock("printObject");
+unlock(printObject_mutex, "printObject");
   
 };
 
 void NWScriptI::printString(const std::string& sString, const Ice::Current& ice) {
-  lock("printString"); callCounter += 1;
+  lock(printString_mutex, "printString");
+  callCounter += 1;
   StackPushString(sString.c_str());
 
   VM_ExecuteCommand(1, 1);
 
-unlock("printString");
+unlock(printString_mutex, "printString");
   
 };
 
 void NWScriptI::printVector(const NWN::NWVector& vVector, bool bPrepend, const Ice::Current& ice) {
-  lock("printVector"); callCounter += 1;
+  lock(printVector_mutex, "printVector");
+  callCounter += 1;
   StackPushInteger(bPrepend == true ? 1 : 0);
   Vector vvVector;
   vvVector.X = vVector.x; vvVector.Y = vVector.y; vvVector.Z = vVector.z;
@@ -11704,49 +12387,53 @@ void NWScriptI::printVector(const NWN::NWVector& vVector, bool bPrepend, const I
 
   VM_ExecuteCommand(141, 2);
 
-unlock("printVector");
+unlock(printVector_mutex, "printVector");
   
 };
 
 Ice::Int NWScriptI::random(Ice::Int nMaxInteger, const Ice::Current& ice) {
-  lock("random"); callCounter += 1;
+  lock(random_mutex, "random");
+  callCounter += 1;
   StackPushInteger(nMaxInteger);
 
   VM_ExecuteCommand(0, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("random");
+  unlock(random_mutex, "random");
   return nRetVal;
 };
 
 std::string NWScriptI::randomName(Ice::Int nNameType, const Ice::Current& ice) {
-  lock("randomName"); callCounter += 1;
+  lock(randomName_mutex, "randomName");
+  callCounter += 1;
   StackPushInteger(nNameType);
 
   VM_ExecuteCommand(249, 1);
 
   char* sRetVal;
   StackPopString(&sRetVal);
-  unlock("randomName");
+  unlock(randomName_mutex, "randomName");
   return std::string(sRetVal);
 };
 
 void NWScriptI::recomputeStaticLighting(const NWN::NWObject& oArea, const Ice::Current& ice) {
   if (oArea.id < 0 || oArea.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("recomputeStaticLighting"); callCounter += 1;
+  lock(recomputeStaticLighting_mutex, "recomputeStaticLighting");
+  callCounter += 1;
   StackPushObject(oArea.id);
 
   VM_ExecuteCommand(516, 1);
 
-unlock("recomputeStaticLighting");
+unlock(recomputeStaticLighting_mutex, "recomputeStaticLighting");
   
 };
 
 NWN::SavingThrowResult NWScriptI::reflexSave(const NWN::NWObject& oCreature, Ice::Int nDC, NWN::SaveType tSaveType, const NWN::NWObject& oSaveVersus, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (oSaveVersus.id < 0 || oSaveVersus.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("reflexSave"); callCounter += 1;
+  lock(reflexSave_mutex, "reflexSave");
+  callCounter += 1;
   StackPushObject(oSaveVersus.id);
   if (tSaveType == NWN::GoodSaveType) StackPushInteger(16);
    else if (tSaveType == NWN::SonicSaveType) StackPushInteger(5);
@@ -11776,7 +12463,7 @@ NWN::SavingThrowResult NWScriptI::reflexSave(const NWN::NWObject& oCreature, Ice
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("reflexSave");
+  unlock(reflexSave_mutex, "reflexSave");
   if (nRetVal == 0) return NWN::FailedRoll;
   if (nRetVal == 1) return NWN::SucceededRoll;
   if (nRetVal == 3) return NWN::ImmuneToSaveType;
@@ -11787,38 +12474,41 @@ void NWScriptI::removeEffect(const NWN::NWObject& oCreature, const NWN::NWEffect
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (effectMap.find(eEffect.id) == effectMap.end()) throw NWN::InvalidEffectException();
   
-  lock("removeEffect"); callCounter += 1;
+  lock(removeEffect_mutex, "removeEffect");
+  callCounter += 1;
   CGameEffect *eEffect_ptr = effectMap.find(eEffect.id)->second;
   StackPushEngineStructure(ENGINE_STRUCTURE_EFFECT, eEffect_ptr);
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(87, 2);
 
-unlock("removeEffect");
+unlock(removeEffect_mutex, "removeEffect");
   
 };
 
 void NWScriptI::removeFromParty(const NWN::NWObject& oPC, const Ice::Current& ice) {
   if (oPC.id < 0 || oPC.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("removeFromParty"); callCounter += 1;
+  lock(removeFromParty_mutex, "removeFromParty");
+  callCounter += 1;
   StackPushObject(oPC.id);
 
   VM_ExecuteCommand(573, 1);
 
-unlock("removeFromParty");
+unlock(removeFromParty_mutex, "removeFromParty");
   
 };
 
 void NWScriptI::removeHenchman(const NWN::NWObject& oMaster, const NWN::NWObject& oHenchman, const Ice::Current& ice) {
   if (oMaster.id < 0 || oMaster.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (oHenchman.id < 0 || oHenchman.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("removeHenchman"); callCounter += 1;
+  lock(removeHenchman_mutex, "removeHenchman");
+  callCounter += 1;
   StackPushObject(oHenchman.id);
   StackPushObject(oMaster.id);
 
   VM_ExecuteCommand(366, 2);
 
-unlock("removeHenchman");
+unlock(removeHenchman_mutex, "removeHenchman");
   
 };
 
@@ -11826,20 +12516,22 @@ void NWScriptI::removeItemProperty(const NWN::NWObject& oItem, const NWN::NWItem
   if (oItem.id < 0 || oItem.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (iprpMap.find(ipProperty.id) == iprpMap.end()) throw NWN::InvalidItemPropertyException();
   
-  lock("removeItemProperty"); callCounter += 1;
+  lock(removeItemProperty_mutex, "removeItemProperty");
+  callCounter += 1;
   CGameEffect *ipProperty_ptr = iprpMap.find(ipProperty.id)->second;
   StackPushEngineStructure(ENGINE_STRUCTURE_ITEMPROPERTY, ipProperty_ptr);
   StackPushObject(oItem.id);
 
   VM_ExecuteCommand(610, 2);
 
-unlock("removeItemProperty");
+unlock(removeItemProperty_mutex, "removeItemProperty");
   
 };
 
 void NWScriptI::removeJournalQuestEntry(const std::string& szPlotID, const NWN::NWObject& oCreature, bool bAllPartyMembers, bool bAllPlayers, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("removeJournalQuestEntry"); callCounter += 1;
+  lock(removeJournalQuestEntry_mutex, "removeJournalQuestEntry");
+  callCounter += 1;
   StackPushInteger(bAllPlayers == true ? 1 : 0);
   StackPushInteger(bAllPartyMembers == true ? 1 : 0);
   StackPushObject(oCreature.id);
@@ -11847,27 +12539,29 @@ void NWScriptI::removeJournalQuestEntry(const std::string& szPlotID, const NWN::
 
   VM_ExecuteCommand(368, 4);
 
-unlock("removeJournalQuestEntry");
+unlock(removeJournalQuestEntry_mutex, "removeJournalQuestEntry");
   
 };
 
 void NWScriptI::removeSummonedAssociate(const NWN::NWObject& oMaster, const NWN::NWObject& oAssociate, const Ice::Current& ice) {
   if (oMaster.id < 0 || oMaster.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (oAssociate.id < 0 || oAssociate.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("removeSummonedAssociate"); callCounter += 1;
+  lock(removeSummonedAssociate_mutex, "removeSummonedAssociate");
+  callCounter += 1;
   StackPushObject(oAssociate.id);
   StackPushObject(oMaster.id);
 
   VM_ExecuteCommand(503, 2);
 
-unlock("removeSummonedAssociate");
+unlock(removeSummonedAssociate_mutex, "removeSummonedAssociate");
   
 };
 
 Ice::Int NWScriptI::resistSpell(const NWN::NWObject& oCaster, const NWN::NWObject& oTarget, const Ice::Current& ice) {
   if (oCaster.id < 0 || oCaster.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("resistSpell"); callCounter += 1;
+  lock(resistSpell_mutex, "resistSpell");
+  callCounter += 1;
   StackPushObject(oTarget.id);
   StackPushObject(oCaster.id);
 
@@ -11875,27 +12569,29 @@ Ice::Int NWScriptI::resistSpell(const NWN::NWObject& oCaster, const NWN::NWObjec
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("resistSpell");
+  unlock(resistSpell_mutex, "resistSpell");
   return nRetVal;
 };
 
 void NWScriptI::restoreBaseAttackBonus(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("restoreBaseAttackBonus"); callCounter += 1;
+  lock(restoreBaseAttackBonus_mutex, "restoreBaseAttackBonus");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(756, 1);
 
-unlock("restoreBaseAttackBonus");
+unlock(restoreBaseAttackBonus_mutex, "restoreBaseAttackBonus");
   
 };
 
 void NWScriptI::restoreCameraFacing(const Ice::Current& ice) {
-  lock("restoreCameraFacing"); callCounter += 1;
+  lock(restoreCameraFacing_mutex, "restoreCameraFacing");
+  callCounter += 1;
 
   VM_ExecuteCommand(703, 0);
 
-unlock("restoreCameraFacing");
+unlock(restoreCameraFacing_mutex, "restoreCameraFacing");
   
 };
 
@@ -11903,7 +12599,8 @@ NWN::NWObject NWScriptI::retrieveCampaignObject(const std::string& sCampaignName
   if (locLocation.area.id < 0) throw NWN::InvalidObjectException();
   if (oOwner.id < 0 || oOwner.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (oPlayer.id < 0 || oPlayer.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("retrieveCampaignObject"); callCounter += 1;
+  lock(retrieveCampaignObject_mutex, "retrieveCampaignObject");
+  callCounter += 1;
   StackPushObject(oPlayer.id);
   StackPushObject(oOwner.id);
   CScriptLocation *locLocation_ptr;
@@ -11922,61 +12619,66 @@ NWN::NWObject NWScriptI::retrieveCampaignObject(const std::string& sCampaignName
 
   dword lRetVal;
   StackPopObject(&lRetVal);
-  unlock("retrieveCampaignObject");
+  unlock(retrieveCampaignObject_mutex, "retrieveCampaignObject");
   NWN::NWObject no;
   no.id = lRetVal;
   return no;
 };
 
 Ice::Double NWScriptI::roundsToSeconds(Ice::Int nRounds, const Ice::Current& ice) {
-  lock("roundsToSeconds"); callCounter += 1;
+  lock(roundsToSeconds_mutex, "roundsToSeconds");
+  callCounter += 1;
   StackPushInteger(nRounds);
 
   VM_ExecuteCommand(121, 1);
 
   float fRetVal;
   StackPopFloat(&fRetVal);
-  unlock("roundsToSeconds");
+  unlock(roundsToSeconds_mutex, "roundsToSeconds");
   return fRetVal;
 };
 
 void NWScriptI::sendMessageToAllDMs(const std::string& szMessage, const Ice::Current& ice) {
-  lock("sendMessageToAllDMs"); callCounter += 1;
+  lock(sendMessageToAllDMs_mutex, "sendMessageToAllDMs");
+  callCounter += 1;
   StackPushString(szMessage.c_str());
 
   VM_ExecuteCommand(563, 1);
 
-unlock("sendMessageToAllDMs");
+unlock(sendMessageToAllDMs_mutex, "sendMessageToAllDMs");
   
 };
 
 void NWScriptI::sendMessageToPC(const NWN::NWObject& oPlayer, const std::string& szMessage, const Ice::Current& ice) {
   if (oPlayer.id < 0 || oPlayer.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("sendMessageToPC"); callCounter += 1;
+  lock(sendMessageToPC_mutex, "sendMessageToPC");
+  callCounter += 1;
   StackPushString(szMessage.c_str());
   StackPushObject(oPlayer.id);
 
   VM_ExecuteCommand(374, 2);
 
-unlock("sendMessageToPC");
+unlock(sendMessageToPC_mutex, "sendMessageToPC");
   
 };
 
 void NWScriptI::sendMessageToPCByStrRef(const NWN::NWObject& oPlayer, Ice::Int nStrRef, const Ice::Current& ice) {
   if (oPlayer.id < 0 || oPlayer.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("sendMessageToPCByStrRef"); callCounter += 1;
+  lock(sendMessageToPCByStrRef_mutex, "sendMessageToPCByStrRef");
+  callCounter += 1;
   StackPushInteger(nStrRef);
   StackPushObject(oPlayer.id);
 
   VM_ExecuteCommand(717, 2);
 
-unlock("sendMessageToPCByStrRef");
+unlock(sendMessageToPCByStrRef_mutex, "sendMessageToPCByStrRef");
   
 };
 
 void NWScriptI::setAILevel(const NWN::NWObject& oTarget, NWN::AILevel tAILevel, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setAILevel"); callCounter += 1;
+  lock(setAILevel_mutex, "setAILevel");
+  callCounter += 1;
   if (tAILevel == NWN::VeryLowAI) StackPushInteger(0);
    else if (tAILevel == NWN::LowAI) StackPushInteger(1);
    else if (tAILevel == NWN::DefaultAI) StackPushInteger(-1);
@@ -11988,13 +12690,14 @@ void NWScriptI::setAILevel(const NWN::NWObject& oTarget, NWN::AILevel tAILevel, 
 
   VM_ExecuteCommand(713, 2);
 
-unlock("setAILevel");
+unlock(setAILevel_mutex, "setAILevel");
   
 };
 
 void NWScriptI::setActionMode(const NWN::NWObject& oCreature, NWN::ActionMode tActionMode, bool bStatus, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setActionMode"); callCounter += 1;
+  lock(setActionMode_mutex, "setActionMode");
+  callCounter += 1;
   StackPushInteger(bStatus == true ? 1 : 0);
   if (tActionMode == NWN::CounterspellMode) StackPushInteger(5);
    else if (tActionMode == NWN::DirtyFightingMode) StackPushInteger(11);
@@ -12013,58 +12716,63 @@ void NWScriptI::setActionMode(const NWN::NWObject& oCreature, NWN::ActionMode tA
 
   VM_ExecuteCommand(736, 3);
 
-unlock("setActionMode");
+unlock(setActionMode_mutex, "setActionMode");
   
 };
 
 void NWScriptI::setAreaTransitionBMP(Ice::Int nPredefinedAreaTransition, const std::string& sCustomAreaTransitionBMP, const Ice::Current& ice) {
-  lock("setAreaTransitionBMP"); callCounter += 1;
+  lock(setAreaTransitionBMP_mutex, "setAreaTransitionBMP");
+  callCounter += 1;
   StackPushString(sCustomAreaTransitionBMP.c_str());
   StackPushInteger(nPredefinedAreaTransition);
 
   VM_ExecuteCommand(203, 2);
 
-unlock("setAreaTransitionBMP");
+unlock(setAreaTransitionBMP_mutex, "setAreaTransitionBMP");
   
 };
 
 void NWScriptI::setAssociateListenPatterns(const NWN::NWObject& oTarget, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setAssociateListenPatterns"); callCounter += 1;
+  lock(setAssociateListenPatterns_mutex, "setAssociateListenPatterns");
+  callCounter += 1;
   StackPushObject(oTarget.id);
 
   VM_ExecuteCommand(327, 1);
 
-unlock("setAssociateListenPatterns");
+unlock(setAssociateListenPatterns_mutex, "setAssociateListenPatterns");
   
 };
 
 void NWScriptI::setBaseAttackBonus(Ice::Int nBaseAttackBonus, const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setBaseAttackBonus"); callCounter += 1;
+  lock(setBaseAttackBonus_mutex, "setBaseAttackBonus");
+  callCounter += 1;
   StackPushObject(oCreature.id);
   StackPushInteger(nBaseAttackBonus);
 
   VM_ExecuteCommand(755, 2);
 
-unlock("setBaseAttackBonus");
+unlock(setBaseAttackBonus_mutex, "setBaseAttackBonus");
   
 };
 
 void NWScriptI::setCalendar(Ice::Int nYear, Ice::Int nMonth, Ice::Int nDay, const Ice::Current& ice) {
-  lock("setCalendar"); callCounter += 1;
+  lock(setCalendar_mutex, "setCalendar");
+  callCounter += 1;
   StackPushInteger(nDay);
   StackPushInteger(nMonth);
   StackPushInteger(nYear);
 
   VM_ExecuteCommand(11, 3);
 
-unlock("setCalendar");
+unlock(setCalendar_mutex, "setCalendar");
   
 };
 
 void NWScriptI::setCameraFacing(Ice::Double fDirection, Ice::Double fDistance, Ice::Double fPitch, Ice::Int nTransitionType, const Ice::Current& ice) {
-  lock("setCameraFacing"); callCounter += 1;
+  lock(setCameraFacing_mutex, "setCameraFacing");
+  callCounter += 1;
   StackPushInteger(nTransitionType);
   StackPushFloat(fPitch);
   StackPushFloat(fDistance);
@@ -12072,37 +12780,40 @@ void NWScriptI::setCameraFacing(Ice::Double fDirection, Ice::Double fDistance, I
 
   VM_ExecuteCommand(45, 4);
 
-unlock("setCameraFacing");
+unlock(setCameraFacing_mutex, "setCameraFacing");
   
 };
 
 void NWScriptI::setCameraHeight(const NWN::NWObject& oPlayer, Ice::Double fHeight, const Ice::Current& ice) {
   if (oPlayer.id < 0 || oPlayer.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setCameraHeight"); callCounter += 1;
+  lock(setCameraHeight_mutex, "setCameraHeight");
+  callCounter += 1;
   StackPushFloat(fHeight);
   StackPushObject(oPlayer.id);
 
   VM_ExecuteCommand(776, 2);
 
-unlock("setCameraHeight");
+unlock(setCameraHeight_mutex, "setCameraHeight");
   
 };
 
 void NWScriptI::setCameraMode(const NWN::NWObject& oPlayer, Ice::Int nCameraMode, const Ice::Current& ice) {
   if (oPlayer.id < 0 || oPlayer.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setCameraMode"); callCounter += 1;
+  lock(setCameraMode_mutex, "setCameraMode");
+  callCounter += 1;
   StackPushInteger(nCameraMode);
   StackPushObject(oPlayer.id);
 
   VM_ExecuteCommand(504, 2);
 
-unlock("setCameraMode");
+unlock(setCameraMode_mutex, "setCameraMode");
   
 };
 
 void NWScriptI::setCampaignFloat(const std::string& sCampaignName, const std::string& sVarName, Ice::Double flFloat, const NWN::NWObject& oPlayer, const Ice::Current& ice) {
   if (oPlayer.id < 0 || oPlayer.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setCampaignFloat"); callCounter += 1;
+  lock(setCampaignFloat_mutex, "setCampaignFloat");
+  callCounter += 1;
   StackPushObject(oPlayer.id);
   StackPushFloat(flFloat);
   StackPushString(sVarName.c_str());
@@ -12110,13 +12821,14 @@ void NWScriptI::setCampaignFloat(const std::string& sCampaignName, const std::st
 
   VM_ExecuteCommand(589, 4);
 
-unlock("setCampaignFloat");
+unlock(setCampaignFloat_mutex, "setCampaignFloat");
   
 };
 
 void NWScriptI::setCampaignInt(const std::string& sCampaignName, const std::string& sVarName, Ice::Int nInt, const NWN::NWObject& oPlayer, const Ice::Current& ice) {
   if (oPlayer.id < 0 || oPlayer.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setCampaignInt"); callCounter += 1;
+  lock(setCampaignInt_mutex, "setCampaignInt");
+  callCounter += 1;
   StackPushObject(oPlayer.id);
   StackPushInteger(nInt);
   StackPushString(sVarName.c_str());
@@ -12124,14 +12836,15 @@ void NWScriptI::setCampaignInt(const std::string& sCampaignName, const std::stri
 
   VM_ExecuteCommand(590, 4);
 
-unlock("setCampaignInt");
+unlock(setCampaignInt_mutex, "setCampaignInt");
   
 };
 
 void NWScriptI::setCampaignLocation(const std::string& sCampaignName, const std::string& sVarName, const NWN::NWLocation& locLocation, const NWN::NWObject& oPlayer, const Ice::Current& ice) {
   if (locLocation.area.id < 0) throw NWN::InvalidObjectException();
   if (oPlayer.id < 0 || oPlayer.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setCampaignLocation"); callCounter += 1;
+  lock(setCampaignLocation_mutex, "setCampaignLocation");
+  callCounter += 1;
   StackPushObject(oPlayer.id);
   CScriptLocation *locLocation_ptr;
   locLocation_ptr->X = locLocation.x;
@@ -12147,13 +12860,14 @@ void NWScriptI::setCampaignLocation(const std::string& sCampaignName, const std:
 
   VM_ExecuteCommand(592, 4);
 
-unlock("setCampaignLocation");
+unlock(setCampaignLocation_mutex, "setCampaignLocation");
   
 };
 
 void NWScriptI::setCampaignString(const std::string& sCampaignName, const std::string& sVarName, const std::string& sString, const NWN::NWObject& oPlayer, const Ice::Current& ice) {
   if (oPlayer.id < 0 || oPlayer.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setCampaignString"); callCounter += 1;
+  lock(setCampaignString_mutex, "setCampaignString");
+  callCounter += 1;
   StackPushObject(oPlayer.id);
   StackPushString(sString.c_str());
   StackPushString(sVarName.c_str());
@@ -12161,13 +12875,14 @@ void NWScriptI::setCampaignString(const std::string& sCampaignName, const std::s
 
   VM_ExecuteCommand(593, 4);
 
-unlock("setCampaignString");
+unlock(setCampaignString_mutex, "setCampaignString");
   
 };
 
 void NWScriptI::setCampaignVector(const std::string& sCampaignName, const std::string& sVarName, const NWN::NWVector& vVector, const NWN::NWObject& oPlayer, const Ice::Current& ice) {
   if (oPlayer.id < 0 || oPlayer.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setCampaignVector"); callCounter += 1;
+  lock(setCampaignVector_mutex, "setCampaignVector");
+  callCounter += 1;
   StackPushObject(oPlayer.id);
   Vector vvVector;
   vvVector.X = vVector.x; vvVector.Y = vVector.y; vvVector.Z = vVector.z;
@@ -12177,341 +12892,369 @@ void NWScriptI::setCampaignVector(const std::string& sCampaignName, const std::s
 
   VM_ExecuteCommand(591, 4);
 
-unlock("setCampaignVector");
+unlock(setCampaignVector_mutex, "setCampaignVector");
   
 };
 
 void NWScriptI::setColor(const NWN::NWObject& oObject, Ice::Int nColorChannel, Ice::Int nColorValue, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setColor"); callCounter += 1;
+  lock(setColor_mutex, "setColor");
+  callCounter += 1;
   StackPushInteger(nColorValue);
   StackPushInteger(nColorChannel);
   StackPushObject(oObject.id);
 
   VM_ExecuteCommand(844, 3);
 
-unlock("setColor");
+unlock(setColor_mutex, "setColor");
   
 };
 
 void NWScriptI::setCommandable(bool bCommandable, const NWN::NWObject& oTarget, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setCommandable"); callCounter += 1;
+  lock(setCommandable_mutex, "setCommandable");
+  callCounter += 1;
   StackPushObject(oTarget.id);
   StackPushInteger(bCommandable == true ? 1 : 0);
 
   VM_ExecuteCommand(162, 2);
 
-unlock("setCommandable");
+unlock(setCommandable_mutex, "setCommandable");
   
 };
 
 void NWScriptI::setCreatureAppearanceType(const NWN::NWObject& oCreature, Ice::Int nAppearanceType, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setCreatureAppearanceType"); callCounter += 1;
+  lock(setCreatureAppearanceType_mutex, "setCreatureAppearanceType");
+  callCounter += 1;
   StackPushInteger(nAppearanceType);
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(765, 2);
 
-unlock("setCreatureAppearanceType");
+unlock(setCreatureAppearanceType_mutex, "setCreatureAppearanceType");
   
 };
 
 void NWScriptI::setCreatureBodyPart(Ice::Int nPart, Ice::Int nModelNumber, const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setCreatureBodyPart"); callCounter += 1;
+  lock(setCreatureBodyPart_mutex, "setCreatureBodyPart");
+  callCounter += 1;
   StackPushObject(oCreature.id);
   StackPushInteger(nModelNumber);
   StackPushInteger(nPart);
 
   VM_ExecuteCommand(793, 3);
 
-unlock("setCreatureBodyPart");
+unlock(setCreatureBodyPart_mutex, "setCreatureBodyPart");
   
 };
 
 void NWScriptI::setCreatureTailType(Ice::Int nTailType, const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setCreatureTailType"); callCounter += 1;
+  lock(setCreatureTailType_mutex, "setCreatureTailType");
+  callCounter += 1;
   StackPushObject(oCreature.id);
   StackPushInteger(nTailType);
 
   VM_ExecuteCommand(795, 2);
 
-unlock("setCreatureTailType");
+unlock(setCreatureTailType_mutex, "setCreatureTailType");
   
 };
 
 void NWScriptI::setCreatureWingType(Ice::Int nWingType, const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setCreatureWingType"); callCounter += 1;
+  lock(setCreatureWingType_mutex, "setCreatureWingType");
+  callCounter += 1;
   StackPushObject(oCreature.id);
   StackPushInteger(nWingType);
 
   VM_ExecuteCommand(791, 2);
 
-unlock("setCreatureWingType");
+unlock(setCreatureWingType_mutex, "setCreatureWingType");
   
 };
 
 void NWScriptI::setCustomToken(Ice::Int nCustomTokenNumber, const std::string& sTokenValue, const Ice::Current& ice) {
-  lock("setCustomToken"); callCounter += 1;
+  lock(setCustomToken_mutex, "setCustomToken");
+  callCounter += 1;
   StackPushString(sTokenValue.c_str());
   StackPushInteger(nCustomTokenNumber);
 
   VM_ExecuteCommand(284, 2);
 
-unlock("setCustomToken");
+unlock(setCustomToken_mutex, "setCustomToken");
   
 };
 
 void NWScriptI::setCutsceneCameraMoveRate(const NWN::NWObject& oCreature, Ice::Double fRate, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setCutsceneCameraMoveRate"); callCounter += 1;
+  lock(setCutsceneCameraMoveRate_mutex, "setCutsceneCameraMoveRate");
+  callCounter += 1;
   StackPushFloat(fRate);
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(743, 2);
 
-unlock("setCutsceneCameraMoveRate");
+unlock(setCutsceneCameraMoveRate_mutex, "setCutsceneCameraMoveRate");
   
 };
 
 void NWScriptI::setCutsceneMode(const NWN::NWObject& oCreature, bool bInCutscene, bool bLeftClickingEnabled, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setCutsceneMode"); callCounter += 1;
+  lock(setCutsceneMode_mutex, "setCutsceneMode");
+  callCounter += 1;
   StackPushInteger(bLeftClickingEnabled == true ? 1 : 0);
   StackPushInteger(bInCutscene == true ? 1 : 0);
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(692, 3);
 
-unlock("setCutsceneMode");
+unlock(setCutsceneMode_mutex, "setCutsceneMode");
   
 };
 
 void NWScriptI::setDeity(const NWN::NWObject& oCreature, const std::string& sDeity, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setDeity"); callCounter += 1;
+  lock(setDeity_mutex, "setDeity");
+  callCounter += 1;
   StackPushString(sDeity.c_str());
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(722, 2);
 
-unlock("setDeity");
+unlock(setDeity_mutex, "setDeity");
   
 };
 
 void NWScriptI::setDescription(const NWN::NWObject& oObject, const std::string& sNewDescription, bool bIdentifiedDescription, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setDescription"); callCounter += 1;
+  lock(setDescription_mutex, "setDescription");
+  callCounter += 1;
   StackPushInteger(bIdentifiedDescription == true ? 1 : 0);
   StackPushString(sNewDescription.c_str());
   StackPushObject(oObject.id);
 
   VM_ExecuteCommand(837, 3);
 
-unlock("setDescription");
+unlock(setDescription_mutex, "setDescription");
   
 };
 
 void NWScriptI::setDroppableFlag(const NWN::NWObject& oItem, bool bDroppable, const Ice::Current& ice) {
   if (oItem.id < 0 || oItem.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setDroppableFlag"); callCounter += 1;
+  lock(setDroppableFlag_mutex, "setDroppableFlag");
+  callCounter += 1;
   StackPushInteger(bDroppable == true ? 1 : 0);
   StackPushObject(oItem.id);
 
   VM_ExecuteCommand(705, 2);
 
-unlock("setDroppableFlag");
+unlock(setDroppableFlag_mutex, "setDroppableFlag");
   
 };
 
 void NWScriptI::setEncounterActive(bool bNewValue, const NWN::NWObject& oEncounter, const Ice::Current& ice) {
   if (oEncounter.id < 0 || oEncounter.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setEncounterActive"); callCounter += 1;
+  lock(setEncounterActive_mutex, "setEncounterActive");
+  callCounter += 1;
   StackPushObject(oEncounter.id);
   StackPushInteger(bNewValue == true ? 1 : 0);
 
   VM_ExecuteCommand(277, 2);
 
-unlock("setEncounterActive");
+unlock(setEncounterActive_mutex, "setEncounterActive");
   
 };
 
 void NWScriptI::setEncounterDifficulty(Ice::Int nEncounterDifficulty, const NWN::NWObject& oEncounter, const Ice::Current& ice) {
   if (oEncounter.id < 0 || oEncounter.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setEncounterDifficulty"); callCounter += 1;
+  lock(setEncounterDifficulty_mutex, "setEncounterDifficulty");
+  callCounter += 1;
   StackPushObject(oEncounter.id);
   StackPushInteger(nEncounterDifficulty);
 
   VM_ExecuteCommand(296, 2);
 
-unlock("setEncounterDifficulty");
+unlock(setEncounterDifficulty_mutex, "setEncounterDifficulty");
   
 };
 
 void NWScriptI::setEncounterSpawnsCurrent(Ice::Int nNewValue, const NWN::NWObject& oEncounter, const Ice::Current& ice) {
   if (oEncounter.id < 0 || oEncounter.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setEncounterSpawnsCurrent"); callCounter += 1;
+  lock(setEncounterSpawnsCurrent_mutex, "setEncounterSpawnsCurrent");
+  callCounter += 1;
   StackPushObject(oEncounter.id);
   StackPushInteger(nNewValue);
 
   VM_ExecuteCommand(281, 2);
 
-unlock("setEncounterSpawnsCurrent");
+unlock(setEncounterSpawnsCurrent_mutex, "setEncounterSpawnsCurrent");
   
 };
 
 void NWScriptI::setEncounterSpawnsMax(Ice::Int nNewValue, const NWN::NWObject& oEncounter, const Ice::Current& ice) {
   if (oEncounter.id < 0 || oEncounter.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setEncounterSpawnsMax"); callCounter += 1;
+  lock(setEncounterSpawnsMax_mutex, "setEncounterSpawnsMax");
+  callCounter += 1;
   StackPushObject(oEncounter.id);
   StackPushInteger(nNewValue);
 
   VM_ExecuteCommand(279, 2);
 
-unlock("setEncounterSpawnsMax");
+unlock(setEncounterSpawnsMax_mutex, "setEncounterSpawnsMax");
   
 };
 
 void NWScriptI::setFacing(Ice::Double fDirection, const Ice::Current& ice) {
-  lock("setFacing"); callCounter += 1;
+  lock(setFacing_mutex, "setFacing");
+  callCounter += 1;
   StackPushFloat(fDirection);
 
   VM_ExecuteCommand(10, 1);
 
-unlock("setFacing");
+unlock(setFacing_mutex, "setFacing");
   
 };
 
 void NWScriptI::setFacingPoint(const NWN::NWVector& vTarget, const Ice::Current& ice) {
-  lock("setFacingPoint"); callCounter += 1;
+  lock(setFacingPoint_mutex, "setFacingPoint");
+  callCounter += 1;
   Vector vvTarget;
   vvTarget.X = vTarget.x; vvTarget.Y = vTarget.y; vvTarget.Z = vTarget.z;
   StackPushVector(vvTarget);
 
   VM_ExecuteCommand(143, 1);
 
-unlock("setFacingPoint");
+unlock(setFacingPoint_mutex, "setFacingPoint");
   
 };
 
 void NWScriptI::setFogAmount(Ice::Int nFogType, Ice::Int nFogAmount, const NWN::NWObject& oArea, const Ice::Current& ice) {
   if (oArea.id < 0 || oArea.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setFogAmount"); callCounter += 1;
+  lock(setFogAmount_mutex, "setFogAmount");
+  callCounter += 1;
   StackPushObject(oArea.id);
   StackPushInteger(nFogAmount);
   StackPushInteger(nFogType);
 
   VM_ExecuteCommand(784, 3);
 
-unlock("setFogAmount");
+unlock(setFogAmount_mutex, "setFogAmount");
   
 };
 
 void NWScriptI::setFogColor(Ice::Int nFogType, Ice::Int nFogColor, const NWN::NWObject& oArea, const Ice::Current& ice) {
   if (oArea.id < 0 || oArea.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setFogColor"); callCounter += 1;
+  lock(setFogColor_mutex, "setFogColor");
+  callCounter += 1;
   StackPushObject(oArea.id);
   StackPushInteger(nFogColor);
   StackPushInteger(nFogType);
 
   VM_ExecuteCommand(780, 3);
 
-unlock("setFogColor");
+unlock(setFogColor_mutex, "setFogColor");
   
 };
 
 void NWScriptI::setFootstepType(Ice::Int nFootstepType, const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setFootstepType"); callCounter += 1;
+  lock(setFootstepType_mutex, "setFootstepType");
+  callCounter += 1;
   StackPushObject(oCreature.id);
   StackPushInteger(nFootstepType);
 
   VM_ExecuteCommand(789, 2);
 
-unlock("setFootstepType");
+unlock(setFootstepType_mutex, "setFootstepType");
   
 };
 
 void NWScriptI::setFortitudeSavingThrow(const NWN::NWObject& oObject, Ice::Int nFortitudeSave, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setFortitudeSavingThrow"); callCounter += 1;
+  lock(setFortitudeSavingThrow_mutex, "setFortitudeSavingThrow");
+  callCounter += 1;
   StackPushInteger(nFortitudeSave);
   StackPushObject(oObject.id);
 
   VM_ExecuteCommand(813, 2);
 
-unlock("setFortitudeSavingThrow");
+unlock(setFortitudeSavingThrow_mutex, "setFortitudeSavingThrow");
   
 };
 
 void NWScriptI::setHardness(Ice::Int nHardness, const NWN::NWObject& oObject, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setHardness"); callCounter += 1;
+  lock(setHardness_mutex, "setHardness");
+  callCounter += 1;
   StackPushObject(oObject.id);
   StackPushInteger(nHardness);
 
   VM_ExecuteCommand(797, 2);
 
-unlock("setHardness");
+unlock(setHardness_mutex, "setHardness");
   
 };
 
 void NWScriptI::setIdentified(const NWN::NWObject& oItem, bool bIdentified, const Ice::Current& ice) {
   if (oItem.id < 0 || oItem.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setIdentified"); callCounter += 1;
+  lock(setIdentified_mutex, "setIdentified");
+  callCounter += 1;
   StackPushInteger(bIdentified == true ? 1 : 0);
   StackPushObject(oItem.id);
 
   VM_ExecuteCommand(333, 2);
 
-unlock("setIdentified");
+unlock(setIdentified_mutex, "setIdentified");
   
 };
 
 void NWScriptI::setImmortal(const NWN::NWObject& oCreature, bool bImmortal, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setImmortal"); callCounter += 1;
+  lock(setImmortal_mutex, "setImmortal");
+  callCounter += 1;
   StackPushInteger(bImmortal == true ? 1 : 0);
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(700, 2);
 
-unlock("setImmortal");
+unlock(setImmortal_mutex, "setImmortal");
   
 };
 
 void NWScriptI::setInfiniteFlag(const NWN::NWObject& oItem, bool bInfinite, const Ice::Current& ice) {
   if (oItem.id < 0 || oItem.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setInfiniteFlag"); callCounter += 1;
+  lock(setInfiniteFlag_mutex, "setInfiniteFlag");
+  callCounter += 1;
   StackPushInteger(bInfinite == true ? 1 : 0);
   StackPushObject(oItem.id);
 
   VM_ExecuteCommand(828, 2);
 
-unlock("setInfiniteFlag");
+unlock(setInfiniteFlag_mutex, "setInfiniteFlag");
   
 };
 
 void NWScriptI::setIsDestroyable(bool bDestroyable, bool bRaiseable, bool bSelectableWhenDead, const Ice::Current& ice) {
-  lock("setIsDestroyable"); callCounter += 1;
+  lock(setIsDestroyable_mutex, "setIsDestroyable");
+  callCounter += 1;
   StackPushInteger(bSelectableWhenDead == true ? 1 : 0);
   StackPushInteger(bRaiseable == true ? 1 : 0);
   StackPushInteger(bDestroyable == true ? 1 : 0);
 
   VM_ExecuteCommand(323, 3);
 
-unlock("setIsDestroyable");
+unlock(setIsDestroyable_mutex, "setIsDestroyable");
   
 };
 
 void NWScriptI::setIsTemporaryEnemy(const NWN::NWObject& oTarget, const NWN::NWObject& oSource, bool bDecays, Ice::Double fDurationInSeconds, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (oSource.id < 0 || oSource.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setIsTemporaryEnemy"); callCounter += 1;
+  lock(setIsTemporaryEnemy_mutex, "setIsTemporaryEnemy");
+  callCounter += 1;
   StackPushFloat(fDurationInSeconds);
   StackPushInteger(bDecays == true ? 1 : 0);
   StackPushObject(oSource.id);
@@ -12519,14 +13262,15 @@ void NWScriptI::setIsTemporaryEnemy(const NWN::NWObject& oTarget, const NWN::NWO
 
   VM_ExecuteCommand(391, 4);
 
-unlock("setIsTemporaryEnemy");
+unlock(setIsTemporaryEnemy_mutex, "setIsTemporaryEnemy");
   
 };
 
 void NWScriptI::setIsTemporaryFriend(const NWN::NWObject& oTarget, const NWN::NWObject& oSource, bool bDecays, Ice::Double fDurationInSeconds, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (oSource.id < 0 || oSource.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setIsTemporaryFriend"); callCounter += 1;
+  lock(setIsTemporaryFriend_mutex, "setIsTemporaryFriend");
+  callCounter += 1;
   StackPushFloat(fDurationInSeconds);
   StackPushInteger(bDecays == true ? 1 : 0);
   StackPushObject(oSource.id);
@@ -12534,14 +13278,15 @@ void NWScriptI::setIsTemporaryFriend(const NWN::NWObject& oTarget, const NWN::NW
 
   VM_ExecuteCommand(390, 4);
 
-unlock("setIsTemporaryFriend");
+unlock(setIsTemporaryFriend_mutex, "setIsTemporaryFriend");
   
 };
 
 void NWScriptI::setIsTemporaryNeutral(const NWN::NWObject& oTarget, const NWN::NWObject& oSource, bool bDecays, Ice::Double fDurationInSeconds, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (oSource.id < 0 || oSource.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setIsTemporaryNeutral"); callCounter += 1;
+  lock(setIsTemporaryNeutral_mutex, "setIsTemporaryNeutral");
+  callCounter += 1;
   StackPushFloat(fDurationInSeconds);
   StackPushInteger(bDecays == true ? 1 : 0);
   StackPushObject(oSource.id);
@@ -12549,113 +13294,122 @@ void NWScriptI::setIsTemporaryNeutral(const NWN::NWObject& oTarget, const NWN::N
 
   VM_ExecuteCommand(392, 4);
 
-unlock("setIsTemporaryNeutral");
+unlock(setIsTemporaryNeutral_mutex, "setIsTemporaryNeutral");
   
 };
 
 void NWScriptI::setItemCharges(const NWN::NWObject& oItem, Ice::Int nCharges, const Ice::Current& ice) {
   if (oItem.id < 0 || oItem.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setItemCharges"); callCounter += 1;
+  lock(setItemCharges_mutex, "setItemCharges");
+  callCounter += 1;
   StackPushInteger(nCharges);
   StackPushObject(oItem.id);
 
   VM_ExecuteCommand(608, 2);
 
-unlock("setItemCharges");
+unlock(setItemCharges_mutex, "setItemCharges");
   
 };
 
 void NWScriptI::setItemCursedFlag(const NWN::NWObject& oItem, bool bCursed, const Ice::Current& ice) {
   if (oItem.id < 0 || oItem.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setItemCursedFlag"); callCounter += 1;
+  lock(setItemCursedFlag_mutex, "setItemCursedFlag");
+  callCounter += 1;
   StackPushInteger(bCursed == true ? 1 : 0);
   StackPushObject(oItem.id);
 
   VM_ExecuteCommand(745, 2);
 
-unlock("setItemCursedFlag");
+unlock(setItemCursedFlag_mutex, "setItemCursedFlag");
   
 };
 
 void NWScriptI::setItemStackSize(const NWN::NWObject& oItem, Ice::Int nSize, const Ice::Current& ice) {
   if (oItem.id < 0 || oItem.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setItemStackSize"); callCounter += 1;
+  lock(setItemStackSize_mutex, "setItemStackSize");
+  callCounter += 1;
   StackPushInteger(nSize);
   StackPushObject(oItem.id);
 
   VM_ExecuteCommand(606, 2);
 
-unlock("setItemStackSize");
+unlock(setItemStackSize_mutex, "setItemStackSize");
   
 };
 
 void NWScriptI::setKeyRequiredFeedback(const NWN::NWObject& oObject, const std::string& sFeedbackMessage, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setKeyRequiredFeedback"); callCounter += 1;
+  lock(setKeyRequiredFeedback_mutex, "setKeyRequiredFeedback");
+  callCounter += 1;
   StackPushString(sFeedbackMessage.c_str());
   StackPushObject(oObject.id);
 
   VM_ExecuteCommand(820, 2);
 
-unlock("setKeyRequiredFeedback");
+unlock(setKeyRequiredFeedback_mutex, "setKeyRequiredFeedback");
   
 };
 
 void NWScriptI::setListenPattern(const NWN::NWObject& oObject, const std::string& sPattern, Ice::Int nNumber, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setListenPattern"); callCounter += 1;
+  lock(setListenPattern_mutex, "setListenPattern");
+  callCounter += 1;
   StackPushInteger(nNumber);
   StackPushString(sPattern.c_str());
   StackPushObject(oObject.id);
 
   VM_ExecuteCommand(176, 3);
 
-unlock("setListenPattern");
+unlock(setListenPattern_mutex, "setListenPattern");
   
 };
 
 void NWScriptI::setListening(const NWN::NWObject& oObject, bool bValue, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setListening"); callCounter += 1;
+  lock(setListening_mutex, "setListening");
+  callCounter += 1;
   StackPushInteger(bValue == true ? 1 : 0);
   StackPushObject(oObject.id);
 
   VM_ExecuteCommand(175, 2);
 
-unlock("setListening");
+unlock(setListening_mutex, "setListening");
   
 };
 
 void NWScriptI::setLocalFloat(const NWN::NWObject& oObject, const std::string& sVarName, Ice::Double fValue, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setLocalFloat"); callCounter += 1;
+  lock(setLocalFloat_mutex, "setLocalFloat");
+  callCounter += 1;
   StackPushFloat(fValue);
   StackPushString(sVarName.c_str());
   StackPushObject(oObject.id);
 
   VM_ExecuteCommand(56, 3);
 
-unlock("setLocalFloat");
+unlock(setLocalFloat_mutex, "setLocalFloat");
   
 };
 
 void NWScriptI::setLocalInt(const NWN::NWObject& oObject, const std::string& sVarName, Ice::Int nValue, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setLocalInt"); callCounter += 1;
+  lock(setLocalInt_mutex, "setLocalInt");
+  callCounter += 1;
   StackPushInteger(nValue);
   StackPushString(sVarName.c_str());
   StackPushObject(oObject.id);
 
   VM_ExecuteCommand(55, 3);
 
-unlock("setLocalInt");
+unlock(setLocalInt_mutex, "setLocalInt");
   
 };
 
 void NWScriptI::setLocalLocation(const NWN::NWObject& oObject, const std::string& sVarName, const NWN::NWLocation& lValue, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (lValue.area.id < 0) throw NWN::InvalidObjectException();
-  lock("setLocalLocation"); callCounter += 1;
+  lock(setLocalLocation_mutex, "setLocalLocation");
+  callCounter += 1;
   CScriptLocation *lValue_ptr;
   lValue_ptr->X = lValue.x;
   lValue_ptr->Y = lValue.y;
@@ -12670,177 +13424,192 @@ void NWScriptI::setLocalLocation(const NWN::NWObject& oObject, const std::string
 
   VM_ExecuteCommand(152, 3);
 
-unlock("setLocalLocation");
+unlock(setLocalLocation_mutex, "setLocalLocation");
   
 };
 
 void NWScriptI::setLocalObject(const NWN::NWObject& oObject, const std::string& sVarName, const NWN::NWObject& oValue, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (oValue.id < 0 || oValue.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setLocalObject"); callCounter += 1;
+  lock(setLocalObject_mutex, "setLocalObject");
+  callCounter += 1;
   StackPushObject(oValue.id);
   StackPushString(sVarName.c_str());
   StackPushObject(oObject.id);
 
   VM_ExecuteCommand(58, 3);
 
-unlock("setLocalObject");
+unlock(setLocalObject_mutex, "setLocalObject");
   
 };
 
 void NWScriptI::setLocalString(const NWN::NWObject& oObject, const std::string& sVarName, const std::string& sValue, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setLocalString"); callCounter += 1;
+  lock(setLocalString_mutex, "setLocalString");
+  callCounter += 1;
   StackPushString(sValue.c_str());
   StackPushString(sVarName.c_str());
   StackPushObject(oObject.id);
 
   VM_ExecuteCommand(57, 3);
 
-unlock("setLocalString");
+unlock(setLocalString_mutex, "setLocalString");
   
 };
 
 void NWScriptI::setLockKeyRequired(const NWN::NWObject& oObject, bool bKeyRequired, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setLockKeyRequired"); callCounter += 1;
+  lock(setLockKeyRequired_mutex, "setLockKeyRequired");
+  callCounter += 1;
   StackPushInteger(bKeyRequired == true ? 1 : 0);
   StackPushObject(oObject.id);
 
   VM_ExecuteCommand(798, 2);
 
-unlock("setLockKeyRequired");
+unlock(setLockKeyRequired_mutex, "setLockKeyRequired");
   
 };
 
 void NWScriptI::setLockKeyTag(const NWN::NWObject& oObject, const std::string& sNewKeyTag, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setLockKeyTag"); callCounter += 1;
+  lock(setLockKeyTag_mutex, "setLockKeyTag");
+  callCounter += 1;
   StackPushString(sNewKeyTag.c_str());
   StackPushObject(oObject.id);
 
   VM_ExecuteCommand(799, 2);
 
-unlock("setLockKeyTag");
+unlock(setLockKeyTag_mutex, "setLockKeyTag");
   
 };
 
 void NWScriptI::setLockLockDC(const NWN::NWObject& oObject, Ice::Int nNewLockDC, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setLockLockDC"); callCounter += 1;
+  lock(setLockLockDC_mutex, "setLockLockDC");
+  callCounter += 1;
   StackPushInteger(nNewLockDC);
   StackPushObject(oObject.id);
 
   VM_ExecuteCommand(802, 2);
 
-unlock("setLockLockDC");
+unlock(setLockLockDC_mutex, "setLockLockDC");
   
 };
 
 void NWScriptI::setLockLockable(const NWN::NWObject& oObject, bool bLockable, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setLockLockable"); callCounter += 1;
+  lock(setLockLockable_mutex, "setLockLockable");
+  callCounter += 1;
   StackPushInteger(bLockable == true ? 1 : 0);
   StackPushObject(oObject.id);
 
   VM_ExecuteCommand(800, 2);
 
-unlock("setLockLockable");
+unlock(setLockLockable_mutex, "setLockLockable");
   
 };
 
 void NWScriptI::setLockUnlockDC(const NWN::NWObject& oObject, Ice::Int nNewUnlockDC, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setLockUnlockDC"); callCounter += 1;
+  lock(setLockUnlockDC_mutex, "setLockUnlockDC");
+  callCounter += 1;
   StackPushInteger(nNewUnlockDC);
   StackPushObject(oObject.id);
 
   VM_ExecuteCommand(801, 2);
 
-unlock("setLockUnlockDC");
+unlock(setLockUnlockDC_mutex, "setLockUnlockDC");
   
 };
 
 void NWScriptI::setLocked(const NWN::NWObject& oTarget, bool bLocked, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setLocked"); callCounter += 1;
+  lock(setLocked_mutex, "setLocked");
+  callCounter += 1;
   StackPushInteger(bLocked == true ? 1 : 0);
   StackPushObject(oTarget.id);
 
   VM_ExecuteCommand(324, 2);
 
-unlock("setLocked");
+unlock(setLocked_mutex, "setLocked");
   
 };
 
 void NWScriptI::setLootable(const NWN::NWObject& oCreature, bool bLootable, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setLootable"); callCounter += 1;
+  lock(setLootable_mutex, "setLootable");
+  callCounter += 1;
   StackPushInteger(bLootable == true ? 1 : 0);
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(740, 2);
 
-unlock("setLootable");
+unlock(setLootable_mutex, "setLootable");
   
 };
 
 void NWScriptI::setMapPinEnabled(const NWN::NWObject& oMapPin, bool bEnabled, const Ice::Current& ice) {
   if (oMapPin.id < 0 || oMapPin.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setMapPinEnabled"); callCounter += 1;
+  lock(setMapPinEnabled_mutex, "setMapPinEnabled");
+  callCounter += 1;
   StackPushInteger(bEnabled == true ? 1 : 0);
   StackPushObject(oMapPin.id);
 
   VM_ExecuteCommand(386, 2);
 
-unlock("setMapPinEnabled");
+unlock(setMapPinEnabled_mutex, "setMapPinEnabled");
   
 };
 
 void NWScriptI::setMaxHenchmen(Ice::Int nNumHenchmen, const Ice::Current& ice) {
-  lock("setMaxHenchmen"); callCounter += 1;
+  lock(setMaxHenchmen_mutex, "setMaxHenchmen");
+  callCounter += 1;
   StackPushInteger(nNumHenchmen);
 
   VM_ExecuteCommand(746, 1);
 
-unlock("setMaxHenchmen");
+unlock(setMaxHenchmen_mutex, "setMaxHenchmen");
   
 };
 
 void NWScriptI::setModuleXPScale(Ice::Int nXPScale, const Ice::Current& ice) {
-  lock("setModuleXPScale"); callCounter += 1;
+  lock(setModuleXPScale_mutex, "setModuleXPScale");
+  callCounter += 1;
   StackPushInteger(nXPScale);
 
   VM_ExecuteCommand(818, 1);
 
-unlock("setModuleXPScale");
+unlock(setModuleXPScale_mutex, "setModuleXPScale");
   
 };
 
 void NWScriptI::setName(const NWN::NWObject& oObject, const std::string& sNewName, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setName"); callCounter += 1;
+  lock(setName_mutex, "setName");
+  callCounter += 1;
   StackPushString(sNewName.c_str());
   StackPushObject(oObject.id);
 
   VM_ExecuteCommand(830, 2);
 
-unlock("setName");
+unlock(setName_mutex, "setName");
   
 };
 
 void NWScriptI::setPCChatMessage(const std::string& sNewChatMessage, const Ice::Current& ice) {
-  lock("setPCChatMessage"); callCounter += 1;
+  lock(setPCChatMessage_mutex, "setPCChatMessage");
+  callCounter += 1;
   StackPushString(sNewChatMessage.c_str());
 
   VM_ExecuteCommand(841, 1);
 
-unlock("setPCChatMessage");
+unlock(setPCChatMessage_mutex, "setPCChatMessage");
   
 };
 
 void NWScriptI::setPCChatVolume(NWN::TalkVolume tTalkVolume, const Ice::Current& ice) {
-  lock("setPCChatVolume"); callCounter += 1;
+  lock(setPCChatVolume_mutex, "setPCChatVolume");
+  callCounter += 1;
   if (tTalkVolume == NWN::PartyVol) StackPushInteger(5);
    else if (tTalkVolume == NWN::TalkVol) StackPushInteger(0);
    else if (tTalkVolume == NWN::TellVol) StackPushInteger(6);
@@ -12852,39 +13621,42 @@ void NWScriptI::setPCChatVolume(NWN::TalkVolume tTalkVolume, const Ice::Current&
 
   VM_ExecuteCommand(842, 1);
 
-unlock("setPCChatVolume");
+unlock(setPCChatVolume_mutex, "setPCChatVolume");
   
 };
 
 void NWScriptI::setPCDislike(const NWN::NWObject& oPlayer, const NWN::NWObject& oTarget, const Ice::Current& ice) {
   if (oPlayer.id < 0 || oPlayer.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setPCDislike"); callCounter += 1;
+  lock(setPCDislike_mutex, "setPCDislike");
+  callCounter += 1;
   StackPushObject(oTarget.id);
   StackPushObject(oPlayer.id);
 
   VM_ExecuteCommand(373, 2);
 
-unlock("setPCDislike");
+unlock(setPCDislike_mutex, "setPCDislike");
   
 };
 
 void NWScriptI::setPCLike(const NWN::NWObject& oPlayer, const NWN::NWObject& oTarget, const Ice::Current& ice) {
   if (oPlayer.id < 0 || oPlayer.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setPCLike"); callCounter += 1;
+  lock(setPCLike_mutex, "setPCLike");
+  callCounter += 1;
   StackPushObject(oTarget.id);
   StackPushObject(oPlayer.id);
 
   VM_ExecuteCommand(372, 2);
 
-unlock("setPCLike");
+unlock(setPCLike_mutex, "setPCLike");
   
 };
 
 void NWScriptI::setPanelButtonFlash(const NWN::NWObject& oPlayer, NWN::Button tButton, bool bEnableFlash, const Ice::Current& ice) {
   if (oPlayer.id < 0 || oPlayer.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setPanelButtonFlash"); callCounter += 1;
+  lock(setPanelButtonFlash_mutex, "setPanelButtonFlash");
+  callCounter += 1;
   StackPushInteger(bEnableFlash == true ? 1 : 0);
   if (tButton == NWN::SpellsButton) StackPushInteger(5);
    else if (tButton == NWN::MapButton) StackPushInteger(0);
@@ -12899,13 +13671,14 @@ void NWScriptI::setPanelButtonFlash(const NWN::NWObject& oPlayer, NWN::Button tB
 
   VM_ExecuteCommand(521, 3);
 
-unlock("setPanelButtonFlash");
+unlock(setPanelButtonFlash_mutex, "setPanelButtonFlash");
   
 };
 
 void NWScriptI::setPhenoType(NWN::PhenoType tPhenoType, const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setPhenoType"); callCounter += 1;
+  lock(setPhenoType_mutex, "setPhenoType");
+  callCounter += 1;
   StackPushObject(oCreature.id);
   if (tPhenoType == NWN::Custom14PhenoType) StackPushInteger(16);
    else if (tPhenoType == NWN::Custom3PhenoType) StackPushInteger(5);
@@ -12931,97 +13704,105 @@ void NWScriptI::setPhenoType(NWN::PhenoType tPhenoType, const NWN::NWObject& oCr
 
   VM_ExecuteCommand(779, 2);
 
-unlock("setPhenoType");
+unlock(setPhenoType_mutex, "setPhenoType");
   
 };
 
 void NWScriptI::setPickpocketableFlag(const NWN::NWObject& oItem, bool bPickpocketable, const Ice::Current& ice) {
   if (oItem.id < 0 || oItem.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setPickpocketableFlag"); callCounter += 1;
+  lock(setPickpocketableFlag_mutex, "setPickpocketableFlag");
+  callCounter += 1;
   StackPushInteger(bPickpocketable == true ? 1 : 0);
   StackPushObject(oItem.id);
 
   VM_ExecuteCommand(787, 2);
 
-unlock("setPickpocketableFlag");
+unlock(setPickpocketableFlag_mutex, "setPickpocketableFlag");
   
 };
 
 void NWScriptI::setPlaceableIllumination(const NWN::NWObject& oPlaceable, bool bIlluminate, const Ice::Current& ice) {
   if (oPlaceable.id < 0 || oPlaceable.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setPlaceableIllumination"); callCounter += 1;
+  lock(setPlaceableIllumination_mutex, "setPlaceableIllumination");
+  callCounter += 1;
   StackPushInteger(bIlluminate == true ? 1 : 0);
   StackPushObject(oPlaceable.id);
 
   VM_ExecuteCommand(544, 2);
 
-unlock("setPlaceableIllumination");
+unlock(setPlaceableIllumination_mutex, "setPlaceableIllumination");
   
 };
 
 void NWScriptI::setPlotFlag(const NWN::NWObject& oTarget, bool bPlotFlag, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setPlotFlag"); callCounter += 1;
+  lock(setPlotFlag_mutex, "setPlotFlag");
+  callCounter += 1;
   StackPushInteger(bPlotFlag == true ? 1 : 0);
   StackPushObject(oTarget.id);
 
   VM_ExecuteCommand(456, 2);
 
-unlock("setPlotFlag");
+unlock(setPlotFlag_mutex, "setPlotFlag");
   
 };
 
 void NWScriptI::setPortraitId(const NWN::NWObject& oTarget, Ice::Int nPortraitId, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setPortraitId"); callCounter += 1;
+  lock(setPortraitId_mutex, "setPortraitId");
+  callCounter += 1;
   StackPushInteger(nPortraitId);
   StackPushObject(oTarget.id);
 
   VM_ExecuteCommand(832, 2);
 
-unlock("setPortraitId");
+unlock(setPortraitId_mutex, "setPortraitId");
   
 };
 
 void NWScriptI::setPortraitResRef(const NWN::NWObject& oTarget, const std::string& sPortraitResRef, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setPortraitResRef"); callCounter += 1;
+  lock(setPortraitResRef_mutex, "setPortraitResRef");
+  callCounter += 1;
   StackPushString(sPortraitResRef.c_str());
   StackPushObject(oTarget.id);
 
   VM_ExecuteCommand(834, 2);
 
-unlock("setPortraitResRef");
+unlock(setPortraitResRef_mutex, "setPortraitResRef");
   
 };
 
 void NWScriptI::setReflexSavingThrow(const NWN::NWObject& oObject, Ice::Int nReflexSave, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setReflexSavingThrow"); callCounter += 1;
+  lock(setReflexSavingThrow_mutex, "setReflexSavingThrow");
+  callCounter += 1;
   StackPushInteger(nReflexSave);
   StackPushObject(oObject.id);
 
   VM_ExecuteCommand(812, 2);
 
-unlock("setReflexSavingThrow");
+unlock(setReflexSavingThrow_mutex, "setReflexSavingThrow");
   
 };
 
 void NWScriptI::setSkyBox(Ice::Int nSkyBox, const NWN::NWObject& oArea, const Ice::Current& ice) {
   if (oArea.id < 0 || oArea.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setSkyBox"); callCounter += 1;
+  lock(setSkyBox_mutex, "setSkyBox");
+  callCounter += 1;
   StackPushObject(oArea.id);
   StackPushInteger(nSkyBox);
 
   VM_ExecuteCommand(777, 2);
 
-unlock("setSkyBox");
+unlock(setSkyBox_mutex, "setSkyBox");
   
 };
 
 void NWScriptI::setStandardFactionReputation(NWN::StandardFaction tStandardFaction, Ice::Int nNewReputation, const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setStandardFactionReputation"); callCounter += 1;
+  lock(setStandardFactionReputation_mutex, "setStandardFactionReputation");
+  callCounter += 1;
   StackPushObject(oCreature.id);
   StackPushInteger(nNewReputation);
   if (tStandardFaction == NWN::Hostile) StackPushInteger(0);
@@ -13032,73 +13813,79 @@ void NWScriptI::setStandardFactionReputation(NWN::StandardFaction tStandardFacti
 
   VM_ExecuteCommand(523, 3);
 
-unlock("setStandardFactionReputation");
+unlock(setStandardFactionReputation_mutex, "setStandardFactionReputation");
   
 };
 
 void NWScriptI::setStolenFlag(const NWN::NWObject& oItem, bool bStolenFlag, const Ice::Current& ice) {
   if (oItem.id < 0 || oItem.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setStolenFlag"); callCounter += 1;
+  lock(setStolenFlag_mutex, "setStolenFlag");
+  callCounter += 1;
   StackPushInteger(bStolenFlag == true ? 1 : 0);
   StackPushObject(oItem.id);
 
   VM_ExecuteCommand(774, 2);
 
-unlock("setStolenFlag");
+unlock(setStolenFlag_mutex, "setStolenFlag");
   
 };
 
 void NWScriptI::setStoreGold(const NWN::NWObject& oidStore, Ice::Int nGold, const Ice::Current& ice) {
   if (oidStore.id < 0 || oidStore.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setStoreGold"); callCounter += 1;
+  lock(setStoreGold_mutex, "setStoreGold");
+  callCounter += 1;
   StackPushInteger(nGold);
   StackPushObject(oidStore.id);
 
   VM_ExecuteCommand(760, 2);
 
-unlock("setStoreGold");
+unlock(setStoreGold_mutex, "setStoreGold");
   
 };
 
 void NWScriptI::setStoreIdentifyCost(const NWN::NWObject& oidStore, Ice::Int nCost, const Ice::Current& ice) {
   if (oidStore.id < 0 || oidStore.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setStoreIdentifyCost"); callCounter += 1;
+  lock(setStoreIdentifyCost_mutex, "setStoreIdentifyCost");
+  callCounter += 1;
   StackPushInteger(nCost);
   StackPushObject(oidStore.id);
 
   VM_ExecuteCommand(764, 2);
 
-unlock("setStoreIdentifyCost");
+unlock(setStoreIdentifyCost_mutex, "setStoreIdentifyCost");
   
 };
 
 void NWScriptI::setStoreMaxBuyPrice(const NWN::NWObject& oidStore, Ice::Int nMaxBuy, const Ice::Current& ice) {
   if (oidStore.id < 0 || oidStore.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setStoreMaxBuyPrice"); callCounter += 1;
+  lock(setStoreMaxBuyPrice_mutex, "setStoreMaxBuyPrice");
+  callCounter += 1;
   StackPushInteger(nMaxBuy);
   StackPushObject(oidStore.id);
 
   VM_ExecuteCommand(762, 2);
 
-unlock("setStoreMaxBuyPrice");
+unlock(setStoreMaxBuyPrice_mutex, "setStoreMaxBuyPrice");
   
 };
 
 void NWScriptI::setSubRace(const NWN::NWObject& oCreature, const std::string& sSubRace, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setSubRace"); callCounter += 1;
+  lock(setSubRace_mutex, "setSubRace");
+  callCounter += 1;
   StackPushString(sSubRace.c_str());
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(721, 2);
 
-unlock("setSubRace");
+unlock(setSubRace_mutex, "setSubRace");
   
 };
 
 void NWScriptI::setTileMainLightColor(const NWN::NWLocation& lTileLocation, NWN::TileMainLightColor nMainLight1Color, NWN::TileMainLightColor nMainLight2Color, const Ice::Current& ice) {
   if (lTileLocation.area.id < 0) throw NWN::InvalidObjectException();
-  lock("setTileMainLightColor"); callCounter += 1;
+  lock(setTileMainLightColor_mutex, "setTileMainLightColor");
+  callCounter += 1;
   if (nMainLight2Color == NWN::RedTileMainLightColor) StackPushInteger(27);
    else if (nMainLight2Color == NWN::PaleDarkBlueTileMainLightColor) StackPushInteger(16);
    else if (nMainLight2Color == NWN::DarkYellowTileMainLightColor) StackPushInteger(5);
@@ -13177,13 +13964,14 @@ void NWScriptI::setTileMainLightColor(const NWN::NWLocation& lTileLocation, NWN:
 
   VM_ExecuteCommand(514, 3);
 
-unlock("setTileMainLightColor");
+unlock(setTileMainLightColor_mutex, "setTileMainLightColor");
   
 };
 
 void NWScriptI::setTileSourceLightColor(const NWN::NWLocation& lTileLocation, NWN::TileSourceLightColor nSourceLight1Color, NWN::TileSourceLightColor nSourceLight2Color, const Ice::Current& ice) {
   if (lTileLocation.area.id < 0) throw NWN::InvalidObjectException();
-  lock("setTileSourceLightColor"); callCounter += 1;
+  lock(setTileSourceLightColor_mutex, "setTileSourceLightColor");
+  callCounter += 1;
   if (nSourceLight2Color == NWN::PaleGreenTileSourceLightColor) StackPushInteger(5);
    else if (nSourceLight2Color == NWN::PalePurpleTileSourceLightColor) StackPushInteger(11);
    else if (nSourceLight2Color == NWN::BlackTileSourceLightColor) StackPushInteger(0);
@@ -13230,12 +14018,13 @@ void NWScriptI::setTileSourceLightColor(const NWN::NWLocation& lTileLocation, NW
 
   VM_ExecuteCommand(515, 3);
 
-unlock("setTileSourceLightColor");
+unlock(setTileSourceLightColor_mutex, "setTileSourceLightColor");
   
 };
 
 void NWScriptI::setTime(Ice::Int nHour, Ice::Int nMinute, Ice::Int nSecond, Ice::Int nMillisecond, const Ice::Current& ice) {
-  lock("setTime"); callCounter += 1;
+  lock(setTime_mutex, "setTime");
+  callCounter += 1;
   StackPushInteger(nMillisecond);
   StackPushInteger(nSecond);
   StackPushInteger(nMinute);
@@ -13243,50 +14032,54 @@ void NWScriptI::setTime(Ice::Int nHour, Ice::Int nMinute, Ice::Int nSecond, Ice:
 
   VM_ExecuteCommand(12, 4);
 
-unlock("setTime");
+unlock(setTime_mutex, "setTime");
   
 };
 
 void NWScriptI::setTrapActive(const NWN::NWObject& oTrapObject, bool bActive, const Ice::Current& ice) {
   if (oTrapObject.id < 0 || oTrapObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setTrapActive"); callCounter += 1;
+  lock(setTrapActive_mutex, "setTrapActive");
+  callCounter += 1;
   StackPushInteger(bActive == true ? 1 : 0);
   StackPushObject(oTrapObject.id);
 
   VM_ExecuteCommand(822, 2);
 
-unlock("setTrapActive");
+unlock(setTrapActive_mutex, "setTrapActive");
   
 };
 
 void NWScriptI::setTrapDetectDC(const NWN::NWObject& oTrapObject, Ice::Int nDetectDC, const Ice::Current& ice) {
   if (oTrapObject.id < 0 || oTrapObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setTrapDetectDC"); callCounter += 1;
+  lock(setTrapDetectDC_mutex, "setTrapDetectDC");
+  callCounter += 1;
   StackPushInteger(nDetectDC);
   StackPushObject(oTrapObject.id);
 
   VM_ExecuteCommand(808, 2);
 
-unlock("setTrapDetectDC");
+unlock(setTrapDetectDC_mutex, "setTrapDetectDC");
   
 };
 
 void NWScriptI::setTrapDetectable(const NWN::NWObject& oTrapObject, bool bDetectable, const Ice::Current& ice) {
   if (oTrapObject.id < 0 || oTrapObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setTrapDetectable"); callCounter += 1;
+  lock(setTrapDetectable_mutex, "setTrapDetectable");
+  callCounter += 1;
   StackPushInteger(bDetectable == true ? 1 : 0);
   StackPushObject(oTrapObject.id);
 
   VM_ExecuteCommand(804, 2);
 
-unlock("setTrapDetectable");
+unlock(setTrapDetectable_mutex, "setTrapDetectable");
   
 };
 
 Ice::Int NWScriptI::setTrapDetectedBy(const NWN::NWObject& oTrap, const NWN::NWObject& oDetector, bool bDetected, const Ice::Current& ice) {
   if (oTrap.id < 0 || oTrap.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (oDetector.id < 0 || oDetector.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setTrapDetectedBy"); callCounter += 1;
+  lock(setTrapDetectedBy_mutex, "setTrapDetectedBy");
+  callCounter += 1;
   StackPushInteger(bDetected == true ? 1 : 0);
   StackPushObject(oDetector.id);
   StackPushObject(oTrap.id);
@@ -13295,96 +14088,104 @@ Ice::Int NWScriptI::setTrapDetectedBy(const NWN::NWObject& oTrap, const NWN::NWO
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("setTrapDetectedBy");
+  unlock(setTrapDetectedBy_mutex, "setTrapDetectedBy");
   return nRetVal;
 };
 
 void NWScriptI::setTrapDisabled(const NWN::NWObject& oTrap, const Ice::Current& ice) {
   if (oTrap.id < 0 || oTrap.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setTrapDisabled"); callCounter += 1;
+  lock(setTrapDisabled_mutex, "setTrapDisabled");
+  callCounter += 1;
   StackPushObject(oTrap.id);
 
   VM_ExecuteCommand(555, 1);
 
-unlock("setTrapDisabled");
+unlock(setTrapDisabled_mutex, "setTrapDisabled");
   
 };
 
 void NWScriptI::setTrapDisarmDC(const NWN::NWObject& oTrapObject, Ice::Int nDisarmDC, const Ice::Current& ice) {
   if (oTrapObject.id < 0 || oTrapObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setTrapDisarmDC"); callCounter += 1;
+  lock(setTrapDisarmDC_mutex, "setTrapDisarmDC");
+  callCounter += 1;
   StackPushInteger(nDisarmDC);
   StackPushObject(oTrapObject.id);
 
   VM_ExecuteCommand(807, 2);
 
-unlock("setTrapDisarmDC");
+unlock(setTrapDisarmDC_mutex, "setTrapDisarmDC");
   
 };
 
 void NWScriptI::setTrapDisarmable(const NWN::NWObject& oTrapObject, bool bDisarmable, const Ice::Current& ice) {
   if (oTrapObject.id < 0 || oTrapObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setTrapDisarmable"); callCounter += 1;
+  lock(setTrapDisarmable_mutex, "setTrapDisarmable");
+  callCounter += 1;
   StackPushInteger(bDisarmable == true ? 1 : 0);
   StackPushObject(oTrapObject.id);
 
   VM_ExecuteCommand(803, 2);
 
-unlock("setTrapDisarmable");
+unlock(setTrapDisarmable_mutex, "setTrapDisarmable");
   
 };
 
 void NWScriptI::setTrapKeyTag(const NWN::NWObject& oTrapObject, const std::string& sKeyTag, const Ice::Current& ice) {
   if (oTrapObject.id < 0 || oTrapObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setTrapKeyTag"); callCounter += 1;
+  lock(setTrapKeyTag_mutex, "setTrapKeyTag");
+  callCounter += 1;
   StackPushString(sKeyTag.c_str());
   StackPushObject(oTrapObject.id);
 
   VM_ExecuteCommand(806, 2);
 
-unlock("setTrapKeyTag");
+unlock(setTrapKeyTag_mutex, "setTrapKeyTag");
   
 };
 
 void NWScriptI::setTrapOneShot(const NWN::NWObject& oTrapObject, bool bOneShot, const Ice::Current& ice) {
   if (oTrapObject.id < 0 || oTrapObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setTrapOneShot"); callCounter += 1;
+  lock(setTrapOneShot_mutex, "setTrapOneShot");
+  callCounter += 1;
   StackPushInteger(bOneShot == true ? 1 : 0);
   StackPushObject(oTrapObject.id);
 
   VM_ExecuteCommand(805, 2);
 
-unlock("setTrapOneShot");
+unlock(setTrapOneShot_mutex, "setTrapOneShot");
   
 };
 
 void NWScriptI::setTrapRecoverable(const NWN::NWObject& oTrapObject, bool bRecoverable, const Ice::Current& ice) {
   if (oTrapObject.id < 0 || oTrapObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setTrapRecoverable"); callCounter += 1;
+  lock(setTrapRecoverable_mutex, "setTrapRecoverable");
+  callCounter += 1;
   StackPushInteger(bRecoverable == true ? 1 : 0);
   StackPushObject(oTrapObject.id);
 
   VM_ExecuteCommand(816, 2);
 
-unlock("setTrapRecoverable");
+unlock(setTrapRecoverable_mutex, "setTrapRecoverable");
   
 };
 
 void NWScriptI::setUseableFlag(const NWN::NWObject& oPlaceable, bool bUseableFlag, const Ice::Current& ice) {
   if (oPlaceable.id < 0 || oPlaceable.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setUseableFlag"); callCounter += 1;
+  lock(setUseableFlag_mutex, "setUseableFlag");
+  callCounter += 1;
   StackPushInteger(bUseableFlag == true ? 1 : 0);
   StackPushObject(oPlaceable.id);
 
   VM_ExecuteCommand(835, 2);
 
-unlock("setUseableFlag");
+unlock(setUseableFlag_mutex, "setUseableFlag");
   
 };
 
 void NWScriptI::setWeather(const NWN::NWObject& oTarget, NWN::Weather tWeather, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setWeather"); callCounter += 1;
+  lock(setWeather_mutex, "setWeather");
+  callCounter += 1;
   if (tWeather == NWN::ClearWeather) StackPushInteger(0);
    else if (tWeather == NWN::RainWeather) StackPushInteger(1);
    else if (tWeather == NWN::InvalidWeather) StackPushInteger(-1);
@@ -13395,60 +14196,65 @@ void NWScriptI::setWeather(const NWN::NWObject& oTarget, NWN::Weather tWeather, 
 
   VM_ExecuteCommand(507, 2);
 
-unlock("setWeather");
+unlock(setWeather_mutex, "setWeather");
   
 };
 
 void NWScriptI::setWillSavingThrow(const NWN::NWObject& oObject, Ice::Int nWillSave, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setWillSavingThrow"); callCounter += 1;
+  lock(setWillSavingThrow_mutex, "setWillSavingThrow");
+  callCounter += 1;
   StackPushInteger(nWillSave);
   StackPushObject(oObject.id);
 
   VM_ExecuteCommand(811, 2);
 
-unlock("setWillSavingThrow");
+unlock(setWillSavingThrow_mutex, "setWillSavingThrow");
   
 };
 
 void NWScriptI::setXP(const NWN::NWObject& oCreature, Ice::Int nXpAmount, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("setXP"); callCounter += 1;
+  lock(setXP_mutex, "setXP");
+  callCounter += 1;
   StackPushInteger(nXpAmount);
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(394, 2);
 
-unlock("setXP");
+unlock(setXP_mutex, "setXP");
   
 };
 
 Ice::Double NWScriptI::sin(Ice::Double fValue, const Ice::Current& ice) {
-  lock("sin"); callCounter += 1;
+  lock(sin_mutex, "sin");
+  callCounter += 1;
   StackPushFloat(fValue);
 
   VM_ExecuteCommand(69, 1);
 
   float fRetVal;
   StackPopFloat(&fRetVal);
-  unlock("sin");
+  unlock(sin_mutex, "sin");
   return fRetVal;
 };
 
 void NWScriptI::soundObjectPlay(const NWN::NWObject& oSound, const Ice::Current& ice) {
   if (oSound.id < 0 || oSound.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("soundObjectPlay"); callCounter += 1;
+  lock(soundObjectPlay_mutex, "soundObjectPlay");
+  callCounter += 1;
   StackPushObject(oSound.id);
 
   VM_ExecuteCommand(413, 1);
 
-unlock("soundObjectPlay");
+unlock(soundObjectPlay_mutex, "soundObjectPlay");
   
 };
 
 void NWScriptI::soundObjectSetPosition(const NWN::NWObject& oSound, const NWN::NWVector& vPosition, const Ice::Current& ice) {
   if (oSound.id < 0 || oSound.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("soundObjectSetPosition"); callCounter += 1;
+  lock(soundObjectSetPosition_mutex, "soundObjectSetPosition");
+  callCounter += 1;
   Vector vvPosition;
   vvPosition.X = vPosition.x; vvPosition.Y = vPosition.y; vvPosition.Z = vPosition.z;
   StackPushVector(vvPosition);
@@ -13456,56 +14262,61 @@ void NWScriptI::soundObjectSetPosition(const NWN::NWObject& oSound, const NWN::N
 
   VM_ExecuteCommand(416, 2);
 
-unlock("soundObjectSetPosition");
+unlock(soundObjectSetPosition_mutex, "soundObjectSetPosition");
   
 };
 
 void NWScriptI::soundObjectSetVolume(const NWN::NWObject& oSound, Ice::Int nVolume, const Ice::Current& ice) {
   if (oSound.id < 0 || oSound.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("soundObjectSetVolume"); callCounter += 1;
+  lock(soundObjectSetVolume_mutex, "soundObjectSetVolume");
+  callCounter += 1;
   StackPushInteger(nVolume);
   StackPushObject(oSound.id);
 
   VM_ExecuteCommand(415, 2);
 
-unlock("soundObjectSetVolume");
+unlock(soundObjectSetVolume_mutex, "soundObjectSetVolume");
   
 };
 
 void NWScriptI::soundObjectStop(const NWN::NWObject& oSound, const Ice::Current& ice) {
   if (oSound.id < 0 || oSound.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("soundObjectStop"); callCounter += 1;
+  lock(soundObjectStop_mutex, "soundObjectStop");
+  callCounter += 1;
   StackPushObject(oSound.id);
 
   VM_ExecuteCommand(414, 1);
 
-unlock("soundObjectStop");
+unlock(soundObjectStop_mutex, "soundObjectStop");
   
 };
 
 void NWScriptI::spawnScriptDebugger(const Ice::Current& ice) {
-  lock("spawnScriptDebugger"); callCounter += 1;
+  lock(spawnScriptDebugger_mutex, "spawnScriptDebugger");
+  callCounter += 1;
 
   VM_ExecuteCommand(578, 0);
 
-unlock("spawnScriptDebugger");
+unlock(spawnScriptDebugger_mutex, "spawnScriptDebugger");
   
 };
 
 void NWScriptI::speakOneLinerConversation(const std::string& sDialogResRef, const NWN::NWObject& oTokenTarget, const Ice::Current& ice) {
   if (oTokenTarget.id < 0 || oTokenTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("speakOneLinerConversation"); callCounter += 1;
+  lock(speakOneLinerConversation_mutex, "speakOneLinerConversation");
+  callCounter += 1;
   StackPushObject(oTokenTarget.id);
   StackPushString(sDialogResRef.c_str());
 
   VM_ExecuteCommand(417, 2);
 
-unlock("speakOneLinerConversation");
+unlock(speakOneLinerConversation_mutex, "speakOneLinerConversation");
   
 };
 
 void NWScriptI::speakString(const std::string& sStringToSpeak, NWN::TalkVolume tTalkVolume, const Ice::Current& ice) {
-  lock("speakString"); callCounter += 1;
+  lock(speakString_mutex, "speakString");
+  callCounter += 1;
   if (tTalkVolume == NWN::PartyVol) StackPushInteger(5);
    else if (tTalkVolume == NWN::TalkVol) StackPushInteger(0);
    else if (tTalkVolume == NWN::TellVol) StackPushInteger(6);
@@ -13518,12 +14329,13 @@ void NWScriptI::speakString(const std::string& sStringToSpeak, NWN::TalkVolume t
 
   VM_ExecuteCommand(221, 2);
 
-unlock("speakString");
+unlock(speakString_mutex, "speakString");
   
 };
 
 void NWScriptI::speakStringByStrRef(Ice::Int nStrRef, NWN::TalkVolume tTalkVolume, const Ice::Current& ice) {
-  lock("speakStringByStrRef"); callCounter += 1;
+  lock(speakStringByStrRef_mutex, "speakStringByStrRef");
+  callCounter += 1;
   if (tTalkVolume == NWN::PartyVol) StackPushInteger(5);
    else if (tTalkVolume == NWN::TalkVol) StackPushInteger(0);
    else if (tTalkVolume == NWN::TellVol) StackPushInteger(6);
@@ -13536,56 +14348,61 @@ void NWScriptI::speakStringByStrRef(Ice::Int nStrRef, NWN::TalkVolume tTalkVolum
 
   VM_ExecuteCommand(691, 2);
 
-unlock("speakStringByStrRef");
+unlock(speakStringByStrRef_mutex, "speakStringByStrRef");
   
 };
 
 Ice::Double NWScriptI::sqrt(Ice::Double fValue, const Ice::Current& ice) {
-  lock("sqrt"); callCounter += 1;
+  lock(sqrt_mutex, "sqrt");
+  callCounter += 1;
   StackPushFloat(fValue);
 
   VM_ExecuteCommand(76, 1);
 
   float fRetVal;
   StackPopFloat(&fRetVal);
-  unlock("sqrt");
+  unlock(sqrt_mutex, "sqrt");
   return fRetVal;
 };
 
 void NWScriptI::startNewModule(const std::string& sModuleName, const Ice::Current& ice) {
-  lock("startNewModule"); callCounter += 1;
+  lock(startNewModule_mutex, "startNewModule");
+  callCounter += 1;
   StackPushString(sModuleName.c_str());
 
   VM_ExecuteCommand(509, 1);
 
-unlock("startNewModule");
+unlock(startNewModule_mutex, "startNewModule");
   
 };
 
 void NWScriptI::stopFade(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("stopFade"); callCounter += 1;
+  lock(stopFade_mutex, "stopFade");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(697, 1);
 
-unlock("stopFade");
+unlock(stopFade_mutex, "stopFade");
   
 };
 
 void NWScriptI::storeCameraFacing(const Ice::Current& ice) {
-  lock("storeCameraFacing"); callCounter += 1;
+  lock(storeCameraFacing_mutex, "storeCameraFacing");
+  callCounter += 1;
 
   VM_ExecuteCommand(702, 0);
 
-unlock("storeCameraFacing");
+unlock(storeCameraFacing_mutex, "storeCameraFacing");
   
 };
 
 Ice::Int NWScriptI::storeCampaignObject(const std::string& sCampaignName, const std::string& sVarName, const NWN::NWObject& oObject, const NWN::NWObject& oPlayer, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (oPlayer.id < 0 || oPlayer.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("storeCampaignObject"); callCounter += 1;
+  lock(storeCampaignObject_mutex, "storeCampaignObject");
+  callCounter += 1;
   StackPushObject(oPlayer.id);
   StackPushObject(oObject.id);
   StackPushString(sVarName.c_str());
@@ -13595,60 +14412,65 @@ Ice::Int NWScriptI::storeCampaignObject(const std::string& sCampaignName, const 
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("storeCampaignObject");
+  unlock(storeCampaignObject_mutex, "storeCampaignObject");
   return nRetVal;
 };
 
 Ice::Double NWScriptI::stringToFloat(const std::string& sNumber, const Ice::Current& ice) {
-  lock("stringToFloat"); callCounter += 1;
+  lock(stringToFloat_mutex, "stringToFloat");
+  callCounter += 1;
   StackPushString(sNumber.c_str());
 
   VM_ExecuteCommand(233, 1);
 
   float fRetVal;
   StackPopFloat(&fRetVal);
-  unlock("stringToFloat");
+  unlock(stringToFloat_mutex, "stringToFloat");
   return fRetVal;
 };
 
 Ice::Int NWScriptI::stringToInt(const std::string& sNumber, const Ice::Current& ice) {
-  lock("stringToInt"); callCounter += 1;
+  lock(stringToInt_mutex, "stringToInt");
+  callCounter += 1;
   StackPushString(sNumber.c_str());
 
   VM_ExecuteCommand(232, 1);
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("stringToInt");
+  unlock(stringToInt_mutex, "stringToInt");
   return nRetVal;
 };
 
 void NWScriptI::summonAnimalCompanion(const NWN::NWObject& oMaster, const Ice::Current& ice) {
   if (oMaster.id < 0 || oMaster.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("summonAnimalCompanion"); callCounter += 1;
+  lock(summonAnimalCompanion_mutex, "summonAnimalCompanion");
+  callCounter += 1;
   StackPushObject(oMaster.id);
 
   VM_ExecuteCommand(334, 1);
 
-unlock("summonAnimalCompanion");
+unlock(summonAnimalCompanion_mutex, "summonAnimalCompanion");
   
 };
 
 void NWScriptI::summonFamiliar(const NWN::NWObject& oMaster, const Ice::Current& ice) {
   if (oMaster.id < 0 || oMaster.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("summonFamiliar"); callCounter += 1;
+  lock(summonFamiliar_mutex, "summonFamiliar");
+  callCounter += 1;
   StackPushObject(oMaster.id);
 
   VM_ExecuteCommand(335, 1);
 
-unlock("summonFamiliar");
+unlock(summonFamiliar_mutex, "summonFamiliar");
   
 };
 
 NWN::NWEffect NWScriptI::supernaturalEffect(const NWN::NWEffect& eEffect, const Ice::Current& ice) {
   if (effectMap.find(eEffect.id) == effectMap.end()) throw NWN::InvalidEffectException();
   
-  lock("supernaturalEffect"); callCounter += 1;
+  lock(supernaturalEffect_mutex, "supernaturalEffect");
+  callCounter += 1;
   CGameEffect *eEffect_ptr = effectMap.find(eEffect.id)->second;
   StackPushEngineStructure(ENGINE_STRUCTURE_EFFECT, eEffect_ptr);
 
@@ -13664,46 +14486,50 @@ NWN::NWEffect NWScriptI::supernaturalEffect(const NWN::NWEffect& eEffect, const 
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("supernaturalEffect");
+  unlock(supernaturalEffect_mutex, "supernaturalEffect");
   return e;
 };
 
 void NWScriptI::surrenderToEnemies(const Ice::Current& ice) {
-  lock("surrenderToEnemies"); callCounter += 1;
+  lock(surrenderToEnemies_mutex, "surrenderToEnemies");
+  callCounter += 1;
 
   VM_ExecuteCommand(476, 0);
 
-unlock("surrenderToEnemies");
+unlock(surrenderToEnemies_mutex, "surrenderToEnemies");
   
 };
 
 void NWScriptI::takeGoldFromCreature(Ice::Int nAmount, const NWN::NWObject& oCreatureToTakeFrom, bool bDestroy, const Ice::Current& ice) {
   if (oCreatureToTakeFrom.id < 0 || oCreatureToTakeFrom.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("takeGoldFromCreature"); callCounter += 1;
+  lock(takeGoldFromCreature_mutex, "takeGoldFromCreature");
+  callCounter += 1;
   StackPushInteger(bDestroy == true ? 1 : 0);
   StackPushObject(oCreatureToTakeFrom.id);
   StackPushInteger(nAmount);
 
   VM_ExecuteCommand(444, 3);
 
-unlock("takeGoldFromCreature");
+unlock(takeGoldFromCreature_mutex, "takeGoldFromCreature");
   
 };
 
 Ice::Double NWScriptI::tan(Ice::Double fValue, const Ice::Current& ice) {
-  lock("tan"); callCounter += 1;
+  lock(tan_mutex, "tan");
+  callCounter += 1;
   StackPushFloat(fValue);
 
   VM_ExecuteCommand(70, 1);
 
   float fRetVal;
   StackPopFloat(&fRetVal);
-  unlock("tan");
+  unlock(tan_mutex, "tan");
   return fRetVal;
 };
 
 Ice::Int NWScriptI::testStringAgainstPattern(const std::string& sPattern, const std::string& sStringToTest, const Ice::Current& ice) {
-  lock("testStringAgainstPattern"); callCounter += 1;
+  lock(testStringAgainstPattern_mutex, "testStringAgainstPattern");
+  callCounter += 1;
   StackPushString(sStringToTest.c_str());
   StackPushString(sPattern.c_str());
 
@@ -13711,13 +14537,14 @@ Ice::Int NWScriptI::testStringAgainstPattern(const std::string& sPattern, const 
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("testStringAgainstPattern");
+  unlock(testStringAgainstPattern_mutex, "testStringAgainstPattern");
   return nRetVal;
 };
 
 NWN::AttackResult NWScriptI::touchAttackMelee(const NWN::NWObject& oTarget, bool bDisplayFeedback, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("touchAttackMelee"); callCounter += 1;
+  lock(touchAttackMelee_mutex, "touchAttackMelee");
+  callCounter += 1;
   StackPushInteger(bDisplayFeedback == true ? 1 : 0);
   StackPushObject(oTarget.id);
 
@@ -13725,7 +14552,7 @@ NWN::AttackResult NWScriptI::touchAttackMelee(const NWN::NWObject& oTarget, bool
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("touchAttackMelee");
+  unlock(touchAttackMelee_mutex, "touchAttackMelee");
   if (nRetVal == 0) return NWN::MissedAttack;
   if (nRetVal == 1) return NWN::HitAttack;
   if (nRetVal == 2) return NWN::CriticalHitAttack;
@@ -13734,7 +14561,8 @@ NWN::AttackResult NWScriptI::touchAttackMelee(const NWN::NWObject& oTarget, bool
 
 NWN::AttackResult NWScriptI::touchAttackRanged(const NWN::NWObject& oTarget, bool bDisplayFeedback, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("touchAttackRanged"); callCounter += 1;
+  lock(touchAttackRanged_mutex, "touchAttackRanged");
+  callCounter += 1;
   StackPushInteger(bDisplayFeedback == true ? 1 : 0);
   StackPushObject(oTarget.id);
 
@@ -13742,7 +14570,7 @@ NWN::AttackResult NWScriptI::touchAttackRanged(const NWN::NWObject& oTarget, boo
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("touchAttackRanged");
+  unlock(touchAttackRanged_mutex, "touchAttackRanged");
   if (nRetVal == 0) return NWN::MissedAttack;
   if (nRetVal == 1) return NWN::HitAttack;
   if (nRetVal == 2) return NWN::CriticalHitAttack;
@@ -13750,30 +14578,33 @@ NWN::AttackResult NWScriptI::touchAttackRanged(const NWN::NWObject& oTarget, boo
 };
 
 Ice::Double NWScriptI::turnsToSeconds(Ice::Int nTurns, const Ice::Current& ice) {
-  lock("turnsToSeconds"); callCounter += 1;
+  lock(turnsToSeconds_mutex, "turnsToSeconds");
+  callCounter += 1;
   StackPushInteger(nTurns);
 
   VM_ExecuteCommand(123, 1);
 
   float fRetVal;
   StackPopFloat(&fRetVal);
-  unlock("turnsToSeconds");
+  unlock(turnsToSeconds_mutex, "turnsToSeconds");
   return fRetVal;
 };
 
 void NWScriptI::unpossessFamiliar(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("unpossessFamiliar"); callCounter += 1;
+  lock(unpossessFamiliar_mutex, "unpossessFamiliar");
+  callCounter += 1;
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(715, 1);
 
-unlock("unpossessFamiliar");
+unlock(unpossessFamiliar_mutex, "unpossessFamiliar");
   
 };
 
 NWN::NWVector NWScriptI::vector(Ice::Double x, Ice::Double y, Ice::Double z, const Ice::Current& ice) {
-  lock("vector"); callCounter += 1;
+  lock(vector_mutex, "vector");
+  callCounter += 1;
   StackPushFloat(z);
   StackPushFloat(y);
   StackPushFloat(x);
@@ -13784,12 +14615,13 @@ NWN::NWVector NWScriptI::vector(Ice::Double x, Ice::Double y, Ice::Double z, con
   StackPopVector(&vRetVal);
   NWN::NWVector nv;
   nv.x = vRetVal.X; nv.y = vRetVal.Y; nv.z = vRetVal.Z;
-  unlock("vector");
+  unlock(vector_mutex, "vector");
   return nv;
 };
 
 Ice::Double NWScriptI::vectorMagnitude(const NWN::NWVector& vVector, const Ice::Current& ice) {
-  lock("vectorMagnitude"); callCounter += 1;
+  lock(vectorMagnitude_mutex, "vectorMagnitude");
+  callCounter += 1;
   Vector vvVector;
   vvVector.X = vVector.x; vvVector.Y = vVector.y; vvVector.Z = vVector.z;
   StackPushVector(vvVector);
@@ -13798,12 +14630,13 @@ Ice::Double NWScriptI::vectorMagnitude(const NWN::NWVector& vVector, const Ice::
 
   float fRetVal;
   StackPopFloat(&fRetVal);
-  unlock("vectorMagnitude");
+  unlock(vectorMagnitude_mutex, "vectorMagnitude");
   return fRetVal;
 };
 
 NWN::NWVector NWScriptI::vectorNormalize(const NWN::NWVector& vVector, const Ice::Current& ice) {
-  lock("vectorNormalize"); callCounter += 1;
+  lock(vectorNormalize_mutex, "vectorNormalize");
+  callCounter += 1;
   Vector vvVector;
   vvVector.X = vVector.x; vvVector.Y = vVector.y; vvVector.Z = vVector.z;
   StackPushVector(vvVector);
@@ -13814,12 +14647,13 @@ NWN::NWVector NWScriptI::vectorNormalize(const NWN::NWVector& vVector, const Ice
   StackPopVector(&vRetVal);
   NWN::NWVector nv;
   nv.x = vRetVal.X; nv.y = vRetVal.Y; nv.z = vRetVal.Z;
-  unlock("vectorNormalize");
+  unlock(vectorNormalize_mutex, "vectorNormalize");
   return nv;
 };
 
 Ice::Double NWScriptI::vectorToAngle(const NWN::NWVector& vVector, const Ice::Current& ice) {
-  lock("vectorToAngle"); callCounter += 1;
+  lock(vectorToAngle_mutex, "vectorToAngle");
+  callCounter += 1;
   Vector vvVector;
   vvVector.X = vVector.x; vvVector.Y = vVector.y; vvVector.Z = vVector.z;
   StackPushVector(vvVector);
@@ -13828,14 +14662,15 @@ Ice::Double NWScriptI::vectorToAngle(const NWN::NWVector& vVector, const Ice::Cu
 
   float fRetVal;
   StackPopFloat(&fRetVal);
-  unlock("vectorToAngle");
+  unlock(vectorToAngle_mutex, "vectorToAngle");
   return fRetVal;
 };
 
 NWN::NWEffect NWScriptI::versusAlignmentEffect(const NWN::NWEffect& eEffect, Ice::Int nLawChaos, Ice::Int nGoodEvil, const Ice::Current& ice) {
   if (effectMap.find(eEffect.id) == effectMap.end()) throw NWN::InvalidEffectException();
   
-  lock("versusAlignmentEffect"); callCounter += 1;
+  lock(versusAlignmentEffect_mutex, "versusAlignmentEffect");
+  callCounter += 1;
   StackPushInteger(nGoodEvil);
   StackPushInteger(nLawChaos);
   CGameEffect *eEffect_ptr = effectMap.find(eEffect.id)->second;
@@ -13853,14 +14688,15 @@ NWN::NWEffect NWScriptI::versusAlignmentEffect(const NWN::NWEffect& eEffect, Ice
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("versusAlignmentEffect");
+  unlock(versusAlignmentEffect_mutex, "versusAlignmentEffect");
   return e;
 };
 
 NWN::NWEffect NWScriptI::versusRacialTypeEffect(const NWN::NWEffect& eEffect, NWN::RacialType tRacialType, const Ice::Current& ice) {
   if (effectMap.find(eEffect.id) == effectMap.end()) throw NWN::InvalidEffectException();
   
-  lock("versusRacialTypeEffect"); callCounter += 1;
+  lock(versusRacialTypeEffect_mutex, "versusRacialTypeEffect");
+  callCounter += 1;
   if (tRacialType == NWN::ElementalRace) StackPushInteger(16);
    else if (tRacialType == NWN::HalforcRace) StackPushInteger(5);
    else if (tRacialType == NWN::DragonRace) StackPushInteger(11);
@@ -13903,14 +14739,15 @@ NWN::NWEffect NWScriptI::versusRacialTypeEffect(const NWN::NWEffect& eEffect, NW
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("versusRacialTypeEffect");
+  unlock(versusRacialTypeEffect_mutex, "versusRacialTypeEffect");
   return e;
 };
 
 NWN::NWEffect NWScriptI::versusTrapEffect(const NWN::NWEffect& eEffect, const Ice::Current& ice) {
   if (effectMap.find(eEffect.id) == effectMap.end()) throw NWN::InvalidEffectException();
   
-  lock("versusTrapEffect"); callCounter += 1;
+  lock(versusTrapEffect_mutex, "versusTrapEffect");
+  callCounter += 1;
   CGameEffect *eEffect_ptr = effectMap.find(eEffect.id)->second;
   StackPushEngineStructure(ENGINE_STRUCTURE_EFFECT, eEffect_ptr);
 
@@ -13926,14 +14763,15 @@ NWN::NWEffect NWScriptI::versusTrapEffect(const NWN::NWEffect& eEffect, const Ic
   if (id == -1)
     { effectMap[lastEffectId] = pRetVal; id = lastEffectId; lastEffectId += 1; }
   e.id = id;
-  unlock("versusTrapEffect");
+  unlock(versusTrapEffect_mutex, "versusTrapEffect");
   return e;
 };
 
 NWN::SavingThrowResult NWScriptI::willSave(const NWN::NWObject& oCreature, Ice::Int nDC, NWN::SaveType tSaveType, const NWN::NWObject& oSaveVersus, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (oSaveVersus.id < 0 || oSaveVersus.id > 0xffffffff) throw NWN::InvalidObjectException();
-  lock("willSave"); callCounter += 1;
+  lock(willSave_mutex, "willSave");
+  callCounter += 1;
   StackPushObject(oSaveVersus.id);
   if (tSaveType == NWN::GoodSaveType) StackPushInteger(16);
    else if (tSaveType == NWN::SonicSaveType) StackPushInteger(5);
@@ -13963,7 +14801,7 @@ NWN::SavingThrowResult NWScriptI::willSave(const NWN::NWObject& oCreature, Ice::
 
   int nRetVal;
   StackPopInteger(&nRetVal);
-  unlock("willSave");
+  unlock(willSave_mutex, "willSave");
   if (nRetVal == 0) return NWN::FailedRoll;
   if (nRetVal == 1) return NWN::SucceededRoll;
   if (nRetVal == 3) return NWN::ImmuneToSaveType;
@@ -13971,24 +14809,26 @@ NWN::SavingThrowResult NWScriptI::willSave(const NWN::NWObject& oCreature, Ice::
 };
 
 void NWScriptI::writeTimestampedLogEntry(const std::string& sLogEntry, const Ice::Current& ice) {
-  lock("writeTimestampedLogEntry"); callCounter += 1;
+  lock(writeTimestampedLogEntry_mutex, "writeTimestampedLogEntry");
+  callCounter += 1;
   StackPushString(sLogEntry.c_str());
 
   VM_ExecuteCommand(560, 1);
 
-unlock("writeTimestampedLogEntry");
+unlock(writeTimestampedLogEntry_mutex, "writeTimestampedLogEntry");
   
 };
 
 Ice::Double NWScriptI::yardsToMeters(Ice::Double fYards, const Ice::Current& ice) {
-  lock("yardsToMeters"); callCounter += 1;
+  lock(yardsToMeters_mutex, "yardsToMeters");
+  callCounter += 1;
   StackPushFloat(fYards);
 
   VM_ExecuteCommand(219, 1);
 
   float fRetVal;
   StackPopFloat(&fRetVal);
-  unlock("yardsToMeters");
+  unlock(yardsToMeters_mutex, "yardsToMeters");
   return fRetVal;
 };
 

@@ -44,8 +44,7 @@ public:
 	int nError;
 
 private:
-	Ice::CommunicatorPtr icClient;
-	Ice::CommunicatorPtr icServer;
+	Ice::CommunicatorPtr ic;
 	Ice::ObjectAdapterPtr adapter;
 
 	NWN::ClientPrx prx_client;

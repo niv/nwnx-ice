@@ -68,18 +68,20 @@ bool CNWNXICE::OnCreate(gline *config, const char *LogDir)
 		return false;
 	}
 
-	// mutex.lock();
+	Ice::PropertiesPtr props = Ice::createProperties();
+	props->setProperty("Ice.ThreadPool.Client.Size", "2");
+	props->setProperty("Ice.ThreadPool.Client.SizeMax", "15");
+	props->setProperty("Ice.ThreadPool.Server.Size", "2");
+	props->setProperty("Ice.ThreadPool.Server.SizeMax", "15");
+	Ice::InitializationData initData;
+	initData.stringConverter = new Ice::IconvStringConverter<char>("ISO_8859-1"); // WINDOWS-1252");
+	initData.properties = props;
+	ic = Ice::initialize(initData);
 
 	while (true) {
 		// Set up the client
 		try {
-
-			Ice::InitializationData initData;
-			initData.stringConverter = new Ice::IconvStringConverter<char>("ISO_8859-1");
-			icClient = Ice::initialize(initData);
-
-
-			Ice::ObjectPrx base = icClient->stringToProxy( "Client:default -p 5223" /*  (*nwnxConfig)[confKey]["client"].c_str() */ );
+			Ice::ObjectPrx base = ic->stringToProxy( "Client:default -p 5223" /*  (*nwnxConfig)[confKey]["client"].c_str() */ );
 			if (!base)
 				throw "Could not create proxy.";
 
@@ -105,12 +107,8 @@ bool CNWNXICE::OnCreate(gline *config, const char *LogDir)
 
 	// Set up the server ..
 	try {
-		Ice::InitializationData initData;
-		initData.stringConverter = new Ice::IconvStringConverter<char>("ISO_8859-1");
-		icServer = Ice::initialize(initData);
-
 		adapter =
-			icServer->createObjectAdapterWithEndpoints(
+			ic->createObjectAdapterWithEndpoints(
 				"NWScriptAdapter", "default -p 5222" /* (*nwnxConfig)[confKey]["server"].c_str() */ );
 		
 		nwscriptI = new NWScriptI;
@@ -118,7 +116,7 @@ bool CNWNXICE::OnCreate(gline *config, const char *LogDir)
 		// nwscriptI->lock("first lock");
 
 		nwscript_proxy = NWN::NWScriptPrx::checkedCast(
-			adapter->add(object, icServer->stringToIdentity("NWScript"))
+			adapter->add(object, ic->stringToIdentity("NWScript"))
 		);
 		adapter->activate();
 
@@ -147,15 +145,18 @@ char* CNWNXICE::OnRequest (char *gameObject, char* request, char* parameters)
 		printf("Usage error, need format: ObjectToString(OBJECT_SELF) event_name\n");
 		return NULL;
 	}
-	if (nwscriptI->inContext)
-		sprintf("Usage error, do NOT stack ICE events. Will now deadlock (blocking request: %s %s\n", request, event);
+	
+	bool alreadyInContext = nwscriptI->inContext;
+
+	// if (nwscriptI->inContext)
+	//	printf("Usage error, do NOT stack more than one ICE event. Will now deadlock (blocking request: %s %s)\n", request, event);
 
 	dword oid = strtol(oid_c, 0, 16);
 	NWN::NWObject nwobj_self;
 	nwobj_self.id = oid;
 
 	nwscriptI->inContext = true;
-	// nwscriptI->unlock(request);
+
 	while (true) {
 		try {
 			if (strcmp(request, "EVENT") == 0)
@@ -173,22 +174,23 @@ char* CNWNXICE::OnRequest (char *gameObject, char* request, char* parameters)
 			IceUtil::ThreadControl::sleep(IceUtil::Time::seconds(2));
 		}
 	}
-	// nwscriptI->lock(request);
-	nwscriptI->inContext = false;
 
-	unsigned long calls = nwscriptI->callCounter;
-	nwscriptI->callCounter = 0;
+	if (!alreadyInContext) {
+		nwscriptI->inContext = false;
+		unsigned long calls = nwscriptI->callCounter;
+		nwscriptI->callCounter = 0;
 
-	timeval t2; gettimeofday(&t2, NULL);
-	long usec = (t2.tv_sec - t1.tv_sec) * 1000000 + (t2.tv_usec - t1.tv_usec);
-	long se = usec / 1000000;
-	long ms = usec % 1000000;
-	if (strcmp(request, "EVENT") == 0)
-		printf("e %0.8x %-20s %6d s %8d u %12d calls\n", oid, event, se, ms, calls);
-	if (strcmp(request, "TOKEN") == 0)
-		printf("t %0.8x %-20s %6d s %8d u %12d calls\n", oid, event, se, ms, calls);
+		timeval t2; gettimeofday(&t2, NULL);
+		long usec = (t2.tv_sec - t1.tv_sec) * 1000000 + (t2.tv_usec - t1.tv_usec);
+		long se = usec / 1000000;
+		long ms = usec % 1000000;
+		if (strcmp(request, "EVENT") == 0)
+			printf("e %0.8x %-20s %6d s %8d u %12d calls\n", oid, event, se, ms, calls);
+		if (strcmp(request, "TOKEN") == 0)
+			printf("t %0.8x %-20s %6d s %8d u %12d calls\n", oid, event, se, ms, calls);
 
-	nwscriptI->resetPerEventMappings();
+		nwscriptI->resetPerEventMappings();
+	}
 
 	sprintf(parameters, "%d", ret);
 	return NULL;
