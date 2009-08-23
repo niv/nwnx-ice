@@ -1,4 +1,4 @@
-// Generated on Fri Aug 21 17:59:46 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Sun Aug 23 15:15:36 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 #include "NWScriptI.h"
 #include <iostream>
@@ -1959,10 +1959,13 @@ NWN::NWEffect NWScriptI::effectAreaOfEffect(Ice::Int nAreaEffectId, const std::s
   return e;
 };
 
-NWN::NWEffect NWScriptI::effectAttackDecrease(Ice::Int nPenalty, Ice::Int nModifierType, const Ice::Current& ice) {
+NWN::NWEffect NWScriptI::effectAttackDecrease(Ice::Int nPenalty, NWN::AttackBonus tAttackBonus, const Ice::Current& ice) {
   lock(effectAttackDecrease_mutex, "effectAttackDecrease");
   callCounter += 1;
-  StackPushInteger(nModifierType);
+  if (tAttackBonus == NWN::MiscBonus) StackPushInteger(0);
+   else if (tAttackBonus == NWN::OnhandBonus) StackPushInteger(1);
+   else if (tAttackBonus == NWN::OffhandBonus) StackPushInteger(2);
+   else throw "fail: invalid struct value passed, internal API error";
   StackPushInteger(nPenalty);
 
   VM_ExecuteCommand(447, 2);
@@ -1986,10 +1989,13 @@ NWN::NWEffect NWScriptI::effectAttackDecrease(Ice::Int nPenalty, Ice::Int nModif
   return e;
 };
 
-NWN::NWEffect NWScriptI::effectAttackIncrease(Ice::Int nBonus, Ice::Int nModifierType, const Ice::Current& ice) {
+NWN::NWEffect NWScriptI::effectAttackIncrease(Ice::Int nBonus, NWN::AttackBonus tAttackBonus, const Ice::Current& ice) {
   lock(effectAttackIncrease_mutex, "effectAttackIncrease");
   callCounter += 1;
-  StackPushInteger(nModifierType);
+  if (tAttackBonus == NWN::MiscBonus) StackPushInteger(0);
+   else if (tAttackBonus == NWN::OnhandBonus) StackPushInteger(1);
+   else if (tAttackBonus == NWN::OffhandBonus) StackPushInteger(2);
+   else throw "fail: invalid struct value passed, internal API error";
   StackPushInteger(nBonus);
 
   VM_ExecuteCommand(118, 2);

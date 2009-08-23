@@ -1,4 +1,4 @@
-// Generated on Fri Aug 21 18:19:57 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Sun Aug 23 15:15:36 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 // Not exported:
 //   getFirstEffect getFirstFactionMember getFirstItemInInventory getFirstItemProperty getFirstInPersistentObject getFirstObjectInArea getFirstObjectInShape getFirstPC
@@ -38,6 +38,7 @@ module NWN {
   enum ActionMode { DetectMode, StealthMode, ParryMode, PowerAttackMode, ImprovedPowerAttackMode, CounterspellMode, FlurryOfBlowsMode, RapidShotMode, ExpertiseMode, ImprovedExpertiseMode, DefensiveCastMode, DirtyFightingMode };
   enum Alignment { Any, Neutral, Lawful, Chaotic, Good, Evil };
   enum TrapType { MinorSpikeTrap, AverageSpikeTrap, StrongSpikeTrap, DeadlySpikeTrap, MinorHolyTrap, AverageHolyTrap, StrongHolyTrap, DeadlyHolyTrap, MinorTangleTrap, AverageTangleTrap, StrongTangleTrap, DeadlyTangleTrap, MinorAcidTrap, AverageAcidTrap, StrongAcidTrap, DeadlyAcidTrap, MinorFireTrap, AverageFireTrap, StrongFireTrap, DeadlyFireTrap, MinorElectricalTrap, AverageElectricalTrap, StrongElectricalTrap, DeadlyElectricalTrap, MinorGasTrap, AverageGasTrap, StrongGasTrap, DeadlyGasTrap, MinorFrostTrap, AverageFrostTrap, StrongFrostTrap, DeadlyFrostTrap, MinorNegativeTrap, AverageNegativeTrap, StrongNegativeTrap, DeadlyNegativeTrap, MinorSonicTrap, AverageSonicTrap, StrongSonicTrap, DeadlySonicTrap, MinorAcidSplashTrap, AverageAcidSplashTrap, StrongAcidSplashTrap, DeadlyAcidSplashTrap, EpicElectricalTrap, EpicFireTrap, EpicFrostTrap, EpicSonicTrap };
+  enum AttackBonus { MiscBonus, OnhandBonus, OffhandBonus };
   enum RacialType { DwarfRace, ElfRace, GnomeRace, HalflingRace, HalfelfRace, HalforcRace, HumanRace, AberrationRace, AnimalRace, BeastRace, ConstructRace, DragonRace, HumanoidGoblinoidRace, HumanoidMonstrousRace, HumanoidOrcRace, HumanoidReptilianRace, ElementalRace, FeyRace, GiantRace, MagicalBeastRace, OutsiderRace, ShapechangerRace, UndeadRace, VerminRace, InvalidRace, OozeRace };
   enum TalkVolume { TalkVol, WhisperVol, ShoutVol, SilentTalkVol, SilentShoutVol, PartyVol, TellVol };
   enum AssociateType { NoAssociate, HenchmanAssociate, AnimalCompanionAssociate, FamiliarAssociate, SummonedAssociate, DominatedAssociate };
@@ -316,8 +317,8 @@ module NWN {
     idempotent NWEffect effectAbilityIncrease(Ability tAbility, int nModifyBy) throws NotInContextException;
     idempotent NWEffect effectAppear(int nAnimation) throws NotInContextException;
     idempotent NWEffect effectAreaOfEffect(int nAreaEffectId, string sOnEnterScript, string sHeartbeatScript, string sOnExitScript) throws NotInContextException;
-    idempotent NWEffect effectAttackDecrease(int nPenalty, int nModifierType) throws NotInContextException;
-    idempotent NWEffect effectAttackIncrease(int nBonus, int nModifierType) throws NotInContextException;
+    idempotent NWEffect effectAttackDecrease(int nPenalty, AttackBonus tAttackBonus) throws NotInContextException;
+    idempotent NWEffect effectAttackIncrease(int nBonus, AttackBonus tAttackBonus) throws NotInContextException;
     idempotent NWEffect effectBeam(int nBeamVisualEffect, NWObject oEffector, int nBodyPart, bool bMissEffect) throws NotInContextException;
     idempotent NWEffect effectBlindness() throws NotInContextException;
     idempotent NWEffect effectCharmed() throws NotInContextException;

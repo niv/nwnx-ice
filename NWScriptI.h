@@ -1,4 +1,4 @@
-// Generated on Fri Aug 21 13:59:18 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Sun Aug 23 15:15:36 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 #include "FunctionHooks.h"
 #include "NWNStructures.h"
@@ -138,8 +138,8 @@ class NWScriptI : public NWN::NWScript {
     virtual NWN::NWEffect effectAbilityIncrease(NWN::Ability tAbility, Ice::Int nModifyBy, const Ice::Current&);
     virtual NWN::NWEffect effectAppear(Ice::Int nAnimation, const Ice::Current&);
     virtual NWN::NWEffect effectAreaOfEffect(Ice::Int nAreaEffectId, const std::string& sOnEnterScript, const std::string& sHeartbeatScript, const std::string& sOnExitScript, const Ice::Current&);
-    virtual NWN::NWEffect effectAttackDecrease(Ice::Int nPenalty, Ice::Int nModifierType, const Ice::Current&);
-    virtual NWN::NWEffect effectAttackIncrease(Ice::Int nBonus, Ice::Int nModifierType, const Ice::Current&);
+    virtual NWN::NWEffect effectAttackDecrease(Ice::Int nPenalty, NWN::AttackBonus tAttackBonus, const Ice::Current&);
+    virtual NWN::NWEffect effectAttackIncrease(Ice::Int nBonus, NWN::AttackBonus tAttackBonus, const Ice::Current&);
     virtual NWN::NWEffect effectBeam(Ice::Int nBeamVisualEffect, const NWN::NWObject& oEffector, Ice::Int nBodyPart, bool bMissEffect, const Ice::Current&);
     virtual NWN::NWEffect effectBlindness(const Ice::Current&);
     virtual NWN::NWEffect effectCharmed(const Ice::Current&);
