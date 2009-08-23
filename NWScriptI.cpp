@@ -1,4 +1,4 @@
-// Generated on Sun Aug 23 15:25:56 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Sun Aug 23 15:24:49 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 #include "NWScriptI.h"
 #include <iostream>
@@ -12608,10 +12608,18 @@ NWN::NWItemProperty NWScriptI::itemPropertySpecialWalk(Ice::Int nWalkType, const
   return e;
 };
 
-NWN::NWItemProperty NWScriptI::itemPropertySpellImmunitySchool(Ice::Int nSchool, const Ice::Current& ice) {
+NWN::NWItemProperty NWScriptI::itemPropertySpellImmunitySchool(NWN::IPSpellSchool tIPSpellSchool, const Ice::Current& ice) {
   lock(itemPropertySpellImmunitySchool_mutex, "itemPropertySpellImmunitySchool");
   callCounter += 1;
-  StackPushInteger(nSchool);
+  if (tIPSpellSchool == NWN::IllusionIPSchool) StackPushInteger(5);
+   else if (tIPSpellSchool == NWN::AbjurationIPSchool) StackPushInteger(0);
+   else if (tIPSpellSchool == NWN::NecromancyIPSchool) StackPushInteger(6);
+   else if (tIPSpellSchool == NWN::ConjurationIPSchool) StackPushInteger(1);
+   else if (tIPSpellSchool == NWN::TransmutationIPSchool) StackPushInteger(7);
+   else if (tIPSpellSchool == NWN::DivinationIPSchool) StackPushInteger(2);
+   else if (tIPSpellSchool == NWN::EnchantmentIPSchool) StackPushInteger(3);
+   else if (tIPSpellSchool == NWN::EvocationIPSchool) StackPushInteger(4);
+   else throw "fail: invalid struct value passed, internal API error";
 
   VM_ExecuteCommand(664, 1);
 

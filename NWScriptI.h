@@ -1,4 +1,4 @@
-// Generated on Sun Aug 23 15:25:55 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Sun Aug 23 15:24:48 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 #include "FunctionHooks.h"
 #include "NWNStructures.h"
@@ -653,7 +653,7 @@ class NWScriptI : public NWN::NWScript {
     virtual NWN::NWItemProperty itemPropertyRegeneration(Ice::Int nRegenAmount, const Ice::Current&);
     virtual NWN::NWItemProperty itemPropertySkillBonus(Ice::Int nSkill, Ice::Int nBonus, const Ice::Current&);
     virtual NWN::NWItemProperty itemPropertySpecialWalk(Ice::Int nWalkType, const Ice::Current&);
-    virtual NWN::NWItemProperty itemPropertySpellImmunitySchool(Ice::Int nSchool, const Ice::Current&);
+    virtual NWN::NWItemProperty itemPropertySpellImmunitySchool(NWN::IPSpellSchool tIPSpellSchool, const Ice::Current&);
     virtual NWN::NWItemProperty itemPropertySpellImmunitySpecific(Ice::Int nSpell, const Ice::Current&);
     virtual NWN::NWItemProperty itemPropertyThievesTools(Ice::Int nModifier, const Ice::Current&);
     virtual NWN::NWItemProperty itemPropertyTrap(Ice::Int nTrapLevel, NWN::IPTrapType tIPTrapType, const Ice::Current&);

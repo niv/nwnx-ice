@@ -1,4 +1,4 @@
-// Generated on Sun Aug 23 15:25:55 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Sun Aug 23 15:24:48 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 // Not exported:
 //   getFirstEffect getFirstFactionMember getFirstItemInInventory getFirstItemProperty getFirstInPersistentObject getFirstObjectInArea getFirstObjectInShape getFirstPC
@@ -23,6 +23,7 @@ module NWN {
   enum IPRacialType { DwarfIPRace, ElfIPRace, GnomeIPRace, HalflingIPRace, HalfelfIPRace, HalforcIPRace, HumanIPRace, AberrationIPRace, AnimalIPRace, BeastIPRace, ConstructIPRace, DragonIPRace, HumanoidGoblinoidIPRace, HumanoidMonstrousIPRace, HumanoidOrcIPRace, HumanoidReptilianIPRace, ElementalIPRace, FeyIPRace, GiantIPRace, MagicalBeastIPRace, OutsiderIPRace, ShapechangerIPRace, UndeadIPRace, VerminIPRace };
   enum PlaceableAction { UsePlaceable, UnlockPlaceable, BashPlaceable, KnockPlaceable };
   enum Ability { Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma };
+  enum IPSpellSchool { AbjurationIPSchool, ConjurationIPSchool, DivinationIPSchool, EnchantmentIPSchool, EvocationIPSchool, IllusionIPSchool, NecromancyIPSchool, TransmutationIPSchool };
   enum IPAlignGroup { AllAlignGroup, NeutralAlignGroup, LawfulAlignGroup, ChaoticAlignGroup, GoodAlignGroup, EvilAlignGroup };
   enum EffectSubType { MagicalSubType, SupernaturalSubType, ExtraordinarySubType };
   enum TileMainLightColor { BlackTileMainLightColor, DimWhiteTileMainLightColor, WhiteTileMainLightColor, BrightWhiteTileMainLightColor, PaleDarkYellowTileMainLightColor, DarkYellowTileMainLightColor, PaleYellowTileMainLightColor, YellowTileMainLightColor, PaleDarkGreenTileMainLightColor, DarkGreenTileMainLightColor, PaleGreenTileMainLightColor, GreenTileMainLightColor, PaleDarkAquaTileMainLightColor, DarkAquaTileMainLightColor, PaleAquaTileMainLightColor, AquaTileMainLightColor, PaleDarkBlueTileMainLightColor, DarkBlueTileMainLightColor, PaleBlueTileMainLightColor, BlueTileMainLightColor, PaleDarkPurpleTileMainLightColor, DarkPurpleTileMainLightColor, PalePurpleTileMainLightColor, PurpleTileMainLightColor, PaleDarkRedTileMainLightColor, DarkRedTileMainLightColor, PaleRedTileMainLightColor, RedTileMainLightColor, PaleDarkOrangeTileMainLightColor, DarkOrangeTileMainLightColor, PaleOrangeTileMainLightColor, OrangeTileMainLightColor };
@@ -800,7 +801,7 @@ module NWN {
     idempotent NWItemProperty itemPropertyRegeneration(int nRegenAmount) throws NotInContextException;
     idempotent NWItemProperty itemPropertySkillBonus(int nSkill, int nBonus) throws NotInContextException;
     idempotent NWItemProperty itemPropertySpecialWalk(int nWalkType) throws NotInContextException;
-    idempotent NWItemProperty itemPropertySpellImmunitySchool(int nSchool) throws NotInContextException;
+    idempotent NWItemProperty itemPropertySpellImmunitySchool(IPSpellSchool tIPSpellSchool) throws NotInContextException;
     idempotent NWItemProperty itemPropertySpellImmunitySpecific(int nSpell) throws NotInContextException;
     idempotent NWItemProperty itemPropertyThievesTools(int nModifier) throws NotInContextException;
     idempotent NWItemProperty itemPropertyTrap(int nTrapLevel, IPTrapType tIPTrapType) throws NotInContextException;
