@@ -1,4 +1,4 @@
-// Generated on Sun Aug 23 15:15:36 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Sun Aug 23 15:25:56 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 #include "NWScriptI.h"
 #include <iostream>
@@ -3066,10 +3066,43 @@ NWN::NWEffect NWScriptI::effectHitPointChangeWhenDying(Ice::Double fHitPointChan
   return e;
 };
 
-NWN::NWEffect NWScriptI::effectImmunity(Ice::Int nImmunityType, const Ice::Current& ice) {
+NWN::NWEffect NWScriptI::effectImmunity(NWN::ImmunityType tImmunityType, const Ice::Current& ice) {
   lock(effectImmunity_mutex, "effectImmunity");
   callCounter += 1;
-  StackPushInteger(nImmunityType);
+  if (tImmunityType == NWN::SkillDecreaseImmunity) StackPushInteger(27);
+   else if (tImmunityType == NWN::ConfusedImmunity) StackPushInteger(16);
+   else if (tImmunityType == NWN::TrapImmunity) StackPushInteger(5);
+   else if (tImmunityType == NWN::DamageImmunityDecreaseImmunity) StackPushInteger(22);
+   else if (tImmunityType == NWN::SilenceImmunity) StackPushInteger(11);
+   else if (tImmunityType == NWN::NoneImmunity) StackPushInteger(0);
+   else if (tImmunityType == NWN::KnockdownImmunity) StackPushInteger(28);
+   else if (tImmunityType == NWN::CursedImmunity) StackPushInteger(17);
+   else if (tImmunityType == NWN::ParalysisImmunity) StackPushInteger(6);
+   else if (tImmunityType == NWN::AcDecreaseImmunity) StackPushInteger(23);
+   else if (tImmunityType == NWN::StunImmunity) StackPushInteger(12);
+   else if (tImmunityType == NWN::MindSpellsImmunity) StackPushInteger(1);
+   else if (tImmunityType == NWN::NegativeLevelImmunity) StackPushInteger(29);
+   else if (tImmunityType == NWN::DazedImmunity) StackPushInteger(18);
+   else if (tImmunityType == NWN::BlindnessImmunity) StackPushInteger(7);
+   else if (tImmunityType == NWN::MovementSpeedDecreaseImmunity) StackPushInteger(24);
+   else if (tImmunityType == NWN::SleepImmunity) StackPushInteger(13);
+   else if (tImmunityType == NWN::PoisonImmunity) StackPushInteger(2);
+   else if (tImmunityType == NWN::SneakAttackImmunity) StackPushInteger(30);
+   else if (tImmunityType == NWN::AbilityDecreaseImmunity) StackPushInteger(19);
+   else if (tImmunityType == NWN::DeafnessImmunity) StackPushInteger(8);
+   else if (tImmunityType == NWN::SavingThrowDecreaseImmunity) StackPushInteger(25);
+   else if (tImmunityType == NWN::CharmImmunity) StackPushInteger(14);
+   else if (tImmunityType == NWN::DiseaseImmunity) StackPushInteger(3);
+   else if (tImmunityType == NWN::CriticalHitImmunity) StackPushInteger(31);
+   else if (tImmunityType == NWN::AttackDecreaseImmunity) StackPushInteger(20);
+   else if (tImmunityType == NWN::SlowImmunity) StackPushInteger(9);
+   else if (tImmunityType == NWN::SpellResistanceDecreaseImmunity) StackPushInteger(26);
+   else if (tImmunityType == NWN::DominateImmunity) StackPushInteger(15);
+   else if (tImmunityType == NWN::FearImmunity) StackPushInteger(4);
+   else if (tImmunityType == NWN::DeathImmunity) StackPushInteger(32);
+   else if (tImmunityType == NWN::DamageDecreaseImmunity) StackPushInteger(21);
+   else if (tImmunityType == NWN::EntangleImmunity) StackPushInteger(10);
+   else throw "fail: invalid struct value passed, internal API error";
 
   VM_ExecuteCommand(273, 1);
 
@@ -6711,13 +6744,46 @@ bool NWScriptI::getIsFriend(const NWN::NWObject& oTarget, const NWN::NWObject& o
   return nRetVal != 0;
 };
 
-bool NWScriptI::getIsImmune(const NWN::NWObject& oCreature, Ice::Int nImmunityType, const NWN::NWObject& oVersus, const Ice::Current& ice) {
+bool NWScriptI::getIsImmune(const NWN::NWObject& oCreature, NWN::ImmunityType tImmunityType, const NWN::NWObject& oVersus, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (oVersus.id < 0 || oVersus.id > 0xffffffff) throw NWN::InvalidObjectException();
   lock(getIsImmune_mutex, "getIsImmune");
   callCounter += 1;
   StackPushObject(oVersus.id);
-  StackPushInteger(nImmunityType);
+  if (tImmunityType == NWN::SkillDecreaseImmunity) StackPushInteger(27);
+   else if (tImmunityType == NWN::ConfusedImmunity) StackPushInteger(16);
+   else if (tImmunityType == NWN::TrapImmunity) StackPushInteger(5);
+   else if (tImmunityType == NWN::DamageImmunityDecreaseImmunity) StackPushInteger(22);
+   else if (tImmunityType == NWN::SilenceImmunity) StackPushInteger(11);
+   else if (tImmunityType == NWN::NoneImmunity) StackPushInteger(0);
+   else if (tImmunityType == NWN::KnockdownImmunity) StackPushInteger(28);
+   else if (tImmunityType == NWN::CursedImmunity) StackPushInteger(17);
+   else if (tImmunityType == NWN::ParalysisImmunity) StackPushInteger(6);
+   else if (tImmunityType == NWN::AcDecreaseImmunity) StackPushInteger(23);
+   else if (tImmunityType == NWN::StunImmunity) StackPushInteger(12);
+   else if (tImmunityType == NWN::MindSpellsImmunity) StackPushInteger(1);
+   else if (tImmunityType == NWN::NegativeLevelImmunity) StackPushInteger(29);
+   else if (tImmunityType == NWN::DazedImmunity) StackPushInteger(18);
+   else if (tImmunityType == NWN::BlindnessImmunity) StackPushInteger(7);
+   else if (tImmunityType == NWN::MovementSpeedDecreaseImmunity) StackPushInteger(24);
+   else if (tImmunityType == NWN::SleepImmunity) StackPushInteger(13);
+   else if (tImmunityType == NWN::PoisonImmunity) StackPushInteger(2);
+   else if (tImmunityType == NWN::SneakAttackImmunity) StackPushInteger(30);
+   else if (tImmunityType == NWN::AbilityDecreaseImmunity) StackPushInteger(19);
+   else if (tImmunityType == NWN::DeafnessImmunity) StackPushInteger(8);
+   else if (tImmunityType == NWN::SavingThrowDecreaseImmunity) StackPushInteger(25);
+   else if (tImmunityType == NWN::CharmImmunity) StackPushInteger(14);
+   else if (tImmunityType == NWN::DiseaseImmunity) StackPushInteger(3);
+   else if (tImmunityType == NWN::CriticalHitImmunity) StackPushInteger(31);
+   else if (tImmunityType == NWN::AttackDecreaseImmunity) StackPushInteger(20);
+   else if (tImmunityType == NWN::SlowImmunity) StackPushInteger(9);
+   else if (tImmunityType == NWN::SpellResistanceDecreaseImmunity) StackPushInteger(26);
+   else if (tImmunityType == NWN::DominateImmunity) StackPushInteger(15);
+   else if (tImmunityType == NWN::FearImmunity) StackPushInteger(4);
+   else if (tImmunityType == NWN::DeathImmunity) StackPushInteger(32);
+   else if (tImmunityType == NWN::DamageDecreaseImmunity) StackPushInteger(21);
+   else if (tImmunityType == NWN::EntangleImmunity) StackPushInteger(10);
+   else throw "fail: invalid struct value passed, internal API error";
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(274, 3);
@@ -11847,10 +11913,20 @@ NWN::NWItemProperty NWScriptI::itemPropertyHolyAvenger(const Ice::Current& ice) 
   return e;
 };
 
-NWN::NWItemProperty NWScriptI::itemPropertyImmunityMisc(Ice::Int nImmunityType, const Ice::Current& ice) {
+NWN::NWItemProperty NWScriptI::itemPropertyImmunityMisc(NWN::IPMiscImmunityType tIPMiscImmunityType, const Ice::Current& ice) {
   lock(itemPropertyImmunityMisc_mutex, "itemPropertyImmunityMisc");
   callCounter += 1;
-  StackPushInteger(nImmunityType);
+  if (tIPMiscImmunityType == NWN::FearIPImmunity) StackPushInteger(5);
+   else if (tIPMiscImmunityType == NWN::BackstabIPImmunity) StackPushInteger(0);
+   else if (tIPMiscImmunityType == NWN::KnockdownIPImmunity) StackPushInteger(6);
+   else if (tIPMiscImmunityType == NWN::LevelAbilDrainIPImmunity) StackPushInteger(1);
+   else if (tIPMiscImmunityType == NWN::ParalysisIPImmunity) StackPushInteger(7);
+   else if (tIPMiscImmunityType == NWN::MindSpellsIPImmunity) StackPushInteger(2);
+   else if (tIPMiscImmunityType == NWN::CriticalHitsIPImmunity) StackPushInteger(8);
+   else if (tIPMiscImmunityType == NWN::PoisonIPImmunity) StackPushInteger(3);
+   else if (tIPMiscImmunityType == NWN::DeathMagicIPImmunity) StackPushInteger(9);
+   else if (tIPMiscImmunityType == NWN::DiseaseIPImmunity) StackPushInteger(4);
+   else throw "fail: invalid struct value passed, internal API error";
 
   VM_ExecuteCommand(649, 1);
 

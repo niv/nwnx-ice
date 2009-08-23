@@ -1,4 +1,4 @@
-// Generated on Sun Aug 23 15:15:36 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Sun Aug 23 15:25:55 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 // Not exported:
 //   getFirstEffect getFirstFactionMember getFirstItemInInventory getFirstItemProperty getFirstInPersistentObject getFirstObjectInArea getFirstObjectInShape getFirstPC
@@ -39,6 +39,7 @@ module NWN {
   enum Alignment { Any, Neutral, Lawful, Chaotic, Good, Evil };
   enum TrapType { MinorSpikeTrap, AverageSpikeTrap, StrongSpikeTrap, DeadlySpikeTrap, MinorHolyTrap, AverageHolyTrap, StrongHolyTrap, DeadlyHolyTrap, MinorTangleTrap, AverageTangleTrap, StrongTangleTrap, DeadlyTangleTrap, MinorAcidTrap, AverageAcidTrap, StrongAcidTrap, DeadlyAcidTrap, MinorFireTrap, AverageFireTrap, StrongFireTrap, DeadlyFireTrap, MinorElectricalTrap, AverageElectricalTrap, StrongElectricalTrap, DeadlyElectricalTrap, MinorGasTrap, AverageGasTrap, StrongGasTrap, DeadlyGasTrap, MinorFrostTrap, AverageFrostTrap, StrongFrostTrap, DeadlyFrostTrap, MinorNegativeTrap, AverageNegativeTrap, StrongNegativeTrap, DeadlyNegativeTrap, MinorSonicTrap, AverageSonicTrap, StrongSonicTrap, DeadlySonicTrap, MinorAcidSplashTrap, AverageAcidSplashTrap, StrongAcidSplashTrap, DeadlyAcidSplashTrap, EpicElectricalTrap, EpicFireTrap, EpicFrostTrap, EpicSonicTrap };
   enum AttackBonus { MiscBonus, OnhandBonus, OffhandBonus };
+  enum IPMiscImmunityType { BackstabIPImmunity, LevelAbilDrainIPImmunity, MindSpellsIPImmunity, PoisonIPImmunity, DiseaseIPImmunity, FearIPImmunity, KnockdownIPImmunity, ParalysisIPImmunity, CriticalHitsIPImmunity, DeathMagicIPImmunity };
   enum RacialType { DwarfRace, ElfRace, GnomeRace, HalflingRace, HalfelfRace, HalforcRace, HumanRace, AberrationRace, AnimalRace, BeastRace, ConstructRace, DragonRace, HumanoidGoblinoidRace, HumanoidMonstrousRace, HumanoidOrcRace, HumanoidReptilianRace, ElementalRace, FeyRace, GiantRace, MagicalBeastRace, OutsiderRace, ShapechangerRace, UndeadRace, VerminRace, InvalidRace, OozeRace };
   enum TalkVolume { TalkVol, WhisperVol, ShoutVol, SilentTalkVol, SilentShoutVol, PartyVol, TellVol };
   enum AssociateType { NoAssociate, HenchmanAssociate, AnimalCompanionAssociate, FamiliarAssociate, SummonedAssociate, DominatedAssociate };
@@ -56,6 +57,7 @@ module NWN {
   enum MetaMagic { NoneMeta, EmpowerMeta, ExtendMeta, MaximizeMeta, QuickenMeta, SilentMeta, StillMeta, AnyMeta };
   enum SpellSchool { GeneralSchool, AbjurationSchool, ConjurationSchool, DivinationSchool, EnchantmentSchool, EvocationSchool, IllusionSchool, NecromancySchool, TransmutationSchool };
   enum MissChanceType { MissChanceVSAll, MissChanceVSRanged, MissChanceVSMelee };
+  enum ImmunityType { NoneImmunity, MindSpellsImmunity, PoisonImmunity, DiseaseImmunity, FearImmunity, TrapImmunity, ParalysisImmunity, BlindnessImmunity, DeafnessImmunity, SlowImmunity, EntangleImmunity, SilenceImmunity, StunImmunity, SleepImmunity, CharmImmunity, DominateImmunity, ConfusedImmunity, CursedImmunity, DazedImmunity, AbilityDecreaseImmunity, AttackDecreaseImmunity, DamageDecreaseImmunity, DamageImmunityDecreaseImmunity, AcDecreaseImmunity, MovementSpeedDecreaseImmunity, SavingThrowDecreaseImmunity, SpellResistanceDecreaseImmunity, SkillDecreaseImmunity, KnockdownImmunity, NegativeLevelImmunity, SneakAttackImmunity, CriticalHitImmunity, DeathImmunity };
 
   sequence<int> IntSeq;
 
@@ -353,7 +355,7 @@ module NWN {
     idempotent NWEffect effectHaste() throws NotInContextException;
     idempotent NWEffect effectHeal(int nDamageToHeal) throws NotInContextException;
     idempotent NWEffect effectHitPointChangeWhenDying(double fHitPointChangePerRound) throws NotInContextException;
-    idempotent NWEffect effectImmunity(int nImmunityType) throws NotInContextException;
+    idempotent NWEffect effectImmunity(ImmunityType tImmunityType) throws NotInContextException;
     idempotent NWEffect effectInvisibility(int nInvisibilityType) throws NotInContextException;
     idempotent NWEffect effectKnockdown() throws NotInContextException;
     idempotent NWEffect effectLinkEffects(NWEffect eChildEffect, NWEffect eParentEffect) throws NotInContextException, InvalidEffectException;
@@ -530,7 +532,7 @@ module NWN {
     idempotent bool getIsEncounterCreature(NWObject oCreature) throws NotInContextException;
     idempotent bool getIsEnemy(NWObject oTarget, NWObject oSource) throws NotInContextException;
     idempotent bool getIsFriend(NWObject oTarget, NWObject oSource) throws NotInContextException;
-    idempotent bool getIsImmune(NWObject oCreature, int nImmunityType, NWObject oVersus) throws NotInContextException;
+    idempotent bool getIsImmune(NWObject oCreature, ImmunityType tImmunityType, NWObject oVersus) throws NotInContextException;
     idempotent bool getIsInCombat(NWObject oCreature) throws NotInContextException;
     idempotent bool getIsInSubArea(NWObject oCreature, NWObject oSubArea) throws NotInContextException;
     idempotent bool getIsItemPropertyValid(NWItemProperty ipProperty) throws NotInContextException, InvalidItemPropertyException;
@@ -775,7 +777,7 @@ module NWN {
     idempotent NWItemProperty itemPropertyHaste() throws NotInContextException;
     idempotent NWItemProperty itemPropertyHealersKit(int nModifier) throws NotInContextException;
     idempotent NWItemProperty itemPropertyHolyAvenger() throws NotInContextException;
-    idempotent NWItemProperty itemPropertyImmunityMisc(int nImmunityType) throws NotInContextException;
+    idempotent NWItemProperty itemPropertyImmunityMisc(IPMiscImmunityType tIPMiscImmunityType) throws NotInContextException;
     idempotent NWItemProperty itemPropertyImmunityToSpellLevel(int nLevel) throws NotInContextException;
     idempotent NWItemProperty itemPropertyImprovedEvasion() throws NotInContextException;
     idempotent NWItemProperty itemPropertyKeen() throws NotInContextException;

@@ -1,4 +1,4 @@
-// Generated on Sun Aug 23 15:15:36 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Sun Aug 23 15:25:55 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 #include "FunctionHooks.h"
 #include "NWNStructures.h"
@@ -174,7 +174,7 @@ class NWScriptI : public NWN::NWScript {
     virtual NWN::NWEffect effectHaste(const Ice::Current&);
     virtual NWN::NWEffect effectHeal(Ice::Int nDamageToHeal, const Ice::Current&);
     virtual NWN::NWEffect effectHitPointChangeWhenDying(Ice::Double fHitPointChangePerRound, const Ice::Current&);
-    virtual NWN::NWEffect effectImmunity(Ice::Int nImmunityType, const Ice::Current&);
+    virtual NWN::NWEffect effectImmunity(NWN::ImmunityType tImmunityType, const Ice::Current&);
     virtual NWN::NWEffect effectInvisibility(Ice::Int nInvisibilityType, const Ice::Current&);
     virtual NWN::NWEffect effectKnockdown(const Ice::Current&);
     virtual NWN::NWEffect effectLinkEffects(const NWN::NWEffect& eChildEffect, const NWN::NWEffect& eParentEffect, const Ice::Current&);
@@ -366,7 +366,7 @@ class NWScriptI : public NWN::NWScript {
     virtual bool getIsEncounterCreature(const NWN::NWObject& oCreature, const Ice::Current&);
     virtual bool getIsEnemy(const NWN::NWObject& oTarget, const NWN::NWObject& oSource, const Ice::Current&);
     virtual bool getIsFriend(const NWN::NWObject& oTarget, const NWN::NWObject& oSource, const Ice::Current&);
-    virtual bool getIsImmune(const NWN::NWObject& oCreature, Ice::Int nImmunityType, const NWN::NWObject& oVersus, const Ice::Current&);
+    virtual bool getIsImmune(const NWN::NWObject& oCreature, NWN::ImmunityType tImmunityType, const NWN::NWObject& oVersus, const Ice::Current&);
     virtual bool getIsInCombat(const NWN::NWObject& oCreature, const Ice::Current&);
     virtual bool getIsInSubArea(const NWN::NWObject& oCreature, const NWN::NWObject& oSubArea, const Ice::Current&);
     virtual bool getIsItemPropertyValid(const NWN::NWItemProperty& ipProperty, const Ice::Current&);
@@ -630,7 +630,7 @@ class NWScriptI : public NWN::NWScript {
     virtual NWN::NWItemProperty itemPropertyHaste(const Ice::Current&);
     virtual NWN::NWItemProperty itemPropertyHealersKit(Ice::Int nModifier, const Ice::Current&);
     virtual NWN::NWItemProperty itemPropertyHolyAvenger(const Ice::Current&);
-    virtual NWN::NWItemProperty itemPropertyImmunityMisc(Ice::Int nImmunityType, const Ice::Current&);
+    virtual NWN::NWItemProperty itemPropertyImmunityMisc(NWN::IPMiscImmunityType tIPMiscImmunityType, const Ice::Current&);
     virtual NWN::NWItemProperty itemPropertyImmunityToSpellLevel(Ice::Int nLevel, const Ice::Current&);
     virtual NWN::NWItemProperty itemPropertyImprovedEvasion(const Ice::Current&);
     virtual NWN::NWItemProperty itemPropertyKeen(const Ice::Current&);
