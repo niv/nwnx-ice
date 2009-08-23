@@ -1,4 +1,4 @@
-// Generated on Sun Aug 23 15:24:48 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Sun Aug 23 15:31:18 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 // Not exported:
 //   getFirstEffect getFirstFactionMember getFirstItemInInventory getFirstItemProperty getFirstInPersistentObject getFirstObjectInArea getFirstObjectInShape getFirstPC
@@ -55,6 +55,7 @@ module NWN {
   enum AILevel { DefaultAI, VeryLowAI, LowAI, NormalAI, HighAI, VeryHighAI };
   enum ShapeType { SpellCylinderShape, ConeShape, CubeShape, SpellConeShape, SphereShape };
   enum AttackResult { MissedAttack, HitAttack, CriticalHitAttack };
+  enum CreaturePart { RightFootPart, LeftFootPart, RightShinPart, LeftShinPart, LeftThighPart, RightThighPart, PelvisPart, TorsoPart, BeltPart, NeckPart, RightForearmPart, LeftForearmPart, RightBicepPart, LeftBicepPart, RightShoulderPart, LeftShoulderPart, RightHandPart, LeftHandPart, HeadPart };
   enum MetaMagic { NoneMeta, EmpowerMeta, ExtendMeta, MaximizeMeta, QuickenMeta, SilentMeta, StillMeta, AnyMeta };
   enum SpellSchool { GeneralSchool, AbjurationSchool, ConjurationSchool, DivinationSchool, EnchantmentSchool, EvocationSchool, IllusionSchool, NecromancySchool, TransmutationSchool };
   enum MissChanceType { MissChanceVSAll, MissChanceVSRanged, MissChanceVSMelee };
@@ -322,7 +323,7 @@ module NWN {
     idempotent NWEffect effectAreaOfEffect(int nAreaEffectId, string sOnEnterScript, string sHeartbeatScript, string sOnExitScript) throws NotInContextException;
     idempotent NWEffect effectAttackDecrease(int nPenalty, AttackBonus tAttackBonus) throws NotInContextException;
     idempotent NWEffect effectAttackIncrease(int nBonus, AttackBonus tAttackBonus) throws NotInContextException;
-    idempotent NWEffect effectBeam(int nBeamVisualEffect, NWObject oEffector, int nBodyPart, bool bMissEffect) throws NotInContextException;
+    idempotent NWEffect effectBeam(int nBeamVisualEffect, NWObject oEffector, CreaturePart tCreaturePart, bool bMissEffect) throws NotInContextException;
     idempotent NWEffect effectBlindness() throws NotInContextException;
     idempotent NWEffect effectCharmed() throws NotInContextException;
     idempotent NWEffect effectConcealment(int nPercentage, MissChanceType tMissChanceType) throws NotInContextException;
@@ -446,7 +447,7 @@ module NWN {
     idempotent NWObject getClickingObject() throws NotInContextException;
     idempotent int getColor(NWObject oObject, int nColorChannel) throws NotInContextException;
     idempotent bool getCommandable(NWObject oTarget) throws NotInContextException;
-    idempotent int getCreatureBodyPart(int nPart, NWObject oCreature) throws NotInContextException;
+    idempotent int getCreatureBodyPart(CreaturePart tCreaturePart, NWObject oCreature) throws NotInContextException;
     idempotent CreatureSize getCreatureSize(NWObject oCreature) throws NotInContextException;
     idempotent int getCreatureStartingPackage(NWObject oCreature) throws NotInContextException;
     idempotent int getCreatureTailType(NWObject oCreature) throws NotInContextException;
@@ -875,7 +876,7 @@ module NWN {
     idempotent void setColor(NWObject oObject, int nColorChannel, int nColorValue) throws NotInContextException;
     idempotent void setCommandable(bool bCommandable, NWObject oTarget) throws NotInContextException;
     idempotent void setCreatureAppearanceType(NWObject oCreature, int nAppearanceType) throws NotInContextException;
-    idempotent void setCreatureBodyPart(int nPart, int nModelNumber, NWObject oCreature) throws NotInContextException;
+    idempotent void setCreatureBodyPart(CreaturePart tCreaturePart, int nModelNumber, NWObject oCreature) throws NotInContextException;
     idempotent void setCreatureTailType(int nTailType, NWObject oCreature) throws NotInContextException;
     idempotent void setCreatureWingType(int nWingType, NWObject oCreature) throws NotInContextException;
     idempotent void setCustomToken(int nCustomTokenNumber, string sTokenValue) throws NotInContextException;

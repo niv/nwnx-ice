@@ -1,4 +1,4 @@
-// Generated on Sun Aug 23 15:24:49 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Sun Aug 23 15:31:19 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 #include "NWScriptI.h"
 #include <iostream>
@@ -2019,12 +2019,31 @@ NWN::NWEffect NWScriptI::effectAttackIncrease(Ice::Int nBonus, NWN::AttackBonus 
   return e;
 };
 
-NWN::NWEffect NWScriptI::effectBeam(Ice::Int nBeamVisualEffect, const NWN::NWObject& oEffector, Ice::Int nBodyPart, bool bMissEffect, const Ice::Current& ice) {
+NWN::NWEffect NWScriptI::effectBeam(Ice::Int nBeamVisualEffect, const NWN::NWObject& oEffector, NWN::CreaturePart tCreaturePart, bool bMissEffect, const Ice::Current& ice) {
   if (oEffector.id < 0 || oEffector.id > 0xffffffff) throw NWN::InvalidObjectException();
   lock(effectBeam_mutex, "effectBeam");
   callCounter += 1;
   StackPushInteger(bMissEffect == true ? 1 : 0);
-  StackPushInteger(nBodyPart);
+  if (tCreaturePart == NWN::RightHandPart) StackPushInteger(16);
+   else if (tCreaturePart == NWN::RightThighPart) StackPushInteger(5);
+   else if (tCreaturePart == NWN::LeftForearmPart) StackPushInteger(11);
+   else if (tCreaturePart == NWN::RightFootPart) StackPushInteger(0);
+   else if (tCreaturePart == NWN::LeftHandPart) StackPushInteger(17);
+   else if (tCreaturePart == NWN::PelvisPart) StackPushInteger(6);
+   else if (tCreaturePart == NWN::RightBicepPart) StackPushInteger(12);
+   else if (tCreaturePart == NWN::LeftFootPart) StackPushInteger(1);
+   else if (tCreaturePart == NWN::TorsoPart) StackPushInteger(7);
+   else if (tCreaturePart == NWN::LeftBicepPart) StackPushInteger(13);
+   else if (tCreaturePart == NWN::RightShinPart) StackPushInteger(2);
+   else if (tCreaturePart == NWN::BeltPart) StackPushInteger(8);
+   else if (tCreaturePart == NWN::RightShoulderPart) StackPushInteger(14);
+   else if (tCreaturePart == NWN::LeftShinPart) StackPushInteger(3);
+   else if (tCreaturePart == NWN::HeadPart) StackPushInteger(20);
+   else if (tCreaturePart == NWN::NeckPart) StackPushInteger(9);
+   else if (tCreaturePart == NWN::LeftShoulderPart) StackPushInteger(15);
+   else if (tCreaturePart == NWN::LeftThighPart) StackPushInteger(4);
+   else if (tCreaturePart == NWN::RightForearmPart) StackPushInteger(10);
+   else throw "fail: invalid struct value passed, internal API error";
   StackPushObject(oEffector.id);
   StackPushInteger(nBeamVisualEffect);
 
@@ -5124,12 +5143,31 @@ bool NWScriptI::getCommandable(const NWN::NWObject& oTarget, const Ice::Current&
   return nRetVal != 0;
 };
 
-Ice::Int NWScriptI::getCreatureBodyPart(Ice::Int nPart, const NWN::NWObject& oCreature, const Ice::Current& ice) {
+Ice::Int NWScriptI::getCreatureBodyPart(NWN::CreaturePart tCreaturePart, const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
   lock(getCreatureBodyPart_mutex, "getCreatureBodyPart");
   callCounter += 1;
   StackPushObject(oCreature.id);
-  StackPushInteger(nPart);
+  if (tCreaturePart == NWN::RightHandPart) StackPushInteger(16);
+   else if (tCreaturePart == NWN::RightThighPart) StackPushInteger(5);
+   else if (tCreaturePart == NWN::LeftForearmPart) StackPushInteger(11);
+   else if (tCreaturePart == NWN::RightFootPart) StackPushInteger(0);
+   else if (tCreaturePart == NWN::LeftHandPart) StackPushInteger(17);
+   else if (tCreaturePart == NWN::PelvisPart) StackPushInteger(6);
+   else if (tCreaturePart == NWN::RightBicepPart) StackPushInteger(12);
+   else if (tCreaturePart == NWN::LeftFootPart) StackPushInteger(1);
+   else if (tCreaturePart == NWN::TorsoPart) StackPushInteger(7);
+   else if (tCreaturePart == NWN::LeftBicepPart) StackPushInteger(13);
+   else if (tCreaturePart == NWN::RightShinPart) StackPushInteger(2);
+   else if (tCreaturePart == NWN::BeltPart) StackPushInteger(8);
+   else if (tCreaturePart == NWN::RightShoulderPart) StackPushInteger(14);
+   else if (tCreaturePart == NWN::LeftShinPart) StackPushInteger(3);
+   else if (tCreaturePart == NWN::HeadPart) StackPushInteger(20);
+   else if (tCreaturePart == NWN::NeckPart) StackPushInteger(9);
+   else if (tCreaturePart == NWN::LeftShoulderPart) StackPushInteger(15);
+   else if (tCreaturePart == NWN::LeftThighPart) StackPushInteger(4);
+   else if (tCreaturePart == NWN::RightForearmPart) StackPushInteger(10);
+   else throw "fail: invalid struct value passed, internal API error";
 
   VM_ExecuteCommand(792, 2);
 
@@ -14023,13 +14061,32 @@ unlock(setCreatureAppearanceType_mutex, "setCreatureAppearanceType");
   
 };
 
-void NWScriptI::setCreatureBodyPart(Ice::Int nPart, Ice::Int nModelNumber, const NWN::NWObject& oCreature, const Ice::Current& ice) {
+void NWScriptI::setCreatureBodyPart(NWN::CreaturePart tCreaturePart, Ice::Int nModelNumber, const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
   lock(setCreatureBodyPart_mutex, "setCreatureBodyPart");
   callCounter += 1;
   StackPushObject(oCreature.id);
   StackPushInteger(nModelNumber);
-  StackPushInteger(nPart);
+  if (tCreaturePart == NWN::RightHandPart) StackPushInteger(16);
+   else if (tCreaturePart == NWN::RightThighPart) StackPushInteger(5);
+   else if (tCreaturePart == NWN::LeftForearmPart) StackPushInteger(11);
+   else if (tCreaturePart == NWN::RightFootPart) StackPushInteger(0);
+   else if (tCreaturePart == NWN::LeftHandPart) StackPushInteger(17);
+   else if (tCreaturePart == NWN::PelvisPart) StackPushInteger(6);
+   else if (tCreaturePart == NWN::RightBicepPart) StackPushInteger(12);
+   else if (tCreaturePart == NWN::LeftFootPart) StackPushInteger(1);
+   else if (tCreaturePart == NWN::TorsoPart) StackPushInteger(7);
+   else if (tCreaturePart == NWN::LeftBicepPart) StackPushInteger(13);
+   else if (tCreaturePart == NWN::RightShinPart) StackPushInteger(2);
+   else if (tCreaturePart == NWN::BeltPart) StackPushInteger(8);
+   else if (tCreaturePart == NWN::RightShoulderPart) StackPushInteger(14);
+   else if (tCreaturePart == NWN::LeftShinPart) StackPushInteger(3);
+   else if (tCreaturePart == NWN::HeadPart) StackPushInteger(20);
+   else if (tCreaturePart == NWN::NeckPart) StackPushInteger(9);
+   else if (tCreaturePart == NWN::LeftShoulderPart) StackPushInteger(15);
+   else if (tCreaturePart == NWN::LeftThighPart) StackPushInteger(4);
+   else if (tCreaturePart == NWN::RightForearmPart) StackPushInteger(10);
+   else throw "fail: invalid struct value passed, internal API error";
 
   VM_ExecuteCommand(793, 3);
 

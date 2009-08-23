@@ -1,4 +1,4 @@
-// Generated on Sun Aug 23 15:24:48 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Sun Aug 23 15:31:18 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 #include "FunctionHooks.h"
 #include "NWNStructures.h"
@@ -140,7 +140,7 @@ class NWScriptI : public NWN::NWScript {
     virtual NWN::NWEffect effectAreaOfEffect(Ice::Int nAreaEffectId, const std::string& sOnEnterScript, const std::string& sHeartbeatScript, const std::string& sOnExitScript, const Ice::Current&);
     virtual NWN::NWEffect effectAttackDecrease(Ice::Int nPenalty, NWN::AttackBonus tAttackBonus, const Ice::Current&);
     virtual NWN::NWEffect effectAttackIncrease(Ice::Int nBonus, NWN::AttackBonus tAttackBonus, const Ice::Current&);
-    virtual NWN::NWEffect effectBeam(Ice::Int nBeamVisualEffect, const NWN::NWObject& oEffector, Ice::Int nBodyPart, bool bMissEffect, const Ice::Current&);
+    virtual NWN::NWEffect effectBeam(Ice::Int nBeamVisualEffect, const NWN::NWObject& oEffector, NWN::CreaturePart tCreaturePart, bool bMissEffect, const Ice::Current&);
     virtual NWN::NWEffect effectBlindness(const Ice::Current&);
     virtual NWN::NWEffect effectCharmed(const Ice::Current&);
     virtual NWN::NWEffect effectConcealment(Ice::Int nPercentage, NWN::MissChanceType tMissChanceType, const Ice::Current&);
@@ -270,7 +270,7 @@ class NWScriptI : public NWN::NWScript {
     virtual NWN::NWObject getClickingObject(const Ice::Current&);
     virtual Ice::Int getColor(const NWN::NWObject& oObject, Ice::Int nColorChannel, const Ice::Current&);
     virtual bool getCommandable(const NWN::NWObject& oTarget, const Ice::Current&);
-    virtual Ice::Int getCreatureBodyPart(Ice::Int nPart, const NWN::NWObject& oCreature, const Ice::Current&);
+    virtual Ice::Int getCreatureBodyPart(NWN::CreaturePart tCreaturePart, const NWN::NWObject& oCreature, const Ice::Current&);
     virtual NWN::CreatureSize getCreatureSize(const NWN::NWObject& oCreature, const Ice::Current&);
     virtual Ice::Int getCreatureStartingPackage(const NWN::NWObject& oCreature, const Ice::Current&);
     virtual Ice::Int getCreatureTailType(const NWN::NWObject& oCreature, const Ice::Current&);
@@ -737,7 +737,7 @@ class NWScriptI : public NWN::NWScript {
     virtual void setColor(const NWN::NWObject& oObject, Ice::Int nColorChannel, Ice::Int nColorValue, const Ice::Current&);
     virtual void setCommandable(bool bCommandable, const NWN::NWObject& oTarget, const Ice::Current&);
     virtual void setCreatureAppearanceType(const NWN::NWObject& oCreature, Ice::Int nAppearanceType, const Ice::Current&);
-    virtual void setCreatureBodyPart(Ice::Int nPart, Ice::Int nModelNumber, const NWN::NWObject& oCreature, const Ice::Current&);
+    virtual void setCreatureBodyPart(NWN::CreaturePart tCreaturePart, Ice::Int nModelNumber, const NWN::NWObject& oCreature, const Ice::Current&);
     virtual void setCreatureTailType(Ice::Int nTailType, const NWN::NWObject& oCreature, const Ice::Current&);
     virtual void setCreatureWingType(Ice::Int nWingType, const NWN::NWObject& oCreature, const Ice::Current&);
     virtual void setCustomToken(Ice::Int nCustomTokenNumber, const std::string& sTokenValue, const Ice::Current&);
