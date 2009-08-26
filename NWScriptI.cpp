@@ -1,4 +1,4 @@
-// Generated on Tue Aug 25 16:14:35 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Wed Aug 26 16:01:26 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 #include "NWScriptI.h"
 #include <iostream>
@@ -99,7 +99,7 @@ void NWScriptI::actionCastFakeSpellAtLocation(Ice::Int nSpell, const NWN::NWLoca
    else if (tProjectilePathType == NWN::BallisticPath) StackPushInteger(2);
    else if (tProjectilePathType == NWN::HighBallisticPath) StackPushInteger(3);
    else if (tProjectilePathType == NWN::AcceleratingPath) StackPushInteger(4);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in actionCastFakeSpellAtLocation for parameter tProjectilePathType of type ProjectilePathType passed: %d. Cannot continue, and it's your fault!\n", tProjectilePathType); exit(1); };
   CScriptLocation *lTarget_ptr;
   lTarget_ptr->X = lTarget.x;
   lTarget_ptr->Y = lTarget.y;
@@ -126,7 +126,7 @@ void NWScriptI::actionCastFakeSpellAtObject(Ice::Int nSpell, const NWN::NWObject
    else if (tProjectilePathType == NWN::BallisticPath) StackPushInteger(2);
    else if (tProjectilePathType == NWN::HighBallisticPath) StackPushInteger(3);
    else if (tProjectilePathType == NWN::AcceleratingPath) StackPushInteger(4);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in actionCastFakeSpellAtObject for parameter tProjectilePathType of type ProjectilePathType passed: %d. Cannot continue, and it's your fault!\n", tProjectilePathType); exit(1); };
   StackPushObject(oTarget.id);
   StackPushInteger(nSpell);
 
@@ -146,7 +146,7 @@ void NWScriptI::actionCastSpellAtLocation(Ice::Int nSpell, const NWN::NWLocation
    else if (tProjectilePathType == NWN::BallisticPath) StackPushInteger(2);
    else if (tProjectilePathType == NWN::HighBallisticPath) StackPushInteger(3);
    else if (tProjectilePathType == NWN::AcceleratingPath) StackPushInteger(4);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in actionCastSpellAtLocation for parameter tProjectilePathType of type ProjectilePathType passed: %d. Cannot continue, and it's your fault!\n", tProjectilePathType); exit(1); };
   StackPushInteger(bCheat == true ? 1 : 0);
   if (tMetaMagic == NWN::SilentMeta) StackPushInteger(16);
    else if (tMetaMagic == NWN::NoneMeta) StackPushInteger(0);
@@ -156,7 +156,7 @@ void NWScriptI::actionCastSpellAtLocation(Ice::Int nSpell, const NWN::NWLocation
    else if (tMetaMagic == NWN::QuickenMeta) StackPushInteger(8);
    else if (tMetaMagic == NWN::MaximizeMeta) StackPushInteger(4);
    else if (tMetaMagic == NWN::StillMeta) StackPushInteger(32);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in actionCastSpellAtLocation for parameter tMetaMagic of type MetaMagic passed: %d. Cannot continue, and it's your fault!\n", tMetaMagic); exit(1); };
   CScriptLocation *lTargetLocation_ptr;
   lTargetLocation_ptr->X = lTargetLocation.x;
   lTargetLocation_ptr->Y = lTargetLocation.y;
@@ -184,7 +184,7 @@ void NWScriptI::actionCastSpellAtObject(Ice::Int nSpell, const NWN::NWObject& oT
    else if (tProjectilePathType == NWN::BallisticPath) StackPushInteger(2);
    else if (tProjectilePathType == NWN::HighBallisticPath) StackPushInteger(3);
    else if (tProjectilePathType == NWN::AcceleratingPath) StackPushInteger(4);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in actionCastSpellAtObject for parameter tProjectilePathType of type ProjectilePathType passed: %d. Cannot continue, and it's your fault!\n", tProjectilePathType); exit(1); };
   StackPushInteger(nDomainLevel);
   StackPushInteger(bCheat == true ? 1 : 0);
   if (tMetaMagic == NWN::SilentMeta) StackPushInteger(16);
@@ -195,7 +195,7 @@ void NWScriptI::actionCastSpellAtObject(Ice::Int nSpell, const NWN::NWObject& oT
    else if (tMetaMagic == NWN::QuickenMeta) StackPushInteger(8);
    else if (tMetaMagic == NWN::MaximizeMeta) StackPushInteger(4);
    else if (tMetaMagic == NWN::StillMeta) StackPushInteger(32);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in actionCastSpellAtObject for parameter tMetaMagic of type MetaMagic passed: %d. Cannot continue, and it's your fault!\n", tMetaMagic); exit(1); };
   StackPushObject(oTarget.id);
   StackPushInteger(nSpell);
 
@@ -251,7 +251,7 @@ void NWScriptI::actionEquipItem(const NWN::NWObject& oItem, NWN::InventorySlot t
    else if (tInventorySlot == NWN::CreatureRighthandSlot) StackPushInteger(15);
    else if (tInventorySlot == NWN::RighthandSlot) StackPushInteger(4);
    else if (tInventorySlot == NWN::BeltSlot) StackPushInteger(10);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in actionEquipItem for parameter tInventorySlot of type InventorySlot passed: %d. Cannot continue, and it's your fault!\n", tInventorySlot); exit(1); };
   StackPushObject(oItem.id);
 
   VM_ExecuteCommand(32, 2);
@@ -611,7 +611,7 @@ void NWScriptI::actionSpeakString(const std::string& sStringToSpeak, NWN::TalkVo
    else if (tTalkVolume == NWN::ShoutVol) StackPushInteger(2);
    else if (tTalkVolume == NWN::SilentTalkVol) StackPushInteger(3);
    else if (tTalkVolume == NWN::SilentShoutVol) StackPushInteger(4);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in actionSpeakString for parameter tTalkVolume of type TalkVolume passed: %d. Cannot continue, and it's your fault!\n", tTalkVolume); exit(1); };
   StackPushString(sStringToSpeak.c_str());
 
   VM_ExecuteCommand(39, 2);
@@ -630,7 +630,7 @@ void NWScriptI::actionSpeakStringByStrRef(Ice::Int nStrRef, NWN::TalkVolume tTal
    else if (tTalkVolume == NWN::ShoutVol) StackPushInteger(2);
    else if (tTalkVolume == NWN::SilentTalkVol) StackPushInteger(3);
    else if (tTalkVolume == NWN::SilentShoutVol) StackPushInteger(4);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in actionSpeakStringByStrRef for parameter tTalkVolume of type TalkVolume passed: %d. Cannot continue, and it's your fault!\n", tTalkVolume); exit(1); };
   StackPushInteger(nStrRef);
 
   VM_ExecuteCommand(240, 2);
@@ -775,7 +775,7 @@ void NWScriptI::addItemProperty(NWN::DurationType tDurationType, const NWN::NWIt
   if (tDurationType == NWN::Instant) StackPushInteger(0);
    else if (tDurationType == NWN::Temporary) StackPushInteger(1);
    else if (tDurationType == NWN::Permanent) StackPushInteger(2);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in addItemProperty for parameter tDurationType of type DurationType passed: %d. Cannot continue, and it's your fault!\n", tDurationType); exit(1); };
 
   VM_ExecuteCommand(609, 4);
 
@@ -826,7 +826,7 @@ void NWScriptI::adjustAlignment(const NWN::NWObject& oSubject, NWN::Alignment tA
    else if (tAlignment == NWN::Lawful) StackPushInteger(2);
    else if (tAlignment == NWN::Chaotic) StackPushInteger(3);
    else if (tAlignment == NWN::Good) StackPushInteger(4);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in adjustAlignment for parameter tAlignment of type Alignment passed: %d. Cannot continue, and it's your fault!\n", tAlignment); exit(1); };
   StackPushObject(oSubject.id);
 
   VM_ExecuteCommand(201, 4);
@@ -962,7 +962,7 @@ void NWScriptI::applyEffectAtLocation(NWN::DurationType tDurationType, const NWN
   if (tDurationType == NWN::Instant) StackPushInteger(0);
    else if (tDurationType == NWN::Temporary) StackPushInteger(1);
    else if (tDurationType == NWN::Permanent) StackPushInteger(2);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in applyEffectAtLocation for parameter tDurationType of type DurationType passed: %d. Cannot continue, and it's your fault!\n", tDurationType); exit(1); };
 
   VM_ExecuteCommand(216, 4);
 
@@ -983,7 +983,7 @@ void NWScriptI::applyEffectToObject(NWN::DurationType tDurationType, const NWN::
   if (tDurationType == NWN::Instant) StackPushInteger(0);
    else if (tDurationType == NWN::Temporary) StackPushInteger(1);
    else if (tDurationType == NWN::Permanent) StackPushInteger(2);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in applyEffectToObject for parameter tDurationType of type DurationType passed: %d. Cannot continue, and it's your fault!\n", tDurationType); exit(1); };
 
   VM_ExecuteCommand(220, 4);
 
@@ -1105,7 +1105,7 @@ void NWScriptI::changeToStandardFaction(const NWN::NWObject& oCreatureToChange, 
    else if (tStandardFaction == NWN::Commoner) StackPushInteger(1);
    else if (tStandardFaction == NWN::Merchant) StackPushInteger(2);
    else if (tStandardFaction == NWN::Defender) StackPushInteger(3);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in changeToStandardFaction for parameter tStandardFaction of type StandardFaction passed: %d. Cannot continue, and it's your fault!\n", tStandardFaction); exit(1); };
   StackPushObject(oCreatureToChange.id);
 
   VM_ExecuteCommand(412, 2);
@@ -1266,7 +1266,7 @@ NWN::NWObject NWScriptI::createObject(NWN::ObjectType tObjectType, const std::st
    else if (tObjectType == NWN::Placeable) StackPushInteger(64);
    else if (tObjectType == NWN::Trigger) StackPushInteger(4);
    else if (tObjectType == NWN::Waypoint) StackPushInteger(32);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in createObject for parameter tObjectType of type ObjectType passed: %d. Cannot continue, and it's your fault!\n", tObjectType); exit(1); };
 
   VM_ExecuteCommand(243, 5);
 
@@ -1288,7 +1288,7 @@ NWN::NWObject NWScriptI::createTrapAtLocation(NWN::TrapType tTrapType, const NWN
    else if (tStandardFaction == NWN::Commoner) StackPushInteger(1);
    else if (tStandardFaction == NWN::Merchant) StackPushInteger(2);
    else if (tStandardFaction == NWN::Defender) StackPushInteger(3);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in createTrapAtLocation for parameter tStandardFaction of type StandardFaction passed: %d. Cannot continue, and it's your fault!\n", tStandardFaction); exit(1); };
   StackPushString(sTag.c_str());
   StackPushFloat(fSize);
   CScriptLocation *lLocation_ptr;
@@ -1348,7 +1348,7 @@ NWN::NWObject NWScriptI::createTrapAtLocation(NWN::TrapType tTrapType, const NWN
    else if (tTrapType == NWN::MinorNegativeTrap) StackPushInteger(32);
    else if (tTrapType == NWN::AverageElectricalTrap) StackPushInteger(21);
    else if (tTrapType == NWN::StrongTangleTrap) StackPushInteger(10);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in createTrapAtLocation for parameter tTrapType of type TrapType passed: %d. Cannot continue, and it's your fault!\n", tTrapType); exit(1); };
 
   VM_ExecuteCommand(809, 7);
 
@@ -1370,7 +1370,7 @@ void NWScriptI::createTrapOnObject(NWN::TrapType tTrapType, const NWN::NWObject&
    else if (tStandardFaction == NWN::Commoner) StackPushInteger(1);
    else if (tStandardFaction == NWN::Merchant) StackPushInteger(2);
    else if (tStandardFaction == NWN::Defender) StackPushInteger(3);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in createTrapOnObject for parameter tStandardFaction of type StandardFaction passed: %d. Cannot continue, and it's your fault!\n", tStandardFaction); exit(1); };
   StackPushObject(oObject.id);
   if (tTrapType == NWN::StrongSonicTrap) StackPushInteger(38);
    else if (tTrapType == NWN::DeadlyGasTrap) StackPushInteger(27);
@@ -1420,7 +1420,7 @@ void NWScriptI::createTrapOnObject(NWN::TrapType tTrapType, const NWN::NWObject&
    else if (tTrapType == NWN::MinorNegativeTrap) StackPushInteger(32);
    else if (tTrapType == NWN::AverageElectricalTrap) StackPushInteger(21);
    else if (tTrapType == NWN::StrongTangleTrap) StackPushInteger(10);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in createTrapOnObject for parameter tTrapType of type TrapType passed: %d. Cannot continue, and it's your fault!\n", tTrapType); exit(1); };
 
   VM_ExecuteCommand(810, 5);
 
@@ -1696,7 +1696,7 @@ void NWScriptI::doDoorAction(const NWN::NWObject& oTargetDoor, NWN::DoorAction t
    else if (tDoorAction == NWN::BashDoor) StackPushInteger(2);
    else if (tDoorAction == NWN::IgnoreDoor) StackPushInteger(3);
    else if (tDoorAction == NWN::KnockDoor) StackPushInteger(4);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in doDoorAction for parameter tDoorAction of type DoorAction passed: %d. Cannot continue, and it's your fault!\n", tDoorAction); exit(1); };
   StackPushObject(oTargetDoor.id);
 
   VM_ExecuteCommand(338, 2);
@@ -1713,7 +1713,7 @@ void NWScriptI::doPlaceableObjectAction(const NWN::NWObject& oPlaceable, NWN::Pl
    else if (tPlaceableAction == NWN::UnlockPlaceable) StackPushInteger(1);
    else if (tPlaceableAction == NWN::BashPlaceable) StackPushInteger(2);
    else if (tPlaceableAction == NWN::KnockPlaceable) StackPushInteger(4);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in doPlaceableObjectAction for parameter tPlaceableAction of type PlaceableAction passed: %d. Cannot continue, and it's your fault!\n", tPlaceableAction); exit(1); };
   StackPushObject(oPlaceable.id);
 
   VM_ExecuteCommand(547, 2);
@@ -1761,13 +1761,13 @@ NWN::NWEffect NWScriptI::effectACDecrease(Ice::Int nValue, NWN::ACModifyType tAC
    else if (tDamageType == NWN::BaseDamage) StackPushInteger(4096);
    else if (tDamageType == NWN::SlashingDamage) StackPushInteger(4);
    else if (tDamageType == NWN::ColdDamage) StackPushInteger(32);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in effectACDecrease for parameter tDamageType of type DamageType passed: %d. Cannot continue, and it's your fault!\n", tDamageType); exit(1); };
   if (tACModifyType == NWN::ACDodgeBonus) StackPushInteger(0);
    else if (tACModifyType == NWN::ACNaturalBonus) StackPushInteger(1);
    else if (tACModifyType == NWN::ACArmorEnchantmentBonus) StackPushInteger(2);
    else if (tACModifyType == NWN::ACShieldEnchantmentBonus) StackPushInteger(3);
    else if (tACModifyType == NWN::ACDeflectionBonus) StackPushInteger(4);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in effectACDecrease for parameter tACModifyType of type ACModifyType passed: %d. Cannot continue, and it's your fault!\n", tACModifyType); exit(1); };
   StackPushInteger(nValue);
 
   VM_ExecuteCommand(450, 3);
@@ -1808,13 +1808,13 @@ NWN::NWEffect NWScriptI::effectACIncrease(Ice::Int nValue, NWN::ACModifyType tAC
    else if (tDamageType == NWN::BaseDamage) StackPushInteger(4096);
    else if (tDamageType == NWN::SlashingDamage) StackPushInteger(4);
    else if (tDamageType == NWN::ColdDamage) StackPushInteger(32);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in effectACIncrease for parameter tDamageType of type DamageType passed: %d. Cannot continue, and it's your fault!\n", tDamageType); exit(1); };
   if (tACModifyType == NWN::ACDodgeBonus) StackPushInteger(0);
    else if (tACModifyType == NWN::ACNaturalBonus) StackPushInteger(1);
    else if (tACModifyType == NWN::ACArmorEnchantmentBonus) StackPushInteger(2);
    else if (tACModifyType == NWN::ACShieldEnchantmentBonus) StackPushInteger(3);
    else if (tACModifyType == NWN::ACDeflectionBonus) StackPushInteger(4);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in effectACIncrease for parameter tACModifyType of type ACModifyType passed: %d. Cannot continue, and it's your fault!\n", tACModifyType); exit(1); };
   StackPushInteger(nValue);
 
   VM_ExecuteCommand(115, 3);
@@ -1848,7 +1848,7 @@ NWN::NWEffect NWScriptI::effectAbilityDecrease(NWN::Ability tAbility, Ice::Int n
    else if (tAbility == NWN::Constitution) StackPushInteger(2);
    else if (tAbility == NWN::Intelligence) StackPushInteger(3);
    else if (tAbility == NWN::Wisdom) StackPushInteger(4);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in effectAbilityDecrease for parameter tAbility of type Ability passed: %d. Cannot continue, and it's your fault!\n", tAbility); exit(1); };
 
   VM_ExecuteCommand(446, 2);
 
@@ -1881,7 +1881,7 @@ NWN::NWEffect NWScriptI::effectAbilityIncrease(NWN::Ability tAbility, Ice::Int n
    else if (tAbility == NWN::Constitution) StackPushInteger(2);
    else if (tAbility == NWN::Intelligence) StackPushInteger(3);
    else if (tAbility == NWN::Wisdom) StackPushInteger(4);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in effectAbilityIncrease for parameter tAbility of type Ability passed: %d. Cannot continue, and it's your fault!\n", tAbility); exit(1); };
 
   VM_ExecuteCommand(80, 2);
 
@@ -1965,7 +1965,7 @@ NWN::NWEffect NWScriptI::effectAttackDecrease(Ice::Int nPenalty, NWN::AttackBonu
   if (tAttackBonus == NWN::MiscBonus) StackPushInteger(0);
    else if (tAttackBonus == NWN::OnhandBonus) StackPushInteger(1);
    else if (tAttackBonus == NWN::OffhandBonus) StackPushInteger(2);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in effectAttackDecrease for parameter tAttackBonus of type AttackBonus passed: %d. Cannot continue, and it's your fault!\n", tAttackBonus); exit(1); };
   StackPushInteger(nPenalty);
 
   VM_ExecuteCommand(447, 2);
@@ -1995,7 +1995,7 @@ NWN::NWEffect NWScriptI::effectAttackIncrease(Ice::Int nBonus, NWN::AttackBonus 
   if (tAttackBonus == NWN::MiscBonus) StackPushInteger(0);
    else if (tAttackBonus == NWN::OnhandBonus) StackPushInteger(1);
    else if (tAttackBonus == NWN::OffhandBonus) StackPushInteger(2);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in effectAttackIncrease for parameter tAttackBonus of type AttackBonus passed: %d. Cannot continue, and it's your fault!\n", tAttackBonus); exit(1); };
   StackPushInteger(nBonus);
 
   VM_ExecuteCommand(118, 2);
@@ -2043,7 +2043,7 @@ NWN::NWEffect NWScriptI::effectBeam(Ice::Int nBeamVisualEffect, const NWN::NWObj
    else if (tCreaturePart == NWN::LeftShoulderPart) StackPushInteger(15);
    else if (tCreaturePart == NWN::LeftThighPart) StackPushInteger(4);
    else if (tCreaturePart == NWN::RightForearmPart) StackPushInteger(10);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in effectBeam for parameter tCreaturePart of type CreaturePart passed: %d. Cannot continue, and it's your fault!\n", tCreaturePart); exit(1); };
   StackPushObject(oEffector.id);
   StackPushInteger(nBeamVisualEffect);
 
@@ -2124,7 +2124,7 @@ NWN::NWEffect NWScriptI::effectConcealment(Ice::Int nPercentage, NWN::MissChance
   if (tMissChanceType == NWN::MissChanceVSAll) StackPushInteger(0);
    else if (tMissChanceType == NWN::MissChanceVSRanged) StackPushInteger(1);
    else if (tMissChanceType == NWN::MissChanceVSMelee) StackPushInteger(2);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in effectConcealment for parameter tMissChanceType of type MissChanceType passed: %d. Cannot continue, and it's your fault!\n", tMissChanceType); exit(1); };
   StackPushInteger(nPercentage);
 
   VM_ExecuteCommand(458, 2);
@@ -2329,7 +2329,7 @@ NWN::NWEffect NWScriptI::effectDamage(Ice::Int nDamageAmount, NWN::DamageType tD
    else if (tDamagePower == NWN::PlusFourDamage) StackPushInteger(4);
    else if (tDamagePower == NWN::PlusTwentyDamage) StackPushInteger(21);
    else if (tDamagePower == NWN::PlusNineDamage) StackPushInteger(10);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in effectDamage for parameter tDamagePower of type DamagePower passed: %d. Cannot continue, and it's your fault!\n", tDamagePower); exit(1); };
   if (tDamageType == NWN::AcidDamage) StackPushInteger(16);
    else if (tDamageType == NWN::ACVsAllDamage) StackPushInteger(4103);
    else if (tDamageType == NWN::NegativeDamage) StackPushInteger(512);
@@ -2344,7 +2344,7 @@ NWN::NWEffect NWScriptI::effectDamage(Ice::Int nDamageAmount, NWN::DamageType tD
    else if (tDamageType == NWN::BaseDamage) StackPushInteger(4096);
    else if (tDamageType == NWN::SlashingDamage) StackPushInteger(4);
    else if (tDamageType == NWN::ColdDamage) StackPushInteger(32);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in effectDamage for parameter tDamageType of type DamageType passed: %d. Cannot continue, and it's your fault!\n", tDamageType); exit(1); };
   StackPushInteger(nDamageAmount);
 
   VM_ExecuteCommand(79, 3);
@@ -2385,7 +2385,7 @@ NWN::NWEffect NWScriptI::effectDamageDecrease(Ice::Int nPenalty, NWN::DamageType
    else if (tDamageType == NWN::BaseDamage) StackPushInteger(4096);
    else if (tDamageType == NWN::SlashingDamage) StackPushInteger(4);
    else if (tDamageType == NWN::ColdDamage) StackPushInteger(32);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in effectDamageDecrease for parameter tDamageType of type DamageType passed: %d. Cannot continue, and it's your fault!\n", tDamageType); exit(1); };
   StackPushInteger(nPenalty);
 
   VM_ExecuteCommand(448, 2);
@@ -2427,7 +2427,7 @@ NWN::NWEffect NWScriptI::effectDamageImmunityDecrease(NWN::DamageType tDamageTyp
    else if (tDamageType == NWN::BaseDamage) StackPushInteger(4096);
    else if (tDamageType == NWN::SlashingDamage) StackPushInteger(4);
    else if (tDamageType == NWN::ColdDamage) StackPushInteger(32);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in effectDamageImmunityDecrease for parameter tDamageType of type DamageType passed: %d. Cannot continue, and it's your fault!\n", tDamageType); exit(1); };
 
   VM_ExecuteCommand(449, 2);
 
@@ -2468,7 +2468,7 @@ NWN::NWEffect NWScriptI::effectDamageImmunityIncrease(NWN::DamageType tDamageTyp
    else if (tDamageType == NWN::BaseDamage) StackPushInteger(4096);
    else if (tDamageType == NWN::SlashingDamage) StackPushInteger(4);
    else if (tDamageType == NWN::ColdDamage) StackPushInteger(32);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in effectDamageImmunityIncrease for parameter tDamageType of type DamageType passed: %d. Cannot continue, and it's your fault!\n", tDamageType); exit(1); };
 
   VM_ExecuteCommand(275, 2);
 
@@ -2508,7 +2508,7 @@ NWN::NWEffect NWScriptI::effectDamageIncrease(Ice::Int nBonus, NWN::DamageType t
    else if (tDamageType == NWN::BaseDamage) StackPushInteger(4096);
    else if (tDamageType == NWN::SlashingDamage) StackPushInteger(4);
    else if (tDamageType == NWN::ColdDamage) StackPushInteger(32);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in effectDamageIncrease for parameter tDamageType of type DamageType passed: %d. Cannot continue, and it's your fault!\n", tDamageType); exit(1); };
   StackPushInteger(nBonus);
 
   VM_ExecuteCommand(120, 2);
@@ -2558,7 +2558,7 @@ NWN::NWEffect NWScriptI::effectDamageReduction(Ice::Int nAmount, NWN::DamagePowe
    else if (tDamagePower == NWN::PlusFourDamage) StackPushInteger(4);
    else if (tDamagePower == NWN::PlusTwentyDamage) StackPushInteger(21);
    else if (tDamagePower == NWN::PlusNineDamage) StackPushInteger(10);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in effectDamageReduction for parameter tDamagePower of type DamagePower passed: %d. Cannot continue, and it's your fault!\n", tDamagePower); exit(1); };
   StackPushInteger(nAmount);
 
   VM_ExecuteCommand(119, 3);
@@ -2601,7 +2601,7 @@ NWN::NWEffect NWScriptI::effectDamageResistance(NWN::DamageType tDamageType, Ice
    else if (tDamageType == NWN::BaseDamage) StackPushInteger(4096);
    else if (tDamageType == NWN::SlashingDamage) StackPushInteger(4);
    else if (tDamageType == NWN::ColdDamage) StackPushInteger(32);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in effectDamageResistance for parameter tDamageType of type DamageType passed: %d. Cannot continue, and it's your fault!\n", tDamageType); exit(1); };
 
   VM_ExecuteCommand(81, 3);
 
@@ -2641,7 +2641,7 @@ NWN::NWEffect NWScriptI::effectDamageShield(Ice::Int nDamageAmount, Ice::Int nRa
    else if (tDamageType == NWN::BaseDamage) StackPushInteger(4096);
    else if (tDamageType == NWN::SlashingDamage) StackPushInteger(4);
    else if (tDamageType == NWN::ColdDamage) StackPushInteger(32);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in effectDamageShield for parameter tDamageType of type DamageType passed: %d. Cannot continue, and it's your fault!\n", tDamageType); exit(1); };
   StackPushInteger(nRandomAmount);
   StackPushInteger(nDamageAmount);
 
@@ -3121,7 +3121,7 @@ NWN::NWEffect NWScriptI::effectImmunity(NWN::ImmunityType tImmunityType, const I
    else if (tImmunityType == NWN::DeathImmunity) StackPushInteger(32);
    else if (tImmunityType == NWN::DamageDecreaseImmunity) StackPushInteger(21);
    else if (tImmunityType == NWN::EntangleImmunity) StackPushInteger(10);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in effectImmunity for parameter tImmunityType of type ImmunityType passed: %d. Cannot continue, and it's your fault!\n", tImmunityType); exit(1); };
 
   VM_ExecuteCommand(273, 1);
 
@@ -3234,7 +3234,7 @@ NWN::NWEffect NWScriptI::effectMissChance(Ice::Int nPercentage, NWN::MissChanceT
   if (tMissChanceType == NWN::MissChanceVSAll) StackPushInteger(0);
    else if (tMissChanceType == NWN::MissChanceVSRanged) StackPushInteger(1);
    else if (tMissChanceType == NWN::MissChanceVSMelee) StackPushInteger(2);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in effectMissChance for parameter tMissChanceType of type MissChanceType passed: %d. Cannot continue, and it's your fault!\n", tMissChanceType); exit(1); };
   StackPushInteger(nPercentage);
 
   VM_ExecuteCommand(477, 2);
@@ -3567,7 +3567,7 @@ NWN::NWEffect NWScriptI::effectSavingThrowDecrease(Ice::Int nSave, Ice::Int nVal
    else if (tSaveType == NWN::SpellSaveType) StackPushInteger(15);
    else if (tSaveType == NWN::FearSaveType) StackPushInteger(4);
    else if (tSaveType == NWN::NegativeSaveType) StackPushInteger(10);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in effectSavingThrowDecrease for parameter tSaveType of type SaveType passed: %d. Cannot continue, and it's your fault!\n", tSaveType); exit(1); };
   StackPushInteger(nValue);
   StackPushInteger(nSave);
 
@@ -3615,7 +3615,7 @@ NWN::NWEffect NWScriptI::effectSavingThrowIncrease(Ice::Int nSave, Ice::Int nVal
    else if (tSaveType == NWN::SpellSaveType) StackPushInteger(15);
    else if (tSaveType == NWN::FearSaveType) StackPushInteger(4);
    else if (tSaveType == NWN::NegativeSaveType) StackPushInteger(10);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in effectSavingThrowIncrease for parameter tSaveType of type SaveType passed: %d. Cannot continue, and it's your fault!\n", tSaveType); exit(1); };
   StackPushInteger(nValue);
   StackPushInteger(nSave);
 
@@ -3806,7 +3806,7 @@ NWN::NWEffect NWScriptI::effectSpellFailure(Ice::Int nPercent, NWN::SpellSchool 
    else if (tSpellSchool == NWN::TransmutationSchool) StackPushInteger(8);
    else if (tSpellSchool == NWN::DivinationSchool) StackPushInteger(3);
    else if (tSpellSchool == NWN::EnchantmentSchool) StackPushInteger(4);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in effectSpellFailure for parameter tSpellSchool of type SpellSchool passed: %d. Cannot continue, and it's your fault!\n", tSpellSchool); exit(1); };
   StackPushInteger(nPercent);
 
   VM_ExecuteCommand(690, 2);
@@ -3868,7 +3868,7 @@ NWN::NWEffect NWScriptI::effectSpellLevelAbsorption(Ice::Int nMaxSpellLevelAbsor
    else if (tSpellSchool == NWN::TransmutationSchool) StackPushInteger(8);
    else if (tSpellSchool == NWN::DivinationSchool) StackPushInteger(3);
    else if (tSpellSchool == NWN::EnchantmentSchool) StackPushInteger(4);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in effectSpellLevelAbsorption for parameter tSpellSchool of type SpellSchool passed: %d. Cannot continue, and it's your fault!\n", tSpellSchool); exit(1); };
   StackPushInteger(nTotalSpellLevelsAbsorbed);
   StackPushInteger(nMaxSpellLevelAbsorbed);
 
@@ -4485,7 +4485,7 @@ NWN::SavingThrowResult NWScriptI::fortitudeSave(const NWN::NWObject& oCreature, 
    else if (tSaveType == NWN::SpellSaveType) StackPushInteger(15);
    else if (tSaveType == NWN::FearSaveType) StackPushInteger(4);
    else if (tSaveType == NWN::NegativeSaveType) StackPushInteger(10);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in fortitudeSave for parameter tSaveType of type SaveType passed: %d. Cannot continue, and it's your fault!\n", tSaveType); exit(1); };
   StackPushInteger(nDC);
   StackPushObject(oCreature.id);
 
@@ -4497,7 +4497,7 @@ NWN::SavingThrowResult NWScriptI::fortitudeSave(const NWN::NWObject& oCreature, 
   if (nRetVal == 0) return NWN::FailedRoll;
   if (nRetVal == 1) return NWN::SucceededRoll;
   if (nRetVal == 3) return NWN::ImmuneToSaveType;
-  throw "Error: Unmapped enum return type";
+  printf("Error: Unmapped enum return type in fortitudeSave of type SavingThrowResult: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
 };
 
 std::string NWScriptI::get2DAString(const std::string& s2DA, const std::string& sColumn, Ice::Int nRow, const Ice::Current& ice) {
@@ -4547,7 +4547,7 @@ NWN::AILevel NWScriptI::getAILevel(const NWN::NWObject& oTarget, const Ice::Curr
   if (nRetVal == 2) return NWN::NormalAI;
   if (nRetVal == 3) return NWN::HighAI;
   if (nRetVal == 4) return NWN::VeryHighAI;
-  throw "Error: Unmapped enum return type";
+  printf("Error: Unmapped enum return type in getAILevel of type AILevel: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
 };
 
 Ice::Int NWScriptI::getAbilityModifier(NWN::Ability tAbility, const NWN::NWObject& oCreature, const Ice::Current& ice) {
@@ -4561,7 +4561,7 @@ Ice::Int NWScriptI::getAbilityModifier(NWN::Ability tAbility, const NWN::NWObjec
    else if (tAbility == NWN::Constitution) StackPushInteger(2);
    else if (tAbility == NWN::Intelligence) StackPushInteger(3);
    else if (tAbility == NWN::Wisdom) StackPushInteger(4);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in getAbilityModifier for parameter tAbility of type Ability passed: %d. Cannot continue, and it's your fault!\n", tAbility); exit(1); };
 
   VM_ExecuteCommand(331, 2);
 
@@ -4582,7 +4582,7 @@ Ice::Int NWScriptI::getAbilityScore(const NWN::NWObject& oCreature, NWN::Ability
    else if (tAbility == NWN::Constitution) StackPushInteger(2);
    else if (tAbility == NWN::Intelligence) StackPushInteger(3);
    else if (tAbility == NWN::Wisdom) StackPushInteger(4);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in getAbilityScore for parameter tAbility of type Ability passed: %d. Cannot continue, and it's your fault!\n", tAbility); exit(1); };
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(139, 3);
@@ -4609,7 +4609,7 @@ bool NWScriptI::getActionMode(const NWN::NWObject& oCreature, NWN::ActionMode tA
    else if (tActionMode == NWN::ImprovedExpertiseMode) StackPushInteger(9);
    else if (tActionMode == NWN::ImprovedPowerAttackMode) StackPushInteger(4);
    else if (tActionMode == NWN::DefensiveCastMode) StackPushInteger(10);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in getActionMode for parameter tActionMode of type ActionMode passed: %d. Cannot continue, and it's your fault!\n", tActionMode); exit(1); };
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(735, 2);
@@ -4651,7 +4651,7 @@ NWN::Alignment NWScriptI::getAlignmentGoodEvil(const NWN::NWObject& oCreature, c
   if (nRetVal == 2) return NWN::Lawful;
   if (nRetVal == 3) return NWN::Chaotic;
   if (nRetVal == 4) return NWN::Good;
-  throw "Error: Unmapped enum return type";
+  printf("Error: Unmapped enum return type in getAlignmentGoodEvil of type Alignment: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
 };
 
 NWN::Alignment NWScriptI::getAlignmentLawChaos(const NWN::NWObject& oCreature, const Ice::Current& ice) {
@@ -4671,7 +4671,7 @@ NWN::Alignment NWScriptI::getAlignmentLawChaos(const NWN::NWObject& oCreature, c
   if (nRetVal == 2) return NWN::Lawful;
   if (nRetVal == 3) return NWN::Chaotic;
   if (nRetVal == 4) return NWN::Good;
-  throw "Error: Unmapped enum return type";
+  printf("Error: Unmapped enum return type in getAlignmentLawChaos of type Alignment: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
 };
 
 Ice::Int NWScriptI::getAnimalCompanionCreatureType(const NWN::NWObject& oCreature, const Ice::Current& ice) {
@@ -4813,7 +4813,7 @@ NWN::NWObject NWScriptI::getAssociate(NWN::AssociateType tAssociateType, const N
    else if (tAssociateType == NWN::AnimalCompanionAssociate) StackPushInteger(2);
    else if (tAssociateType == NWN::FamiliarAssociate) StackPushInteger(3);
    else if (tAssociateType == NWN::SummonedAssociate) StackPushInteger(4);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in getAssociate for parameter tAssociateType of type AssociateType passed: %d. Cannot continue, and it's your fault!\n", tAssociateType); exit(1); };
 
   VM_ExecuteCommand(364, 3);
 
@@ -4842,7 +4842,7 @@ NWN::AssociateType NWScriptI::getAssociateType(const NWN::NWObject& oAssociate, 
   if (nRetVal == 2) return NWN::AnimalCompanionAssociate;
   if (nRetVal == 3) return NWN::FamiliarAssociate;
   if (nRetVal == 4) return NWN::SummonedAssociate;
-  throw "Error: Unmapped enum return type";
+  printf("Error: Unmapped enum return type in getAssociateType of type AssociateType: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
 };
 
 NWN::NWObject NWScriptI::getAttackTarget(const NWN::NWObject& oCreature, const Ice::Current& ice) {
@@ -5167,7 +5167,7 @@ Ice::Int NWScriptI::getCreatureBodyPart(NWN::CreaturePart tCreaturePart, const N
    else if (tCreaturePart == NWN::LeftShoulderPart) StackPushInteger(15);
    else if (tCreaturePart == NWN::LeftThighPart) StackPushInteger(4);
    else if (tCreaturePart == NWN::RightForearmPart) StackPushInteger(10);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in getCreatureBodyPart for parameter tCreaturePart of type CreaturePart passed: %d. Cannot continue, and it's your fault!\n", tCreaturePart); exit(1); };
 
   VM_ExecuteCommand(792, 2);
 
@@ -5194,7 +5194,7 @@ NWN::CreatureSize NWScriptI::getCreatureSize(const NWN::NWObject& oCreature, con
   if (nRetVal == 2) return NWN::SmallSize;
   if (nRetVal == 3) return NWN::MediumSize;
   if (nRetVal == 4) return NWN::LargeSize;
-  throw "Error: Unmapped enum return type";
+  printf("Error: Unmapped enum return type in getCreatureSize of type CreatureSize: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
 };
 
 Ice::Int NWScriptI::getCreatureStartingPackage(const NWN::NWObject& oCreature, const Ice::Current& ice) {
@@ -5279,7 +5279,7 @@ NWN::Action NWScriptI::getCurrentAction(const NWN::NWObject& oObject, const Ice:
   if (nRetVal == 4) return NWN::CastSpellAction;
   if (nRetVal == 43) return NWN::RandomWalkAction;
   if (nRetVal == 10) return NWN::FlagTrapAction;
-  throw "Error: Unmapped enum return type";
+  printf("Error: Unmapped enum return type in getCurrentAction of type Action: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
 };
 
 Ice::Int NWScriptI::getCurrentHitPoints(const NWN::NWObject& oObject, const Ice::Current& ice) {
@@ -5341,7 +5341,7 @@ Ice::Int NWScriptI::getDamageDealtByType(NWN::DamageType tDamageType, const Ice:
    else if (tDamageType == NWN::BaseDamage) StackPushInteger(4096);
    else if (tDamageType == NWN::SlashingDamage) StackPushInteger(4);
    else if (tDamageType == NWN::ColdDamage) StackPushInteger(32);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in getDamageDealtByType for parameter tDamageType of type DamageType passed: %d. Cannot continue, and it's your fault!\n", tDamageType); exit(1); };
 
   VM_ExecuteCommand(344, 1);
 
@@ -5532,7 +5532,7 @@ NWN::DurationType NWScriptI::getEffectDurationType(const NWN::NWEffect& eEffect,
   if (nRetVal == 0) return NWN::Instant;
   if (nRetVal == 1) return NWN::Temporary;
   if (nRetVal == 2) return NWN::Permanent;
-  throw "Error: Unmapped enum return type";
+  printf("Error: Unmapped enum return type in getEffectDurationType of type DurationType: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
 };
 
 Ice::Int NWScriptI::getEffectSpellId(const NWN::NWEffect& eSpellEffect, const Ice::Current& ice) {
@@ -5565,9 +5565,10 @@ NWN::EffectSubType NWScriptI::getEffectSubType(const NWN::NWEffect& eEffect, con
   StackPopInteger(&nRetVal);
   unlock(getEffectSubType_mutex, "getEffectSubType");
   if (nRetVal == 16) return NWN::SupernaturalSubType;
+  if (nRetVal == 0) return NWN::InvalidSubType;
   if (nRetVal == 24) return NWN::ExtraordinarySubType;
   if (nRetVal == 8) return NWN::MagicalSubType;
-  throw "Error: Unmapped enum return type";
+  printf("Error: Unmapped enum return type in getEffectSubType of type EffectSubType: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
 };
 
 NWN::EffectType NWScriptI::getEffectType(const NWN::NWEffect& eEffect, const Ice::Current& ice) {
@@ -5659,7 +5660,7 @@ NWN::EffectType NWScriptI::getEffectType(const NWN::NWEffect& eEffect, const Ice
   if (nRetVal == 37) return NWN::SlowEffect;
   if (nRetVal == 18) return NWN::ArcaneSpellFailureEffect;
   if (nRetVal == 56) return NWN::InvisibilityEffect;
-  throw "Error: Unmapped enum return type";
+  printf("Error: Unmapped enum return type in getEffectType of type EffectType: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
 };
 
 Ice::Int NWScriptI::getEncounterActive(const NWN::NWObject& oEncounter, const Ice::Current& ice) {
@@ -6191,7 +6192,7 @@ NWN::NWObject NWScriptI::getFirstObjectInShape(NWN::ShapeType tShapeType, Ice::D
    else if (tShapeType == NWN::CubeShape) StackPushInteger(2);
    else if (tShapeType == NWN::SpellConeShape) StackPushInteger(3);
    else if (tShapeType == NWN::SphereShape) StackPushInteger(4);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in getFirstObjectInShape for parameter tShapeType of type ShapeType passed: %d. Cannot continue, and it's your fault!\n", tShapeType); exit(1); };
 
   VM_ExecuteCommand(128, 6);
 
@@ -6303,7 +6304,7 @@ NWN::Gender NWScriptI::getGender(const NWN::NWObject& oCreature, const Ice::Curr
   if (nRetVal == 2) return NWN::BothGender;
   if (nRetVal == 3) return NWN::OtherGender;
   if (nRetVal == 4) return NWN::NoneGender;
-  throw "Error: Unmapped enum return type";
+  printf("Error: Unmapped enum return type in getGender of type Gender: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
 };
 
 NWN::NWObject NWScriptI::getGoingToBeAttackedBy(const NWN::NWObject& oTarget, const Ice::Current& ice) {
@@ -6697,7 +6698,7 @@ bool NWScriptI::getIsDoorActionPossible(const NWN::NWObject& oTargetDoor, NWN::D
    else if (tDoorAction == NWN::BashDoor) StackPushInteger(2);
    else if (tDoorAction == NWN::IgnoreDoor) StackPushInteger(3);
    else if (tDoorAction == NWN::KnockDoor) StackPushInteger(4);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in getIsDoorActionPossible for parameter tDoorAction of type DoorAction passed: %d. Cannot continue, and it's your fault!\n", tDoorAction); exit(1); };
   StackPushObject(oTargetDoor.id);
 
   VM_ExecuteCommand(337, 2);
@@ -6821,7 +6822,7 @@ bool NWScriptI::getIsImmune(const NWN::NWObject& oCreature, NWN::ImmunityType tI
    else if (tImmunityType == NWN::DeathImmunity) StackPushInteger(32);
    else if (tImmunityType == NWN::DamageDecreaseImmunity) StackPushInteger(21);
    else if (tImmunityType == NWN::EntangleImmunity) StackPushInteger(10);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in getIsImmune for parameter tImmunityType of type ImmunityType passed: %d. Cannot continue, and it's your fault!\n", tImmunityType); exit(1); };
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(274, 3);
@@ -6970,7 +6971,7 @@ bool NWScriptI::getIsPlaceableObjectActionPossible(const NWN::NWObject& oPlaceab
    else if (tPlaceableAction == NWN::UnlockPlaceable) StackPushInteger(1);
    else if (tPlaceableAction == NWN::BashPlaceable) StackPushInteger(2);
    else if (tPlaceableAction == NWN::KnockPlaceable) StackPushInteger(4);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in getIsPlaceableObjectActionPossible for parameter tPlaceableAction of type PlaceableAction passed: %d. Cannot continue, and it's your fault!\n", tPlaceableAction); exit(1); };
   StackPushObject(oPlaceable.id);
 
   VM_ExecuteCommand(546, 2);
@@ -7274,7 +7275,7 @@ NWN::NWObject NWScriptI::getItemInSlot(NWN::InventorySlot tInventorySlot, const 
    else if (tInventorySlot == NWN::CreatureRighthandSlot) StackPushInteger(15);
    else if (tInventorySlot == NWN::RighthandSlot) StackPushInteger(4);
    else if (tInventorySlot == NWN::BeltSlot) StackPushInteger(10);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in getItemInSlot for parameter tInventorySlot of type InventorySlot passed: %d. Cannot continue, and it's your fault!\n", tInventorySlot); exit(1); };
 
   VM_ExecuteCommand(155, 2);
 
@@ -7367,7 +7368,7 @@ NWN::DurationType NWScriptI::getItemPropertyDurationType(const NWN::NWItemProper
   if (nRetVal == 0) return NWN::Instant;
   if (nRetVal == 1) return NWN::Temporary;
   if (nRetVal == 2) return NWN::Permanent;
-  throw "Error: Unmapped enum return type";
+  printf("Error: Unmapped enum return type in getItemPropertyDurationType of type DurationType: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
 };
 
 Ice::Int NWScriptI::getItemPropertyParam1(const NWN::NWItemProperty& iProp, const Ice::Current& ice) {
@@ -7508,7 +7509,7 @@ NWN::AssociateCommand NWScriptI::getLastAssociateCommand(const NWN::NWObject& oA
   if (nRetVal == -9) return NWN::UnsummonAnimalCompanionCommand;
   if (nRetVal == -14) return NWN::MasterSawTrapCommand;
   if (nRetVal == -3) return NWN::AttackNearestCommand;
-  throw "Error: Unmapped enum return type";
+  printf("Error: Unmapped enum return type in getLastAssociateCommand of type AssociateCommand: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
 };
 
 NWN::CombatMode NWScriptI::getLastAttackMode(const NWN::NWObject& oCreature, const Ice::Current& ice) {
@@ -7533,7 +7534,7 @@ NWN::CombatMode NWScriptI::getLastAttackMode(const NWN::NWObject& oCreature, con
   if (nRetVal == 9) return NWN::DirtyFightingCombatMode;
   if (nRetVal == 4) return NWN::FlurryOfBlowsCombatMode;
   if (nRetVal == 10) return NWN::DefensiveStanceCombatMode;
-  throw "Error: Unmapped enum return type";
+  printf("Error: Unmapped enum return type in getLastAttackMode of type CombatMode: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
 };
 
 NWN::SpecialAttack NWScriptI::getLastAttackType(const NWN::NWObject& oCreature, const Ice::Current& ice) {
@@ -7558,7 +7559,7 @@ NWN::SpecialAttack NWScriptI::getLastAttackType(const NWN::NWObject& oCreature, 
   if (nRetVal == 9) return NWN::FlurryOfBlowsSpecialAttack;
   if (nRetVal == 4) return NWN::DisarmSpecialAttack;
   if (nRetVal == 10) return NWN::RapidShotSpecialAttack;
-  throw "Error: Unmapped enum return type";
+  printf("Error: Unmapped enum return type in getLastAttackType of type SpecialAttack: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
 };
 
 NWN::NWObject NWScriptI::getLastAttacker(const NWN::NWObject& oAttackee, const Ice::Current& ice) {
@@ -8306,7 +8307,7 @@ NWN::MetaMagic NWScriptI::getMetaMagicFeat(const Ice::Current& ice) {
   if (nRetVal == 8) return NWN::QuickenMeta;
   if (nRetVal == 4) return NWN::MaximizeMeta;
   if (nRetVal == 32) return NWN::StillMeta;
-  throw "Error: Unmapped enum return type";
+  printf("Error: Unmapped enum return type in getMetaMagicFeat of type MetaMagic: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
 };
 
 NWN::NWObject NWScriptI::getModule(const Ice::Current& ice) {
@@ -8529,7 +8530,7 @@ NWN::NWObject NWScriptI::getNearestObject(NWN::ObjectType tObjectType, const NWN
    else if (tObjectType == NWN::Placeable) StackPushInteger(64);
    else if (tObjectType == NWN::Trigger) StackPushInteger(4);
    else if (tObjectType == NWN::Waypoint) StackPushInteger(32);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in getNearestObject for parameter tObjectType of type ObjectType passed: %d. Cannot continue, and it's your fault!\n", tObjectType); exit(1); };
 
   VM_ExecuteCommand(227, 3);
 
@@ -8584,7 +8585,7 @@ NWN::NWObject NWScriptI::getNearestObjectToLocation(NWN::ObjectType tObjectType,
    else if (tObjectType == NWN::Placeable) StackPushInteger(64);
    else if (tObjectType == NWN::Trigger) StackPushInteger(4);
    else if (tObjectType == NWN::Waypoint) StackPushInteger(32);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in getNearestObjectToLocation for parameter tObjectType of type ObjectType passed: %d. Cannot continue, and it's your fault!\n", tObjectType); exit(1); };
 
   VM_ExecuteCommand(228, 3);
 
@@ -8760,7 +8761,7 @@ NWN::NWObject NWScriptI::getNextObjectInShape(NWN::ShapeType tShapeType, Ice::Do
    else if (tShapeType == NWN::CubeShape) StackPushInteger(2);
    else if (tShapeType == NWN::SpellConeShape) StackPushInteger(3);
    else if (tShapeType == NWN::SphereShape) StackPushInteger(4);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in getNextObjectInShape for parameter tShapeType of type ShapeType passed: %d. Cannot continue, and it's your fault!\n", tShapeType); exit(1); };
 
   VM_ExecuteCommand(129, 6);
 
@@ -8870,7 +8871,7 @@ NWN::ObjectType NWScriptI::getObjectType(const NWN::NWObject& oTarget, const Ice
   if (nRetVal == 64) return NWN::Placeable;
   if (nRetVal == 4) return NWN::Trigger;
   if (nRetVal == 32) return NWN::Waypoint;
-  throw "Error: Unmapped enum return type";
+  printf("Error: Unmapped enum return type in getObjectType of type ObjectType: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
 };
 
 std::string NWScriptI::getPCChatMessage(const Ice::Current& ice) {
@@ -9069,7 +9070,7 @@ NWN::PhenoType NWScriptI::getPhenoType(const NWN::NWObject& oCreature, const Ice
   if (nRetVal == 15) return NWN::Custom13PhenoType;
   if (nRetVal == 4) return NWN::Custom2PhenoType;
   if (nRetVal == 10) return NWN::Custom8PhenoType;
-  throw "Error: Unmapped enum return type";
+  printf("Error: Unmapped enum return type in getPhenoType of type PhenoType: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
 };
 
 bool NWScriptI::getPickpocketableFlag(const NWN::NWObject& oItem, const Ice::Current& ice) {
@@ -9233,7 +9234,7 @@ NWN::RacialType NWScriptI::getRacialType(const NWN::NWObject& oCreature, const I
   if (nRetVal == 15) return NWN::HumanoidReptilianRace;
   if (nRetVal == 4) return NWN::HalfelfRace;
   if (nRetVal == 10) return NWN::ConstructRace;
-  throw "Error: Unmapped enum return type";
+  printf("Error: Unmapped enum return type in getRacialType of type RacialType: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
 };
 
 Ice::Int NWScriptI::getReflexAdjustedDamage(Ice::Int nDamage, const NWN::NWObject& oTarget, Ice::Int nDC, NWN::SaveType tSaveType, const NWN::NWObject& oSaveVersus, const Ice::Current& ice) {
@@ -9262,7 +9263,7 @@ Ice::Int NWScriptI::getReflexAdjustedDamage(Ice::Int nDamage, const NWN::NWObjec
    else if (tSaveType == NWN::SpellSaveType) StackPushInteger(15);
    else if (tSaveType == NWN::FearSaveType) StackPushInteger(4);
    else if (tSaveType == NWN::NegativeSaveType) StackPushInteger(10);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in getReflexAdjustedDamage for parameter tSaveType of type SaveType passed: %d. Cannot continue, and it's your fault!\n", tSaveType); exit(1); };
   StackPushInteger(nDC);
   StackPushObject(oTarget.id);
   StackPushInteger(nDamage);
@@ -9460,7 +9461,7 @@ Ice::Int NWScriptI::getStandardFactionReputation(NWN::StandardFaction tStandardF
    else if (tStandardFaction == NWN::Commoner) StackPushInteger(1);
    else if (tStandardFaction == NWN::Merchant) StackPushInteger(2);
    else if (tStandardFaction == NWN::Defender) StackPushInteger(3);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in getStandardFactionReputation for parameter tStandardFaction of type StandardFaction passed: %d. Cannot continue, and it's your fault!\n", tStandardFaction); exit(1); };
 
   VM_ExecuteCommand(524, 2);
 
@@ -9581,7 +9582,7 @@ std::string NWScriptI::getStringByStrRef(Ice::Int nStrRef, NWN::Gender tGender, 
    else if (tGender == NWN::BothGender) StackPushInteger(2);
    else if (tGender == NWN::OtherGender) StackPushInteger(3);
    else if (tGender == NWN::NoneGender) StackPushInteger(4);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in getStringByStrRef for parameter tGender of type Gender passed: %d. Cannot continue, and it's your fault!\n", tGender); exit(1); };
   StackPushInteger(nStrRef);
 
   VM_ExecuteCommand(239, 2);
@@ -9753,7 +9754,7 @@ NWN::TileMainLightColor NWScriptI::getTileMainLight1Color(const NWN::NWLocation&
   if (nRetVal == 4) return NWN::PaleDarkYellowTileMainLightColor;
   if (nRetVal == 21) return NWN::DarkPurpleTileMainLightColor;
   if (nRetVal == 10) return NWN::PaleGreenTileMainLightColor;
-  throw "Error: Unmapped enum return type";
+  printf("Error: Unmapped enum return type in getTileMainLight1Color of type TileMainLightColor: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
 };
 
 NWN::TileMainLightColor NWScriptI::getTileMainLight2Color(const NWN::NWLocation& lTile, const Ice::Current& ice) {
@@ -9807,7 +9808,7 @@ NWN::TileMainLightColor NWScriptI::getTileMainLight2Color(const NWN::NWLocation&
   if (nRetVal == 4) return NWN::PaleDarkYellowTileMainLightColor;
   if (nRetVal == 21) return NWN::DarkPurpleTileMainLightColor;
   if (nRetVal == 10) return NWN::PaleGreenTileMainLightColor;
-  throw "Error: Unmapped enum return type";
+  printf("Error: Unmapped enum return type in getTileMainLight2Color of type TileMainLightColor: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
 };
 
 NWN::TileSourceLightColor NWScriptI::getTileSourceLight1Color(const NWN::NWLocation& lTile, const Ice::Current& ice) {
@@ -9845,7 +9846,7 @@ NWN::TileSourceLightColor NWScriptI::getTileSourceLight1Color(const NWN::NWLocat
   if (nRetVal == 15) return NWN::PaleOrangeTileSourceLightColor;
   if (nRetVal == 4) return NWN::PaleDarkGreenTileSourceLightColor;
   if (nRetVal == 10) return NWN::PaleDarkPurpleTileSourceLightColor;
-  throw "Error: Unmapped enum return type";
+  printf("Error: Unmapped enum return type in getTileSourceLight1Color of type TileSourceLightColor: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
 };
 
 NWN::TileSourceLightColor NWScriptI::getTileSourceLight2Color(const NWN::NWLocation& lTile, const Ice::Current& ice) {
@@ -9883,7 +9884,7 @@ NWN::TileSourceLightColor NWScriptI::getTileSourceLight2Color(const NWN::NWLocat
   if (nRetVal == 15) return NWN::PaleOrangeTileSourceLightColor;
   if (nRetVal == 4) return NWN::PaleDarkGreenTileSourceLightColor;
   if (nRetVal == 10) return NWN::PaleDarkPurpleTileSourceLightColor;
-  throw "Error: Unmapped enum return type";
+  printf("Error: Unmapped enum return type in getTileSourceLight2Color of type TileSourceLightColor: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
 };
 
 std::string NWScriptI::getTilesetResRef(const NWN::NWObject& oArea, const Ice::Current& ice) {
@@ -10233,7 +10234,7 @@ NWN::Weather NWScriptI::getWeather(const NWN::NWObject& oArea, const Ice::Curren
   if (nRetVal == -1) return NWN::InvalidWeather;
   if (nRetVal == 2) return NWN::SnowWeather;
   if (nRetVal == 3) return NWN::AreaDefaultsWeather;
-  throw "Error: Unmapped enum return type";
+  printf("Error: Unmapped enum return type in getWeather of type Weather: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
 };
 
 Ice::Int NWScriptI::getWeight(const NWN::NWObject& oTarget, const Ice::Current& ice) {
@@ -10436,7 +10437,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyACBonusVsAlign(NWN::IPAlignGroup tIPA
    else if (tIPAlignGroup == NWN::LawfulAlignGroup) StackPushInteger(2);
    else if (tIPAlignGroup == NWN::ChaoticAlignGroup) StackPushInteger(3);
    else if (tIPAlignGroup == NWN::GoodAlignGroup) StackPushInteger(4);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in itemPropertyACBonusVsAlign for parameter tIPAlignGroup of type IPAlignGroup passed: %d. Cannot continue, and it's your fault!\n", tIPAlignGroup); exit(1); };
 
   VM_ExecuteCommand(618, 2);
 
@@ -10479,7 +10480,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyACBonusVsDmgType(NWN::IPDamageType tI
    else if (tIPDamageType == NWN::ElectricalIPDamage) StackPushInteger(9);
    else if (tIPDamageType == NWN::PhysicalIPDamage) StackPushInteger(4);
    else if (tIPDamageType == NWN::FireIPDamage) StackPushInteger(10);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in itemPropertyACBonusVsDmgType for parameter tIPDamageType of type IPDamageType passed: %d. Cannot continue, and it's your fault!\n", tIPDamageType); exit(1); };
 
   VM_ExecuteCommand(619, 2);
 
@@ -10532,7 +10533,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyACBonusVsRace(NWN::IPRacialType tIPRa
    else if (tIPRacialType == NWN::HumanoidReptilianIPRace) StackPushInteger(15);
    else if (tIPRacialType == NWN::HalfelfIPRace) StackPushInteger(4);
    else if (tIPRacialType == NWN::ConstructIPRace) StackPushInteger(10);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in itemPropertyACBonusVsRace for parameter tIPRacialType of type IPRacialType passed: %d. Cannot continue, and it's your fault!\n", tIPRacialType); exit(1); };
 
   VM_ExecuteCommand(620, 2);
 
@@ -10567,7 +10568,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyACBonusVsSAlign(NWN::Alignment tAlign
    else if (tAlignment == NWN::Lawful) StackPushInteger(2);
    else if (tAlignment == NWN::Chaotic) StackPushInteger(3);
    else if (tAlignment == NWN::Good) StackPushInteger(4);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in itemPropertyACBonusVsSAlign for parameter tAlignment of type Alignment passed: %d. Cannot continue, and it's your fault!\n", tAlignment); exit(1); };
 
   VM_ExecuteCommand(621, 2);
 
@@ -10602,7 +10603,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyAbilityBonus(NWN::Ability tAbility, I
    else if (tAbility == NWN::Constitution) StackPushInteger(2);
    else if (tAbility == NWN::Intelligence) StackPushInteger(3);
    else if (tAbility == NWN::Wisdom) StackPushInteger(4);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in itemPropertyAbilityBonus for parameter tAbility of type Ability passed: %d. Cannot continue, and it's your fault!\n", tAbility); exit(1); };
 
   VM_ExecuteCommand(616, 2);
 
@@ -10721,7 +10722,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyAttackBonusVsAlign(NWN::IPAlignGroup 
    else if (tIPAlignGroup == NWN::LawfulAlignGroup) StackPushInteger(2);
    else if (tIPAlignGroup == NWN::ChaoticAlignGroup) StackPushInteger(3);
    else if (tIPAlignGroup == NWN::GoodAlignGroup) StackPushInteger(4);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in itemPropertyAttackBonusVsAlign for parameter tIPAlignGroup of type IPAlignGroup passed: %d. Cannot continue, and it's your fault!\n", tIPAlignGroup); exit(1); };
 
   VM_ExecuteCommand(667, 2);
 
@@ -10774,7 +10775,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyAttackBonusVsRace(NWN::IPRacialType t
    else if (tIPRacialType == NWN::HumanoidReptilianIPRace) StackPushInteger(15);
    else if (tIPRacialType == NWN::HalfelfIPRace) StackPushInteger(4);
    else if (tIPRacialType == NWN::ConstructIPRace) StackPushInteger(10);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in itemPropertyAttackBonusVsRace for parameter tIPRacialType of type IPRacialType passed: %d. Cannot continue, and it's your fault!\n", tIPRacialType); exit(1); };
 
   VM_ExecuteCommand(668, 2);
 
@@ -10809,7 +10810,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyAttackBonusVsSAlign(NWN::Alignment tA
    else if (tAlignment == NWN::Lawful) StackPushInteger(2);
    else if (tAlignment == NWN::Chaotic) StackPushInteger(3);
    else if (tAlignment == NWN::Good) StackPushInteger(4);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in itemPropertyAttackBonusVsSAlign for parameter tAlignment of type Alignment passed: %d. Cannot continue, and it's your fault!\n", tAlignment); exit(1); };
 
   VM_ExecuteCommand(669, 2);
 
@@ -11080,7 +11081,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyDamageBonus(NWN::IPDamageType tIPDama
    else if (tIPDamageType == NWN::ElectricalIPDamage) StackPushInteger(9);
    else if (tIPDamageType == NWN::PhysicalIPDamage) StackPushInteger(4);
    else if (tIPDamageType == NWN::FireIPDamage) StackPushInteger(10);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in itemPropertyDamageBonus for parameter tIPDamageType of type IPDamageType passed: %d. Cannot continue, and it's your fault!\n", tIPDamageType); exit(1); };
 
   VM_ExecuteCommand(631, 2);
 
@@ -11123,14 +11124,14 @@ NWN::NWItemProperty NWScriptI::itemPropertyDamageBonusVsAlign(NWN::IPAlignGroup 
    else if (tIPDamageType == NWN::ElectricalIPDamage) StackPushInteger(9);
    else if (tIPDamageType == NWN::PhysicalIPDamage) StackPushInteger(4);
    else if (tIPDamageType == NWN::FireIPDamage) StackPushInteger(10);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in itemPropertyDamageBonusVsAlign for parameter tIPDamageType of type IPDamageType passed: %d. Cannot continue, and it's your fault!\n", tIPDamageType); exit(1); };
   if (tIPAlignGroup == NWN::EvilAlignGroup) StackPushInteger(5);
    else if (tIPAlignGroup == NWN::AllAlignGroup) StackPushInteger(0);
    else if (tIPAlignGroup == NWN::NeutralAlignGroup) StackPushInteger(1);
    else if (tIPAlignGroup == NWN::LawfulAlignGroup) StackPushInteger(2);
    else if (tIPAlignGroup == NWN::ChaoticAlignGroup) StackPushInteger(3);
    else if (tIPAlignGroup == NWN::GoodAlignGroup) StackPushInteger(4);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in itemPropertyDamageBonusVsAlign for parameter tIPAlignGroup of type IPAlignGroup passed: %d. Cannot continue, and it's your fault!\n", tIPAlignGroup); exit(1); };
 
   VM_ExecuteCommand(632, 3);
 
@@ -11173,7 +11174,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyDamageBonusVsRace(NWN::IPRacialType t
    else if (tIPDamageType == NWN::ElectricalIPDamage) StackPushInteger(9);
    else if (tIPDamageType == NWN::PhysicalIPDamage) StackPushInteger(4);
    else if (tIPDamageType == NWN::FireIPDamage) StackPushInteger(10);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in itemPropertyDamageBonusVsRace for parameter tIPDamageType of type IPDamageType passed: %d. Cannot continue, and it's your fault!\n", tIPDamageType); exit(1); };
   if (tIPRacialType == NWN::ElementalIPRace) StackPushInteger(16);
    else if (tIPRacialType == NWN::HalforcIPRace) StackPushInteger(5);
    else if (tIPRacialType == NWN::DragonIPRace) StackPushInteger(11);
@@ -11198,7 +11199,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyDamageBonusVsRace(NWN::IPRacialType t
    else if (tIPRacialType == NWN::HumanoidReptilianIPRace) StackPushInteger(15);
    else if (tIPRacialType == NWN::HalfelfIPRace) StackPushInteger(4);
    else if (tIPRacialType == NWN::ConstructIPRace) StackPushInteger(10);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in itemPropertyDamageBonusVsRace for parameter tIPRacialType of type IPRacialType passed: %d. Cannot continue, and it's your fault!\n", tIPRacialType); exit(1); };
 
   VM_ExecuteCommand(633, 3);
 
@@ -11241,14 +11242,14 @@ NWN::NWItemProperty NWScriptI::itemPropertyDamageBonusVsSAlign(NWN::Alignment tA
    else if (tIPDamageType == NWN::ElectricalIPDamage) StackPushInteger(9);
    else if (tIPDamageType == NWN::PhysicalIPDamage) StackPushInteger(4);
    else if (tIPDamageType == NWN::FireIPDamage) StackPushInteger(10);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in itemPropertyDamageBonusVsSAlign for parameter tIPDamageType of type IPDamageType passed: %d. Cannot continue, and it's your fault!\n", tIPDamageType); exit(1); };
   if (tAlignment == NWN::Evil) StackPushInteger(5);
    else if (tAlignment == NWN::Any) StackPushInteger(0);
    else if (tAlignment == NWN::Neutral) StackPushInteger(1);
    else if (tAlignment == NWN::Lawful) StackPushInteger(2);
    else if (tAlignment == NWN::Chaotic) StackPushInteger(3);
    else if (tAlignment == NWN::Good) StackPushInteger(4);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in itemPropertyDamageBonusVsSAlign for parameter tAlignment of type Alignment passed: %d. Cannot continue, and it's your fault!\n", tAlignment); exit(1); };
 
   VM_ExecuteCommand(634, 3);
 
@@ -11291,7 +11292,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyDamageImmunity(NWN::IPDamageType tIPD
    else if (tIPDamageType == NWN::ElectricalIPDamage) StackPushInteger(9);
    else if (tIPDamageType == NWN::PhysicalIPDamage) StackPushInteger(4);
    else if (tIPDamageType == NWN::FireIPDamage) StackPushInteger(10);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in itemPropertyDamageImmunity for parameter tIPDamageType of type IPDamageType passed: %d. Cannot continue, and it's your fault!\n", tIPDamageType); exit(1); };
 
   VM_ExecuteCommand(635, 2);
 
@@ -11391,7 +11392,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyDamageResistance(NWN::IPDamageType tI
    else if (tIPDamageType == NWN::ElectricalIPDamage) StackPushInteger(9);
    else if (tIPDamageType == NWN::PhysicalIPDamage) StackPushInteger(4);
    else if (tIPDamageType == NWN::FireIPDamage) StackPushInteger(10);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in itemPropertyDamageResistance for parameter tIPDamageType of type IPDamageType passed: %d. Cannot continue, and it's your fault!\n", tIPDamageType); exit(1); };
 
   VM_ExecuteCommand(638, 2);
 
@@ -11434,7 +11435,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyDamageVulnerability(NWN::IPDamageType
    else if (tIPDamageType == NWN::ElectricalIPDamage) StackPushInteger(9);
    else if (tIPDamageType == NWN::PhysicalIPDamage) StackPushInteger(4);
    else if (tIPDamageType == NWN::FireIPDamage) StackPushInteger(10);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in itemPropertyDamageVulnerability for parameter tIPDamageType of type IPDamageType passed: %d. Cannot continue, and it's your fault!\n", tIPDamageType); exit(1); };
 
   VM_ExecuteCommand(639, 2);
 
@@ -11525,7 +11526,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyDecreaseAbility(NWN::Ability tAbility
    else if (tAbility == NWN::Constitution) StackPushInteger(2);
    else if (tAbility == NWN::Intelligence) StackPushInteger(3);
    else if (tAbility == NWN::Wisdom) StackPushInteger(4);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in itemPropertyDecreaseAbility for parameter tAbility of type Ability passed: %d. Cannot continue, and it's your fault!\n", tAbility); exit(1); };
 
   VM_ExecuteCommand(641, 2);
 
@@ -11617,7 +11618,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyEnhancementBonusVsAlign(NWN::IPAlignG
    else if (tIPAlignGroup == NWN::LawfulAlignGroup) StackPushInteger(2);
    else if (tIPAlignGroup == NWN::ChaoticAlignGroup) StackPushInteger(3);
    else if (tIPAlignGroup == NWN::GoodAlignGroup) StackPushInteger(4);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in itemPropertyEnhancementBonusVsAlign for parameter tIPAlignGroup of type IPAlignGroup passed: %d. Cannot continue, and it's your fault!\n", tIPAlignGroup); exit(1); };
 
   VM_ExecuteCommand(623, 2);
 
@@ -11670,7 +11671,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyEnhancementBonusVsRace(NWN::IPRacialT
    else if (tIPRacialType == NWN::HumanoidReptilianIPRace) StackPushInteger(15);
    else if (tIPRacialType == NWN::HalfelfIPRace) StackPushInteger(4);
    else if (tIPRacialType == NWN::ConstructIPRace) StackPushInteger(10);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in itemPropertyEnhancementBonusVsRace for parameter tIPRacialType of type IPRacialType passed: %d. Cannot continue, and it's your fault!\n", tIPRacialType); exit(1); };
 
   VM_ExecuteCommand(624, 2);
 
@@ -11705,7 +11706,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyEnhancementBonusVsSAlign(NWN::Alignme
    else if (tAlignment == NWN::Lawful) StackPushInteger(2);
    else if (tAlignment == NWN::Chaotic) StackPushInteger(3);
    else if (tAlignment == NWN::Good) StackPushInteger(4);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in itemPropertyEnhancementBonusVsSAlign for parameter tAlignment of type Alignment passed: %d. Cannot continue, and it's your fault!\n", tAlignment); exit(1); };
 
   VM_ExecuteCommand(625, 2);
 
@@ -11775,7 +11776,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyExtraMeleeDamageType(NWN::IPDamageTyp
    else if (tIPDamageType == NWN::ElectricalIPDamage) StackPushInteger(9);
    else if (tIPDamageType == NWN::PhysicalIPDamage) StackPushInteger(4);
    else if (tIPDamageType == NWN::FireIPDamage) StackPushInteger(10);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in itemPropertyExtraMeleeDamageType for parameter tIPDamageType of type IPDamageType passed: %d. Cannot continue, and it's your fault!\n", tIPDamageType); exit(1); };
 
   VM_ExecuteCommand(645, 1);
 
@@ -11817,7 +11818,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyExtraRangeDamageType(NWN::IPDamageTyp
    else if (tIPDamageType == NWN::ElectricalIPDamage) StackPushInteger(9);
    else if (tIPDamageType == NWN::PhysicalIPDamage) StackPushInteger(4);
    else if (tIPDamageType == NWN::FireIPDamage) StackPushInteger(10);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in itemPropertyExtraRangeDamageType for parameter tIPDamageType of type IPDamageType passed: %d. Cannot continue, and it's your fault!\n", tIPDamageType); exit(1); };
 
   VM_ExecuteCommand(646, 1);
 
@@ -11964,7 +11965,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyImmunityMisc(NWN::IPMiscImmunityType 
    else if (tIPMiscImmunityType == NWN::PoisonIPImmunity) StackPushInteger(3);
    else if (tIPMiscImmunityType == NWN::DeathMagicIPImmunity) StackPushInteger(9);
    else if (tIPMiscImmunityType == NWN::DiseaseIPImmunity) StackPushInteger(4);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in itemPropertyImmunityMisc for parameter tIPMiscImmunityType of type IPMiscImmunityType passed: %d. Cannot continue, and it's your fault!\n", tIPMiscImmunityType); exit(1); };
 
   VM_ExecuteCommand(649, 1);
 
@@ -12109,7 +12110,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyLimitUseByAlign(NWN::IPAlignGroup tIP
    else if (tIPAlignGroup == NWN::LawfulAlignGroup) StackPushInteger(2);
    else if (tIPAlignGroup == NWN::ChaoticAlignGroup) StackPushInteger(3);
    else if (tIPAlignGroup == NWN::GoodAlignGroup) StackPushInteger(4);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in itemPropertyLimitUseByAlign for parameter tIPAlignGroup of type IPAlignGroup passed: %d. Cannot continue, and it's your fault!\n", tIPAlignGroup); exit(1); };
 
   VM_ExecuteCommand(672, 1);
 
@@ -12189,7 +12190,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyLimitUseByRace(NWN::IPRacialType tIPR
    else if (tIPRacialType == NWN::HumanoidReptilianIPRace) StackPushInteger(15);
    else if (tIPRacialType == NWN::HalfelfIPRace) StackPushInteger(4);
    else if (tIPRacialType == NWN::ConstructIPRace) StackPushInteger(10);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in itemPropertyLimitUseByRace for parameter tIPRacialType of type IPRacialType passed: %d. Cannot continue, and it's your fault!\n", tIPRacialType); exit(1); };
 
   VM_ExecuteCommand(674, 1);
 
@@ -12223,7 +12224,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyLimitUseBySAlign(NWN::Alignment tAlig
    else if (tAlignment == NWN::Lawful) StackPushInteger(2);
    else if (tAlignment == NWN::Chaotic) StackPushInteger(3);
    else if (tAlignment == NWN::Good) StackPushInteger(4);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in itemPropertyLimitUseBySAlign for parameter tAlignment of type Alignment passed: %d. Cannot continue, and it's your fault!\n", tAlignment); exit(1); };
 
   VM_ExecuteCommand(675, 1);
 
@@ -12657,7 +12658,7 @@ NWN::NWItemProperty NWScriptI::itemPropertySpellImmunitySchool(NWN::IPSpellSchoo
    else if (tIPSpellSchool == NWN::DivinationIPSchool) StackPushInteger(2);
    else if (tIPSpellSchool == NWN::EnchantmentIPSchool) StackPushInteger(3);
    else if (tIPSpellSchool == NWN::EvocationIPSchool) StackPushInteger(4);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in itemPropertySpellImmunitySchool for parameter tIPSpellSchool of type IPSpellSchool passed: %d. Cannot continue, and it's your fault!\n", tIPSpellSchool); exit(1); };
 
   VM_ExecuteCommand(664, 1);
 
@@ -12752,7 +12753,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyTrap(Ice::Int nTrapLevel, NWN::IPTrap
    else if (tIPTrapType == NWN::AcidSplashIPTrap) StackPushInteger(9);
    else if (tIPTrapType == NWN::BlobOfAcidIPTrap) StackPushInteger(4);
    else if (tIPTrapType == NWN::SonicIPTrap) StackPushInteger(10);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in itemPropertyTrap for parameter tIPTrapType of type IPTrapType passed: %d. Cannot continue, and it's your fault!\n", tIPTrapType); exit(1); };
   StackPushInteger(nTrapLevel);
 
   VM_ExecuteCommand(678, 2);
@@ -13580,7 +13581,7 @@ NWN::SavingThrowResult NWScriptI::reflexSave(const NWN::NWObject& oCreature, Ice
    else if (tSaveType == NWN::SpellSaveType) StackPushInteger(15);
    else if (tSaveType == NWN::FearSaveType) StackPushInteger(4);
    else if (tSaveType == NWN::NegativeSaveType) StackPushInteger(10);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in reflexSave for parameter tSaveType of type SaveType passed: %d. Cannot continue, and it's your fault!\n", tSaveType); exit(1); };
   StackPushInteger(nDC);
   StackPushObject(oCreature.id);
 
@@ -13592,7 +13593,7 @@ NWN::SavingThrowResult NWScriptI::reflexSave(const NWN::NWObject& oCreature, Ice
   if (nRetVal == 0) return NWN::FailedRoll;
   if (nRetVal == 1) return NWN::SucceededRoll;
   if (nRetVal == 3) return NWN::ImmuneToSaveType;
-  throw "Error: Unmapped enum return type";
+  printf("Error: Unmapped enum return type in reflexSave of type SavingThrowResult: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
 };
 
 void NWScriptI::removeEffect(const NWN::NWObject& oCreature, const NWN::NWEffect& eEffect, const Ice::Current& ice) {
@@ -13810,7 +13811,7 @@ void NWScriptI::setAILevel(const NWN::NWObject& oTarget, NWN::AILevel tAILevel, 
    else if (tAILevel == NWN::NormalAI) StackPushInteger(2);
    else if (tAILevel == NWN::HighAI) StackPushInteger(3);
    else if (tAILevel == NWN::VeryHighAI) StackPushInteger(4);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in setAILevel for parameter tAILevel of type AILevel passed: %d. Cannot continue, and it's your fault!\n", tAILevel); exit(1); };
   StackPushObject(oTarget.id);
 
   VM_ExecuteCommand(713, 2);
@@ -13836,7 +13837,7 @@ void NWScriptI::setActionMode(const NWN::NWObject& oCreature, NWN::ActionMode tA
    else if (tActionMode == NWN::ImprovedExpertiseMode) StackPushInteger(9);
    else if (tActionMode == NWN::ImprovedPowerAttackMode) StackPushInteger(4);
    else if (tActionMode == NWN::DefensiveCastMode) StackPushInteger(10);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in setActionMode for parameter tActionMode of type ActionMode passed: %d. Cannot continue, and it's your fault!\n", tActionMode); exit(1); };
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(736, 3);
@@ -14086,7 +14087,7 @@ void NWScriptI::setCreatureBodyPart(NWN::CreaturePart tCreaturePart, Ice::Int nM
    else if (tCreaturePart == NWN::LeftShoulderPart) StackPushInteger(15);
    else if (tCreaturePart == NWN::LeftThighPart) StackPushInteger(4);
    else if (tCreaturePart == NWN::RightForearmPart) StackPushInteger(10);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in setCreatureBodyPart for parameter tCreaturePart of type CreaturePart passed: %d. Cannot continue, and it's your fault!\n", tCreaturePart); exit(1); };
 
   VM_ExecuteCommand(793, 3);
 
@@ -14761,7 +14762,7 @@ void NWScriptI::setPCChatVolume(NWN::TalkVolume tTalkVolume, const Ice::Current&
    else if (tTalkVolume == NWN::ShoutVol) StackPushInteger(2);
    else if (tTalkVolume == NWN::SilentTalkVol) StackPushInteger(3);
    else if (tTalkVolume == NWN::SilentShoutVol) StackPushInteger(4);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in setPCChatVolume for parameter tTalkVolume of type TalkVolume passed: %d. Cannot continue, and it's your fault!\n", tTalkVolume); exit(1); };
 
   VM_ExecuteCommand(842, 1);
 
@@ -14810,7 +14811,7 @@ void NWScriptI::setPanelButtonFlash(const NWN::NWObject& oPlayer, NWN::Button tB
    else if (tButton == NWN::JournalButton) StackPushInteger(2);
    else if (tButton == NWN::CharacterButton) StackPushInteger(3);
    else if (tButton == NWN::OptionsButton) StackPushInteger(4);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in setPanelButtonFlash for parameter tButton of type Button passed: %d. Cannot continue, and it's your fault!\n", tButton); exit(1); };
   StackPushObject(oPlayer.id);
 
   VM_ExecuteCommand(521, 3);
@@ -14844,7 +14845,7 @@ void NWScriptI::setPhenoType(NWN::PhenoType tPhenoType, const NWN::NWObject& oCr
    else if (tPhenoType == NWN::Custom13PhenoType) StackPushInteger(15);
    else if (tPhenoType == NWN::Custom2PhenoType) StackPushInteger(4);
    else if (tPhenoType == NWN::Custom8PhenoType) StackPushInteger(10);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in setPhenoType for parameter tPhenoType of type PhenoType passed: %d. Cannot continue, and it's your fault!\n", tPhenoType); exit(1); };
 
   VM_ExecuteCommand(779, 2);
 
@@ -14953,7 +14954,7 @@ void NWScriptI::setStandardFactionReputation(NWN::StandardFaction tStandardFacti
    else if (tStandardFaction == NWN::Commoner) StackPushInteger(1);
    else if (tStandardFaction == NWN::Merchant) StackPushInteger(2);
    else if (tStandardFaction == NWN::Defender) StackPushInteger(3);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in setStandardFactionReputation for parameter tStandardFaction of type StandardFaction passed: %d. Cannot continue, and it's your fault!\n", tStandardFaction); exit(1); };
 
   VM_ExecuteCommand(523, 3);
 
@@ -15062,7 +15063,7 @@ void NWScriptI::setTileMainLightColor(const NWN::NWLocation& lTileLocation, NWN:
    else if (nMainLight2Color == NWN::PaleDarkYellowTileMainLightColor) StackPushInteger(4);
    else if (nMainLight2Color == NWN::DarkPurpleTileMainLightColor) StackPushInteger(21);
    else if (nMainLight2Color == NWN::PaleGreenTileMainLightColor) StackPushInteger(10);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in setTileMainLightColor for parameter nMainLight2Color of type TileMainLightColor passed: %d. Cannot continue, and it's your fault!\n", nMainLight2Color); exit(1); };
   if (nMainLight1Color == NWN::RedTileMainLightColor) StackPushInteger(27);
    else if (nMainLight1Color == NWN::PaleDarkBlueTileMainLightColor) StackPushInteger(16);
    else if (nMainLight1Color == NWN::DarkYellowTileMainLightColor) StackPushInteger(5);
@@ -15095,7 +15096,7 @@ void NWScriptI::setTileMainLightColor(const NWN::NWLocation& lTileLocation, NWN:
    else if (nMainLight1Color == NWN::PaleDarkYellowTileMainLightColor) StackPushInteger(4);
    else if (nMainLight1Color == NWN::DarkPurpleTileMainLightColor) StackPushInteger(21);
    else if (nMainLight1Color == NWN::PaleGreenTileMainLightColor) StackPushInteger(10);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in setTileMainLightColor for parameter nMainLight1Color of type TileMainLightColor passed: %d. Cannot continue, and it's your fault!\n", nMainLight1Color); exit(1); };
   CScriptLocation *lTileLocation_ptr;
   lTileLocation_ptr->X = lTileLocation.x;
   lTileLocation_ptr->Y = lTileLocation.y;
@@ -15132,7 +15133,7 @@ void NWScriptI::setTileSourceLightColor(const NWN::NWLocation& lTileLocation, NW
    else if (nSourceLight2Color == NWN::PaleOrangeTileSourceLightColor) StackPushInteger(15);
    else if (nSourceLight2Color == NWN::PaleDarkGreenTileSourceLightColor) StackPushInteger(4);
    else if (nSourceLight2Color == NWN::PaleDarkPurpleTileSourceLightColor) StackPushInteger(10);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in setTileSourceLightColor for parameter nSourceLight2Color of type TileSourceLightColor passed: %d. Cannot continue, and it's your fault!\n", nSourceLight2Color); exit(1); };
   if (nSourceLight1Color == NWN::PaleGreenTileSourceLightColor) StackPushInteger(5);
    else if (nSourceLight1Color == NWN::PalePurpleTileSourceLightColor) StackPushInteger(11);
    else if (nSourceLight1Color == NWN::BlackTileSourceLightColor) StackPushInteger(0);
@@ -15149,7 +15150,7 @@ void NWScriptI::setTileSourceLightColor(const NWN::NWLocation& lTileLocation, NW
    else if (nSourceLight1Color == NWN::PaleOrangeTileSourceLightColor) StackPushInteger(15);
    else if (nSourceLight1Color == NWN::PaleDarkGreenTileSourceLightColor) StackPushInteger(4);
    else if (nSourceLight1Color == NWN::PaleDarkPurpleTileSourceLightColor) StackPushInteger(10);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in setTileSourceLightColor for parameter nSourceLight1Color of type TileSourceLightColor passed: %d. Cannot continue, and it's your fault!\n", nSourceLight1Color); exit(1); };
   CScriptLocation *lTileLocation_ptr;
   lTileLocation_ptr->X = lTileLocation.x;
   lTileLocation_ptr->Y = lTileLocation.y;
@@ -15335,7 +15336,7 @@ void NWScriptI::setWeather(const NWN::NWObject& oTarget, NWN::Weather tWeather, 
    else if (tWeather == NWN::InvalidWeather) StackPushInteger(-1);
    else if (tWeather == NWN::SnowWeather) StackPushInteger(2);
    else if (tWeather == NWN::AreaDefaultsWeather) StackPushInteger(3);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in setWeather for parameter tWeather of type Weather passed: %d. Cannot continue, and it's your fault!\n", tWeather); exit(1); };
   StackPushObject(oTarget.id);
 
   VM_ExecuteCommand(507, 2);
@@ -15468,7 +15469,7 @@ void NWScriptI::speakString(const std::string& sStringToSpeak, NWN::TalkVolume t
    else if (tTalkVolume == NWN::ShoutVol) StackPushInteger(2);
    else if (tTalkVolume == NWN::SilentTalkVol) StackPushInteger(3);
    else if (tTalkVolume == NWN::SilentShoutVol) StackPushInteger(4);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in speakString for parameter tTalkVolume of type TalkVolume passed: %d. Cannot continue, and it's your fault!\n", tTalkVolume); exit(1); };
   StackPushString(sStringToSpeak.c_str());
 
   VM_ExecuteCommand(221, 2);
@@ -15487,7 +15488,7 @@ void NWScriptI::speakStringByStrRef(Ice::Int nStrRef, NWN::TalkVolume tTalkVolum
    else if (tTalkVolume == NWN::ShoutVol) StackPushInteger(2);
    else if (tTalkVolume == NWN::SilentTalkVol) StackPushInteger(3);
    else if (tTalkVolume == NWN::SilentShoutVol) StackPushInteger(4);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in speakStringByStrRef for parameter tTalkVolume of type TalkVolume passed: %d. Cannot continue, and it's your fault!\n", tTalkVolume); exit(1); };
   StackPushInteger(nStrRef);
 
   VM_ExecuteCommand(691, 2);
@@ -15705,7 +15706,7 @@ NWN::AttackResult NWScriptI::touchAttackMelee(const NWN::NWObject& oTarget, bool
   if (nRetVal == 0) return NWN::MissedAttack;
   if (nRetVal == 1) return NWN::HitAttack;
   if (nRetVal == 2) return NWN::CriticalHitAttack;
-  throw "Error: Unmapped enum return type";
+  printf("Error: Unmapped enum return type in touchAttackMelee of type AttackResult: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
 };
 
 NWN::AttackResult NWScriptI::touchAttackRanged(const NWN::NWObject& oTarget, bool bDisplayFeedback, const Ice::Current& ice) {
@@ -15723,7 +15724,7 @@ NWN::AttackResult NWScriptI::touchAttackRanged(const NWN::NWObject& oTarget, boo
   if (nRetVal == 0) return NWN::MissedAttack;
   if (nRetVal == 1) return NWN::HitAttack;
   if (nRetVal == 2) return NWN::CriticalHitAttack;
-  throw "Error: Unmapped enum return type";
+  printf("Error: Unmapped enum return type in touchAttackRanged of type AttackResult: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
 };
 
 Ice::Double NWScriptI::turnsToSeconds(Ice::Int nTurns, const Ice::Current& ice) {
@@ -15877,7 +15878,7 @@ NWN::NWEffect NWScriptI::versusRacialTypeEffect(const NWN::NWEffect& eEffect, NW
    else if (tRacialType == NWN::HumanoidReptilianRace) StackPushInteger(15);
    else if (tRacialType == NWN::HalfelfRace) StackPushInteger(4);
    else if (tRacialType == NWN::ConstructRace) StackPushInteger(10);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in versusRacialTypeEffect for parameter tRacialType of type RacialType passed: %d. Cannot continue, and it's your fault!\n", tRacialType); exit(1); };
   CGameEffect *eEffect_ptr = effectMap.find(eEffect.id)->second;
   StackPushEngineStructure(ENGINE_STRUCTURE_EFFECT, eEffect_ptr);
 
@@ -15957,7 +15958,7 @@ NWN::SavingThrowResult NWScriptI::willSave(const NWN::NWObject& oCreature, Ice::
    else if (tSaveType == NWN::SpellSaveType) StackPushInteger(15);
    else if (tSaveType == NWN::FearSaveType) StackPushInteger(4);
    else if (tSaveType == NWN::NegativeSaveType) StackPushInteger(10);
-   else throw "fail: invalid struct value passed, internal API error";
+   else { printf("Invalid enum value in willSave for parameter tSaveType of type SaveType passed: %d. Cannot continue, and it's your fault!\n", tSaveType); exit(1); };
   StackPushInteger(nDC);
   StackPushObject(oCreature.id);
 
@@ -15969,7 +15970,7 @@ NWN::SavingThrowResult NWScriptI::willSave(const NWN::NWObject& oCreature, Ice::
   if (nRetVal == 0) return NWN::FailedRoll;
   if (nRetVal == 1) return NWN::SucceededRoll;
   if (nRetVal == 3) return NWN::ImmuneToSaveType;
-  throw "Error: Unmapped enum return type";
+  printf("Error: Unmapped enum return type in willSave of type SavingThrowResult: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
 };
 
 void NWScriptI::writeTimestampedLogEntry(const std::string& sLogEntry, const Ice::Current& ice) {

@@ -1,4 +1,4 @@
-// Generated on Wed Aug 26 15:18:17 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Wed Aug 26 16:01:26 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 // Not exported:
 //   getFirstEffect getFirstFactionMember getFirstItemInInventory getFirstItemProperty getFirstInPersistentObject getFirstObjectInArea getFirstObjectInShape getFirstPC
@@ -25,7 +25,7 @@ module NWN {
   enum Ability { Strength, Dexterity, Constitution, Intelligence, Wisdom, Charisma };
   enum IPSpellSchool { AbjurationIPSchool, ConjurationIPSchool, DivinationIPSchool, EnchantmentIPSchool, EvocationIPSchool, IllusionIPSchool, NecromancyIPSchool, TransmutationIPSchool };
   enum IPAlignGroup { AllAlignGroup, NeutralAlignGroup, LawfulAlignGroup, ChaoticAlignGroup, GoodAlignGroup, EvilAlignGroup };
-  enum EffectSubType { MagicalSubType, SupernaturalSubType, ExtraordinarySubType };
+  enum EffectSubType { InvalidSubType, MagicalSubType, SupernaturalSubType, ExtraordinarySubType };
   enum TileMainLightColor { BlackTileMainLightColor, DimWhiteTileMainLightColor, WhiteTileMainLightColor, BrightWhiteTileMainLightColor, PaleDarkYellowTileMainLightColor, DarkYellowTileMainLightColor, PaleYellowTileMainLightColor, YellowTileMainLightColor, PaleDarkGreenTileMainLightColor, DarkGreenTileMainLightColor, PaleGreenTileMainLightColor, GreenTileMainLightColor, PaleDarkAquaTileMainLightColor, DarkAquaTileMainLightColor, PaleAquaTileMainLightColor, AquaTileMainLightColor, PaleDarkBlueTileMainLightColor, DarkBlueTileMainLightColor, PaleBlueTileMainLightColor, BlueTileMainLightColor, PaleDarkPurpleTileMainLightColor, DarkPurpleTileMainLightColor, PalePurpleTileMainLightColor, PurpleTileMainLightColor, PaleDarkRedTileMainLightColor, DarkRedTileMainLightColor, PaleRedTileMainLightColor, RedTileMainLightColor, PaleDarkOrangeTileMainLightColor, DarkOrangeTileMainLightColor, PaleOrangeTileMainLightColor, OrangeTileMainLightColor };
   enum DamagePower { NormalDamage, PlusOneDamage, PlusTwoDamage, PlusThreeDamage, PlusFourDamage, PlusFiveDamage, EnergyDamage, PlusSixDamage, PlusSevenDamage, PlusEightDamage, PlusNineDamage, PlusTenDamage, PlusElevenDamage, PlusTwelveDamage, PlusThirteenDamage, PlusFourteenDamage, PlusFifteenDamage, PlusSixteenDamage, PlusSeventeenDamage, PlusEighteenDamage, PlusNinteenDamage, PlusTwentyDamage };
   enum DamageType { BludgeoningDamage, PiercingDamage, SlashingDamage, MagicalDamage, AcidDamage, ColdDamage, DivineDamage, ElectricalDamage, FireDamage, NegativeDamage, PositiveDamage, SonicDamage, BaseDamage, ACVsAllDamage };
