@@ -1,4 +1,4 @@
-// Generated on Wed Aug 26 16:01:26 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Wed Aug 26 17:13:43 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 // Not exported:
 //   getFirstEffect getFirstFactionMember getFirstItemInInventory getFirstItemProperty getFirstInPersistentObject getFirstObjectInArea getFirstObjectInShape getFirstPC
@@ -225,17 +225,64 @@ module NWN {
     idempotent void delState(string key);
     idempotent void clearState();
 
+    /**
+     * Returns a sequence of all players currently online.
+     * This simply wraps GetFirst/Next to be idempotent.
+     */
     idempotent NWObjectSeq allPCs() throws NotInContextException;
+
+    /**
+     * Returns a sequence of all effects on the given object.
+     * This simply wraps GetFirst/Next to be idempotent.
+     */
     idempotent NWEffectSeq allEffects(NWObject o) throws NotInContextException;
+
+    /**
+     * Returns a sequence of all objects in the given area.
+     * This simply wraps GetFirst/Next to be idempotent.
+     */
     idempotent NWObjectSeq allInArea(NWObject area) throws NotInContextException;
+
+    /**
+     * Returns a sequence of all items in the given objects' inventory, EXCLUDING equipped.
+     * This simply wraps GetFirst/Next to be idempotent.
+     */
     idempotent NWObjectSeq allInInventory(NWObject o) throws NotInContextException;
+
+    /**
+     * Returns a struct describing the equipped inventory of the given object, EXCLUDING normal inventory pages.
+     * This simply wraps GetFirst/Next to be idempotent.
+     */
     idempotent NWCreatureEquipped allEquipped(NWObject o) throws NotInContextException;
+
+    /**
+     * Returns a sequence of all itempoperties on the given item.
+     * This simply wraps GetFirst/Next to be idempotent.
+     */
     idempotent NWItemPropertySeq allItemProperties(NWObject item) throws NotInContextException;
+
+    /**
+     * Returns a sequence of all objects in the given shape.
+     * This simply wraps GetFirst/Next to be idempotent.
+     */
     idempotent NWObjectSeq allInShape(ShapeType tShapeType, double fSize,
       NWLocation lTarget, bool bLineOfSight, ObjectType tObjectType, NWVector vOrigin) throws NotInContextException;
+
+    /**
+     * Returns a sequence of all members in the given faction source.
+     * This simply wraps GetFirst/Next to be idempotent.
+     */
     idempotent NWObjectSeq allInFaction(NWObject memberOf, bool bPCOnly) throws NotInContextException;
 
+    /**
+     * Returns if the given effect is shown to clients (in the upper right corner and in the character sheet).
+     */
     idempotent bool getEffectIconShown(NWEffect eff) throws NotInContextException, InvalidEffectException;
+
+    /**
+     * Sets if the given effect should be shown to clients (in the upper right corner and in the character sheet).
+     * This will be cached by clients and is probably only reliable when setting BEFORE applying the effect.
+     */
     idempotent void setEffectIconShown(NWEffect eff, bool bShown) throws NotInContextException, InvalidEffectException;
 
 
