@@ -23,8 +23,8 @@ class ClientI extends Observable implements _ClientOperations {
 		return self;
 	}
 
-	public void assign(NWObject obj, Anon code, Double delay) throws NotInContextException {
-		if (obj.equals(this.self) && delay == 0.0) {
+	public void assign(NWObject obj, Anon code) throws NotInContextException {
+		if (obj.equals(this.self)) {
 			// This saves us a round trip, because NWScripts OBJECT_SELF is
 			// already properly set.
 			code.e();
@@ -34,7 +34,6 @@ class ClientI extends Observable implements _ClientOperations {
 			tokens.put(token, code);
 
 			proxy.setLocalString(module, "ice_token", token.toString());
-			proxy.setLocalFloat(module, "ice_token_delay", delay);
 			proxy.executeScript("ice_token", obj);
 		}
 	}
