@@ -1,4 +1,4 @@
-// Generated on Tue Aug 25 16:14:34 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Wed Aug 26 15:16:21 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 // Not exported:
 //   getFirstEffect getFirstFactionMember getFirstItemInInventory getFirstItemProperty getFirstInPersistentObject getFirstObjectInArea getFirstObjectInShape getFirstPC
@@ -108,8 +108,6 @@ module NWN {
 
   /**
     A location, just like the engine structure.
-    orientation* is undefined, and probably ever 0, but added
-    here for completeness' sake.
   **/
   struct NWLocation {
     NWObject area;
@@ -119,7 +117,6 @@ module NWN {
     double orientationX;
     double orientationY;
     double orientationZ;
-    double facing;
   };
 
   /**
