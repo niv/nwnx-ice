@@ -1,4 +1,4 @@
-// Generated on Wed Aug 26 16:01:26 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Sun Aug 30 12:51:48 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 #include "NWScriptI.h"
 #include <iostream>
@@ -16033,6 +16033,21 @@ NWN::NWObjectSeq NWScriptI::allInArea(const NWN::NWObject& area, const Ice::Curr
   innerUnlock("allInArea");
   return p;
 };
+
+NWN::NWObjectSeq NWScriptI::allByTag(const std::string& tag, const Ice::Current& ice) {
+  NWN::NWObjectSeq p;
+  innerLock("allByTag");
+  int i = 0;
+  NWN::NWObject pc = getObjectByTag(tag, i, ice);
+  while (getIsObjectValid(pc, ice)) {
+    p.push_back(pc);
+    i++;
+    pc = getObjectByTag(tag, i, ice);
+  }
+  innerUnlock("allByTag");
+  return p;
+};
+
 
 NWN::NWObjectSeq NWScriptI::allInFaction(const NWN::NWObject& memberOf, bool bPCOnly, const Ice::Current& ice) {
   NWN::NWObjectSeq p;
