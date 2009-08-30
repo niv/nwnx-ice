@@ -1,4 +1,4 @@
-// Generated on Wed Aug 26 17:13:43 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Sun Aug 30 12:34:31 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 // Not exported:
 //   getFirstEffect getFirstFactionMember getFirstItemInInventory getFirstItemProperty getFirstInPersistentObject getFirstObjectInArea getFirstObjectInShape getFirstPC
@@ -92,7 +92,7 @@ module NWN {
     passing in the requested ID (for example, 0 for module).
   **/
   struct NWObject {
-    int id;
+    long id;
   };
   sequence<NWObject> NWObjectSeq;
 
