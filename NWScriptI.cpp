@@ -1,4 +1,4 @@
-// Generated on Sun Aug 30 12:51:48 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Tue Sep 01 23:33:53 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 #include "NWScriptI.h"
 #include <iostream>
@@ -1040,6 +1040,7 @@ NWN::NWItemProperty NWScriptI::badBadReplaceMeThisDoesNothing(const Ice::Current
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(badBadReplaceMeThisDoesNothing_mutex, "badBadReplaceMeThisDoesNothing");
   return e;
 };
@@ -1787,6 +1788,7 @@ NWN::NWEffect NWScriptI::effectACDecrease(Ice::Int nValue, NWN::ACModifyType tAC
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectACDecrease_mutex, "effectACDecrease");
   return e;
 };
@@ -1834,6 +1836,7 @@ NWN::NWEffect NWScriptI::effectACIncrease(Ice::Int nValue, NWN::ACModifyType tAC
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectACIncrease_mutex, "effectACIncrease");
   return e;
 };
@@ -1867,6 +1870,7 @@ NWN::NWEffect NWScriptI::effectAbilityDecrease(NWN::Ability tAbility, Ice::Int n
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectAbilityDecrease_mutex, "effectAbilityDecrease");
   return e;
 };
@@ -1900,6 +1904,7 @@ NWN::NWEffect NWScriptI::effectAbilityIncrease(NWN::Ability tAbility, Ice::Int n
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectAbilityIncrease_mutex, "effectAbilityIncrease");
   return e;
 };
@@ -1926,6 +1931,7 @@ NWN::NWEffect NWScriptI::effectAppear(Ice::Int nAnimation, const Ice::Current& i
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectAppear_mutex, "effectAppear");
   return e;
 };
@@ -1955,6 +1961,7 @@ NWN::NWEffect NWScriptI::effectAreaOfEffect(Ice::Int nAreaEffectId, const std::s
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectAreaOfEffect_mutex, "effectAreaOfEffect");
   return e;
 };
@@ -1985,6 +1992,7 @@ NWN::NWEffect NWScriptI::effectAttackDecrease(Ice::Int nPenalty, NWN::AttackBonu
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectAttackDecrease_mutex, "effectAttackDecrease");
   return e;
 };
@@ -2015,6 +2023,7 @@ NWN::NWEffect NWScriptI::effectAttackIncrease(Ice::Int nBonus, NWN::AttackBonus 
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectAttackIncrease_mutex, "effectAttackIncrease");
   return e;
 };
@@ -2064,6 +2073,7 @@ NWN::NWEffect NWScriptI::effectBeam(Ice::Int nBeamVisualEffect, const NWN::NWObj
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectBeam_mutex, "effectBeam");
   return e;
 };
@@ -2089,6 +2099,7 @@ NWN::NWEffect NWScriptI::effectBlindness(const Ice::Current& ice) {
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectBlindness_mutex, "effectBlindness");
   return e;
 };
@@ -2114,6 +2125,7 @@ NWN::NWEffect NWScriptI::effectCharmed(const Ice::Current& ice) {
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectCharmed_mutex, "effectCharmed");
   return e;
 };
@@ -2144,6 +2156,7 @@ NWN::NWEffect NWScriptI::effectConcealment(Ice::Int nPercentage, NWN::MissChance
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectConcealment_mutex, "effectConcealment");
   return e;
 };
@@ -2169,6 +2182,7 @@ NWN::NWEffect NWScriptI::effectConfused(const Ice::Current& ice) {
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectConfused_mutex, "effectConfused");
   return e;
 };
@@ -2200,6 +2214,7 @@ NWN::NWEffect NWScriptI::effectCurse(Ice::Int nStrMod, Ice::Int nDexMod, Ice::In
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectCurse_mutex, "effectCurse");
   return e;
 };
@@ -2225,6 +2240,7 @@ NWN::NWEffect NWScriptI::effectCutsceneDominated(const Ice::Current& ice) {
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectCutsceneDominated_mutex, "effectCutsceneDominated");
   return e;
 };
@@ -2250,6 +2266,7 @@ NWN::NWEffect NWScriptI::effectCutsceneGhost(const Ice::Current& ice) {
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectCutsceneGhost_mutex, "effectCutsceneGhost");
   return e;
 };
@@ -2275,6 +2292,7 @@ NWN::NWEffect NWScriptI::effectCutsceneImmobilize(const Ice::Current& ice) {
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectCutsceneImmobilize_mutex, "effectCutsceneImmobilize");
   return e;
 };
@@ -2300,6 +2318,7 @@ NWN::NWEffect NWScriptI::effectCutsceneParalyze(const Ice::Current& ice) {
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectCutsceneParalyze_mutex, "effectCutsceneParalyze");
   return e;
 };
@@ -2364,6 +2383,7 @@ NWN::NWEffect NWScriptI::effectDamage(Ice::Int nDamageAmount, NWN::DamageType tD
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectDamage_mutex, "effectDamage");
   return e;
 };
@@ -2405,6 +2425,7 @@ NWN::NWEffect NWScriptI::effectDamageDecrease(Ice::Int nPenalty, NWN::DamageType
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectDamageDecrease_mutex, "effectDamageDecrease");
   return e;
 };
@@ -2446,6 +2467,7 @@ NWN::NWEffect NWScriptI::effectDamageImmunityDecrease(NWN::DamageType tDamageTyp
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectDamageImmunityDecrease_mutex, "effectDamageImmunityDecrease");
   return e;
 };
@@ -2487,6 +2509,7 @@ NWN::NWEffect NWScriptI::effectDamageImmunityIncrease(NWN::DamageType tDamageTyp
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectDamageImmunityIncrease_mutex, "effectDamageImmunityIncrease");
   return e;
 };
@@ -2528,6 +2551,7 @@ NWN::NWEffect NWScriptI::effectDamageIncrease(Ice::Int nBonus, NWN::DamageType t
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectDamageIncrease_mutex, "effectDamageIncrease");
   return e;
 };
@@ -2578,6 +2602,7 @@ NWN::NWEffect NWScriptI::effectDamageReduction(Ice::Int nAmount, NWN::DamagePowe
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectDamageReduction_mutex, "effectDamageReduction");
   return e;
 };
@@ -2620,6 +2645,7 @@ NWN::NWEffect NWScriptI::effectDamageResistance(NWN::DamageType tDamageType, Ice
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectDamageResistance_mutex, "effectDamageResistance");
   return e;
 };
@@ -2662,6 +2688,7 @@ NWN::NWEffect NWScriptI::effectDamageShield(Ice::Int nDamageAmount, Ice::Int nRa
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectDamageShield_mutex, "effectDamageShield");
   return e;
 };
@@ -2687,6 +2714,7 @@ NWN::NWEffect NWScriptI::effectDarkness(const Ice::Current& ice) {
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectDarkness_mutex, "effectDarkness");
   return e;
 };
@@ -2712,6 +2740,7 @@ NWN::NWEffect NWScriptI::effectDazed(const Ice::Current& ice) {
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectDazed_mutex, "effectDazed");
   return e;
 };
@@ -2737,6 +2766,7 @@ NWN::NWEffect NWScriptI::effectDeaf(const Ice::Current& ice) {
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectDeaf_mutex, "effectDeaf");
   return e;
 };
@@ -2764,6 +2794,7 @@ NWN::NWEffect NWScriptI::effectDeath(bool bSpectacularDeath, bool bDisplayFeedba
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectDeath_mutex, "effectDeath");
   return e;
 };
@@ -2790,6 +2821,7 @@ NWN::NWEffect NWScriptI::effectDisappear(Ice::Int nAnimation, const Ice::Current
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectDisappear_mutex, "effectDisappear");
   return e;
 };
@@ -2826,6 +2858,7 @@ NWN::NWEffect NWScriptI::effectDisappearAppear(const NWN::NWLocation& lLocation,
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectDisappearAppear_mutex, "effectDisappearAppear");
   return e;
 };
@@ -2852,6 +2885,7 @@ NWN::NWEffect NWScriptI::effectDisease(Ice::Int nDiseaseType, const Ice::Current
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectDisease_mutex, "effectDisease");
   return e;
 };
@@ -2878,6 +2912,7 @@ NWN::NWEffect NWScriptI::effectDispelMagicAll(Ice::Int nCasterLevel, const Ice::
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectDispelMagicAll_mutex, "effectDispelMagicAll");
   return e;
 };
@@ -2904,6 +2939,7 @@ NWN::NWEffect NWScriptI::effectDispelMagicBest(Ice::Int nCasterLevel, const Ice:
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectDispelMagicBest_mutex, "effectDispelMagicBest");
   return e;
 };
@@ -2929,6 +2965,7 @@ NWN::NWEffect NWScriptI::effectDominated(const Ice::Current& ice) {
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectDominated_mutex, "effectDominated");
   return e;
 };
@@ -2954,6 +2991,7 @@ NWN::NWEffect NWScriptI::effectEntangle(const Ice::Current& ice) {
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectEntangle_mutex, "effectEntangle");
   return e;
 };
@@ -2979,6 +3017,7 @@ NWN::NWEffect NWScriptI::effectEthereal(const Ice::Current& ice) {
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectEthereal_mutex, "effectEthereal");
   return e;
 };
@@ -3004,6 +3043,7 @@ NWN::NWEffect NWScriptI::effectFrightened(const Ice::Current& ice) {
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectFrightened_mutex, "effectFrightened");
   return e;
 };
@@ -3029,6 +3069,7 @@ NWN::NWEffect NWScriptI::effectHaste(const Ice::Current& ice) {
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectHaste_mutex, "effectHaste");
   return e;
 };
@@ -3055,6 +3096,7 @@ NWN::NWEffect NWScriptI::effectHeal(Ice::Int nDamageToHeal, const Ice::Current& 
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectHeal_mutex, "effectHeal");
   return e;
 };
@@ -3081,6 +3123,7 @@ NWN::NWEffect NWScriptI::effectHitPointChangeWhenDying(Ice::Double fHitPointChan
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectHitPointChangeWhenDying_mutex, "effectHitPointChangeWhenDying");
   return e;
 };
@@ -3140,6 +3183,7 @@ NWN::NWEffect NWScriptI::effectImmunity(NWN::ImmunityType tImmunityType, const I
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectImmunity_mutex, "effectImmunity");
   return e;
 };
@@ -3166,6 +3210,7 @@ NWN::NWEffect NWScriptI::effectInvisibility(Ice::Int nInvisibilityType, const Ic
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectInvisibility_mutex, "effectInvisibility");
   return e;
 };
@@ -3191,6 +3236,7 @@ NWN::NWEffect NWScriptI::effectKnockdown(const Ice::Current& ice) {
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectKnockdown_mutex, "effectKnockdown");
   return e;
 };
@@ -3224,6 +3270,7 @@ NWN::NWEffect NWScriptI::effectLinkEffects(const NWN::NWEffect& eChildEffect, co
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectLinkEffects_mutex, "effectLinkEffects");
   return e;
 };
@@ -3254,6 +3301,7 @@ NWN::NWEffect NWScriptI::effectMissChance(Ice::Int nPercentage, NWN::MissChanceT
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectMissChance_mutex, "effectMissChance");
   return e;
 };
@@ -3280,6 +3328,7 @@ NWN::NWEffect NWScriptI::effectModifyAttacks(Ice::Int nAttacks, const Ice::Curre
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectModifyAttacks_mutex, "effectModifyAttacks");
   return e;
 };
@@ -3306,6 +3355,7 @@ NWN::NWEffect NWScriptI::effectMovementSpeedDecrease(Ice::Int nPercentChange, co
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectMovementSpeedDecrease_mutex, "effectMovementSpeedDecrease");
   return e;
 };
@@ -3332,6 +3382,7 @@ NWN::NWEffect NWScriptI::effectMovementSpeedIncrease(Ice::Int nPercentChange, co
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectMovementSpeedIncrease_mutex, "effectMovementSpeedIncrease");
   return e;
 };
@@ -3359,6 +3410,7 @@ NWN::NWEffect NWScriptI::effectNegativeLevel(Ice::Int nNumLevels, bool bHPBonus,
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectNegativeLevel_mutex, "effectNegativeLevel");
   return e;
 };
@@ -3384,6 +3436,7 @@ NWN::NWEffect NWScriptI::effectParalyze(const Ice::Current& ice) {
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectParalyze_mutex, "effectParalyze");
   return e;
 };
@@ -3409,6 +3462,7 @@ NWN::NWEffect NWScriptI::effectPetrify(const Ice::Current& ice) {
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectPetrify_mutex, "effectPetrify");
   return e;
 };
@@ -3435,6 +3489,7 @@ NWN::NWEffect NWScriptI::effectPoison(Ice::Int nPoisonType, const Ice::Current& 
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectPoison_mutex, "effectPoison");
   return e;
 };
@@ -3462,6 +3517,7 @@ NWN::NWEffect NWScriptI::effectPolymorph(Ice::Int nPolymorphSelection, bool bLoc
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectPolymorph_mutex, "effectPolymorph");
   return e;
 };
@@ -3489,6 +3545,7 @@ NWN::NWEffect NWScriptI::effectRegenerate(Ice::Int nAmount, Ice::Double fInterva
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectRegenerate_mutex, "effectRegenerate");
   return e;
 };
@@ -3514,6 +3571,7 @@ NWN::NWEffect NWScriptI::effectResurrection(const Ice::Current& ice) {
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectResurrection_mutex, "effectResurrection");
   return e;
 };
@@ -3540,6 +3598,7 @@ NWN::NWEffect NWScriptI::effectSanctuary(Ice::Int nDifficultyClass, const Ice::C
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectSanctuary_mutex, "effectSanctuary");
   return e;
 };
@@ -3588,6 +3647,7 @@ NWN::NWEffect NWScriptI::effectSavingThrowDecrease(Ice::Int nSave, Ice::Int nVal
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectSavingThrowDecrease_mutex, "effectSavingThrowDecrease");
   return e;
 };
@@ -3636,6 +3696,7 @@ NWN::NWEffect NWScriptI::effectSavingThrowIncrease(Ice::Int nSave, Ice::Int nVal
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectSavingThrowIncrease_mutex, "effectSavingThrowIncrease");
   return e;
 };
@@ -3661,6 +3722,7 @@ NWN::NWEffect NWScriptI::effectSeeInvisible(const Ice::Current& ice) {
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectSeeInvisible_mutex, "effectSeeInvisible");
   return e;
 };
@@ -3686,6 +3748,7 @@ NWN::NWEffect NWScriptI::effectSilence(const Ice::Current& ice) {
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectSilence_mutex, "effectSilence");
   return e;
 };
@@ -3713,6 +3776,7 @@ NWN::NWEffect NWScriptI::effectSkillDecrease(Ice::Int nSkill, Ice::Int nValue, c
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectSkillDecrease_mutex, "effectSkillDecrease");
   return e;
 };
@@ -3740,6 +3804,7 @@ NWN::NWEffect NWScriptI::effectSkillIncrease(Ice::Int nSkill, Ice::Int nValue, c
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectSkillIncrease_mutex, "effectSkillIncrease");
   return e;
 };
@@ -3765,6 +3830,7 @@ NWN::NWEffect NWScriptI::effectSleep(const Ice::Current& ice) {
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectSleep_mutex, "effectSleep");
   return e;
 };
@@ -3790,6 +3856,7 @@ NWN::NWEffect NWScriptI::effectSlow(const Ice::Current& ice) {
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectSlow_mutex, "effectSlow");
   return e;
 };
@@ -3826,6 +3893,7 @@ NWN::NWEffect NWScriptI::effectSpellFailure(Ice::Int nPercent, NWN::SpellSchool 
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectSpellFailure_mutex, "effectSpellFailure");
   return e;
 };
@@ -3852,6 +3920,7 @@ NWN::NWEffect NWScriptI::effectSpellImmunity(Ice::Int nImmunityToSpell, const Ic
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectSpellImmunity_mutex, "effectSpellImmunity");
   return e;
 };
@@ -3889,6 +3958,7 @@ NWN::NWEffect NWScriptI::effectSpellLevelAbsorption(Ice::Int nMaxSpellLevelAbsor
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectSpellLevelAbsorption_mutex, "effectSpellLevelAbsorption");
   return e;
 };
@@ -3915,6 +3985,7 @@ NWN::NWEffect NWScriptI::effectSpellResistanceDecrease(Ice::Int nValue, const Ic
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectSpellResistanceDecrease_mutex, "effectSpellResistanceDecrease");
   return e;
 };
@@ -3941,6 +4012,7 @@ NWN::NWEffect NWScriptI::effectSpellResistanceIncrease(Ice::Int nValue, const Ic
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectSpellResistanceIncrease_mutex, "effectSpellResistanceIncrease");
   return e;
 };
@@ -3966,6 +4038,7 @@ NWN::NWEffect NWScriptI::effectStunned(const Ice::Current& ice) {
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectStunned_mutex, "effectStunned");
   return e;
 };
@@ -3995,6 +4068,7 @@ NWN::NWEffect NWScriptI::effectSummonCreature(const std::string& sCreatureResref
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectSummonCreature_mutex, "effectSummonCreature");
   return e;
 };
@@ -4025,6 +4099,7 @@ NWN::NWEffect NWScriptI::effectSwarm(bool bLooping, const std::string& sCreature
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectSwarm_mutex, "effectSwarm");
   return e;
 };
@@ -4051,6 +4126,7 @@ NWN::NWEffect NWScriptI::effectTemporaryHitpoints(Ice::Int nHitPoints, const Ice
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectTemporaryHitpoints_mutex, "effectTemporaryHitpoints");
   return e;
 };
@@ -4076,6 +4152,7 @@ NWN::NWEffect NWScriptI::effectTimeStop(const Ice::Current& ice) {
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectTimeStop_mutex, "effectTimeStop");
   return e;
 };
@@ -4101,6 +4178,7 @@ NWN::NWEffect NWScriptI::effectTrueSeeing(const Ice::Current& ice) {
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectTrueSeeing_mutex, "effectTrueSeeing");
   return e;
 };
@@ -4127,6 +4205,7 @@ NWN::NWEffect NWScriptI::effectTurnResistanceDecrease(Ice::Int nHitDice, const I
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectTurnResistanceDecrease_mutex, "effectTurnResistanceDecrease");
   return e;
 };
@@ -4153,6 +4232,7 @@ NWN::NWEffect NWScriptI::effectTurnResistanceIncrease(Ice::Int nHitDice, const I
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectTurnResistanceIncrease_mutex, "effectTurnResistanceIncrease");
   return e;
 };
@@ -4178,6 +4258,7 @@ NWN::NWEffect NWScriptI::effectTurned(const Ice::Current& ice) {
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectTurned_mutex, "effectTurned");
   return e;
 };
@@ -4203,6 +4284,7 @@ NWN::NWEffect NWScriptI::effectUltravision(const Ice::Current& ice) {
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectUltravision_mutex, "effectUltravision");
   return e;
 };
@@ -4230,6 +4312,7 @@ NWN::NWEffect NWScriptI::effectVisualEffect(Ice::Int nVisualEffectId, bool bMiss
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectVisualEffect_mutex, "effectVisualEffect");
   return e;
 };
@@ -4320,6 +4403,7 @@ NWN::NWEffect NWScriptI::extraordinaryEffect(const NWN::NWEffect& eEffect, const
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(extraordinaryEffect_mutex, "extraordinaryEffect");
   return e;
 };
@@ -6068,6 +6152,7 @@ NWN::NWEffect NWScriptI::getFirstEffect(const NWN::NWObject& oCreature, const Ic
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(getFirstEffect_mutex, "getFirstEffect");
   return e;
 };
@@ -6148,6 +6233,7 @@ NWN::NWItemProperty NWScriptI::getFirstItemProperty(const NWN::NWObject& oItem, 
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(getFirstItemProperty_mutex, "getFirstItemProperty");
   return e;
 };
@@ -8637,6 +8723,7 @@ NWN::NWEffect NWScriptI::getNextEffect(const NWN::NWObject& oCreature, const Ice
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(getNextEffect_mutex, "getNextEffect");
   return e;
 };
@@ -8717,6 +8804,7 @@ NWN::NWItemProperty NWScriptI::getNextItemProperty(const NWN::NWObject& oItem, c
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(getNextItemProperty_mutex, "getNextItemProperty");
   return e;
 };
@@ -10423,6 +10511,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyACBonus(Ice::Int nBonus, const Ice::C
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyACBonus_mutex, "itemPropertyACBonus");
   return e;
 };
@@ -10458,6 +10547,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyACBonusVsAlign(NWN::IPAlignGroup tIPA
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyACBonusVsAlign_mutex, "itemPropertyACBonusVsAlign");
   return e;
 };
@@ -10501,6 +10591,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyACBonusVsDmgType(NWN::IPDamageType tI
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyACBonusVsDmgType_mutex, "itemPropertyACBonusVsDmgType");
   return e;
 };
@@ -10554,6 +10645,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyACBonusVsRace(NWN::IPRacialType tIPRa
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyACBonusVsRace_mutex, "itemPropertyACBonusVsRace");
   return e;
 };
@@ -10589,6 +10681,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyACBonusVsSAlign(NWN::Alignment tAlign
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyACBonusVsSAlign_mutex, "itemPropertyACBonusVsSAlign");
   return e;
 };
@@ -10624,6 +10717,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyAbilityBonus(NWN::Ability tAbility, I
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyAbilityBonus_mutex, "itemPropertyAbilityBonus");
   return e;
 };
@@ -10652,6 +10746,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyAdditional(Ice::Int nAdditionalProper
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyAdditional_mutex, "itemPropertyAdditional");
   return e;
 };
@@ -10680,6 +10775,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyArcaneSpellFailure(Ice::Int nModLevel
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyArcaneSpellFailure_mutex, "itemPropertyArcaneSpellFailure");
   return e;
 };
@@ -10708,6 +10804,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyAttackBonus(Ice::Int nBonus, const Ic
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyAttackBonus_mutex, "itemPropertyAttackBonus");
   return e;
 };
@@ -10743,6 +10840,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyAttackBonusVsAlign(NWN::IPAlignGroup 
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyAttackBonusVsAlign_mutex, "itemPropertyAttackBonusVsAlign");
   return e;
 };
@@ -10796,6 +10894,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyAttackBonusVsRace(NWN::IPRacialType t
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyAttackBonusVsRace_mutex, "itemPropertyAttackBonusVsRace");
   return e;
 };
@@ -10831,6 +10930,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyAttackBonusVsSAlign(NWN::Alignment tA
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyAttackBonusVsSAlign_mutex, "itemPropertyAttackBonusVsSAlign");
   return e;
 };
@@ -10859,6 +10959,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyAttackPenalty(Ice::Int nPenalty, cons
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyAttackPenalty_mutex, "itemPropertyAttackPenalty");
   return e;
 };
@@ -10887,6 +10988,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyBonusFeat(Ice::Int nFeat, const Ice::
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyBonusFeat_mutex, "itemPropertyBonusFeat");
   return e;
 };
@@ -10916,6 +11018,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyBonusLevelSpell(Ice::Int nClass, Ice:
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyBonusLevelSpell_mutex, "itemPropertyBonusLevelSpell");
   return e;
 };
@@ -10945,6 +11048,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyBonusSavingThrow(Ice::Int nBaseSaveTy
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyBonusSavingThrow_mutex, "itemPropertyBonusSavingThrow");
   return e;
 };
@@ -10974,6 +11078,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyBonusSavingThrowVsX(Ice::Int nBonusTy
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyBonusSavingThrowVsX_mutex, "itemPropertyBonusSavingThrowVsX");
   return e;
 };
@@ -11002,6 +11107,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyBonusSpellResistance(Ice::Int nBonus,
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyBonusSpellResistance_mutex, "itemPropertyBonusSpellResistance");
   return e;
 };
@@ -11031,6 +11137,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyCastSpell(Ice::Int nSpell, Ice::Int n
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyCastSpell_mutex, "itemPropertyCastSpell");
   return e;
 };
@@ -11059,6 +11166,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyContainerReducedWeight(Ice::Int nCont
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyContainerReducedWeight_mutex, "itemPropertyContainerReducedWeight");
   return e;
 };
@@ -11102,6 +11210,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyDamageBonus(NWN::IPDamageType tIPDama
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyDamageBonus_mutex, "itemPropertyDamageBonus");
   return e;
 };
@@ -11152,6 +11261,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyDamageBonusVsAlign(NWN::IPAlignGroup 
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyDamageBonusVsAlign_mutex, "itemPropertyDamageBonusVsAlign");
   return e;
 };
@@ -11220,6 +11330,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyDamageBonusVsRace(NWN::IPRacialType t
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyDamageBonusVsRace_mutex, "itemPropertyDamageBonusVsRace");
   return e;
 };
@@ -11270,6 +11381,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyDamageBonusVsSAlign(NWN::Alignment tA
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyDamageBonusVsSAlign_mutex, "itemPropertyDamageBonusVsSAlign");
   return e;
 };
@@ -11313,6 +11425,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyDamageImmunity(NWN::IPDamageType tIPD
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyDamageImmunity_mutex, "itemPropertyDamageImmunity");
   return e;
 };
@@ -11341,6 +11454,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyDamagePenalty(Ice::Int nPenalty, cons
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyDamagePenalty_mutex, "itemPropertyDamagePenalty");
   return e;
 };
@@ -11370,6 +11484,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyDamageReduction(Ice::Int nEnhancement
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyDamageReduction_mutex, "itemPropertyDamageReduction");
   return e;
 };
@@ -11413,6 +11528,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyDamageResistance(NWN::IPDamageType tI
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyDamageResistance_mutex, "itemPropertyDamageResistance");
   return e;
 };
@@ -11456,6 +11572,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyDamageVulnerability(NWN::IPDamageType
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyDamageVulnerability_mutex, "itemPropertyDamageVulnerability");
   return e;
 };
@@ -11483,6 +11600,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyDarkvision(const Ice::Current& ice) {
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyDarkvision_mutex, "itemPropertyDarkvision");
   return e;
 };
@@ -11512,6 +11630,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyDecreaseAC(Ice::Int nModifierType, Ic
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyDecreaseAC_mutex, "itemPropertyDecreaseAC");
   return e;
 };
@@ -11547,6 +11666,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyDecreaseAbility(NWN::Ability tAbility
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyDecreaseAbility_mutex, "itemPropertyDecreaseAbility");
   return e;
 };
@@ -11576,6 +11696,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyDecreaseSkill(Ice::Int nSkill, Ice::I
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyDecreaseSkill_mutex, "itemPropertyDecreaseSkill");
   return e;
 };
@@ -11604,6 +11725,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyEnhancementBonus(Ice::Int nEnhancemen
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyEnhancementBonus_mutex, "itemPropertyEnhancementBonus");
   return e;
 };
@@ -11639,6 +11761,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyEnhancementBonusVsAlign(NWN::IPAlignG
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyEnhancementBonusVsAlign_mutex, "itemPropertyEnhancementBonusVsAlign");
   return e;
 };
@@ -11692,6 +11815,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyEnhancementBonusVsRace(NWN::IPRacialT
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyEnhancementBonusVsRace_mutex, "itemPropertyEnhancementBonusVsRace");
   return e;
 };
@@ -11727,6 +11851,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyEnhancementBonusVsSAlign(NWN::Alignme
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyEnhancementBonusVsSAlign_mutex, "itemPropertyEnhancementBonusVsSAlign");
   return e;
 };
@@ -11755,6 +11880,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyEnhancementPenalty(Ice::Int nPenalty,
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyEnhancementPenalty_mutex, "itemPropertyEnhancementPenalty");
   return e;
 };
@@ -11797,6 +11923,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyExtraMeleeDamageType(NWN::IPDamageTyp
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyExtraMeleeDamageType_mutex, "itemPropertyExtraMeleeDamageType");
   return e;
 };
@@ -11839,6 +11966,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyExtraRangeDamageType(NWN::IPDamageTyp
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyExtraRangeDamageType_mutex, "itemPropertyExtraRangeDamageType");
   return e;
 };
@@ -11866,6 +11994,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyFreeAction(const Ice::Current& ice) {
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyFreeAction_mutex, "itemPropertyFreeAction");
   return e;
 };
@@ -11893,6 +12022,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyHaste(const Ice::Current& ice) {
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyHaste_mutex, "itemPropertyHaste");
   return e;
 };
@@ -11921,6 +12051,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyHealersKit(Ice::Int nModifier, const 
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyHealersKit_mutex, "itemPropertyHealersKit");
   return e;
 };
@@ -11948,6 +12079,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyHolyAvenger(const Ice::Current& ice) 
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyHolyAvenger_mutex, "itemPropertyHolyAvenger");
   return e;
 };
@@ -11986,6 +12118,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyImmunityMisc(NWN::IPMiscImmunityType 
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyImmunityMisc_mutex, "itemPropertyImmunityMisc");
   return e;
 };
@@ -12014,6 +12147,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyImmunityToSpellLevel(Ice::Int nLevel,
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyImmunityToSpellLevel_mutex, "itemPropertyImmunityToSpellLevel");
   return e;
 };
@@ -12041,6 +12175,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyImprovedEvasion(const Ice::Current& i
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyImprovedEvasion_mutex, "itemPropertyImprovedEvasion");
   return e;
 };
@@ -12068,6 +12203,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyKeen(const Ice::Current& ice) {
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyKeen_mutex, "itemPropertyKeen");
   return e;
 };
@@ -12097,6 +12233,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyLight(Ice::Int nBrightness, Ice::Int 
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyLight_mutex, "itemPropertyLight");
   return e;
 };
@@ -12131,6 +12268,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyLimitUseByAlign(NWN::IPAlignGroup tIP
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyLimitUseByAlign_mutex, "itemPropertyLimitUseByAlign");
   return e;
 };
@@ -12159,6 +12297,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyLimitUseByClass(Ice::Int nClass, cons
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyLimitUseByClass_mutex, "itemPropertyLimitUseByClass");
   return e;
 };
@@ -12211,6 +12350,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyLimitUseByRace(NWN::IPRacialType tIPR
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyLimitUseByRace_mutex, "itemPropertyLimitUseByRace");
   return e;
 };
@@ -12245,6 +12385,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyLimitUseBySAlign(NWN::Alignment tAlig
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyLimitUseBySAlign_mutex, "itemPropertyLimitUseBySAlign");
   return e;
 };
@@ -12273,6 +12414,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyMassiveCritical(Ice::Int nDamage, con
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyMassiveCritical_mutex, "itemPropertyMassiveCritical");
   return e;
 };
@@ -12301,6 +12443,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyMaterial(Ice::Int nMaterialType, cons
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyMaterial_mutex, "itemPropertyMaterial");
   return e;
 };
@@ -12329,6 +12472,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyMaxRangeStrengthMod(Ice::Int nModifie
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyMaxRangeStrengthMod_mutex, "itemPropertyMaxRangeStrengthMod");
   return e;
 };
@@ -12357,6 +12501,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyMonsterDamage(Ice::Int nDamage, const
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyMonsterDamage_mutex, "itemPropertyMonsterDamage");
   return e;
 };
@@ -12384,6 +12529,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyNoDamage(const Ice::Current& ice) {
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyNoDamage_mutex, "itemPropertyNoDamage");
   return e;
 };
@@ -12413,6 +12559,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyOnHitCastSpell(Ice::Int nSpell, Ice::
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyOnHitCastSpell_mutex, "itemPropertyOnHitCastSpell");
   return e;
 };
@@ -12443,6 +12590,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyOnHitProps(Ice::Int nProperty, Ice::I
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyOnHitProps_mutex, "itemPropertyOnHitProps");
   return e;
 };
@@ -12472,6 +12620,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyOnMonsterHitProperties(Ice::Int nProp
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyOnMonsterHitProperties_mutex, "itemPropertyOnMonsterHitProperties");
   return e;
 };
@@ -12500,6 +12649,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyQuality(Ice::Int nQuality, const Ice:
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyQuality_mutex, "itemPropertyQuality");
   return e;
 };
@@ -12529,6 +12679,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyReducedSavingThrow(Ice::Int nBonusTyp
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyReducedSavingThrow_mutex, "itemPropertyReducedSavingThrow");
   return e;
 };
@@ -12558,6 +12709,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyReducedSavingThrowVsX(Ice::Int nBaseS
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyReducedSavingThrowVsX_mutex, "itemPropertyReducedSavingThrowVsX");
   return e;
 };
@@ -12586,6 +12738,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyRegeneration(Ice::Int nRegenAmount, c
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyRegeneration_mutex, "itemPropertyRegeneration");
   return e;
 };
@@ -12615,6 +12768,7 @@ NWN::NWItemProperty NWScriptI::itemPropertySkillBonus(Ice::Int nSkill, Ice::Int 
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertySkillBonus_mutex, "itemPropertySkillBonus");
   return e;
 };
@@ -12643,6 +12797,7 @@ NWN::NWItemProperty NWScriptI::itemPropertySpecialWalk(Ice::Int nWalkType, const
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertySpecialWalk_mutex, "itemPropertySpecialWalk");
   return e;
 };
@@ -12679,6 +12834,7 @@ NWN::NWItemProperty NWScriptI::itemPropertySpellImmunitySchool(NWN::IPSpellSchoo
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertySpellImmunitySchool_mutex, "itemPropertySpellImmunitySchool");
   return e;
 };
@@ -12707,6 +12863,7 @@ NWN::NWItemProperty NWScriptI::itemPropertySpellImmunitySpecific(Ice::Int nSpell
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertySpellImmunitySpecific_mutex, "itemPropertySpellImmunitySpecific");
   return e;
 };
@@ -12735,6 +12892,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyThievesTools(Ice::Int nModifier, cons
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyThievesTools_mutex, "itemPropertyThievesTools");
   return e;
 };
@@ -12775,6 +12933,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyTrap(Ice::Int nTrapLevel, NWN::IPTrap
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyTrap_mutex, "itemPropertyTrap");
   return e;
 };
@@ -12802,6 +12961,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyTrueSeeing(const Ice::Current& ice) {
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyTrueSeeing_mutex, "itemPropertyTrueSeeing");
   return e;
 };
@@ -12830,6 +12990,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyTurnResistance(Ice::Int nModifier, co
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyTurnResistance_mutex, "itemPropertyTurnResistance");
   return e;
 };
@@ -12858,6 +13019,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyUnlimitedAmmo(Ice::Int nAmmoDamage, c
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyUnlimitedAmmo_mutex, "itemPropertyUnlimitedAmmo");
   return e;
 };
@@ -12886,6 +13048,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyVampiricRegeneration(Ice::Int nRegenA
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyVampiricRegeneration_mutex, "itemPropertyVampiricRegeneration");
   return e;
 };
@@ -12914,6 +13077,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyVisualEffect(Ice::Int nEffect, const 
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyVisualEffect_mutex, "itemPropertyVisualEffect");
   return e;
 };
@@ -12942,6 +13106,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyWeightIncrease(Ice::Int nWeight, cons
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyWeightIncrease_mutex, "itemPropertyWeightIncrease");
   return e;
 };
@@ -12970,6 +13135,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyWeightReduction(Ice::Int nReduction, 
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
+  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyWeightReduction_mutex, "itemPropertyWeightReduction");
   return e;
 };
@@ -13161,6 +13327,7 @@ NWN::NWEffect NWScriptI::magicalEffect(const NWN::NWEffect& eEffect, const Ice::
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(magicalEffect_mutex, "magicalEffect");
   return e;
 };
@@ -15636,6 +15803,7 @@ NWN::NWEffect NWScriptI::supernaturalEffect(const NWN::NWEffect& eEffect, const 
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(supernaturalEffect_mutex, "supernaturalEffect");
   return e;
 };
@@ -15843,6 +16011,7 @@ NWN::NWEffect NWScriptI::versusAlignmentEffect(const NWN::NWEffect& eEffect, Ice
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(versusAlignmentEffect_mutex, "versusAlignmentEffect");
   return e;
 };
@@ -15899,6 +16068,7 @@ NWN::NWEffect NWScriptI::versusRacialTypeEffect(const NWN::NWEffect& eEffect, NW
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(versusRacialTypeEffect_mutex, "versusRacialTypeEffect");
   return e;
 };
@@ -15928,6 +16098,7 @@ NWN::NWEffect NWScriptI::versusTrapEffect(const NWN::NWEffect& eEffect, const Ic
   e.tSubType = getEffectSubType(e, ice);
   e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
+  e.tSpellId = getEffectSpellId(e, ice);
   unlock(versusTrapEffect_mutex, "versusTrapEffect");
   return e;
 };

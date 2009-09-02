@@ -1,4 +1,4 @@
-// Generated on Sun Aug 30 12:51:48 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Tue Sep 01 23:33:52 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 // Not exported:
 //   getFirstEffect getFirstFactionMember getFirstItemInInventory getFirstItemProperty getFirstInPersistentObject getFirstObjectInArea getFirstObjectInShape getFirstPC
@@ -170,6 +170,7 @@ module NWN {
     EffectSubType tSubType;
     bool tIconShown;
     NWObject tCreator;
+    int tSpellId;
 
     /*long id;
     long type;
@@ -213,6 +214,7 @@ module NWN {
     int tCostTableValue;
     int tParam1;
     int tParam1Value;
+    NWObject tCreator;
   };
   sequence<NWItemProperty> NWItemPropertySeq;
 
