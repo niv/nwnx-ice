@@ -33,7 +33,7 @@
 
 CNWNXICE::CNWNXICE()
 {
-	confKey = "ICE";
+	confKey = strdup("ICE");
 	bHooked = 1;
 	printEvents = true;
 }
