@@ -1,4 +1,4 @@
-// Generated on Wed Sep 02 13:05:54 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Wed Sep 02 15:02:16 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 // Not exported:
 //   getFirstEffect getFirstFactionMember getFirstItemInInventory getFirstItemProperty getFirstInPersistentObject getFirstObjectInArea getFirstObjectInShape getFirstPC
@@ -85,6 +85,14 @@ module NWN {
   exception InvalidObjectException {};
   exception InvalidEffectException {};
   exception InvalidItemPropertyException {};
+
+  /**
+    Gets thrown when you pass in an invalid argument
+    to a function.
+  */
+  exception InvalidArgumentException {
+    string message;
+  };
 
   /**
     id is equivalent to the server-side object ID. As opposed to
@@ -220,6 +228,27 @@ module NWN {
 
 
   interface NWScript {
+
+    /**
+      Gets a int on the given CGameEffect. 0 <= index < 16.
+      Equivalent to nwnx_structs version.
+    */
+    int getEffectInteger(NWEffect e, int index);
+    /**
+      Sets a int on the given CGameEffect. 0 <= index < 16.
+      Equivalent to nwnx_structs version.
+    */
+    void setEffectInteger(NWEffect e, int index, int value);
+    /**
+      Gets a int on the given CGameEffect. 0 <= index < 16.
+      Equivalent to nwnx_structs version.
+    */
+    int getItemPropertyInteger(NWItemProperty e, int index);
+    /**
+      Sets a int on the given CGameEffect. 0 <= index < 16.
+      Equivalent to nwnx_structs version.
+    */
+    void setItemPropertyInteger(NWItemProperty e, int index, int value);
 
     idempotent bool hasState(string key);
     idempotent Persistable getState(string key) throws StateNotAvailableException;

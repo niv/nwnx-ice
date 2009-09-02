@@ -1,4 +1,4 @@
-// Generated on Wed Sep 02 13:05:55 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Wed Sep 02 15:02:17 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 #include "NWScriptI.h"
 #include <iostream>
@@ -16354,3 +16354,47 @@ void NWScriptI::setEffectIconShown(const NWN::NWEffect& eff, bool shown, const I
   CGameEffect *eff_ptr = effectMap.find(eff.id)->second;
   eff_ptr->IsIconShown = shown ? 1 : 0;
 };
+
+int NWScriptI::getEffectInteger(const NWN::NWEffect& eff, Ice::Int idx, const Ice::Current& ice) {
+  if (idx < 0 || idx > 15)
+    throw NWN::InvalidArgumentException("index not in 0 <= idx < 16");
+
+  if (effectMap.find(eff.id) == effectMap.end())
+    throw NWN::InvalidEffectException();
+  CGameEffect *eff_ptr = effectMap.find(eff.id)->second;
+
+  return eff_ptr->IntList[idx];
+};
+void NWScriptI::setEffectInteger(const NWN::NWEffect& eff, Ice::Int idx, Ice::Int value, const Ice::Current& ice) {
+  if (idx < 0 || idx > 15)
+    throw NWN::InvalidArgumentException("index not in 0 <= idx < 16");
+
+  if (effectMap.find(eff.id) == effectMap.end())
+    throw NWN::InvalidEffectException();
+  CGameEffect *eff_ptr = effectMap.find(eff.id)->second;
+
+  eff_ptr->IntList[idx] = value;
+};
+
+int NWScriptI::getItemPropertyInteger(const NWN::NWItemProperty& eff, Ice::Int idx, const Ice::Current& ice) {
+  if (idx < 0 || idx > 15)
+    throw NWN::InvalidArgumentException("index not in 0 <= idx < 16");
+
+  if (iprpMap.find(eff.id) == iprpMap.end())
+    throw NWN::InvalidItemPropertyException();
+  CGameEffect *eff_ptr = iprpMap.find(eff.id)->second;
+
+  return eff_ptr->IntList[idx];
+};
+void NWScriptI::setItemPropertyInteger(const NWN::NWItemProperty& eff, Ice::Int idx, Ice::Int value, const Ice::Current& ice) {
+  if (idx < 0 || idx > 15)
+    throw NWN::InvalidArgumentException("index not in 0 <= idx < 16");
+
+  if (iprpMap.find(eff.id) == iprpMap.end())
+    throw NWN::InvalidItemPropertyException();
+  CGameEffect *eff_ptr = iprpMap.find(eff.id)->second;
+
+  eff_ptr->IntList[idx] = value;
+};
+
+
