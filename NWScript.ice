@@ -1,4 +1,4 @@
-// Generated on Wed Sep 02 15:02:16 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Wed Sep 02 20:40:30 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 // Not exported:
 //   getFirstEffect getFirstFactionMember getFirstItemInInventory getFirstItemProperty getFirstInPersistentObject getFirstObjectInArea getFirstObjectInShape getFirstPC
@@ -32,8 +32,10 @@ module NWN {
   enum SaveType { AllOrNoneSaveType, MindSpellsSaveType, PoisonSaveType, DiseaseSaveType, FearSaveType, SonicSaveType, AcidSaveType, FireSaveType, ElectricitySaveType, PositiveSaveType, NegativeSaveType, DeathSaveType, ColdSaveType, DivineSaveType, TrapSaveType, SpellSaveType, GoodSaveType, EvilSaveType, LawSaveType, ChaosSaveType };
   enum CombatMode { InvalidCombatMode, ParryCombatMode, PowerAttackCombatMode, ImprovedPowerAttackCombatMode, FlurryOfBlowsCombatMode, RapidShotCombatMode, ExpertiseCombatMode, ImprovedExpertiseCombatMode, DefensiveCastingCombatMode, DirtyFightingCombatMode, DefensiveStanceCombatMode };
   enum IPTrapType { SpikeIPTrap, HolyIPTrap, TangleIPTrap, BlobOfAcidIPTrap, FireIPTrap, ElectricalIPTrap, GasIPTrap, FrostIPTrap, AcidSplashIPTrap, SonicIPTrap, NegativeIPTrap };
+  enum EffectState { CharmedState, ConfusedState, FrightenedState, TurnedState, DazedState, StunnedState, DominatedState, ParalyzeState, SleepState };
   enum CreatureSize { InvalidSize, TinySize, SmallSize, MediumSize, LargeSize, HugeSize };
   enum AssociateCommand { ToggleSearchCommand, ToggleStealthCommand, ToggleCastingCommand, DisarmTrapCommand, InventoryCommand, PickLockCommand, LeavePartyCommand, MasterGoingToBeAttackedCommand, MasterAttackedOtherCommand, MasterSawTrapCommand, UnpossessFamiliarCommand, ReleaseDominationCommand, MasterUnderAttackCommand, UnsummonSummonedCommand, UnsummonAnimalCompanionCommand, UnsummonFamiliarCommand, GuardMasterCommand, MasterFailedLockpickCommand, FollowMasterCommand, HealMasterCommand, AttackNearestCommand, StandGroundCommand };
+  enum EffectTrueType { InvalidEffectType, HasteEffectType, DamageResistanceEffectType, SlowEffectType, ResurrectionEffectType, DiseaseEffectType, SummonCreatureEffectType, RegenerateEffectType, SetStateEffectType, SetStateInternalEffectType, AttackIncreaseEffectType, AttackDecreaseEffectType, DamageReductionEffectType, DamageIncreaseEffectType, DamageDecreaseEffectType, TemporaryHitpointsEffectType, DamageImmunityIncreaseEffectType, DamageImmunityDecreaseEffectType, EntangleEffectType, DeathEffectType, KnockdownEffectType, DeafEffectType, ImmunityEffectType, SetAIStateEffectType, EnemyAttackBonusEffectType, ArcaneSpellFailureEffectType, SavingThrowIncreaseEffectType, SavingThrowDecreaseEffectType, MovementSpeedIncreaseEffectType, MovementSpeedDecreaseEffectType, VisualEffectType, AOEEffectType, BeamEffectType, SpellResistanceIncreaseEffectType, SpellResistanceDecreaseEffectType, PoisonEffectType, AbilityIncreaseEffectType, AbilityDecreaseEffectType, DamageEffectType, HealEffectType, LinkEffectType, HasteInternalEffectType, SlowInternalEffectType, ModifynumattacksEffectType, CurseEffectType, SilenceEffectType, InvisibilityEffectType, AcIncreaseEffectType, AcDecreaseEffectType, SpellImmunityEffectType, DispelAllMagicEffectType, DispelBestMagicEffectType, TauntEffectType, LightEffectType, SkillIncreaseEffectType, SkillDecreaseEffectType, HitpointChangeWhenDyingEffectType, SetWalkAnimationEffectType, LimitMovementSpeedEffectType, DamageShieldEffectType, PolymorphEffectType, SanctuaryEffectType, TimestopEffectType, SpellLevelAbsorptionEffectType, IconEffectType, RacialTypeEffectType, VisionEffectType, SeeInvisibleEffectType, UltravisionEffectType, TrueSeeingEffectType, BlindnessEffectType, DarknessEffectType, MissChanceEffectType, ConcealmentEffectType, TurnResistanceIncreaseEffectType, BonusSpellOfLevelEffectType, DisappearAppearEffectType, DisappearEffectType, AppearEffectType, NegativeLevelEffectType, BonusFeatEffectType, WoundingEffectType, SwarmEffectType, VampiricRegenerationEffectType, DisarmEffectType, TurnResistanceDecreaseEffectType, BlindnessInactiveEffectType, PetrifyEffectType, ItempropertyEffectType, SpellFailureEffectType, CutsceneGhostEffectType, CutsceneImmobileEffectType, DefensiveStanceEffectType };
   enum ObjectType { InvalidObject, Creature, Item, Trigger, Door, AOE, Waypoint, Placeable, Store, Encounter, All };
   enum DurationType { Instant, Temporary, Permanent };
   enum ActionMode { DetectMode, StealthMode, ParryMode, PowerAttackMode, ImprovedPowerAttackMode, CounterspellMode, FlurryOfBlowsMode, RapidShotMode, ExpertiseMode, ImprovedExpertiseMode, DefensiveCastMode, DirtyFightingMode };
@@ -175,8 +177,8 @@ module NWN {
 
     DurationType tDurationType;
     EffectType tType;
+    EffectTrueType tTrueType;
     EffectSubType tSubType;
-    bool tIconShown;
     NWObject tCreator;
     int tSpellId;
 
@@ -217,6 +219,8 @@ module NWN {
 
     DurationType tDurationType;
     int tType;
+    // always ItempropertyEffectType
+    // EffectTrueType tTrueType;
     int tSubType;
     int tCostTable;
     int tCostTableValue;
@@ -233,22 +237,30 @@ module NWN {
       Gets a int on the given CGameEffect. 0 <= index < 16.
       Equivalent to nwnx_structs version.
     */
-    int getEffectInteger(NWEffect e, int index);
+    int getEffectInteger(NWEffect e, int index) throws InvalidArgumentException, InvalidEffectException;
     /**
       Sets a int on the given CGameEffect. 0 <= index < 16.
       Equivalent to nwnx_structs version.
     */
-    void setEffectInteger(NWEffect e, int index, int value);
+    void setEffectInteger(NWEffect e, int index, int value) throws InvalidArgumentException, InvalidEffectException;
     /**
       Gets a int on the given CGameEffect. 0 <= index < 16.
       Equivalent to nwnx_structs version.
     */
-    int getItemPropertyInteger(NWItemProperty e, int index);
+    int getItemPropertyInteger(NWItemProperty e, int index) throws InvalidArgumentException, InvalidItemPropertyException;
     /**
       Sets a int on the given CGameEffect. 0 <= index < 16.
       Equivalent to nwnx_structs version.
     */
-    void setItemPropertyInteger(NWItemProperty e, int index, int value);
+    void setItemPropertyInteger(NWItemProperty e, int index, int value) throws InvalidArgumentException, InvalidItemPropertyException;
+
+    void setEffectTrueType(NWEffect e, EffectTrueType t) throws InvalidItemPropertyException;
+
+    /**
+      Gets this effects' duration.
+    */
+    double getEffectDuration(NWEffect e) throws InvalidEffectException;
+    double getItemPropertyDuration(NWItemProperty e) throws InvalidEffectException;
 
     idempotent bool hasState(string key);
     idempotent Persistable getState(string key) throws StateNotAvailableException;
@@ -321,6 +333,17 @@ module NWN {
      * This will be cached by clients and is probably only reliable when setting BEFORE applying the effect.
      */
     idempotent void setEffectIconShown(NWEffect eff, bool bShown) throws NotInContextException, InvalidEffectException;
+
+    /**
+     * ???
+     */
+    idempotent bool getEffectExposed(NWEffect eff) throws NotInContextException, InvalidEffectException;
+
+    /**
+     * ???
+     */
+    idempotent void setEffectExposed(NWEffect eff, bool bShown) throws NotInContextException, InvalidEffectException;
+
 
 
     /**<br>

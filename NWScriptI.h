@@ -1,4 +1,4 @@
-// Generated on Wed Sep 02 15:02:16 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Wed Sep 02 20:40:31 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 #include "FunctionHooks.h"
 #include "NWNStructures.h"
@@ -15,6 +15,11 @@ class NWScriptI : public NWN::NWScript {
     void setEffectInteger(const NWN::NWEffect&, Ice::Int, Ice::Int, const Ice::Current&);
     int getItemPropertyInteger(const NWN::NWItemProperty&, Ice::Int, const Ice::Current&);
     void setItemPropertyInteger(const NWN::NWItemProperty&, Ice::Int, Ice::Int, const Ice::Current&);
+
+    Ice::Double getEffectDuration(const NWN::NWEffect&, const Ice::Current&);
+    Ice::Double getItemPropertyDuration(const NWN::NWItemProperty&, const Ice::Current&);
+
+    void setEffectTrueType(const NWN::NWEffect&, NWN::EffectTrueType, const Ice::Current&);
 
     bool hasState(const std::string&, const Ice::Current&);
     NWN::Persistable getState(const std::string&, const Ice::Current&);
@@ -36,6 +41,8 @@ class NWScriptI : public NWN::NWScript {
 
     bool getEffectIconShown(const NWN::NWEffect&, const Ice::Current&);
     void setEffectIconShown(const NWN::NWEffect&, bool, const Ice::Current&);
+    bool getEffectExposed(const NWN::NWEffect&, const Ice::Current&);
+    void setEffectExposed(const NWN::NWEffect&, bool, const Ice::Current&);
     virtual Ice::Int abs(Ice::Int nValue, const Ice::Current&);
     virtual Ice::Double acos(Ice::Double fValue, const Ice::Current&);
     virtual void actionAttack(const NWN::NWObject& oAttackee, bool bPassive, const Ice::Current&);
@@ -1703,4 +1710,104 @@ class NWScriptI : public NWN::NWScript {
     IceUtil::Mutex willSave_mutex;
     IceUtil::Mutex writeTimestampedLogEntry_mutex;
     IceUtil::Mutex yardsToMeters_mutex;
+    long enum_EffectType_2_long(NWN::EffectType k);
+    NWN::EffectType enum_long_2_EffectType(long v);
+    long enum_Weather_2_long(NWN::Weather k);
+    NWN::Weather enum_long_2_Weather(long v);
+    long enum_TileSourceLightColor_2_long(NWN::TileSourceLightColor k);
+    NWN::TileSourceLightColor enum_long_2_TileSourceLightColor(long v);
+    long enum_StandardFaction_2_long(NWN::StandardFaction k);
+    NWN::StandardFaction enum_long_2_StandardFaction(long v);
+    long enum_SavingThrowResult_2_long(NWN::SavingThrowResult k);
+    NWN::SavingThrowResult enum_long_2_SavingThrowResult(long v);
+    long enum_Action_2_long(NWN::Action k);
+    NWN::Action enum_long_2_Action(long v);
+    long enum_ACModifyType_2_long(NWN::ACModifyType k);
+    NWN::ACModifyType enum_long_2_ACModifyType(long v);
+    long enum_Gender_2_long(NWN::Gender k);
+    NWN::Gender enum_long_2_Gender(long v);
+    long enum_IPRacialType_2_long(NWN::IPRacialType k);
+    NWN::IPRacialType enum_long_2_IPRacialType(long v);
+    long enum_PlaceableAction_2_long(NWN::PlaceableAction k);
+    NWN::PlaceableAction enum_long_2_PlaceableAction(long v);
+    long enum_Ability_2_long(NWN::Ability k);
+    NWN::Ability enum_long_2_Ability(long v);
+    long enum_IPSpellSchool_2_long(NWN::IPSpellSchool k);
+    NWN::IPSpellSchool enum_long_2_IPSpellSchool(long v);
+    long enum_IPAlignGroup_2_long(NWN::IPAlignGroup k);
+    NWN::IPAlignGroup enum_long_2_IPAlignGroup(long v);
+    long enum_EffectSubType_2_long(NWN::EffectSubType k);
+    NWN::EffectSubType enum_long_2_EffectSubType(long v);
+    long enum_TileMainLightColor_2_long(NWN::TileMainLightColor k);
+    NWN::TileMainLightColor enum_long_2_TileMainLightColor(long v);
+    long enum_DamagePower_2_long(NWN::DamagePower k);
+    NWN::DamagePower enum_long_2_DamagePower(long v);
+    long enum_DamageType_2_long(NWN::DamageType k);
+    NWN::DamageType enum_long_2_DamageType(long v);
+    long enum_SaveType_2_long(NWN::SaveType k);
+    NWN::SaveType enum_long_2_SaveType(long v);
+    long enum_CombatMode_2_long(NWN::CombatMode k);
+    NWN::CombatMode enum_long_2_CombatMode(long v);
+    long enum_IPTrapType_2_long(NWN::IPTrapType k);
+    NWN::IPTrapType enum_long_2_IPTrapType(long v);
+    long enum_EffectState_2_long(NWN::EffectState k);
+    NWN::EffectState enum_long_2_EffectState(long v);
+    long enum_CreatureSize_2_long(NWN::CreatureSize k);
+    NWN::CreatureSize enum_long_2_CreatureSize(long v);
+    long enum_AssociateCommand_2_long(NWN::AssociateCommand k);
+    NWN::AssociateCommand enum_long_2_AssociateCommand(long v);
+    long enum_EffectTrueType_2_long(NWN::EffectTrueType k);
+    NWN::EffectTrueType enum_long_2_EffectTrueType(long v);
+    long enum_ObjectType_2_long(NWN::ObjectType k);
+    NWN::ObjectType enum_long_2_ObjectType(long v);
+    long enum_DurationType_2_long(NWN::DurationType k);
+    NWN::DurationType enum_long_2_DurationType(long v);
+    long enum_ActionMode_2_long(NWN::ActionMode k);
+    NWN::ActionMode enum_long_2_ActionMode(long v);
+    long enum_Alignment_2_long(NWN::Alignment k);
+    NWN::Alignment enum_long_2_Alignment(long v);
+    long enum_TrapType_2_long(NWN::TrapType k);
+    NWN::TrapType enum_long_2_TrapType(long v);
+    long enum_AttackBonus_2_long(NWN::AttackBonus k);
+    NWN::AttackBonus enum_long_2_AttackBonus(long v);
+    long enum_IPMiscImmunityType_2_long(NWN::IPMiscImmunityType k);
+    NWN::IPMiscImmunityType enum_long_2_IPMiscImmunityType(long v);
+    long enum_RacialType_2_long(NWN::RacialType k);
+    NWN::RacialType enum_long_2_RacialType(long v);
+    long enum_TalkVolume_2_long(NWN::TalkVolume k);
+    NWN::TalkVolume enum_long_2_TalkVolume(long v);
+    long enum_AssociateType_2_long(NWN::AssociateType k);
+    NWN::AssociateType enum_long_2_AssociateType(long v);
+    long enum_IPAlignment_2_long(NWN::IPAlignment k);
+    NWN::IPAlignment enum_long_2_IPAlignment(long v);
+    long enum_Button_2_long(NWN::Button k);
+    NWN::Button enum_long_2_Button(long v);
+    long enum_SpecialAttack_2_long(NWN::SpecialAttack k);
+    NWN::SpecialAttack enum_long_2_SpecialAttack(long v);
+    long enum_IPDamageType_2_long(NWN::IPDamageType k);
+    NWN::IPDamageType enum_long_2_IPDamageType(long v);
+    long enum_PhenoType_2_long(NWN::PhenoType k);
+    NWN::PhenoType enum_long_2_PhenoType(long v);
+    long enum_InventorySlot_2_long(NWN::InventorySlot k);
+    NWN::InventorySlot enum_long_2_InventorySlot(long v);
+    long enum_DoorAction_2_long(NWN::DoorAction k);
+    NWN::DoorAction enum_long_2_DoorAction(long v);
+    long enum_ProjectilePathType_2_long(NWN::ProjectilePathType k);
+    NWN::ProjectilePathType enum_long_2_ProjectilePathType(long v);
+    long enum_AILevel_2_long(NWN::AILevel k);
+    NWN::AILevel enum_long_2_AILevel(long v);
+    long enum_ShapeType_2_long(NWN::ShapeType k);
+    NWN::ShapeType enum_long_2_ShapeType(long v);
+    long enum_AttackResult_2_long(NWN::AttackResult k);
+    NWN::AttackResult enum_long_2_AttackResult(long v);
+    long enum_CreaturePart_2_long(NWN::CreaturePart k);
+    NWN::CreaturePart enum_long_2_CreaturePart(long v);
+    long enum_MetaMagic_2_long(NWN::MetaMagic k);
+    NWN::MetaMagic enum_long_2_MetaMagic(long v);
+    long enum_SpellSchool_2_long(NWN::SpellSchool k);
+    NWN::SpellSchool enum_long_2_SpellSchool(long v);
+    long enum_MissChanceType_2_long(NWN::MissChanceType k);
+    NWN::MissChanceType enum_long_2_MissChanceType(long v);
+    long enum_ImmunityType_2_long(NWN::ImmunityType k);
+    NWN::ImmunityType enum_long_2_ImmunityType(long v);
 };

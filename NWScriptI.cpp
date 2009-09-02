@@ -1,4 +1,4 @@
-// Generated on Wed Sep 02 15:02:17 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Wed Sep 02 20:40:31 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 #include "NWScriptI.h"
 #include <iostream>
@@ -51,6 +51,1792 @@ void NWScriptI::innerUnlock(const char* name) {
   cout << "innerUnlock()" << endl;
 #endif
 }
+long NWScriptI::enum_EffectType_2_long(NWN::EffectType k) {
+  if (k == NWN::TemporaryHitpointsEffect) return 9;
+  if (k == NWN::ACDecreaseEffect) return 47;
+  if (k == NWN::DazedEffect) return 28;
+  if (k == NWN::TimestopEffect) return 66;
+  if (k == NWN::SwarmEffect) return 76;
+  if (k == NWN::ImprovedInvisibilityEffect) return 57;
+  if (k == NWN::InvalidEffect) return 0;
+  if (k == NWN::AbilityIncreaseEffect) return 38;
+  if (k == NWN::MovementSpeedIncreaseEffect) return 48;
+  if (k == NWN::StunnedEffect) return 29;
+  if (k == NWN::BlindnessEffect) return 67;
+  if (k == NWN::TurnResistanceDecreaseEffect) return 77;
+  if (k == NWN::AreaOfEffectEffect) return 20;
+  if (k == NWN::DarknessEffect) return 58;
+  if (k == NWN::DamageResistanceEffect) return 1;
+  if (k == NWN::AbilityDecreaseEffect) return 39;
+  if (k == NWN::SleepEffect) return 30;
+  if (k == NWN::SpellLevelAbsorptionEffect) return 68;
+  if (k == NWN::EntangleEffect) return 11;
+  if (k == NWN::MovementSpeedDecreaseEffect) return 49;
+  if (k == NWN::TurnResistanceIncreaseEffect) return 78;
+  if (k == NWN::BeamEffect) return 21;
+  if (k == NWN::DispelMagicAllEffect) return 59;
+  if (k == NWN::AttackIncreaseEffect) return 40;
+  if (k == NWN::PoisonEffect) return 31;
+  if (k == NWN::DispelMagicBestEffect) return 69;
+  if (k == NWN::InvulnerableEffect) return 12;
+  if (k == NWN::SavingThrowIncreaseEffect) return 50;
+  if (k == NWN::PetrifyEffect) return 79;
+  if (k == NWN::RegenerateEffect) return 3;
+  if (k == NWN::AttackDecreaseEffect) return 41;
+  if (k == NWN::ElementalShieldEffect) return 60;
+  if (k == NWN::DiseaseEffect) return 32;
+  if (k == NWN::UltravisionEffect) return 70;
+  if (k == NWN::DeafEffect) return 13;
+  if (k == NWN::SavingThrowDecreaseEffect) return 51;
+  if (k == NWN::CutsceneParalyzeEffect) return 80;
+  if (k == NWN::DamageIncreaseEffect) return 42;
+  if (k == NWN::CharmedEffect) return 23;
+  if (k == NWN::NegativeLevelEffect) return 61;
+  if (k == NWN::ResurrectionEffect) return 14;
+  if (k == NWN::SpellResistanceIncreaseEffect) return 52;
+  if (k == NWN::CurseEffect) return 33;
+  if (k == NWN::MissChanceEffect) return 71;
+  if (k == NWN::EtherealEffect) return 81;
+  if (k == NWN::DamageDecreaseEffect) return 43;
+  if (k == NWN::ConfusedEffect) return 24;
+  if (k == NWN::PolymorphEffect) return 62;
+  if (k == NWN::ImmunityEffect) return 15;
+  if (k == NWN::SpellResistanceDecreaseEffect) return 53;
+  if (k == NWN::SilenceEffect) return 34;
+  if (k == NWN::ConcealmentEffect) return 72;
+  if (k == NWN::SpellFailureEffect) return 82;
+  if (k == NWN::FrightenedEffect) return 25;
+  if (k == NWN::SanctuaryEffect) return 63;
+  if (k == NWN::DamageImmunityIncreaseEffect) return 44;
+  if (k == NWN::SkillIncreaseEffect) return 54;
+  if (k == NWN::TurnedEffect) return 35;
+  if (k == NWN::SpellImmunityEffect) return 73;
+  if (k == NWN::CutsceneGhostEffect) return 83;
+  if (k == NWN::DominatedEffect) return 26;
+  if (k == NWN::TrueSeeingEffect) return 64;
+  if (k == NWN::DamageReductionEffect) return 7;
+  if (k == NWN::DamageImmunityDecreaseEffect) return 45;
+  if (k == NWN::HasteEffect) return 36;
+  if (k == NWN::VisualEffect) return 74;
+  if (k == NWN::EnemyAttackBonusEffect) return 17;
+  if (k == NWN::SkillDecreaseEffect) return 55;
+  if (k == NWN::CutsceneImmobilizeEffect) return 84;
+  if (k == NWN::SeeInvisibleEffect) return 65;
+  if (k == NWN::ACIncreaseEffect) return 46;
+  if (k == NWN::ParalyzeEffect) return 27;
+  if (k == NWN::DisappearAppearEffect) return 75;
+  if (k == NWN::SlowEffect) return 37;
+  if (k == NWN::ArcaneSpellFailureEffect) return 18;
+  if (k == NWN::InvisibilityEffect) return 56;
+  throw "omg";
+};
+NWN::EffectType NWScriptI::enum_long_2_EffectType(long v) {
+  if (v == 9) return NWN::TemporaryHitpointsEffect;
+  if (v == 47) return NWN::ACDecreaseEffect;
+  if (v == 28) return NWN::DazedEffect;
+  if (v == 66) return NWN::TimestopEffect;
+  if (v == 76) return NWN::SwarmEffect;
+  if (v == 57) return NWN::ImprovedInvisibilityEffect;
+  if (v == 0) return NWN::InvalidEffect;
+  if (v == 38) return NWN::AbilityIncreaseEffect;
+  if (v == 48) return NWN::MovementSpeedIncreaseEffect;
+  if (v == 29) return NWN::StunnedEffect;
+  if (v == 67) return NWN::BlindnessEffect;
+  if (v == 77) return NWN::TurnResistanceDecreaseEffect;
+  if (v == 20) return NWN::AreaOfEffectEffect;
+  if (v == 58) return NWN::DarknessEffect;
+  if (v == 1) return NWN::DamageResistanceEffect;
+  if (v == 39) return NWN::AbilityDecreaseEffect;
+  if (v == 30) return NWN::SleepEffect;
+  if (v == 68) return NWN::SpellLevelAbsorptionEffect;
+  if (v == 11) return NWN::EntangleEffect;
+  if (v == 49) return NWN::MovementSpeedDecreaseEffect;
+  if (v == 78) return NWN::TurnResistanceIncreaseEffect;
+  if (v == 21) return NWN::BeamEffect;
+  if (v == 59) return NWN::DispelMagicAllEffect;
+  if (v == 40) return NWN::AttackIncreaseEffect;
+  if (v == 31) return NWN::PoisonEffect;
+  if (v == 69) return NWN::DispelMagicBestEffect;
+  if (v == 12) return NWN::InvulnerableEffect;
+  if (v == 50) return NWN::SavingThrowIncreaseEffect;
+  if (v == 79) return NWN::PetrifyEffect;
+  if (v == 3) return NWN::RegenerateEffect;
+  if (v == 41) return NWN::AttackDecreaseEffect;
+  if (v == 60) return NWN::ElementalShieldEffect;
+  if (v == 32) return NWN::DiseaseEffect;
+  if (v == 70) return NWN::UltravisionEffect;
+  if (v == 13) return NWN::DeafEffect;
+  if (v == 51) return NWN::SavingThrowDecreaseEffect;
+  if (v == 80) return NWN::CutsceneParalyzeEffect;
+  if (v == 42) return NWN::DamageIncreaseEffect;
+  if (v == 23) return NWN::CharmedEffect;
+  if (v == 61) return NWN::NegativeLevelEffect;
+  if (v == 14) return NWN::ResurrectionEffect;
+  if (v == 52) return NWN::SpellResistanceIncreaseEffect;
+  if (v == 33) return NWN::CurseEffect;
+  if (v == 71) return NWN::MissChanceEffect;
+  if (v == 81) return NWN::EtherealEffect;
+  if (v == 43) return NWN::DamageDecreaseEffect;
+  if (v == 24) return NWN::ConfusedEffect;
+  if (v == 62) return NWN::PolymorphEffect;
+  if (v == 15) return NWN::ImmunityEffect;
+  if (v == 53) return NWN::SpellResistanceDecreaseEffect;
+  if (v == 34) return NWN::SilenceEffect;
+  if (v == 72) return NWN::ConcealmentEffect;
+  if (v == 82) return NWN::SpellFailureEffect;
+  if (v == 25) return NWN::FrightenedEffect;
+  if (v == 63) return NWN::SanctuaryEffect;
+  if (v == 44) return NWN::DamageImmunityIncreaseEffect;
+  if (v == 54) return NWN::SkillIncreaseEffect;
+  if (v == 35) return NWN::TurnedEffect;
+  if (v == 73) return NWN::SpellImmunityEffect;
+  if (v == 83) return NWN::CutsceneGhostEffect;
+  if (v == 26) return NWN::DominatedEffect;
+  if (v == 64) return NWN::TrueSeeingEffect;
+  if (v == 7) return NWN::DamageReductionEffect;
+  if (v == 45) return NWN::DamageImmunityDecreaseEffect;
+  if (v == 36) return NWN::HasteEffect;
+  if (v == 74) return NWN::VisualEffect;
+  if (v == 17) return NWN::EnemyAttackBonusEffect;
+  if (v == 55) return NWN::SkillDecreaseEffect;
+  if (v == 84) return NWN::CutsceneImmobilizeEffect;
+  if (v == 65) return NWN::SeeInvisibleEffect;
+  if (v == 46) return NWN::ACIncreaseEffect;
+  if (v == 27) return NWN::ParalyzeEffect;
+  if (v == 75) return NWN::DisappearAppearEffect;
+  if (v == 37) return NWN::SlowEffect;
+  if (v == 18) return NWN::ArcaneSpellFailureEffect;
+  if (v == 56) return NWN::InvisibilityEffect;
+  printf("Invalid enum value of type EffectType passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+};
+long NWScriptI::enum_Weather_2_long(NWN::Weather k) {
+  if (k == NWN::ClearWeather) return 0;
+  if (k == NWN::RainWeather) return 1;
+  if (k == NWN::InvalidWeather) return -1;
+  if (k == NWN::SnowWeather) return 2;
+  if (k == NWN::AreaDefaultsWeather) return 3;
+  throw "omg";
+};
+NWN::Weather NWScriptI::enum_long_2_Weather(long v) {
+  if (v == 0) return NWN::ClearWeather;
+  if (v == 1) return NWN::RainWeather;
+  if (v == -1) return NWN::InvalidWeather;
+  if (v == 2) return NWN::SnowWeather;
+  if (v == 3) return NWN::AreaDefaultsWeather;
+  printf("Invalid enum value of type Weather passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+};
+long NWScriptI::enum_TileSourceLightColor_2_long(NWN::TileSourceLightColor k) {
+  if (k == NWN::PaleGreenTileSourceLightColor) return 5;
+  if (k == NWN::PalePurpleTileSourceLightColor) return 11;
+  if (k == NWN::BlackTileSourceLightColor) return 0;
+  if (k == NWN::PaleDarkAquaTileSourceLightColor) return 6;
+  if (k == NWN::PaleDarkRedTileSourceLightColor) return 12;
+  if (k == NWN::WhiteTileSourceLightColor) return 1;
+  if (k == NWN::PaleAquaTileSourceLightColor) return 7;
+  if (k == NWN::PaleRedTileSourceLightColor) return 13;
+  if (k == NWN::PaleDarkYellowTileSourceLightColor) return 2;
+  if (k == NWN::PaleDarkBlueTileSourceLightColor) return 8;
+  if (k == NWN::PaleDarkOrangeTileSourceLightColor) return 14;
+  if (k == NWN::PaleYellowTileSourceLightColor) return 3;
+  if (k == NWN::PaleBlueTileSourceLightColor) return 9;
+  if (k == NWN::PaleOrangeTileSourceLightColor) return 15;
+  if (k == NWN::PaleDarkGreenTileSourceLightColor) return 4;
+  if (k == NWN::PaleDarkPurpleTileSourceLightColor) return 10;
+  throw "omg";
+};
+NWN::TileSourceLightColor NWScriptI::enum_long_2_TileSourceLightColor(long v) {
+  if (v == 5) return NWN::PaleGreenTileSourceLightColor;
+  if (v == 11) return NWN::PalePurpleTileSourceLightColor;
+  if (v == 0) return NWN::BlackTileSourceLightColor;
+  if (v == 6) return NWN::PaleDarkAquaTileSourceLightColor;
+  if (v == 12) return NWN::PaleDarkRedTileSourceLightColor;
+  if (v == 1) return NWN::WhiteTileSourceLightColor;
+  if (v == 7) return NWN::PaleAquaTileSourceLightColor;
+  if (v == 13) return NWN::PaleRedTileSourceLightColor;
+  if (v == 2) return NWN::PaleDarkYellowTileSourceLightColor;
+  if (v == 8) return NWN::PaleDarkBlueTileSourceLightColor;
+  if (v == 14) return NWN::PaleDarkOrangeTileSourceLightColor;
+  if (v == 3) return NWN::PaleYellowTileSourceLightColor;
+  if (v == 9) return NWN::PaleBlueTileSourceLightColor;
+  if (v == 15) return NWN::PaleOrangeTileSourceLightColor;
+  if (v == 4) return NWN::PaleDarkGreenTileSourceLightColor;
+  if (v == 10) return NWN::PaleDarkPurpleTileSourceLightColor;
+  printf("Invalid enum value of type TileSourceLightColor passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+};
+long NWScriptI::enum_StandardFaction_2_long(NWN::StandardFaction k) {
+  if (k == NWN::Hostile) return 0;
+  if (k == NWN::Commoner) return 1;
+  if (k == NWN::Merchant) return 2;
+  if (k == NWN::Defender) return 3;
+  throw "omg";
+};
+NWN::StandardFaction NWScriptI::enum_long_2_StandardFaction(long v) {
+  if (v == 0) return NWN::Hostile;
+  if (v == 1) return NWN::Commoner;
+  if (v == 2) return NWN::Merchant;
+  if (v == 3) return NWN::Defender;
+  printf("Invalid enum value of type StandardFaction passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+};
+long NWScriptI::enum_SavingThrowResult_2_long(NWN::SavingThrowResult k) {
+  if (k == NWN::FailedRoll) return 0;
+  if (k == NWN::SucceededRoll) return 1;
+  if (k == NWN::ImmuneToSaveType) return 3;
+  throw "omg";
+};
+NWN::SavingThrowResult NWScriptI::enum_long_2_SavingThrowResult(long v) {
+  if (v == 0) return NWN::FailedRoll;
+  if (v == 1) return NWN::SucceededRoll;
+  if (v == 3) return NWN::ImmuneToSaveType;
+  printf("Invalid enum value of type SavingThrowResult passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+};
+long NWScriptI::enum_Action_2_long(NWN::Action k) {
+  if (k == NWN::AnimalEmpathyAction) return 16;
+  if (k == NWN::OpenDoorAction) return 5;
+  if (k == NWN::HealAction) return 33;
+  if (k == NWN::ExamineTrapAction) return 11;
+  if (k == NWN::MoveToPointAction) return 0;
+  if (k == NWN::RestAction) return 17;
+  if (k == NWN::CloseDoorAction) return 6;
+  if (k == NWN::PickpocketAction) return 34;
+  if (k == NWN::SetTrapAction) return 12;
+  if (k == NWN::PickupItemAction) return 1;
+  if (k == NWN::SmiteGoodAction) return 40;
+  if (k == NWN::TauntAction) return 18;
+  if (k == NWN::DialogObjectAction) return 7;
+  if (k == NWN::FollowAction) return 35;
+  if (k == NWN::OpenLockAction) return 13;
+  if (k == NWN::DropItemAction) return 2;
+  if (k == NWN::InvalidAction) return 65535;
+  if (k == NWN::KIDamageAction) return 41;
+  if (k == NWN::ItemCastSpellAction) return 19;
+  if (k == NWN::DisableTrapAction) return 8;
+  if (k == NWN::LockAction) return 14;
+  if (k == NWN::AttackObjectAction) return 3;
+  if (k == NWN::CounterSpellAction) return 31;
+  if (k == NWN::RecoverTrapAction) return 9;
+  if (k == NWN::SitAction) return 37;
+  if (k == NWN::UseObjectAction) return 15;
+  if (k == NWN::CastSpellAction) return 4;
+  if (k == NWN::RandomWalkAction) return 43;
+  if (k == NWN::FlagTrapAction) return 10;
+  throw "omg";
+};
+NWN::Action NWScriptI::enum_long_2_Action(long v) {
+  if (v == 16) return NWN::AnimalEmpathyAction;
+  if (v == 5) return NWN::OpenDoorAction;
+  if (v == 33) return NWN::HealAction;
+  if (v == 11) return NWN::ExamineTrapAction;
+  if (v == 0) return NWN::MoveToPointAction;
+  if (v == 17) return NWN::RestAction;
+  if (v == 6) return NWN::CloseDoorAction;
+  if (v == 34) return NWN::PickpocketAction;
+  if (v == 12) return NWN::SetTrapAction;
+  if (v == 1) return NWN::PickupItemAction;
+  if (v == 40) return NWN::SmiteGoodAction;
+  if (v == 18) return NWN::TauntAction;
+  if (v == 7) return NWN::DialogObjectAction;
+  if (v == 35) return NWN::FollowAction;
+  if (v == 13) return NWN::OpenLockAction;
+  if (v == 2) return NWN::DropItemAction;
+  if (v == 65535) return NWN::InvalidAction;
+  if (v == 41) return NWN::KIDamageAction;
+  if (v == 19) return NWN::ItemCastSpellAction;
+  if (v == 8) return NWN::DisableTrapAction;
+  if (v == 14) return NWN::LockAction;
+  if (v == 3) return NWN::AttackObjectAction;
+  if (v == 31) return NWN::CounterSpellAction;
+  if (v == 9) return NWN::RecoverTrapAction;
+  if (v == 37) return NWN::SitAction;
+  if (v == 15) return NWN::UseObjectAction;
+  if (v == 4) return NWN::CastSpellAction;
+  if (v == 43) return NWN::RandomWalkAction;
+  if (v == 10) return NWN::FlagTrapAction;
+  printf("Invalid enum value of type Action passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+};
+long NWScriptI::enum_ACModifyType_2_long(NWN::ACModifyType k) {
+  if (k == NWN::ACDodgeBonus) return 0;
+  if (k == NWN::ACNaturalBonus) return 1;
+  if (k == NWN::ACArmorEnchantmentBonus) return 2;
+  if (k == NWN::ACShieldEnchantmentBonus) return 3;
+  if (k == NWN::ACDeflectionBonus) return 4;
+  throw "omg";
+};
+NWN::ACModifyType NWScriptI::enum_long_2_ACModifyType(long v) {
+  if (v == 0) return NWN::ACDodgeBonus;
+  if (v == 1) return NWN::ACNaturalBonus;
+  if (v == 2) return NWN::ACArmorEnchantmentBonus;
+  if (v == 3) return NWN::ACShieldEnchantmentBonus;
+  if (v == 4) return NWN::ACDeflectionBonus;
+  printf("Invalid enum value of type ACModifyType passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+};
+long NWScriptI::enum_Gender_2_long(NWN::Gender k) {
+  if (k == NWN::MaleGender) return 0;
+  if (k == NWN::Female) return 1;
+  if (k == NWN::BothGender) return 2;
+  if (k == NWN::OtherGender) return 3;
+  if (k == NWN::NoneGender) return 4;
+  throw "omg";
+};
+NWN::Gender NWScriptI::enum_long_2_Gender(long v) {
+  if (v == 0) return NWN::MaleGender;
+  if (v == 1) return NWN::Female;
+  if (v == 2) return NWN::BothGender;
+  if (v == 3) return NWN::OtherGender;
+  if (v == 4) return NWN::NoneGender;
+  printf("Invalid enum value of type Gender passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+};
+long NWScriptI::enum_IPRacialType_2_long(NWN::IPRacialType k) {
+  if (k == NWN::ElementalIPRace) return 16;
+  if (k == NWN::HalforcIPRace) return 5;
+  if (k == NWN::DragonIPRace) return 11;
+  if (k == NWN::DwarfIPRace) return 0;
+  if (k == NWN::FeyIPRace) return 17;
+  if (k == NWN::HumanIPRace) return 6;
+  if (k == NWN::ShapechangerIPRace) return 23;
+  if (k == NWN::HumanoidGoblinoidIPRace) return 12;
+  if (k == NWN::ElfIPRace) return 1;
+  if (k == NWN::GiantIPRace) return 18;
+  if (k == NWN::AberrationIPRace) return 7;
+  if (k == NWN::UndeadIPRace) return 24;
+  if (k == NWN::HumanoidMonstrousIPRace) return 13;
+  if (k == NWN::GnomeIPRace) return 2;
+  if (k == NWN::MagicalBeastIPRace) return 19;
+  if (k == NWN::AnimalIPRace) return 8;
+  if (k == NWN::VerminIPRace) return 25;
+  if (k == NWN::HumanoidOrcIPRace) return 14;
+  if (k == NWN::HalflingIPRace) return 3;
+  if (k == NWN::OutsiderIPRace) return 20;
+  if (k == NWN::BeastIPRace) return 9;
+  if (k == NWN::HumanoidReptilianIPRace) return 15;
+  if (k == NWN::HalfelfIPRace) return 4;
+  if (k == NWN::ConstructIPRace) return 10;
+  throw "omg";
+};
+NWN::IPRacialType NWScriptI::enum_long_2_IPRacialType(long v) {
+  if (v == 16) return NWN::ElementalIPRace;
+  if (v == 5) return NWN::HalforcIPRace;
+  if (v == 11) return NWN::DragonIPRace;
+  if (v == 0) return NWN::DwarfIPRace;
+  if (v == 17) return NWN::FeyIPRace;
+  if (v == 6) return NWN::HumanIPRace;
+  if (v == 23) return NWN::ShapechangerIPRace;
+  if (v == 12) return NWN::HumanoidGoblinoidIPRace;
+  if (v == 1) return NWN::ElfIPRace;
+  if (v == 18) return NWN::GiantIPRace;
+  if (v == 7) return NWN::AberrationIPRace;
+  if (v == 24) return NWN::UndeadIPRace;
+  if (v == 13) return NWN::HumanoidMonstrousIPRace;
+  if (v == 2) return NWN::GnomeIPRace;
+  if (v == 19) return NWN::MagicalBeastIPRace;
+  if (v == 8) return NWN::AnimalIPRace;
+  if (v == 25) return NWN::VerminIPRace;
+  if (v == 14) return NWN::HumanoidOrcIPRace;
+  if (v == 3) return NWN::HalflingIPRace;
+  if (v == 20) return NWN::OutsiderIPRace;
+  if (v == 9) return NWN::BeastIPRace;
+  if (v == 15) return NWN::HumanoidReptilianIPRace;
+  if (v == 4) return NWN::HalfelfIPRace;
+  if (v == 10) return NWN::ConstructIPRace;
+  printf("Invalid enum value of type IPRacialType passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+};
+long NWScriptI::enum_PlaceableAction_2_long(NWN::PlaceableAction k) {
+  if (k == NWN::UsePlaceable) return 0;
+  if (k == NWN::UnlockPlaceable) return 1;
+  if (k == NWN::BashPlaceable) return 2;
+  if (k == NWN::KnockPlaceable) return 4;
+  throw "omg";
+};
+NWN::PlaceableAction NWScriptI::enum_long_2_PlaceableAction(long v) {
+  if (v == 0) return NWN::UsePlaceable;
+  if (v == 1) return NWN::UnlockPlaceable;
+  if (v == 2) return NWN::BashPlaceable;
+  if (v == 4) return NWN::KnockPlaceable;
+  printf("Invalid enum value of type PlaceableAction passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+};
+long NWScriptI::enum_Ability_2_long(NWN::Ability k) {
+  if (k == NWN::Charisma) return 5;
+  if (k == NWN::Strength) return 0;
+  if (k == NWN::Dexterity) return 1;
+  if (k == NWN::Constitution) return 2;
+  if (k == NWN::Intelligence) return 3;
+  if (k == NWN::Wisdom) return 4;
+  throw "omg";
+};
+NWN::Ability NWScriptI::enum_long_2_Ability(long v) {
+  if (v == 5) return NWN::Charisma;
+  if (v == 0) return NWN::Strength;
+  if (v == 1) return NWN::Dexterity;
+  if (v == 2) return NWN::Constitution;
+  if (v == 3) return NWN::Intelligence;
+  if (v == 4) return NWN::Wisdom;
+  printf("Invalid enum value of type Ability passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+};
+long NWScriptI::enum_IPSpellSchool_2_long(NWN::IPSpellSchool k) {
+  if (k == NWN::IllusionIPSchool) return 5;
+  if (k == NWN::AbjurationIPSchool) return 0;
+  if (k == NWN::NecromancyIPSchool) return 6;
+  if (k == NWN::ConjurationIPSchool) return 1;
+  if (k == NWN::TransmutationIPSchool) return 7;
+  if (k == NWN::DivinationIPSchool) return 2;
+  if (k == NWN::EnchantmentIPSchool) return 3;
+  if (k == NWN::EvocationIPSchool) return 4;
+  throw "omg";
+};
+NWN::IPSpellSchool NWScriptI::enum_long_2_IPSpellSchool(long v) {
+  if (v == 5) return NWN::IllusionIPSchool;
+  if (v == 0) return NWN::AbjurationIPSchool;
+  if (v == 6) return NWN::NecromancyIPSchool;
+  if (v == 1) return NWN::ConjurationIPSchool;
+  if (v == 7) return NWN::TransmutationIPSchool;
+  if (v == 2) return NWN::DivinationIPSchool;
+  if (v == 3) return NWN::EnchantmentIPSchool;
+  if (v == 4) return NWN::EvocationIPSchool;
+  printf("Invalid enum value of type IPSpellSchool passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+};
+long NWScriptI::enum_IPAlignGroup_2_long(NWN::IPAlignGroup k) {
+  if (k == NWN::EvilAlignGroup) return 5;
+  if (k == NWN::AllAlignGroup) return 0;
+  if (k == NWN::NeutralAlignGroup) return 1;
+  if (k == NWN::LawfulAlignGroup) return 2;
+  if (k == NWN::ChaoticAlignGroup) return 3;
+  if (k == NWN::GoodAlignGroup) return 4;
+  throw "omg";
+};
+NWN::IPAlignGroup NWScriptI::enum_long_2_IPAlignGroup(long v) {
+  if (v == 5) return NWN::EvilAlignGroup;
+  if (v == 0) return NWN::AllAlignGroup;
+  if (v == 1) return NWN::NeutralAlignGroup;
+  if (v == 2) return NWN::LawfulAlignGroup;
+  if (v == 3) return NWN::ChaoticAlignGroup;
+  if (v == 4) return NWN::GoodAlignGroup;
+  printf("Invalid enum value of type IPAlignGroup passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+};
+long NWScriptI::enum_EffectSubType_2_long(NWN::EffectSubType k) {
+  if (k == NWN::SupernaturalSubType) return 16;
+  if (k == NWN::InvalidSubType) return 0;
+  if (k == NWN::ExtraordinarySubType) return 24;
+  if (k == NWN::MagicalSubType) return 8;
+  throw "omg";
+};
+NWN::EffectSubType NWScriptI::enum_long_2_EffectSubType(long v) {
+  if (v == 16) return NWN::SupernaturalSubType;
+  if (v == 0) return NWN::InvalidSubType;
+  if (v == 24) return NWN::ExtraordinarySubType;
+  if (v == 8) return NWN::MagicalSubType;
+  printf("Invalid enum value of type EffectSubType passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+};
+long NWScriptI::enum_TileMainLightColor_2_long(NWN::TileMainLightColor k) {
+  if (k == NWN::RedTileMainLightColor) return 27;
+  if (k == NWN::PaleDarkBlueTileMainLightColor) return 16;
+  if (k == NWN::DarkYellowTileMainLightColor) return 5;
+  if (k == NWN::PalePurpleTileMainLightColor) return 22;
+  if (k == NWN::GreenTileMainLightColor) return 11;
+  if (k == NWN::BlackTileMainLightColor) return 0;
+  if (k == NWN::PaleDarkOrangeTileMainLightColor) return 28;
+  if (k == NWN::DarkBlueTileMainLightColor) return 17;
+  if (k == NWN::PaleYellowTileMainLightColor) return 6;
+  if (k == NWN::PurpleTileMainLightColor) return 23;
+  if (k == NWN::PaleDarkAquaTileMainLightColor) return 12;
+  if (k == NWN::DimWhiteTileMainLightColor) return 1;
+  if (k == NWN::DarkOrangeTileMainLightColor) return 29;
+  if (k == NWN::PaleBlueTileMainLightColor) return 18;
+  if (k == NWN::YellowTileMainLightColor) return 7;
+  if (k == NWN::PaleDarkRedTileMainLightColor) return 24;
+  if (k == NWN::DarkAquaTileMainLightColor) return 13;
+  if (k == NWN::WhiteTileMainLightColor) return 2;
+  if (k == NWN::PaleOrangeTileMainLightColor) return 30;
+  if (k == NWN::BlueTileMainLightColor) return 19;
+  if (k == NWN::PaleDarkGreenTileMainLightColor) return 8;
+  if (k == NWN::DarkRedTileMainLightColor) return 25;
+  if (k == NWN::PaleAquaTileMainLightColor) return 14;
+  if (k == NWN::BrightWhiteTileMainLightColor) return 3;
+  if (k == NWN::OrangeTileMainLightColor) return 31;
+  if (k == NWN::PaleDarkPurpleTileMainLightColor) return 20;
+  if (k == NWN::DarkGreenTileMainLightColor) return 9;
+  if (k == NWN::PaleRedTileMainLightColor) return 26;
+  if (k == NWN::AquaTileMainLightColor) return 15;
+  if (k == NWN::PaleDarkYellowTileMainLightColor) return 4;
+  if (k == NWN::DarkPurpleTileMainLightColor) return 21;
+  if (k == NWN::PaleGreenTileMainLightColor) return 10;
+  throw "omg";
+};
+NWN::TileMainLightColor NWScriptI::enum_long_2_TileMainLightColor(long v) {
+  if (v == 27) return NWN::RedTileMainLightColor;
+  if (v == 16) return NWN::PaleDarkBlueTileMainLightColor;
+  if (v == 5) return NWN::DarkYellowTileMainLightColor;
+  if (v == 22) return NWN::PalePurpleTileMainLightColor;
+  if (v == 11) return NWN::GreenTileMainLightColor;
+  if (v == 0) return NWN::BlackTileMainLightColor;
+  if (v == 28) return NWN::PaleDarkOrangeTileMainLightColor;
+  if (v == 17) return NWN::DarkBlueTileMainLightColor;
+  if (v == 6) return NWN::PaleYellowTileMainLightColor;
+  if (v == 23) return NWN::PurpleTileMainLightColor;
+  if (v == 12) return NWN::PaleDarkAquaTileMainLightColor;
+  if (v == 1) return NWN::DimWhiteTileMainLightColor;
+  if (v == 29) return NWN::DarkOrangeTileMainLightColor;
+  if (v == 18) return NWN::PaleBlueTileMainLightColor;
+  if (v == 7) return NWN::YellowTileMainLightColor;
+  if (v == 24) return NWN::PaleDarkRedTileMainLightColor;
+  if (v == 13) return NWN::DarkAquaTileMainLightColor;
+  if (v == 2) return NWN::WhiteTileMainLightColor;
+  if (v == 30) return NWN::PaleOrangeTileMainLightColor;
+  if (v == 19) return NWN::BlueTileMainLightColor;
+  if (v == 8) return NWN::PaleDarkGreenTileMainLightColor;
+  if (v == 25) return NWN::DarkRedTileMainLightColor;
+  if (v == 14) return NWN::PaleAquaTileMainLightColor;
+  if (v == 3) return NWN::BrightWhiteTileMainLightColor;
+  if (v == 31) return NWN::OrangeTileMainLightColor;
+  if (v == 20) return NWN::PaleDarkPurpleTileMainLightColor;
+  if (v == 9) return NWN::DarkGreenTileMainLightColor;
+  if (v == 26) return NWN::PaleRedTileMainLightColor;
+  if (v == 15) return NWN::AquaTileMainLightColor;
+  if (v == 4) return NWN::PaleDarkYellowTileMainLightColor;
+  if (v == 21) return NWN::DarkPurpleTileMainLightColor;
+  if (v == 10) return NWN::PaleGreenTileMainLightColor;
+  printf("Invalid enum value of type TileMainLightColor passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+};
+long NWScriptI::enum_DamagePower_2_long(NWN::DamagePower k) {
+  if (k == NWN::PlusFifteenDamage) return 16;
+  if (k == NWN::PlusFiveDamage) return 5;
+  if (k == NWN::PlusTenDamage) return 11;
+  if (k == NWN::NormalDamage) return 0;
+  if (k == NWN::PlusSixteenDamage) return 17;
+  if (k == NWN::EnergyDamage) return 6;
+  if (k == NWN::PlusElevenDamage) return 12;
+  if (k == NWN::PlusOneDamage) return 1;
+  if (k == NWN::PlusSeventeenDamage) return 18;
+  if (k == NWN::PlusSixDamage) return 7;
+  if (k == NWN::PlusTwelveDamage) return 13;
+  if (k == NWN::PlusTwoDamage) return 2;
+  if (k == NWN::PlusEighteenDamage) return 19;
+  if (k == NWN::PlusSevenDamage) return 8;
+  if (k == NWN::PlusThirteenDamage) return 14;
+  if (k == NWN::PlusThreeDamage) return 3;
+  if (k == NWN::PlusNinteenDamage) return 20;
+  if (k == NWN::PlusEightDamage) return 9;
+  if (k == NWN::PlusFourteenDamage) return 15;
+  if (k == NWN::PlusFourDamage) return 4;
+  if (k == NWN::PlusTwentyDamage) return 21;
+  if (k == NWN::PlusNineDamage) return 10;
+  throw "omg";
+};
+NWN::DamagePower NWScriptI::enum_long_2_DamagePower(long v) {
+  if (v == 16) return NWN::PlusFifteenDamage;
+  if (v == 5) return NWN::PlusFiveDamage;
+  if (v == 11) return NWN::PlusTenDamage;
+  if (v == 0) return NWN::NormalDamage;
+  if (v == 17) return NWN::PlusSixteenDamage;
+  if (v == 6) return NWN::EnergyDamage;
+  if (v == 12) return NWN::PlusElevenDamage;
+  if (v == 1) return NWN::PlusOneDamage;
+  if (v == 18) return NWN::PlusSeventeenDamage;
+  if (v == 7) return NWN::PlusSixDamage;
+  if (v == 13) return NWN::PlusTwelveDamage;
+  if (v == 2) return NWN::PlusTwoDamage;
+  if (v == 19) return NWN::PlusEighteenDamage;
+  if (v == 8) return NWN::PlusSevenDamage;
+  if (v == 14) return NWN::PlusThirteenDamage;
+  if (v == 3) return NWN::PlusThreeDamage;
+  if (v == 20) return NWN::PlusNinteenDamage;
+  if (v == 9) return NWN::PlusEightDamage;
+  if (v == 15) return NWN::PlusFourteenDamage;
+  if (v == 4) return NWN::PlusFourDamage;
+  if (v == 21) return NWN::PlusTwentyDamage;
+  if (v == 10) return NWN::PlusNineDamage;
+  printf("Invalid enum value of type DamagePower passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+};
+long NWScriptI::enum_DamageType_2_long(NWN::DamageType k) {
+  if (k == NWN::AcidDamage) return 16;
+  if (k == NWN::ACVsAllDamage) return 4103;
+  if (k == NWN::NegativeDamage) return 512;
+  if (k == NWN::PositiveDamage) return 1024;
+  if (k == NWN::BludgeoningDamage) return 1;
+  if (k == NWN::ElectricalDamage) return 128;
+  if (k == NWN::SonicDamage) return 2048;
+  if (k == NWN::PiercingDamage) return 2;
+  if (k == NWN::MagicalDamage) return 8;
+  if (k == NWN::FireDamage) return 256;
+  if (k == NWN::DivineDamage) return 64;
+  if (k == NWN::BaseDamage) return 4096;
+  if (k == NWN::SlashingDamage) return 4;
+  if (k == NWN::ColdDamage) return 32;
+  throw "omg";
+};
+NWN::DamageType NWScriptI::enum_long_2_DamageType(long v) {
+  if (v == 16) return NWN::AcidDamage;
+  if (v == 4103) return NWN::ACVsAllDamage;
+  if (v == 512) return NWN::NegativeDamage;
+  if (v == 1024) return NWN::PositiveDamage;
+  if (v == 1) return NWN::BludgeoningDamage;
+  if (v == 128) return NWN::ElectricalDamage;
+  if (v == 2048) return NWN::SonicDamage;
+  if (v == 2) return NWN::PiercingDamage;
+  if (v == 8) return NWN::MagicalDamage;
+  if (v == 256) return NWN::FireDamage;
+  if (v == 64) return NWN::DivineDamage;
+  if (v == 4096) return NWN::BaseDamage;
+  if (v == 4) return NWN::SlashingDamage;
+  if (v == 32) return NWN::ColdDamage;
+  printf("Invalid enum value of type DamageType passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+};
+long NWScriptI::enum_SaveType_2_long(NWN::SaveType k) {
+  if (k == NWN::GoodSaveType) return 16;
+  if (k == NWN::SonicSaveType) return 5;
+  if (k == NWN::DeathSaveType) return 11;
+  if (k == NWN::AllOrNoneSaveType) return 0;
+  if (k == NWN::EvilSaveType) return 17;
+  if (k == NWN::AcidSaveType) return 6;
+  if (k == NWN::ColdSaveType) return 12;
+  if (k == NWN::MindSpellsSaveType) return 1;
+  if (k == NWN::LawSaveType) return 18;
+  if (k == NWN::FireSaveType) return 7;
+  if (k == NWN::DivineSaveType) return 13;
+  if (k == NWN::PoisonSaveType) return 2;
+  if (k == NWN::ChaosSaveType) return 19;
+  if (k == NWN::ElectricitySaveType) return 8;
+  if (k == NWN::TrapSaveType) return 14;
+  if (k == NWN::DiseaseSaveType) return 3;
+  if (k == NWN::PositiveSaveType) return 9;
+  if (k == NWN::SpellSaveType) return 15;
+  if (k == NWN::FearSaveType) return 4;
+  if (k == NWN::NegativeSaveType) return 10;
+  throw "omg";
+};
+NWN::SaveType NWScriptI::enum_long_2_SaveType(long v) {
+  if (v == 16) return NWN::GoodSaveType;
+  if (v == 5) return NWN::SonicSaveType;
+  if (v == 11) return NWN::DeathSaveType;
+  if (v == 0) return NWN::AllOrNoneSaveType;
+  if (v == 17) return NWN::EvilSaveType;
+  if (v == 6) return NWN::AcidSaveType;
+  if (v == 12) return NWN::ColdSaveType;
+  if (v == 1) return NWN::MindSpellsSaveType;
+  if (v == 18) return NWN::LawSaveType;
+  if (v == 7) return NWN::FireSaveType;
+  if (v == 13) return NWN::DivineSaveType;
+  if (v == 2) return NWN::PoisonSaveType;
+  if (v == 19) return NWN::ChaosSaveType;
+  if (v == 8) return NWN::ElectricitySaveType;
+  if (v == 14) return NWN::TrapSaveType;
+  if (v == 3) return NWN::DiseaseSaveType;
+  if (v == 9) return NWN::PositiveSaveType;
+  if (v == 15) return NWN::SpellSaveType;
+  if (v == 4) return NWN::FearSaveType;
+  if (v == 10) return NWN::NegativeSaveType;
+  printf("Invalid enum value of type SaveType passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+};
+long NWScriptI::enum_CombatMode_2_long(NWN::CombatMode k) {
+  if (k == NWN::RapidShotCombatMode) return 5;
+  if (k == NWN::InvalidCombatMode) return 0;
+  if (k == NWN::ExpertiseCombatMode) return 6;
+  if (k == NWN::ParryCombatMode) return 1;
+  if (k == NWN::ImprovedExpertiseCombatMode) return 7;
+  if (k == NWN::PowerAttackCombatMode) return 2;
+  if (k == NWN::DefensiveCastingCombatMode) return 8;
+  if (k == NWN::ImprovedPowerAttackCombatMode) return 3;
+  if (k == NWN::DirtyFightingCombatMode) return 9;
+  if (k == NWN::FlurryOfBlowsCombatMode) return 4;
+  if (k == NWN::DefensiveStanceCombatMode) return 10;
+  throw "omg";
+};
+NWN::CombatMode NWScriptI::enum_long_2_CombatMode(long v) {
+  if (v == 5) return NWN::RapidShotCombatMode;
+  if (v == 0) return NWN::InvalidCombatMode;
+  if (v == 6) return NWN::ExpertiseCombatMode;
+  if (v == 1) return NWN::ParryCombatMode;
+  if (v == 7) return NWN::ImprovedExpertiseCombatMode;
+  if (v == 2) return NWN::PowerAttackCombatMode;
+  if (v == 8) return NWN::DefensiveCastingCombatMode;
+  if (v == 3) return NWN::ImprovedPowerAttackCombatMode;
+  if (v == 9) return NWN::DirtyFightingCombatMode;
+  if (v == 4) return NWN::FlurryOfBlowsCombatMode;
+  if (v == 10) return NWN::DefensiveStanceCombatMode;
+  printf("Invalid enum value of type CombatMode passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+};
+long NWScriptI::enum_IPTrapType_2_long(NWN::IPTrapType k) {
+  if (k == NWN::FireIPTrap) return 5;
+  if (k == NWN::NegativeIPTrap) return 11;
+  if (k == NWN::ElectricalIPTrap) return 6;
+  if (k == NWN::SpikeIPTrap) return 1;
+  if (k == NWN::GasIPTrap) return 7;
+  if (k == NWN::HolyIPTrap) return 2;
+  if (k == NWN::FrostIPTrap) return 8;
+  if (k == NWN::TangleIPTrap) return 3;
+  if (k == NWN::AcidSplashIPTrap) return 9;
+  if (k == NWN::BlobOfAcidIPTrap) return 4;
+  if (k == NWN::SonicIPTrap) return 10;
+  throw "omg";
+};
+NWN::IPTrapType NWScriptI::enum_long_2_IPTrapType(long v) {
+  if (v == 5) return NWN::FireIPTrap;
+  if (v == 11) return NWN::NegativeIPTrap;
+  if (v == 6) return NWN::ElectricalIPTrap;
+  if (v == 1) return NWN::SpikeIPTrap;
+  if (v == 7) return NWN::GasIPTrap;
+  if (v == 2) return NWN::HolyIPTrap;
+  if (v == 8) return NWN::FrostIPTrap;
+  if (v == 3) return NWN::TangleIPTrap;
+  if (v == 9) return NWN::AcidSplashIPTrap;
+  if (v == 4) return NWN::BlobOfAcidIPTrap;
+  if (v == 10) return NWN::SonicIPTrap;
+  printf("Invalid enum value of type IPTrapType passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+};
+long NWScriptI::enum_EffectState_2_long(NWN::EffectState k) {
+  if (k == NWN::DazedState) return 5;
+  if (k == NWN::StunnedState) return 6;
+  if (k == NWN::CharmedState) return 1;
+  if (k == NWN::DominatedState) return 7;
+  if (k == NWN::ConfusedState) return 2;
+  if (k == NWN::ParalyzeState) return 8;
+  if (k == NWN::FrightenedState) return 3;
+  if (k == NWN::SleepState) return 9;
+  if (k == NWN::TurnedState) return 4;
+  throw "omg";
+};
+NWN::EffectState NWScriptI::enum_long_2_EffectState(long v) {
+  if (v == 5) return NWN::DazedState;
+  if (v == 6) return NWN::StunnedState;
+  if (v == 1) return NWN::CharmedState;
+  if (v == 7) return NWN::DominatedState;
+  if (v == 2) return NWN::ConfusedState;
+  if (v == 8) return NWN::ParalyzeState;
+  if (v == 3) return NWN::FrightenedState;
+  if (v == 9) return NWN::SleepState;
+  if (v == 4) return NWN::TurnedState;
+  printf("Invalid enum value of type EffectState passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+};
+long NWScriptI::enum_CreatureSize_2_long(NWN::CreatureSize k) {
+  if (k == NWN::HugeSize) return 5;
+  if (k == NWN::InvalidSize) return 0;
+  if (k == NWN::TinySize) return 1;
+  if (k == NWN::SmallSize) return 2;
+  if (k == NWN::MediumSize) return 3;
+  if (k == NWN::LargeSize) return 4;
+  throw "omg";
+};
+NWN::CreatureSize NWScriptI::enum_long_2_CreatureSize(long v) {
+  if (v == 5) return NWN::HugeSize;
+  if (v == 0) return NWN::InvalidSize;
+  if (v == 1) return NWN::TinySize;
+  if (v == 2) return NWN::SmallSize;
+  if (v == 3) return NWN::MediumSize;
+  if (v == 4) return NWN::LargeSize;
+  printf("Invalid enum value of type CreatureSize passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+};
+long NWScriptI::enum_AssociateCommand_2_long(NWN::AssociateCommand k) {
+  if (k == NWN::InventoryCommand) return -19;
+  if (k == NWN::UnsummonFamiliarCommand) return -8;
+  if (k == NWN::UnpossessFamiliarCommand) return -13;
+  if (k == NWN::StandGroundCommand) return -2;
+  if (k == NWN::PickLockCommand) return -18;
+  if (k == NWN::GuardMasterCommand) return -7;
+  if (k == NWN::ToggleSearchCommand) return -23;
+  if (k == NWN::ReleaseDominationCommand) return -12;
+  if (k == NWN::LeavePartyCommand) return -17;
+  if (k == NWN::MasterFailedLockpickCommand) return -6;
+  if (k == NWN::ToggleStealthCommand) return -22;
+  if (k == NWN::MasterUnderAttackCommand) return -11;
+  if (k == NWN::MasterGoingToBeAttackedCommand) return -16;
+  if (k == NWN::FollowMasterCommand) return -5;
+  if (k == NWN::ToggleCastingCommand) return -21;
+  if (k == NWN::UnsummonSummonedCommand) return -10;
+  if (k == NWN::MasterAttackedOtherCommand) return -15;
+  if (k == NWN::HealMasterCommand) return -4;
+  if (k == NWN::DisarmTrapCommand) return -20;
+  if (k == NWN::UnsummonAnimalCompanionCommand) return -9;
+  if (k == NWN::MasterSawTrapCommand) return -14;
+  if (k == NWN::AttackNearestCommand) return -3;
+  throw "omg";
+};
+NWN::AssociateCommand NWScriptI::enum_long_2_AssociateCommand(long v) {
+  if (v == -19) return NWN::InventoryCommand;
+  if (v == -8) return NWN::UnsummonFamiliarCommand;
+  if (v == -13) return NWN::UnpossessFamiliarCommand;
+  if (v == -2) return NWN::StandGroundCommand;
+  if (v == -18) return NWN::PickLockCommand;
+  if (v == -7) return NWN::GuardMasterCommand;
+  if (v == -23) return NWN::ToggleSearchCommand;
+  if (v == -12) return NWN::ReleaseDominationCommand;
+  if (v == -17) return NWN::LeavePartyCommand;
+  if (v == -6) return NWN::MasterFailedLockpickCommand;
+  if (v == -22) return NWN::ToggleStealthCommand;
+  if (v == -11) return NWN::MasterUnderAttackCommand;
+  if (v == -16) return NWN::MasterGoingToBeAttackedCommand;
+  if (v == -5) return NWN::FollowMasterCommand;
+  if (v == -21) return NWN::ToggleCastingCommand;
+  if (v == -10) return NWN::UnsummonSummonedCommand;
+  if (v == -15) return NWN::MasterAttackedOtherCommand;
+  if (v == -4) return NWN::HealMasterCommand;
+  if (v == -20) return NWN::DisarmTrapCommand;
+  if (v == -9) return NWN::UnsummonAnimalCompanionCommand;
+  if (v == -14) return NWN::MasterSawTrapCommand;
+  if (v == -3) return NWN::AttackNearestCommand;
+  printf("Invalid enum value of type AssociateCommand passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+};
+long NWScriptI::enum_EffectTrueType_2_long(NWN::EffectTrueType k) {
+  if (k == NWN::SwarmEffectType) return 85;
+  if (k == NWN::SetStateInternalEffectType) return 9;
+  if (k == NWN::InvisibilityEffectType) return 47;
+  if (k == NWN::MovementSpeedIncreaseEffectType) return 28;
+  if (k == NWN::DefensiveStanceEffectType) return 95;
+  if (k == NWN::ConcealmentEffectType) return 76;
+  if (k == NWN::DeathEffectType) return 19;
+  if (k == NWN::HitpointChangeWhenDyingEffectType) return 57;
+  if (k == NWN::InvalidEffectType) return 0;
+  if (k == NWN::DamageEffectType) return 38;
+  if (k == NWN::VampiricRegenerationEffectType) return 86;
+  if (k == NWN::AttackIncreaseEffectType) return 10;
+  if (k == NWN::AcIncreaseEffectType) return 48;
+  if (k == NWN::MovementSpeedDecreaseEffectType) return 29;
+  if (k == NWN::IconEffectType) return 67;
+  if (k == NWN::TurnResistanceIncreaseEffectType) return 77;
+  if (k == NWN::KnockdownEffectType) return 20;
+  if (k == NWN::SetWalkAnimationEffectType) return 58;
+  if (k == NWN::HasteEffectType) return 1;
+  if (k == NWN::HealEffectType) return 39;
+  if (k == NWN::DisarmEffectType) return 87;
+  if (k == NWN::VisualEffectType) return 30;
+  if (k == NWN::RacialTypeEffectType) return 68;
+  if (k == NWN::AttackDecreaseEffectType) return 11;
+  if (k == NWN::AcDecreaseEffectType) return 49;
+  if (k == NWN::BonusSpellOfLevelEffectType) return 78;
+  if (k == NWN::DeafEffectType) return 21;
+  if (k == NWN::LimitMovementSpeedEffectType) return 59;
+  if (k == NWN::DamageResistanceEffectType) return 2;
+  if (k == NWN::LinkEffectType) return 40;
+  if (k == NWN::TurnResistanceDecreaseEffectType) return 88;
+  if (k == NWN::VisionEffectType) return 69;
+  if (k == NWN::AOEEffectType) return 31;
+  if (k == NWN::DamageReductionEffectType) return 12;
+  if (k == NWN::SpellImmunityEffectType) return 50;
+  if (k == NWN::DisappearAppearEffectType) return 79;
+  if (k == NWN::SlowEffectType) return 3;
+  if (k == NWN::HasteInternalEffectType) return 41;
+  if (k == NWN::ImmunityEffectType) return 22;
+  if (k == NWN::BlindnessInactiveEffectType) return 89;
+  if (k == NWN::SeeInvisibleEffectType) return 70;
+  if (k == NWN::BeamEffectType) return 32;
+  if (k == NWN::DamageIncreaseEffectType) return 13;
+  if (k == NWN::DispelAllMagicEffectType) return 51;
+  if (k == NWN::DisappearEffectType) return 80;
+  if (k == NWN::ResurrectionEffectType) return 4;
+  if (k == NWN::SlowInternalEffectType) return 42;
+  if (k == NWN::SetAIStateEffectType) return 23;
+  if (k == NWN::DamageShieldEffectType) return 61;
+  if (k == NWN::PetrifyEffectType) return 90;
+  if (k == NWN::UltravisionEffectType) return 71;
+  if (k == NWN::DamageDecreaseEffectType) return 14;
+  if (k == NWN::DispelBestMagicEffectType) return 52;
+  if (k == NWN::SpellResistanceIncreaseEffectType) return 33;
+  if (k == NWN::AppearEffectType) return 81;
+  if (k == NWN::EnemyAttackBonusEffectType) return 24;
+  if (k == NWN::PolymorphEffectType) return 62;
+  if (k == NWN::DiseaseEffectType) return 5;
+  if (k == NWN::ItempropertyEffectType) return 91;
+  if (k == NWN::TrueSeeingEffectType) return 72;
+  if (k == NWN::TemporaryHitpointsEffectType) return 15;
+  if (k == NWN::TauntEffectType) return 53;
+  if (k == NWN::SpellResistanceDecreaseEffectType) return 34;
+  if (k == NWN::NegativeLevelEffectType) return 82;
+  if (k == NWN::ArcaneSpellFailureEffectType) return 25;
+  if (k == NWN::SanctuaryEffectType) return 63;
+  if (k == NWN::SummonCreatureEffectType) return 6;
+  if (k == NWN::ModifynumattacksEffectType) return 44;
+  if (k == NWN::SpellFailureEffectType) return 92;
+  if (k == NWN::BlindnessEffectType) return 73;
+  if (k == NWN::LightEffectType) return 54;
+  if (k == NWN::PoisonEffectType) return 35;
+  if (k == NWN::DamageImmunityIncreaseEffectType) return 16;
+  if (k == NWN::BonusFeatEffectType) return 83;
+  if (k == NWN::SavingThrowIncreaseEffectType) return 26;
+  if (k == NWN::TimestopEffectType) return 64;
+  if (k == NWN::RegenerateEffectType) return 7;
+  if (k == NWN::CurseEffectType) return 45;
+  if (k == NWN::CutsceneGhostEffectType) return 93;
+  if (k == NWN::DarknessEffectType) return 74;
+  if (k == NWN::AbilityIncreaseEffectType) return 36;
+  if (k == NWN::DamageImmunityDecreaseEffectType) return 17;
+  if (k == NWN::SkillIncreaseEffectType) return 55;
+  if (k == NWN::WoundingEffectType) return 84;
+  if (k == NWN::SpellLevelAbsorptionEffectType) return 65;
+  if (k == NWN::SetStateEffectType) return 8;
+  if (k == NWN::SilenceEffectType) return 46;
+  if (k == NWN::SavingThrowDecreaseEffectType) return 27;
+  if (k == NWN::CutsceneImmobileEffectType) return 94;
+  if (k == NWN::MissChanceEffectType) return 75;
+  if (k == NWN::AbilityDecreaseEffectType) return 37;
+  if (k == NWN::EntangleEffectType) return 18;
+  if (k == NWN::SkillDecreaseEffectType) return 56;
+  throw "omg";
+};
+NWN::EffectTrueType NWScriptI::enum_long_2_EffectTrueType(long v) {
+  if (v == 85) return NWN::SwarmEffectType;
+  if (v == 9) return NWN::SetStateInternalEffectType;
+  if (v == 47) return NWN::InvisibilityEffectType;
+  if (v == 28) return NWN::MovementSpeedIncreaseEffectType;
+  if (v == 95) return NWN::DefensiveStanceEffectType;
+  if (v == 76) return NWN::ConcealmentEffectType;
+  if (v == 19) return NWN::DeathEffectType;
+  if (v == 57) return NWN::HitpointChangeWhenDyingEffectType;
+  if (v == 0) return NWN::InvalidEffectType;
+  if (v == 38) return NWN::DamageEffectType;
+  if (v == 86) return NWN::VampiricRegenerationEffectType;
+  if (v == 10) return NWN::AttackIncreaseEffectType;
+  if (v == 48) return NWN::AcIncreaseEffectType;
+  if (v == 29) return NWN::MovementSpeedDecreaseEffectType;
+  if (v == 67) return NWN::IconEffectType;
+  if (v == 77) return NWN::TurnResistanceIncreaseEffectType;
+  if (v == 20) return NWN::KnockdownEffectType;
+  if (v == 58) return NWN::SetWalkAnimationEffectType;
+  if (v == 1) return NWN::HasteEffectType;
+  if (v == 39) return NWN::HealEffectType;
+  if (v == 87) return NWN::DisarmEffectType;
+  if (v == 30) return NWN::VisualEffectType;
+  if (v == 68) return NWN::RacialTypeEffectType;
+  if (v == 11) return NWN::AttackDecreaseEffectType;
+  if (v == 49) return NWN::AcDecreaseEffectType;
+  if (v == 78) return NWN::BonusSpellOfLevelEffectType;
+  if (v == 21) return NWN::DeafEffectType;
+  if (v == 59) return NWN::LimitMovementSpeedEffectType;
+  if (v == 2) return NWN::DamageResistanceEffectType;
+  if (v == 40) return NWN::LinkEffectType;
+  if (v == 88) return NWN::TurnResistanceDecreaseEffectType;
+  if (v == 69) return NWN::VisionEffectType;
+  if (v == 31) return NWN::AOEEffectType;
+  if (v == 12) return NWN::DamageReductionEffectType;
+  if (v == 50) return NWN::SpellImmunityEffectType;
+  if (v == 79) return NWN::DisappearAppearEffectType;
+  if (v == 3) return NWN::SlowEffectType;
+  if (v == 41) return NWN::HasteInternalEffectType;
+  if (v == 22) return NWN::ImmunityEffectType;
+  if (v == 89) return NWN::BlindnessInactiveEffectType;
+  if (v == 70) return NWN::SeeInvisibleEffectType;
+  if (v == 32) return NWN::BeamEffectType;
+  if (v == 13) return NWN::DamageIncreaseEffectType;
+  if (v == 51) return NWN::DispelAllMagicEffectType;
+  if (v == 80) return NWN::DisappearEffectType;
+  if (v == 4) return NWN::ResurrectionEffectType;
+  if (v == 42) return NWN::SlowInternalEffectType;
+  if (v == 23) return NWN::SetAIStateEffectType;
+  if (v == 61) return NWN::DamageShieldEffectType;
+  if (v == 90) return NWN::PetrifyEffectType;
+  if (v == 71) return NWN::UltravisionEffectType;
+  if (v == 14) return NWN::DamageDecreaseEffectType;
+  if (v == 52) return NWN::DispelBestMagicEffectType;
+  if (v == 33) return NWN::SpellResistanceIncreaseEffectType;
+  if (v == 81) return NWN::AppearEffectType;
+  if (v == 24) return NWN::EnemyAttackBonusEffectType;
+  if (v == 62) return NWN::PolymorphEffectType;
+  if (v == 5) return NWN::DiseaseEffectType;
+  if (v == 91) return NWN::ItempropertyEffectType;
+  if (v == 72) return NWN::TrueSeeingEffectType;
+  if (v == 15) return NWN::TemporaryHitpointsEffectType;
+  if (v == 53) return NWN::TauntEffectType;
+  if (v == 34) return NWN::SpellResistanceDecreaseEffectType;
+  if (v == 82) return NWN::NegativeLevelEffectType;
+  if (v == 25) return NWN::ArcaneSpellFailureEffectType;
+  if (v == 63) return NWN::SanctuaryEffectType;
+  if (v == 6) return NWN::SummonCreatureEffectType;
+  if (v == 44) return NWN::ModifynumattacksEffectType;
+  if (v == 92) return NWN::SpellFailureEffectType;
+  if (v == 73) return NWN::BlindnessEffectType;
+  if (v == 54) return NWN::LightEffectType;
+  if (v == 35) return NWN::PoisonEffectType;
+  if (v == 16) return NWN::DamageImmunityIncreaseEffectType;
+  if (v == 83) return NWN::BonusFeatEffectType;
+  if (v == 26) return NWN::SavingThrowIncreaseEffectType;
+  if (v == 64) return NWN::TimestopEffectType;
+  if (v == 7) return NWN::RegenerateEffectType;
+  if (v == 45) return NWN::CurseEffectType;
+  if (v == 93) return NWN::CutsceneGhostEffectType;
+  if (v == 74) return NWN::DarknessEffectType;
+  if (v == 36) return NWN::AbilityIncreaseEffectType;
+  if (v == 17) return NWN::DamageImmunityDecreaseEffectType;
+  if (v == 55) return NWN::SkillIncreaseEffectType;
+  if (v == 84) return NWN::WoundingEffectType;
+  if (v == 65) return NWN::SpellLevelAbsorptionEffectType;
+  if (v == 8) return NWN::SetStateEffectType;
+  if (v == 46) return NWN::SilenceEffectType;
+  if (v == 27) return NWN::SavingThrowDecreaseEffectType;
+  if (v == 94) return NWN::CutsceneImmobileEffectType;
+  if (v == 75) return NWN::MissChanceEffectType;
+  if (v == 37) return NWN::AbilityDecreaseEffectType;
+  if (v == 18) return NWN::EntangleEffectType;
+  if (v == 56) return NWN::SkillDecreaseEffectType;
+  printf("Invalid enum value of type EffectTrueType passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+};
+long NWScriptI::enum_ObjectType_2_long(NWN::ObjectType k) {
+  if (k == NWN::AOE) return 16;
+  if (k == NWN::InvalidObject) return 0;
+  if (k == NWN::Creature) return 1;
+  if (k == NWN::Store) return 128;
+  if (k == NWN::Item) return 2;
+  if (k == NWN::Door) return 8;
+  if (k == NWN::Encounter) return 256;
+  if (k == NWN::All) return 32767;
+  if (k == NWN::Placeable) return 64;
+  if (k == NWN::Trigger) return 4;
+  if (k == NWN::Waypoint) return 32;
+  throw "omg";
+};
+NWN::ObjectType NWScriptI::enum_long_2_ObjectType(long v) {
+  if (v == 16) return NWN::AOE;
+  if (v == 0) return NWN::InvalidObject;
+  if (v == 1) return NWN::Creature;
+  if (v == 128) return NWN::Store;
+  if (v == 2) return NWN::Item;
+  if (v == 8) return NWN::Door;
+  if (v == 256) return NWN::Encounter;
+  if (v == 32767) return NWN::All;
+  if (v == 64) return NWN::Placeable;
+  if (v == 4) return NWN::Trigger;
+  if (v == 32) return NWN::Waypoint;
+  printf("Invalid enum value of type ObjectType passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+};
+long NWScriptI::enum_DurationType_2_long(NWN::DurationType k) {
+  if (k == NWN::Instant) return 0;
+  if (k == NWN::Temporary) return 1;
+  if (k == NWN::Permanent) return 2;
+  throw "omg";
+};
+NWN::DurationType NWScriptI::enum_long_2_DurationType(long v) {
+  if (v == 0) return NWN::Instant;
+  if (v == 1) return NWN::Temporary;
+  if (v == 2) return NWN::Permanent;
+  printf("Invalid enum value of type DurationType passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+};
+long NWScriptI::enum_ActionMode_2_long(NWN::ActionMode k) {
+  if (k == NWN::CounterspellMode) return 5;
+  if (k == NWN::DirtyFightingMode) return 11;
+  if (k == NWN::DetectMode) return 0;
+  if (k == NWN::FlurryOfBlowsMode) return 6;
+  if (k == NWN::StealthMode) return 1;
+  if (k == NWN::RapidShotMode) return 7;
+  if (k == NWN::ParryMode) return 2;
+  if (k == NWN::ExpertiseMode) return 8;
+  if (k == NWN::PowerAttackMode) return 3;
+  if (k == NWN::ImprovedExpertiseMode) return 9;
+  if (k == NWN::ImprovedPowerAttackMode) return 4;
+  if (k == NWN::DefensiveCastMode) return 10;
+  throw "omg";
+};
+NWN::ActionMode NWScriptI::enum_long_2_ActionMode(long v) {
+  if (v == 5) return NWN::CounterspellMode;
+  if (v == 11) return NWN::DirtyFightingMode;
+  if (v == 0) return NWN::DetectMode;
+  if (v == 6) return NWN::FlurryOfBlowsMode;
+  if (v == 1) return NWN::StealthMode;
+  if (v == 7) return NWN::RapidShotMode;
+  if (v == 2) return NWN::ParryMode;
+  if (v == 8) return NWN::ExpertiseMode;
+  if (v == 3) return NWN::PowerAttackMode;
+  if (v == 9) return NWN::ImprovedExpertiseMode;
+  if (v == 4) return NWN::ImprovedPowerAttackMode;
+  if (v == 10) return NWN::DefensiveCastMode;
+  printf("Invalid enum value of type ActionMode passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+};
+long NWScriptI::enum_Alignment_2_long(NWN::Alignment k) {
+  if (k == NWN::Evil) return 5;
+  if (k == NWN::Any) return 0;
+  if (k == NWN::Neutral) return 1;
+  if (k == NWN::Lawful) return 2;
+  if (k == NWN::Chaotic) return 3;
+  if (k == NWN::Good) return 4;
+  throw "omg";
+};
+NWN::Alignment NWScriptI::enum_long_2_Alignment(long v) {
+  if (v == 5) return NWN::Evil;
+  if (v == 0) return NWN::Any;
+  if (v == 1) return NWN::Neutral;
+  if (v == 2) return NWN::Lawful;
+  if (v == 3) return NWN::Chaotic;
+  if (v == 4) return NWN::Good;
+  printf("Invalid enum value of type Alignment passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+};
+long NWScriptI::enum_TrapType_2_long(NWN::TrapType k) {
+  if (k == NWN::StrongSonicTrap) return 38;
+  if (k == NWN::DeadlyGasTrap) return 27;
+  if (k == NWN::MinorFireTrap) return 16;
+  if (k == NWN::AverageHolyTrap) return 5;
+  if (k == NWN::EpicElectricalTrap) return 44;
+  if (k == NWN::AverageNegativeTrap) return 33;
+  if (k == NWN::StrongElectricalTrap) return 22;
+  if (k == NWN::DeadlyTangleTrap) return 11;
+  if (k == NWN::MinorSpikeTrap) return 0;
+  if (k == NWN::DeadlySonicTrap) return 39;
+  if (k == NWN::MinorFrostTrap) return 28;
+  if (k == NWN::AverageFireTrap) return 17;
+  if (k == NWN::StrongHolyTrap) return 6;
+  if (k == NWN::EpicFireTrap) return 45;
+  if (k == NWN::StrongNegativeTrap) return 34;
+  if (k == NWN::DeadlyElectricalTrap) return 23;
+  if (k == NWN::MinorAcidTrap) return 12;
+  if (k == NWN::AverageSpikeTrap) return 1;
+  if (k == NWN::MinorAcidSplashTrap) return 40;
+  if (k == NWN::AverageFrostTrap) return 29;
+  if (k == NWN::StrongFireTrap) return 18;
+  if (k == NWN::DeadlyHolyTrap) return 7;
+  if (k == NWN::EpicFrostTrap) return 46;
+  if (k == NWN::DeadlyNegativeTrap) return 35;
+  if (k == NWN::MinorGasTrap) return 24;
+  if (k == NWN::AverageAcidTrap) return 13;
+  if (k == NWN::StrongSpikeTrap) return 2;
+  if (k == NWN::AverageAcidSplashTrap) return 41;
+  if (k == NWN::StrongFrostTrap) return 30;
+  if (k == NWN::DeadlyFireTrap) return 19;
+  if (k == NWN::MinorTangleTrap) return 8;
+  if (k == NWN::EpicSonicTrap) return 47;
+  if (k == NWN::MinorSonicTrap) return 36;
+  if (k == NWN::AverageGasTrap) return 25;
+  if (k == NWN::StrongAcidTrap) return 14;
+  if (k == NWN::DeadlySpikeTrap) return 3;
+  if (k == NWN::StrongAcidSplashTrap) return 42;
+  if (k == NWN::DeadlyFrostTrap) return 31;
+  if (k == NWN::MinorElectricalTrap) return 20;
+  if (k == NWN::AverageTangleTrap) return 9;
+  if (k == NWN::AverageSonicTrap) return 37;
+  if (k == NWN::StrongGasTrap) return 26;
+  if (k == NWN::DeadlyAcidTrap) return 15;
+  if (k == NWN::MinorHolyTrap) return 4;
+  if (k == NWN::DeadlyAcidSplashTrap) return 43;
+  if (k == NWN::MinorNegativeTrap) return 32;
+  if (k == NWN::AverageElectricalTrap) return 21;
+  if (k == NWN::StrongTangleTrap) return 10;
+  throw "omg";
+};
+NWN::TrapType NWScriptI::enum_long_2_TrapType(long v) {
+  if (v == 38) return NWN::StrongSonicTrap;
+  if (v == 27) return NWN::DeadlyGasTrap;
+  if (v == 16) return NWN::MinorFireTrap;
+  if (v == 5) return NWN::AverageHolyTrap;
+  if (v == 44) return NWN::EpicElectricalTrap;
+  if (v == 33) return NWN::AverageNegativeTrap;
+  if (v == 22) return NWN::StrongElectricalTrap;
+  if (v == 11) return NWN::DeadlyTangleTrap;
+  if (v == 0) return NWN::MinorSpikeTrap;
+  if (v == 39) return NWN::DeadlySonicTrap;
+  if (v == 28) return NWN::MinorFrostTrap;
+  if (v == 17) return NWN::AverageFireTrap;
+  if (v == 6) return NWN::StrongHolyTrap;
+  if (v == 45) return NWN::EpicFireTrap;
+  if (v == 34) return NWN::StrongNegativeTrap;
+  if (v == 23) return NWN::DeadlyElectricalTrap;
+  if (v == 12) return NWN::MinorAcidTrap;
+  if (v == 1) return NWN::AverageSpikeTrap;
+  if (v == 40) return NWN::MinorAcidSplashTrap;
+  if (v == 29) return NWN::AverageFrostTrap;
+  if (v == 18) return NWN::StrongFireTrap;
+  if (v == 7) return NWN::DeadlyHolyTrap;
+  if (v == 46) return NWN::EpicFrostTrap;
+  if (v == 35) return NWN::DeadlyNegativeTrap;
+  if (v == 24) return NWN::MinorGasTrap;
+  if (v == 13) return NWN::AverageAcidTrap;
+  if (v == 2) return NWN::StrongSpikeTrap;
+  if (v == 41) return NWN::AverageAcidSplashTrap;
+  if (v == 30) return NWN::StrongFrostTrap;
+  if (v == 19) return NWN::DeadlyFireTrap;
+  if (v == 8) return NWN::MinorTangleTrap;
+  if (v == 47) return NWN::EpicSonicTrap;
+  if (v == 36) return NWN::MinorSonicTrap;
+  if (v == 25) return NWN::AverageGasTrap;
+  if (v == 14) return NWN::StrongAcidTrap;
+  if (v == 3) return NWN::DeadlySpikeTrap;
+  if (v == 42) return NWN::StrongAcidSplashTrap;
+  if (v == 31) return NWN::DeadlyFrostTrap;
+  if (v == 20) return NWN::MinorElectricalTrap;
+  if (v == 9) return NWN::AverageTangleTrap;
+  if (v == 37) return NWN::AverageSonicTrap;
+  if (v == 26) return NWN::StrongGasTrap;
+  if (v == 15) return NWN::DeadlyAcidTrap;
+  if (v == 4) return NWN::MinorHolyTrap;
+  if (v == 43) return NWN::DeadlyAcidSplashTrap;
+  if (v == 32) return NWN::MinorNegativeTrap;
+  if (v == 21) return NWN::AverageElectricalTrap;
+  if (v == 10) return NWN::StrongTangleTrap;
+  printf("Invalid enum value of type TrapType passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+};
+long NWScriptI::enum_AttackBonus_2_long(NWN::AttackBonus k) {
+  if (k == NWN::MiscBonus) return 0;
+  if (k == NWN::OnhandBonus) return 1;
+  if (k == NWN::OffhandBonus) return 2;
+  throw "omg";
+};
+NWN::AttackBonus NWScriptI::enum_long_2_AttackBonus(long v) {
+  if (v == 0) return NWN::MiscBonus;
+  if (v == 1) return NWN::OnhandBonus;
+  if (v == 2) return NWN::OffhandBonus;
+  printf("Invalid enum value of type AttackBonus passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+};
+long NWScriptI::enum_IPMiscImmunityType_2_long(NWN::IPMiscImmunityType k) {
+  if (k == NWN::FearIPImmunity) return 5;
+  if (k == NWN::BackstabIPImmunity) return 0;
+  if (k == NWN::KnockdownIPImmunity) return 6;
+  if (k == NWN::LevelAbilDrainIPImmunity) return 1;
+  if (k == NWN::ParalysisIPImmunity) return 7;
+  if (k == NWN::MindSpellsIPImmunity) return 2;
+  if (k == NWN::CriticalHitsIPImmunity) return 8;
+  if (k == NWN::PoisonIPImmunity) return 3;
+  if (k == NWN::DeathMagicIPImmunity) return 9;
+  if (k == NWN::DiseaseIPImmunity) return 4;
+  throw "omg";
+};
+NWN::IPMiscImmunityType NWScriptI::enum_long_2_IPMiscImmunityType(long v) {
+  if (v == 5) return NWN::FearIPImmunity;
+  if (v == 0) return NWN::BackstabIPImmunity;
+  if (v == 6) return NWN::KnockdownIPImmunity;
+  if (v == 1) return NWN::LevelAbilDrainIPImmunity;
+  if (v == 7) return NWN::ParalysisIPImmunity;
+  if (v == 2) return NWN::MindSpellsIPImmunity;
+  if (v == 8) return NWN::CriticalHitsIPImmunity;
+  if (v == 3) return NWN::PoisonIPImmunity;
+  if (v == 9) return NWN::DeathMagicIPImmunity;
+  if (v == 4) return NWN::DiseaseIPImmunity;
+  printf("Invalid enum value of type IPMiscImmunityType passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+};
+long NWScriptI::enum_RacialType_2_long(NWN::RacialType k) {
+  if (k == NWN::ElementalRace) return 16;
+  if (k == NWN::HalforcRace) return 5;
+  if (k == NWN::DragonRace) return 11;
+  if (k == NWN::DwarfRace) return 0;
+  if (k == NWN::InvalidRace) return 28;
+  if (k == NWN::FeyRace) return 17;
+  if (k == NWN::HumanRace) return 6;
+  if (k == NWN::ShapechangerRace) return 23;
+  if (k == NWN::HumanoidGoblinoidRace) return 12;
+  if (k == NWN::ElfRace) return 1;
+  if (k == NWN::OozeRace) return 29;
+  if (k == NWN::GiantRace) return 18;
+  if (k == NWN::AberrationRace) return 7;
+  if (k == NWN::UndeadRace) return 24;
+  if (k == NWN::HumanoidMonstrousRace) return 13;
+  if (k == NWN::GnomeRace) return 2;
+  if (k == NWN::MagicalBeastRace) return 19;
+  if (k == NWN::AnimalRace) return 8;
+  if (k == NWN::VerminRace) return 25;
+  if (k == NWN::HumanoidOrcRace) return 14;
+  if (k == NWN::HalflingRace) return 3;
+  if (k == NWN::OutsiderRace) return 20;
+  if (k == NWN::BeastRace) return 9;
+  if (k == NWN::HumanoidReptilianRace) return 15;
+  if (k == NWN::HalfelfRace) return 4;
+  if (k == NWN::ConstructRace) return 10;
+  throw "omg";
+};
+NWN::RacialType NWScriptI::enum_long_2_RacialType(long v) {
+  if (v == 16) return NWN::ElementalRace;
+  if (v == 5) return NWN::HalforcRace;
+  if (v == 11) return NWN::DragonRace;
+  if (v == 0) return NWN::DwarfRace;
+  if (v == 28) return NWN::InvalidRace;
+  if (v == 17) return NWN::FeyRace;
+  if (v == 6) return NWN::HumanRace;
+  if (v == 23) return NWN::ShapechangerRace;
+  if (v == 12) return NWN::HumanoidGoblinoidRace;
+  if (v == 1) return NWN::ElfRace;
+  if (v == 29) return NWN::OozeRace;
+  if (v == 18) return NWN::GiantRace;
+  if (v == 7) return NWN::AberrationRace;
+  if (v == 24) return NWN::UndeadRace;
+  if (v == 13) return NWN::HumanoidMonstrousRace;
+  if (v == 2) return NWN::GnomeRace;
+  if (v == 19) return NWN::MagicalBeastRace;
+  if (v == 8) return NWN::AnimalRace;
+  if (v == 25) return NWN::VerminRace;
+  if (v == 14) return NWN::HumanoidOrcRace;
+  if (v == 3) return NWN::HalflingRace;
+  if (v == 20) return NWN::OutsiderRace;
+  if (v == 9) return NWN::BeastRace;
+  if (v == 15) return NWN::HumanoidReptilianRace;
+  if (v == 4) return NWN::HalfelfRace;
+  if (v == 10) return NWN::ConstructRace;
+  printf("Invalid enum value of type RacialType passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+};
+long NWScriptI::enum_TalkVolume_2_long(NWN::TalkVolume k) {
+  if (k == NWN::PartyVol) return 5;
+  if (k == NWN::TalkVol) return 0;
+  if (k == NWN::TellVol) return 6;
+  if (k == NWN::WhisperVol) return 1;
+  if (k == NWN::ShoutVol) return 2;
+  if (k == NWN::SilentTalkVol) return 3;
+  if (k == NWN::SilentShoutVol) return 4;
+  throw "omg";
+};
+NWN::TalkVolume NWScriptI::enum_long_2_TalkVolume(long v) {
+  if (v == 5) return NWN::PartyVol;
+  if (v == 0) return NWN::TalkVol;
+  if (v == 6) return NWN::TellVol;
+  if (v == 1) return NWN::WhisperVol;
+  if (v == 2) return NWN::ShoutVol;
+  if (v == 3) return NWN::SilentTalkVol;
+  if (v == 4) return NWN::SilentShoutVol;
+  printf("Invalid enum value of type TalkVolume passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+};
+long NWScriptI::enum_AssociateType_2_long(NWN::AssociateType k) {
+  if (k == NWN::DominatedAssociate) return 5;
+  if (k == NWN::NoAssociate) return 0;
+  if (k == NWN::HenchmanAssociate) return 1;
+  if (k == NWN::AnimalCompanionAssociate) return 2;
+  if (k == NWN::FamiliarAssociate) return 3;
+  if (k == NWN::SummonedAssociate) return 4;
+  throw "omg";
+};
+NWN::AssociateType NWScriptI::enum_long_2_AssociateType(long v) {
+  if (v == 5) return NWN::DominatedAssociate;
+  if (v == 0) return NWN::NoAssociate;
+  if (v == 1) return NWN::HenchmanAssociate;
+  if (v == 2) return NWN::AnimalCompanionAssociate;
+  if (v == 3) return NWN::FamiliarAssociate;
+  if (v == 4) return NWN::SummonedAssociate;
+  printf("Invalid enum value of type AssociateType passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+};
+long NWScriptI::enum_IPAlignment_2_long(NWN::IPAlignment k) {
+  if (k == NWN::NeAlignment) return 5;
+  if (k == NWN::LgAlignment) return 0;
+  if (k == NWN::CgAlignment) return 6;
+  if (k == NWN::LnAlignment) return 1;
+  if (k == NWN::CnAlignment) return 7;
+  if (k == NWN::LeAlignment) return 2;
+  if (k == NWN::CeAlignment) return 8;
+  if (k == NWN::NgAlignment) return 3;
+  if (k == NWN::TnAlignment) return 4;
+  throw "omg";
+};
+NWN::IPAlignment NWScriptI::enum_long_2_IPAlignment(long v) {
+  if (v == 5) return NWN::NeAlignment;
+  if (v == 0) return NWN::LgAlignment;
+  if (v == 6) return NWN::CgAlignment;
+  if (v == 1) return NWN::LnAlignment;
+  if (v == 7) return NWN::CnAlignment;
+  if (v == 2) return NWN::LeAlignment;
+  if (v == 8) return NWN::CeAlignment;
+  if (v == 3) return NWN::NgAlignment;
+  if (v == 4) return NWN::TnAlignment;
+  printf("Invalid enum value of type IPAlignment passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+};
+long NWScriptI::enum_Button_2_long(NWN::Button k) {
+  if (k == NWN::SpellsButton) return 5;
+  if (k == NWN::MapButton) return 0;
+  if (k == NWN::RestButton) return 6;
+  if (k == NWN::InventoryButton) return 1;
+  if (k == NWN::PvPButton) return 7;
+  if (k == NWN::JournalButton) return 2;
+  if (k == NWN::CharacterButton) return 3;
+  if (k == NWN::OptionsButton) return 4;
+  throw "omg";
+};
+NWN::Button NWScriptI::enum_long_2_Button(long v) {
+  if (v == 5) return NWN::SpellsButton;
+  if (v == 0) return NWN::MapButton;
+  if (v == 6) return NWN::RestButton;
+  if (v == 1) return NWN::InventoryButton;
+  if (v == 7) return NWN::PvPButton;
+  if (v == 2) return NWN::JournalButton;
+  if (v == 3) return NWN::CharacterButton;
+  if (v == 4) return NWN::OptionsButton;
+  printf("Invalid enum value of type Button passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+};
+long NWScriptI::enum_SpecialAttack_2_long(NWN::SpecialAttack k) {
+  if (k == NWN::ImprovedDisarmSpecialAttack) return 5;
+  if (k == NWN::InvalidSpecialAttack) return 0;
+  if (k == NWN::KnockdownSpecialAttack) return 6;
+  if (k == NWN::CalledShotLegSpecialAttack) return 1;
+  if (k == NWN::ImprovedKnockdownSpecialAttack) return 7;
+  if (k == NWN::CalledShotArmSpecialAttack) return 2;
+  if (k == NWN::StunningFistSpecialAttack) return 8;
+  if (k == NWN::SapSpecialAttack) return 3;
+  if (k == NWN::FlurryOfBlowsSpecialAttack) return 9;
+  if (k == NWN::DisarmSpecialAttack) return 4;
+  if (k == NWN::RapidShotSpecialAttack) return 10;
+  throw "omg";
+};
+NWN::SpecialAttack NWScriptI::enum_long_2_SpecialAttack(long v) {
+  if (v == 5) return NWN::ImprovedDisarmSpecialAttack;
+  if (v == 0) return NWN::InvalidSpecialAttack;
+  if (v == 6) return NWN::KnockdownSpecialAttack;
+  if (v == 1) return NWN::CalledShotLegSpecialAttack;
+  if (v == 7) return NWN::ImprovedKnockdownSpecialAttack;
+  if (v == 2) return NWN::CalledShotArmSpecialAttack;
+  if (v == 8) return NWN::StunningFistSpecialAttack;
+  if (v == 3) return NWN::SapSpecialAttack;
+  if (v == 9) return NWN::FlurryOfBlowsSpecialAttack;
+  if (v == 4) return NWN::DisarmSpecialAttack;
+  if (v == 10) return NWN::RapidShotSpecialAttack;
+  printf("Invalid enum value of type SpecialAttack passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+};
+long NWScriptI::enum_IPDamageType_2_long(NWN::IPDamageType k) {
+  if (k == NWN::MagicalIPDamage) return 5;
+  if (k == NWN::NegativeIPDamage) return 11;
+  if (k == NWN::BludgeoningIPDamage) return 0;
+  if (k == NWN::AcidIPDamage) return 6;
+  if (k == NWN::PositiveIPDamage) return 12;
+  if (k == NWN::PiercingIPDamage) return 1;
+  if (k == NWN::ColdIPDamage) return 7;
+  if (k == NWN::SonicIPDamage) return 13;
+  if (k == NWN::SlashingIPDamage) return 2;
+  if (k == NWN::DivineIPDamage) return 8;
+  if (k == NWN::SubdualIPDamage) return 3;
+  if (k == NWN::ElectricalIPDamage) return 9;
+  if (k == NWN::PhysicalIPDamage) return 4;
+  if (k == NWN::FireIPDamage) return 10;
+  throw "omg";
+};
+NWN::IPDamageType NWScriptI::enum_long_2_IPDamageType(long v) {
+  if (v == 5) return NWN::MagicalIPDamage;
+  if (v == 11) return NWN::NegativeIPDamage;
+  if (v == 0) return NWN::BludgeoningIPDamage;
+  if (v == 6) return NWN::AcidIPDamage;
+  if (v == 12) return NWN::PositiveIPDamage;
+  if (v == 1) return NWN::PiercingIPDamage;
+  if (v == 7) return NWN::ColdIPDamage;
+  if (v == 13) return NWN::SonicIPDamage;
+  if (v == 2) return NWN::SlashingIPDamage;
+  if (v == 8) return NWN::DivineIPDamage;
+  if (v == 3) return NWN::SubdualIPDamage;
+  if (v == 9) return NWN::ElectricalIPDamage;
+  if (v == 4) return NWN::PhysicalIPDamage;
+  if (v == 10) return NWN::FireIPDamage;
+  printf("Invalid enum value of type IPDamageType passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+};
+long NWScriptI::enum_PhenoType_2_long(NWN::PhenoType k) {
+  if (k == NWN::Custom14PhenoType) return 16;
+  if (k == NWN::Custom3PhenoType) return 5;
+  if (k == NWN::Custom9PhenoType) return 11;
+  if (k == NWN::NormalPhenoType) return 0;
+  if (k == NWN::Custom15PhenoType) return 17;
+  if (k == NWN::Custom4PhenoType) return 6;
+  if (k == NWN::Custom10PhenoType) return 12;
+  if (k == NWN::Custom16PhenoType) return 18;
+  if (k == NWN::Custom5PhenoType) return 7;
+  if (k == NWN::Custom11PhenoType) return 13;
+  if (k == NWN::BigPhenoType) return 2;
+  if (k == NWN::Custom17PhenoType) return 19;
+  if (k == NWN::Custom6PhenoType) return 8;
+  if (k == NWN::Custom12PhenoType) return 14;
+  if (k == NWN::Custom1PhenoType) return 3;
+  if (k == NWN::Custom18PhenoType) return 20;
+  if (k == NWN::Custom7PhenoType) return 9;
+  if (k == NWN::Custom13PhenoType) return 15;
+  if (k == NWN::Custom2PhenoType) return 4;
+  if (k == NWN::Custom8PhenoType) return 10;
+  throw "omg";
+};
+NWN::PhenoType NWScriptI::enum_long_2_PhenoType(long v) {
+  if (v == 16) return NWN::Custom14PhenoType;
+  if (v == 5) return NWN::Custom3PhenoType;
+  if (v == 11) return NWN::Custom9PhenoType;
+  if (v == 0) return NWN::NormalPhenoType;
+  if (v == 17) return NWN::Custom15PhenoType;
+  if (v == 6) return NWN::Custom4PhenoType;
+  if (v == 12) return NWN::Custom10PhenoType;
+  if (v == 18) return NWN::Custom16PhenoType;
+  if (v == 7) return NWN::Custom5PhenoType;
+  if (v == 13) return NWN::Custom11PhenoType;
+  if (v == 2) return NWN::BigPhenoType;
+  if (v == 19) return NWN::Custom17PhenoType;
+  if (v == 8) return NWN::Custom6PhenoType;
+  if (v == 14) return NWN::Custom12PhenoType;
+  if (v == 3) return NWN::Custom1PhenoType;
+  if (v == 20) return NWN::Custom18PhenoType;
+  if (v == 9) return NWN::Custom7PhenoType;
+  if (v == 15) return NWN::Custom13PhenoType;
+  if (v == 4) return NWN::Custom2PhenoType;
+  if (v == 10) return NWN::Custom8PhenoType;
+  printf("Invalid enum value of type PhenoType passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+};
+long NWScriptI::enum_InventorySlot_2_long(NWN::InventorySlot k) {
+  if (k == NWN::CreatureBiteSlot) return 16;
+  if (k == NWN::LefthandSlot) return 5;
+  if (k == NWN::ArrowsSlot) return 11;
+  if (k == NWN::HeadSlot) return 0;
+  if (k == NWN::CreatureArmorSlot) return 17;
+  if (k == NWN::CloakSlot) return 6;
+  if (k == NWN::BulletsSlot) return 12;
+  if (k == NWN::ChestSlot) return 1;
+  if (k == NWN::LeftringSlot) return 7;
+  if (k == NWN::BoltsSlot) return 13;
+  if (k == NWN::BootsSlot) return 2;
+  if (k == NWN::RightringSlot) return 8;
+  if (k == NWN::CreatureLefthandSlot) return 14;
+  if (k == NWN::ArmsSlot) return 3;
+  if (k == NWN::NeckSlot) return 9;
+  if (k == NWN::CreatureRighthandSlot) return 15;
+  if (k == NWN::RighthandSlot) return 4;
+  if (k == NWN::BeltSlot) return 10;
+  throw "omg";
+};
+NWN::InventorySlot NWScriptI::enum_long_2_InventorySlot(long v) {
+  if (v == 16) return NWN::CreatureBiteSlot;
+  if (v == 5) return NWN::LefthandSlot;
+  if (v == 11) return NWN::ArrowsSlot;
+  if (v == 0) return NWN::HeadSlot;
+  if (v == 17) return NWN::CreatureArmorSlot;
+  if (v == 6) return NWN::CloakSlot;
+  if (v == 12) return NWN::BulletsSlot;
+  if (v == 1) return NWN::ChestSlot;
+  if (v == 7) return NWN::LeftringSlot;
+  if (v == 13) return NWN::BoltsSlot;
+  if (v == 2) return NWN::BootsSlot;
+  if (v == 8) return NWN::RightringSlot;
+  if (v == 14) return NWN::CreatureLefthandSlot;
+  if (v == 3) return NWN::ArmsSlot;
+  if (v == 9) return NWN::NeckSlot;
+  if (v == 15) return NWN::CreatureRighthandSlot;
+  if (v == 4) return NWN::RighthandSlot;
+  if (v == 10) return NWN::BeltSlot;
+  printf("Invalid enum value of type InventorySlot passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+};
+long NWScriptI::enum_DoorAction_2_long(NWN::DoorAction k) {
+  if (k == NWN::OpenDoor) return 0;
+  if (k == NWN::UnlockDoor) return 1;
+  if (k == NWN::BashDoor) return 2;
+  if (k == NWN::IgnoreDoor) return 3;
+  if (k == NWN::KnockDoor) return 4;
+  throw "omg";
+};
+NWN::DoorAction NWScriptI::enum_long_2_DoorAction(long v) {
+  if (v == 0) return NWN::OpenDoor;
+  if (v == 1) return NWN::UnlockDoor;
+  if (v == 2) return NWN::BashDoor;
+  if (v == 3) return NWN::IgnoreDoor;
+  if (v == 4) return NWN::KnockDoor;
+  printf("Invalid enum value of type DoorAction passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+};
+long NWScriptI::enum_ProjectilePathType_2_long(NWN::ProjectilePathType k) {
+  if (k == NWN::DefaultPath) return 0;
+  if (k == NWN::HomingPath) return 1;
+  if (k == NWN::BallisticPath) return 2;
+  if (k == NWN::HighBallisticPath) return 3;
+  if (k == NWN::AcceleratingPath) return 4;
+  throw "omg";
+};
+NWN::ProjectilePathType NWScriptI::enum_long_2_ProjectilePathType(long v) {
+  if (v == 0) return NWN::DefaultPath;
+  if (v == 1) return NWN::HomingPath;
+  if (v == 2) return NWN::BallisticPath;
+  if (v == 3) return NWN::HighBallisticPath;
+  if (v == 4) return NWN::AcceleratingPath;
+  printf("Invalid enum value of type ProjectilePathType passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+};
+long NWScriptI::enum_AILevel_2_long(NWN::AILevel k) {
+  if (k == NWN::VeryLowAI) return 0;
+  if (k == NWN::LowAI) return 1;
+  if (k == NWN::DefaultAI) return -1;
+  if (k == NWN::NormalAI) return 2;
+  if (k == NWN::HighAI) return 3;
+  if (k == NWN::VeryHighAI) return 4;
+  throw "omg";
+};
+NWN::AILevel NWScriptI::enum_long_2_AILevel(long v) {
+  if (v == 0) return NWN::VeryLowAI;
+  if (v == 1) return NWN::LowAI;
+  if (v == -1) return NWN::DefaultAI;
+  if (v == 2) return NWN::NormalAI;
+  if (v == 3) return NWN::HighAI;
+  if (v == 4) return NWN::VeryHighAI;
+  printf("Invalid enum value of type AILevel passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+};
+long NWScriptI::enum_ShapeType_2_long(NWN::ShapeType k) {
+  if (k == NWN::SpellCylinderShape) return 0;
+  if (k == NWN::ConeShape) return 1;
+  if (k == NWN::CubeShape) return 2;
+  if (k == NWN::SpellConeShape) return 3;
+  if (k == NWN::SphereShape) return 4;
+  throw "omg";
+};
+NWN::ShapeType NWScriptI::enum_long_2_ShapeType(long v) {
+  if (v == 0) return NWN::SpellCylinderShape;
+  if (v == 1) return NWN::ConeShape;
+  if (v == 2) return NWN::CubeShape;
+  if (v == 3) return NWN::SpellConeShape;
+  if (v == 4) return NWN::SphereShape;
+  printf("Invalid enum value of type ShapeType passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+};
+long NWScriptI::enum_AttackResult_2_long(NWN::AttackResult k) {
+  if (k == NWN::MissedAttack) return 0;
+  if (k == NWN::HitAttack) return 1;
+  if (k == NWN::CriticalHitAttack) return 2;
+  throw "omg";
+};
+NWN::AttackResult NWScriptI::enum_long_2_AttackResult(long v) {
+  if (v == 0) return NWN::MissedAttack;
+  if (v == 1) return NWN::HitAttack;
+  if (v == 2) return NWN::CriticalHitAttack;
+  printf("Invalid enum value of type AttackResult passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+};
+long NWScriptI::enum_CreaturePart_2_long(NWN::CreaturePart k) {
+  if (k == NWN::RightHandPart) return 16;
+  if (k == NWN::RightThighPart) return 5;
+  if (k == NWN::LeftForearmPart) return 11;
+  if (k == NWN::RightFootPart) return 0;
+  if (k == NWN::LeftHandPart) return 17;
+  if (k == NWN::PelvisPart) return 6;
+  if (k == NWN::RightBicepPart) return 12;
+  if (k == NWN::LeftFootPart) return 1;
+  if (k == NWN::TorsoPart) return 7;
+  if (k == NWN::LeftBicepPart) return 13;
+  if (k == NWN::RightShinPart) return 2;
+  if (k == NWN::BeltPart) return 8;
+  if (k == NWN::RightShoulderPart) return 14;
+  if (k == NWN::LeftShinPart) return 3;
+  if (k == NWN::HeadPart) return 20;
+  if (k == NWN::NeckPart) return 9;
+  if (k == NWN::LeftShoulderPart) return 15;
+  if (k == NWN::LeftThighPart) return 4;
+  if (k == NWN::RightForearmPart) return 10;
+  throw "omg";
+};
+NWN::CreaturePart NWScriptI::enum_long_2_CreaturePart(long v) {
+  if (v == 16) return NWN::RightHandPart;
+  if (v == 5) return NWN::RightThighPart;
+  if (v == 11) return NWN::LeftForearmPart;
+  if (v == 0) return NWN::RightFootPart;
+  if (v == 17) return NWN::LeftHandPart;
+  if (v == 6) return NWN::PelvisPart;
+  if (v == 12) return NWN::RightBicepPart;
+  if (v == 1) return NWN::LeftFootPart;
+  if (v == 7) return NWN::TorsoPart;
+  if (v == 13) return NWN::LeftBicepPart;
+  if (v == 2) return NWN::RightShinPart;
+  if (v == 8) return NWN::BeltPart;
+  if (v == 14) return NWN::RightShoulderPart;
+  if (v == 3) return NWN::LeftShinPart;
+  if (v == 20) return NWN::HeadPart;
+  if (v == 9) return NWN::NeckPart;
+  if (v == 15) return NWN::LeftShoulderPart;
+  if (v == 4) return NWN::LeftThighPart;
+  if (v == 10) return NWN::RightForearmPart;
+  printf("Invalid enum value of type CreaturePart passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+};
+long NWScriptI::enum_MetaMagic_2_long(NWN::MetaMagic k) {
+  if (k == NWN::SilentMeta) return 16;
+  if (k == NWN::NoneMeta) return 0;
+  if (k == NWN::EmpowerMeta) return 1;
+  if (k == NWN::AnyMeta) return 255;
+  if (k == NWN::ExtendMeta) return 2;
+  if (k == NWN::QuickenMeta) return 8;
+  if (k == NWN::MaximizeMeta) return 4;
+  if (k == NWN::StillMeta) return 32;
+  throw "omg";
+};
+NWN::MetaMagic NWScriptI::enum_long_2_MetaMagic(long v) {
+  if (v == 16) return NWN::SilentMeta;
+  if (v == 0) return NWN::NoneMeta;
+  if (v == 1) return NWN::EmpowerMeta;
+  if (v == 255) return NWN::AnyMeta;
+  if (v == 2) return NWN::ExtendMeta;
+  if (v == 8) return NWN::QuickenMeta;
+  if (v == 4) return NWN::MaximizeMeta;
+  if (v == 32) return NWN::StillMeta;
+  printf("Invalid enum value of type MetaMagic passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+};
+long NWScriptI::enum_SpellSchool_2_long(NWN::SpellSchool k) {
+  if (k == NWN::EvocationSchool) return 5;
+  if (k == NWN::GeneralSchool) return 0;
+  if (k == NWN::IllusionSchool) return 6;
+  if (k == NWN::AbjurationSchool) return 1;
+  if (k == NWN::NecromancySchool) return 7;
+  if (k == NWN::ConjurationSchool) return 2;
+  if (k == NWN::TransmutationSchool) return 8;
+  if (k == NWN::DivinationSchool) return 3;
+  if (k == NWN::EnchantmentSchool) return 4;
+  throw "omg";
+};
+NWN::SpellSchool NWScriptI::enum_long_2_SpellSchool(long v) {
+  if (v == 5) return NWN::EvocationSchool;
+  if (v == 0) return NWN::GeneralSchool;
+  if (v == 6) return NWN::IllusionSchool;
+  if (v == 1) return NWN::AbjurationSchool;
+  if (v == 7) return NWN::NecromancySchool;
+  if (v == 2) return NWN::ConjurationSchool;
+  if (v == 8) return NWN::TransmutationSchool;
+  if (v == 3) return NWN::DivinationSchool;
+  if (v == 4) return NWN::EnchantmentSchool;
+  printf("Invalid enum value of type SpellSchool passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+};
+long NWScriptI::enum_MissChanceType_2_long(NWN::MissChanceType k) {
+  if (k == NWN::MissChanceVSAll) return 0;
+  if (k == NWN::MissChanceVSRanged) return 1;
+  if (k == NWN::MissChanceVSMelee) return 2;
+  throw "omg";
+};
+NWN::MissChanceType NWScriptI::enum_long_2_MissChanceType(long v) {
+  if (v == 0) return NWN::MissChanceVSAll;
+  if (v == 1) return NWN::MissChanceVSRanged;
+  if (v == 2) return NWN::MissChanceVSMelee;
+  printf("Invalid enum value of type MissChanceType passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+};
+long NWScriptI::enum_ImmunityType_2_long(NWN::ImmunityType k) {
+  if (k == NWN::SkillDecreaseImmunity) return 27;
+  if (k == NWN::ConfusedImmunity) return 16;
+  if (k == NWN::TrapImmunity) return 5;
+  if (k == NWN::DamageImmunityDecreaseImmunity) return 22;
+  if (k == NWN::SilenceImmunity) return 11;
+  if (k == NWN::NoneImmunity) return 0;
+  if (k == NWN::KnockdownImmunity) return 28;
+  if (k == NWN::CursedImmunity) return 17;
+  if (k == NWN::ParalysisImmunity) return 6;
+  if (k == NWN::AcDecreaseImmunity) return 23;
+  if (k == NWN::StunImmunity) return 12;
+  if (k == NWN::MindSpellsImmunity) return 1;
+  if (k == NWN::NegativeLevelImmunity) return 29;
+  if (k == NWN::DazedImmunity) return 18;
+  if (k == NWN::BlindnessImmunity) return 7;
+  if (k == NWN::MovementSpeedDecreaseImmunity) return 24;
+  if (k == NWN::SleepImmunity) return 13;
+  if (k == NWN::PoisonImmunity) return 2;
+  if (k == NWN::SneakAttackImmunity) return 30;
+  if (k == NWN::AbilityDecreaseImmunity) return 19;
+  if (k == NWN::DeafnessImmunity) return 8;
+  if (k == NWN::SavingThrowDecreaseImmunity) return 25;
+  if (k == NWN::CharmImmunity) return 14;
+  if (k == NWN::DiseaseImmunity) return 3;
+  if (k == NWN::CriticalHitImmunity) return 31;
+  if (k == NWN::AttackDecreaseImmunity) return 20;
+  if (k == NWN::SlowImmunity) return 9;
+  if (k == NWN::SpellResistanceDecreaseImmunity) return 26;
+  if (k == NWN::DominateImmunity) return 15;
+  if (k == NWN::FearImmunity) return 4;
+  if (k == NWN::DeathImmunity) return 32;
+  if (k == NWN::DamageDecreaseImmunity) return 21;
+  if (k == NWN::EntangleImmunity) return 10;
+  throw "omg";
+};
+NWN::ImmunityType NWScriptI::enum_long_2_ImmunityType(long v) {
+  if (v == 27) return NWN::SkillDecreaseImmunity;
+  if (v == 16) return NWN::ConfusedImmunity;
+  if (v == 5) return NWN::TrapImmunity;
+  if (v == 22) return NWN::DamageImmunityDecreaseImmunity;
+  if (v == 11) return NWN::SilenceImmunity;
+  if (v == 0) return NWN::NoneImmunity;
+  if (v == 28) return NWN::KnockdownImmunity;
+  if (v == 17) return NWN::CursedImmunity;
+  if (v == 6) return NWN::ParalysisImmunity;
+  if (v == 23) return NWN::AcDecreaseImmunity;
+  if (v == 12) return NWN::StunImmunity;
+  if (v == 1) return NWN::MindSpellsImmunity;
+  if (v == 29) return NWN::NegativeLevelImmunity;
+  if (v == 18) return NWN::DazedImmunity;
+  if (v == 7) return NWN::BlindnessImmunity;
+  if (v == 24) return NWN::MovementSpeedDecreaseImmunity;
+  if (v == 13) return NWN::SleepImmunity;
+  if (v == 2) return NWN::PoisonImmunity;
+  if (v == 30) return NWN::SneakAttackImmunity;
+  if (v == 19) return NWN::AbilityDecreaseImmunity;
+  if (v == 8) return NWN::DeafnessImmunity;
+  if (v == 25) return NWN::SavingThrowDecreaseImmunity;
+  if (v == 14) return NWN::CharmImmunity;
+  if (v == 3) return NWN::DiseaseImmunity;
+  if (v == 31) return NWN::CriticalHitImmunity;
+  if (v == 20) return NWN::AttackDecreaseImmunity;
+  if (v == 9) return NWN::SlowImmunity;
+  if (v == 26) return NWN::SpellResistanceDecreaseImmunity;
+  if (v == 15) return NWN::DominateImmunity;
+  if (v == 4) return NWN::FearImmunity;
+  if (v == 32) return NWN::DeathImmunity;
+  if (v == 21) return NWN::DamageDecreaseImmunity;
+  if (v == 10) return NWN::EntangleImmunity;
+  printf("Invalid enum value of type ImmunityType passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+};
 Ice::Int NWScriptI::abs(Ice::Int nValue, const Ice::Current& ice) {
   lock(abs_mutex, "abs");
   callCounter += 1;
@@ -94,12 +1880,8 @@ void NWScriptI::actionCastFakeSpellAtLocation(Ice::Int nSpell, const NWN::NWLoca
   if (lTarget.area.id < 0) throw NWN::InvalidObjectException();
   lock(actionCastFakeSpellAtLocation_mutex, "actionCastFakeSpellAtLocation");
   callCounter += 1;
-  if (tProjectilePathType == NWN::DefaultPath) StackPushInteger(0);
-   else if (tProjectilePathType == NWN::HomingPath) StackPushInteger(1);
-   else if (tProjectilePathType == NWN::BallisticPath) StackPushInteger(2);
-   else if (tProjectilePathType == NWN::HighBallisticPath) StackPushInteger(3);
-   else if (tProjectilePathType == NWN::AcceleratingPath) StackPushInteger(4);
-   else { printf("Invalid enum value in actionCastFakeSpellAtLocation for parameter tProjectilePathType of type ProjectilePathType passed: %d. Cannot continue, and it's your fault!\n", tProjectilePathType); exit(1); };
+  StackPushInteger(enum_ProjectilePathType_2_long(tProjectilePathType));
+  
   CScriptLocation *lTarget_ptr;
   lTarget_ptr->X = lTarget.x;
   lTarget_ptr->Y = lTarget.y;
@@ -121,12 +1903,8 @@ void NWScriptI::actionCastFakeSpellAtObject(Ice::Int nSpell, const NWN::NWObject
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
   lock(actionCastFakeSpellAtObject_mutex, "actionCastFakeSpellAtObject");
   callCounter += 1;
-  if (tProjectilePathType == NWN::DefaultPath) StackPushInteger(0);
-   else if (tProjectilePathType == NWN::HomingPath) StackPushInteger(1);
-   else if (tProjectilePathType == NWN::BallisticPath) StackPushInteger(2);
-   else if (tProjectilePathType == NWN::HighBallisticPath) StackPushInteger(3);
-   else if (tProjectilePathType == NWN::AcceleratingPath) StackPushInteger(4);
-   else { printf("Invalid enum value in actionCastFakeSpellAtObject for parameter tProjectilePathType of type ProjectilePathType passed: %d. Cannot continue, and it's your fault!\n", tProjectilePathType); exit(1); };
+  StackPushInteger(enum_ProjectilePathType_2_long(tProjectilePathType));
+  
   StackPushObject(oTarget.id);
   StackPushInteger(nSpell);
 
@@ -141,22 +1919,11 @@ void NWScriptI::actionCastSpellAtLocation(Ice::Int nSpell, const NWN::NWLocation
   lock(actionCastSpellAtLocation_mutex, "actionCastSpellAtLocation");
   callCounter += 1;
   StackPushInteger(bInstantSpell == true ? 1 : 0);
-  if (tProjectilePathType == NWN::DefaultPath) StackPushInteger(0);
-   else if (tProjectilePathType == NWN::HomingPath) StackPushInteger(1);
-   else if (tProjectilePathType == NWN::BallisticPath) StackPushInteger(2);
-   else if (tProjectilePathType == NWN::HighBallisticPath) StackPushInteger(3);
-   else if (tProjectilePathType == NWN::AcceleratingPath) StackPushInteger(4);
-   else { printf("Invalid enum value in actionCastSpellAtLocation for parameter tProjectilePathType of type ProjectilePathType passed: %d. Cannot continue, and it's your fault!\n", tProjectilePathType); exit(1); };
+  StackPushInteger(enum_ProjectilePathType_2_long(tProjectilePathType));
+  
   StackPushInteger(bCheat == true ? 1 : 0);
-  if (tMetaMagic == NWN::SilentMeta) StackPushInteger(16);
-   else if (tMetaMagic == NWN::NoneMeta) StackPushInteger(0);
-   else if (tMetaMagic == NWN::EmpowerMeta) StackPushInteger(1);
-   else if (tMetaMagic == NWN::AnyMeta) StackPushInteger(255);
-   else if (tMetaMagic == NWN::ExtendMeta) StackPushInteger(2);
-   else if (tMetaMagic == NWN::QuickenMeta) StackPushInteger(8);
-   else if (tMetaMagic == NWN::MaximizeMeta) StackPushInteger(4);
-   else if (tMetaMagic == NWN::StillMeta) StackPushInteger(32);
-   else { printf("Invalid enum value in actionCastSpellAtLocation for parameter tMetaMagic of type MetaMagic passed: %d. Cannot continue, and it's your fault!\n", tMetaMagic); exit(1); };
+  StackPushInteger(enum_MetaMagic_2_long(tMetaMagic));
+  
   CScriptLocation *lTargetLocation_ptr;
   lTargetLocation_ptr->X = lTargetLocation.x;
   lTargetLocation_ptr->Y = lTargetLocation.y;
@@ -179,23 +1946,12 @@ void NWScriptI::actionCastSpellAtObject(Ice::Int nSpell, const NWN::NWObject& oT
   lock(actionCastSpellAtObject_mutex, "actionCastSpellAtObject");
   callCounter += 1;
   StackPushInteger(bInstantSpell == true ? 1 : 0);
-  if (tProjectilePathType == NWN::DefaultPath) StackPushInteger(0);
-   else if (tProjectilePathType == NWN::HomingPath) StackPushInteger(1);
-   else if (tProjectilePathType == NWN::BallisticPath) StackPushInteger(2);
-   else if (tProjectilePathType == NWN::HighBallisticPath) StackPushInteger(3);
-   else if (tProjectilePathType == NWN::AcceleratingPath) StackPushInteger(4);
-   else { printf("Invalid enum value in actionCastSpellAtObject for parameter tProjectilePathType of type ProjectilePathType passed: %d. Cannot continue, and it's your fault!\n", tProjectilePathType); exit(1); };
+  StackPushInteger(enum_ProjectilePathType_2_long(tProjectilePathType));
+  
   StackPushInteger(nDomainLevel);
   StackPushInteger(bCheat == true ? 1 : 0);
-  if (tMetaMagic == NWN::SilentMeta) StackPushInteger(16);
-   else if (tMetaMagic == NWN::NoneMeta) StackPushInteger(0);
-   else if (tMetaMagic == NWN::EmpowerMeta) StackPushInteger(1);
-   else if (tMetaMagic == NWN::AnyMeta) StackPushInteger(255);
-   else if (tMetaMagic == NWN::ExtendMeta) StackPushInteger(2);
-   else if (tMetaMagic == NWN::QuickenMeta) StackPushInteger(8);
-   else if (tMetaMagic == NWN::MaximizeMeta) StackPushInteger(4);
-   else if (tMetaMagic == NWN::StillMeta) StackPushInteger(32);
-   else { printf("Invalid enum value in actionCastSpellAtObject for parameter tMetaMagic of type MetaMagic passed: %d. Cannot continue, and it's your fault!\n", tMetaMagic); exit(1); };
+  StackPushInteger(enum_MetaMagic_2_long(tMetaMagic));
+  
   StackPushObject(oTarget.id);
   StackPushInteger(nSpell);
 
@@ -233,25 +1989,8 @@ void NWScriptI::actionEquipItem(const NWN::NWObject& oItem, NWN::InventorySlot t
   if (oItem.id < 0 || oItem.id > 0xffffffff) throw NWN::InvalidObjectException();
   lock(actionEquipItem_mutex, "actionEquipItem");
   callCounter += 1;
-  if (tInventorySlot == NWN::CreatureBiteSlot) StackPushInteger(16);
-   else if (tInventorySlot == NWN::LefthandSlot) StackPushInteger(5);
-   else if (tInventorySlot == NWN::ArrowsSlot) StackPushInteger(11);
-   else if (tInventorySlot == NWN::HeadSlot) StackPushInteger(0);
-   else if (tInventorySlot == NWN::CreatureArmorSlot) StackPushInteger(17);
-   else if (tInventorySlot == NWN::CloakSlot) StackPushInteger(6);
-   else if (tInventorySlot == NWN::BulletsSlot) StackPushInteger(12);
-   else if (tInventorySlot == NWN::ChestSlot) StackPushInteger(1);
-   else if (tInventorySlot == NWN::LeftringSlot) StackPushInteger(7);
-   else if (tInventorySlot == NWN::BoltsSlot) StackPushInteger(13);
-   else if (tInventorySlot == NWN::BootsSlot) StackPushInteger(2);
-   else if (tInventorySlot == NWN::RightringSlot) StackPushInteger(8);
-   else if (tInventorySlot == NWN::CreatureLefthandSlot) StackPushInteger(14);
-   else if (tInventorySlot == NWN::ArmsSlot) StackPushInteger(3);
-   else if (tInventorySlot == NWN::NeckSlot) StackPushInteger(9);
-   else if (tInventorySlot == NWN::CreatureRighthandSlot) StackPushInteger(15);
-   else if (tInventorySlot == NWN::RighthandSlot) StackPushInteger(4);
-   else if (tInventorySlot == NWN::BeltSlot) StackPushInteger(10);
-   else { printf("Invalid enum value in actionEquipItem for parameter tInventorySlot of type InventorySlot passed: %d. Cannot continue, and it's your fault!\n", tInventorySlot); exit(1); };
+  StackPushInteger(enum_InventorySlot_2_long(tInventorySlot));
+  
   StackPushObject(oItem.id);
 
   VM_ExecuteCommand(32, 2);
@@ -604,14 +2343,8 @@ unlock(actionSit_mutex, "actionSit");
 void NWScriptI::actionSpeakString(const std::string& sStringToSpeak, NWN::TalkVolume tTalkVolume, const Ice::Current& ice) {
   lock(actionSpeakString_mutex, "actionSpeakString");
   callCounter += 1;
-  if (tTalkVolume == NWN::PartyVol) StackPushInteger(5);
-   else if (tTalkVolume == NWN::TalkVol) StackPushInteger(0);
-   else if (tTalkVolume == NWN::TellVol) StackPushInteger(6);
-   else if (tTalkVolume == NWN::WhisperVol) StackPushInteger(1);
-   else if (tTalkVolume == NWN::ShoutVol) StackPushInteger(2);
-   else if (tTalkVolume == NWN::SilentTalkVol) StackPushInteger(3);
-   else if (tTalkVolume == NWN::SilentShoutVol) StackPushInteger(4);
-   else { printf("Invalid enum value in actionSpeakString for parameter tTalkVolume of type TalkVolume passed: %d. Cannot continue, and it's your fault!\n", tTalkVolume); exit(1); };
+  StackPushInteger(enum_TalkVolume_2_long(tTalkVolume));
+  
   StackPushString(sStringToSpeak.c_str());
 
   VM_ExecuteCommand(39, 2);
@@ -623,14 +2356,8 @@ unlock(actionSpeakString_mutex, "actionSpeakString");
 void NWScriptI::actionSpeakStringByStrRef(Ice::Int nStrRef, NWN::TalkVolume tTalkVolume, const Ice::Current& ice) {
   lock(actionSpeakStringByStrRef_mutex, "actionSpeakStringByStrRef");
   callCounter += 1;
-  if (tTalkVolume == NWN::PartyVol) StackPushInteger(5);
-   else if (tTalkVolume == NWN::TalkVol) StackPushInteger(0);
-   else if (tTalkVolume == NWN::TellVol) StackPushInteger(6);
-   else if (tTalkVolume == NWN::WhisperVol) StackPushInteger(1);
-   else if (tTalkVolume == NWN::ShoutVol) StackPushInteger(2);
-   else if (tTalkVolume == NWN::SilentTalkVol) StackPushInteger(3);
-   else if (tTalkVolume == NWN::SilentShoutVol) StackPushInteger(4);
-   else { printf("Invalid enum value in actionSpeakStringByStrRef for parameter tTalkVolume of type TalkVolume passed: %d. Cannot continue, and it's your fault!\n", tTalkVolume); exit(1); };
+  StackPushInteger(enum_TalkVolume_2_long(tTalkVolume));
+  
   StackPushInteger(nStrRef);
 
   VM_ExecuteCommand(240, 2);
@@ -772,10 +2499,8 @@ void NWScriptI::addItemProperty(NWN::DurationType tDurationType, const NWN::NWIt
   StackPushObject(oItem.id);
   CGameEffect *ipProperty_ptr = iprpMap.find(ipProperty.id)->second;
   StackPushEngineStructure(ENGINE_STRUCTURE_ITEMPROPERTY, ipProperty_ptr);
-  if (tDurationType == NWN::Instant) StackPushInteger(0);
-   else if (tDurationType == NWN::Temporary) StackPushInteger(1);
-   else if (tDurationType == NWN::Permanent) StackPushInteger(2);
-   else { printf("Invalid enum value in addItemProperty for parameter tDurationType of type DurationType passed: %d. Cannot continue, and it's your fault!\n", tDurationType); exit(1); };
+  StackPushInteger(enum_DurationType_2_long(tDurationType));
+  
 
   VM_ExecuteCommand(609, 4);
 
@@ -820,13 +2545,8 @@ void NWScriptI::adjustAlignment(const NWN::NWObject& oSubject, NWN::Alignment tA
   callCounter += 1;
   StackPushInteger(bAllPartyMembers == true ? 1 : 0);
   StackPushInteger(nShift);
-  if (tAlignment == NWN::Evil) StackPushInteger(5);
-   else if (tAlignment == NWN::Any) StackPushInteger(0);
-   else if (tAlignment == NWN::Neutral) StackPushInteger(1);
-   else if (tAlignment == NWN::Lawful) StackPushInteger(2);
-   else if (tAlignment == NWN::Chaotic) StackPushInteger(3);
-   else if (tAlignment == NWN::Good) StackPushInteger(4);
-   else { printf("Invalid enum value in adjustAlignment for parameter tAlignment of type Alignment passed: %d. Cannot continue, and it's your fault!\n", tAlignment); exit(1); };
+  StackPushInteger(enum_Alignment_2_long(tAlignment));
+  
   StackPushObject(oSubject.id);
 
   VM_ExecuteCommand(201, 4);
@@ -959,10 +2679,8 @@ void NWScriptI::applyEffectAtLocation(NWN::DurationType tDurationType, const NWN
   StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, lLocation_ptr);
   CGameEffect *eEffect_ptr = effectMap.find(eEffect.id)->second;
   StackPushEngineStructure(ENGINE_STRUCTURE_EFFECT, eEffect_ptr);
-  if (tDurationType == NWN::Instant) StackPushInteger(0);
-   else if (tDurationType == NWN::Temporary) StackPushInteger(1);
-   else if (tDurationType == NWN::Permanent) StackPushInteger(2);
-   else { printf("Invalid enum value in applyEffectAtLocation for parameter tDurationType of type DurationType passed: %d. Cannot continue, and it's your fault!\n", tDurationType); exit(1); };
+  StackPushInteger(enum_DurationType_2_long(tDurationType));
+  
 
   VM_ExecuteCommand(216, 4);
 
@@ -980,10 +2698,8 @@ void NWScriptI::applyEffectToObject(NWN::DurationType tDurationType, const NWN::
   StackPushObject(oTarget.id);
   CGameEffect *eEffect_ptr = effectMap.find(eEffect.id)->second;
   StackPushEngineStructure(ENGINE_STRUCTURE_EFFECT, eEffect_ptr);
-  if (tDurationType == NWN::Instant) StackPushInteger(0);
-   else if (tDurationType == NWN::Temporary) StackPushInteger(1);
-   else if (tDurationType == NWN::Permanent) StackPushInteger(2);
-   else { printf("Invalid enum value in applyEffectToObject for parameter tDurationType of type DurationType passed: %d. Cannot continue, and it's your fault!\n", tDurationType); exit(1); };
+  StackPushInteger(enum_DurationType_2_long(tDurationType));
+  
 
   VM_ExecuteCommand(220, 4);
 
@@ -1102,11 +2818,8 @@ void NWScriptI::changeToStandardFaction(const NWN::NWObject& oCreatureToChange, 
   if (oCreatureToChange.id < 0 || oCreatureToChange.id > 0xffffffff) throw NWN::InvalidObjectException();
   lock(changeToStandardFaction_mutex, "changeToStandardFaction");
   callCounter += 1;
-  if (tStandardFaction == NWN::Hostile) StackPushInteger(0);
-   else if (tStandardFaction == NWN::Commoner) StackPushInteger(1);
-   else if (tStandardFaction == NWN::Merchant) StackPushInteger(2);
-   else if (tStandardFaction == NWN::Defender) StackPushInteger(3);
-   else { printf("Invalid enum value in changeToStandardFaction for parameter tStandardFaction of type StandardFaction passed: %d. Cannot continue, and it's your fault!\n", tStandardFaction); exit(1); };
+  StackPushInteger(enum_StandardFaction_2_long(tStandardFaction));
+  
   StackPushObject(oCreatureToChange.id);
 
   VM_ExecuteCommand(412, 2);
@@ -1256,18 +2969,8 @@ NWN::NWObject NWScriptI::createObject(NWN::ObjectType tObjectType, const std::st
   lLocation_ptr->AreaID = lLocation.area.id;
   StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, lLocation_ptr);
   StackPushString(sTemplate.c_str());
-  if (tObjectType == NWN::AOE) StackPushInteger(16);
-   else if (tObjectType == NWN::InvalidObject) StackPushInteger(0);
-   else if (tObjectType == NWN::Creature) StackPushInteger(1);
-   else if (tObjectType == NWN::Store) StackPushInteger(128);
-   else if (tObjectType == NWN::Item) StackPushInteger(2);
-   else if (tObjectType == NWN::Door) StackPushInteger(8);
-   else if (tObjectType == NWN::Encounter) StackPushInteger(256);
-   else if (tObjectType == NWN::All) StackPushInteger(32767);
-   else if (tObjectType == NWN::Placeable) StackPushInteger(64);
-   else if (tObjectType == NWN::Trigger) StackPushInteger(4);
-   else if (tObjectType == NWN::Waypoint) StackPushInteger(32);
-   else { printf("Invalid enum value in createObject for parameter tObjectType of type ObjectType passed: %d. Cannot continue, and it's your fault!\n", tObjectType); exit(1); };
+  StackPushInteger(enum_ObjectType_2_long(tObjectType));
+  
 
   VM_ExecuteCommand(243, 5);
 
@@ -1285,11 +2988,8 @@ NWN::NWObject NWScriptI::createTrapAtLocation(NWN::TrapType tTrapType, const NWN
   callCounter += 1;
   StackPushString(sOnTrapTriggeredScript.c_str());
   StackPushString(sOnDisarmScript.c_str());
-  if (tStandardFaction == NWN::Hostile) StackPushInteger(0);
-   else if (tStandardFaction == NWN::Commoner) StackPushInteger(1);
-   else if (tStandardFaction == NWN::Merchant) StackPushInteger(2);
-   else if (tStandardFaction == NWN::Defender) StackPushInteger(3);
-   else { printf("Invalid enum value in createTrapAtLocation for parameter tStandardFaction of type StandardFaction passed: %d. Cannot continue, and it's your fault!\n", tStandardFaction); exit(1); };
+  StackPushInteger(enum_StandardFaction_2_long(tStandardFaction));
+  
   StackPushString(sTag.c_str());
   StackPushFloat(fSize);
   CScriptLocation *lLocation_ptr;
@@ -1301,55 +3001,8 @@ NWN::NWObject NWScriptI::createTrapAtLocation(NWN::TrapType tTrapType, const NWN
   lLocation_ptr->OrientationZ = lLocation.orientationZ;
   lLocation_ptr->AreaID = lLocation.area.id;
   StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, lLocation_ptr);
-  if (tTrapType == NWN::StrongSonicTrap) StackPushInteger(38);
-   else if (tTrapType == NWN::DeadlyGasTrap) StackPushInteger(27);
-   else if (tTrapType == NWN::MinorFireTrap) StackPushInteger(16);
-   else if (tTrapType == NWN::AverageHolyTrap) StackPushInteger(5);
-   else if (tTrapType == NWN::EpicElectricalTrap) StackPushInteger(44);
-   else if (tTrapType == NWN::AverageNegativeTrap) StackPushInteger(33);
-   else if (tTrapType == NWN::StrongElectricalTrap) StackPushInteger(22);
-   else if (tTrapType == NWN::DeadlyTangleTrap) StackPushInteger(11);
-   else if (tTrapType == NWN::MinorSpikeTrap) StackPushInteger(0);
-   else if (tTrapType == NWN::DeadlySonicTrap) StackPushInteger(39);
-   else if (tTrapType == NWN::MinorFrostTrap) StackPushInteger(28);
-   else if (tTrapType == NWN::AverageFireTrap) StackPushInteger(17);
-   else if (tTrapType == NWN::StrongHolyTrap) StackPushInteger(6);
-   else if (tTrapType == NWN::EpicFireTrap) StackPushInteger(45);
-   else if (tTrapType == NWN::StrongNegativeTrap) StackPushInteger(34);
-   else if (tTrapType == NWN::DeadlyElectricalTrap) StackPushInteger(23);
-   else if (tTrapType == NWN::MinorAcidTrap) StackPushInteger(12);
-   else if (tTrapType == NWN::AverageSpikeTrap) StackPushInteger(1);
-   else if (tTrapType == NWN::MinorAcidSplashTrap) StackPushInteger(40);
-   else if (tTrapType == NWN::AverageFrostTrap) StackPushInteger(29);
-   else if (tTrapType == NWN::StrongFireTrap) StackPushInteger(18);
-   else if (tTrapType == NWN::DeadlyHolyTrap) StackPushInteger(7);
-   else if (tTrapType == NWN::EpicFrostTrap) StackPushInteger(46);
-   else if (tTrapType == NWN::DeadlyNegativeTrap) StackPushInteger(35);
-   else if (tTrapType == NWN::MinorGasTrap) StackPushInteger(24);
-   else if (tTrapType == NWN::AverageAcidTrap) StackPushInteger(13);
-   else if (tTrapType == NWN::StrongSpikeTrap) StackPushInteger(2);
-   else if (tTrapType == NWN::AverageAcidSplashTrap) StackPushInteger(41);
-   else if (tTrapType == NWN::StrongFrostTrap) StackPushInteger(30);
-   else if (tTrapType == NWN::DeadlyFireTrap) StackPushInteger(19);
-   else if (tTrapType == NWN::MinorTangleTrap) StackPushInteger(8);
-   else if (tTrapType == NWN::EpicSonicTrap) StackPushInteger(47);
-   else if (tTrapType == NWN::MinorSonicTrap) StackPushInteger(36);
-   else if (tTrapType == NWN::AverageGasTrap) StackPushInteger(25);
-   else if (tTrapType == NWN::StrongAcidTrap) StackPushInteger(14);
-   else if (tTrapType == NWN::DeadlySpikeTrap) StackPushInteger(3);
-   else if (tTrapType == NWN::StrongAcidSplashTrap) StackPushInteger(42);
-   else if (tTrapType == NWN::DeadlyFrostTrap) StackPushInteger(31);
-   else if (tTrapType == NWN::MinorElectricalTrap) StackPushInteger(20);
-   else if (tTrapType == NWN::AverageTangleTrap) StackPushInteger(9);
-   else if (tTrapType == NWN::AverageSonicTrap) StackPushInteger(37);
-   else if (tTrapType == NWN::StrongGasTrap) StackPushInteger(26);
-   else if (tTrapType == NWN::DeadlyAcidTrap) StackPushInteger(15);
-   else if (tTrapType == NWN::MinorHolyTrap) StackPushInteger(4);
-   else if (tTrapType == NWN::DeadlyAcidSplashTrap) StackPushInteger(43);
-   else if (tTrapType == NWN::MinorNegativeTrap) StackPushInteger(32);
-   else if (tTrapType == NWN::AverageElectricalTrap) StackPushInteger(21);
-   else if (tTrapType == NWN::StrongTangleTrap) StackPushInteger(10);
-   else { printf("Invalid enum value in createTrapAtLocation for parameter tTrapType of type TrapType passed: %d. Cannot continue, and it's your fault!\n", tTrapType); exit(1); };
+  StackPushInteger(enum_TrapType_2_long(tTrapType));
+  
 
   VM_ExecuteCommand(809, 7);
 
@@ -1367,61 +3020,11 @@ void NWScriptI::createTrapOnObject(NWN::TrapType tTrapType, const NWN::NWObject&
   callCounter += 1;
   StackPushString(sOnTrapTriggeredScript.c_str());
   StackPushString(sOnDisarmScript.c_str());
-  if (tStandardFaction == NWN::Hostile) StackPushInteger(0);
-   else if (tStandardFaction == NWN::Commoner) StackPushInteger(1);
-   else if (tStandardFaction == NWN::Merchant) StackPushInteger(2);
-   else if (tStandardFaction == NWN::Defender) StackPushInteger(3);
-   else { printf("Invalid enum value in createTrapOnObject for parameter tStandardFaction of type StandardFaction passed: %d. Cannot continue, and it's your fault!\n", tStandardFaction); exit(1); };
+  StackPushInteger(enum_StandardFaction_2_long(tStandardFaction));
+  
   StackPushObject(oObject.id);
-  if (tTrapType == NWN::StrongSonicTrap) StackPushInteger(38);
-   else if (tTrapType == NWN::DeadlyGasTrap) StackPushInteger(27);
-   else if (tTrapType == NWN::MinorFireTrap) StackPushInteger(16);
-   else if (tTrapType == NWN::AverageHolyTrap) StackPushInteger(5);
-   else if (tTrapType == NWN::EpicElectricalTrap) StackPushInteger(44);
-   else if (tTrapType == NWN::AverageNegativeTrap) StackPushInteger(33);
-   else if (tTrapType == NWN::StrongElectricalTrap) StackPushInteger(22);
-   else if (tTrapType == NWN::DeadlyTangleTrap) StackPushInteger(11);
-   else if (tTrapType == NWN::MinorSpikeTrap) StackPushInteger(0);
-   else if (tTrapType == NWN::DeadlySonicTrap) StackPushInteger(39);
-   else if (tTrapType == NWN::MinorFrostTrap) StackPushInteger(28);
-   else if (tTrapType == NWN::AverageFireTrap) StackPushInteger(17);
-   else if (tTrapType == NWN::StrongHolyTrap) StackPushInteger(6);
-   else if (tTrapType == NWN::EpicFireTrap) StackPushInteger(45);
-   else if (tTrapType == NWN::StrongNegativeTrap) StackPushInteger(34);
-   else if (tTrapType == NWN::DeadlyElectricalTrap) StackPushInteger(23);
-   else if (tTrapType == NWN::MinorAcidTrap) StackPushInteger(12);
-   else if (tTrapType == NWN::AverageSpikeTrap) StackPushInteger(1);
-   else if (tTrapType == NWN::MinorAcidSplashTrap) StackPushInteger(40);
-   else if (tTrapType == NWN::AverageFrostTrap) StackPushInteger(29);
-   else if (tTrapType == NWN::StrongFireTrap) StackPushInteger(18);
-   else if (tTrapType == NWN::DeadlyHolyTrap) StackPushInteger(7);
-   else if (tTrapType == NWN::EpicFrostTrap) StackPushInteger(46);
-   else if (tTrapType == NWN::DeadlyNegativeTrap) StackPushInteger(35);
-   else if (tTrapType == NWN::MinorGasTrap) StackPushInteger(24);
-   else if (tTrapType == NWN::AverageAcidTrap) StackPushInteger(13);
-   else if (tTrapType == NWN::StrongSpikeTrap) StackPushInteger(2);
-   else if (tTrapType == NWN::AverageAcidSplashTrap) StackPushInteger(41);
-   else if (tTrapType == NWN::StrongFrostTrap) StackPushInteger(30);
-   else if (tTrapType == NWN::DeadlyFireTrap) StackPushInteger(19);
-   else if (tTrapType == NWN::MinorTangleTrap) StackPushInteger(8);
-   else if (tTrapType == NWN::EpicSonicTrap) StackPushInteger(47);
-   else if (tTrapType == NWN::MinorSonicTrap) StackPushInteger(36);
-   else if (tTrapType == NWN::AverageGasTrap) StackPushInteger(25);
-   else if (tTrapType == NWN::StrongAcidTrap) StackPushInteger(14);
-   else if (tTrapType == NWN::DeadlySpikeTrap) StackPushInteger(3);
-   else if (tTrapType == NWN::StrongAcidSplashTrap) StackPushInteger(42);
-   else if (tTrapType == NWN::DeadlyFrostTrap) StackPushInteger(31);
-   else if (tTrapType == NWN::MinorElectricalTrap) StackPushInteger(20);
-   else if (tTrapType == NWN::AverageTangleTrap) StackPushInteger(9);
-   else if (tTrapType == NWN::AverageSonicTrap) StackPushInteger(37);
-   else if (tTrapType == NWN::StrongGasTrap) StackPushInteger(26);
-   else if (tTrapType == NWN::DeadlyAcidTrap) StackPushInteger(15);
-   else if (tTrapType == NWN::MinorHolyTrap) StackPushInteger(4);
-   else if (tTrapType == NWN::DeadlyAcidSplashTrap) StackPushInteger(43);
-   else if (tTrapType == NWN::MinorNegativeTrap) StackPushInteger(32);
-   else if (tTrapType == NWN::AverageElectricalTrap) StackPushInteger(21);
-   else if (tTrapType == NWN::StrongTangleTrap) StackPushInteger(10);
-   else { printf("Invalid enum value in createTrapOnObject for parameter tTrapType of type TrapType passed: %d. Cannot continue, and it's your fault!\n", tTrapType); exit(1); };
+  StackPushInteger(enum_TrapType_2_long(tTrapType));
+  
 
   VM_ExecuteCommand(810, 5);
 
@@ -1692,12 +3295,8 @@ void NWScriptI::doDoorAction(const NWN::NWObject& oTargetDoor, NWN::DoorAction t
   if (oTargetDoor.id < 0 || oTargetDoor.id > 0xffffffff) throw NWN::InvalidObjectException();
   lock(doDoorAction_mutex, "doDoorAction");
   callCounter += 1;
-  if (tDoorAction == NWN::OpenDoor) StackPushInteger(0);
-   else if (tDoorAction == NWN::UnlockDoor) StackPushInteger(1);
-   else if (tDoorAction == NWN::BashDoor) StackPushInteger(2);
-   else if (tDoorAction == NWN::IgnoreDoor) StackPushInteger(3);
-   else if (tDoorAction == NWN::KnockDoor) StackPushInteger(4);
-   else { printf("Invalid enum value in doDoorAction for parameter tDoorAction of type DoorAction passed: %d. Cannot continue, and it's your fault!\n", tDoorAction); exit(1); };
+  StackPushInteger(enum_DoorAction_2_long(tDoorAction));
+  
   StackPushObject(oTargetDoor.id);
 
   VM_ExecuteCommand(338, 2);
@@ -1710,11 +3309,8 @@ void NWScriptI::doPlaceableObjectAction(const NWN::NWObject& oPlaceable, NWN::Pl
   if (oPlaceable.id < 0 || oPlaceable.id > 0xffffffff) throw NWN::InvalidObjectException();
   lock(doPlaceableObjectAction_mutex, "doPlaceableObjectAction");
   callCounter += 1;
-  if (tPlaceableAction == NWN::UsePlaceable) StackPushInteger(0);
-   else if (tPlaceableAction == NWN::UnlockPlaceable) StackPushInteger(1);
-   else if (tPlaceableAction == NWN::BashPlaceable) StackPushInteger(2);
-   else if (tPlaceableAction == NWN::KnockPlaceable) StackPushInteger(4);
-   else { printf("Invalid enum value in doPlaceableObjectAction for parameter tPlaceableAction of type PlaceableAction passed: %d. Cannot continue, and it's your fault!\n", tPlaceableAction); exit(1); };
+  StackPushInteger(enum_PlaceableAction_2_long(tPlaceableAction));
+  
   StackPushObject(oPlaceable.id);
 
   VM_ExecuteCommand(547, 2);
@@ -1748,27 +3344,10 @@ unlock(doWhirlwindAttack_mutex, "doWhirlwindAttack");
 NWN::NWEffect NWScriptI::effectACDecrease(Ice::Int nValue, NWN::ACModifyType tACModifyType, NWN::DamageType tDamageType, const Ice::Current& ice) {
   lock(effectACDecrease_mutex, "effectACDecrease");
   callCounter += 1;
-  if (tDamageType == NWN::AcidDamage) StackPushInteger(16);
-   else if (tDamageType == NWN::ACVsAllDamage) StackPushInteger(4103);
-   else if (tDamageType == NWN::NegativeDamage) StackPushInteger(512);
-   else if (tDamageType == NWN::PositiveDamage) StackPushInteger(1024);
-   else if (tDamageType == NWN::BludgeoningDamage) StackPushInteger(1);
-   else if (tDamageType == NWN::ElectricalDamage) StackPushInteger(128);
-   else if (tDamageType == NWN::SonicDamage) StackPushInteger(2048);
-   else if (tDamageType == NWN::PiercingDamage) StackPushInteger(2);
-   else if (tDamageType == NWN::MagicalDamage) StackPushInteger(8);
-   else if (tDamageType == NWN::FireDamage) StackPushInteger(256);
-   else if (tDamageType == NWN::DivineDamage) StackPushInteger(64);
-   else if (tDamageType == NWN::BaseDamage) StackPushInteger(4096);
-   else if (tDamageType == NWN::SlashingDamage) StackPushInteger(4);
-   else if (tDamageType == NWN::ColdDamage) StackPushInteger(32);
-   else { printf("Invalid enum value in effectACDecrease for parameter tDamageType of type DamageType passed: %d. Cannot continue, and it's your fault!\n", tDamageType); exit(1); };
-  if (tACModifyType == NWN::ACDodgeBonus) StackPushInteger(0);
-   else if (tACModifyType == NWN::ACNaturalBonus) StackPushInteger(1);
-   else if (tACModifyType == NWN::ACArmorEnchantmentBonus) StackPushInteger(2);
-   else if (tACModifyType == NWN::ACShieldEnchantmentBonus) StackPushInteger(3);
-   else if (tACModifyType == NWN::ACDeflectionBonus) StackPushInteger(4);
-   else { printf("Invalid enum value in effectACDecrease for parameter tACModifyType of type ACModifyType passed: %d. Cannot continue, and it's your fault!\n", tACModifyType); exit(1); };
+  StackPushInteger(enum_DamageType_2_long(tDamageType));
+  
+  StackPushInteger(enum_ACModifyType_2_long(tACModifyType));
+  
   StackPushInteger(nValue);
 
   VM_ExecuteCommand(450, 3);
@@ -1785,8 +3364,8 @@ NWN::NWEffect NWScriptI::effectACDecrease(Ice::Int nValue, NWN::ACModifyType tAC
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectACDecrease_mutex, "effectACDecrease");
@@ -1796,27 +3375,10 @@ NWN::NWEffect NWScriptI::effectACDecrease(Ice::Int nValue, NWN::ACModifyType tAC
 NWN::NWEffect NWScriptI::effectACIncrease(Ice::Int nValue, NWN::ACModifyType tACModifyType, NWN::DamageType tDamageType, const Ice::Current& ice) {
   lock(effectACIncrease_mutex, "effectACIncrease");
   callCounter += 1;
-  if (tDamageType == NWN::AcidDamage) StackPushInteger(16);
-   else if (tDamageType == NWN::ACVsAllDamage) StackPushInteger(4103);
-   else if (tDamageType == NWN::NegativeDamage) StackPushInteger(512);
-   else if (tDamageType == NWN::PositiveDamage) StackPushInteger(1024);
-   else if (tDamageType == NWN::BludgeoningDamage) StackPushInteger(1);
-   else if (tDamageType == NWN::ElectricalDamage) StackPushInteger(128);
-   else if (tDamageType == NWN::SonicDamage) StackPushInteger(2048);
-   else if (tDamageType == NWN::PiercingDamage) StackPushInteger(2);
-   else if (tDamageType == NWN::MagicalDamage) StackPushInteger(8);
-   else if (tDamageType == NWN::FireDamage) StackPushInteger(256);
-   else if (tDamageType == NWN::DivineDamage) StackPushInteger(64);
-   else if (tDamageType == NWN::BaseDamage) StackPushInteger(4096);
-   else if (tDamageType == NWN::SlashingDamage) StackPushInteger(4);
-   else if (tDamageType == NWN::ColdDamage) StackPushInteger(32);
-   else { printf("Invalid enum value in effectACIncrease for parameter tDamageType of type DamageType passed: %d. Cannot continue, and it's your fault!\n", tDamageType); exit(1); };
-  if (tACModifyType == NWN::ACDodgeBonus) StackPushInteger(0);
-   else if (tACModifyType == NWN::ACNaturalBonus) StackPushInteger(1);
-   else if (tACModifyType == NWN::ACArmorEnchantmentBonus) StackPushInteger(2);
-   else if (tACModifyType == NWN::ACShieldEnchantmentBonus) StackPushInteger(3);
-   else if (tACModifyType == NWN::ACDeflectionBonus) StackPushInteger(4);
-   else { printf("Invalid enum value in effectACIncrease for parameter tACModifyType of type ACModifyType passed: %d. Cannot continue, and it's your fault!\n", tACModifyType); exit(1); };
+  StackPushInteger(enum_DamageType_2_long(tDamageType));
+  
+  StackPushInteger(enum_ACModifyType_2_long(tACModifyType));
+  
   StackPushInteger(nValue);
 
   VM_ExecuteCommand(115, 3);
@@ -1833,8 +3395,8 @@ NWN::NWEffect NWScriptI::effectACIncrease(Ice::Int nValue, NWN::ACModifyType tAC
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectACIncrease_mutex, "effectACIncrease");
@@ -1845,13 +3407,8 @@ NWN::NWEffect NWScriptI::effectAbilityDecrease(NWN::Ability tAbility, Ice::Int n
   lock(effectAbilityDecrease_mutex, "effectAbilityDecrease");
   callCounter += 1;
   StackPushInteger(nModifyBy);
-  if (tAbility == NWN::Charisma) StackPushInteger(5);
-   else if (tAbility == NWN::Strength) StackPushInteger(0);
-   else if (tAbility == NWN::Dexterity) StackPushInteger(1);
-   else if (tAbility == NWN::Constitution) StackPushInteger(2);
-   else if (tAbility == NWN::Intelligence) StackPushInteger(3);
-   else if (tAbility == NWN::Wisdom) StackPushInteger(4);
-   else { printf("Invalid enum value in effectAbilityDecrease for parameter tAbility of type Ability passed: %d. Cannot continue, and it's your fault!\n", tAbility); exit(1); };
+  StackPushInteger(enum_Ability_2_long(tAbility));
+  
 
   VM_ExecuteCommand(446, 2);
 
@@ -1867,8 +3424,8 @@ NWN::NWEffect NWScriptI::effectAbilityDecrease(NWN::Ability tAbility, Ice::Int n
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectAbilityDecrease_mutex, "effectAbilityDecrease");
@@ -1879,13 +3436,8 @@ NWN::NWEffect NWScriptI::effectAbilityIncrease(NWN::Ability tAbility, Ice::Int n
   lock(effectAbilityIncrease_mutex, "effectAbilityIncrease");
   callCounter += 1;
   StackPushInteger(nModifyBy);
-  if (tAbility == NWN::Charisma) StackPushInteger(5);
-   else if (tAbility == NWN::Strength) StackPushInteger(0);
-   else if (tAbility == NWN::Dexterity) StackPushInteger(1);
-   else if (tAbility == NWN::Constitution) StackPushInteger(2);
-   else if (tAbility == NWN::Intelligence) StackPushInteger(3);
-   else if (tAbility == NWN::Wisdom) StackPushInteger(4);
-   else { printf("Invalid enum value in effectAbilityIncrease for parameter tAbility of type Ability passed: %d. Cannot continue, and it's your fault!\n", tAbility); exit(1); };
+  StackPushInteger(enum_Ability_2_long(tAbility));
+  
 
   VM_ExecuteCommand(80, 2);
 
@@ -1901,8 +3453,8 @@ NWN::NWEffect NWScriptI::effectAbilityIncrease(NWN::Ability tAbility, Ice::Int n
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectAbilityIncrease_mutex, "effectAbilityIncrease");
@@ -1928,8 +3480,8 @@ NWN::NWEffect NWScriptI::effectAppear(Ice::Int nAnimation, const Ice::Current& i
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectAppear_mutex, "effectAppear");
@@ -1958,8 +3510,8 @@ NWN::NWEffect NWScriptI::effectAreaOfEffect(Ice::Int nAreaEffectId, const std::s
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectAreaOfEffect_mutex, "effectAreaOfEffect");
@@ -1969,10 +3521,8 @@ NWN::NWEffect NWScriptI::effectAreaOfEffect(Ice::Int nAreaEffectId, const std::s
 NWN::NWEffect NWScriptI::effectAttackDecrease(Ice::Int nPenalty, NWN::AttackBonus tAttackBonus, const Ice::Current& ice) {
   lock(effectAttackDecrease_mutex, "effectAttackDecrease");
   callCounter += 1;
-  if (tAttackBonus == NWN::MiscBonus) StackPushInteger(0);
-   else if (tAttackBonus == NWN::OnhandBonus) StackPushInteger(1);
-   else if (tAttackBonus == NWN::OffhandBonus) StackPushInteger(2);
-   else { printf("Invalid enum value in effectAttackDecrease for parameter tAttackBonus of type AttackBonus passed: %d. Cannot continue, and it's your fault!\n", tAttackBonus); exit(1); };
+  StackPushInteger(enum_AttackBonus_2_long(tAttackBonus));
+  
   StackPushInteger(nPenalty);
 
   VM_ExecuteCommand(447, 2);
@@ -1989,8 +3539,8 @@ NWN::NWEffect NWScriptI::effectAttackDecrease(Ice::Int nPenalty, NWN::AttackBonu
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectAttackDecrease_mutex, "effectAttackDecrease");
@@ -2000,10 +3550,8 @@ NWN::NWEffect NWScriptI::effectAttackDecrease(Ice::Int nPenalty, NWN::AttackBonu
 NWN::NWEffect NWScriptI::effectAttackIncrease(Ice::Int nBonus, NWN::AttackBonus tAttackBonus, const Ice::Current& ice) {
   lock(effectAttackIncrease_mutex, "effectAttackIncrease");
   callCounter += 1;
-  if (tAttackBonus == NWN::MiscBonus) StackPushInteger(0);
-   else if (tAttackBonus == NWN::OnhandBonus) StackPushInteger(1);
-   else if (tAttackBonus == NWN::OffhandBonus) StackPushInteger(2);
-   else { printf("Invalid enum value in effectAttackIncrease for parameter tAttackBonus of type AttackBonus passed: %d. Cannot continue, and it's your fault!\n", tAttackBonus); exit(1); };
+  StackPushInteger(enum_AttackBonus_2_long(tAttackBonus));
+  
   StackPushInteger(nBonus);
 
   VM_ExecuteCommand(118, 2);
@@ -2020,8 +3568,8 @@ NWN::NWEffect NWScriptI::effectAttackIncrease(Ice::Int nBonus, NWN::AttackBonus 
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectAttackIncrease_mutex, "effectAttackIncrease");
@@ -2033,26 +3581,8 @@ NWN::NWEffect NWScriptI::effectBeam(Ice::Int nBeamVisualEffect, const NWN::NWObj
   lock(effectBeam_mutex, "effectBeam");
   callCounter += 1;
   StackPushInteger(bMissEffect == true ? 1 : 0);
-  if (tCreaturePart == NWN::RightHandPart) StackPushInteger(16);
-   else if (tCreaturePart == NWN::RightThighPart) StackPushInteger(5);
-   else if (tCreaturePart == NWN::LeftForearmPart) StackPushInteger(11);
-   else if (tCreaturePart == NWN::RightFootPart) StackPushInteger(0);
-   else if (tCreaturePart == NWN::LeftHandPart) StackPushInteger(17);
-   else if (tCreaturePart == NWN::PelvisPart) StackPushInteger(6);
-   else if (tCreaturePart == NWN::RightBicepPart) StackPushInteger(12);
-   else if (tCreaturePart == NWN::LeftFootPart) StackPushInteger(1);
-   else if (tCreaturePart == NWN::TorsoPart) StackPushInteger(7);
-   else if (tCreaturePart == NWN::LeftBicepPart) StackPushInteger(13);
-   else if (tCreaturePart == NWN::RightShinPart) StackPushInteger(2);
-   else if (tCreaturePart == NWN::BeltPart) StackPushInteger(8);
-   else if (tCreaturePart == NWN::RightShoulderPart) StackPushInteger(14);
-   else if (tCreaturePart == NWN::LeftShinPart) StackPushInteger(3);
-   else if (tCreaturePart == NWN::HeadPart) StackPushInteger(20);
-   else if (tCreaturePart == NWN::NeckPart) StackPushInteger(9);
-   else if (tCreaturePart == NWN::LeftShoulderPart) StackPushInteger(15);
-   else if (tCreaturePart == NWN::LeftThighPart) StackPushInteger(4);
-   else if (tCreaturePart == NWN::RightForearmPart) StackPushInteger(10);
-   else { printf("Invalid enum value in effectBeam for parameter tCreaturePart of type CreaturePart passed: %d. Cannot continue, and it's your fault!\n", tCreaturePart); exit(1); };
+  StackPushInteger(enum_CreaturePart_2_long(tCreaturePart));
+  
   StackPushObject(oEffector.id);
   StackPushInteger(nBeamVisualEffect);
 
@@ -2070,8 +3600,8 @@ NWN::NWEffect NWScriptI::effectBeam(Ice::Int nBeamVisualEffect, const NWN::NWObj
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectBeam_mutex, "effectBeam");
@@ -2096,8 +3626,8 @@ NWN::NWEffect NWScriptI::effectBlindness(const Ice::Current& ice) {
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectBlindness_mutex, "effectBlindness");
@@ -2122,8 +3652,8 @@ NWN::NWEffect NWScriptI::effectCharmed(const Ice::Current& ice) {
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectCharmed_mutex, "effectCharmed");
@@ -2133,10 +3663,8 @@ NWN::NWEffect NWScriptI::effectCharmed(const Ice::Current& ice) {
 NWN::NWEffect NWScriptI::effectConcealment(Ice::Int nPercentage, NWN::MissChanceType tMissChanceType, const Ice::Current& ice) {
   lock(effectConcealment_mutex, "effectConcealment");
   callCounter += 1;
-  if (tMissChanceType == NWN::MissChanceVSAll) StackPushInteger(0);
-   else if (tMissChanceType == NWN::MissChanceVSRanged) StackPushInteger(1);
-   else if (tMissChanceType == NWN::MissChanceVSMelee) StackPushInteger(2);
-   else { printf("Invalid enum value in effectConcealment for parameter tMissChanceType of type MissChanceType passed: %d. Cannot continue, and it's your fault!\n", tMissChanceType); exit(1); };
+  StackPushInteger(enum_MissChanceType_2_long(tMissChanceType));
+  
   StackPushInteger(nPercentage);
 
   VM_ExecuteCommand(458, 2);
@@ -2153,8 +3681,8 @@ NWN::NWEffect NWScriptI::effectConcealment(Ice::Int nPercentage, NWN::MissChance
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectConcealment_mutex, "effectConcealment");
@@ -2179,8 +3707,8 @@ NWN::NWEffect NWScriptI::effectConfused(const Ice::Current& ice) {
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectConfused_mutex, "effectConfused");
@@ -2211,8 +3739,8 @@ NWN::NWEffect NWScriptI::effectCurse(Ice::Int nStrMod, Ice::Int nDexMod, Ice::In
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectCurse_mutex, "effectCurse");
@@ -2237,8 +3765,8 @@ NWN::NWEffect NWScriptI::effectCutsceneDominated(const Ice::Current& ice) {
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectCutsceneDominated_mutex, "effectCutsceneDominated");
@@ -2263,8 +3791,8 @@ NWN::NWEffect NWScriptI::effectCutsceneGhost(const Ice::Current& ice) {
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectCutsceneGhost_mutex, "effectCutsceneGhost");
@@ -2289,8 +3817,8 @@ NWN::NWEffect NWScriptI::effectCutsceneImmobilize(const Ice::Current& ice) {
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectCutsceneImmobilize_mutex, "effectCutsceneImmobilize");
@@ -2315,8 +3843,8 @@ NWN::NWEffect NWScriptI::effectCutsceneParalyze(const Ice::Current& ice) {
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectCutsceneParalyze_mutex, "effectCutsceneParalyze");
@@ -2326,44 +3854,10 @@ NWN::NWEffect NWScriptI::effectCutsceneParalyze(const Ice::Current& ice) {
 NWN::NWEffect NWScriptI::effectDamage(Ice::Int nDamageAmount, NWN::DamageType tDamageType, NWN::DamagePower tDamagePower, const Ice::Current& ice) {
   lock(effectDamage_mutex, "effectDamage");
   callCounter += 1;
-  if (tDamagePower == NWN::PlusFifteenDamage) StackPushInteger(16);
-   else if (tDamagePower == NWN::PlusFiveDamage) StackPushInteger(5);
-   else if (tDamagePower == NWN::PlusTenDamage) StackPushInteger(11);
-   else if (tDamagePower == NWN::NormalDamage) StackPushInteger(0);
-   else if (tDamagePower == NWN::PlusSixteenDamage) StackPushInteger(17);
-   else if (tDamagePower == NWN::EnergyDamage) StackPushInteger(6);
-   else if (tDamagePower == NWN::PlusElevenDamage) StackPushInteger(12);
-   else if (tDamagePower == NWN::PlusOneDamage) StackPushInteger(1);
-   else if (tDamagePower == NWN::PlusSeventeenDamage) StackPushInteger(18);
-   else if (tDamagePower == NWN::PlusSixDamage) StackPushInteger(7);
-   else if (tDamagePower == NWN::PlusTwelveDamage) StackPushInteger(13);
-   else if (tDamagePower == NWN::PlusTwoDamage) StackPushInteger(2);
-   else if (tDamagePower == NWN::PlusEighteenDamage) StackPushInteger(19);
-   else if (tDamagePower == NWN::PlusSevenDamage) StackPushInteger(8);
-   else if (tDamagePower == NWN::PlusThirteenDamage) StackPushInteger(14);
-   else if (tDamagePower == NWN::PlusThreeDamage) StackPushInteger(3);
-   else if (tDamagePower == NWN::PlusNinteenDamage) StackPushInteger(20);
-   else if (tDamagePower == NWN::PlusEightDamage) StackPushInteger(9);
-   else if (tDamagePower == NWN::PlusFourteenDamage) StackPushInteger(15);
-   else if (tDamagePower == NWN::PlusFourDamage) StackPushInteger(4);
-   else if (tDamagePower == NWN::PlusTwentyDamage) StackPushInteger(21);
-   else if (tDamagePower == NWN::PlusNineDamage) StackPushInteger(10);
-   else { printf("Invalid enum value in effectDamage for parameter tDamagePower of type DamagePower passed: %d. Cannot continue, and it's your fault!\n", tDamagePower); exit(1); };
-  if (tDamageType == NWN::AcidDamage) StackPushInteger(16);
-   else if (tDamageType == NWN::ACVsAllDamage) StackPushInteger(4103);
-   else if (tDamageType == NWN::NegativeDamage) StackPushInteger(512);
-   else if (tDamageType == NWN::PositiveDamage) StackPushInteger(1024);
-   else if (tDamageType == NWN::BludgeoningDamage) StackPushInteger(1);
-   else if (tDamageType == NWN::ElectricalDamage) StackPushInteger(128);
-   else if (tDamageType == NWN::SonicDamage) StackPushInteger(2048);
-   else if (tDamageType == NWN::PiercingDamage) StackPushInteger(2);
-   else if (tDamageType == NWN::MagicalDamage) StackPushInteger(8);
-   else if (tDamageType == NWN::FireDamage) StackPushInteger(256);
-   else if (tDamageType == NWN::DivineDamage) StackPushInteger(64);
-   else if (tDamageType == NWN::BaseDamage) StackPushInteger(4096);
-   else if (tDamageType == NWN::SlashingDamage) StackPushInteger(4);
-   else if (tDamageType == NWN::ColdDamage) StackPushInteger(32);
-   else { printf("Invalid enum value in effectDamage for parameter tDamageType of type DamageType passed: %d. Cannot continue, and it's your fault!\n", tDamageType); exit(1); };
+  StackPushInteger(enum_DamagePower_2_long(tDamagePower));
+  
+  StackPushInteger(enum_DamageType_2_long(tDamageType));
+  
   StackPushInteger(nDamageAmount);
 
   VM_ExecuteCommand(79, 3);
@@ -2380,8 +3874,8 @@ NWN::NWEffect NWScriptI::effectDamage(Ice::Int nDamageAmount, NWN::DamageType tD
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectDamage_mutex, "effectDamage");
@@ -2391,21 +3885,8 @@ NWN::NWEffect NWScriptI::effectDamage(Ice::Int nDamageAmount, NWN::DamageType tD
 NWN::NWEffect NWScriptI::effectDamageDecrease(Ice::Int nPenalty, NWN::DamageType tDamageType, const Ice::Current& ice) {
   lock(effectDamageDecrease_mutex, "effectDamageDecrease");
   callCounter += 1;
-  if (tDamageType == NWN::AcidDamage) StackPushInteger(16);
-   else if (tDamageType == NWN::ACVsAllDamage) StackPushInteger(4103);
-   else if (tDamageType == NWN::NegativeDamage) StackPushInteger(512);
-   else if (tDamageType == NWN::PositiveDamage) StackPushInteger(1024);
-   else if (tDamageType == NWN::BludgeoningDamage) StackPushInteger(1);
-   else if (tDamageType == NWN::ElectricalDamage) StackPushInteger(128);
-   else if (tDamageType == NWN::SonicDamage) StackPushInteger(2048);
-   else if (tDamageType == NWN::PiercingDamage) StackPushInteger(2);
-   else if (tDamageType == NWN::MagicalDamage) StackPushInteger(8);
-   else if (tDamageType == NWN::FireDamage) StackPushInteger(256);
-   else if (tDamageType == NWN::DivineDamage) StackPushInteger(64);
-   else if (tDamageType == NWN::BaseDamage) StackPushInteger(4096);
-   else if (tDamageType == NWN::SlashingDamage) StackPushInteger(4);
-   else if (tDamageType == NWN::ColdDamage) StackPushInteger(32);
-   else { printf("Invalid enum value in effectDamageDecrease for parameter tDamageType of type DamageType passed: %d. Cannot continue, and it's your fault!\n", tDamageType); exit(1); };
+  StackPushInteger(enum_DamageType_2_long(tDamageType));
+  
   StackPushInteger(nPenalty);
 
   VM_ExecuteCommand(448, 2);
@@ -2422,8 +3903,8 @@ NWN::NWEffect NWScriptI::effectDamageDecrease(Ice::Int nPenalty, NWN::DamageType
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectDamageDecrease_mutex, "effectDamageDecrease");
@@ -2434,21 +3915,8 @@ NWN::NWEffect NWScriptI::effectDamageImmunityDecrease(NWN::DamageType tDamageTyp
   lock(effectDamageImmunityDecrease_mutex, "effectDamageImmunityDecrease");
   callCounter += 1;
   StackPushInteger(nPercentImmunity);
-  if (tDamageType == NWN::AcidDamage) StackPushInteger(16);
-   else if (tDamageType == NWN::ACVsAllDamage) StackPushInteger(4103);
-   else if (tDamageType == NWN::NegativeDamage) StackPushInteger(512);
-   else if (tDamageType == NWN::PositiveDamage) StackPushInteger(1024);
-   else if (tDamageType == NWN::BludgeoningDamage) StackPushInteger(1);
-   else if (tDamageType == NWN::ElectricalDamage) StackPushInteger(128);
-   else if (tDamageType == NWN::SonicDamage) StackPushInteger(2048);
-   else if (tDamageType == NWN::PiercingDamage) StackPushInteger(2);
-   else if (tDamageType == NWN::MagicalDamage) StackPushInteger(8);
-   else if (tDamageType == NWN::FireDamage) StackPushInteger(256);
-   else if (tDamageType == NWN::DivineDamage) StackPushInteger(64);
-   else if (tDamageType == NWN::BaseDamage) StackPushInteger(4096);
-   else if (tDamageType == NWN::SlashingDamage) StackPushInteger(4);
-   else if (tDamageType == NWN::ColdDamage) StackPushInteger(32);
-   else { printf("Invalid enum value in effectDamageImmunityDecrease for parameter tDamageType of type DamageType passed: %d. Cannot continue, and it's your fault!\n", tDamageType); exit(1); };
+  StackPushInteger(enum_DamageType_2_long(tDamageType));
+  
 
   VM_ExecuteCommand(449, 2);
 
@@ -2464,8 +3932,8 @@ NWN::NWEffect NWScriptI::effectDamageImmunityDecrease(NWN::DamageType tDamageTyp
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectDamageImmunityDecrease_mutex, "effectDamageImmunityDecrease");
@@ -2476,21 +3944,8 @@ NWN::NWEffect NWScriptI::effectDamageImmunityIncrease(NWN::DamageType tDamageTyp
   lock(effectDamageImmunityIncrease_mutex, "effectDamageImmunityIncrease");
   callCounter += 1;
   StackPushInteger(nPercentImmunity);
-  if (tDamageType == NWN::AcidDamage) StackPushInteger(16);
-   else if (tDamageType == NWN::ACVsAllDamage) StackPushInteger(4103);
-   else if (tDamageType == NWN::NegativeDamage) StackPushInteger(512);
-   else if (tDamageType == NWN::PositiveDamage) StackPushInteger(1024);
-   else if (tDamageType == NWN::BludgeoningDamage) StackPushInteger(1);
-   else if (tDamageType == NWN::ElectricalDamage) StackPushInteger(128);
-   else if (tDamageType == NWN::SonicDamage) StackPushInteger(2048);
-   else if (tDamageType == NWN::PiercingDamage) StackPushInteger(2);
-   else if (tDamageType == NWN::MagicalDamage) StackPushInteger(8);
-   else if (tDamageType == NWN::FireDamage) StackPushInteger(256);
-   else if (tDamageType == NWN::DivineDamage) StackPushInteger(64);
-   else if (tDamageType == NWN::BaseDamage) StackPushInteger(4096);
-   else if (tDamageType == NWN::SlashingDamage) StackPushInteger(4);
-   else if (tDamageType == NWN::ColdDamage) StackPushInteger(32);
-   else { printf("Invalid enum value in effectDamageImmunityIncrease for parameter tDamageType of type DamageType passed: %d. Cannot continue, and it's your fault!\n", tDamageType); exit(1); };
+  StackPushInteger(enum_DamageType_2_long(tDamageType));
+  
 
   VM_ExecuteCommand(275, 2);
 
@@ -2506,8 +3961,8 @@ NWN::NWEffect NWScriptI::effectDamageImmunityIncrease(NWN::DamageType tDamageTyp
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectDamageImmunityIncrease_mutex, "effectDamageImmunityIncrease");
@@ -2517,21 +3972,8 @@ NWN::NWEffect NWScriptI::effectDamageImmunityIncrease(NWN::DamageType tDamageTyp
 NWN::NWEffect NWScriptI::effectDamageIncrease(Ice::Int nBonus, NWN::DamageType tDamageType, const Ice::Current& ice) {
   lock(effectDamageIncrease_mutex, "effectDamageIncrease");
   callCounter += 1;
-  if (tDamageType == NWN::AcidDamage) StackPushInteger(16);
-   else if (tDamageType == NWN::ACVsAllDamage) StackPushInteger(4103);
-   else if (tDamageType == NWN::NegativeDamage) StackPushInteger(512);
-   else if (tDamageType == NWN::PositiveDamage) StackPushInteger(1024);
-   else if (tDamageType == NWN::BludgeoningDamage) StackPushInteger(1);
-   else if (tDamageType == NWN::ElectricalDamage) StackPushInteger(128);
-   else if (tDamageType == NWN::SonicDamage) StackPushInteger(2048);
-   else if (tDamageType == NWN::PiercingDamage) StackPushInteger(2);
-   else if (tDamageType == NWN::MagicalDamage) StackPushInteger(8);
-   else if (tDamageType == NWN::FireDamage) StackPushInteger(256);
-   else if (tDamageType == NWN::DivineDamage) StackPushInteger(64);
-   else if (tDamageType == NWN::BaseDamage) StackPushInteger(4096);
-   else if (tDamageType == NWN::SlashingDamage) StackPushInteger(4);
-   else if (tDamageType == NWN::ColdDamage) StackPushInteger(32);
-   else { printf("Invalid enum value in effectDamageIncrease for parameter tDamageType of type DamageType passed: %d. Cannot continue, and it's your fault!\n", tDamageType); exit(1); };
+  StackPushInteger(enum_DamageType_2_long(tDamageType));
+  
   StackPushInteger(nBonus);
 
   VM_ExecuteCommand(120, 2);
@@ -2548,8 +3990,8 @@ NWN::NWEffect NWScriptI::effectDamageIncrease(Ice::Int nBonus, NWN::DamageType t
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectDamageIncrease_mutex, "effectDamageIncrease");
@@ -2560,29 +4002,8 @@ NWN::NWEffect NWScriptI::effectDamageReduction(Ice::Int nAmount, NWN::DamagePowe
   lock(effectDamageReduction_mutex, "effectDamageReduction");
   callCounter += 1;
   StackPushInteger(nLimit);
-  if (tDamagePower == NWN::PlusFifteenDamage) StackPushInteger(16);
-   else if (tDamagePower == NWN::PlusFiveDamage) StackPushInteger(5);
-   else if (tDamagePower == NWN::PlusTenDamage) StackPushInteger(11);
-   else if (tDamagePower == NWN::NormalDamage) StackPushInteger(0);
-   else if (tDamagePower == NWN::PlusSixteenDamage) StackPushInteger(17);
-   else if (tDamagePower == NWN::EnergyDamage) StackPushInteger(6);
-   else if (tDamagePower == NWN::PlusElevenDamage) StackPushInteger(12);
-   else if (tDamagePower == NWN::PlusOneDamage) StackPushInteger(1);
-   else if (tDamagePower == NWN::PlusSeventeenDamage) StackPushInteger(18);
-   else if (tDamagePower == NWN::PlusSixDamage) StackPushInteger(7);
-   else if (tDamagePower == NWN::PlusTwelveDamage) StackPushInteger(13);
-   else if (tDamagePower == NWN::PlusTwoDamage) StackPushInteger(2);
-   else if (tDamagePower == NWN::PlusEighteenDamage) StackPushInteger(19);
-   else if (tDamagePower == NWN::PlusSevenDamage) StackPushInteger(8);
-   else if (tDamagePower == NWN::PlusThirteenDamage) StackPushInteger(14);
-   else if (tDamagePower == NWN::PlusThreeDamage) StackPushInteger(3);
-   else if (tDamagePower == NWN::PlusNinteenDamage) StackPushInteger(20);
-   else if (tDamagePower == NWN::PlusEightDamage) StackPushInteger(9);
-   else if (tDamagePower == NWN::PlusFourteenDamage) StackPushInteger(15);
-   else if (tDamagePower == NWN::PlusFourDamage) StackPushInteger(4);
-   else if (tDamagePower == NWN::PlusTwentyDamage) StackPushInteger(21);
-   else if (tDamagePower == NWN::PlusNineDamage) StackPushInteger(10);
-   else { printf("Invalid enum value in effectDamageReduction for parameter tDamagePower of type DamagePower passed: %d. Cannot continue, and it's your fault!\n", tDamagePower); exit(1); };
+  StackPushInteger(enum_DamagePower_2_long(tDamagePower));
+  
   StackPushInteger(nAmount);
 
   VM_ExecuteCommand(119, 3);
@@ -2599,8 +4020,8 @@ NWN::NWEffect NWScriptI::effectDamageReduction(Ice::Int nAmount, NWN::DamagePowe
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectDamageReduction_mutex, "effectDamageReduction");
@@ -2612,21 +4033,8 @@ NWN::NWEffect NWScriptI::effectDamageResistance(NWN::DamageType tDamageType, Ice
   callCounter += 1;
   StackPushInteger(nLimit);
   StackPushInteger(nAmount);
-  if (tDamageType == NWN::AcidDamage) StackPushInteger(16);
-   else if (tDamageType == NWN::ACVsAllDamage) StackPushInteger(4103);
-   else if (tDamageType == NWN::NegativeDamage) StackPushInteger(512);
-   else if (tDamageType == NWN::PositiveDamage) StackPushInteger(1024);
-   else if (tDamageType == NWN::BludgeoningDamage) StackPushInteger(1);
-   else if (tDamageType == NWN::ElectricalDamage) StackPushInteger(128);
-   else if (tDamageType == NWN::SonicDamage) StackPushInteger(2048);
-   else if (tDamageType == NWN::PiercingDamage) StackPushInteger(2);
-   else if (tDamageType == NWN::MagicalDamage) StackPushInteger(8);
-   else if (tDamageType == NWN::FireDamage) StackPushInteger(256);
-   else if (tDamageType == NWN::DivineDamage) StackPushInteger(64);
-   else if (tDamageType == NWN::BaseDamage) StackPushInteger(4096);
-   else if (tDamageType == NWN::SlashingDamage) StackPushInteger(4);
-   else if (tDamageType == NWN::ColdDamage) StackPushInteger(32);
-   else { printf("Invalid enum value in effectDamageResistance for parameter tDamageType of type DamageType passed: %d. Cannot continue, and it's your fault!\n", tDamageType); exit(1); };
+  StackPushInteger(enum_DamageType_2_long(tDamageType));
+  
 
   VM_ExecuteCommand(81, 3);
 
@@ -2642,8 +4050,8 @@ NWN::NWEffect NWScriptI::effectDamageResistance(NWN::DamageType tDamageType, Ice
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectDamageResistance_mutex, "effectDamageResistance");
@@ -2653,21 +4061,8 @@ NWN::NWEffect NWScriptI::effectDamageResistance(NWN::DamageType tDamageType, Ice
 NWN::NWEffect NWScriptI::effectDamageShield(Ice::Int nDamageAmount, Ice::Int nRandomAmount, NWN::DamageType tDamageType, const Ice::Current& ice) {
   lock(effectDamageShield_mutex, "effectDamageShield");
   callCounter += 1;
-  if (tDamageType == NWN::AcidDamage) StackPushInteger(16);
-   else if (tDamageType == NWN::ACVsAllDamage) StackPushInteger(4103);
-   else if (tDamageType == NWN::NegativeDamage) StackPushInteger(512);
-   else if (tDamageType == NWN::PositiveDamage) StackPushInteger(1024);
-   else if (tDamageType == NWN::BludgeoningDamage) StackPushInteger(1);
-   else if (tDamageType == NWN::ElectricalDamage) StackPushInteger(128);
-   else if (tDamageType == NWN::SonicDamage) StackPushInteger(2048);
-   else if (tDamageType == NWN::PiercingDamage) StackPushInteger(2);
-   else if (tDamageType == NWN::MagicalDamage) StackPushInteger(8);
-   else if (tDamageType == NWN::FireDamage) StackPushInteger(256);
-   else if (tDamageType == NWN::DivineDamage) StackPushInteger(64);
-   else if (tDamageType == NWN::BaseDamage) StackPushInteger(4096);
-   else if (tDamageType == NWN::SlashingDamage) StackPushInteger(4);
-   else if (tDamageType == NWN::ColdDamage) StackPushInteger(32);
-   else { printf("Invalid enum value in effectDamageShield for parameter tDamageType of type DamageType passed: %d. Cannot continue, and it's your fault!\n", tDamageType); exit(1); };
+  StackPushInteger(enum_DamageType_2_long(tDamageType));
+  
   StackPushInteger(nRandomAmount);
   StackPushInteger(nDamageAmount);
 
@@ -2685,8 +4080,8 @@ NWN::NWEffect NWScriptI::effectDamageShield(Ice::Int nDamageAmount, Ice::Int nRa
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectDamageShield_mutex, "effectDamageShield");
@@ -2711,8 +4106,8 @@ NWN::NWEffect NWScriptI::effectDarkness(const Ice::Current& ice) {
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectDarkness_mutex, "effectDarkness");
@@ -2737,8 +4132,8 @@ NWN::NWEffect NWScriptI::effectDazed(const Ice::Current& ice) {
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectDazed_mutex, "effectDazed");
@@ -2763,8 +4158,8 @@ NWN::NWEffect NWScriptI::effectDeaf(const Ice::Current& ice) {
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectDeaf_mutex, "effectDeaf");
@@ -2791,8 +4186,8 @@ NWN::NWEffect NWScriptI::effectDeath(bool bSpectacularDeath, bool bDisplayFeedba
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectDeath_mutex, "effectDeath");
@@ -2818,8 +4213,8 @@ NWN::NWEffect NWScriptI::effectDisappear(Ice::Int nAnimation, const Ice::Current
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectDisappear_mutex, "effectDisappear");
@@ -2855,8 +4250,8 @@ NWN::NWEffect NWScriptI::effectDisappearAppear(const NWN::NWLocation& lLocation,
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectDisappearAppear_mutex, "effectDisappearAppear");
@@ -2882,8 +4277,8 @@ NWN::NWEffect NWScriptI::effectDisease(Ice::Int nDiseaseType, const Ice::Current
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectDisease_mutex, "effectDisease");
@@ -2909,8 +4304,8 @@ NWN::NWEffect NWScriptI::effectDispelMagicAll(Ice::Int nCasterLevel, const Ice::
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectDispelMagicAll_mutex, "effectDispelMagicAll");
@@ -2936,8 +4331,8 @@ NWN::NWEffect NWScriptI::effectDispelMagicBest(Ice::Int nCasterLevel, const Ice:
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectDispelMagicBest_mutex, "effectDispelMagicBest");
@@ -2962,8 +4357,8 @@ NWN::NWEffect NWScriptI::effectDominated(const Ice::Current& ice) {
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectDominated_mutex, "effectDominated");
@@ -2988,8 +4383,8 @@ NWN::NWEffect NWScriptI::effectEntangle(const Ice::Current& ice) {
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectEntangle_mutex, "effectEntangle");
@@ -3014,8 +4409,8 @@ NWN::NWEffect NWScriptI::effectEthereal(const Ice::Current& ice) {
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectEthereal_mutex, "effectEthereal");
@@ -3040,8 +4435,8 @@ NWN::NWEffect NWScriptI::effectFrightened(const Ice::Current& ice) {
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectFrightened_mutex, "effectFrightened");
@@ -3066,8 +4461,8 @@ NWN::NWEffect NWScriptI::effectHaste(const Ice::Current& ice) {
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectHaste_mutex, "effectHaste");
@@ -3093,8 +4488,8 @@ NWN::NWEffect NWScriptI::effectHeal(Ice::Int nDamageToHeal, const Ice::Current& 
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectHeal_mutex, "effectHeal");
@@ -3120,8 +4515,8 @@ NWN::NWEffect NWScriptI::effectHitPointChangeWhenDying(Ice::Double fHitPointChan
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectHitPointChangeWhenDying_mutex, "effectHitPointChangeWhenDying");
@@ -3131,40 +4526,8 @@ NWN::NWEffect NWScriptI::effectHitPointChangeWhenDying(Ice::Double fHitPointChan
 NWN::NWEffect NWScriptI::effectImmunity(NWN::ImmunityType tImmunityType, const Ice::Current& ice) {
   lock(effectImmunity_mutex, "effectImmunity");
   callCounter += 1;
-  if (tImmunityType == NWN::SkillDecreaseImmunity) StackPushInteger(27);
-   else if (tImmunityType == NWN::ConfusedImmunity) StackPushInteger(16);
-   else if (tImmunityType == NWN::TrapImmunity) StackPushInteger(5);
-   else if (tImmunityType == NWN::DamageImmunityDecreaseImmunity) StackPushInteger(22);
-   else if (tImmunityType == NWN::SilenceImmunity) StackPushInteger(11);
-   else if (tImmunityType == NWN::NoneImmunity) StackPushInteger(0);
-   else if (tImmunityType == NWN::KnockdownImmunity) StackPushInteger(28);
-   else if (tImmunityType == NWN::CursedImmunity) StackPushInteger(17);
-   else if (tImmunityType == NWN::ParalysisImmunity) StackPushInteger(6);
-   else if (tImmunityType == NWN::AcDecreaseImmunity) StackPushInteger(23);
-   else if (tImmunityType == NWN::StunImmunity) StackPushInteger(12);
-   else if (tImmunityType == NWN::MindSpellsImmunity) StackPushInteger(1);
-   else if (tImmunityType == NWN::NegativeLevelImmunity) StackPushInteger(29);
-   else if (tImmunityType == NWN::DazedImmunity) StackPushInteger(18);
-   else if (tImmunityType == NWN::BlindnessImmunity) StackPushInteger(7);
-   else if (tImmunityType == NWN::MovementSpeedDecreaseImmunity) StackPushInteger(24);
-   else if (tImmunityType == NWN::SleepImmunity) StackPushInteger(13);
-   else if (tImmunityType == NWN::PoisonImmunity) StackPushInteger(2);
-   else if (tImmunityType == NWN::SneakAttackImmunity) StackPushInteger(30);
-   else if (tImmunityType == NWN::AbilityDecreaseImmunity) StackPushInteger(19);
-   else if (tImmunityType == NWN::DeafnessImmunity) StackPushInteger(8);
-   else if (tImmunityType == NWN::SavingThrowDecreaseImmunity) StackPushInteger(25);
-   else if (tImmunityType == NWN::CharmImmunity) StackPushInteger(14);
-   else if (tImmunityType == NWN::DiseaseImmunity) StackPushInteger(3);
-   else if (tImmunityType == NWN::CriticalHitImmunity) StackPushInteger(31);
-   else if (tImmunityType == NWN::AttackDecreaseImmunity) StackPushInteger(20);
-   else if (tImmunityType == NWN::SlowImmunity) StackPushInteger(9);
-   else if (tImmunityType == NWN::SpellResistanceDecreaseImmunity) StackPushInteger(26);
-   else if (tImmunityType == NWN::DominateImmunity) StackPushInteger(15);
-   else if (tImmunityType == NWN::FearImmunity) StackPushInteger(4);
-   else if (tImmunityType == NWN::DeathImmunity) StackPushInteger(32);
-   else if (tImmunityType == NWN::DamageDecreaseImmunity) StackPushInteger(21);
-   else if (tImmunityType == NWN::EntangleImmunity) StackPushInteger(10);
-   else { printf("Invalid enum value in effectImmunity for parameter tImmunityType of type ImmunityType passed: %d. Cannot continue, and it's your fault!\n", tImmunityType); exit(1); };
+  StackPushInteger(enum_ImmunityType_2_long(tImmunityType));
+  
 
   VM_ExecuteCommand(273, 1);
 
@@ -3180,8 +4543,8 @@ NWN::NWEffect NWScriptI::effectImmunity(NWN::ImmunityType tImmunityType, const I
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectImmunity_mutex, "effectImmunity");
@@ -3207,8 +4570,8 @@ NWN::NWEffect NWScriptI::effectInvisibility(Ice::Int nInvisibilityType, const Ic
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectInvisibility_mutex, "effectInvisibility");
@@ -3233,8 +4596,8 @@ NWN::NWEffect NWScriptI::effectKnockdown(const Ice::Current& ice) {
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectKnockdown_mutex, "effectKnockdown");
@@ -3267,8 +4630,8 @@ NWN::NWEffect NWScriptI::effectLinkEffects(const NWN::NWEffect& eChildEffect, co
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectLinkEffects_mutex, "effectLinkEffects");
@@ -3278,10 +4641,8 @@ NWN::NWEffect NWScriptI::effectLinkEffects(const NWN::NWEffect& eChildEffect, co
 NWN::NWEffect NWScriptI::effectMissChance(Ice::Int nPercentage, NWN::MissChanceType tMissChanceType, const Ice::Current& ice) {
   lock(effectMissChance_mutex, "effectMissChance");
   callCounter += 1;
-  if (tMissChanceType == NWN::MissChanceVSAll) StackPushInteger(0);
-   else if (tMissChanceType == NWN::MissChanceVSRanged) StackPushInteger(1);
-   else if (tMissChanceType == NWN::MissChanceVSMelee) StackPushInteger(2);
-   else { printf("Invalid enum value in effectMissChance for parameter tMissChanceType of type MissChanceType passed: %d. Cannot continue, and it's your fault!\n", tMissChanceType); exit(1); };
+  StackPushInteger(enum_MissChanceType_2_long(tMissChanceType));
+  
   StackPushInteger(nPercentage);
 
   VM_ExecuteCommand(477, 2);
@@ -3298,8 +4659,8 @@ NWN::NWEffect NWScriptI::effectMissChance(Ice::Int nPercentage, NWN::MissChanceT
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectMissChance_mutex, "effectMissChance");
@@ -3325,8 +4686,8 @@ NWN::NWEffect NWScriptI::effectModifyAttacks(Ice::Int nAttacks, const Ice::Curre
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectModifyAttacks_mutex, "effectModifyAttacks");
@@ -3352,8 +4713,8 @@ NWN::NWEffect NWScriptI::effectMovementSpeedDecrease(Ice::Int nPercentChange, co
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectMovementSpeedDecrease_mutex, "effectMovementSpeedDecrease");
@@ -3379,8 +4740,8 @@ NWN::NWEffect NWScriptI::effectMovementSpeedIncrease(Ice::Int nPercentChange, co
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectMovementSpeedIncrease_mutex, "effectMovementSpeedIncrease");
@@ -3407,8 +4768,8 @@ NWN::NWEffect NWScriptI::effectNegativeLevel(Ice::Int nNumLevels, bool bHPBonus,
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectNegativeLevel_mutex, "effectNegativeLevel");
@@ -3433,8 +4794,8 @@ NWN::NWEffect NWScriptI::effectParalyze(const Ice::Current& ice) {
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectParalyze_mutex, "effectParalyze");
@@ -3459,8 +4820,8 @@ NWN::NWEffect NWScriptI::effectPetrify(const Ice::Current& ice) {
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectPetrify_mutex, "effectPetrify");
@@ -3486,8 +4847,8 @@ NWN::NWEffect NWScriptI::effectPoison(Ice::Int nPoisonType, const Ice::Current& 
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectPoison_mutex, "effectPoison");
@@ -3514,8 +4875,8 @@ NWN::NWEffect NWScriptI::effectPolymorph(Ice::Int nPolymorphSelection, bool bLoc
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectPolymorph_mutex, "effectPolymorph");
@@ -3542,8 +4903,8 @@ NWN::NWEffect NWScriptI::effectRegenerate(Ice::Int nAmount, Ice::Double fInterva
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectRegenerate_mutex, "effectRegenerate");
@@ -3568,8 +4929,8 @@ NWN::NWEffect NWScriptI::effectResurrection(const Ice::Current& ice) {
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectResurrection_mutex, "effectResurrection");
@@ -3595,8 +4956,8 @@ NWN::NWEffect NWScriptI::effectSanctuary(Ice::Int nDifficultyClass, const Ice::C
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectSanctuary_mutex, "effectSanctuary");
@@ -3606,27 +4967,8 @@ NWN::NWEffect NWScriptI::effectSanctuary(Ice::Int nDifficultyClass, const Ice::C
 NWN::NWEffect NWScriptI::effectSavingThrowDecrease(Ice::Int nSave, Ice::Int nValue, NWN::SaveType tSaveType, const Ice::Current& ice) {
   lock(effectSavingThrowDecrease_mutex, "effectSavingThrowDecrease");
   callCounter += 1;
-  if (tSaveType == NWN::GoodSaveType) StackPushInteger(16);
-   else if (tSaveType == NWN::SonicSaveType) StackPushInteger(5);
-   else if (tSaveType == NWN::DeathSaveType) StackPushInteger(11);
-   else if (tSaveType == NWN::AllOrNoneSaveType) StackPushInteger(0);
-   else if (tSaveType == NWN::EvilSaveType) StackPushInteger(17);
-   else if (tSaveType == NWN::AcidSaveType) StackPushInteger(6);
-   else if (tSaveType == NWN::ColdSaveType) StackPushInteger(12);
-   else if (tSaveType == NWN::MindSpellsSaveType) StackPushInteger(1);
-   else if (tSaveType == NWN::LawSaveType) StackPushInteger(18);
-   else if (tSaveType == NWN::FireSaveType) StackPushInteger(7);
-   else if (tSaveType == NWN::DivineSaveType) StackPushInteger(13);
-   else if (tSaveType == NWN::PoisonSaveType) StackPushInteger(2);
-   else if (tSaveType == NWN::ChaosSaveType) StackPushInteger(19);
-   else if (tSaveType == NWN::ElectricitySaveType) StackPushInteger(8);
-   else if (tSaveType == NWN::TrapSaveType) StackPushInteger(14);
-   else if (tSaveType == NWN::DiseaseSaveType) StackPushInteger(3);
-   else if (tSaveType == NWN::PositiveSaveType) StackPushInteger(9);
-   else if (tSaveType == NWN::SpellSaveType) StackPushInteger(15);
-   else if (tSaveType == NWN::FearSaveType) StackPushInteger(4);
-   else if (tSaveType == NWN::NegativeSaveType) StackPushInteger(10);
-   else { printf("Invalid enum value in effectSavingThrowDecrease for parameter tSaveType of type SaveType passed: %d. Cannot continue, and it's your fault!\n", tSaveType); exit(1); };
+  StackPushInteger(enum_SaveType_2_long(tSaveType));
+  
   StackPushInteger(nValue);
   StackPushInteger(nSave);
 
@@ -3644,8 +4986,8 @@ NWN::NWEffect NWScriptI::effectSavingThrowDecrease(Ice::Int nSave, Ice::Int nVal
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectSavingThrowDecrease_mutex, "effectSavingThrowDecrease");
@@ -3655,27 +4997,8 @@ NWN::NWEffect NWScriptI::effectSavingThrowDecrease(Ice::Int nSave, Ice::Int nVal
 NWN::NWEffect NWScriptI::effectSavingThrowIncrease(Ice::Int nSave, Ice::Int nValue, NWN::SaveType tSaveType, const Ice::Current& ice) {
   lock(effectSavingThrowIncrease_mutex, "effectSavingThrowIncrease");
   callCounter += 1;
-  if (tSaveType == NWN::GoodSaveType) StackPushInteger(16);
-   else if (tSaveType == NWN::SonicSaveType) StackPushInteger(5);
-   else if (tSaveType == NWN::DeathSaveType) StackPushInteger(11);
-   else if (tSaveType == NWN::AllOrNoneSaveType) StackPushInteger(0);
-   else if (tSaveType == NWN::EvilSaveType) StackPushInteger(17);
-   else if (tSaveType == NWN::AcidSaveType) StackPushInteger(6);
-   else if (tSaveType == NWN::ColdSaveType) StackPushInteger(12);
-   else if (tSaveType == NWN::MindSpellsSaveType) StackPushInteger(1);
-   else if (tSaveType == NWN::LawSaveType) StackPushInteger(18);
-   else if (tSaveType == NWN::FireSaveType) StackPushInteger(7);
-   else if (tSaveType == NWN::DivineSaveType) StackPushInteger(13);
-   else if (tSaveType == NWN::PoisonSaveType) StackPushInteger(2);
-   else if (tSaveType == NWN::ChaosSaveType) StackPushInteger(19);
-   else if (tSaveType == NWN::ElectricitySaveType) StackPushInteger(8);
-   else if (tSaveType == NWN::TrapSaveType) StackPushInteger(14);
-   else if (tSaveType == NWN::DiseaseSaveType) StackPushInteger(3);
-   else if (tSaveType == NWN::PositiveSaveType) StackPushInteger(9);
-   else if (tSaveType == NWN::SpellSaveType) StackPushInteger(15);
-   else if (tSaveType == NWN::FearSaveType) StackPushInteger(4);
-   else if (tSaveType == NWN::NegativeSaveType) StackPushInteger(10);
-   else { printf("Invalid enum value in effectSavingThrowIncrease for parameter tSaveType of type SaveType passed: %d. Cannot continue, and it's your fault!\n", tSaveType); exit(1); };
+  StackPushInteger(enum_SaveType_2_long(tSaveType));
+  
   StackPushInteger(nValue);
   StackPushInteger(nSave);
 
@@ -3693,8 +5016,8 @@ NWN::NWEffect NWScriptI::effectSavingThrowIncrease(Ice::Int nSave, Ice::Int nVal
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectSavingThrowIncrease_mutex, "effectSavingThrowIncrease");
@@ -3719,8 +5042,8 @@ NWN::NWEffect NWScriptI::effectSeeInvisible(const Ice::Current& ice) {
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectSeeInvisible_mutex, "effectSeeInvisible");
@@ -3745,8 +5068,8 @@ NWN::NWEffect NWScriptI::effectSilence(const Ice::Current& ice) {
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectSilence_mutex, "effectSilence");
@@ -3773,8 +5096,8 @@ NWN::NWEffect NWScriptI::effectSkillDecrease(Ice::Int nSkill, Ice::Int nValue, c
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectSkillDecrease_mutex, "effectSkillDecrease");
@@ -3801,8 +5124,8 @@ NWN::NWEffect NWScriptI::effectSkillIncrease(Ice::Int nSkill, Ice::Int nValue, c
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectSkillIncrease_mutex, "effectSkillIncrease");
@@ -3827,8 +5150,8 @@ NWN::NWEffect NWScriptI::effectSleep(const Ice::Current& ice) {
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectSleep_mutex, "effectSleep");
@@ -3853,8 +5176,8 @@ NWN::NWEffect NWScriptI::effectSlow(const Ice::Current& ice) {
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectSlow_mutex, "effectSlow");
@@ -3864,16 +5187,8 @@ NWN::NWEffect NWScriptI::effectSlow(const Ice::Current& ice) {
 NWN::NWEffect NWScriptI::effectSpellFailure(Ice::Int nPercent, NWN::SpellSchool tSpellSchool, const Ice::Current& ice) {
   lock(effectSpellFailure_mutex, "effectSpellFailure");
   callCounter += 1;
-  if (tSpellSchool == NWN::EvocationSchool) StackPushInteger(5);
-   else if (tSpellSchool == NWN::GeneralSchool) StackPushInteger(0);
-   else if (tSpellSchool == NWN::IllusionSchool) StackPushInteger(6);
-   else if (tSpellSchool == NWN::AbjurationSchool) StackPushInteger(1);
-   else if (tSpellSchool == NWN::NecromancySchool) StackPushInteger(7);
-   else if (tSpellSchool == NWN::ConjurationSchool) StackPushInteger(2);
-   else if (tSpellSchool == NWN::TransmutationSchool) StackPushInteger(8);
-   else if (tSpellSchool == NWN::DivinationSchool) StackPushInteger(3);
-   else if (tSpellSchool == NWN::EnchantmentSchool) StackPushInteger(4);
-   else { printf("Invalid enum value in effectSpellFailure for parameter tSpellSchool of type SpellSchool passed: %d. Cannot continue, and it's your fault!\n", tSpellSchool); exit(1); };
+  StackPushInteger(enum_SpellSchool_2_long(tSpellSchool));
+  
   StackPushInteger(nPercent);
 
   VM_ExecuteCommand(690, 2);
@@ -3890,8 +5205,8 @@ NWN::NWEffect NWScriptI::effectSpellFailure(Ice::Int nPercent, NWN::SpellSchool 
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectSpellFailure_mutex, "effectSpellFailure");
@@ -3917,8 +5232,8 @@ NWN::NWEffect NWScriptI::effectSpellImmunity(Ice::Int nImmunityToSpell, const Ic
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectSpellImmunity_mutex, "effectSpellImmunity");
@@ -3928,16 +5243,8 @@ NWN::NWEffect NWScriptI::effectSpellImmunity(Ice::Int nImmunityToSpell, const Ic
 NWN::NWEffect NWScriptI::effectSpellLevelAbsorption(Ice::Int nMaxSpellLevelAbsorbed, Ice::Int nTotalSpellLevelsAbsorbed, NWN::SpellSchool tSpellSchool, const Ice::Current& ice) {
   lock(effectSpellLevelAbsorption_mutex, "effectSpellLevelAbsorption");
   callCounter += 1;
-  if (tSpellSchool == NWN::EvocationSchool) StackPushInteger(5);
-   else if (tSpellSchool == NWN::GeneralSchool) StackPushInteger(0);
-   else if (tSpellSchool == NWN::IllusionSchool) StackPushInteger(6);
-   else if (tSpellSchool == NWN::AbjurationSchool) StackPushInteger(1);
-   else if (tSpellSchool == NWN::NecromancySchool) StackPushInteger(7);
-   else if (tSpellSchool == NWN::ConjurationSchool) StackPushInteger(2);
-   else if (tSpellSchool == NWN::TransmutationSchool) StackPushInteger(8);
-   else if (tSpellSchool == NWN::DivinationSchool) StackPushInteger(3);
-   else if (tSpellSchool == NWN::EnchantmentSchool) StackPushInteger(4);
-   else { printf("Invalid enum value in effectSpellLevelAbsorption for parameter tSpellSchool of type SpellSchool passed: %d. Cannot continue, and it's your fault!\n", tSpellSchool); exit(1); };
+  StackPushInteger(enum_SpellSchool_2_long(tSpellSchool));
+  
   StackPushInteger(nTotalSpellLevelsAbsorbed);
   StackPushInteger(nMaxSpellLevelAbsorbed);
 
@@ -3955,8 +5262,8 @@ NWN::NWEffect NWScriptI::effectSpellLevelAbsorption(Ice::Int nMaxSpellLevelAbsor
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectSpellLevelAbsorption_mutex, "effectSpellLevelAbsorption");
@@ -3982,8 +5289,8 @@ NWN::NWEffect NWScriptI::effectSpellResistanceDecrease(Ice::Int nValue, const Ic
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectSpellResistanceDecrease_mutex, "effectSpellResistanceDecrease");
@@ -4009,8 +5316,8 @@ NWN::NWEffect NWScriptI::effectSpellResistanceIncrease(Ice::Int nValue, const Ic
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectSpellResistanceIncrease_mutex, "effectSpellResistanceIncrease");
@@ -4035,8 +5342,8 @@ NWN::NWEffect NWScriptI::effectStunned(const Ice::Current& ice) {
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectStunned_mutex, "effectStunned");
@@ -4065,8 +5372,8 @@ NWN::NWEffect NWScriptI::effectSummonCreature(const std::string& sCreatureResref
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectSummonCreature_mutex, "effectSummonCreature");
@@ -4096,8 +5403,8 @@ NWN::NWEffect NWScriptI::effectSwarm(bool bLooping, const std::string& sCreature
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectSwarm_mutex, "effectSwarm");
@@ -4123,8 +5430,8 @@ NWN::NWEffect NWScriptI::effectTemporaryHitpoints(Ice::Int nHitPoints, const Ice
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectTemporaryHitpoints_mutex, "effectTemporaryHitpoints");
@@ -4149,8 +5456,8 @@ NWN::NWEffect NWScriptI::effectTimeStop(const Ice::Current& ice) {
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectTimeStop_mutex, "effectTimeStop");
@@ -4175,8 +5482,8 @@ NWN::NWEffect NWScriptI::effectTrueSeeing(const Ice::Current& ice) {
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectTrueSeeing_mutex, "effectTrueSeeing");
@@ -4202,8 +5509,8 @@ NWN::NWEffect NWScriptI::effectTurnResistanceDecrease(Ice::Int nHitDice, const I
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectTurnResistanceDecrease_mutex, "effectTurnResistanceDecrease");
@@ -4229,8 +5536,8 @@ NWN::NWEffect NWScriptI::effectTurnResistanceIncrease(Ice::Int nHitDice, const I
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectTurnResistanceIncrease_mutex, "effectTurnResistanceIncrease");
@@ -4255,8 +5562,8 @@ NWN::NWEffect NWScriptI::effectTurned(const Ice::Current& ice) {
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectTurned_mutex, "effectTurned");
@@ -4281,8 +5588,8 @@ NWN::NWEffect NWScriptI::effectUltravision(const Ice::Current& ice) {
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectUltravision_mutex, "effectUltravision");
@@ -4309,8 +5616,8 @@ NWN::NWEffect NWScriptI::effectVisualEffect(Ice::Int nVisualEffectId, bool bMiss
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(effectVisualEffect_mutex, "effectVisualEffect");
@@ -4400,8 +5707,8 @@ NWN::NWEffect NWScriptI::extraordinaryEffect(const NWN::NWEffect& eEffect, const
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(extraordinaryEffect_mutex, "extraordinaryEffect");
@@ -4549,27 +5856,8 @@ NWN::SavingThrowResult NWScriptI::fortitudeSave(const NWN::NWObject& oCreature, 
   lock(fortitudeSave_mutex, "fortitudeSave");
   callCounter += 1;
   StackPushObject(oSaveVersus.id);
-  if (tSaveType == NWN::GoodSaveType) StackPushInteger(16);
-   else if (tSaveType == NWN::SonicSaveType) StackPushInteger(5);
-   else if (tSaveType == NWN::DeathSaveType) StackPushInteger(11);
-   else if (tSaveType == NWN::AllOrNoneSaveType) StackPushInteger(0);
-   else if (tSaveType == NWN::EvilSaveType) StackPushInteger(17);
-   else if (tSaveType == NWN::AcidSaveType) StackPushInteger(6);
-   else if (tSaveType == NWN::ColdSaveType) StackPushInteger(12);
-   else if (tSaveType == NWN::MindSpellsSaveType) StackPushInteger(1);
-   else if (tSaveType == NWN::LawSaveType) StackPushInteger(18);
-   else if (tSaveType == NWN::FireSaveType) StackPushInteger(7);
-   else if (tSaveType == NWN::DivineSaveType) StackPushInteger(13);
-   else if (tSaveType == NWN::PoisonSaveType) StackPushInteger(2);
-   else if (tSaveType == NWN::ChaosSaveType) StackPushInteger(19);
-   else if (tSaveType == NWN::ElectricitySaveType) StackPushInteger(8);
-   else if (tSaveType == NWN::TrapSaveType) StackPushInteger(14);
-   else if (tSaveType == NWN::DiseaseSaveType) StackPushInteger(3);
-   else if (tSaveType == NWN::PositiveSaveType) StackPushInteger(9);
-   else if (tSaveType == NWN::SpellSaveType) StackPushInteger(15);
-   else if (tSaveType == NWN::FearSaveType) StackPushInteger(4);
-   else if (tSaveType == NWN::NegativeSaveType) StackPushInteger(10);
-   else { printf("Invalid enum value in fortitudeSave for parameter tSaveType of type SaveType passed: %d. Cannot continue, and it's your fault!\n", tSaveType); exit(1); };
+  StackPushInteger(enum_SaveType_2_long(tSaveType));
+  
   StackPushInteger(nDC);
   StackPushObject(oCreature.id);
 
@@ -4578,10 +5866,8 @@ NWN::SavingThrowResult NWScriptI::fortitudeSave(const NWN::NWObject& oCreature, 
   int nRetVal;
   StackPopInteger(&nRetVal);
   unlock(fortitudeSave_mutex, "fortitudeSave");
-  if (nRetVal == 0) return NWN::FailedRoll;
-  if (nRetVal == 1) return NWN::SucceededRoll;
-  if (nRetVal == 3) return NWN::ImmuneToSaveType;
-  printf("Error: Unmapped enum return type in fortitudeSave of type SavingThrowResult: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
+    return enum_long_2_SavingThrowResult(nRetVal);
+  
 };
 
 std::string NWScriptI::get2DAString(const std::string& s2DA, const std::string& sColumn, Ice::Int nRow, const Ice::Current& ice) {
@@ -4625,13 +5911,8 @@ NWN::AILevel NWScriptI::getAILevel(const NWN::NWObject& oTarget, const Ice::Curr
   int nRetVal;
   StackPopInteger(&nRetVal);
   unlock(getAILevel_mutex, "getAILevel");
-  if (nRetVal == 0) return NWN::VeryLowAI;
-  if (nRetVal == 1) return NWN::LowAI;
-  if (nRetVal == -1) return NWN::DefaultAI;
-  if (nRetVal == 2) return NWN::NormalAI;
-  if (nRetVal == 3) return NWN::HighAI;
-  if (nRetVal == 4) return NWN::VeryHighAI;
-  printf("Error: Unmapped enum return type in getAILevel of type AILevel: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
+    return enum_long_2_AILevel(nRetVal);
+  
 };
 
 Ice::Int NWScriptI::getAbilityModifier(NWN::Ability tAbility, const NWN::NWObject& oCreature, const Ice::Current& ice) {
@@ -4639,13 +5920,8 @@ Ice::Int NWScriptI::getAbilityModifier(NWN::Ability tAbility, const NWN::NWObjec
   lock(getAbilityModifier_mutex, "getAbilityModifier");
   callCounter += 1;
   StackPushObject(oCreature.id);
-  if (tAbility == NWN::Charisma) StackPushInteger(5);
-   else if (tAbility == NWN::Strength) StackPushInteger(0);
-   else if (tAbility == NWN::Dexterity) StackPushInteger(1);
-   else if (tAbility == NWN::Constitution) StackPushInteger(2);
-   else if (tAbility == NWN::Intelligence) StackPushInteger(3);
-   else if (tAbility == NWN::Wisdom) StackPushInteger(4);
-   else { printf("Invalid enum value in getAbilityModifier for parameter tAbility of type Ability passed: %d. Cannot continue, and it's your fault!\n", tAbility); exit(1); };
+  StackPushInteger(enum_Ability_2_long(tAbility));
+  
 
   VM_ExecuteCommand(331, 2);
 
@@ -4660,13 +5936,8 @@ Ice::Int NWScriptI::getAbilityScore(const NWN::NWObject& oCreature, NWN::Ability
   lock(getAbilityScore_mutex, "getAbilityScore");
   callCounter += 1;
   StackPushInteger(bBaseAbilityScore == true ? 1 : 0);
-  if (tAbility == NWN::Charisma) StackPushInteger(5);
-   else if (tAbility == NWN::Strength) StackPushInteger(0);
-   else if (tAbility == NWN::Dexterity) StackPushInteger(1);
-   else if (tAbility == NWN::Constitution) StackPushInteger(2);
-   else if (tAbility == NWN::Intelligence) StackPushInteger(3);
-   else if (tAbility == NWN::Wisdom) StackPushInteger(4);
-   else { printf("Invalid enum value in getAbilityScore for parameter tAbility of type Ability passed: %d. Cannot continue, and it's your fault!\n", tAbility); exit(1); };
+  StackPushInteger(enum_Ability_2_long(tAbility));
+  
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(139, 3);
@@ -4681,19 +5952,8 @@ bool NWScriptI::getActionMode(const NWN::NWObject& oCreature, NWN::ActionMode tA
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
   lock(getActionMode_mutex, "getActionMode");
   callCounter += 1;
-  if (tActionMode == NWN::CounterspellMode) StackPushInteger(5);
-   else if (tActionMode == NWN::DirtyFightingMode) StackPushInteger(11);
-   else if (tActionMode == NWN::DetectMode) StackPushInteger(0);
-   else if (tActionMode == NWN::FlurryOfBlowsMode) StackPushInteger(6);
-   else if (tActionMode == NWN::StealthMode) StackPushInteger(1);
-   else if (tActionMode == NWN::RapidShotMode) StackPushInteger(7);
-   else if (tActionMode == NWN::ParryMode) StackPushInteger(2);
-   else if (tActionMode == NWN::ExpertiseMode) StackPushInteger(8);
-   else if (tActionMode == NWN::PowerAttackMode) StackPushInteger(3);
-   else if (tActionMode == NWN::ImprovedExpertiseMode) StackPushInteger(9);
-   else if (tActionMode == NWN::ImprovedPowerAttackMode) StackPushInteger(4);
-   else if (tActionMode == NWN::DefensiveCastMode) StackPushInteger(10);
-   else { printf("Invalid enum value in getActionMode for parameter tActionMode of type ActionMode passed: %d. Cannot continue, and it's your fault!\n", tActionMode); exit(1); };
+  StackPushInteger(enum_ActionMode_2_long(tActionMode));
+  
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(735, 2);
@@ -4729,13 +5989,8 @@ NWN::Alignment NWScriptI::getAlignmentGoodEvil(const NWN::NWObject& oCreature, c
   int nRetVal;
   StackPopInteger(&nRetVal);
   unlock(getAlignmentGoodEvil_mutex, "getAlignmentGoodEvil");
-  if (nRetVal == 5) return NWN::Evil;
-  if (nRetVal == 0) return NWN::Any;
-  if (nRetVal == 1) return NWN::Neutral;
-  if (nRetVal == 2) return NWN::Lawful;
-  if (nRetVal == 3) return NWN::Chaotic;
-  if (nRetVal == 4) return NWN::Good;
-  printf("Error: Unmapped enum return type in getAlignmentGoodEvil of type Alignment: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
+    return enum_long_2_Alignment(nRetVal);
+  
 };
 
 NWN::Alignment NWScriptI::getAlignmentLawChaos(const NWN::NWObject& oCreature, const Ice::Current& ice) {
@@ -4749,13 +6004,8 @@ NWN::Alignment NWScriptI::getAlignmentLawChaos(const NWN::NWObject& oCreature, c
   int nRetVal;
   StackPopInteger(&nRetVal);
   unlock(getAlignmentLawChaos_mutex, "getAlignmentLawChaos");
-  if (nRetVal == 5) return NWN::Evil;
-  if (nRetVal == 0) return NWN::Any;
-  if (nRetVal == 1) return NWN::Neutral;
-  if (nRetVal == 2) return NWN::Lawful;
-  if (nRetVal == 3) return NWN::Chaotic;
-  if (nRetVal == 4) return NWN::Good;
-  printf("Error: Unmapped enum return type in getAlignmentLawChaos of type Alignment: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
+    return enum_long_2_Alignment(nRetVal);
+  
 };
 
 Ice::Int NWScriptI::getAnimalCompanionCreatureType(const NWN::NWObject& oCreature, const Ice::Current& ice) {
@@ -4891,13 +6141,8 @@ NWN::NWObject NWScriptI::getAssociate(NWN::AssociateType tAssociateType, const N
   callCounter += 1;
   StackPushInteger(nTh);
   StackPushObject(oMaster.id);
-  if (tAssociateType == NWN::DominatedAssociate) StackPushInteger(5);
-   else if (tAssociateType == NWN::NoAssociate) StackPushInteger(0);
-   else if (tAssociateType == NWN::HenchmanAssociate) StackPushInteger(1);
-   else if (tAssociateType == NWN::AnimalCompanionAssociate) StackPushInteger(2);
-   else if (tAssociateType == NWN::FamiliarAssociate) StackPushInteger(3);
-   else if (tAssociateType == NWN::SummonedAssociate) StackPushInteger(4);
-   else { printf("Invalid enum value in getAssociate for parameter tAssociateType of type AssociateType passed: %d. Cannot continue, and it's your fault!\n", tAssociateType); exit(1); };
+  StackPushInteger(enum_AssociateType_2_long(tAssociateType));
+  
 
   VM_ExecuteCommand(364, 3);
 
@@ -4920,13 +6165,8 @@ NWN::AssociateType NWScriptI::getAssociateType(const NWN::NWObject& oAssociate, 
   int nRetVal;
   StackPopInteger(&nRetVal);
   unlock(getAssociateType_mutex, "getAssociateType");
-  if (nRetVal == 5) return NWN::DominatedAssociate;
-  if (nRetVal == 0) return NWN::NoAssociate;
-  if (nRetVal == 1) return NWN::HenchmanAssociate;
-  if (nRetVal == 2) return NWN::AnimalCompanionAssociate;
-  if (nRetVal == 3) return NWN::FamiliarAssociate;
-  if (nRetVal == 4) return NWN::SummonedAssociate;
-  printf("Error: Unmapped enum return type in getAssociateType of type AssociateType: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
+    return enum_long_2_AssociateType(nRetVal);
+  
 };
 
 NWN::NWObject NWScriptI::getAttackTarget(const NWN::NWObject& oCreature, const Ice::Current& ice) {
@@ -5232,26 +6472,8 @@ Ice::Int NWScriptI::getCreatureBodyPart(NWN::CreaturePart tCreaturePart, const N
   lock(getCreatureBodyPart_mutex, "getCreatureBodyPart");
   callCounter += 1;
   StackPushObject(oCreature.id);
-  if (tCreaturePart == NWN::RightHandPart) StackPushInteger(16);
-   else if (tCreaturePart == NWN::RightThighPart) StackPushInteger(5);
-   else if (tCreaturePart == NWN::LeftForearmPart) StackPushInteger(11);
-   else if (tCreaturePart == NWN::RightFootPart) StackPushInteger(0);
-   else if (tCreaturePart == NWN::LeftHandPart) StackPushInteger(17);
-   else if (tCreaturePart == NWN::PelvisPart) StackPushInteger(6);
-   else if (tCreaturePart == NWN::RightBicepPart) StackPushInteger(12);
-   else if (tCreaturePart == NWN::LeftFootPart) StackPushInteger(1);
-   else if (tCreaturePart == NWN::TorsoPart) StackPushInteger(7);
-   else if (tCreaturePart == NWN::LeftBicepPart) StackPushInteger(13);
-   else if (tCreaturePart == NWN::RightShinPart) StackPushInteger(2);
-   else if (tCreaturePart == NWN::BeltPart) StackPushInteger(8);
-   else if (tCreaturePart == NWN::RightShoulderPart) StackPushInteger(14);
-   else if (tCreaturePart == NWN::LeftShinPart) StackPushInteger(3);
-   else if (tCreaturePart == NWN::HeadPart) StackPushInteger(20);
-   else if (tCreaturePart == NWN::NeckPart) StackPushInteger(9);
-   else if (tCreaturePart == NWN::LeftShoulderPart) StackPushInteger(15);
-   else if (tCreaturePart == NWN::LeftThighPart) StackPushInteger(4);
-   else if (tCreaturePart == NWN::RightForearmPart) StackPushInteger(10);
-   else { printf("Invalid enum value in getCreatureBodyPart for parameter tCreaturePart of type CreaturePart passed: %d. Cannot continue, and it's your fault!\n", tCreaturePart); exit(1); };
+  StackPushInteger(enum_CreaturePart_2_long(tCreaturePart));
+  
 
   VM_ExecuteCommand(792, 2);
 
@@ -5272,13 +6494,8 @@ NWN::CreatureSize NWScriptI::getCreatureSize(const NWN::NWObject& oCreature, con
   int nRetVal;
   StackPopInteger(&nRetVal);
   unlock(getCreatureSize_mutex, "getCreatureSize");
-  if (nRetVal == 5) return NWN::HugeSize;
-  if (nRetVal == 0) return NWN::InvalidSize;
-  if (nRetVal == 1) return NWN::TinySize;
-  if (nRetVal == 2) return NWN::SmallSize;
-  if (nRetVal == 3) return NWN::MediumSize;
-  if (nRetVal == 4) return NWN::LargeSize;
-  printf("Error: Unmapped enum return type in getCreatureSize of type CreatureSize: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
+    return enum_long_2_CreatureSize(nRetVal);
+  
 };
 
 Ice::Int NWScriptI::getCreatureStartingPackage(const NWN::NWObject& oCreature, const Ice::Current& ice) {
@@ -5334,36 +6551,8 @@ NWN::Action NWScriptI::getCurrentAction(const NWN::NWObject& oObject, const Ice:
   int nRetVal;
   StackPopInteger(&nRetVal);
   unlock(getCurrentAction_mutex, "getCurrentAction");
-  if (nRetVal == 16) return NWN::AnimalEmpathyAction;
-  if (nRetVal == 5) return NWN::OpenDoorAction;
-  if (nRetVal == 33) return NWN::HealAction;
-  if (nRetVal == 11) return NWN::ExamineTrapAction;
-  if (nRetVal == 0) return NWN::MoveToPointAction;
-  if (nRetVal == 17) return NWN::RestAction;
-  if (nRetVal == 6) return NWN::CloseDoorAction;
-  if (nRetVal == 34) return NWN::PickpocketAction;
-  if (nRetVal == 12) return NWN::SetTrapAction;
-  if (nRetVal == 1) return NWN::PickupItemAction;
-  if (nRetVal == 40) return NWN::SmiteGoodAction;
-  if (nRetVal == 18) return NWN::TauntAction;
-  if (nRetVal == 7) return NWN::DialogObjectAction;
-  if (nRetVal == 35) return NWN::FollowAction;
-  if (nRetVal == 13) return NWN::OpenLockAction;
-  if (nRetVal == 2) return NWN::DropItemAction;
-  if (nRetVal == 65535) return NWN::InvalidAction;
-  if (nRetVal == 41) return NWN::KIDamageAction;
-  if (nRetVal == 19) return NWN::ItemCastSpellAction;
-  if (nRetVal == 8) return NWN::DisableTrapAction;
-  if (nRetVal == 14) return NWN::LockAction;
-  if (nRetVal == 3) return NWN::AttackObjectAction;
-  if (nRetVal == 31) return NWN::CounterSpellAction;
-  if (nRetVal == 9) return NWN::RecoverTrapAction;
-  if (nRetVal == 37) return NWN::SitAction;
-  if (nRetVal == 15) return NWN::UseObjectAction;
-  if (nRetVal == 4) return NWN::CastSpellAction;
-  if (nRetVal == 43) return NWN::RandomWalkAction;
-  if (nRetVal == 10) return NWN::FlagTrapAction;
-  printf("Error: Unmapped enum return type in getCurrentAction of type Action: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
+    return enum_long_2_Action(nRetVal);
+  
 };
 
 Ice::Int NWScriptI::getCurrentHitPoints(const NWN::NWObject& oObject, const Ice::Current& ice) {
@@ -5411,21 +6600,8 @@ bool NWScriptI::getCutsceneMode(const NWN::NWObject& oCreature, const Ice::Curre
 Ice::Int NWScriptI::getDamageDealtByType(NWN::DamageType tDamageType, const Ice::Current& ice) {
   lock(getDamageDealtByType_mutex, "getDamageDealtByType");
   callCounter += 1;
-  if (tDamageType == NWN::AcidDamage) StackPushInteger(16);
-   else if (tDamageType == NWN::ACVsAllDamage) StackPushInteger(4103);
-   else if (tDamageType == NWN::NegativeDamage) StackPushInteger(512);
-   else if (tDamageType == NWN::PositiveDamage) StackPushInteger(1024);
-   else if (tDamageType == NWN::BludgeoningDamage) StackPushInteger(1);
-   else if (tDamageType == NWN::ElectricalDamage) StackPushInteger(128);
-   else if (tDamageType == NWN::SonicDamage) StackPushInteger(2048);
-   else if (tDamageType == NWN::PiercingDamage) StackPushInteger(2);
-   else if (tDamageType == NWN::MagicalDamage) StackPushInteger(8);
-   else if (tDamageType == NWN::FireDamage) StackPushInteger(256);
-   else if (tDamageType == NWN::DivineDamage) StackPushInteger(64);
-   else if (tDamageType == NWN::BaseDamage) StackPushInteger(4096);
-   else if (tDamageType == NWN::SlashingDamage) StackPushInteger(4);
-   else if (tDamageType == NWN::ColdDamage) StackPushInteger(32);
-   else { printf("Invalid enum value in getDamageDealtByType for parameter tDamageType of type DamageType passed: %d. Cannot continue, and it's your fault!\n", tDamageType); exit(1); };
+  StackPushInteger(enum_DamageType_2_long(tDamageType));
+  
 
   VM_ExecuteCommand(344, 1);
 
@@ -5613,10 +6789,8 @@ NWN::DurationType NWScriptI::getEffectDurationType(const NWN::NWEffect& eEffect,
   int nRetVal;
   StackPopInteger(&nRetVal);
   unlock(getEffectDurationType_mutex, "getEffectDurationType");
-  if (nRetVal == 0) return NWN::Instant;
-  if (nRetVal == 1) return NWN::Temporary;
-  if (nRetVal == 2) return NWN::Permanent;
-  printf("Error: Unmapped enum return type in getEffectDurationType of type DurationType: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
+    return enum_long_2_DurationType(nRetVal);
+  
 };
 
 Ice::Int NWScriptI::getEffectSpellId(const NWN::NWEffect& eSpellEffect, const Ice::Current& ice) {
@@ -5648,11 +6822,8 @@ NWN::EffectSubType NWScriptI::getEffectSubType(const NWN::NWEffect& eEffect, con
   int nRetVal;
   StackPopInteger(&nRetVal);
   unlock(getEffectSubType_mutex, "getEffectSubType");
-  if (nRetVal == 16) return NWN::SupernaturalSubType;
-  if (nRetVal == 0) return NWN::InvalidSubType;
-  if (nRetVal == 24) return NWN::ExtraordinarySubType;
-  if (nRetVal == 8) return NWN::MagicalSubType;
-  printf("Error: Unmapped enum return type in getEffectSubType of type EffectSubType: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
+    return enum_long_2_EffectSubType(nRetVal);
+  
 };
 
 NWN::EffectType NWScriptI::getEffectType(const NWN::NWEffect& eEffect, const Ice::Current& ice) {
@@ -5668,83 +6839,8 @@ NWN::EffectType NWScriptI::getEffectType(const NWN::NWEffect& eEffect, const Ice
   int nRetVal;
   StackPopInteger(&nRetVal);
   unlock(getEffectType_mutex, "getEffectType");
-  if (nRetVal == 9) return NWN::TemporaryHitpointsEffect;
-  if (nRetVal == 47) return NWN::ACDecreaseEffect;
-  if (nRetVal == 28) return NWN::DazedEffect;
-  if (nRetVal == 66) return NWN::TimestopEffect;
-  if (nRetVal == 76) return NWN::SwarmEffect;
-  if (nRetVal == 57) return NWN::ImprovedInvisibilityEffect;
-  if (nRetVal == 0) return NWN::InvalidEffect;
-  if (nRetVal == 38) return NWN::AbilityIncreaseEffect;
-  if (nRetVal == 48) return NWN::MovementSpeedIncreaseEffect;
-  if (nRetVal == 29) return NWN::StunnedEffect;
-  if (nRetVal == 67) return NWN::BlindnessEffect;
-  if (nRetVal == 77) return NWN::TurnResistanceDecreaseEffect;
-  if (nRetVal == 20) return NWN::AreaOfEffectEffect;
-  if (nRetVal == 58) return NWN::DarknessEffect;
-  if (nRetVal == 1) return NWN::DamageResistanceEffect;
-  if (nRetVal == 39) return NWN::AbilityDecreaseEffect;
-  if (nRetVal == 30) return NWN::SleepEffect;
-  if (nRetVal == 68) return NWN::SpellLevelAbsorptionEffect;
-  if (nRetVal == 11) return NWN::EntangleEffect;
-  if (nRetVal == 49) return NWN::MovementSpeedDecreaseEffect;
-  if (nRetVal == 78) return NWN::TurnResistanceIncreaseEffect;
-  if (nRetVal == 21) return NWN::BeamEffect;
-  if (nRetVal == 59) return NWN::DispelMagicAllEffect;
-  if (nRetVal == 40) return NWN::AttackIncreaseEffect;
-  if (nRetVal == 31) return NWN::PoisonEffect;
-  if (nRetVal == 69) return NWN::DispelMagicBestEffect;
-  if (nRetVal == 12) return NWN::InvulnerableEffect;
-  if (nRetVal == 50) return NWN::SavingThrowIncreaseEffect;
-  if (nRetVal == 79) return NWN::PetrifyEffect;
-  if (nRetVal == 3) return NWN::RegenerateEffect;
-  if (nRetVal == 41) return NWN::AttackDecreaseEffect;
-  if (nRetVal == 60) return NWN::ElementalShieldEffect;
-  if (nRetVal == 32) return NWN::DiseaseEffect;
-  if (nRetVal == 70) return NWN::UltravisionEffect;
-  if (nRetVal == 13) return NWN::DeafEffect;
-  if (nRetVal == 51) return NWN::SavingThrowDecreaseEffect;
-  if (nRetVal == 80) return NWN::CutsceneParalyzeEffect;
-  if (nRetVal == 42) return NWN::DamageIncreaseEffect;
-  if (nRetVal == 23) return NWN::CharmedEffect;
-  if (nRetVal == 61) return NWN::NegativeLevelEffect;
-  if (nRetVal == 14) return NWN::ResurrectionEffect;
-  if (nRetVal == 52) return NWN::SpellResistanceIncreaseEffect;
-  if (nRetVal == 33) return NWN::CurseEffect;
-  if (nRetVal == 71) return NWN::MissChanceEffect;
-  if (nRetVal == 81) return NWN::EtherealEffect;
-  if (nRetVal == 43) return NWN::DamageDecreaseEffect;
-  if (nRetVal == 24) return NWN::ConfusedEffect;
-  if (nRetVal == 62) return NWN::PolymorphEffect;
-  if (nRetVal == 15) return NWN::ImmunityEffect;
-  if (nRetVal == 53) return NWN::SpellResistanceDecreaseEffect;
-  if (nRetVal == 34) return NWN::SilenceEffect;
-  if (nRetVal == 72) return NWN::ConcealmentEffect;
-  if (nRetVal == 82) return NWN::SpellFailureEffect;
-  if (nRetVal == 25) return NWN::FrightenedEffect;
-  if (nRetVal == 63) return NWN::SanctuaryEffect;
-  if (nRetVal == 44) return NWN::DamageImmunityIncreaseEffect;
-  if (nRetVal == 54) return NWN::SkillIncreaseEffect;
-  if (nRetVal == 35) return NWN::TurnedEffect;
-  if (nRetVal == 73) return NWN::SpellImmunityEffect;
-  if (nRetVal == 83) return NWN::CutsceneGhostEffect;
-  if (nRetVal == 26) return NWN::DominatedEffect;
-  if (nRetVal == 64) return NWN::TrueSeeingEffect;
-  if (nRetVal == 7) return NWN::DamageReductionEffect;
-  if (nRetVal == 45) return NWN::DamageImmunityDecreaseEffect;
-  if (nRetVal == 36) return NWN::HasteEffect;
-  if (nRetVal == 74) return NWN::VisualEffect;
-  if (nRetVal == 17) return NWN::EnemyAttackBonusEffect;
-  if (nRetVal == 55) return NWN::SkillDecreaseEffect;
-  if (nRetVal == 84) return NWN::CutsceneImmobilizeEffect;
-  if (nRetVal == 65) return NWN::SeeInvisibleEffect;
-  if (nRetVal == 46) return NWN::ACIncreaseEffect;
-  if (nRetVal == 27) return NWN::ParalyzeEffect;
-  if (nRetVal == 75) return NWN::DisappearAppearEffect;
-  if (nRetVal == 37) return NWN::SlowEffect;
-  if (nRetVal == 18) return NWN::ArcaneSpellFailureEffect;
-  if (nRetVal == 56) return NWN::InvisibilityEffect;
-  printf("Error: Unmapped enum return type in getEffectType of type EffectType: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
+    return enum_long_2_EffectType(nRetVal);
+  
 };
 
 Ice::Int NWScriptI::getEncounterActive(const NWN::NWObject& oEncounter, const Ice::Current& ice) {
@@ -6149,8 +7245,8 @@ NWN::NWEffect NWScriptI::getFirstEffect(const NWN::NWObject& oCreature, const Ic
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(getFirstEffect_mutex, "getFirstEffect");
@@ -6273,12 +7369,8 @@ NWN::NWObject NWScriptI::getFirstObjectInShape(NWN::ShapeType tShapeType, Ice::D
   lTarget_ptr->AreaID = lTarget.area.id;
   StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, lTarget_ptr);
   StackPushFloat(fSize);
-  if (tShapeType == NWN::SpellCylinderShape) StackPushInteger(0);
-   else if (tShapeType == NWN::ConeShape) StackPushInteger(1);
-   else if (tShapeType == NWN::CubeShape) StackPushInteger(2);
-   else if (tShapeType == NWN::SpellConeShape) StackPushInteger(3);
-   else if (tShapeType == NWN::SphereShape) StackPushInteger(4);
-   else { printf("Invalid enum value in getFirstObjectInShape for parameter tShapeType of type ShapeType passed: %d. Cannot continue, and it's your fault!\n", tShapeType); exit(1); };
+  StackPushInteger(enum_ShapeType_2_long(tShapeType));
+  
 
   VM_ExecuteCommand(128, 6);
 
@@ -6385,12 +7477,8 @@ NWN::Gender NWScriptI::getGender(const NWN::NWObject& oCreature, const Ice::Curr
   int nRetVal;
   StackPopInteger(&nRetVal);
   unlock(getGender_mutex, "getGender");
-  if (nRetVal == 0) return NWN::MaleGender;
-  if (nRetVal == 1) return NWN::Female;
-  if (nRetVal == 2) return NWN::BothGender;
-  if (nRetVal == 3) return NWN::OtherGender;
-  if (nRetVal == 4) return NWN::NoneGender;
-  printf("Error: Unmapped enum return type in getGender of type Gender: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
+    return enum_long_2_Gender(nRetVal);
+  
 };
 
 NWN::NWObject NWScriptI::getGoingToBeAttackedBy(const NWN::NWObject& oTarget, const Ice::Current& ice) {
@@ -6779,12 +7867,8 @@ bool NWScriptI::getIsDoorActionPossible(const NWN::NWObject& oTargetDoor, NWN::D
   if (oTargetDoor.id < 0 || oTargetDoor.id > 0xffffffff) throw NWN::InvalidObjectException();
   lock(getIsDoorActionPossible_mutex, "getIsDoorActionPossible");
   callCounter += 1;
-  if (tDoorAction == NWN::OpenDoor) StackPushInteger(0);
-   else if (tDoorAction == NWN::UnlockDoor) StackPushInteger(1);
-   else if (tDoorAction == NWN::BashDoor) StackPushInteger(2);
-   else if (tDoorAction == NWN::IgnoreDoor) StackPushInteger(3);
-   else if (tDoorAction == NWN::KnockDoor) StackPushInteger(4);
-   else { printf("Invalid enum value in getIsDoorActionPossible for parameter tDoorAction of type DoorAction passed: %d. Cannot continue, and it's your fault!\n", tDoorAction); exit(1); };
+  StackPushInteger(enum_DoorAction_2_long(tDoorAction));
+  
   StackPushObject(oTargetDoor.id);
 
   VM_ExecuteCommand(337, 2);
@@ -6875,40 +7959,8 @@ bool NWScriptI::getIsImmune(const NWN::NWObject& oCreature, NWN::ImmunityType tI
   lock(getIsImmune_mutex, "getIsImmune");
   callCounter += 1;
   StackPushObject(oVersus.id);
-  if (tImmunityType == NWN::SkillDecreaseImmunity) StackPushInteger(27);
-   else if (tImmunityType == NWN::ConfusedImmunity) StackPushInteger(16);
-   else if (tImmunityType == NWN::TrapImmunity) StackPushInteger(5);
-   else if (tImmunityType == NWN::DamageImmunityDecreaseImmunity) StackPushInteger(22);
-   else if (tImmunityType == NWN::SilenceImmunity) StackPushInteger(11);
-   else if (tImmunityType == NWN::NoneImmunity) StackPushInteger(0);
-   else if (tImmunityType == NWN::KnockdownImmunity) StackPushInteger(28);
-   else if (tImmunityType == NWN::CursedImmunity) StackPushInteger(17);
-   else if (tImmunityType == NWN::ParalysisImmunity) StackPushInteger(6);
-   else if (tImmunityType == NWN::AcDecreaseImmunity) StackPushInteger(23);
-   else if (tImmunityType == NWN::StunImmunity) StackPushInteger(12);
-   else if (tImmunityType == NWN::MindSpellsImmunity) StackPushInteger(1);
-   else if (tImmunityType == NWN::NegativeLevelImmunity) StackPushInteger(29);
-   else if (tImmunityType == NWN::DazedImmunity) StackPushInteger(18);
-   else if (tImmunityType == NWN::BlindnessImmunity) StackPushInteger(7);
-   else if (tImmunityType == NWN::MovementSpeedDecreaseImmunity) StackPushInteger(24);
-   else if (tImmunityType == NWN::SleepImmunity) StackPushInteger(13);
-   else if (tImmunityType == NWN::PoisonImmunity) StackPushInteger(2);
-   else if (tImmunityType == NWN::SneakAttackImmunity) StackPushInteger(30);
-   else if (tImmunityType == NWN::AbilityDecreaseImmunity) StackPushInteger(19);
-   else if (tImmunityType == NWN::DeafnessImmunity) StackPushInteger(8);
-   else if (tImmunityType == NWN::SavingThrowDecreaseImmunity) StackPushInteger(25);
-   else if (tImmunityType == NWN::CharmImmunity) StackPushInteger(14);
-   else if (tImmunityType == NWN::DiseaseImmunity) StackPushInteger(3);
-   else if (tImmunityType == NWN::CriticalHitImmunity) StackPushInteger(31);
-   else if (tImmunityType == NWN::AttackDecreaseImmunity) StackPushInteger(20);
-   else if (tImmunityType == NWN::SlowImmunity) StackPushInteger(9);
-   else if (tImmunityType == NWN::SpellResistanceDecreaseImmunity) StackPushInteger(26);
-   else if (tImmunityType == NWN::DominateImmunity) StackPushInteger(15);
-   else if (tImmunityType == NWN::FearImmunity) StackPushInteger(4);
-   else if (tImmunityType == NWN::DeathImmunity) StackPushInteger(32);
-   else if (tImmunityType == NWN::DamageDecreaseImmunity) StackPushInteger(21);
-   else if (tImmunityType == NWN::EntangleImmunity) StackPushInteger(10);
-   else { printf("Invalid enum value in getIsImmune for parameter tImmunityType of type ImmunityType passed: %d. Cannot continue, and it's your fault!\n", tImmunityType); exit(1); };
+  StackPushInteger(enum_ImmunityType_2_long(tImmunityType));
+  
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(274, 3);
@@ -7053,11 +8105,8 @@ bool NWScriptI::getIsPlaceableObjectActionPossible(const NWN::NWObject& oPlaceab
   if (oPlaceable.id < 0 || oPlaceable.id > 0xffffffff) throw NWN::InvalidObjectException();
   lock(getIsPlaceableObjectActionPossible_mutex, "getIsPlaceableObjectActionPossible");
   callCounter += 1;
-  if (tPlaceableAction == NWN::UsePlaceable) StackPushInteger(0);
-   else if (tPlaceableAction == NWN::UnlockPlaceable) StackPushInteger(1);
-   else if (tPlaceableAction == NWN::BashPlaceable) StackPushInteger(2);
-   else if (tPlaceableAction == NWN::KnockPlaceable) StackPushInteger(4);
-   else { printf("Invalid enum value in getIsPlaceableObjectActionPossible for parameter tPlaceableAction of type PlaceableAction passed: %d. Cannot continue, and it's your fault!\n", tPlaceableAction); exit(1); };
+  StackPushInteger(enum_PlaceableAction_2_long(tPlaceableAction));
+  
   StackPushObject(oPlaceable.id);
 
   VM_ExecuteCommand(546, 2);
@@ -7343,25 +8392,8 @@ NWN::NWObject NWScriptI::getItemInSlot(NWN::InventorySlot tInventorySlot, const 
   lock(getItemInSlot_mutex, "getItemInSlot");
   callCounter += 1;
   StackPushObject(oCreature.id);
-  if (tInventorySlot == NWN::CreatureBiteSlot) StackPushInteger(16);
-   else if (tInventorySlot == NWN::LefthandSlot) StackPushInteger(5);
-   else if (tInventorySlot == NWN::ArrowsSlot) StackPushInteger(11);
-   else if (tInventorySlot == NWN::HeadSlot) StackPushInteger(0);
-   else if (tInventorySlot == NWN::CreatureArmorSlot) StackPushInteger(17);
-   else if (tInventorySlot == NWN::CloakSlot) StackPushInteger(6);
-   else if (tInventorySlot == NWN::BulletsSlot) StackPushInteger(12);
-   else if (tInventorySlot == NWN::ChestSlot) StackPushInteger(1);
-   else if (tInventorySlot == NWN::LeftringSlot) StackPushInteger(7);
-   else if (tInventorySlot == NWN::BoltsSlot) StackPushInteger(13);
-   else if (tInventorySlot == NWN::BootsSlot) StackPushInteger(2);
-   else if (tInventorySlot == NWN::RightringSlot) StackPushInteger(8);
-   else if (tInventorySlot == NWN::CreatureLefthandSlot) StackPushInteger(14);
-   else if (tInventorySlot == NWN::ArmsSlot) StackPushInteger(3);
-   else if (tInventorySlot == NWN::NeckSlot) StackPushInteger(9);
-   else if (tInventorySlot == NWN::CreatureRighthandSlot) StackPushInteger(15);
-   else if (tInventorySlot == NWN::RighthandSlot) StackPushInteger(4);
-   else if (tInventorySlot == NWN::BeltSlot) StackPushInteger(10);
-   else { printf("Invalid enum value in getItemInSlot for parameter tInventorySlot of type InventorySlot passed: %d. Cannot continue, and it's your fault!\n", tInventorySlot); exit(1); };
+  StackPushInteger(enum_InventorySlot_2_long(tInventorySlot));
+  
 
   VM_ExecuteCommand(155, 2);
 
@@ -7451,10 +8483,8 @@ NWN::DurationType NWScriptI::getItemPropertyDurationType(const NWN::NWItemProper
   int nRetVal;
   StackPopInteger(&nRetVal);
   unlock(getItemPropertyDurationType_mutex, "getItemPropertyDurationType");
-  if (nRetVal == 0) return NWN::Instant;
-  if (nRetVal == 1) return NWN::Temporary;
-  if (nRetVal == 2) return NWN::Permanent;
-  printf("Error: Unmapped enum return type in getItemPropertyDurationType of type DurationType: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
+    return enum_long_2_DurationType(nRetVal);
+  
 };
 
 Ice::Int NWScriptI::getItemPropertyParam1(const NWN::NWItemProperty& iProp, const Ice::Current& ice) {
@@ -7573,29 +8603,8 @@ NWN::AssociateCommand NWScriptI::getLastAssociateCommand(const NWN::NWObject& oA
   int nRetVal;
   StackPopInteger(&nRetVal);
   unlock(getLastAssociateCommand_mutex, "getLastAssociateCommand");
-  if (nRetVal == -19) return NWN::InventoryCommand;
-  if (nRetVal == -8) return NWN::UnsummonFamiliarCommand;
-  if (nRetVal == -13) return NWN::UnpossessFamiliarCommand;
-  if (nRetVal == -2) return NWN::StandGroundCommand;
-  if (nRetVal == -18) return NWN::PickLockCommand;
-  if (nRetVal == -7) return NWN::GuardMasterCommand;
-  if (nRetVal == -23) return NWN::ToggleSearchCommand;
-  if (nRetVal == -12) return NWN::ReleaseDominationCommand;
-  if (nRetVal == -17) return NWN::LeavePartyCommand;
-  if (nRetVal == -6) return NWN::MasterFailedLockpickCommand;
-  if (nRetVal == -22) return NWN::ToggleStealthCommand;
-  if (nRetVal == -11) return NWN::MasterUnderAttackCommand;
-  if (nRetVal == -16) return NWN::MasterGoingToBeAttackedCommand;
-  if (nRetVal == -5) return NWN::FollowMasterCommand;
-  if (nRetVal == -21) return NWN::ToggleCastingCommand;
-  if (nRetVal == -10) return NWN::UnsummonSummonedCommand;
-  if (nRetVal == -15) return NWN::MasterAttackedOtherCommand;
-  if (nRetVal == -4) return NWN::HealMasterCommand;
-  if (nRetVal == -20) return NWN::DisarmTrapCommand;
-  if (nRetVal == -9) return NWN::UnsummonAnimalCompanionCommand;
-  if (nRetVal == -14) return NWN::MasterSawTrapCommand;
-  if (nRetVal == -3) return NWN::AttackNearestCommand;
-  printf("Error: Unmapped enum return type in getLastAssociateCommand of type AssociateCommand: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
+    return enum_long_2_AssociateCommand(nRetVal);
+  
 };
 
 NWN::CombatMode NWScriptI::getLastAttackMode(const NWN::NWObject& oCreature, const Ice::Current& ice) {
@@ -7609,18 +8618,8 @@ NWN::CombatMode NWScriptI::getLastAttackMode(const NWN::NWObject& oCreature, con
   int nRetVal;
   StackPopInteger(&nRetVal);
   unlock(getLastAttackMode_mutex, "getLastAttackMode");
-  if (nRetVal == 5) return NWN::RapidShotCombatMode;
-  if (nRetVal == 0) return NWN::InvalidCombatMode;
-  if (nRetVal == 6) return NWN::ExpertiseCombatMode;
-  if (nRetVal == 1) return NWN::ParryCombatMode;
-  if (nRetVal == 7) return NWN::ImprovedExpertiseCombatMode;
-  if (nRetVal == 2) return NWN::PowerAttackCombatMode;
-  if (nRetVal == 8) return NWN::DefensiveCastingCombatMode;
-  if (nRetVal == 3) return NWN::ImprovedPowerAttackCombatMode;
-  if (nRetVal == 9) return NWN::DirtyFightingCombatMode;
-  if (nRetVal == 4) return NWN::FlurryOfBlowsCombatMode;
-  if (nRetVal == 10) return NWN::DefensiveStanceCombatMode;
-  printf("Error: Unmapped enum return type in getLastAttackMode of type CombatMode: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
+    return enum_long_2_CombatMode(nRetVal);
+  
 };
 
 NWN::SpecialAttack NWScriptI::getLastAttackType(const NWN::NWObject& oCreature, const Ice::Current& ice) {
@@ -7634,18 +8633,8 @@ NWN::SpecialAttack NWScriptI::getLastAttackType(const NWN::NWObject& oCreature, 
   int nRetVal;
   StackPopInteger(&nRetVal);
   unlock(getLastAttackType_mutex, "getLastAttackType");
-  if (nRetVal == 5) return NWN::ImprovedDisarmSpecialAttack;
-  if (nRetVal == 0) return NWN::InvalidSpecialAttack;
-  if (nRetVal == 6) return NWN::KnockdownSpecialAttack;
-  if (nRetVal == 1) return NWN::CalledShotLegSpecialAttack;
-  if (nRetVal == 7) return NWN::ImprovedKnockdownSpecialAttack;
-  if (nRetVal == 2) return NWN::CalledShotArmSpecialAttack;
-  if (nRetVal == 8) return NWN::StunningFistSpecialAttack;
-  if (nRetVal == 3) return NWN::SapSpecialAttack;
-  if (nRetVal == 9) return NWN::FlurryOfBlowsSpecialAttack;
-  if (nRetVal == 4) return NWN::DisarmSpecialAttack;
-  if (nRetVal == 10) return NWN::RapidShotSpecialAttack;
-  printf("Error: Unmapped enum return type in getLastAttackType of type SpecialAttack: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
+    return enum_long_2_SpecialAttack(nRetVal);
+  
 };
 
 NWN::NWObject NWScriptI::getLastAttacker(const NWN::NWObject& oAttackee, const Ice::Current& ice) {
@@ -8385,15 +9374,8 @@ NWN::MetaMagic NWScriptI::getMetaMagicFeat(const Ice::Current& ice) {
   int nRetVal;
   StackPopInteger(&nRetVal);
   unlock(getMetaMagicFeat_mutex, "getMetaMagicFeat");
-  if (nRetVal == 16) return NWN::SilentMeta;
-  if (nRetVal == 0) return NWN::NoneMeta;
-  if (nRetVal == 1) return NWN::EmpowerMeta;
-  if (nRetVal == 255) return NWN::AnyMeta;
-  if (nRetVal == 2) return NWN::ExtendMeta;
-  if (nRetVal == 8) return NWN::QuickenMeta;
-  if (nRetVal == 4) return NWN::MaximizeMeta;
-  if (nRetVal == 32) return NWN::StillMeta;
-  printf("Error: Unmapped enum return type in getMetaMagicFeat of type MetaMagic: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
+    return enum_long_2_MetaMagic(nRetVal);
+  
 };
 
 NWN::NWObject NWScriptI::getModule(const Ice::Current& ice) {
@@ -8605,18 +9587,8 @@ NWN::NWObject NWScriptI::getNearestObject(NWN::ObjectType tObjectType, const NWN
   callCounter += 1;
   StackPushInteger(nNth);
   StackPushObject(oTarget.id);
-  if (tObjectType == NWN::AOE) StackPushInteger(16);
-   else if (tObjectType == NWN::InvalidObject) StackPushInteger(0);
-   else if (tObjectType == NWN::Creature) StackPushInteger(1);
-   else if (tObjectType == NWN::Store) StackPushInteger(128);
-   else if (tObjectType == NWN::Item) StackPushInteger(2);
-   else if (tObjectType == NWN::Door) StackPushInteger(8);
-   else if (tObjectType == NWN::Encounter) StackPushInteger(256);
-   else if (tObjectType == NWN::All) StackPushInteger(32767);
-   else if (tObjectType == NWN::Placeable) StackPushInteger(64);
-   else if (tObjectType == NWN::Trigger) StackPushInteger(4);
-   else if (tObjectType == NWN::Waypoint) StackPushInteger(32);
-   else { printf("Invalid enum value in getNearestObject for parameter tObjectType of type ObjectType passed: %d. Cannot continue, and it's your fault!\n", tObjectType); exit(1); };
+  StackPushInteger(enum_ObjectType_2_long(tObjectType));
+  
 
   VM_ExecuteCommand(227, 3);
 
@@ -8660,18 +9632,8 @@ NWN::NWObject NWScriptI::getNearestObjectToLocation(NWN::ObjectType tObjectType,
   lLocation_ptr->OrientationZ = lLocation.orientationZ;
   lLocation_ptr->AreaID = lLocation.area.id;
   StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, lLocation_ptr);
-  if (tObjectType == NWN::AOE) StackPushInteger(16);
-   else if (tObjectType == NWN::InvalidObject) StackPushInteger(0);
-   else if (tObjectType == NWN::Creature) StackPushInteger(1);
-   else if (tObjectType == NWN::Store) StackPushInteger(128);
-   else if (tObjectType == NWN::Item) StackPushInteger(2);
-   else if (tObjectType == NWN::Door) StackPushInteger(8);
-   else if (tObjectType == NWN::Encounter) StackPushInteger(256);
-   else if (tObjectType == NWN::All) StackPushInteger(32767);
-   else if (tObjectType == NWN::Placeable) StackPushInteger(64);
-   else if (tObjectType == NWN::Trigger) StackPushInteger(4);
-   else if (tObjectType == NWN::Waypoint) StackPushInteger(32);
-   else { printf("Invalid enum value in getNearestObjectToLocation for parameter tObjectType of type ObjectType passed: %d. Cannot continue, and it's your fault!\n", tObjectType); exit(1); };
+  StackPushInteger(enum_ObjectType_2_long(tObjectType));
+  
 
   VM_ExecuteCommand(228, 3);
 
@@ -8720,8 +9682,8 @@ NWN::NWEffect NWScriptI::getNextEffect(const NWN::NWObject& oCreature, const Ice
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(getNextEffect_mutex, "getNextEffect");
@@ -8844,12 +9806,8 @@ NWN::NWObject NWScriptI::getNextObjectInShape(NWN::ShapeType tShapeType, Ice::Do
   lTarget_ptr->AreaID = lTarget.area.id;
   StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, lTarget_ptr);
   StackPushFloat(fSize);
-  if (tShapeType == NWN::SpellCylinderShape) StackPushInteger(0);
-   else if (tShapeType == NWN::ConeShape) StackPushInteger(1);
-   else if (tShapeType == NWN::CubeShape) StackPushInteger(2);
-   else if (tShapeType == NWN::SpellConeShape) StackPushInteger(3);
-   else if (tShapeType == NWN::SphereShape) StackPushInteger(4);
-   else { printf("Invalid enum value in getNextObjectInShape for parameter tShapeType of type ShapeType passed: %d. Cannot continue, and it's your fault!\n", tShapeType); exit(1); };
+  StackPushInteger(enum_ShapeType_2_long(tShapeType));
+  
 
   VM_ExecuteCommand(129, 6);
 
@@ -8948,18 +9906,8 @@ NWN::ObjectType NWScriptI::getObjectType(const NWN::NWObject& oTarget, const Ice
   int nRetVal;
   StackPopInteger(&nRetVal);
   unlock(getObjectType_mutex, "getObjectType");
-  if (nRetVal == 16) return NWN::AOE;
-  if (nRetVal == 0) return NWN::InvalidObject;
-  if (nRetVal == 1) return NWN::Creature;
-  if (nRetVal == 128) return NWN::Store;
-  if (nRetVal == 2) return NWN::Item;
-  if (nRetVal == 8) return NWN::Door;
-  if (nRetVal == 256) return NWN::Encounter;
-  if (nRetVal == 32767) return NWN::All;
-  if (nRetVal == 64) return NWN::Placeable;
-  if (nRetVal == 4) return NWN::Trigger;
-  if (nRetVal == 32) return NWN::Waypoint;
-  printf("Error: Unmapped enum return type in getObjectType of type ObjectType: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
+    return enum_long_2_ObjectType(nRetVal);
+  
 };
 
 std::string NWScriptI::getPCChatMessage(const Ice::Current& ice) {
@@ -9138,27 +10086,8 @@ NWN::PhenoType NWScriptI::getPhenoType(const NWN::NWObject& oCreature, const Ice
   int nRetVal;
   StackPopInteger(&nRetVal);
   unlock(getPhenoType_mutex, "getPhenoType");
-  if (nRetVal == 16) return NWN::Custom14PhenoType;
-  if (nRetVal == 5) return NWN::Custom3PhenoType;
-  if (nRetVal == 11) return NWN::Custom9PhenoType;
-  if (nRetVal == 0) return NWN::NormalPhenoType;
-  if (nRetVal == 17) return NWN::Custom15PhenoType;
-  if (nRetVal == 6) return NWN::Custom4PhenoType;
-  if (nRetVal == 12) return NWN::Custom10PhenoType;
-  if (nRetVal == 18) return NWN::Custom16PhenoType;
-  if (nRetVal == 7) return NWN::Custom5PhenoType;
-  if (nRetVal == 13) return NWN::Custom11PhenoType;
-  if (nRetVal == 2) return NWN::BigPhenoType;
-  if (nRetVal == 19) return NWN::Custom17PhenoType;
-  if (nRetVal == 8) return NWN::Custom6PhenoType;
-  if (nRetVal == 14) return NWN::Custom12PhenoType;
-  if (nRetVal == 3) return NWN::Custom1PhenoType;
-  if (nRetVal == 20) return NWN::Custom18PhenoType;
-  if (nRetVal == 9) return NWN::Custom7PhenoType;
-  if (nRetVal == 15) return NWN::Custom13PhenoType;
-  if (nRetVal == 4) return NWN::Custom2PhenoType;
-  if (nRetVal == 10) return NWN::Custom8PhenoType;
-  printf("Error: Unmapped enum return type in getPhenoType of type PhenoType: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
+    return enum_long_2_PhenoType(nRetVal);
+  
 };
 
 bool NWScriptI::getPickpocketableFlag(const NWN::NWObject& oItem, const Ice::Current& ice) {
@@ -9296,33 +10225,8 @@ NWN::RacialType NWScriptI::getRacialType(const NWN::NWObject& oCreature, const I
   int nRetVal;
   StackPopInteger(&nRetVal);
   unlock(getRacialType_mutex, "getRacialType");
-  if (nRetVal == 16) return NWN::ElementalRace;
-  if (nRetVal == 5) return NWN::HalforcRace;
-  if (nRetVal == 11) return NWN::DragonRace;
-  if (nRetVal == 0) return NWN::DwarfRace;
-  if (nRetVal == 28) return NWN::InvalidRace;
-  if (nRetVal == 17) return NWN::FeyRace;
-  if (nRetVal == 6) return NWN::HumanRace;
-  if (nRetVal == 23) return NWN::ShapechangerRace;
-  if (nRetVal == 12) return NWN::HumanoidGoblinoidRace;
-  if (nRetVal == 1) return NWN::ElfRace;
-  if (nRetVal == 29) return NWN::OozeRace;
-  if (nRetVal == 18) return NWN::GiantRace;
-  if (nRetVal == 7) return NWN::AberrationRace;
-  if (nRetVal == 24) return NWN::UndeadRace;
-  if (nRetVal == 13) return NWN::HumanoidMonstrousRace;
-  if (nRetVal == 2) return NWN::GnomeRace;
-  if (nRetVal == 19) return NWN::MagicalBeastRace;
-  if (nRetVal == 8) return NWN::AnimalRace;
-  if (nRetVal == 25) return NWN::VerminRace;
-  if (nRetVal == 14) return NWN::HumanoidOrcRace;
-  if (nRetVal == 3) return NWN::HalflingRace;
-  if (nRetVal == 20) return NWN::OutsiderRace;
-  if (nRetVal == 9) return NWN::BeastRace;
-  if (nRetVal == 15) return NWN::HumanoidReptilianRace;
-  if (nRetVal == 4) return NWN::HalfelfRace;
-  if (nRetVal == 10) return NWN::ConstructRace;
-  printf("Error: Unmapped enum return type in getRacialType of type RacialType: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
+    return enum_long_2_RacialType(nRetVal);
+  
 };
 
 Ice::Int NWScriptI::getReflexAdjustedDamage(Ice::Int nDamage, const NWN::NWObject& oTarget, Ice::Int nDC, NWN::SaveType tSaveType, const NWN::NWObject& oSaveVersus, const Ice::Current& ice) {
@@ -9331,27 +10235,8 @@ Ice::Int NWScriptI::getReflexAdjustedDamage(Ice::Int nDamage, const NWN::NWObjec
   lock(getReflexAdjustedDamage_mutex, "getReflexAdjustedDamage");
   callCounter += 1;
   StackPushObject(oSaveVersus.id);
-  if (tSaveType == NWN::GoodSaveType) StackPushInteger(16);
-   else if (tSaveType == NWN::SonicSaveType) StackPushInteger(5);
-   else if (tSaveType == NWN::DeathSaveType) StackPushInteger(11);
-   else if (tSaveType == NWN::AllOrNoneSaveType) StackPushInteger(0);
-   else if (tSaveType == NWN::EvilSaveType) StackPushInteger(17);
-   else if (tSaveType == NWN::AcidSaveType) StackPushInteger(6);
-   else if (tSaveType == NWN::ColdSaveType) StackPushInteger(12);
-   else if (tSaveType == NWN::MindSpellsSaveType) StackPushInteger(1);
-   else if (tSaveType == NWN::LawSaveType) StackPushInteger(18);
-   else if (tSaveType == NWN::FireSaveType) StackPushInteger(7);
-   else if (tSaveType == NWN::DivineSaveType) StackPushInteger(13);
-   else if (tSaveType == NWN::PoisonSaveType) StackPushInteger(2);
-   else if (tSaveType == NWN::ChaosSaveType) StackPushInteger(19);
-   else if (tSaveType == NWN::ElectricitySaveType) StackPushInteger(8);
-   else if (tSaveType == NWN::TrapSaveType) StackPushInteger(14);
-   else if (tSaveType == NWN::DiseaseSaveType) StackPushInteger(3);
-   else if (tSaveType == NWN::PositiveSaveType) StackPushInteger(9);
-   else if (tSaveType == NWN::SpellSaveType) StackPushInteger(15);
-   else if (tSaveType == NWN::FearSaveType) StackPushInteger(4);
-   else if (tSaveType == NWN::NegativeSaveType) StackPushInteger(10);
-   else { printf("Invalid enum value in getReflexAdjustedDamage for parameter tSaveType of type SaveType passed: %d. Cannot continue, and it's your fault!\n", tSaveType); exit(1); };
+  StackPushInteger(enum_SaveType_2_long(tSaveType));
+  
   StackPushInteger(nDC);
   StackPushObject(oTarget.id);
   StackPushInteger(nDamage);
@@ -9545,11 +10430,8 @@ Ice::Int NWScriptI::getStandardFactionReputation(NWN::StandardFaction tStandardF
   lock(getStandardFactionReputation_mutex, "getStandardFactionReputation");
   callCounter += 1;
   StackPushObject(oCreature.id);
-  if (tStandardFaction == NWN::Hostile) StackPushInteger(0);
-   else if (tStandardFaction == NWN::Commoner) StackPushInteger(1);
-   else if (tStandardFaction == NWN::Merchant) StackPushInteger(2);
-   else if (tStandardFaction == NWN::Defender) StackPushInteger(3);
-   else { printf("Invalid enum value in getStandardFactionReputation for parameter tStandardFaction of type StandardFaction passed: %d. Cannot continue, and it's your fault!\n", tStandardFaction); exit(1); };
+  StackPushInteger(enum_StandardFaction_2_long(tStandardFaction));
+  
 
   VM_ExecuteCommand(524, 2);
 
@@ -9665,12 +10547,8 @@ Ice::Double NWScriptI::getStrRefSoundDuration(Ice::Int nStrRef, const Ice::Curre
 std::string NWScriptI::getStringByStrRef(Ice::Int nStrRef, NWN::Gender tGender, const Ice::Current& ice) {
   lock(getStringByStrRef_mutex, "getStringByStrRef");
   callCounter += 1;
-  if (tGender == NWN::MaleGender) StackPushInteger(0);
-   else if (tGender == NWN::Female) StackPushInteger(1);
-   else if (tGender == NWN::BothGender) StackPushInteger(2);
-   else if (tGender == NWN::OtherGender) StackPushInteger(3);
-   else if (tGender == NWN::NoneGender) StackPushInteger(4);
-   else { printf("Invalid enum value in getStringByStrRef for parameter tGender of type Gender passed: %d. Cannot continue, and it's your fault!\n", tGender); exit(1); };
+  StackPushInteger(enum_Gender_2_long(tGender));
+  
   StackPushInteger(nStrRef);
 
   VM_ExecuteCommand(239, 2);
@@ -9810,39 +10688,8 @@ NWN::TileMainLightColor NWScriptI::getTileMainLight1Color(const NWN::NWLocation&
   int nRetVal;
   StackPopInteger(&nRetVal);
   unlock(getTileMainLight1Color_mutex, "getTileMainLight1Color");
-  if (nRetVal == 27) return NWN::RedTileMainLightColor;
-  if (nRetVal == 16) return NWN::PaleDarkBlueTileMainLightColor;
-  if (nRetVal == 5) return NWN::DarkYellowTileMainLightColor;
-  if (nRetVal == 22) return NWN::PalePurpleTileMainLightColor;
-  if (nRetVal == 11) return NWN::GreenTileMainLightColor;
-  if (nRetVal == 0) return NWN::BlackTileMainLightColor;
-  if (nRetVal == 28) return NWN::PaleDarkOrangeTileMainLightColor;
-  if (nRetVal == 17) return NWN::DarkBlueTileMainLightColor;
-  if (nRetVal == 6) return NWN::PaleYellowTileMainLightColor;
-  if (nRetVal == 23) return NWN::PurpleTileMainLightColor;
-  if (nRetVal == 12) return NWN::PaleDarkAquaTileMainLightColor;
-  if (nRetVal == 1) return NWN::DimWhiteTileMainLightColor;
-  if (nRetVal == 29) return NWN::DarkOrangeTileMainLightColor;
-  if (nRetVal == 18) return NWN::PaleBlueTileMainLightColor;
-  if (nRetVal == 7) return NWN::YellowTileMainLightColor;
-  if (nRetVal == 24) return NWN::PaleDarkRedTileMainLightColor;
-  if (nRetVal == 13) return NWN::DarkAquaTileMainLightColor;
-  if (nRetVal == 2) return NWN::WhiteTileMainLightColor;
-  if (nRetVal == 30) return NWN::PaleOrangeTileMainLightColor;
-  if (nRetVal == 19) return NWN::BlueTileMainLightColor;
-  if (nRetVal == 8) return NWN::PaleDarkGreenTileMainLightColor;
-  if (nRetVal == 25) return NWN::DarkRedTileMainLightColor;
-  if (nRetVal == 14) return NWN::PaleAquaTileMainLightColor;
-  if (nRetVal == 3) return NWN::BrightWhiteTileMainLightColor;
-  if (nRetVal == 31) return NWN::OrangeTileMainLightColor;
-  if (nRetVal == 20) return NWN::PaleDarkPurpleTileMainLightColor;
-  if (nRetVal == 9) return NWN::DarkGreenTileMainLightColor;
-  if (nRetVal == 26) return NWN::PaleRedTileMainLightColor;
-  if (nRetVal == 15) return NWN::AquaTileMainLightColor;
-  if (nRetVal == 4) return NWN::PaleDarkYellowTileMainLightColor;
-  if (nRetVal == 21) return NWN::DarkPurpleTileMainLightColor;
-  if (nRetVal == 10) return NWN::PaleGreenTileMainLightColor;
-  printf("Error: Unmapped enum return type in getTileMainLight1Color of type TileMainLightColor: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
+    return enum_long_2_TileMainLightColor(nRetVal);
+  
 };
 
 NWN::TileMainLightColor NWScriptI::getTileMainLight2Color(const NWN::NWLocation& lTile, const Ice::Current& ice) {
@@ -9864,39 +10711,8 @@ NWN::TileMainLightColor NWScriptI::getTileMainLight2Color(const NWN::NWLocation&
   int nRetVal;
   StackPopInteger(&nRetVal);
   unlock(getTileMainLight2Color_mutex, "getTileMainLight2Color");
-  if (nRetVal == 27) return NWN::RedTileMainLightColor;
-  if (nRetVal == 16) return NWN::PaleDarkBlueTileMainLightColor;
-  if (nRetVal == 5) return NWN::DarkYellowTileMainLightColor;
-  if (nRetVal == 22) return NWN::PalePurpleTileMainLightColor;
-  if (nRetVal == 11) return NWN::GreenTileMainLightColor;
-  if (nRetVal == 0) return NWN::BlackTileMainLightColor;
-  if (nRetVal == 28) return NWN::PaleDarkOrangeTileMainLightColor;
-  if (nRetVal == 17) return NWN::DarkBlueTileMainLightColor;
-  if (nRetVal == 6) return NWN::PaleYellowTileMainLightColor;
-  if (nRetVal == 23) return NWN::PurpleTileMainLightColor;
-  if (nRetVal == 12) return NWN::PaleDarkAquaTileMainLightColor;
-  if (nRetVal == 1) return NWN::DimWhiteTileMainLightColor;
-  if (nRetVal == 29) return NWN::DarkOrangeTileMainLightColor;
-  if (nRetVal == 18) return NWN::PaleBlueTileMainLightColor;
-  if (nRetVal == 7) return NWN::YellowTileMainLightColor;
-  if (nRetVal == 24) return NWN::PaleDarkRedTileMainLightColor;
-  if (nRetVal == 13) return NWN::DarkAquaTileMainLightColor;
-  if (nRetVal == 2) return NWN::WhiteTileMainLightColor;
-  if (nRetVal == 30) return NWN::PaleOrangeTileMainLightColor;
-  if (nRetVal == 19) return NWN::BlueTileMainLightColor;
-  if (nRetVal == 8) return NWN::PaleDarkGreenTileMainLightColor;
-  if (nRetVal == 25) return NWN::DarkRedTileMainLightColor;
-  if (nRetVal == 14) return NWN::PaleAquaTileMainLightColor;
-  if (nRetVal == 3) return NWN::BrightWhiteTileMainLightColor;
-  if (nRetVal == 31) return NWN::OrangeTileMainLightColor;
-  if (nRetVal == 20) return NWN::PaleDarkPurpleTileMainLightColor;
-  if (nRetVal == 9) return NWN::DarkGreenTileMainLightColor;
-  if (nRetVal == 26) return NWN::PaleRedTileMainLightColor;
-  if (nRetVal == 15) return NWN::AquaTileMainLightColor;
-  if (nRetVal == 4) return NWN::PaleDarkYellowTileMainLightColor;
-  if (nRetVal == 21) return NWN::DarkPurpleTileMainLightColor;
-  if (nRetVal == 10) return NWN::PaleGreenTileMainLightColor;
-  printf("Error: Unmapped enum return type in getTileMainLight2Color of type TileMainLightColor: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
+    return enum_long_2_TileMainLightColor(nRetVal);
+  
 };
 
 NWN::TileSourceLightColor NWScriptI::getTileSourceLight1Color(const NWN::NWLocation& lTile, const Ice::Current& ice) {
@@ -9918,23 +10734,8 @@ NWN::TileSourceLightColor NWScriptI::getTileSourceLight1Color(const NWN::NWLocat
   int nRetVal;
   StackPopInteger(&nRetVal);
   unlock(getTileSourceLight1Color_mutex, "getTileSourceLight1Color");
-  if (nRetVal == 5) return NWN::PaleGreenTileSourceLightColor;
-  if (nRetVal == 11) return NWN::PalePurpleTileSourceLightColor;
-  if (nRetVal == 0) return NWN::BlackTileSourceLightColor;
-  if (nRetVal == 6) return NWN::PaleDarkAquaTileSourceLightColor;
-  if (nRetVal == 12) return NWN::PaleDarkRedTileSourceLightColor;
-  if (nRetVal == 1) return NWN::WhiteTileSourceLightColor;
-  if (nRetVal == 7) return NWN::PaleAquaTileSourceLightColor;
-  if (nRetVal == 13) return NWN::PaleRedTileSourceLightColor;
-  if (nRetVal == 2) return NWN::PaleDarkYellowTileSourceLightColor;
-  if (nRetVal == 8) return NWN::PaleDarkBlueTileSourceLightColor;
-  if (nRetVal == 14) return NWN::PaleDarkOrangeTileSourceLightColor;
-  if (nRetVal == 3) return NWN::PaleYellowTileSourceLightColor;
-  if (nRetVal == 9) return NWN::PaleBlueTileSourceLightColor;
-  if (nRetVal == 15) return NWN::PaleOrangeTileSourceLightColor;
-  if (nRetVal == 4) return NWN::PaleDarkGreenTileSourceLightColor;
-  if (nRetVal == 10) return NWN::PaleDarkPurpleTileSourceLightColor;
-  printf("Error: Unmapped enum return type in getTileSourceLight1Color of type TileSourceLightColor: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
+    return enum_long_2_TileSourceLightColor(nRetVal);
+  
 };
 
 NWN::TileSourceLightColor NWScriptI::getTileSourceLight2Color(const NWN::NWLocation& lTile, const Ice::Current& ice) {
@@ -9956,23 +10757,8 @@ NWN::TileSourceLightColor NWScriptI::getTileSourceLight2Color(const NWN::NWLocat
   int nRetVal;
   StackPopInteger(&nRetVal);
   unlock(getTileSourceLight2Color_mutex, "getTileSourceLight2Color");
-  if (nRetVal == 5) return NWN::PaleGreenTileSourceLightColor;
-  if (nRetVal == 11) return NWN::PalePurpleTileSourceLightColor;
-  if (nRetVal == 0) return NWN::BlackTileSourceLightColor;
-  if (nRetVal == 6) return NWN::PaleDarkAquaTileSourceLightColor;
-  if (nRetVal == 12) return NWN::PaleDarkRedTileSourceLightColor;
-  if (nRetVal == 1) return NWN::WhiteTileSourceLightColor;
-  if (nRetVal == 7) return NWN::PaleAquaTileSourceLightColor;
-  if (nRetVal == 13) return NWN::PaleRedTileSourceLightColor;
-  if (nRetVal == 2) return NWN::PaleDarkYellowTileSourceLightColor;
-  if (nRetVal == 8) return NWN::PaleDarkBlueTileSourceLightColor;
-  if (nRetVal == 14) return NWN::PaleDarkOrangeTileSourceLightColor;
-  if (nRetVal == 3) return NWN::PaleYellowTileSourceLightColor;
-  if (nRetVal == 9) return NWN::PaleBlueTileSourceLightColor;
-  if (nRetVal == 15) return NWN::PaleOrangeTileSourceLightColor;
-  if (nRetVal == 4) return NWN::PaleDarkGreenTileSourceLightColor;
-  if (nRetVal == 10) return NWN::PaleDarkPurpleTileSourceLightColor;
-  printf("Error: Unmapped enum return type in getTileSourceLight2Color of type TileSourceLightColor: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
+    return enum_long_2_TileSourceLightColor(nRetVal);
+  
 };
 
 std::string NWScriptI::getTilesetResRef(const NWN::NWObject& oArea, const Ice::Current& ice) {
@@ -10317,12 +11103,8 @@ NWN::Weather NWScriptI::getWeather(const NWN::NWObject& oArea, const Ice::Curren
   int nRetVal;
   StackPopInteger(&nRetVal);
   unlock(getWeather_mutex, "getWeather");
-  if (nRetVal == 0) return NWN::ClearWeather;
-  if (nRetVal == 1) return NWN::RainWeather;
-  if (nRetVal == -1) return NWN::InvalidWeather;
-  if (nRetVal == 2) return NWN::SnowWeather;
-  if (nRetVal == 3) return NWN::AreaDefaultsWeather;
-  printf("Error: Unmapped enum return type in getWeather of type Weather: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
+    return enum_long_2_Weather(nRetVal);
+  
 };
 
 Ice::Int NWScriptI::getWeight(const NWN::NWObject& oTarget, const Ice::Current& ice) {
@@ -10520,13 +11302,8 @@ NWN::NWItemProperty NWScriptI::itemPropertyACBonusVsAlign(NWN::IPAlignGroup tIPA
   lock(itemPropertyACBonusVsAlign_mutex, "itemPropertyACBonusVsAlign");
   callCounter += 1;
   StackPushInteger(nACBonus);
-  if (tIPAlignGroup == NWN::EvilAlignGroup) StackPushInteger(5);
-   else if (tIPAlignGroup == NWN::AllAlignGroup) StackPushInteger(0);
-   else if (tIPAlignGroup == NWN::NeutralAlignGroup) StackPushInteger(1);
-   else if (tIPAlignGroup == NWN::LawfulAlignGroup) StackPushInteger(2);
-   else if (tIPAlignGroup == NWN::ChaoticAlignGroup) StackPushInteger(3);
-   else if (tIPAlignGroup == NWN::GoodAlignGroup) StackPushInteger(4);
-   else { printf("Invalid enum value in itemPropertyACBonusVsAlign for parameter tIPAlignGroup of type IPAlignGroup passed: %d. Cannot continue, and it's your fault!\n", tIPAlignGroup); exit(1); };
+  StackPushInteger(enum_IPAlignGroup_2_long(tIPAlignGroup));
+  
 
   VM_ExecuteCommand(618, 2);
 
@@ -10556,21 +11333,8 @@ NWN::NWItemProperty NWScriptI::itemPropertyACBonusVsDmgType(NWN::IPDamageType tI
   lock(itemPropertyACBonusVsDmgType_mutex, "itemPropertyACBonusVsDmgType");
   callCounter += 1;
   StackPushInteger(nACBonus);
-  if (tIPDamageType == NWN::MagicalIPDamage) StackPushInteger(5);
-   else if (tIPDamageType == NWN::NegativeIPDamage) StackPushInteger(11);
-   else if (tIPDamageType == NWN::BludgeoningIPDamage) StackPushInteger(0);
-   else if (tIPDamageType == NWN::AcidIPDamage) StackPushInteger(6);
-   else if (tIPDamageType == NWN::PositiveIPDamage) StackPushInteger(12);
-   else if (tIPDamageType == NWN::PiercingIPDamage) StackPushInteger(1);
-   else if (tIPDamageType == NWN::ColdIPDamage) StackPushInteger(7);
-   else if (tIPDamageType == NWN::SonicIPDamage) StackPushInteger(13);
-   else if (tIPDamageType == NWN::SlashingIPDamage) StackPushInteger(2);
-   else if (tIPDamageType == NWN::DivineIPDamage) StackPushInteger(8);
-   else if (tIPDamageType == NWN::SubdualIPDamage) StackPushInteger(3);
-   else if (tIPDamageType == NWN::ElectricalIPDamage) StackPushInteger(9);
-   else if (tIPDamageType == NWN::PhysicalIPDamage) StackPushInteger(4);
-   else if (tIPDamageType == NWN::FireIPDamage) StackPushInteger(10);
-   else { printf("Invalid enum value in itemPropertyACBonusVsDmgType for parameter tIPDamageType of type IPDamageType passed: %d. Cannot continue, and it's your fault!\n", tIPDamageType); exit(1); };
+  StackPushInteger(enum_IPDamageType_2_long(tIPDamageType));
+  
 
   VM_ExecuteCommand(619, 2);
 
@@ -10600,31 +11364,8 @@ NWN::NWItemProperty NWScriptI::itemPropertyACBonusVsRace(NWN::IPRacialType tIPRa
   lock(itemPropertyACBonusVsRace_mutex, "itemPropertyACBonusVsRace");
   callCounter += 1;
   StackPushInteger(nACBonus);
-  if (tIPRacialType == NWN::ElementalIPRace) StackPushInteger(16);
-   else if (tIPRacialType == NWN::HalforcIPRace) StackPushInteger(5);
-   else if (tIPRacialType == NWN::DragonIPRace) StackPushInteger(11);
-   else if (tIPRacialType == NWN::DwarfIPRace) StackPushInteger(0);
-   else if (tIPRacialType == NWN::FeyIPRace) StackPushInteger(17);
-   else if (tIPRacialType == NWN::HumanIPRace) StackPushInteger(6);
-   else if (tIPRacialType == NWN::ShapechangerIPRace) StackPushInteger(23);
-   else if (tIPRacialType == NWN::HumanoidGoblinoidIPRace) StackPushInteger(12);
-   else if (tIPRacialType == NWN::ElfIPRace) StackPushInteger(1);
-   else if (tIPRacialType == NWN::GiantIPRace) StackPushInteger(18);
-   else if (tIPRacialType == NWN::AberrationIPRace) StackPushInteger(7);
-   else if (tIPRacialType == NWN::UndeadIPRace) StackPushInteger(24);
-   else if (tIPRacialType == NWN::HumanoidMonstrousIPRace) StackPushInteger(13);
-   else if (tIPRacialType == NWN::GnomeIPRace) StackPushInteger(2);
-   else if (tIPRacialType == NWN::MagicalBeastIPRace) StackPushInteger(19);
-   else if (tIPRacialType == NWN::AnimalIPRace) StackPushInteger(8);
-   else if (tIPRacialType == NWN::VerminIPRace) StackPushInteger(25);
-   else if (tIPRacialType == NWN::HumanoidOrcIPRace) StackPushInteger(14);
-   else if (tIPRacialType == NWN::HalflingIPRace) StackPushInteger(3);
-   else if (tIPRacialType == NWN::OutsiderIPRace) StackPushInteger(20);
-   else if (tIPRacialType == NWN::BeastIPRace) StackPushInteger(9);
-   else if (tIPRacialType == NWN::HumanoidReptilianIPRace) StackPushInteger(15);
-   else if (tIPRacialType == NWN::HalfelfIPRace) StackPushInteger(4);
-   else if (tIPRacialType == NWN::ConstructIPRace) StackPushInteger(10);
-   else { printf("Invalid enum value in itemPropertyACBonusVsRace for parameter tIPRacialType of type IPRacialType passed: %d. Cannot continue, and it's your fault!\n", tIPRacialType); exit(1); };
+  StackPushInteger(enum_IPRacialType_2_long(tIPRacialType));
+  
 
   VM_ExecuteCommand(620, 2);
 
@@ -10654,13 +11395,8 @@ NWN::NWItemProperty NWScriptI::itemPropertyACBonusVsSAlign(NWN::Alignment tAlign
   lock(itemPropertyACBonusVsSAlign_mutex, "itemPropertyACBonusVsSAlign");
   callCounter += 1;
   StackPushInteger(nACBonus);
-  if (tAlignment == NWN::Evil) StackPushInteger(5);
-   else if (tAlignment == NWN::Any) StackPushInteger(0);
-   else if (tAlignment == NWN::Neutral) StackPushInteger(1);
-   else if (tAlignment == NWN::Lawful) StackPushInteger(2);
-   else if (tAlignment == NWN::Chaotic) StackPushInteger(3);
-   else if (tAlignment == NWN::Good) StackPushInteger(4);
-   else { printf("Invalid enum value in itemPropertyACBonusVsSAlign for parameter tAlignment of type Alignment passed: %d. Cannot continue, and it's your fault!\n", tAlignment); exit(1); };
+  StackPushInteger(enum_Alignment_2_long(tAlignment));
+  
 
   VM_ExecuteCommand(621, 2);
 
@@ -10690,13 +11426,8 @@ NWN::NWItemProperty NWScriptI::itemPropertyAbilityBonus(NWN::Ability tAbility, I
   lock(itemPropertyAbilityBonus_mutex, "itemPropertyAbilityBonus");
   callCounter += 1;
   StackPushInteger(nBonus);
-  if (tAbility == NWN::Charisma) StackPushInteger(5);
-   else if (tAbility == NWN::Strength) StackPushInteger(0);
-   else if (tAbility == NWN::Dexterity) StackPushInteger(1);
-   else if (tAbility == NWN::Constitution) StackPushInteger(2);
-   else if (tAbility == NWN::Intelligence) StackPushInteger(3);
-   else if (tAbility == NWN::Wisdom) StackPushInteger(4);
-   else { printf("Invalid enum value in itemPropertyAbilityBonus for parameter tAbility of type Ability passed: %d. Cannot continue, and it's your fault!\n", tAbility); exit(1); };
+  StackPushInteger(enum_Ability_2_long(tAbility));
+  
 
   VM_ExecuteCommand(616, 2);
 
@@ -10813,13 +11544,8 @@ NWN::NWItemProperty NWScriptI::itemPropertyAttackBonusVsAlign(NWN::IPAlignGroup 
   lock(itemPropertyAttackBonusVsAlign_mutex, "itemPropertyAttackBonusVsAlign");
   callCounter += 1;
   StackPushInteger(nBonus);
-  if (tIPAlignGroup == NWN::EvilAlignGroup) StackPushInteger(5);
-   else if (tIPAlignGroup == NWN::AllAlignGroup) StackPushInteger(0);
-   else if (tIPAlignGroup == NWN::NeutralAlignGroup) StackPushInteger(1);
-   else if (tIPAlignGroup == NWN::LawfulAlignGroup) StackPushInteger(2);
-   else if (tIPAlignGroup == NWN::ChaoticAlignGroup) StackPushInteger(3);
-   else if (tIPAlignGroup == NWN::GoodAlignGroup) StackPushInteger(4);
-   else { printf("Invalid enum value in itemPropertyAttackBonusVsAlign for parameter tIPAlignGroup of type IPAlignGroup passed: %d. Cannot continue, and it's your fault!\n", tIPAlignGroup); exit(1); };
+  StackPushInteger(enum_IPAlignGroup_2_long(tIPAlignGroup));
+  
 
   VM_ExecuteCommand(667, 2);
 
@@ -10849,31 +11575,8 @@ NWN::NWItemProperty NWScriptI::itemPropertyAttackBonusVsRace(NWN::IPRacialType t
   lock(itemPropertyAttackBonusVsRace_mutex, "itemPropertyAttackBonusVsRace");
   callCounter += 1;
   StackPushInteger(nBonus);
-  if (tIPRacialType == NWN::ElementalIPRace) StackPushInteger(16);
-   else if (tIPRacialType == NWN::HalforcIPRace) StackPushInteger(5);
-   else if (tIPRacialType == NWN::DragonIPRace) StackPushInteger(11);
-   else if (tIPRacialType == NWN::DwarfIPRace) StackPushInteger(0);
-   else if (tIPRacialType == NWN::FeyIPRace) StackPushInteger(17);
-   else if (tIPRacialType == NWN::HumanIPRace) StackPushInteger(6);
-   else if (tIPRacialType == NWN::ShapechangerIPRace) StackPushInteger(23);
-   else if (tIPRacialType == NWN::HumanoidGoblinoidIPRace) StackPushInteger(12);
-   else if (tIPRacialType == NWN::ElfIPRace) StackPushInteger(1);
-   else if (tIPRacialType == NWN::GiantIPRace) StackPushInteger(18);
-   else if (tIPRacialType == NWN::AberrationIPRace) StackPushInteger(7);
-   else if (tIPRacialType == NWN::UndeadIPRace) StackPushInteger(24);
-   else if (tIPRacialType == NWN::HumanoidMonstrousIPRace) StackPushInteger(13);
-   else if (tIPRacialType == NWN::GnomeIPRace) StackPushInteger(2);
-   else if (tIPRacialType == NWN::MagicalBeastIPRace) StackPushInteger(19);
-   else if (tIPRacialType == NWN::AnimalIPRace) StackPushInteger(8);
-   else if (tIPRacialType == NWN::VerminIPRace) StackPushInteger(25);
-   else if (tIPRacialType == NWN::HumanoidOrcIPRace) StackPushInteger(14);
-   else if (tIPRacialType == NWN::HalflingIPRace) StackPushInteger(3);
-   else if (tIPRacialType == NWN::OutsiderIPRace) StackPushInteger(20);
-   else if (tIPRacialType == NWN::BeastIPRace) StackPushInteger(9);
-   else if (tIPRacialType == NWN::HumanoidReptilianIPRace) StackPushInteger(15);
-   else if (tIPRacialType == NWN::HalfelfIPRace) StackPushInteger(4);
-   else if (tIPRacialType == NWN::ConstructIPRace) StackPushInteger(10);
-   else { printf("Invalid enum value in itemPropertyAttackBonusVsRace for parameter tIPRacialType of type IPRacialType passed: %d. Cannot continue, and it's your fault!\n", tIPRacialType); exit(1); };
+  StackPushInteger(enum_IPRacialType_2_long(tIPRacialType));
+  
 
   VM_ExecuteCommand(668, 2);
 
@@ -10903,13 +11606,8 @@ NWN::NWItemProperty NWScriptI::itemPropertyAttackBonusVsSAlign(NWN::Alignment tA
   lock(itemPropertyAttackBonusVsSAlign_mutex, "itemPropertyAttackBonusVsSAlign");
   callCounter += 1;
   StackPushInteger(nBonus);
-  if (tAlignment == NWN::Evil) StackPushInteger(5);
-   else if (tAlignment == NWN::Any) StackPushInteger(0);
-   else if (tAlignment == NWN::Neutral) StackPushInteger(1);
-   else if (tAlignment == NWN::Lawful) StackPushInteger(2);
-   else if (tAlignment == NWN::Chaotic) StackPushInteger(3);
-   else if (tAlignment == NWN::Good) StackPushInteger(4);
-   else { printf("Invalid enum value in itemPropertyAttackBonusVsSAlign for parameter tAlignment of type Alignment passed: %d. Cannot continue, and it's your fault!\n", tAlignment); exit(1); };
+  StackPushInteger(enum_Alignment_2_long(tAlignment));
+  
 
   VM_ExecuteCommand(669, 2);
 
@@ -11175,21 +11873,8 @@ NWN::NWItemProperty NWScriptI::itemPropertyDamageBonus(NWN::IPDamageType tIPDama
   lock(itemPropertyDamageBonus_mutex, "itemPropertyDamageBonus");
   callCounter += 1;
   StackPushInteger(nDamage);
-  if (tIPDamageType == NWN::MagicalIPDamage) StackPushInteger(5);
-   else if (tIPDamageType == NWN::NegativeIPDamage) StackPushInteger(11);
-   else if (tIPDamageType == NWN::BludgeoningIPDamage) StackPushInteger(0);
-   else if (tIPDamageType == NWN::AcidIPDamage) StackPushInteger(6);
-   else if (tIPDamageType == NWN::PositiveIPDamage) StackPushInteger(12);
-   else if (tIPDamageType == NWN::PiercingIPDamage) StackPushInteger(1);
-   else if (tIPDamageType == NWN::ColdIPDamage) StackPushInteger(7);
-   else if (tIPDamageType == NWN::SonicIPDamage) StackPushInteger(13);
-   else if (tIPDamageType == NWN::SlashingIPDamage) StackPushInteger(2);
-   else if (tIPDamageType == NWN::DivineIPDamage) StackPushInteger(8);
-   else if (tIPDamageType == NWN::SubdualIPDamage) StackPushInteger(3);
-   else if (tIPDamageType == NWN::ElectricalIPDamage) StackPushInteger(9);
-   else if (tIPDamageType == NWN::PhysicalIPDamage) StackPushInteger(4);
-   else if (tIPDamageType == NWN::FireIPDamage) StackPushInteger(10);
-   else { printf("Invalid enum value in itemPropertyDamageBonus for parameter tIPDamageType of type IPDamageType passed: %d. Cannot continue, and it's your fault!\n", tIPDamageType); exit(1); };
+  StackPushInteger(enum_IPDamageType_2_long(tIPDamageType));
+  
 
   VM_ExecuteCommand(631, 2);
 
@@ -11219,28 +11904,10 @@ NWN::NWItemProperty NWScriptI::itemPropertyDamageBonusVsAlign(NWN::IPAlignGroup 
   lock(itemPropertyDamageBonusVsAlign_mutex, "itemPropertyDamageBonusVsAlign");
   callCounter += 1;
   StackPushInteger(nDamage);
-  if (tIPDamageType == NWN::MagicalIPDamage) StackPushInteger(5);
-   else if (tIPDamageType == NWN::NegativeIPDamage) StackPushInteger(11);
-   else if (tIPDamageType == NWN::BludgeoningIPDamage) StackPushInteger(0);
-   else if (tIPDamageType == NWN::AcidIPDamage) StackPushInteger(6);
-   else if (tIPDamageType == NWN::PositiveIPDamage) StackPushInteger(12);
-   else if (tIPDamageType == NWN::PiercingIPDamage) StackPushInteger(1);
-   else if (tIPDamageType == NWN::ColdIPDamage) StackPushInteger(7);
-   else if (tIPDamageType == NWN::SonicIPDamage) StackPushInteger(13);
-   else if (tIPDamageType == NWN::SlashingIPDamage) StackPushInteger(2);
-   else if (tIPDamageType == NWN::DivineIPDamage) StackPushInteger(8);
-   else if (tIPDamageType == NWN::SubdualIPDamage) StackPushInteger(3);
-   else if (tIPDamageType == NWN::ElectricalIPDamage) StackPushInteger(9);
-   else if (tIPDamageType == NWN::PhysicalIPDamage) StackPushInteger(4);
-   else if (tIPDamageType == NWN::FireIPDamage) StackPushInteger(10);
-   else { printf("Invalid enum value in itemPropertyDamageBonusVsAlign for parameter tIPDamageType of type IPDamageType passed: %d. Cannot continue, and it's your fault!\n", tIPDamageType); exit(1); };
-  if (tIPAlignGroup == NWN::EvilAlignGroup) StackPushInteger(5);
-   else if (tIPAlignGroup == NWN::AllAlignGroup) StackPushInteger(0);
-   else if (tIPAlignGroup == NWN::NeutralAlignGroup) StackPushInteger(1);
-   else if (tIPAlignGroup == NWN::LawfulAlignGroup) StackPushInteger(2);
-   else if (tIPAlignGroup == NWN::ChaoticAlignGroup) StackPushInteger(3);
-   else if (tIPAlignGroup == NWN::GoodAlignGroup) StackPushInteger(4);
-   else { printf("Invalid enum value in itemPropertyDamageBonusVsAlign for parameter tIPAlignGroup of type IPAlignGroup passed: %d. Cannot continue, and it's your fault!\n", tIPAlignGroup); exit(1); };
+  StackPushInteger(enum_IPDamageType_2_long(tIPDamageType));
+  
+  StackPushInteger(enum_IPAlignGroup_2_long(tIPAlignGroup));
+  
 
   VM_ExecuteCommand(632, 3);
 
@@ -11270,46 +11937,10 @@ NWN::NWItemProperty NWScriptI::itemPropertyDamageBonusVsRace(NWN::IPRacialType t
   lock(itemPropertyDamageBonusVsRace_mutex, "itemPropertyDamageBonusVsRace");
   callCounter += 1;
   StackPushInteger(nDamage);
-  if (tIPDamageType == NWN::MagicalIPDamage) StackPushInteger(5);
-   else if (tIPDamageType == NWN::NegativeIPDamage) StackPushInteger(11);
-   else if (tIPDamageType == NWN::BludgeoningIPDamage) StackPushInteger(0);
-   else if (tIPDamageType == NWN::AcidIPDamage) StackPushInteger(6);
-   else if (tIPDamageType == NWN::PositiveIPDamage) StackPushInteger(12);
-   else if (tIPDamageType == NWN::PiercingIPDamage) StackPushInteger(1);
-   else if (tIPDamageType == NWN::ColdIPDamage) StackPushInteger(7);
-   else if (tIPDamageType == NWN::SonicIPDamage) StackPushInteger(13);
-   else if (tIPDamageType == NWN::SlashingIPDamage) StackPushInteger(2);
-   else if (tIPDamageType == NWN::DivineIPDamage) StackPushInteger(8);
-   else if (tIPDamageType == NWN::SubdualIPDamage) StackPushInteger(3);
-   else if (tIPDamageType == NWN::ElectricalIPDamage) StackPushInteger(9);
-   else if (tIPDamageType == NWN::PhysicalIPDamage) StackPushInteger(4);
-   else if (tIPDamageType == NWN::FireIPDamage) StackPushInteger(10);
-   else { printf("Invalid enum value in itemPropertyDamageBonusVsRace for parameter tIPDamageType of type IPDamageType passed: %d. Cannot continue, and it's your fault!\n", tIPDamageType); exit(1); };
-  if (tIPRacialType == NWN::ElementalIPRace) StackPushInteger(16);
-   else if (tIPRacialType == NWN::HalforcIPRace) StackPushInteger(5);
-   else if (tIPRacialType == NWN::DragonIPRace) StackPushInteger(11);
-   else if (tIPRacialType == NWN::DwarfIPRace) StackPushInteger(0);
-   else if (tIPRacialType == NWN::FeyIPRace) StackPushInteger(17);
-   else if (tIPRacialType == NWN::HumanIPRace) StackPushInteger(6);
-   else if (tIPRacialType == NWN::ShapechangerIPRace) StackPushInteger(23);
-   else if (tIPRacialType == NWN::HumanoidGoblinoidIPRace) StackPushInteger(12);
-   else if (tIPRacialType == NWN::ElfIPRace) StackPushInteger(1);
-   else if (tIPRacialType == NWN::GiantIPRace) StackPushInteger(18);
-   else if (tIPRacialType == NWN::AberrationIPRace) StackPushInteger(7);
-   else if (tIPRacialType == NWN::UndeadIPRace) StackPushInteger(24);
-   else if (tIPRacialType == NWN::HumanoidMonstrousIPRace) StackPushInteger(13);
-   else if (tIPRacialType == NWN::GnomeIPRace) StackPushInteger(2);
-   else if (tIPRacialType == NWN::MagicalBeastIPRace) StackPushInteger(19);
-   else if (tIPRacialType == NWN::AnimalIPRace) StackPushInteger(8);
-   else if (tIPRacialType == NWN::VerminIPRace) StackPushInteger(25);
-   else if (tIPRacialType == NWN::HumanoidOrcIPRace) StackPushInteger(14);
-   else if (tIPRacialType == NWN::HalflingIPRace) StackPushInteger(3);
-   else if (tIPRacialType == NWN::OutsiderIPRace) StackPushInteger(20);
-   else if (tIPRacialType == NWN::BeastIPRace) StackPushInteger(9);
-   else if (tIPRacialType == NWN::HumanoidReptilianIPRace) StackPushInteger(15);
-   else if (tIPRacialType == NWN::HalfelfIPRace) StackPushInteger(4);
-   else if (tIPRacialType == NWN::ConstructIPRace) StackPushInteger(10);
-   else { printf("Invalid enum value in itemPropertyDamageBonusVsRace for parameter tIPRacialType of type IPRacialType passed: %d. Cannot continue, and it's your fault!\n", tIPRacialType); exit(1); };
+  StackPushInteger(enum_IPDamageType_2_long(tIPDamageType));
+  
+  StackPushInteger(enum_IPRacialType_2_long(tIPRacialType));
+  
 
   VM_ExecuteCommand(633, 3);
 
@@ -11339,28 +11970,10 @@ NWN::NWItemProperty NWScriptI::itemPropertyDamageBonusVsSAlign(NWN::Alignment tA
   lock(itemPropertyDamageBonusVsSAlign_mutex, "itemPropertyDamageBonusVsSAlign");
   callCounter += 1;
   StackPushInteger(nDamage);
-  if (tIPDamageType == NWN::MagicalIPDamage) StackPushInteger(5);
-   else if (tIPDamageType == NWN::NegativeIPDamage) StackPushInteger(11);
-   else if (tIPDamageType == NWN::BludgeoningIPDamage) StackPushInteger(0);
-   else if (tIPDamageType == NWN::AcidIPDamage) StackPushInteger(6);
-   else if (tIPDamageType == NWN::PositiveIPDamage) StackPushInteger(12);
-   else if (tIPDamageType == NWN::PiercingIPDamage) StackPushInteger(1);
-   else if (tIPDamageType == NWN::ColdIPDamage) StackPushInteger(7);
-   else if (tIPDamageType == NWN::SonicIPDamage) StackPushInteger(13);
-   else if (tIPDamageType == NWN::SlashingIPDamage) StackPushInteger(2);
-   else if (tIPDamageType == NWN::DivineIPDamage) StackPushInteger(8);
-   else if (tIPDamageType == NWN::SubdualIPDamage) StackPushInteger(3);
-   else if (tIPDamageType == NWN::ElectricalIPDamage) StackPushInteger(9);
-   else if (tIPDamageType == NWN::PhysicalIPDamage) StackPushInteger(4);
-   else if (tIPDamageType == NWN::FireIPDamage) StackPushInteger(10);
-   else { printf("Invalid enum value in itemPropertyDamageBonusVsSAlign for parameter tIPDamageType of type IPDamageType passed: %d. Cannot continue, and it's your fault!\n", tIPDamageType); exit(1); };
-  if (tAlignment == NWN::Evil) StackPushInteger(5);
-   else if (tAlignment == NWN::Any) StackPushInteger(0);
-   else if (tAlignment == NWN::Neutral) StackPushInteger(1);
-   else if (tAlignment == NWN::Lawful) StackPushInteger(2);
-   else if (tAlignment == NWN::Chaotic) StackPushInteger(3);
-   else if (tAlignment == NWN::Good) StackPushInteger(4);
-   else { printf("Invalid enum value in itemPropertyDamageBonusVsSAlign for parameter tAlignment of type Alignment passed: %d. Cannot continue, and it's your fault!\n", tAlignment); exit(1); };
+  StackPushInteger(enum_IPDamageType_2_long(tIPDamageType));
+  
+  StackPushInteger(enum_Alignment_2_long(tAlignment));
+  
 
   VM_ExecuteCommand(634, 3);
 
@@ -11390,21 +12003,8 @@ NWN::NWItemProperty NWScriptI::itemPropertyDamageImmunity(NWN::IPDamageType tIPD
   lock(itemPropertyDamageImmunity_mutex, "itemPropertyDamageImmunity");
   callCounter += 1;
   StackPushInteger(nImmuneBonus);
-  if (tIPDamageType == NWN::MagicalIPDamage) StackPushInteger(5);
-   else if (tIPDamageType == NWN::NegativeIPDamage) StackPushInteger(11);
-   else if (tIPDamageType == NWN::BludgeoningIPDamage) StackPushInteger(0);
-   else if (tIPDamageType == NWN::AcidIPDamage) StackPushInteger(6);
-   else if (tIPDamageType == NWN::PositiveIPDamage) StackPushInteger(12);
-   else if (tIPDamageType == NWN::PiercingIPDamage) StackPushInteger(1);
-   else if (tIPDamageType == NWN::ColdIPDamage) StackPushInteger(7);
-   else if (tIPDamageType == NWN::SonicIPDamage) StackPushInteger(13);
-   else if (tIPDamageType == NWN::SlashingIPDamage) StackPushInteger(2);
-   else if (tIPDamageType == NWN::DivineIPDamage) StackPushInteger(8);
-   else if (tIPDamageType == NWN::SubdualIPDamage) StackPushInteger(3);
-   else if (tIPDamageType == NWN::ElectricalIPDamage) StackPushInteger(9);
-   else if (tIPDamageType == NWN::PhysicalIPDamage) StackPushInteger(4);
-   else if (tIPDamageType == NWN::FireIPDamage) StackPushInteger(10);
-   else { printf("Invalid enum value in itemPropertyDamageImmunity for parameter tIPDamageType of type IPDamageType passed: %d. Cannot continue, and it's your fault!\n", tIPDamageType); exit(1); };
+  StackPushInteger(enum_IPDamageType_2_long(tIPDamageType));
+  
 
   VM_ExecuteCommand(635, 2);
 
@@ -11493,21 +12093,8 @@ NWN::NWItemProperty NWScriptI::itemPropertyDamageResistance(NWN::IPDamageType tI
   lock(itemPropertyDamageResistance_mutex, "itemPropertyDamageResistance");
   callCounter += 1;
   StackPushInteger(nHPResist);
-  if (tIPDamageType == NWN::MagicalIPDamage) StackPushInteger(5);
-   else if (tIPDamageType == NWN::NegativeIPDamage) StackPushInteger(11);
-   else if (tIPDamageType == NWN::BludgeoningIPDamage) StackPushInteger(0);
-   else if (tIPDamageType == NWN::AcidIPDamage) StackPushInteger(6);
-   else if (tIPDamageType == NWN::PositiveIPDamage) StackPushInteger(12);
-   else if (tIPDamageType == NWN::PiercingIPDamage) StackPushInteger(1);
-   else if (tIPDamageType == NWN::ColdIPDamage) StackPushInteger(7);
-   else if (tIPDamageType == NWN::SonicIPDamage) StackPushInteger(13);
-   else if (tIPDamageType == NWN::SlashingIPDamage) StackPushInteger(2);
-   else if (tIPDamageType == NWN::DivineIPDamage) StackPushInteger(8);
-   else if (tIPDamageType == NWN::SubdualIPDamage) StackPushInteger(3);
-   else if (tIPDamageType == NWN::ElectricalIPDamage) StackPushInteger(9);
-   else if (tIPDamageType == NWN::PhysicalIPDamage) StackPushInteger(4);
-   else if (tIPDamageType == NWN::FireIPDamage) StackPushInteger(10);
-   else { printf("Invalid enum value in itemPropertyDamageResistance for parameter tIPDamageType of type IPDamageType passed: %d. Cannot continue, and it's your fault!\n", tIPDamageType); exit(1); };
+  StackPushInteger(enum_IPDamageType_2_long(tIPDamageType));
+  
 
   VM_ExecuteCommand(638, 2);
 
@@ -11537,21 +12124,8 @@ NWN::NWItemProperty NWScriptI::itemPropertyDamageVulnerability(NWN::IPDamageType
   lock(itemPropertyDamageVulnerability_mutex, "itemPropertyDamageVulnerability");
   callCounter += 1;
   StackPushInteger(nVulnerability);
-  if (tIPDamageType == NWN::MagicalIPDamage) StackPushInteger(5);
-   else if (tIPDamageType == NWN::NegativeIPDamage) StackPushInteger(11);
-   else if (tIPDamageType == NWN::BludgeoningIPDamage) StackPushInteger(0);
-   else if (tIPDamageType == NWN::AcidIPDamage) StackPushInteger(6);
-   else if (tIPDamageType == NWN::PositiveIPDamage) StackPushInteger(12);
-   else if (tIPDamageType == NWN::PiercingIPDamage) StackPushInteger(1);
-   else if (tIPDamageType == NWN::ColdIPDamage) StackPushInteger(7);
-   else if (tIPDamageType == NWN::SonicIPDamage) StackPushInteger(13);
-   else if (tIPDamageType == NWN::SlashingIPDamage) StackPushInteger(2);
-   else if (tIPDamageType == NWN::DivineIPDamage) StackPushInteger(8);
-   else if (tIPDamageType == NWN::SubdualIPDamage) StackPushInteger(3);
-   else if (tIPDamageType == NWN::ElectricalIPDamage) StackPushInteger(9);
-   else if (tIPDamageType == NWN::PhysicalIPDamage) StackPushInteger(4);
-   else if (tIPDamageType == NWN::FireIPDamage) StackPushInteger(10);
-   else { printf("Invalid enum value in itemPropertyDamageVulnerability for parameter tIPDamageType of type IPDamageType passed: %d. Cannot continue, and it's your fault!\n", tIPDamageType); exit(1); };
+  StackPushInteger(enum_IPDamageType_2_long(tIPDamageType));
+  
 
   VM_ExecuteCommand(639, 2);
 
@@ -11639,13 +12213,8 @@ NWN::NWItemProperty NWScriptI::itemPropertyDecreaseAbility(NWN::Ability tAbility
   lock(itemPropertyDecreaseAbility_mutex, "itemPropertyDecreaseAbility");
   callCounter += 1;
   StackPushInteger(nModifier);
-  if (tAbility == NWN::Charisma) StackPushInteger(5);
-   else if (tAbility == NWN::Strength) StackPushInteger(0);
-   else if (tAbility == NWN::Dexterity) StackPushInteger(1);
-   else if (tAbility == NWN::Constitution) StackPushInteger(2);
-   else if (tAbility == NWN::Intelligence) StackPushInteger(3);
-   else if (tAbility == NWN::Wisdom) StackPushInteger(4);
-   else { printf("Invalid enum value in itemPropertyDecreaseAbility for parameter tAbility of type Ability passed: %d. Cannot continue, and it's your fault!\n", tAbility); exit(1); };
+  StackPushInteger(enum_Ability_2_long(tAbility));
+  
 
   VM_ExecuteCommand(641, 2);
 
@@ -11734,13 +12303,8 @@ NWN::NWItemProperty NWScriptI::itemPropertyEnhancementBonusVsAlign(NWN::IPAlignG
   lock(itemPropertyEnhancementBonusVsAlign_mutex, "itemPropertyEnhancementBonusVsAlign");
   callCounter += 1;
   StackPushInteger(nBonus);
-  if (tIPAlignGroup == NWN::EvilAlignGroup) StackPushInteger(5);
-   else if (tIPAlignGroup == NWN::AllAlignGroup) StackPushInteger(0);
-   else if (tIPAlignGroup == NWN::NeutralAlignGroup) StackPushInteger(1);
-   else if (tIPAlignGroup == NWN::LawfulAlignGroup) StackPushInteger(2);
-   else if (tIPAlignGroup == NWN::ChaoticAlignGroup) StackPushInteger(3);
-   else if (tIPAlignGroup == NWN::GoodAlignGroup) StackPushInteger(4);
-   else { printf("Invalid enum value in itemPropertyEnhancementBonusVsAlign for parameter tIPAlignGroup of type IPAlignGroup passed: %d. Cannot continue, and it's your fault!\n", tIPAlignGroup); exit(1); };
+  StackPushInteger(enum_IPAlignGroup_2_long(tIPAlignGroup));
+  
 
   VM_ExecuteCommand(623, 2);
 
@@ -11770,31 +12334,8 @@ NWN::NWItemProperty NWScriptI::itemPropertyEnhancementBonusVsRace(NWN::IPRacialT
   lock(itemPropertyEnhancementBonusVsRace_mutex, "itemPropertyEnhancementBonusVsRace");
   callCounter += 1;
   StackPushInteger(nBonus);
-  if (tIPRacialType == NWN::ElementalIPRace) StackPushInteger(16);
-   else if (tIPRacialType == NWN::HalforcIPRace) StackPushInteger(5);
-   else if (tIPRacialType == NWN::DragonIPRace) StackPushInteger(11);
-   else if (tIPRacialType == NWN::DwarfIPRace) StackPushInteger(0);
-   else if (tIPRacialType == NWN::FeyIPRace) StackPushInteger(17);
-   else if (tIPRacialType == NWN::HumanIPRace) StackPushInteger(6);
-   else if (tIPRacialType == NWN::ShapechangerIPRace) StackPushInteger(23);
-   else if (tIPRacialType == NWN::HumanoidGoblinoidIPRace) StackPushInteger(12);
-   else if (tIPRacialType == NWN::ElfIPRace) StackPushInteger(1);
-   else if (tIPRacialType == NWN::GiantIPRace) StackPushInteger(18);
-   else if (tIPRacialType == NWN::AberrationIPRace) StackPushInteger(7);
-   else if (tIPRacialType == NWN::UndeadIPRace) StackPushInteger(24);
-   else if (tIPRacialType == NWN::HumanoidMonstrousIPRace) StackPushInteger(13);
-   else if (tIPRacialType == NWN::GnomeIPRace) StackPushInteger(2);
-   else if (tIPRacialType == NWN::MagicalBeastIPRace) StackPushInteger(19);
-   else if (tIPRacialType == NWN::AnimalIPRace) StackPushInteger(8);
-   else if (tIPRacialType == NWN::VerminIPRace) StackPushInteger(25);
-   else if (tIPRacialType == NWN::HumanoidOrcIPRace) StackPushInteger(14);
-   else if (tIPRacialType == NWN::HalflingIPRace) StackPushInteger(3);
-   else if (tIPRacialType == NWN::OutsiderIPRace) StackPushInteger(20);
-   else if (tIPRacialType == NWN::BeastIPRace) StackPushInteger(9);
-   else if (tIPRacialType == NWN::HumanoidReptilianIPRace) StackPushInteger(15);
-   else if (tIPRacialType == NWN::HalfelfIPRace) StackPushInteger(4);
-   else if (tIPRacialType == NWN::ConstructIPRace) StackPushInteger(10);
-   else { printf("Invalid enum value in itemPropertyEnhancementBonusVsRace for parameter tIPRacialType of type IPRacialType passed: %d. Cannot continue, and it's your fault!\n", tIPRacialType); exit(1); };
+  StackPushInteger(enum_IPRacialType_2_long(tIPRacialType));
+  
 
   VM_ExecuteCommand(624, 2);
 
@@ -11824,13 +12365,8 @@ NWN::NWItemProperty NWScriptI::itemPropertyEnhancementBonusVsSAlign(NWN::Alignme
   lock(itemPropertyEnhancementBonusVsSAlign_mutex, "itemPropertyEnhancementBonusVsSAlign");
   callCounter += 1;
   StackPushInteger(nBonus);
-  if (tAlignment == NWN::Evil) StackPushInteger(5);
-   else if (tAlignment == NWN::Any) StackPushInteger(0);
-   else if (tAlignment == NWN::Neutral) StackPushInteger(1);
-   else if (tAlignment == NWN::Lawful) StackPushInteger(2);
-   else if (tAlignment == NWN::Chaotic) StackPushInteger(3);
-   else if (tAlignment == NWN::Good) StackPushInteger(4);
-   else { printf("Invalid enum value in itemPropertyEnhancementBonusVsSAlign for parameter tAlignment of type Alignment passed: %d. Cannot continue, and it's your fault!\n", tAlignment); exit(1); };
+  StackPushInteger(enum_Alignment_2_long(tAlignment));
+  
 
   VM_ExecuteCommand(625, 2);
 
@@ -11888,21 +12424,8 @@ NWN::NWItemProperty NWScriptI::itemPropertyEnhancementPenalty(Ice::Int nPenalty,
 NWN::NWItemProperty NWScriptI::itemPropertyExtraMeleeDamageType(NWN::IPDamageType tIPDamageType, const Ice::Current& ice) {
   lock(itemPropertyExtraMeleeDamageType_mutex, "itemPropertyExtraMeleeDamageType");
   callCounter += 1;
-  if (tIPDamageType == NWN::MagicalIPDamage) StackPushInteger(5);
-   else if (tIPDamageType == NWN::NegativeIPDamage) StackPushInteger(11);
-   else if (tIPDamageType == NWN::BludgeoningIPDamage) StackPushInteger(0);
-   else if (tIPDamageType == NWN::AcidIPDamage) StackPushInteger(6);
-   else if (tIPDamageType == NWN::PositiveIPDamage) StackPushInteger(12);
-   else if (tIPDamageType == NWN::PiercingIPDamage) StackPushInteger(1);
-   else if (tIPDamageType == NWN::ColdIPDamage) StackPushInteger(7);
-   else if (tIPDamageType == NWN::SonicIPDamage) StackPushInteger(13);
-   else if (tIPDamageType == NWN::SlashingIPDamage) StackPushInteger(2);
-   else if (tIPDamageType == NWN::DivineIPDamage) StackPushInteger(8);
-   else if (tIPDamageType == NWN::SubdualIPDamage) StackPushInteger(3);
-   else if (tIPDamageType == NWN::ElectricalIPDamage) StackPushInteger(9);
-   else if (tIPDamageType == NWN::PhysicalIPDamage) StackPushInteger(4);
-   else if (tIPDamageType == NWN::FireIPDamage) StackPushInteger(10);
-   else { printf("Invalid enum value in itemPropertyExtraMeleeDamageType for parameter tIPDamageType of type IPDamageType passed: %d. Cannot continue, and it's your fault!\n", tIPDamageType); exit(1); };
+  StackPushInteger(enum_IPDamageType_2_long(tIPDamageType));
+  
 
   VM_ExecuteCommand(645, 1);
 
@@ -11931,21 +12454,8 @@ NWN::NWItemProperty NWScriptI::itemPropertyExtraMeleeDamageType(NWN::IPDamageTyp
 NWN::NWItemProperty NWScriptI::itemPropertyExtraRangeDamageType(NWN::IPDamageType tIPDamageType, const Ice::Current& ice) {
   lock(itemPropertyExtraRangeDamageType_mutex, "itemPropertyExtraRangeDamageType");
   callCounter += 1;
-  if (tIPDamageType == NWN::MagicalIPDamage) StackPushInteger(5);
-   else if (tIPDamageType == NWN::NegativeIPDamage) StackPushInteger(11);
-   else if (tIPDamageType == NWN::BludgeoningIPDamage) StackPushInteger(0);
-   else if (tIPDamageType == NWN::AcidIPDamage) StackPushInteger(6);
-   else if (tIPDamageType == NWN::PositiveIPDamage) StackPushInteger(12);
-   else if (tIPDamageType == NWN::PiercingIPDamage) StackPushInteger(1);
-   else if (tIPDamageType == NWN::ColdIPDamage) StackPushInteger(7);
-   else if (tIPDamageType == NWN::SonicIPDamage) StackPushInteger(13);
-   else if (tIPDamageType == NWN::SlashingIPDamage) StackPushInteger(2);
-   else if (tIPDamageType == NWN::DivineIPDamage) StackPushInteger(8);
-   else if (tIPDamageType == NWN::SubdualIPDamage) StackPushInteger(3);
-   else if (tIPDamageType == NWN::ElectricalIPDamage) StackPushInteger(9);
-   else if (tIPDamageType == NWN::PhysicalIPDamage) StackPushInteger(4);
-   else if (tIPDamageType == NWN::FireIPDamage) StackPushInteger(10);
-   else { printf("Invalid enum value in itemPropertyExtraRangeDamageType for parameter tIPDamageType of type IPDamageType passed: %d. Cannot continue, and it's your fault!\n", tIPDamageType); exit(1); };
+  StackPushInteger(enum_IPDamageType_2_long(tIPDamageType));
+  
 
   VM_ExecuteCommand(646, 1);
 
@@ -12087,17 +12597,8 @@ NWN::NWItemProperty NWScriptI::itemPropertyHolyAvenger(const Ice::Current& ice) 
 NWN::NWItemProperty NWScriptI::itemPropertyImmunityMisc(NWN::IPMiscImmunityType tIPMiscImmunityType, const Ice::Current& ice) {
   lock(itemPropertyImmunityMisc_mutex, "itemPropertyImmunityMisc");
   callCounter += 1;
-  if (tIPMiscImmunityType == NWN::FearIPImmunity) StackPushInteger(5);
-   else if (tIPMiscImmunityType == NWN::BackstabIPImmunity) StackPushInteger(0);
-   else if (tIPMiscImmunityType == NWN::KnockdownIPImmunity) StackPushInteger(6);
-   else if (tIPMiscImmunityType == NWN::LevelAbilDrainIPImmunity) StackPushInteger(1);
-   else if (tIPMiscImmunityType == NWN::ParalysisIPImmunity) StackPushInteger(7);
-   else if (tIPMiscImmunityType == NWN::MindSpellsIPImmunity) StackPushInteger(2);
-   else if (tIPMiscImmunityType == NWN::CriticalHitsIPImmunity) StackPushInteger(8);
-   else if (tIPMiscImmunityType == NWN::PoisonIPImmunity) StackPushInteger(3);
-   else if (tIPMiscImmunityType == NWN::DeathMagicIPImmunity) StackPushInteger(9);
-   else if (tIPMiscImmunityType == NWN::DiseaseIPImmunity) StackPushInteger(4);
-   else { printf("Invalid enum value in itemPropertyImmunityMisc for parameter tIPMiscImmunityType of type IPMiscImmunityType passed: %d. Cannot continue, and it's your fault!\n", tIPMiscImmunityType); exit(1); };
+  StackPushInteger(enum_IPMiscImmunityType_2_long(tIPMiscImmunityType));
+  
 
   VM_ExecuteCommand(649, 1);
 
@@ -12241,13 +12742,8 @@ NWN::NWItemProperty NWScriptI::itemPropertyLight(Ice::Int nBrightness, Ice::Int 
 NWN::NWItemProperty NWScriptI::itemPropertyLimitUseByAlign(NWN::IPAlignGroup tIPAlignGroup, const Ice::Current& ice) {
   lock(itemPropertyLimitUseByAlign_mutex, "itemPropertyLimitUseByAlign");
   callCounter += 1;
-  if (tIPAlignGroup == NWN::EvilAlignGroup) StackPushInteger(5);
-   else if (tIPAlignGroup == NWN::AllAlignGroup) StackPushInteger(0);
-   else if (tIPAlignGroup == NWN::NeutralAlignGroup) StackPushInteger(1);
-   else if (tIPAlignGroup == NWN::LawfulAlignGroup) StackPushInteger(2);
-   else if (tIPAlignGroup == NWN::ChaoticAlignGroup) StackPushInteger(3);
-   else if (tIPAlignGroup == NWN::GoodAlignGroup) StackPushInteger(4);
-   else { printf("Invalid enum value in itemPropertyLimitUseByAlign for parameter tIPAlignGroup of type IPAlignGroup passed: %d. Cannot continue, and it's your fault!\n", tIPAlignGroup); exit(1); };
+  StackPushInteger(enum_IPAlignGroup_2_long(tIPAlignGroup));
+  
 
   VM_ExecuteCommand(672, 1);
 
@@ -12305,31 +12801,8 @@ NWN::NWItemProperty NWScriptI::itemPropertyLimitUseByClass(Ice::Int nClass, cons
 NWN::NWItemProperty NWScriptI::itemPropertyLimitUseByRace(NWN::IPRacialType tIPRacialType, const Ice::Current& ice) {
   lock(itemPropertyLimitUseByRace_mutex, "itemPropertyLimitUseByRace");
   callCounter += 1;
-  if (tIPRacialType == NWN::ElementalIPRace) StackPushInteger(16);
-   else if (tIPRacialType == NWN::HalforcIPRace) StackPushInteger(5);
-   else if (tIPRacialType == NWN::DragonIPRace) StackPushInteger(11);
-   else if (tIPRacialType == NWN::DwarfIPRace) StackPushInteger(0);
-   else if (tIPRacialType == NWN::FeyIPRace) StackPushInteger(17);
-   else if (tIPRacialType == NWN::HumanIPRace) StackPushInteger(6);
-   else if (tIPRacialType == NWN::ShapechangerIPRace) StackPushInteger(23);
-   else if (tIPRacialType == NWN::HumanoidGoblinoidIPRace) StackPushInteger(12);
-   else if (tIPRacialType == NWN::ElfIPRace) StackPushInteger(1);
-   else if (tIPRacialType == NWN::GiantIPRace) StackPushInteger(18);
-   else if (tIPRacialType == NWN::AberrationIPRace) StackPushInteger(7);
-   else if (tIPRacialType == NWN::UndeadIPRace) StackPushInteger(24);
-   else if (tIPRacialType == NWN::HumanoidMonstrousIPRace) StackPushInteger(13);
-   else if (tIPRacialType == NWN::GnomeIPRace) StackPushInteger(2);
-   else if (tIPRacialType == NWN::MagicalBeastIPRace) StackPushInteger(19);
-   else if (tIPRacialType == NWN::AnimalIPRace) StackPushInteger(8);
-   else if (tIPRacialType == NWN::VerminIPRace) StackPushInteger(25);
-   else if (tIPRacialType == NWN::HumanoidOrcIPRace) StackPushInteger(14);
-   else if (tIPRacialType == NWN::HalflingIPRace) StackPushInteger(3);
-   else if (tIPRacialType == NWN::OutsiderIPRace) StackPushInteger(20);
-   else if (tIPRacialType == NWN::BeastIPRace) StackPushInteger(9);
-   else if (tIPRacialType == NWN::HumanoidReptilianIPRace) StackPushInteger(15);
-   else if (tIPRacialType == NWN::HalfelfIPRace) StackPushInteger(4);
-   else if (tIPRacialType == NWN::ConstructIPRace) StackPushInteger(10);
-   else { printf("Invalid enum value in itemPropertyLimitUseByRace for parameter tIPRacialType of type IPRacialType passed: %d. Cannot continue, and it's your fault!\n", tIPRacialType); exit(1); };
+  StackPushInteger(enum_IPRacialType_2_long(tIPRacialType));
+  
 
   VM_ExecuteCommand(674, 1);
 
@@ -12358,13 +12831,8 @@ NWN::NWItemProperty NWScriptI::itemPropertyLimitUseByRace(NWN::IPRacialType tIPR
 NWN::NWItemProperty NWScriptI::itemPropertyLimitUseBySAlign(NWN::Alignment tAlignment, const Ice::Current& ice) {
   lock(itemPropertyLimitUseBySAlign_mutex, "itemPropertyLimitUseBySAlign");
   callCounter += 1;
-  if (tAlignment == NWN::Evil) StackPushInteger(5);
-   else if (tAlignment == NWN::Any) StackPushInteger(0);
-   else if (tAlignment == NWN::Neutral) StackPushInteger(1);
-   else if (tAlignment == NWN::Lawful) StackPushInteger(2);
-   else if (tAlignment == NWN::Chaotic) StackPushInteger(3);
-   else if (tAlignment == NWN::Good) StackPushInteger(4);
-   else { printf("Invalid enum value in itemPropertyLimitUseBySAlign for parameter tAlignment of type Alignment passed: %d. Cannot continue, and it's your fault!\n", tAlignment); exit(1); };
+  StackPushInteger(enum_Alignment_2_long(tAlignment));
+  
 
   VM_ExecuteCommand(675, 1);
 
@@ -12805,15 +13273,8 @@ NWN::NWItemProperty NWScriptI::itemPropertySpecialWalk(Ice::Int nWalkType, const
 NWN::NWItemProperty NWScriptI::itemPropertySpellImmunitySchool(NWN::IPSpellSchool tIPSpellSchool, const Ice::Current& ice) {
   lock(itemPropertySpellImmunitySchool_mutex, "itemPropertySpellImmunitySchool");
   callCounter += 1;
-  if (tIPSpellSchool == NWN::IllusionIPSchool) StackPushInteger(5);
-   else if (tIPSpellSchool == NWN::AbjurationIPSchool) StackPushInteger(0);
-   else if (tIPSpellSchool == NWN::NecromancyIPSchool) StackPushInteger(6);
-   else if (tIPSpellSchool == NWN::ConjurationIPSchool) StackPushInteger(1);
-   else if (tIPSpellSchool == NWN::TransmutationIPSchool) StackPushInteger(7);
-   else if (tIPSpellSchool == NWN::DivinationIPSchool) StackPushInteger(2);
-   else if (tIPSpellSchool == NWN::EnchantmentIPSchool) StackPushInteger(3);
-   else if (tIPSpellSchool == NWN::EvocationIPSchool) StackPushInteger(4);
-   else { printf("Invalid enum value in itemPropertySpellImmunitySchool for parameter tIPSpellSchool of type IPSpellSchool passed: %d. Cannot continue, and it's your fault!\n", tIPSpellSchool); exit(1); };
+  StackPushInteger(enum_IPSpellSchool_2_long(tIPSpellSchool));
+  
 
   VM_ExecuteCommand(664, 1);
 
@@ -12900,18 +13361,8 @@ NWN::NWItemProperty NWScriptI::itemPropertyThievesTools(Ice::Int nModifier, cons
 NWN::NWItemProperty NWScriptI::itemPropertyTrap(Ice::Int nTrapLevel, NWN::IPTrapType tIPTrapType, const Ice::Current& ice) {
   lock(itemPropertyTrap_mutex, "itemPropertyTrap");
   callCounter += 1;
-  if (tIPTrapType == NWN::FireIPTrap) StackPushInteger(5);
-   else if (tIPTrapType == NWN::NegativeIPTrap) StackPushInteger(11);
-   else if (tIPTrapType == NWN::ElectricalIPTrap) StackPushInteger(6);
-   else if (tIPTrapType == NWN::SpikeIPTrap) StackPushInteger(1);
-   else if (tIPTrapType == NWN::GasIPTrap) StackPushInteger(7);
-   else if (tIPTrapType == NWN::HolyIPTrap) StackPushInteger(2);
-   else if (tIPTrapType == NWN::FrostIPTrap) StackPushInteger(8);
-   else if (tIPTrapType == NWN::TangleIPTrap) StackPushInteger(3);
-   else if (tIPTrapType == NWN::AcidSplashIPTrap) StackPushInteger(9);
-   else if (tIPTrapType == NWN::BlobOfAcidIPTrap) StackPushInteger(4);
-   else if (tIPTrapType == NWN::SonicIPTrap) StackPushInteger(10);
-   else { printf("Invalid enum value in itemPropertyTrap for parameter tIPTrapType of type IPTrapType passed: %d. Cannot continue, and it's your fault!\n", tIPTrapType); exit(1); };
+  StackPushInteger(enum_IPTrapType_2_long(tIPTrapType));
+  
   StackPushInteger(nTrapLevel);
 
   VM_ExecuteCommand(678, 2);
@@ -13324,8 +13775,8 @@ NWN::NWEffect NWScriptI::magicalEffect(const NWN::NWEffect& eEffect, const Ice::
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(magicalEffect_mutex, "magicalEffect");
@@ -13728,27 +14179,8 @@ NWN::SavingThrowResult NWScriptI::reflexSave(const NWN::NWObject& oCreature, Ice
   lock(reflexSave_mutex, "reflexSave");
   callCounter += 1;
   StackPushObject(oSaveVersus.id);
-  if (tSaveType == NWN::GoodSaveType) StackPushInteger(16);
-   else if (tSaveType == NWN::SonicSaveType) StackPushInteger(5);
-   else if (tSaveType == NWN::DeathSaveType) StackPushInteger(11);
-   else if (tSaveType == NWN::AllOrNoneSaveType) StackPushInteger(0);
-   else if (tSaveType == NWN::EvilSaveType) StackPushInteger(17);
-   else if (tSaveType == NWN::AcidSaveType) StackPushInteger(6);
-   else if (tSaveType == NWN::ColdSaveType) StackPushInteger(12);
-   else if (tSaveType == NWN::MindSpellsSaveType) StackPushInteger(1);
-   else if (tSaveType == NWN::LawSaveType) StackPushInteger(18);
-   else if (tSaveType == NWN::FireSaveType) StackPushInteger(7);
-   else if (tSaveType == NWN::DivineSaveType) StackPushInteger(13);
-   else if (tSaveType == NWN::PoisonSaveType) StackPushInteger(2);
-   else if (tSaveType == NWN::ChaosSaveType) StackPushInteger(19);
-   else if (tSaveType == NWN::ElectricitySaveType) StackPushInteger(8);
-   else if (tSaveType == NWN::TrapSaveType) StackPushInteger(14);
-   else if (tSaveType == NWN::DiseaseSaveType) StackPushInteger(3);
-   else if (tSaveType == NWN::PositiveSaveType) StackPushInteger(9);
-   else if (tSaveType == NWN::SpellSaveType) StackPushInteger(15);
-   else if (tSaveType == NWN::FearSaveType) StackPushInteger(4);
-   else if (tSaveType == NWN::NegativeSaveType) StackPushInteger(10);
-   else { printf("Invalid enum value in reflexSave for parameter tSaveType of type SaveType passed: %d. Cannot continue, and it's your fault!\n", tSaveType); exit(1); };
+  StackPushInteger(enum_SaveType_2_long(tSaveType));
+  
   StackPushInteger(nDC);
   StackPushObject(oCreature.id);
 
@@ -13757,10 +14189,8 @@ NWN::SavingThrowResult NWScriptI::reflexSave(const NWN::NWObject& oCreature, Ice
   int nRetVal;
   StackPopInteger(&nRetVal);
   unlock(reflexSave_mutex, "reflexSave");
-  if (nRetVal == 0) return NWN::FailedRoll;
-  if (nRetVal == 1) return NWN::SucceededRoll;
-  if (nRetVal == 3) return NWN::ImmuneToSaveType;
-  printf("Error: Unmapped enum return type in reflexSave of type SavingThrowResult: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
+    return enum_long_2_SavingThrowResult(nRetVal);
+  
 };
 
 void NWScriptI::removeEffect(const NWN::NWObject& oCreature, const NWN::NWEffect& eEffect, const Ice::Current& ice) {
@@ -13972,13 +14402,8 @@ void NWScriptI::setAILevel(const NWN::NWObject& oTarget, NWN::AILevel tAILevel, 
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
   lock(setAILevel_mutex, "setAILevel");
   callCounter += 1;
-  if (tAILevel == NWN::VeryLowAI) StackPushInteger(0);
-   else if (tAILevel == NWN::LowAI) StackPushInteger(1);
-   else if (tAILevel == NWN::DefaultAI) StackPushInteger(-1);
-   else if (tAILevel == NWN::NormalAI) StackPushInteger(2);
-   else if (tAILevel == NWN::HighAI) StackPushInteger(3);
-   else if (tAILevel == NWN::VeryHighAI) StackPushInteger(4);
-   else { printf("Invalid enum value in setAILevel for parameter tAILevel of type AILevel passed: %d. Cannot continue, and it's your fault!\n", tAILevel); exit(1); };
+  StackPushInteger(enum_AILevel_2_long(tAILevel));
+  
   StackPushObject(oTarget.id);
 
   VM_ExecuteCommand(713, 2);
@@ -13992,19 +14417,8 @@ void NWScriptI::setActionMode(const NWN::NWObject& oCreature, NWN::ActionMode tA
   lock(setActionMode_mutex, "setActionMode");
   callCounter += 1;
   StackPushInteger(bStatus == true ? 1 : 0);
-  if (tActionMode == NWN::CounterspellMode) StackPushInteger(5);
-   else if (tActionMode == NWN::DirtyFightingMode) StackPushInteger(11);
-   else if (tActionMode == NWN::DetectMode) StackPushInteger(0);
-   else if (tActionMode == NWN::FlurryOfBlowsMode) StackPushInteger(6);
-   else if (tActionMode == NWN::StealthMode) StackPushInteger(1);
-   else if (tActionMode == NWN::RapidShotMode) StackPushInteger(7);
-   else if (tActionMode == NWN::ParryMode) StackPushInteger(2);
-   else if (tActionMode == NWN::ExpertiseMode) StackPushInteger(8);
-   else if (tActionMode == NWN::PowerAttackMode) StackPushInteger(3);
-   else if (tActionMode == NWN::ImprovedExpertiseMode) StackPushInteger(9);
-   else if (tActionMode == NWN::ImprovedPowerAttackMode) StackPushInteger(4);
-   else if (tActionMode == NWN::DefensiveCastMode) StackPushInteger(10);
-   else { printf("Invalid enum value in setActionMode for parameter tActionMode of type ActionMode passed: %d. Cannot continue, and it's your fault!\n", tActionMode); exit(1); };
+  StackPushInteger(enum_ActionMode_2_long(tActionMode));
+  
   StackPushObject(oCreature.id);
 
   VM_ExecuteCommand(736, 3);
@@ -14235,26 +14649,8 @@ void NWScriptI::setCreatureBodyPart(NWN::CreaturePart tCreaturePart, Ice::Int nM
   callCounter += 1;
   StackPushObject(oCreature.id);
   StackPushInteger(nModelNumber);
-  if (tCreaturePart == NWN::RightHandPart) StackPushInteger(16);
-   else if (tCreaturePart == NWN::RightThighPart) StackPushInteger(5);
-   else if (tCreaturePart == NWN::LeftForearmPart) StackPushInteger(11);
-   else if (tCreaturePart == NWN::RightFootPart) StackPushInteger(0);
-   else if (tCreaturePart == NWN::LeftHandPart) StackPushInteger(17);
-   else if (tCreaturePart == NWN::PelvisPart) StackPushInteger(6);
-   else if (tCreaturePart == NWN::RightBicepPart) StackPushInteger(12);
-   else if (tCreaturePart == NWN::LeftFootPart) StackPushInteger(1);
-   else if (tCreaturePart == NWN::TorsoPart) StackPushInteger(7);
-   else if (tCreaturePart == NWN::LeftBicepPart) StackPushInteger(13);
-   else if (tCreaturePart == NWN::RightShinPart) StackPushInteger(2);
-   else if (tCreaturePart == NWN::BeltPart) StackPushInteger(8);
-   else if (tCreaturePart == NWN::RightShoulderPart) StackPushInteger(14);
-   else if (tCreaturePart == NWN::LeftShinPart) StackPushInteger(3);
-   else if (tCreaturePart == NWN::HeadPart) StackPushInteger(20);
-   else if (tCreaturePart == NWN::NeckPart) StackPushInteger(9);
-   else if (tCreaturePart == NWN::LeftShoulderPart) StackPushInteger(15);
-   else if (tCreaturePart == NWN::LeftThighPart) StackPushInteger(4);
-   else if (tCreaturePart == NWN::RightForearmPart) StackPushInteger(10);
-   else { printf("Invalid enum value in setCreatureBodyPart for parameter tCreaturePart of type CreaturePart passed: %d. Cannot continue, and it's your fault!\n", tCreaturePart); exit(1); };
+  StackPushInteger(enum_CreaturePart_2_long(tCreaturePart));
+  
 
   VM_ExecuteCommand(793, 3);
 
@@ -14922,14 +15318,8 @@ unlock(setPCChatMessage_mutex, "setPCChatMessage");
 void NWScriptI::setPCChatVolume(NWN::TalkVolume tTalkVolume, const Ice::Current& ice) {
   lock(setPCChatVolume_mutex, "setPCChatVolume");
   callCounter += 1;
-  if (tTalkVolume == NWN::PartyVol) StackPushInteger(5);
-   else if (tTalkVolume == NWN::TalkVol) StackPushInteger(0);
-   else if (tTalkVolume == NWN::TellVol) StackPushInteger(6);
-   else if (tTalkVolume == NWN::WhisperVol) StackPushInteger(1);
-   else if (tTalkVolume == NWN::ShoutVol) StackPushInteger(2);
-   else if (tTalkVolume == NWN::SilentTalkVol) StackPushInteger(3);
-   else if (tTalkVolume == NWN::SilentShoutVol) StackPushInteger(4);
-   else { printf("Invalid enum value in setPCChatVolume for parameter tTalkVolume of type TalkVolume passed: %d. Cannot continue, and it's your fault!\n", tTalkVolume); exit(1); };
+  StackPushInteger(enum_TalkVolume_2_long(tTalkVolume));
+  
 
   VM_ExecuteCommand(842, 1);
 
@@ -14970,15 +15360,8 @@ void NWScriptI::setPanelButtonFlash(const NWN::NWObject& oPlayer, NWN::Button tB
   lock(setPanelButtonFlash_mutex, "setPanelButtonFlash");
   callCounter += 1;
   StackPushInteger(bEnableFlash == true ? 1 : 0);
-  if (tButton == NWN::SpellsButton) StackPushInteger(5);
-   else if (tButton == NWN::MapButton) StackPushInteger(0);
-   else if (tButton == NWN::RestButton) StackPushInteger(6);
-   else if (tButton == NWN::InventoryButton) StackPushInteger(1);
-   else if (tButton == NWN::PvPButton) StackPushInteger(7);
-   else if (tButton == NWN::JournalButton) StackPushInteger(2);
-   else if (tButton == NWN::CharacterButton) StackPushInteger(3);
-   else if (tButton == NWN::OptionsButton) StackPushInteger(4);
-   else { printf("Invalid enum value in setPanelButtonFlash for parameter tButton of type Button passed: %d. Cannot continue, and it's your fault!\n", tButton); exit(1); };
+  StackPushInteger(enum_Button_2_long(tButton));
+  
   StackPushObject(oPlayer.id);
 
   VM_ExecuteCommand(521, 3);
@@ -14992,27 +15375,8 @@ void NWScriptI::setPhenoType(NWN::PhenoType tPhenoType, const NWN::NWObject& oCr
   lock(setPhenoType_mutex, "setPhenoType");
   callCounter += 1;
   StackPushObject(oCreature.id);
-  if (tPhenoType == NWN::Custom14PhenoType) StackPushInteger(16);
-   else if (tPhenoType == NWN::Custom3PhenoType) StackPushInteger(5);
-   else if (tPhenoType == NWN::Custom9PhenoType) StackPushInteger(11);
-   else if (tPhenoType == NWN::NormalPhenoType) StackPushInteger(0);
-   else if (tPhenoType == NWN::Custom15PhenoType) StackPushInteger(17);
-   else if (tPhenoType == NWN::Custom4PhenoType) StackPushInteger(6);
-   else if (tPhenoType == NWN::Custom10PhenoType) StackPushInteger(12);
-   else if (tPhenoType == NWN::Custom16PhenoType) StackPushInteger(18);
-   else if (tPhenoType == NWN::Custom5PhenoType) StackPushInteger(7);
-   else if (tPhenoType == NWN::Custom11PhenoType) StackPushInteger(13);
-   else if (tPhenoType == NWN::BigPhenoType) StackPushInteger(2);
-   else if (tPhenoType == NWN::Custom17PhenoType) StackPushInteger(19);
-   else if (tPhenoType == NWN::Custom6PhenoType) StackPushInteger(8);
-   else if (tPhenoType == NWN::Custom12PhenoType) StackPushInteger(14);
-   else if (tPhenoType == NWN::Custom1PhenoType) StackPushInteger(3);
-   else if (tPhenoType == NWN::Custom18PhenoType) StackPushInteger(20);
-   else if (tPhenoType == NWN::Custom7PhenoType) StackPushInteger(9);
-   else if (tPhenoType == NWN::Custom13PhenoType) StackPushInteger(15);
-   else if (tPhenoType == NWN::Custom2PhenoType) StackPushInteger(4);
-   else if (tPhenoType == NWN::Custom8PhenoType) StackPushInteger(10);
-   else { printf("Invalid enum value in setPhenoType for parameter tPhenoType of type PhenoType passed: %d. Cannot continue, and it's your fault!\n", tPhenoType); exit(1); };
+  StackPushInteger(enum_PhenoType_2_long(tPhenoType));
+  
 
   VM_ExecuteCommand(779, 2);
 
@@ -15117,11 +15481,8 @@ void NWScriptI::setStandardFactionReputation(NWN::StandardFaction tStandardFacti
   callCounter += 1;
   StackPushObject(oCreature.id);
   StackPushInteger(nNewReputation);
-  if (tStandardFaction == NWN::Hostile) StackPushInteger(0);
-   else if (tStandardFaction == NWN::Commoner) StackPushInteger(1);
-   else if (tStandardFaction == NWN::Merchant) StackPushInteger(2);
-   else if (tStandardFaction == NWN::Defender) StackPushInteger(3);
-   else { printf("Invalid enum value in setStandardFactionReputation for parameter tStandardFaction of type StandardFaction passed: %d. Cannot continue, and it's your fault!\n", tStandardFaction); exit(1); };
+  StackPushInteger(enum_StandardFaction_2_long(tStandardFaction));
+  
 
   VM_ExecuteCommand(523, 3);
 
@@ -15198,72 +15559,10 @@ void NWScriptI::setTileMainLightColor(const NWN::NWLocation& lTileLocation, NWN:
   if (lTileLocation.area.id < 0) throw NWN::InvalidObjectException();
   lock(setTileMainLightColor_mutex, "setTileMainLightColor");
   callCounter += 1;
-  if (nMainLight2Color == NWN::RedTileMainLightColor) StackPushInteger(27);
-   else if (nMainLight2Color == NWN::PaleDarkBlueTileMainLightColor) StackPushInteger(16);
-   else if (nMainLight2Color == NWN::DarkYellowTileMainLightColor) StackPushInteger(5);
-   else if (nMainLight2Color == NWN::PalePurpleTileMainLightColor) StackPushInteger(22);
-   else if (nMainLight2Color == NWN::GreenTileMainLightColor) StackPushInteger(11);
-   else if (nMainLight2Color == NWN::BlackTileMainLightColor) StackPushInteger(0);
-   else if (nMainLight2Color == NWN::PaleDarkOrangeTileMainLightColor) StackPushInteger(28);
-   else if (nMainLight2Color == NWN::DarkBlueTileMainLightColor) StackPushInteger(17);
-   else if (nMainLight2Color == NWN::PaleYellowTileMainLightColor) StackPushInteger(6);
-   else if (nMainLight2Color == NWN::PurpleTileMainLightColor) StackPushInteger(23);
-   else if (nMainLight2Color == NWN::PaleDarkAquaTileMainLightColor) StackPushInteger(12);
-   else if (nMainLight2Color == NWN::DimWhiteTileMainLightColor) StackPushInteger(1);
-   else if (nMainLight2Color == NWN::DarkOrangeTileMainLightColor) StackPushInteger(29);
-   else if (nMainLight2Color == NWN::PaleBlueTileMainLightColor) StackPushInteger(18);
-   else if (nMainLight2Color == NWN::YellowTileMainLightColor) StackPushInteger(7);
-   else if (nMainLight2Color == NWN::PaleDarkRedTileMainLightColor) StackPushInteger(24);
-   else if (nMainLight2Color == NWN::DarkAquaTileMainLightColor) StackPushInteger(13);
-   else if (nMainLight2Color == NWN::WhiteTileMainLightColor) StackPushInteger(2);
-   else if (nMainLight2Color == NWN::PaleOrangeTileMainLightColor) StackPushInteger(30);
-   else if (nMainLight2Color == NWN::BlueTileMainLightColor) StackPushInteger(19);
-   else if (nMainLight2Color == NWN::PaleDarkGreenTileMainLightColor) StackPushInteger(8);
-   else if (nMainLight2Color == NWN::DarkRedTileMainLightColor) StackPushInteger(25);
-   else if (nMainLight2Color == NWN::PaleAquaTileMainLightColor) StackPushInteger(14);
-   else if (nMainLight2Color == NWN::BrightWhiteTileMainLightColor) StackPushInteger(3);
-   else if (nMainLight2Color == NWN::OrangeTileMainLightColor) StackPushInteger(31);
-   else if (nMainLight2Color == NWN::PaleDarkPurpleTileMainLightColor) StackPushInteger(20);
-   else if (nMainLight2Color == NWN::DarkGreenTileMainLightColor) StackPushInteger(9);
-   else if (nMainLight2Color == NWN::PaleRedTileMainLightColor) StackPushInteger(26);
-   else if (nMainLight2Color == NWN::AquaTileMainLightColor) StackPushInteger(15);
-   else if (nMainLight2Color == NWN::PaleDarkYellowTileMainLightColor) StackPushInteger(4);
-   else if (nMainLight2Color == NWN::DarkPurpleTileMainLightColor) StackPushInteger(21);
-   else if (nMainLight2Color == NWN::PaleGreenTileMainLightColor) StackPushInteger(10);
-   else { printf("Invalid enum value in setTileMainLightColor for parameter nMainLight2Color of type TileMainLightColor passed: %d. Cannot continue, and it's your fault!\n", nMainLight2Color); exit(1); };
-  if (nMainLight1Color == NWN::RedTileMainLightColor) StackPushInteger(27);
-   else if (nMainLight1Color == NWN::PaleDarkBlueTileMainLightColor) StackPushInteger(16);
-   else if (nMainLight1Color == NWN::DarkYellowTileMainLightColor) StackPushInteger(5);
-   else if (nMainLight1Color == NWN::PalePurpleTileMainLightColor) StackPushInteger(22);
-   else if (nMainLight1Color == NWN::GreenTileMainLightColor) StackPushInteger(11);
-   else if (nMainLight1Color == NWN::BlackTileMainLightColor) StackPushInteger(0);
-   else if (nMainLight1Color == NWN::PaleDarkOrangeTileMainLightColor) StackPushInteger(28);
-   else if (nMainLight1Color == NWN::DarkBlueTileMainLightColor) StackPushInteger(17);
-   else if (nMainLight1Color == NWN::PaleYellowTileMainLightColor) StackPushInteger(6);
-   else if (nMainLight1Color == NWN::PurpleTileMainLightColor) StackPushInteger(23);
-   else if (nMainLight1Color == NWN::PaleDarkAquaTileMainLightColor) StackPushInteger(12);
-   else if (nMainLight1Color == NWN::DimWhiteTileMainLightColor) StackPushInteger(1);
-   else if (nMainLight1Color == NWN::DarkOrangeTileMainLightColor) StackPushInteger(29);
-   else if (nMainLight1Color == NWN::PaleBlueTileMainLightColor) StackPushInteger(18);
-   else if (nMainLight1Color == NWN::YellowTileMainLightColor) StackPushInteger(7);
-   else if (nMainLight1Color == NWN::PaleDarkRedTileMainLightColor) StackPushInteger(24);
-   else if (nMainLight1Color == NWN::DarkAquaTileMainLightColor) StackPushInteger(13);
-   else if (nMainLight1Color == NWN::WhiteTileMainLightColor) StackPushInteger(2);
-   else if (nMainLight1Color == NWN::PaleOrangeTileMainLightColor) StackPushInteger(30);
-   else if (nMainLight1Color == NWN::BlueTileMainLightColor) StackPushInteger(19);
-   else if (nMainLight1Color == NWN::PaleDarkGreenTileMainLightColor) StackPushInteger(8);
-   else if (nMainLight1Color == NWN::DarkRedTileMainLightColor) StackPushInteger(25);
-   else if (nMainLight1Color == NWN::PaleAquaTileMainLightColor) StackPushInteger(14);
-   else if (nMainLight1Color == NWN::BrightWhiteTileMainLightColor) StackPushInteger(3);
-   else if (nMainLight1Color == NWN::OrangeTileMainLightColor) StackPushInteger(31);
-   else if (nMainLight1Color == NWN::PaleDarkPurpleTileMainLightColor) StackPushInteger(20);
-   else if (nMainLight1Color == NWN::DarkGreenTileMainLightColor) StackPushInteger(9);
-   else if (nMainLight1Color == NWN::PaleRedTileMainLightColor) StackPushInteger(26);
-   else if (nMainLight1Color == NWN::AquaTileMainLightColor) StackPushInteger(15);
-   else if (nMainLight1Color == NWN::PaleDarkYellowTileMainLightColor) StackPushInteger(4);
-   else if (nMainLight1Color == NWN::DarkPurpleTileMainLightColor) StackPushInteger(21);
-   else if (nMainLight1Color == NWN::PaleGreenTileMainLightColor) StackPushInteger(10);
-   else { printf("Invalid enum value in setTileMainLightColor for parameter nMainLight1Color of type TileMainLightColor passed: %d. Cannot continue, and it's your fault!\n", nMainLight1Color); exit(1); };
+  StackPushInteger(enum_TileMainLightColor_2_long(nMainLight2Color));
+  
+  StackPushInteger(enum_TileMainLightColor_2_long(nMainLight1Color));
+  
   CScriptLocation *lTileLocation_ptr;
   lTileLocation_ptr->X = lTileLocation.x;
   lTileLocation_ptr->Y = lTileLocation.y;
@@ -15284,40 +15583,10 @@ void NWScriptI::setTileSourceLightColor(const NWN::NWLocation& lTileLocation, NW
   if (lTileLocation.area.id < 0) throw NWN::InvalidObjectException();
   lock(setTileSourceLightColor_mutex, "setTileSourceLightColor");
   callCounter += 1;
-  if (nSourceLight2Color == NWN::PaleGreenTileSourceLightColor) StackPushInteger(5);
-   else if (nSourceLight2Color == NWN::PalePurpleTileSourceLightColor) StackPushInteger(11);
-   else if (nSourceLight2Color == NWN::BlackTileSourceLightColor) StackPushInteger(0);
-   else if (nSourceLight2Color == NWN::PaleDarkAquaTileSourceLightColor) StackPushInteger(6);
-   else if (nSourceLight2Color == NWN::PaleDarkRedTileSourceLightColor) StackPushInteger(12);
-   else if (nSourceLight2Color == NWN::WhiteTileSourceLightColor) StackPushInteger(1);
-   else if (nSourceLight2Color == NWN::PaleAquaTileSourceLightColor) StackPushInteger(7);
-   else if (nSourceLight2Color == NWN::PaleRedTileSourceLightColor) StackPushInteger(13);
-   else if (nSourceLight2Color == NWN::PaleDarkYellowTileSourceLightColor) StackPushInteger(2);
-   else if (nSourceLight2Color == NWN::PaleDarkBlueTileSourceLightColor) StackPushInteger(8);
-   else if (nSourceLight2Color == NWN::PaleDarkOrangeTileSourceLightColor) StackPushInteger(14);
-   else if (nSourceLight2Color == NWN::PaleYellowTileSourceLightColor) StackPushInteger(3);
-   else if (nSourceLight2Color == NWN::PaleBlueTileSourceLightColor) StackPushInteger(9);
-   else if (nSourceLight2Color == NWN::PaleOrangeTileSourceLightColor) StackPushInteger(15);
-   else if (nSourceLight2Color == NWN::PaleDarkGreenTileSourceLightColor) StackPushInteger(4);
-   else if (nSourceLight2Color == NWN::PaleDarkPurpleTileSourceLightColor) StackPushInteger(10);
-   else { printf("Invalid enum value in setTileSourceLightColor for parameter nSourceLight2Color of type TileSourceLightColor passed: %d. Cannot continue, and it's your fault!\n", nSourceLight2Color); exit(1); };
-  if (nSourceLight1Color == NWN::PaleGreenTileSourceLightColor) StackPushInteger(5);
-   else if (nSourceLight1Color == NWN::PalePurpleTileSourceLightColor) StackPushInteger(11);
-   else if (nSourceLight1Color == NWN::BlackTileSourceLightColor) StackPushInteger(0);
-   else if (nSourceLight1Color == NWN::PaleDarkAquaTileSourceLightColor) StackPushInteger(6);
-   else if (nSourceLight1Color == NWN::PaleDarkRedTileSourceLightColor) StackPushInteger(12);
-   else if (nSourceLight1Color == NWN::WhiteTileSourceLightColor) StackPushInteger(1);
-   else if (nSourceLight1Color == NWN::PaleAquaTileSourceLightColor) StackPushInteger(7);
-   else if (nSourceLight1Color == NWN::PaleRedTileSourceLightColor) StackPushInteger(13);
-   else if (nSourceLight1Color == NWN::PaleDarkYellowTileSourceLightColor) StackPushInteger(2);
-   else if (nSourceLight1Color == NWN::PaleDarkBlueTileSourceLightColor) StackPushInteger(8);
-   else if (nSourceLight1Color == NWN::PaleDarkOrangeTileSourceLightColor) StackPushInteger(14);
-   else if (nSourceLight1Color == NWN::PaleYellowTileSourceLightColor) StackPushInteger(3);
-   else if (nSourceLight1Color == NWN::PaleBlueTileSourceLightColor) StackPushInteger(9);
-   else if (nSourceLight1Color == NWN::PaleOrangeTileSourceLightColor) StackPushInteger(15);
-   else if (nSourceLight1Color == NWN::PaleDarkGreenTileSourceLightColor) StackPushInteger(4);
-   else if (nSourceLight1Color == NWN::PaleDarkPurpleTileSourceLightColor) StackPushInteger(10);
-   else { printf("Invalid enum value in setTileSourceLightColor for parameter nSourceLight1Color of type TileSourceLightColor passed: %d. Cannot continue, and it's your fault!\n", nSourceLight1Color); exit(1); };
+  StackPushInteger(enum_TileSourceLightColor_2_long(nSourceLight2Color));
+  
+  StackPushInteger(enum_TileSourceLightColor_2_long(nSourceLight1Color));
+  
   CScriptLocation *lTileLocation_ptr;
   lTileLocation_ptr->X = lTileLocation.x;
   lTileLocation_ptr->Y = lTileLocation.y;
@@ -15498,12 +15767,8 @@ void NWScriptI::setWeather(const NWN::NWObject& oTarget, NWN::Weather tWeather, 
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
   lock(setWeather_mutex, "setWeather");
   callCounter += 1;
-  if (tWeather == NWN::ClearWeather) StackPushInteger(0);
-   else if (tWeather == NWN::RainWeather) StackPushInteger(1);
-   else if (tWeather == NWN::InvalidWeather) StackPushInteger(-1);
-   else if (tWeather == NWN::SnowWeather) StackPushInteger(2);
-   else if (tWeather == NWN::AreaDefaultsWeather) StackPushInteger(3);
-   else { printf("Invalid enum value in setWeather for parameter tWeather of type Weather passed: %d. Cannot continue, and it's your fault!\n", tWeather); exit(1); };
+  StackPushInteger(enum_Weather_2_long(tWeather));
+  
   StackPushObject(oTarget.id);
 
   VM_ExecuteCommand(507, 2);
@@ -15629,14 +15894,8 @@ unlock(speakOneLinerConversation_mutex, "speakOneLinerConversation");
 void NWScriptI::speakString(const std::string& sStringToSpeak, NWN::TalkVolume tTalkVolume, const Ice::Current& ice) {
   lock(speakString_mutex, "speakString");
   callCounter += 1;
-  if (tTalkVolume == NWN::PartyVol) StackPushInteger(5);
-   else if (tTalkVolume == NWN::TalkVol) StackPushInteger(0);
-   else if (tTalkVolume == NWN::TellVol) StackPushInteger(6);
-   else if (tTalkVolume == NWN::WhisperVol) StackPushInteger(1);
-   else if (tTalkVolume == NWN::ShoutVol) StackPushInteger(2);
-   else if (tTalkVolume == NWN::SilentTalkVol) StackPushInteger(3);
-   else if (tTalkVolume == NWN::SilentShoutVol) StackPushInteger(4);
-   else { printf("Invalid enum value in speakString for parameter tTalkVolume of type TalkVolume passed: %d. Cannot continue, and it's your fault!\n", tTalkVolume); exit(1); };
+  StackPushInteger(enum_TalkVolume_2_long(tTalkVolume));
+  
   StackPushString(sStringToSpeak.c_str());
 
   VM_ExecuteCommand(221, 2);
@@ -15648,14 +15907,8 @@ unlock(speakString_mutex, "speakString");
 void NWScriptI::speakStringByStrRef(Ice::Int nStrRef, NWN::TalkVolume tTalkVolume, const Ice::Current& ice) {
   lock(speakStringByStrRef_mutex, "speakStringByStrRef");
   callCounter += 1;
-  if (tTalkVolume == NWN::PartyVol) StackPushInteger(5);
-   else if (tTalkVolume == NWN::TalkVol) StackPushInteger(0);
-   else if (tTalkVolume == NWN::TellVol) StackPushInteger(6);
-   else if (tTalkVolume == NWN::WhisperVol) StackPushInteger(1);
-   else if (tTalkVolume == NWN::ShoutVol) StackPushInteger(2);
-   else if (tTalkVolume == NWN::SilentTalkVol) StackPushInteger(3);
-   else if (tTalkVolume == NWN::SilentShoutVol) StackPushInteger(4);
-   else { printf("Invalid enum value in speakStringByStrRef for parameter tTalkVolume of type TalkVolume passed: %d. Cannot continue, and it's your fault!\n", tTalkVolume); exit(1); };
+  StackPushInteger(enum_TalkVolume_2_long(tTalkVolume));
+  
   StackPushInteger(nStrRef);
 
   VM_ExecuteCommand(691, 2);
@@ -15800,8 +16053,8 @@ NWN::NWEffect NWScriptI::supernaturalEffect(const NWN::NWEffect& eEffect, const 
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(supernaturalEffect_mutex, "supernaturalEffect");
@@ -15871,10 +16124,8 @@ NWN::AttackResult NWScriptI::touchAttackMelee(const NWN::NWObject& oTarget, bool
   int nRetVal;
   StackPopInteger(&nRetVal);
   unlock(touchAttackMelee_mutex, "touchAttackMelee");
-  if (nRetVal == 0) return NWN::MissedAttack;
-  if (nRetVal == 1) return NWN::HitAttack;
-  if (nRetVal == 2) return NWN::CriticalHitAttack;
-  printf("Error: Unmapped enum return type in touchAttackMelee of type AttackResult: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
+    return enum_long_2_AttackResult(nRetVal);
+  
 };
 
 NWN::AttackResult NWScriptI::touchAttackRanged(const NWN::NWObject& oTarget, bool bDisplayFeedback, const Ice::Current& ice) {
@@ -15889,10 +16140,8 @@ NWN::AttackResult NWScriptI::touchAttackRanged(const NWN::NWObject& oTarget, boo
   int nRetVal;
   StackPopInteger(&nRetVal);
   unlock(touchAttackRanged_mutex, "touchAttackRanged");
-  if (nRetVal == 0) return NWN::MissedAttack;
-  if (nRetVal == 1) return NWN::HitAttack;
-  if (nRetVal == 2) return NWN::CriticalHitAttack;
-  printf("Error: Unmapped enum return type in touchAttackRanged of type AttackResult: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
+    return enum_long_2_AttackResult(nRetVal);
+  
 };
 
 Ice::Double NWScriptI::turnsToSeconds(Ice::Int nTurns, const Ice::Current& ice) {
@@ -16008,8 +16257,8 @@ NWN::NWEffect NWScriptI::versusAlignmentEffect(const NWN::NWEffect& eEffect, Ice
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(versusAlignmentEffect_mutex, "versusAlignmentEffect");
@@ -16021,33 +16270,8 @@ NWN::NWEffect NWScriptI::versusRacialTypeEffect(const NWN::NWEffect& eEffect, NW
   
   lock(versusRacialTypeEffect_mutex, "versusRacialTypeEffect");
   callCounter += 1;
-  if (tRacialType == NWN::ElementalRace) StackPushInteger(16);
-   else if (tRacialType == NWN::HalforcRace) StackPushInteger(5);
-   else if (tRacialType == NWN::DragonRace) StackPushInteger(11);
-   else if (tRacialType == NWN::DwarfRace) StackPushInteger(0);
-   else if (tRacialType == NWN::InvalidRace) StackPushInteger(28);
-   else if (tRacialType == NWN::FeyRace) StackPushInteger(17);
-   else if (tRacialType == NWN::HumanRace) StackPushInteger(6);
-   else if (tRacialType == NWN::ShapechangerRace) StackPushInteger(23);
-   else if (tRacialType == NWN::HumanoidGoblinoidRace) StackPushInteger(12);
-   else if (tRacialType == NWN::ElfRace) StackPushInteger(1);
-   else if (tRacialType == NWN::OozeRace) StackPushInteger(29);
-   else if (tRacialType == NWN::GiantRace) StackPushInteger(18);
-   else if (tRacialType == NWN::AberrationRace) StackPushInteger(7);
-   else if (tRacialType == NWN::UndeadRace) StackPushInteger(24);
-   else if (tRacialType == NWN::HumanoidMonstrousRace) StackPushInteger(13);
-   else if (tRacialType == NWN::GnomeRace) StackPushInteger(2);
-   else if (tRacialType == NWN::MagicalBeastRace) StackPushInteger(19);
-   else if (tRacialType == NWN::AnimalRace) StackPushInteger(8);
-   else if (tRacialType == NWN::VerminRace) StackPushInteger(25);
-   else if (tRacialType == NWN::HumanoidOrcRace) StackPushInteger(14);
-   else if (tRacialType == NWN::HalflingRace) StackPushInteger(3);
-   else if (tRacialType == NWN::OutsiderRace) StackPushInteger(20);
-   else if (tRacialType == NWN::BeastRace) StackPushInteger(9);
-   else if (tRacialType == NWN::HumanoidReptilianRace) StackPushInteger(15);
-   else if (tRacialType == NWN::HalfelfRace) StackPushInteger(4);
-   else if (tRacialType == NWN::ConstructRace) StackPushInteger(10);
-   else { printf("Invalid enum value in versusRacialTypeEffect for parameter tRacialType of type RacialType passed: %d. Cannot continue, and it's your fault!\n", tRacialType); exit(1); };
+  StackPushInteger(enum_RacialType_2_long(tRacialType));
+  
   CGameEffect *eEffect_ptr = effectMap.find(eEffect.id)->second;
   StackPushEngineStructure(ENGINE_STRUCTURE_EFFECT, eEffect_ptr);
 
@@ -16065,8 +16289,8 @@ NWN::NWEffect NWScriptI::versusRacialTypeEffect(const NWN::NWEffect& eEffect, NW
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(versusRacialTypeEffect_mutex, "versusRacialTypeEffect");
@@ -16095,8 +16319,8 @@ NWN::NWEffect NWScriptI::versusTrapEffect(const NWN::NWEffect& eEffect, const Ic
   e.id = id;
   e.tDurationType = getEffectDurationType(e, ice);
   e.tType = getEffectType(e, ice);
+  e.tTrueType = enum_long_2_EffectTrueType(pRetVal->Type);
   e.tSubType = getEffectSubType(e, ice);
-  e.tIconShown = getEffectIconShown(e, ice);
   e.tCreator = getEffectCreator(e, ice);
   e.tSpellId = getEffectSpellId(e, ice);
   unlock(versusTrapEffect_mutex, "versusTrapEffect");
@@ -16109,27 +16333,8 @@ NWN::SavingThrowResult NWScriptI::willSave(const NWN::NWObject& oCreature, Ice::
   lock(willSave_mutex, "willSave");
   callCounter += 1;
   StackPushObject(oSaveVersus.id);
-  if (tSaveType == NWN::GoodSaveType) StackPushInteger(16);
-   else if (tSaveType == NWN::SonicSaveType) StackPushInteger(5);
-   else if (tSaveType == NWN::DeathSaveType) StackPushInteger(11);
-   else if (tSaveType == NWN::AllOrNoneSaveType) StackPushInteger(0);
-   else if (tSaveType == NWN::EvilSaveType) StackPushInteger(17);
-   else if (tSaveType == NWN::AcidSaveType) StackPushInteger(6);
-   else if (tSaveType == NWN::ColdSaveType) StackPushInteger(12);
-   else if (tSaveType == NWN::MindSpellsSaveType) StackPushInteger(1);
-   else if (tSaveType == NWN::LawSaveType) StackPushInteger(18);
-   else if (tSaveType == NWN::FireSaveType) StackPushInteger(7);
-   else if (tSaveType == NWN::DivineSaveType) StackPushInteger(13);
-   else if (tSaveType == NWN::PoisonSaveType) StackPushInteger(2);
-   else if (tSaveType == NWN::ChaosSaveType) StackPushInteger(19);
-   else if (tSaveType == NWN::ElectricitySaveType) StackPushInteger(8);
-   else if (tSaveType == NWN::TrapSaveType) StackPushInteger(14);
-   else if (tSaveType == NWN::DiseaseSaveType) StackPushInteger(3);
-   else if (tSaveType == NWN::PositiveSaveType) StackPushInteger(9);
-   else if (tSaveType == NWN::SpellSaveType) StackPushInteger(15);
-   else if (tSaveType == NWN::FearSaveType) StackPushInteger(4);
-   else if (tSaveType == NWN::NegativeSaveType) StackPushInteger(10);
-   else { printf("Invalid enum value in willSave for parameter tSaveType of type SaveType passed: %d. Cannot continue, and it's your fault!\n", tSaveType); exit(1); };
+  StackPushInteger(enum_SaveType_2_long(tSaveType));
+  
   StackPushInteger(nDC);
   StackPushObject(oCreature.id);
 
@@ -16138,10 +16343,8 @@ NWN::SavingThrowResult NWScriptI::willSave(const NWN::NWObject& oCreature, Ice::
   int nRetVal;
   StackPopInteger(&nRetVal);
   unlock(willSave_mutex, "willSave");
-  if (nRetVal == 0) return NWN::FailedRoll;
-  if (nRetVal == 1) return NWN::SucceededRoll;
-  if (nRetVal == 3) return NWN::ImmuneToSaveType;
-  printf("Error: Unmapped enum return type in willSave of type SavingThrowResult: %d. Cannot continue, and it's your fault!\n", nRetVal); exit(1);
+    return enum_long_2_SavingThrowResult(nRetVal);
+  
 };
 
 void NWScriptI::writeTimestampedLogEntry(const std::string& sLogEntry, const Ice::Current& ice) {
@@ -16354,6 +16557,19 @@ void NWScriptI::setEffectIconShown(const NWN::NWEffect& eff, bool shown, const I
   CGameEffect *eff_ptr = effectMap.find(eff.id)->second;
   eff_ptr->IsIconShown = shown ? 1 : 0;
 };
+bool NWScriptI::getEffectExposed(const NWN::NWEffect& eff, const Ice::Current& ice) {
+  if (effectMap.find(eff.id) == effectMap.end())
+    throw NWN::InvalidEffectException();
+  CGameEffect *eff_ptr = effectMap.find(eff.id)->second;
+  return eff_ptr->IsExposed == 1;
+};
+
+void NWScriptI::setEffectExposed(const NWN::NWEffect& eff, bool shown, const Ice::Current& ice) {
+  if (effectMap.find(eff.id) == effectMap.end())
+    throw NWN::InvalidEffectException();
+  CGameEffect *eff_ptr = effectMap.find(eff.id)->second;
+  eff_ptr->IsExposed = shown ? 1 : 0;
+};
 
 int NWScriptI::getEffectInteger(const NWN::NWEffect& eff, Ice::Int idx, const Ice::Current& ice) {
   if (idx < 0 || idx > 15)
@@ -16397,4 +16613,26 @@ void NWScriptI::setItemPropertyInteger(const NWN::NWItemProperty& eff, Ice::Int 
   eff_ptr->IntList[idx] = value;
 };
 
+Ice::Double NWScriptI::getEffectDuration(const NWN::NWEffect& eff, const Ice::Current& ice) {
+  if (effectMap.find(eff.id) == effectMap.end())
+    throw NWN::InvalidEffectException();
+  CGameEffect *eff_ptr = effectMap.find(eff.id)->second;
+
+  return eff_ptr->Duration;
+};
+Ice::Double NWScriptI::getItemPropertyDuration(const NWN::NWItemProperty& eff, const Ice::Current& ice) {
+  if (iprpMap.find(eff.id) == iprpMap.end())
+    throw NWN::InvalidEffectException();
+  CGameEffect *eff_ptr = iprpMap.find(eff.id)->second;
+
+  return eff_ptr->Duration;
+};
+
+void NWScriptI::setEffectTrueType(const NWN::NWEffect& eff, NWN::EffectTrueType t, const Ice::Current& ice) {
+  if (effectMap.find(eff.id) == effectMap.end())
+    throw NWN::InvalidEffectException();
+  CGameEffect *eff_ptr = effectMap.find(eff.id)->second;
+
+  eff_ptr->Type = enum_EffectTrueType_2_long(t);
+};
 
