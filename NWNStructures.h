@@ -63,8 +63,9 @@ typedef struct
 {
 	dword ID;
 	dword field_4;
-	dword Type;
-	dword field_C;
+	word Type;
+	word SubType;
+	float Duration;
 	dword ExpireDay;
 	dword ExpireTime;
 	dword CreatorId;
