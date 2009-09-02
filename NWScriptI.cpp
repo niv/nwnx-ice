@@ -1,4 +1,4 @@
-// Generated on Tue Sep 01 23:33:53 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Wed Sep 02 13:05:55 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 #include "NWScriptI.h"
 #include <iostream>
@@ -1040,7 +1040,7 @@ NWN::NWItemProperty NWScriptI::badBadReplaceMeThisDoesNothing(const Ice::Current
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(badBadReplaceMeThisDoesNothing_mutex, "badBadReplaceMeThisDoesNothing");
   return e;
 };
@@ -6233,7 +6233,7 @@ NWN::NWItemProperty NWScriptI::getFirstItemProperty(const NWN::NWObject& oItem, 
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(getFirstItemProperty_mutex, "getFirstItemProperty");
   return e;
 };
@@ -8804,7 +8804,7 @@ NWN::NWItemProperty NWScriptI::getNextItemProperty(const NWN::NWObject& oItem, c
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(getNextItemProperty_mutex, "getNextItemProperty");
   return e;
 };
@@ -10511,7 +10511,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyACBonus(Ice::Int nBonus, const Ice::C
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyACBonus_mutex, "itemPropertyACBonus");
   return e;
 };
@@ -10547,7 +10547,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyACBonusVsAlign(NWN::IPAlignGroup tIPA
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyACBonusVsAlign_mutex, "itemPropertyACBonusVsAlign");
   return e;
 };
@@ -10591,7 +10591,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyACBonusVsDmgType(NWN::IPDamageType tI
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyACBonusVsDmgType_mutex, "itemPropertyACBonusVsDmgType");
   return e;
 };
@@ -10645,7 +10645,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyACBonusVsRace(NWN::IPRacialType tIPRa
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyACBonusVsRace_mutex, "itemPropertyACBonusVsRace");
   return e;
 };
@@ -10681,7 +10681,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyACBonusVsSAlign(NWN::Alignment tAlign
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyACBonusVsSAlign_mutex, "itemPropertyACBonusVsSAlign");
   return e;
 };
@@ -10717,7 +10717,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyAbilityBonus(NWN::Ability tAbility, I
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyAbilityBonus_mutex, "itemPropertyAbilityBonus");
   return e;
 };
@@ -10746,7 +10746,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyAdditional(Ice::Int nAdditionalProper
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyAdditional_mutex, "itemPropertyAdditional");
   return e;
 };
@@ -10775,7 +10775,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyArcaneSpellFailure(Ice::Int nModLevel
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyArcaneSpellFailure_mutex, "itemPropertyArcaneSpellFailure");
   return e;
 };
@@ -10804,7 +10804,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyAttackBonus(Ice::Int nBonus, const Ic
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyAttackBonus_mutex, "itemPropertyAttackBonus");
   return e;
 };
@@ -10840,7 +10840,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyAttackBonusVsAlign(NWN::IPAlignGroup 
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyAttackBonusVsAlign_mutex, "itemPropertyAttackBonusVsAlign");
   return e;
 };
@@ -10894,7 +10894,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyAttackBonusVsRace(NWN::IPRacialType t
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyAttackBonusVsRace_mutex, "itemPropertyAttackBonusVsRace");
   return e;
 };
@@ -10930,7 +10930,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyAttackBonusVsSAlign(NWN::Alignment tA
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyAttackBonusVsSAlign_mutex, "itemPropertyAttackBonusVsSAlign");
   return e;
 };
@@ -10959,7 +10959,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyAttackPenalty(Ice::Int nPenalty, cons
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyAttackPenalty_mutex, "itemPropertyAttackPenalty");
   return e;
 };
@@ -10988,7 +10988,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyBonusFeat(Ice::Int nFeat, const Ice::
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyBonusFeat_mutex, "itemPropertyBonusFeat");
   return e;
 };
@@ -11018,7 +11018,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyBonusLevelSpell(Ice::Int nClass, Ice:
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyBonusLevelSpell_mutex, "itemPropertyBonusLevelSpell");
   return e;
 };
@@ -11048,7 +11048,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyBonusSavingThrow(Ice::Int nBaseSaveTy
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyBonusSavingThrow_mutex, "itemPropertyBonusSavingThrow");
   return e;
 };
@@ -11078,7 +11078,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyBonusSavingThrowVsX(Ice::Int nBonusTy
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyBonusSavingThrowVsX_mutex, "itemPropertyBonusSavingThrowVsX");
   return e;
 };
@@ -11107,7 +11107,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyBonusSpellResistance(Ice::Int nBonus,
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyBonusSpellResistance_mutex, "itemPropertyBonusSpellResistance");
   return e;
 };
@@ -11137,7 +11137,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyCastSpell(Ice::Int nSpell, Ice::Int n
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyCastSpell_mutex, "itemPropertyCastSpell");
   return e;
 };
@@ -11166,7 +11166,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyContainerReducedWeight(Ice::Int nCont
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyContainerReducedWeight_mutex, "itemPropertyContainerReducedWeight");
   return e;
 };
@@ -11210,7 +11210,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyDamageBonus(NWN::IPDamageType tIPDama
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyDamageBonus_mutex, "itemPropertyDamageBonus");
   return e;
 };
@@ -11261,7 +11261,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyDamageBonusVsAlign(NWN::IPAlignGroup 
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyDamageBonusVsAlign_mutex, "itemPropertyDamageBonusVsAlign");
   return e;
 };
@@ -11330,7 +11330,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyDamageBonusVsRace(NWN::IPRacialType t
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyDamageBonusVsRace_mutex, "itemPropertyDamageBonusVsRace");
   return e;
 };
@@ -11381,7 +11381,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyDamageBonusVsSAlign(NWN::Alignment tA
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyDamageBonusVsSAlign_mutex, "itemPropertyDamageBonusVsSAlign");
   return e;
 };
@@ -11425,7 +11425,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyDamageImmunity(NWN::IPDamageType tIPD
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyDamageImmunity_mutex, "itemPropertyDamageImmunity");
   return e;
 };
@@ -11454,7 +11454,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyDamagePenalty(Ice::Int nPenalty, cons
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyDamagePenalty_mutex, "itemPropertyDamagePenalty");
   return e;
 };
@@ -11484,7 +11484,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyDamageReduction(Ice::Int nEnhancement
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyDamageReduction_mutex, "itemPropertyDamageReduction");
   return e;
 };
@@ -11528,7 +11528,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyDamageResistance(NWN::IPDamageType tI
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyDamageResistance_mutex, "itemPropertyDamageResistance");
   return e;
 };
@@ -11572,7 +11572,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyDamageVulnerability(NWN::IPDamageType
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyDamageVulnerability_mutex, "itemPropertyDamageVulnerability");
   return e;
 };
@@ -11600,7 +11600,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyDarkvision(const Ice::Current& ice) {
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyDarkvision_mutex, "itemPropertyDarkvision");
   return e;
 };
@@ -11630,7 +11630,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyDecreaseAC(Ice::Int nModifierType, Ic
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyDecreaseAC_mutex, "itemPropertyDecreaseAC");
   return e;
 };
@@ -11666,7 +11666,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyDecreaseAbility(NWN::Ability tAbility
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyDecreaseAbility_mutex, "itemPropertyDecreaseAbility");
   return e;
 };
@@ -11696,7 +11696,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyDecreaseSkill(Ice::Int nSkill, Ice::I
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyDecreaseSkill_mutex, "itemPropertyDecreaseSkill");
   return e;
 };
@@ -11725,7 +11725,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyEnhancementBonus(Ice::Int nEnhancemen
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyEnhancementBonus_mutex, "itemPropertyEnhancementBonus");
   return e;
 };
@@ -11761,7 +11761,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyEnhancementBonusVsAlign(NWN::IPAlignG
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyEnhancementBonusVsAlign_mutex, "itemPropertyEnhancementBonusVsAlign");
   return e;
 };
@@ -11815,7 +11815,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyEnhancementBonusVsRace(NWN::IPRacialT
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyEnhancementBonusVsRace_mutex, "itemPropertyEnhancementBonusVsRace");
   return e;
 };
@@ -11851,7 +11851,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyEnhancementBonusVsSAlign(NWN::Alignme
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyEnhancementBonusVsSAlign_mutex, "itemPropertyEnhancementBonusVsSAlign");
   return e;
 };
@@ -11880,7 +11880,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyEnhancementPenalty(Ice::Int nPenalty,
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyEnhancementPenalty_mutex, "itemPropertyEnhancementPenalty");
   return e;
 };
@@ -11923,7 +11923,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyExtraMeleeDamageType(NWN::IPDamageTyp
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyExtraMeleeDamageType_mutex, "itemPropertyExtraMeleeDamageType");
   return e;
 };
@@ -11966,7 +11966,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyExtraRangeDamageType(NWN::IPDamageTyp
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyExtraRangeDamageType_mutex, "itemPropertyExtraRangeDamageType");
   return e;
 };
@@ -11994,7 +11994,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyFreeAction(const Ice::Current& ice) {
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyFreeAction_mutex, "itemPropertyFreeAction");
   return e;
 };
@@ -12022,7 +12022,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyHaste(const Ice::Current& ice) {
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyHaste_mutex, "itemPropertyHaste");
   return e;
 };
@@ -12051,7 +12051,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyHealersKit(Ice::Int nModifier, const 
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyHealersKit_mutex, "itemPropertyHealersKit");
   return e;
 };
@@ -12079,7 +12079,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyHolyAvenger(const Ice::Current& ice) 
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyHolyAvenger_mutex, "itemPropertyHolyAvenger");
   return e;
 };
@@ -12118,7 +12118,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyImmunityMisc(NWN::IPMiscImmunityType 
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyImmunityMisc_mutex, "itemPropertyImmunityMisc");
   return e;
 };
@@ -12147,7 +12147,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyImmunityToSpellLevel(Ice::Int nLevel,
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyImmunityToSpellLevel_mutex, "itemPropertyImmunityToSpellLevel");
   return e;
 };
@@ -12175,7 +12175,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyImprovedEvasion(const Ice::Current& i
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyImprovedEvasion_mutex, "itemPropertyImprovedEvasion");
   return e;
 };
@@ -12203,7 +12203,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyKeen(const Ice::Current& ice) {
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyKeen_mutex, "itemPropertyKeen");
   return e;
 };
@@ -12233,7 +12233,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyLight(Ice::Int nBrightness, Ice::Int 
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyLight_mutex, "itemPropertyLight");
   return e;
 };
@@ -12268,7 +12268,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyLimitUseByAlign(NWN::IPAlignGroup tIP
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyLimitUseByAlign_mutex, "itemPropertyLimitUseByAlign");
   return e;
 };
@@ -12297,7 +12297,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyLimitUseByClass(Ice::Int nClass, cons
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyLimitUseByClass_mutex, "itemPropertyLimitUseByClass");
   return e;
 };
@@ -12350,7 +12350,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyLimitUseByRace(NWN::IPRacialType tIPR
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyLimitUseByRace_mutex, "itemPropertyLimitUseByRace");
   return e;
 };
@@ -12385,7 +12385,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyLimitUseBySAlign(NWN::Alignment tAlig
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyLimitUseBySAlign_mutex, "itemPropertyLimitUseBySAlign");
   return e;
 };
@@ -12414,7 +12414,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyMassiveCritical(Ice::Int nDamage, con
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyMassiveCritical_mutex, "itemPropertyMassiveCritical");
   return e;
 };
@@ -12443,7 +12443,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyMaterial(Ice::Int nMaterialType, cons
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyMaterial_mutex, "itemPropertyMaterial");
   return e;
 };
@@ -12472,7 +12472,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyMaxRangeStrengthMod(Ice::Int nModifie
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyMaxRangeStrengthMod_mutex, "itemPropertyMaxRangeStrengthMod");
   return e;
 };
@@ -12501,7 +12501,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyMonsterDamage(Ice::Int nDamage, const
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyMonsterDamage_mutex, "itemPropertyMonsterDamage");
   return e;
 };
@@ -12529,7 +12529,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyNoDamage(const Ice::Current& ice) {
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyNoDamage_mutex, "itemPropertyNoDamage");
   return e;
 };
@@ -12559,7 +12559,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyOnHitCastSpell(Ice::Int nSpell, Ice::
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyOnHitCastSpell_mutex, "itemPropertyOnHitCastSpell");
   return e;
 };
@@ -12590,7 +12590,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyOnHitProps(Ice::Int nProperty, Ice::I
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyOnHitProps_mutex, "itemPropertyOnHitProps");
   return e;
 };
@@ -12620,7 +12620,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyOnMonsterHitProperties(Ice::Int nProp
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyOnMonsterHitProperties_mutex, "itemPropertyOnMonsterHitProperties");
   return e;
 };
@@ -12649,7 +12649,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyQuality(Ice::Int nQuality, const Ice:
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyQuality_mutex, "itemPropertyQuality");
   return e;
 };
@@ -12679,7 +12679,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyReducedSavingThrow(Ice::Int nBonusTyp
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyReducedSavingThrow_mutex, "itemPropertyReducedSavingThrow");
   return e;
 };
@@ -12709,7 +12709,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyReducedSavingThrowVsX(Ice::Int nBaseS
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyReducedSavingThrowVsX_mutex, "itemPropertyReducedSavingThrowVsX");
   return e;
 };
@@ -12738,7 +12738,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyRegeneration(Ice::Int nRegenAmount, c
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyRegeneration_mutex, "itemPropertyRegeneration");
   return e;
 };
@@ -12768,7 +12768,7 @@ NWN::NWItemProperty NWScriptI::itemPropertySkillBonus(Ice::Int nSkill, Ice::Int 
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertySkillBonus_mutex, "itemPropertySkillBonus");
   return e;
 };
@@ -12797,7 +12797,7 @@ NWN::NWItemProperty NWScriptI::itemPropertySpecialWalk(Ice::Int nWalkType, const
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertySpecialWalk_mutex, "itemPropertySpecialWalk");
   return e;
 };
@@ -12834,7 +12834,7 @@ NWN::NWItemProperty NWScriptI::itemPropertySpellImmunitySchool(NWN::IPSpellSchoo
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertySpellImmunitySchool_mutex, "itemPropertySpellImmunitySchool");
   return e;
 };
@@ -12863,7 +12863,7 @@ NWN::NWItemProperty NWScriptI::itemPropertySpellImmunitySpecific(Ice::Int nSpell
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertySpellImmunitySpecific_mutex, "itemPropertySpellImmunitySpecific");
   return e;
 };
@@ -12892,7 +12892,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyThievesTools(Ice::Int nModifier, cons
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyThievesTools_mutex, "itemPropertyThievesTools");
   return e;
 };
@@ -12933,7 +12933,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyTrap(Ice::Int nTrapLevel, NWN::IPTrap
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyTrap_mutex, "itemPropertyTrap");
   return e;
 };
@@ -12961,7 +12961,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyTrueSeeing(const Ice::Current& ice) {
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyTrueSeeing_mutex, "itemPropertyTrueSeeing");
   return e;
 };
@@ -12990,7 +12990,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyTurnResistance(Ice::Int nModifier, co
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyTurnResistance_mutex, "itemPropertyTurnResistance");
   return e;
 };
@@ -13019,7 +13019,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyUnlimitedAmmo(Ice::Int nAmmoDamage, c
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyUnlimitedAmmo_mutex, "itemPropertyUnlimitedAmmo");
   return e;
 };
@@ -13048,7 +13048,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyVampiricRegeneration(Ice::Int nRegenA
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyVampiricRegeneration_mutex, "itemPropertyVampiricRegeneration");
   return e;
 };
@@ -13077,7 +13077,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyVisualEffect(Ice::Int nEffect, const 
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyVisualEffect_mutex, "itemPropertyVisualEffect");
   return e;
 };
@@ -13106,7 +13106,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyWeightIncrease(Ice::Int nWeight, cons
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyWeightIncrease_mutex, "itemPropertyWeightIncrease");
   return e;
 };
@@ -13135,7 +13135,7 @@ NWN::NWItemProperty NWScriptI::itemPropertyWeightReduction(Ice::Int nReduction, 
   e.tParam1Value = getItemPropertyParam1Value(e, ice);
   e.tCostTable = getItemPropertyCostTable(e, ice);
   e.tCostTableValue = getItemPropertyCostTableValue(e, ice);
-  NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
+  NWN::NWObject oCreator; oCreator.id = pRetVal->CreatorId; e.tCreator = oCreator;
   unlock(itemPropertyWeightReduction_mutex, "itemPropertyWeightReduction");
   return e;
 };
