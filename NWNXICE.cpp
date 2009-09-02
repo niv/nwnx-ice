@@ -161,6 +161,7 @@ char* CNWNXICE::OnRequest (char *gameObject, char* request, char* parameters)
 
 	nwscriptI->contextDepth += 1;
 
+	std::string lastException;
 	while (true) {
 		try {
 			if (strcmp(request, "EVENT") == 0)
@@ -173,9 +174,14 @@ char* CNWNXICE::OnRequest (char *gameObject, char* request, char* parameters)
 			throw;
 
 		} catch (const Ice::LocalException& e) {
-			printf("%8x %s: Connection lost, retrying in 2.\n", oid, event);
-			cerr << e << endl;
+			if (e.ice_name() != lastException) {
+				cerr << e << endl;
+				printf("%8x %s: will retry (quietly) in 2s intervals.\n", oid, event);
+				lastException = e.ice_name();
+			}
 			IceUtil::ThreadControl::sleep(IceUtil::Time::seconds(2));
+		} catch (...) {
+			exit(1);
 		}
 	}
 
