@@ -35,6 +35,7 @@ CNWNXICE::CNWNXICE()
 {
 	confKey = "ICE";
 	bHooked = 1;
+	printEvents = true;
 }
 
 CNWNXICE::~CNWNXICE()
@@ -69,14 +70,17 @@ bool CNWNXICE::OnCreate(gline *config, const char *LogDir)
 	}
 
 	Ice::PropertiesPtr props = Ice::createProperties();
-	props->setProperty("Ice.ThreadPool.Client.Size", "2");
-	props->setProperty("Ice.ThreadPool.Client.SizeMax", "15");
-	props->setProperty("Ice.ThreadPool.Server.Size", "2");
-	props->setProperty("Ice.ThreadPool.Server.SizeMax", "15");
+	props->setProperty("Ice.ThreadPool.Client.Size", (*nwnxConfig)[confKey]["threadPoolClientSize"].c_str());
+	props->setProperty("Ice.ThreadPool.Client.SizeMax", (*nwnxConfig)[confKey]["threadPoolClientSizeMax"].c_str());
+	props->setProperty("Ice.ThreadPool.Server.Size", (*nwnxConfig)[confKey]["threadPoolServerSize"].c_str());
+	props->setProperty("Ice.ThreadPool.Server.SizeMax", (*nwnxConfig)[confKey]["threadPoolServerSizeMax"].c_str());
 	Ice::InitializationData initData;
-	initData.stringConverter = new Ice::IconvStringConverter<char>("ISO_8859-1"); // WINDOWS-1252");
+	const char* charset = (*nwnxConfig)[confKey]["charset"].c_str();
+	initData.stringConverter = new Ice::IconvStringConverter<char>(charset);
 	initData.properties = props;
 	ic = Ice::initialize(initData);
+
+	printEvents = atoi((*nwnxConfig)[confKey]["printEvents"].c_str()) == 1 ? true : false;
 
 	while (true) {
 		// Set up the client
@@ -176,7 +180,7 @@ char* CNWNXICE::OnRequest (char *gameObject, char* request, char* parameters)
 		} catch (const Ice::LocalException& e) {
 			if (e.ice_name() != lastException) {
 				cerr << e << endl;
-				printf("%8x %s: will retry (quietly) in 2s intervals.\n", oid, event);
+				printf("%8x %s: will retry (quietly) in 2s intervals (%d calls so far).\n", oid, event, (nwscriptI->callCounter - previousCallCounter));
 				lastException = e.ice_name();
 			}
 			IceUtil::ThreadControl::sleep(IceUtil::Time::seconds(2));
@@ -198,10 +202,12 @@ char* CNWNXICE::OnRequest (char *gameObject, char* request, char* parameters)
 	if (nwscriptI->contextDepth == 0)
 		nwscriptI->resetPerEventMappings();
 
-	if (strcmp(request, "EVENT") == 0)
-		printf("e %0.8x %-20s %6d s %8d u %12d calls\n", oid, event, se, ms, calls);
-	if (strcmp(request, "TOKEN") == 0)
-		printf("t %0.8x %-20s %6d s %8d u %12d calls\n", oid, event, se, ms, calls);
+	if (printEvents) {
+		if (strcmp(request, "EVENT") == 0)
+			printf("e %0.8x %-20s %6d s %8d u %12d calls\n", oid, event, se, ms, calls);
+		if (strcmp(request, "TOKEN") == 0)
+			printf("t %0.8x %-20s %6d s %8d u %12d calls\n", oid, event, se, ms, calls);
+	}
 
 	sprintf(parameters, "%d", ret);
 	return NULL;
