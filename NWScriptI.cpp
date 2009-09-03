@@ -1,4 +1,4 @@
-// Generated on Wed Sep 02 20:40:31 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Thu Sep 03 19:48:36 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 #include "NWScriptI.h"
 #include <iostream>
@@ -310,6 +310,7 @@ long NWScriptI::enum_Action_2_long(NWN::Action k) {
   if (k == NWN::KIDamageAction) return 41;
   if (k == NWN::ItemCastSpellAction) return 19;
   if (k == NWN::DisableTrapAction) return 8;
+  if (k == NWN::WaitAction) return 36;
   if (k == NWN::LockAction) return 14;
   if (k == NWN::AttackObjectAction) return 3;
   if (k == NWN::CounterSpellAction) return 31;
@@ -342,6 +343,7 @@ NWN::Action NWScriptI::enum_long_2_Action(long v) {
   if (v == 41) return NWN::KIDamageAction;
   if (v == 19) return NWN::ItemCastSpellAction;
   if (v == 8) return NWN::DisableTrapAction;
+  if (v == 36) return NWN::WaitAction;
   if (v == 14) return NWN::LockAction;
   if (v == 3) return NWN::AttackObjectAction;
   if (v == 31) return NWN::CounterSpellAction;

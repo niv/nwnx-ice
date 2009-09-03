@@ -1,4 +1,4 @@
-// Generated on Wed Sep 02 20:40:30 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Thu Sep 03 19:48:36 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 // Not exported:
 //   getFirstEffect getFirstFactionMember getFirstItemInInventory getFirstItemProperty getFirstInPersistentObject getFirstObjectInArea getFirstObjectInShape getFirstPC
@@ -17,7 +17,7 @@ module NWN {
   enum TileSourceLightColor { BlackTileSourceLightColor, WhiteTileSourceLightColor, PaleDarkYellowTileSourceLightColor, PaleYellowTileSourceLightColor, PaleDarkGreenTileSourceLightColor, PaleGreenTileSourceLightColor, PaleDarkAquaTileSourceLightColor, PaleAquaTileSourceLightColor, PaleDarkBlueTileSourceLightColor, PaleBlueTileSourceLightColor, PaleDarkPurpleTileSourceLightColor, PalePurpleTileSourceLightColor, PaleDarkRedTileSourceLightColor, PaleRedTileSourceLightColor, PaleDarkOrangeTileSourceLightColor, PaleOrangeTileSourceLightColor };
   enum StandardFaction { Hostile, Commoner, Merchant, Defender };
   enum SavingThrowResult { FailedRoll, SucceededRoll, ImmuneToSaveType };
-  enum Action { MoveToPointAction, PickupItemAction, DropItemAction, AttackObjectAction, CastSpellAction, OpenDoorAction, CloseDoorAction, DialogObjectAction, DisableTrapAction, RecoverTrapAction, FlagTrapAction, ExamineTrapAction, SetTrapAction, OpenLockAction, LockAction, UseObjectAction, AnimalEmpathyAction, RestAction, TauntAction, ItemCastSpellAction, CounterSpellAction, HealAction, PickpocketAction, FollowAction, SitAction, SmiteGoodAction, KIDamageAction, RandomWalkAction, InvalidAction };
+  enum Action { MoveToPointAction, PickupItemAction, DropItemAction, AttackObjectAction, CastSpellAction, OpenDoorAction, CloseDoorAction, DialogObjectAction, DisableTrapAction, RecoverTrapAction, FlagTrapAction, ExamineTrapAction, SetTrapAction, OpenLockAction, LockAction, UseObjectAction, AnimalEmpathyAction, RestAction, TauntAction, ItemCastSpellAction, CounterSpellAction, HealAction, PickpocketAction, FollowAction, WaitAction, SitAction, SmiteGoodAction, KIDamageAction, RandomWalkAction, InvalidAction };
   enum ACModifyType { ACDodgeBonus, ACNaturalBonus, ACArmorEnchantmentBonus, ACShieldEnchantmentBonus, ACDeflectionBonus };
   enum Gender { MaleGender, Female, BothGender, OtherGender, NoneGender };
   enum IPRacialType { DwarfIPRace, ElfIPRace, GnomeIPRace, HalflingIPRace, HalfelfIPRace, HalforcIPRace, HumanIPRace, AberrationIPRace, AnimalIPRace, BeastIPRace, ConstructIPRace, DragonIPRace, HumanoidGoblinoidIPRace, HumanoidMonstrousIPRace, HumanoidOrcIPRace, HumanoidReptilianIPRace, ElementalIPRace, FeyIPRace, GiantIPRace, MagicalBeastIPRace, OutsiderIPRace, ShapechangerIPRace, UndeadIPRace, VerminIPRace };
