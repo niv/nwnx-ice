@@ -1,4 +1,4 @@
-// Generated on Thu Sep 03 19:48:36 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Fri Sep 04 16:17:21 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 // Not exported:
 //   getFirstEffect getFirstFactionMember getFirstItemInInventory getFirstItemProperty getFirstInPersistentObject getFirstObjectInArea getFirstObjectInShape getFirstPC
@@ -261,6 +261,12 @@ module NWN {
     */
     double getEffectDuration(NWEffect e) throws InvalidEffectException;
     double getItemPropertyDuration(NWItemProperty e) throws InvalidEffectException;
+
+
+    /**
+      Disable/enable serverside debug printing of events.
+    */
+    idempotent void setDebugLogging(bool state);
 
     idempotent bool hasState(string key);
     idempotent Persistable getState(string key) throws StateNotAvailableException;

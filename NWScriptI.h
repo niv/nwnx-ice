@@ -1,4 +1,4 @@
-// Generated on Thu Sep 03 19:48:36 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Fri Sep 04 16:17:21 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 #include "FunctionHooks.h"
 #include "NWNStructures.h"
@@ -9,6 +9,7 @@ class NWScriptI : public NWN::NWScript {
   public:
     NWScriptI();
     void resetPerEventMappings();
+    bool printEvents;
     unsigned long callCounter;
     unsigned int contextDepth;
     int getEffectInteger(const NWN::NWEffect&, Ice::Int, const Ice::Current&);
@@ -20,6 +21,8 @@ class NWScriptI : public NWN::NWScript {
     Ice::Double getItemPropertyDuration(const NWN::NWItemProperty&, const Ice::Current&);
 
     void setEffectTrueType(const NWN::NWEffect&, NWN::EffectTrueType, const Ice::Current&);
+
+    void setDebugLogging(bool, const Ice::Current&);
 
     bool hasState(const std::string&, const Ice::Current&);
     NWN::Persistable getState(const std::string&, const Ice::Current&);

@@ -35,7 +35,6 @@ CNWNXICE::CNWNXICE()
 {
 	confKey = strdup("ICE");
 	bHooked = 1;
-	printEvents = true;
 }
 
 CNWNXICE::~CNWNXICE()
@@ -79,8 +78,6 @@ bool CNWNXICE::OnCreate(gline *config, const char *LogDir)
 	initData.stringConverter = new Ice::IconvStringConverter<char>(charset);
 	initData.properties = props;
 	ic = Ice::initialize(initData);
-
-	printEvents = atoi((*nwnxConfig)[confKey]["printEvents"].c_str()) == 1 ? true : false;
 
 	while (true) {
 		// Set up the client
@@ -128,6 +125,8 @@ bool CNWNXICE::OnCreate(gline *config, const char *LogDir)
 		throw;
 	}
 
+	nwscriptI->printEvents = atoi((*nwnxConfig)[confKey]["printEvents"].c_str()) == 1 ? true : false;
+
     return true;
 }
 
@@ -165,7 +164,7 @@ char* CNWNXICE::OnRequest (char *gameObject, char* request, char* parameters)
 
 	nwscriptI->contextDepth += 1;
 
-	std::string lastException;
+	std::string lastException = "";
 	while (true) {
 		try {
 			if (strcmp(request, "EVENT") == 0)
@@ -188,6 +187,10 @@ char* CNWNXICE::OnRequest (char *gameObject, char* request, char* parameters)
 			exit(1);
 		}
 	}
+	if (lastException != "") {
+		printf(".. it's back, continuing.\n");
+		lastException = "";
+	}
 
 	nwscriptI->contextDepth -= 1;
 
@@ -202,7 +205,7 @@ char* CNWNXICE::OnRequest (char *gameObject, char* request, char* parameters)
 	if (nwscriptI->contextDepth == 0)
 		nwscriptI->resetPerEventMappings();
 
-	if (printEvents) {
+	if (nwscriptI->printEvents) {
 		if (strcmp(request, "EVENT") == 0)
 			printf("e %0.8x %-20s %6d s %8d u %12d calls\n", oid, event, se, ms, calls);
 		if (strcmp(request, "TOKEN") == 0)

@@ -43,8 +43,6 @@ public:
 	bool bHooked;
 	int nError;
 
-	bool printEvents;
-
 private:
 	Ice::CommunicatorPtr ic;
 	Ice::ObjectAdapterPtr adapter;

@@ -1,4 +1,4 @@
-// Generated on Thu Sep 03 19:48:36 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Fri Sep 04 16:17:21 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 #include "NWScriptI.h"
 #include <iostream>
@@ -13,6 +13,7 @@ NWScriptI::NWScriptI() {
   contextDepth = 0;
   lastEffectId = 0;
   lastIprpId = 0;
+  printEvents = false;
 }
 
 void NWScriptI::resetPerEventMappings() {
@@ -16373,6 +16374,10 @@ Ice::Double NWScriptI::yardsToMeters(Ice::Double fYards, const Ice::Current& ice
   return fRetVal;
 };
 
+
+void NWScriptI::setDebugLogging(bool what, const Ice::Current& ice) {
+  printEvents = what;
+};
 
 NWN::NWObjectSeq NWScriptI::allPCs(const Ice::Current& ice) {
   NWN::NWObjectSeq p;
