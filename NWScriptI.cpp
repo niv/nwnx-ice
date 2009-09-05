@@ -16454,11 +16454,12 @@ NWN::NWObjectSeq NWScriptI::allInShape(NWN::ShapeType shape, Ice::Double size,
     const NWN::NWVector& origin, const Ice::Current& ice) {
   NWN::NWObjectSeq p;
   innerLock("allInShape");
+  int ot = enum_ObjectType_2_long(objType);
   NWN::NWObject o = getFirstObjectInShape(shape, size, location, lineOfSight,
-    objType, origin, ice);
+    ot, origin, ice);
   while (getIsObjectValid(o, ice)) {
     p.push_back(o);
-    o = getNextObjectInShape(shape, size, location, lineOfSight, objType, origin, ice);
+    o = getNextObjectInShape(shape, size, location, lineOfSight, ot, origin, ice);
   }
   innerUnlock("allInShape");
   return p;
