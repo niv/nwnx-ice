@@ -1,4 +1,4 @@
-// Generated on Fri Sep 04 16:17:21 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Sat Sep 05 13:14:02 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 #include "NWScriptI.h"
 #include <iostream>
@@ -16377,6 +16377,10 @@ Ice::Double NWScriptI::yardsToMeters(Ice::Double fYards, const Ice::Current& ice
 
 void NWScriptI::setDebugLogging(bool what, const Ice::Current& ice) {
   printEvents = what;
+};
+
+Ice::Long NWScriptI::getInstructionCount(const Ice::Current& ice) {
+  return callCounter;
 };
 
 NWN::NWObjectSeq NWScriptI::allPCs(const Ice::Current& ice) {
