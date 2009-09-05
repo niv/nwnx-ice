@@ -1,4 +1,4 @@
-// Generated on Sat Sep 05 13:14:02 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Sat Sep 05 15:28:37 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 #include "NWScriptI.h"
 #include <iostream>
@@ -1099,12 +1099,14 @@ NWN::ObjectType NWScriptI::enum_long_2_ObjectType(long v) {
 long NWScriptI::enum_DurationType_2_long(NWN::DurationType k) {
   if (k == NWN::Instant) return 0;
   if (k == NWN::Temporary) return 1;
+  if (k == NWN::InvalidDuration) return -1;
   if (k == NWN::Permanent) return 2;
   throw "omg";
 };
 NWN::DurationType NWScriptI::enum_long_2_DurationType(long v) {
   if (v == 0) return NWN::Instant;
   if (v == 1) return NWN::Temporary;
+  if (v == -1) return NWN::InvalidDuration;
   if (v == 2) return NWN::Permanent;
   printf("Invalid enum value of type DurationType passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
 };
