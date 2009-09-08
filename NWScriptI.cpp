@@ -1,4 +1,4 @@
-// Generated on Sat Sep 05 18:23:00 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Tue Sep 08 21:33:56 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 #include "NWScriptI.h"
 #include <iostream>
@@ -6,6 +6,8 @@
 #include <string>
 #include <map>
 #include <stdlib.h>
+#include <math.h>
+
 using namespace std;
 
 NWScriptI::NWScriptI() {
@@ -1887,15 +1889,14 @@ void NWScriptI::actionCastFakeSpellAtLocation(Ice::Int nSpell, const NWN::NWLoca
   callCounter += 1;
   StackPushInteger(enum_ProjectilePathType_2_long(tProjectilePathType));
   
-  CScriptLocation lTarget_ptr;
-  lTarget_ptr.X = lTarget.x;
-  lTarget_ptr.Y = lTarget.y;
-  lTarget_ptr.Z = lTarget.z;
-  lTarget_ptr.OrientationX = lTarget.orientationX;
-  lTarget_ptr.OrientationY = lTarget.orientationY;
-  lTarget_ptr.OrientationZ = lTarget.orientationZ;
-  lTarget_ptr.AreaID = lTarget.area.id;
-  StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, &lTarget_ptr);
+  
+  StackPushFloat(lTarget.facing);
+  Vector lTarget_vv;
+  lTarget_vv.X = lTarget.x; lTarget_vv.Y = lTarget.y; lTarget_vv.Z = lTarget.z;
+  StackPushVector(lTarget_vv);
+  StackPushObject(lTarget.area.id);
+  VM_ExecuteCommand(215, 3); // Location(...);
+  
   StackPushInteger(nSpell);
 
   VM_ExecuteCommand(502, 3);
@@ -1929,15 +1930,14 @@ void NWScriptI::actionCastSpellAtLocation(Ice::Int nSpell, const NWN::NWLocation
   StackPushInteger(bCheat == true ? 1 : 0);
   StackPushInteger(enum_MetaMagic_2_long(tMetaMagic));
   
-  CScriptLocation lTargetLocation_ptr;
-  lTargetLocation_ptr.X = lTargetLocation.x;
-  lTargetLocation_ptr.Y = lTargetLocation.y;
-  lTargetLocation_ptr.Z = lTargetLocation.z;
-  lTargetLocation_ptr.OrientationX = lTargetLocation.orientationX;
-  lTargetLocation_ptr.OrientationY = lTargetLocation.orientationY;
-  lTargetLocation_ptr.OrientationZ = lTargetLocation.orientationZ;
-  lTargetLocation_ptr.AreaID = lTargetLocation.area.id;
-  StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, &lTargetLocation_ptr);
+  
+  StackPushFloat(lTargetLocation.facing);
+  Vector lTargetLocation_vv;
+  lTargetLocation_vv.X = lTargetLocation.x; lTargetLocation_vv.Y = lTargetLocation.y; lTargetLocation_vv.Z = lTargetLocation.z;
+  StackPushVector(lTargetLocation_vv);
+  StackPushObject(lTargetLocation.area.id);
+  VM_ExecuteCommand(215, 3); // Location(...);
+  
   StackPushInteger(nSpell);
 
   VM_ExecuteCommand(234, 6);
@@ -2070,15 +2070,14 @@ void NWScriptI::actionForceMoveToLocation(const NWN::NWLocation& lDestination, b
   callCounter += 1;
   StackPushFloat(fTimeout);
   StackPushInteger(bRun == true ? 1 : 0);
-  CScriptLocation lDestination_ptr;
-  lDestination_ptr.X = lDestination.x;
-  lDestination_ptr.Y = lDestination.y;
-  lDestination_ptr.Z = lDestination.z;
-  lDestination_ptr.OrientationX = lDestination.orientationX;
-  lDestination_ptr.OrientationY = lDestination.orientationY;
-  lDestination_ptr.OrientationZ = lDestination.orientationZ;
-  lDestination_ptr.AreaID = lDestination.area.id;
-  StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, &lDestination_ptr);
+  
+  StackPushFloat(lDestination.facing);
+  Vector lDestination_vv;
+  lDestination_vv.X = lDestination.x; lDestination_vv.Y = lDestination.y; lDestination_vv.Z = lDestination.z;
+  StackPushVector(lDestination_vv);
+  StackPushObject(lDestination.area.id);
+  VM_ExecuteCommand(215, 3); // Location(...);
+  
 
   VM_ExecuteCommand(382, 3);
 
@@ -2131,15 +2130,14 @@ void NWScriptI::actionJumpToLocation(const NWN::NWLocation& lLocation, const Ice
   if (lLocation.area.id < 0) throw NWN::InvalidObjectException();
   lock(actionJumpToLocation_mutex, "actionJumpToLocation");
   callCounter += 1;
-  CScriptLocation lLocation_ptr;
-  lLocation_ptr.X = lLocation.x;
-  lLocation_ptr.Y = lLocation.y;
-  lLocation_ptr.Z = lLocation.z;
-  lLocation_ptr.OrientationX = lLocation.orientationX;
-  lLocation_ptr.OrientationY = lLocation.orientationY;
-  lLocation_ptr.OrientationZ = lLocation.orientationZ;
-  lLocation_ptr.AreaID = lLocation.area.id;
-  StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, &lLocation_ptr);
+  
+  StackPushFloat(lLocation.facing);
+  Vector lLocation_vv;
+  lLocation_vv.X = lLocation.x; lLocation_vv.Y = lLocation.y; lLocation_vv.Z = lLocation.z;
+  StackPushVector(lLocation_vv);
+  StackPushObject(lLocation.area.id);
+  VM_ExecuteCommand(215, 3); // Location(...);
+  
 
   VM_ExecuteCommand(214, 1);
 
@@ -2178,15 +2176,14 @@ void NWScriptI::actionMoveAwayFromLocation(const NWN::NWLocation& lMoveAwayFrom,
   callCounter += 1;
   StackPushFloat(fMoveAwayRange);
   StackPushInteger(bRun == true ? 1 : 0);
-  CScriptLocation lMoveAwayFrom_ptr;
-  lMoveAwayFrom_ptr.X = lMoveAwayFrom.x;
-  lMoveAwayFrom_ptr.Y = lMoveAwayFrom.y;
-  lMoveAwayFrom_ptr.Z = lMoveAwayFrom.z;
-  lMoveAwayFrom_ptr.OrientationX = lMoveAwayFrom.orientationX;
-  lMoveAwayFrom_ptr.OrientationY = lMoveAwayFrom.orientationY;
-  lMoveAwayFrom_ptr.OrientationZ = lMoveAwayFrom.orientationZ;
-  lMoveAwayFrom_ptr.AreaID = lMoveAwayFrom.area.id;
-  StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, &lMoveAwayFrom_ptr);
+  
+  StackPushFloat(lMoveAwayFrom.facing);
+  Vector lMoveAwayFrom_vv;
+  lMoveAwayFrom_vv.X = lMoveAwayFrom.x; lMoveAwayFrom_vv.Y = lMoveAwayFrom.y; lMoveAwayFrom_vv.Z = lMoveAwayFrom.z;
+  StackPushVector(lMoveAwayFrom_vv);
+  StackPushObject(lMoveAwayFrom.area.id);
+  VM_ExecuteCommand(215, 3); // Location(...);
+  
 
   VM_ExecuteCommand(360, 3);
 
@@ -2213,15 +2210,14 @@ void NWScriptI::actionMoveToLocation(const NWN::NWLocation& lDestination, bool b
   lock(actionMoveToLocation_mutex, "actionMoveToLocation");
   callCounter += 1;
   StackPushInteger(bRun == true ? 1 : 0);
-  CScriptLocation lDestination_ptr;
-  lDestination_ptr.X = lDestination.x;
-  lDestination_ptr.Y = lDestination.y;
-  lDestination_ptr.Z = lDestination.z;
-  lDestination_ptr.OrientationX = lDestination.orientationX;
-  lDestination_ptr.OrientationY = lDestination.orientationY;
-  lDestination_ptr.OrientationZ = lDestination.orientationZ;
-  lDestination_ptr.AreaID = lDestination.area.id;
-  StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, &lDestination_ptr);
+  
+  StackPushFloat(lDestination.facing);
+  Vector lDestination_vv;
+  lDestination_vv.X = lDestination.x; lDestination_vv.Y = lDestination.y; lDestination_vv.Z = lDestination.z;
+  StackPushVector(lDestination_vv);
+  StackPushObject(lDestination.area.id);
+  VM_ExecuteCommand(215, 3); // Location(...);
+  
 
   VM_ExecuteCommand(21, 2);
 
@@ -2673,15 +2669,14 @@ void NWScriptI::applyEffectAtLocation(NWN::DurationType tDurationType, const NWN
   lock(applyEffectAtLocation_mutex, "applyEffectAtLocation");
   callCounter += 1;
   StackPushFloat(fDuration);
-  CScriptLocation lLocation_ptr;
-  lLocation_ptr.X = lLocation.x;
-  lLocation_ptr.Y = lLocation.y;
-  lLocation_ptr.Z = lLocation.z;
-  lLocation_ptr.OrientationX = lLocation.orientationX;
-  lLocation_ptr.OrientationY = lLocation.orientationY;
-  lLocation_ptr.OrientationZ = lLocation.orientationZ;
-  lLocation_ptr.AreaID = lLocation.area.id;
-  StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, &lLocation_ptr);
+  
+  StackPushFloat(lLocation.facing);
+  Vector lLocation_vv;
+  lLocation_vv.X = lLocation.x; lLocation_vv.Y = lLocation.y; lLocation_vv.Z = lLocation.z;
+  StackPushVector(lLocation_vv);
+  StackPushObject(lLocation.area.id);
+  VM_ExecuteCommand(215, 3); // Location(...);
+  
   CGameEffect *eEffect_ptr = effectMap.find(eEffect.id)->second;
   StackPushEngineStructure(ENGINE_STRUCTURE_EFFECT, eEffect_ptr);
   StackPushInteger(enum_DurationType_2_long(tDurationType));
@@ -2722,19 +2717,6 @@ Ice::Double NWScriptI::asin(Ice::Double fValue, const Ice::Current& ice) {
   float fRetVal;
   StackPopFloat(&fRetVal);
   unlock(asin_mutex, "asin");
-  return fRetVal;
-};
-
-Ice::Double NWScriptI::atan(Ice::Double fValue, const Ice::Current& ice) {
-  lock(atan_mutex, "atan");
-  callCounter += 1;
-  StackPushFloat(fValue);
-
-  VM_ExecuteCommand(73, 1);
-
-  float fRetVal;
-  StackPopFloat(&fRetVal);
-  unlock(atan_mutex, "atan");
   return fRetVal;
 };
 
@@ -2905,15 +2887,14 @@ NWN::NWObject NWScriptI::copyObject(const NWN::NWObject& oSource, const NWN::NWL
   callCounter += 1;
   StackPushString(sNewTag.c_str());
   StackPushObject(oOwner.id);
-  CScriptLocation locLocation_ptr;
-  locLocation_ptr.X = locLocation.x;
-  locLocation_ptr.Y = locLocation.y;
-  locLocation_ptr.Z = locLocation.z;
-  locLocation_ptr.OrientationX = locLocation.orientationX;
-  locLocation_ptr.OrientationY = locLocation.orientationY;
-  locLocation_ptr.OrientationZ = locLocation.orientationZ;
-  locLocation_ptr.AreaID = locLocation.area.id;
-  StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, &locLocation_ptr);
+  
+  StackPushFloat(locLocation.facing);
+  Vector locLocation_vv;
+  locLocation_vv.X = locLocation.x; locLocation_vv.Y = locLocation.y; locLocation_vv.Z = locLocation.z;
+  StackPushVector(locLocation_vv);
+  StackPushObject(locLocation.area.id);
+  VM_ExecuteCommand(215, 3); // Location(...);
+  
   StackPushObject(oSource.id);
 
   VM_ExecuteCommand(600, 4);
@@ -2964,15 +2945,14 @@ NWN::NWObject NWScriptI::createObject(NWN::ObjectType tObjectType, const std::st
   callCounter += 1;
   StackPushString(sNewTag.c_str());
   StackPushInteger(bUseAppearAnimation == true ? 1 : 0);
-  CScriptLocation lLocation_ptr;
-  lLocation_ptr.X = lLocation.x;
-  lLocation_ptr.Y = lLocation.y;
-  lLocation_ptr.Z = lLocation.z;
-  lLocation_ptr.OrientationX = lLocation.orientationX;
-  lLocation_ptr.OrientationY = lLocation.orientationY;
-  lLocation_ptr.OrientationZ = lLocation.orientationZ;
-  lLocation_ptr.AreaID = lLocation.area.id;
-  StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, &lLocation_ptr);
+  
+  StackPushFloat(lLocation.facing);
+  Vector lLocation_vv;
+  lLocation_vv.X = lLocation.x; lLocation_vv.Y = lLocation.y; lLocation_vv.Z = lLocation.z;
+  StackPushVector(lLocation_vv);
+  StackPushObject(lLocation.area.id);
+  VM_ExecuteCommand(215, 3); // Location(...);
+  
   StackPushString(sTemplate.c_str());
   StackPushInteger(enum_ObjectType_2_long(tObjectType));
   
@@ -2997,15 +2977,14 @@ NWN::NWObject NWScriptI::createTrapAtLocation(NWN::TrapType tTrapType, const NWN
   
   StackPushString(sTag.c_str());
   StackPushFloat(fSize);
-  CScriptLocation lLocation_ptr;
-  lLocation_ptr.X = lLocation.x;
-  lLocation_ptr.Y = lLocation.y;
-  lLocation_ptr.Z = lLocation.z;
-  lLocation_ptr.OrientationX = lLocation.orientationX;
-  lLocation_ptr.OrientationY = lLocation.orientationY;
-  lLocation_ptr.OrientationZ = lLocation.orientationZ;
-  lLocation_ptr.AreaID = lLocation.area.id;
-  StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, &lLocation_ptr);
+  
+  StackPushFloat(lLocation.facing);
+  Vector lLocation_vv;
+  lLocation_vv.X = lLocation.x; lLocation_vv.Y = lLocation.y; lLocation_vv.Z = lLocation.z;
+  StackPushVector(lLocation_vv);
+  StackPushObject(lLocation.area.id);
+  VM_ExecuteCommand(215, 3); // Location(...);
+  
   StackPushInteger(enum_TrapType_2_long(tTrapType));
   
 
@@ -4231,15 +4210,14 @@ NWN::NWEffect NWScriptI::effectDisappearAppear(const NWN::NWLocation& lLocation,
   lock(effectDisappearAppear_mutex, "effectDisappearAppear");
   callCounter += 1;
   StackPushInteger(nAnimation);
-  CScriptLocation lLocation_ptr;
-  lLocation_ptr.X = lLocation.x;
-  lLocation_ptr.Y = lLocation.y;
-  lLocation_ptr.Z = lLocation.z;
-  lLocation_ptr.OrientationX = lLocation.orientationX;
-  lLocation_ptr.OrientationY = lLocation.orientationY;
-  lLocation_ptr.OrientationZ = lLocation.orientationZ;
-  lLocation_ptr.AreaID = lLocation.area.id;
-  StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, &lLocation_ptr);
+  
+  StackPushFloat(lLocation.facing);
+  Vector lLocation_vv;
+  lLocation_vv.X = lLocation.x; lLocation_vv.Y = lLocation.y; lLocation_vv.Z = lLocation.z;
+  StackPushVector(lLocation_vv);
+  StackPushObject(lLocation.area.id);
+  VM_ExecuteCommand(215, 3); // Location(...);
+  
 
   VM_ExecuteCommand(480, 2);
 
@@ -6089,15 +6067,14 @@ NWN::NWObject NWScriptI::getAreaFromLocation(const NWN::NWLocation& lLocation, c
   if (lLocation.area.id < 0) throw NWN::InvalidObjectException();
   lock(getAreaFromLocation_mutex, "getAreaFromLocation");
   callCounter += 1;
-  CScriptLocation lLocation_ptr;
-  lLocation_ptr.X = lLocation.x;
-  lLocation_ptr.Y = lLocation.y;
-  lLocation_ptr.Z = lLocation.z;
-  lLocation_ptr.OrientationX = lLocation.orientationX;
-  lLocation_ptr.OrientationY = lLocation.orientationY;
-  lLocation_ptr.OrientationZ = lLocation.orientationZ;
-  lLocation_ptr.AreaID = lLocation.area.id;
-  StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, &lLocation_ptr);
+  
+  StackPushFloat(lLocation.facing);
+  Vector lLocation_vv;
+  lLocation_vv.X = lLocation.x; lLocation_vv.Y = lLocation.y; lLocation_vv.Z = lLocation.z;
+  StackPushVector(lLocation_vv);
+  StackPushObject(lLocation.area.id);
+  VM_ExecuteCommand(215, 3); // Location(...);
+  
 
   VM_ExecuteCommand(224, 1);
 
@@ -6341,13 +6318,13 @@ NWN::NWLocation NWScriptI::getCampaignLocation(const std::string& sCampaignName,
   CScriptLocation *pRetVal;
   StackPopEngineStructure(ENGINE_STRUCTURE_LOCATION, (void **) &pRetVal);
   NWN::NWLocation nl;
-  nl.x = pRetVal->X;
-  nl.y = pRetVal->X;
-  nl.z = pRetVal->X;
-  nl.orientationX = pRetVal->OrientationX;
-  nl.orientationY = pRetVal->OrientationY;
-  nl.orientationZ = pRetVal->OrientationZ;
   nl.area.id = pRetVal->AreaID;
+  nl.x = pRetVal->X;
+  nl.y = pRetVal->Y;
+  nl.z = pRetVal->Z;
+  nl.facing = atan(pRetVal->OrientationY / pRetVal->OrientationX) * (180 / 3.1415927);
+  nl.facing += 180;
+  while (nl.facing > 360.0) nl.facing -= 360.0; while (nl.facing < 0.0) nl.facing += 360.0;
   unlock(getCampaignLocation_mutex, "getCampaignLocation");
   return nl;
 };
@@ -6708,24 +6685,22 @@ Ice::Double NWScriptI::getDistanceBetweenLocations(const NWN::NWLocation& lLocat
   if (lLocationB.area.id < 0) throw NWN::InvalidObjectException();
   lock(getDistanceBetweenLocations_mutex, "getDistanceBetweenLocations");
   callCounter += 1;
-  CScriptLocation lLocationB_ptr;
-  lLocationB_ptr.X = lLocationB.x;
-  lLocationB_ptr.Y = lLocationB.y;
-  lLocationB_ptr.Z = lLocationB.z;
-  lLocationB_ptr.OrientationX = lLocationB.orientationX;
-  lLocationB_ptr.OrientationY = lLocationB.orientationY;
-  lLocationB_ptr.OrientationZ = lLocationB.orientationZ;
-  lLocationB_ptr.AreaID = lLocationB.area.id;
-  StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, &lLocationB_ptr);
-  CScriptLocation lLocationA_ptr;
-  lLocationA_ptr.X = lLocationA.x;
-  lLocationA_ptr.Y = lLocationA.y;
-  lLocationA_ptr.Z = lLocationA.z;
-  lLocationA_ptr.OrientationX = lLocationA.orientationX;
-  lLocationA_ptr.OrientationY = lLocationA.orientationY;
-  lLocationA_ptr.OrientationZ = lLocationA.orientationZ;
-  lLocationA_ptr.AreaID = lLocationA.area.id;
-  StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, &lLocationA_ptr);
+  
+  StackPushFloat(lLocationB.facing);
+  Vector lLocationB_vv;
+  lLocationB_vv.X = lLocationB.x; lLocationB_vv.Y = lLocationB.y; lLocationB_vv.Z = lLocationB.z;
+  StackPushVector(lLocationB_vv);
+  StackPushObject(lLocationB.area.id);
+  VM_ExecuteCommand(215, 3); // Location(...);
+  
+  
+  StackPushFloat(lLocationA.facing);
+  Vector lLocationA_vv;
+  lLocationA_vv.X = lLocationA.x; lLocationA_vv.Y = lLocationA.y; lLocationA_vv.Z = lLocationA.z;
+  StackPushVector(lLocationA_vv);
+  StackPushObject(lLocationA.area.id);
+  VM_ExecuteCommand(215, 3); // Location(...);
+  
 
   VM_ExecuteCommand(298, 2);
 
@@ -6950,15 +6925,14 @@ Ice::Double NWScriptI::getFacingFromLocation(const NWN::NWLocation& lLocation, c
   if (lLocation.area.id < 0) throw NWN::InvalidObjectException();
   lock(getFacingFromLocation_mutex, "getFacingFromLocation");
   callCounter += 1;
-  CScriptLocation lLocation_ptr;
-  lLocation_ptr.X = lLocation.x;
-  lLocation_ptr.Y = lLocation.y;
-  lLocation_ptr.Z = lLocation.z;
-  lLocation_ptr.OrientationX = lLocation.orientationX;
-  lLocation_ptr.OrientationY = lLocation.orientationY;
-  lLocation_ptr.OrientationZ = lLocation.orientationZ;
-  lLocation_ptr.AreaID = lLocation.area.id;
-  StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, &lLocation_ptr);
+  
+  StackPushFloat(lLocation.facing);
+  Vector lLocation_vv;
+  lLocation_vv.X = lLocation.x; lLocation_vv.Y = lLocation.y; lLocation_vv.Z = lLocation.z;
+  StackPushVector(lLocation_vv);
+  StackPushObject(lLocation.area.id);
+  VM_ExecuteCommand(215, 3); // Location(...);
+  
 
   VM_ExecuteCommand(225, 1);
 
@@ -7364,15 +7338,14 @@ NWN::NWObject NWScriptI::getFirstObjectInShape(NWN::ShapeType tShapeType, Ice::D
   StackPushVector(vvOrigin);
   StackPushInteger(nObjectFilter);
   StackPushInteger(bLineOfSight == true ? 1 : 0);
-  CScriptLocation lTarget_ptr;
-  lTarget_ptr.X = lTarget.x;
-  lTarget_ptr.Y = lTarget.y;
-  lTarget_ptr.Z = lTarget.z;
-  lTarget_ptr.OrientationX = lTarget.orientationX;
-  lTarget_ptr.OrientationY = lTarget.orientationY;
-  lTarget_ptr.OrientationZ = lTarget.orientationZ;
-  lTarget_ptr.AreaID = lTarget.area.id;
-  StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, &lTarget_ptr);
+  
+  StackPushFloat(lTarget.facing);
+  Vector lTarget_vv;
+  lTarget_vv.X = lTarget.x; lTarget_vv.Y = lTarget.y; lTarget_vv.Z = lTarget.z;
+  StackPushVector(lTarget_vv);
+  StackPushObject(lTarget.area.id);
+  VM_ExecuteCommand(215, 3); // Location(...);
+  
   StackPushFloat(fSize);
   StackPushInteger(enum_ShapeType_2_long(tShapeType));
   
@@ -8308,13 +8281,13 @@ NWN::NWLocation NWScriptI::getItemActivatedTargetLocation(const Ice::Current& ic
   CScriptLocation *pRetVal;
   StackPopEngineStructure(ENGINE_STRUCTURE_LOCATION, (void **) &pRetVal);
   NWN::NWLocation nl;
-  nl.x = pRetVal->X;
-  nl.y = pRetVal->X;
-  nl.z = pRetVal->X;
-  nl.orientationX = pRetVal->OrientationX;
-  nl.orientationY = pRetVal->OrientationY;
-  nl.orientationZ = pRetVal->OrientationZ;
   nl.area.id = pRetVal->AreaID;
+  nl.x = pRetVal->X;
+  nl.y = pRetVal->Y;
+  nl.z = pRetVal->Z;
+  nl.facing = atan(pRetVal->OrientationY / pRetVal->OrientationX) * (180 / 3.1415927);
+  nl.facing += 180;
+  while (nl.facing > 360.0) nl.facing -= 360.0; while (nl.facing < 0.0) nl.facing += 360.0;
   unlock(getItemActivatedTargetLocation_mutex, "getItemActivatedTargetLocation");
   return nl;
 };
@@ -9140,13 +9113,13 @@ NWN::NWLocation NWScriptI::getLocalLocation(const NWN::NWObject& oObject, const 
   CScriptLocation *pRetVal;
   StackPopEngineStructure(ENGINE_STRUCTURE_LOCATION, (void **) &pRetVal);
   NWN::NWLocation nl;
-  nl.x = pRetVal->X;
-  nl.y = pRetVal->X;
-  nl.z = pRetVal->X;
-  nl.orientationX = pRetVal->OrientationX;
-  nl.orientationY = pRetVal->OrientationY;
-  nl.orientationZ = pRetVal->OrientationZ;
   nl.area.id = pRetVal->AreaID;
+  nl.x = pRetVal->X;
+  nl.y = pRetVal->Y;
+  nl.z = pRetVal->Z;
+  nl.facing = atan(pRetVal->OrientationY / pRetVal->OrientationX) * (180 / 3.1415927);
+  nl.facing += 180;
+  while (nl.facing > 360.0) nl.facing -= 360.0; while (nl.facing < 0.0) nl.facing += 360.0;
   unlock(getLocalLocation_mutex, "getLocalLocation");
   return nl;
 };
@@ -9194,13 +9167,13 @@ NWN::NWLocation NWScriptI::getLocation(const NWN::NWObject& oObject, const Ice::
   CScriptLocation *pRetVal;
   StackPopEngineStructure(ENGINE_STRUCTURE_LOCATION, (void **) &pRetVal);
   NWN::NWLocation nl;
-  nl.x = pRetVal->X;
-  nl.y = pRetVal->X;
-  nl.z = pRetVal->X;
-  nl.orientationX = pRetVal->OrientationX;
-  nl.orientationY = pRetVal->OrientationY;
-  nl.orientationZ = pRetVal->OrientationZ;
   nl.area.id = pRetVal->AreaID;
+  nl.x = pRetVal->X;
+  nl.y = pRetVal->Y;
+  nl.z = pRetVal->Z;
+  nl.facing = atan(pRetVal->OrientationY / pRetVal->OrientationX) * (180 / 3.1415927);
+  nl.facing += 180;
+  while (nl.facing > 360.0) nl.facing -= 360.0; while (nl.facing < 0.0) nl.facing += 360.0;
   unlock(getLocation_mutex, "getLocation");
   return nl;
 };
@@ -9564,15 +9537,14 @@ NWN::NWObject NWScriptI::getNearestCreatureToLocation(Ice::Int nFirstCriteriaTyp
   StackPushInteger(nSecondCriteriaValue);
   StackPushInteger(nSecondCriteriaType);
   StackPushInteger(nNth);
-  CScriptLocation lLocation_ptr;
-  lLocation_ptr.X = lLocation.x;
-  lLocation_ptr.Y = lLocation.y;
-  lLocation_ptr.Z = lLocation.z;
-  lLocation_ptr.OrientationX = lLocation.orientationX;
-  lLocation_ptr.OrientationY = lLocation.orientationY;
-  lLocation_ptr.OrientationZ = lLocation.orientationZ;
-  lLocation_ptr.AreaID = lLocation.area.id;
-  StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, &lLocation_ptr);
+  
+  StackPushFloat(lLocation.facing);
+  Vector lLocation_vv;
+  lLocation_vv.X = lLocation.x; lLocation_vv.Y = lLocation.y; lLocation_vv.Z = lLocation.z;
+  StackPushVector(lLocation_vv);
+  StackPushObject(lLocation.area.id);
+  VM_ExecuteCommand(215, 3); // Location(...);
+  
   StackPushInteger(nFirstCriteriaValue);
   StackPushInteger(nFirstCriteriaType);
 
@@ -9628,15 +9600,14 @@ NWN::NWObject NWScriptI::getNearestObjectToLocation(NWN::ObjectType tObjectType,
   lock(getNearestObjectToLocation_mutex, "getNearestObjectToLocation");
   callCounter += 1;
   StackPushInteger(nNth);
-  CScriptLocation lLocation_ptr;
-  lLocation_ptr.X = lLocation.x;
-  lLocation_ptr.Y = lLocation.y;
-  lLocation_ptr.Z = lLocation.z;
-  lLocation_ptr.OrientationX = lLocation.orientationX;
-  lLocation_ptr.OrientationY = lLocation.orientationY;
-  lLocation_ptr.OrientationZ = lLocation.orientationZ;
-  lLocation_ptr.AreaID = lLocation.area.id;
-  StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, &lLocation_ptr);
+  
+  StackPushFloat(lLocation.facing);
+  Vector lLocation_vv;
+  lLocation_vv.X = lLocation.x; lLocation_vv.Y = lLocation.y; lLocation_vv.Z = lLocation.z;
+  StackPushVector(lLocation_vv);
+  StackPushObject(lLocation.area.id);
+  VM_ExecuteCommand(215, 3); // Location(...);
+  
   StackPushInteger(enum_ObjectType_2_long(tObjectType));
   
 
@@ -9801,15 +9772,14 @@ NWN::NWObject NWScriptI::getNextObjectInShape(NWN::ShapeType tShapeType, Ice::Do
   StackPushVector(vvOrigin);
   StackPushInteger(nObjectFilter);
   StackPushInteger(bLineOfSight == true ? 1 : 0);
-  CScriptLocation lTarget_ptr;
-  lTarget_ptr.X = lTarget.x;
-  lTarget_ptr.Y = lTarget.y;
-  lTarget_ptr.Z = lTarget.z;
-  lTarget_ptr.OrientationX = lTarget.orientationX;
-  lTarget_ptr.OrientationY = lTarget.orientationY;
-  lTarget_ptr.OrientationZ = lTarget.orientationZ;
-  lTarget_ptr.AreaID = lTarget.area.id;
-  StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, &lTarget_ptr);
+  
+  StackPushFloat(lTarget.facing);
+  Vector lTarget_vv;
+  lTarget_vv.X = lTarget.x; lTarget_vv.Y = lTarget.y; lTarget_vv.Z = lTarget.z;
+  StackPushVector(lTarget_vv);
+  StackPushObject(lTarget.area.id);
+  VM_ExecuteCommand(215, 3); // Location(...);
+  
   StackPushFloat(fSize);
   StackPushInteger(enum_ShapeType_2_long(tShapeType));
   
@@ -10199,15 +10169,14 @@ NWN::NWVector NWScriptI::getPositionFromLocation(const NWN::NWLocation& lLocatio
   if (lLocation.area.id < 0) throw NWN::InvalidObjectException();
   lock(getPositionFromLocation_mutex, "getPositionFromLocation");
   callCounter += 1;
-  CScriptLocation lLocation_ptr;
-  lLocation_ptr.X = lLocation.x;
-  lLocation_ptr.Y = lLocation.y;
-  lLocation_ptr.Z = lLocation.z;
-  lLocation_ptr.OrientationX = lLocation.orientationX;
-  lLocation_ptr.OrientationY = lLocation.orientationY;
-  lLocation_ptr.OrientationZ = lLocation.orientationZ;
-  lLocation_ptr.AreaID = lLocation.area.id;
-  StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, &lLocation_ptr);
+  
+  StackPushFloat(lLocation.facing);
+  Vector lLocation_vv;
+  lLocation_vv.X = lLocation.x; lLocation_vv.Y = lLocation.y; lLocation_vv.Z = lLocation.z;
+  StackPushVector(lLocation_vv);
+  StackPushObject(lLocation.area.id);
+  VM_ExecuteCommand(215, 3); // Location(...);
+  
 
   VM_ExecuteCommand(223, 1);
 
@@ -10405,13 +10374,13 @@ NWN::NWLocation NWScriptI::getSpellTargetLocation(const Ice::Current& ice) {
   CScriptLocation *pRetVal;
   StackPopEngineStructure(ENGINE_STRUCTURE_LOCATION, (void **) &pRetVal);
   NWN::NWLocation nl;
-  nl.x = pRetVal->X;
-  nl.y = pRetVal->X;
-  nl.z = pRetVal->X;
-  nl.orientationX = pRetVal->OrientationX;
-  nl.orientationY = pRetVal->OrientationY;
-  nl.orientationZ = pRetVal->OrientationZ;
   nl.area.id = pRetVal->AreaID;
+  nl.x = pRetVal->X;
+  nl.y = pRetVal->Y;
+  nl.z = pRetVal->Z;
+  nl.facing = atan(pRetVal->OrientationY / pRetVal->OrientationX) * (180 / 3.1415927);
+  nl.facing += 180;
+  while (nl.facing > 360.0) nl.facing -= 360.0; while (nl.facing < 0.0) nl.facing += 360.0;
   unlock(getSpellTargetLocation_mutex, "getSpellTargetLocation");
   return nl;
 };
@@ -10455,13 +10424,13 @@ NWN::NWLocation NWScriptI::getStartingLocation(const Ice::Current& ice) {
   CScriptLocation *pRetVal;
   StackPopEngineStructure(ENGINE_STRUCTURE_LOCATION, (void **) &pRetVal);
   NWN::NWLocation nl;
-  nl.x = pRetVal->X;
-  nl.y = pRetVal->X;
-  nl.z = pRetVal->X;
-  nl.orientationX = pRetVal->OrientationX;
-  nl.orientationY = pRetVal->OrientationY;
-  nl.orientationZ = pRetVal->OrientationZ;
   nl.area.id = pRetVal->AreaID;
+  nl.x = pRetVal->X;
+  nl.y = pRetVal->Y;
+  nl.z = pRetVal->Z;
+  nl.facing = atan(pRetVal->OrientationY / pRetVal->OrientationX) * (180 / 3.1415927);
+  nl.facing += 180;
+  while (nl.facing > 360.0) nl.facing -= 360.0; while (nl.facing < 0.0) nl.facing += 360.0;
   unlock(getStartingLocation_mutex, "getStartingLocation");
   return nl;
 };
@@ -10678,15 +10647,14 @@ NWN::TileMainLightColor NWScriptI::getTileMainLight1Color(const NWN::NWLocation&
   if (lTile.area.id < 0) throw NWN::InvalidObjectException();
   lock(getTileMainLight1Color_mutex, "getTileMainLight1Color");
   callCounter += 1;
-  CScriptLocation lTile_ptr;
-  lTile_ptr.X = lTile.x;
-  lTile_ptr.Y = lTile.y;
-  lTile_ptr.Z = lTile.z;
-  lTile_ptr.OrientationX = lTile.orientationX;
-  lTile_ptr.OrientationY = lTile.orientationY;
-  lTile_ptr.OrientationZ = lTile.orientationZ;
-  lTile_ptr.AreaID = lTile.area.id;
-  StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, &lTile_ptr);
+  
+  StackPushFloat(lTile.facing);
+  Vector lTile_vv;
+  lTile_vv.X = lTile.x; lTile_vv.Y = lTile.y; lTile_vv.Z = lTile.z;
+  StackPushVector(lTile_vv);
+  StackPushObject(lTile.area.id);
+  VM_ExecuteCommand(215, 3); // Location(...);
+  
 
   VM_ExecuteCommand(517, 1);
 
@@ -10701,15 +10669,14 @@ NWN::TileMainLightColor NWScriptI::getTileMainLight2Color(const NWN::NWLocation&
   if (lTile.area.id < 0) throw NWN::InvalidObjectException();
   lock(getTileMainLight2Color_mutex, "getTileMainLight2Color");
   callCounter += 1;
-  CScriptLocation lTile_ptr;
-  lTile_ptr.X = lTile.x;
-  lTile_ptr.Y = lTile.y;
-  lTile_ptr.Z = lTile.z;
-  lTile_ptr.OrientationX = lTile.orientationX;
-  lTile_ptr.OrientationY = lTile.orientationY;
-  lTile_ptr.OrientationZ = lTile.orientationZ;
-  lTile_ptr.AreaID = lTile.area.id;
-  StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, &lTile_ptr);
+  
+  StackPushFloat(lTile.facing);
+  Vector lTile_vv;
+  lTile_vv.X = lTile.x; lTile_vv.Y = lTile.y; lTile_vv.Z = lTile.z;
+  StackPushVector(lTile_vv);
+  StackPushObject(lTile.area.id);
+  VM_ExecuteCommand(215, 3); // Location(...);
+  
 
   VM_ExecuteCommand(518, 1);
 
@@ -10724,15 +10691,14 @@ NWN::TileSourceLightColor NWScriptI::getTileSourceLight1Color(const NWN::NWLocat
   if (lTile.area.id < 0) throw NWN::InvalidObjectException();
   lock(getTileSourceLight1Color_mutex, "getTileSourceLight1Color");
   callCounter += 1;
-  CScriptLocation lTile_ptr;
-  lTile_ptr.X = lTile.x;
-  lTile_ptr.Y = lTile.y;
-  lTile_ptr.Z = lTile.z;
-  lTile_ptr.OrientationX = lTile.orientationX;
-  lTile_ptr.OrientationY = lTile.orientationY;
-  lTile_ptr.OrientationZ = lTile.orientationZ;
-  lTile_ptr.AreaID = lTile.area.id;
-  StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, &lTile_ptr);
+  
+  StackPushFloat(lTile.facing);
+  Vector lTile_vv;
+  lTile_vv.X = lTile.x; lTile_vv.Y = lTile.y; lTile_vv.Z = lTile.z;
+  StackPushVector(lTile_vv);
+  StackPushObject(lTile.area.id);
+  VM_ExecuteCommand(215, 3); // Location(...);
+  
 
   VM_ExecuteCommand(519, 1);
 
@@ -10747,15 +10713,14 @@ NWN::TileSourceLightColor NWScriptI::getTileSourceLight2Color(const NWN::NWLocat
   if (lTile.area.id < 0) throw NWN::InvalidObjectException();
   lock(getTileSourceLight2Color_mutex, "getTileSourceLight2Color");
   callCounter += 1;
-  CScriptLocation lTile_ptr;
-  lTile_ptr.X = lTile.x;
-  lTile_ptr.Y = lTile.y;
-  lTile_ptr.Z = lTile.z;
-  lTile_ptr.OrientationX = lTile.orientationX;
-  lTile_ptr.OrientationY = lTile.orientationY;
-  lTile_ptr.OrientationZ = lTile.orientationZ;
-  lTile_ptr.AreaID = lTile.area.id;
-  StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, &lTile_ptr);
+  
+  StackPushFloat(lTile.facing);
+  Vector lTile_vv;
+  lTile_vv.X = lTile.x; lTile_vv.Y = lTile.y; lTile_vv.Z = lTile.z;
+  StackPushVector(lTile_vv);
+  StackPushObject(lTile.area.id);
+  VM_ExecuteCommand(215, 3); // Location(...);
+  
 
   VM_ExecuteCommand(520, 1);
 
@@ -13600,15 +13565,14 @@ void NWScriptI::jumpToLocation(const NWN::NWLocation& lDestination, const Ice::C
   if (lDestination.area.id < 0) throw NWN::InvalidObjectException();
   lock(jumpToLocation_mutex, "jumpToLocation");
   callCounter += 1;
-  CScriptLocation lDestination_ptr;
-  lDestination_ptr.X = lDestination.x;
-  lDestination_ptr.Y = lDestination.y;
-  lDestination_ptr.Z = lDestination.z;
-  lDestination_ptr.OrientationX = lDestination.orientationX;
-  lDestination_ptr.OrientationY = lDestination.orientationY;
-  lDestination_ptr.OrientationZ = lDestination.orientationZ;
-  lDestination_ptr.AreaID = lDestination.area.id;
-  StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, &lDestination_ptr);
+  
+  StackPushFloat(lDestination.facing);
+  Vector lDestination_vv;
+  lDestination_vv.X = lDestination.x; lDestination_vv.Y = lDestination.y; lDestination_vv.Z = lDestination.z;
+  StackPushVector(lDestination_vv);
+  StackPushObject(lDestination.area.id);
+  VM_ExecuteCommand(215, 3); // Location(...);
+  
 
   VM_ExecuteCommand(313, 1);
 
@@ -13695,13 +13659,13 @@ NWN::NWLocation NWScriptI::location(const NWN::NWObject& oArea, const NWN::NWVec
   CScriptLocation *pRetVal;
   StackPopEngineStructure(ENGINE_STRUCTURE_LOCATION, (void **) &pRetVal);
   NWN::NWLocation nl;
-  nl.x = pRetVal->X;
-  nl.y = pRetVal->X;
-  nl.z = pRetVal->X;
-  nl.orientationX = pRetVal->OrientationX;
-  nl.orientationY = pRetVal->OrientationY;
-  nl.orientationZ = pRetVal->OrientationZ;
   nl.area.id = pRetVal->AreaID;
+  nl.x = pRetVal->X;
+  nl.y = pRetVal->Y;
+  nl.z = pRetVal->Z;
+  nl.facing = atan(pRetVal->OrientationY / pRetVal->OrientationX) * (180 / 3.1415927);
+  nl.facing += 180;
+  while (nl.facing > 360.0) nl.facing -= 360.0; while (nl.facing < 0.0) nl.facing += 360.0;
   unlock(location_mutex, "location");
   return nl;
 };
@@ -14331,15 +14295,14 @@ NWN::NWObject NWScriptI::retrieveCampaignObject(const std::string& sCampaignName
   callCounter += 1;
   StackPushObject(oPlayer.id);
   StackPushObject(oOwner.id);
-  CScriptLocation locLocation_ptr;
-  locLocation_ptr.X = locLocation.x;
-  locLocation_ptr.Y = locLocation.y;
-  locLocation_ptr.Z = locLocation.z;
-  locLocation_ptr.OrientationX = locLocation.orientationX;
-  locLocation_ptr.OrientationY = locLocation.orientationY;
-  locLocation_ptr.OrientationZ = locLocation.orientationZ;
-  locLocation_ptr.AreaID = locLocation.area.id;
-  StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, &locLocation_ptr);
+  
+  StackPushFloat(locLocation.facing);
+  Vector locLocation_vv;
+  locLocation_vv.X = locLocation.x; locLocation_vv.Y = locLocation.y; locLocation_vv.Z = locLocation.z;
+  StackPushVector(locLocation_vv);
+  StackPushObject(locLocation.area.id);
+  VM_ExecuteCommand(215, 3); // Location(...);
+  
   StackPushString(sVarName.c_str());
   StackPushString(sCampaignName.c_str());
 
@@ -14558,15 +14521,14 @@ void NWScriptI::setCampaignLocation(const std::string& sCampaignName, const std:
   lock(setCampaignLocation_mutex, "setCampaignLocation");
   callCounter += 1;
   StackPushObject(oPlayer.id);
-  CScriptLocation locLocation_ptr;
-  locLocation_ptr.X = locLocation.x;
-  locLocation_ptr.Y = locLocation.y;
-  locLocation_ptr.Z = locLocation.z;
-  locLocation_ptr.OrientationX = locLocation.orientationX;
-  locLocation_ptr.OrientationY = locLocation.orientationY;
-  locLocation_ptr.OrientationZ = locLocation.orientationZ;
-  locLocation_ptr.AreaID = locLocation.area.id;
-  StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, &locLocation_ptr);
+  
+  StackPushFloat(locLocation.facing);
+  Vector locLocation_vv;
+  locLocation_vv.X = locLocation.x; locLocation_vv.Y = locLocation.y; locLocation_vv.Z = locLocation.z;
+  StackPushVector(locLocation_vv);
+  StackPushObject(locLocation.area.id);
+  VM_ExecuteCommand(215, 3); // Location(...);
+  
   StackPushString(sVarName.c_str());
   StackPushString(sCampaignName.c_str());
 
@@ -15123,15 +15085,14 @@ void NWScriptI::setLocalLocation(const NWN::NWObject& oObject, const std::string
   if (lValue.area.id < 0) throw NWN::InvalidObjectException();
   lock(setLocalLocation_mutex, "setLocalLocation");
   callCounter += 1;
-  CScriptLocation lValue_ptr;
-  lValue_ptr.X = lValue.x;
-  lValue_ptr.Y = lValue.y;
-  lValue_ptr.Z = lValue.z;
-  lValue_ptr.OrientationX = lValue.orientationX;
-  lValue_ptr.OrientationY = lValue.orientationY;
-  lValue_ptr.OrientationZ = lValue.orientationZ;
-  lValue_ptr.AreaID = lValue.area.id;
-  StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, &lValue_ptr);
+  
+  StackPushFloat(lValue.facing);
+  Vector lValue_vv;
+  lValue_vv.X = lValue.x; lValue_vv.Y = lValue.y; lValue_vv.Z = lValue.z;
+  StackPushVector(lValue_vv);
+  StackPushObject(lValue.area.id);
+  VM_ExecuteCommand(215, 3); // Location(...);
+  
   StackPushString(sVarName.c_str());
   StackPushObject(oObject.id);
 
@@ -15568,15 +15529,14 @@ void NWScriptI::setTileMainLightColor(const NWN::NWLocation& lTileLocation, NWN:
   
   StackPushInteger(enum_TileMainLightColor_2_long(nMainLight1Color));
   
-  CScriptLocation lTileLocation_ptr;
-  lTileLocation_ptr.X = lTileLocation.x;
-  lTileLocation_ptr.Y = lTileLocation.y;
-  lTileLocation_ptr.Z = lTileLocation.z;
-  lTileLocation_ptr.OrientationX = lTileLocation.orientationX;
-  lTileLocation_ptr.OrientationY = lTileLocation.orientationY;
-  lTileLocation_ptr.OrientationZ = lTileLocation.orientationZ;
-  lTileLocation_ptr.AreaID = lTileLocation.area.id;
-  StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, &lTileLocation_ptr);
+  
+  StackPushFloat(lTileLocation.facing);
+  Vector lTileLocation_vv;
+  lTileLocation_vv.X = lTileLocation.x; lTileLocation_vv.Y = lTileLocation.y; lTileLocation_vv.Z = lTileLocation.z;
+  StackPushVector(lTileLocation_vv);
+  StackPushObject(lTileLocation.area.id);
+  VM_ExecuteCommand(215, 3); // Location(...);
+  
 
   VM_ExecuteCommand(514, 3);
 
@@ -15592,15 +15552,14 @@ void NWScriptI::setTileSourceLightColor(const NWN::NWLocation& lTileLocation, NW
   
   StackPushInteger(enum_TileSourceLightColor_2_long(nSourceLight1Color));
   
-  CScriptLocation lTileLocation_ptr;
-  lTileLocation_ptr.X = lTileLocation.x;
-  lTileLocation_ptr.Y = lTileLocation.y;
-  lTileLocation_ptr.Z = lTileLocation.z;
-  lTileLocation_ptr.OrientationX = lTileLocation.orientationX;
-  lTileLocation_ptr.OrientationY = lTileLocation.orientationY;
-  lTileLocation_ptr.OrientationZ = lTileLocation.orientationZ;
-  lTileLocation_ptr.AreaID = lTileLocation.area.id;
-  StackPushEngineStructure(ENGINE_STRUCTURE_LOCATION, &lTileLocation_ptr);
+  
+  StackPushFloat(lTileLocation.facing);
+  Vector lTileLocation_vv;
+  lTileLocation_vv.X = lTileLocation.x; lTileLocation_vv.Y = lTileLocation.y; lTileLocation_vv.Z = lTileLocation.z;
+  StackPushVector(lTileLocation_vv);
+  StackPushObject(lTileLocation.area.id);
+  VM_ExecuteCommand(215, 3); // Location(...);
+  
 
   VM_ExecuteCommand(515, 3);
 

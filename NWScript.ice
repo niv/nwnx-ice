@@ -1,4 +1,4 @@
-// Generated on Sat Sep 05 18:22:59 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Tue Sep 08 21:33:55 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 // Not exported:
 //   getFirstEffect getFirstFactionMember getFirstItemInInventory getFirstItemProperty getFirstInPersistentObject getFirstObjectInArea getFirstObjectInShape getFirstPC
@@ -124,9 +124,7 @@ module NWN {
     double x;
     double y;
     double z;
-    double orientationX;
-    double orientationY;
-    double orientationZ;
+    double facing;
   };
 
   /**

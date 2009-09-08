@@ -1,4 +1,4 @@
-// Generated on Sat Sep 05 18:23:00 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Tue Sep 08 21:33:56 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 #include "FunctionHooks.h"
 #include "NWNStructures.h"
@@ -108,7 +108,6 @@ class NWScriptI : public NWN::NWScript {
     virtual void applyEffectAtLocation(NWN::DurationType tDurationType, const NWN::NWEffect& eEffect, const NWN::NWLocation& lLocation, Ice::Double fDuration, const Ice::Current&);
     virtual void applyEffectToObject(NWN::DurationType tDurationType, const NWN::NWEffect& eEffect, const NWN::NWObject& oTarget, Ice::Double fDuration, const Ice::Current&);
     virtual Ice::Double asin(Ice::Double fValue, const Ice::Current&);
-    virtual Ice::Double atan(Ice::Double fValue, const Ice::Current&);
     virtual NWN::NWItemProperty badBadReplaceMeThisDoesNothing(const Ice::Current&);
     virtual Ice::Int beginConversation(const std::string& sResRef, const NWN::NWObject& oObjectToDialog, const Ice::Current&);
     virtual void blackScreen(const NWN::NWObject& oCreature, const Ice::Current&);
@@ -946,7 +945,6 @@ class NWScriptI : public NWN::NWScript {
     IceUtil::Mutex applyEffectAtLocation_mutex;
     IceUtil::Mutex applyEffectToObject_mutex;
     IceUtil::Mutex asin_mutex;
-    IceUtil::Mutex atan_mutex;
     IceUtil::Mutex badBadReplaceMeThisDoesNothing_mutex;
     IceUtil::Mutex beginConversation_mutex;
     IceUtil::Mutex blackScreen_mutex;
