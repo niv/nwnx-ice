@@ -1,4 +1,4 @@
-// Generated on Tue Sep 08 21:33:56 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Tue Sep 08 21:46:55 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 #include "NWScriptI.h"
 #include <iostream>
@@ -1857,7 +1857,7 @@ Ice::Int NWScriptI::abs(Ice::Int nValue, const Ice::Current& ice) {
   return nRetVal;
 };
 
-Ice::Double NWScriptI::acos(Ice::Double fValue, const Ice::Current& ice) {
+Ice::Float NWScriptI::acos(Ice::Float fValue, const Ice::Current& ice) {
   lock(acos_mutex, "acos");
   callCounter += 1;
   StackPushFloat(fValue);
@@ -2051,7 +2051,7 @@ unlock(actionExamine_mutex, "actionExamine");
   
 };
 
-void NWScriptI::actionForceFollowObject(const NWN::NWObject& oFollow, Ice::Double fFollowDistance, const Ice::Current& ice) {
+void NWScriptI::actionForceFollowObject(const NWN::NWObject& oFollow, Ice::Float fFollowDistance, const Ice::Current& ice) {
   if (oFollow.id < 0 || oFollow.id > 0xffffffff) throw NWN::InvalidObjectException();
   lock(actionForceFollowObject_mutex, "actionForceFollowObject");
   callCounter += 1;
@@ -2064,7 +2064,7 @@ unlock(actionForceFollowObject_mutex, "actionForceFollowObject");
   
 };
 
-void NWScriptI::actionForceMoveToLocation(const NWN::NWLocation& lDestination, bool bRun, Ice::Double fTimeout, const Ice::Current& ice) {
+void NWScriptI::actionForceMoveToLocation(const NWN::NWLocation& lDestination, bool bRun, Ice::Float fTimeout, const Ice::Current& ice) {
   if (lDestination.area.id < 0) throw NWN::InvalidObjectException();
   lock(actionForceMoveToLocation_mutex, "actionForceMoveToLocation");
   callCounter += 1;
@@ -2085,7 +2085,7 @@ unlock(actionForceMoveToLocation_mutex, "actionForceMoveToLocation");
   
 };
 
-void NWScriptI::actionForceMoveToObject(const NWN::NWObject& oMoveTo, bool bRun, Ice::Double fRange, Ice::Double fTimeout, const Ice::Current& ice) {
+void NWScriptI::actionForceMoveToObject(const NWN::NWObject& oMoveTo, bool bRun, Ice::Float fRange, Ice::Float fTimeout, const Ice::Current& ice) {
   if (oMoveTo.id < 0 || oMoveTo.id > 0xffffffff) throw NWN::InvalidObjectException();
   lock(actionForceMoveToObject_mutex, "actionForceMoveToObject");
   callCounter += 1;
@@ -2170,7 +2170,7 @@ unlock(actionLockObject_mutex, "actionLockObject");
   
 };
 
-void NWScriptI::actionMoveAwayFromLocation(const NWN::NWLocation& lMoveAwayFrom, bool bRun, Ice::Double fMoveAwayRange, const Ice::Current& ice) {
+void NWScriptI::actionMoveAwayFromLocation(const NWN::NWLocation& lMoveAwayFrom, bool bRun, Ice::Float fMoveAwayRange, const Ice::Current& ice) {
   if (lMoveAwayFrom.area.id < 0) throw NWN::InvalidObjectException();
   lock(actionMoveAwayFromLocation_mutex, "actionMoveAwayFromLocation");
   callCounter += 1;
@@ -2191,7 +2191,7 @@ unlock(actionMoveAwayFromLocation_mutex, "actionMoveAwayFromLocation");
   
 };
 
-void NWScriptI::actionMoveAwayFromObject(const NWN::NWObject& oFleeFrom, bool bRun, Ice::Double fMoveAwayRange, const Ice::Current& ice) {
+void NWScriptI::actionMoveAwayFromObject(const NWN::NWObject& oFleeFrom, bool bRun, Ice::Float fMoveAwayRange, const Ice::Current& ice) {
   if (oFleeFrom.id < 0 || oFleeFrom.id > 0xffffffff) throw NWN::InvalidObjectException();
   lock(actionMoveAwayFromObject_mutex, "actionMoveAwayFromObject");
   callCounter += 1;
@@ -2225,7 +2225,7 @@ unlock(actionMoveToLocation_mutex, "actionMoveToLocation");
   
 };
 
-void NWScriptI::actionMoveToObject(const NWN::NWObject& oMoveTo, bool bRun, Ice::Double fRange, const Ice::Current& ice) {
+void NWScriptI::actionMoveToObject(const NWN::NWObject& oMoveTo, bool bRun, Ice::Float fRange, const Ice::Current& ice) {
   if (oMoveTo.id < 0 || oMoveTo.id > 0xffffffff) throw NWN::InvalidObjectException();
   lock(actionMoveToObject_mutex, "actionMoveToObject");
   callCounter += 1;
@@ -2273,7 +2273,7 @@ unlock(actionPickUpItem_mutex, "actionPickUpItem");
   
 };
 
-void NWScriptI::actionPlayAnimation(Ice::Int nAnimation, Ice::Double fSpeed, Ice::Double fDurationSeconds, const Ice::Current& ice) {
+void NWScriptI::actionPlayAnimation(Ice::Int nAnimation, Ice::Float fSpeed, Ice::Float fDurationSeconds, const Ice::Current& ice) {
   lock(actionPlayAnimation_mutex, "actionPlayAnimation");
   callCounter += 1;
   StackPushFloat(fDurationSeconds);
@@ -2449,7 +2449,7 @@ unlock(actionUseSkill_mutex, "actionUseSkill");
   
 };
 
-void NWScriptI::actionWait(Ice::Double fSeconds, const Ice::Current& ice) {
+void NWScriptI::actionWait(Ice::Float fSeconds, const Ice::Current& ice) {
   lock(actionWait_mutex, "actionWait");
   callCounter += 1;
   StackPushFloat(fSeconds);
@@ -2490,7 +2490,7 @@ unlock(addHenchman_mutex, "addHenchman");
   
 };
 
-void NWScriptI::addItemProperty(NWN::DurationType tDurationType, const NWN::NWItemProperty& ipProperty, const NWN::NWObject& oItem, Ice::Double fDuration, const Ice::Current& ice) {
+void NWScriptI::addItemProperty(NWN::DurationType tDurationType, const NWN::NWItemProperty& ipProperty, const NWN::NWObject& oItem, Ice::Float fDuration, const Ice::Current& ice) {
   if (iprpMap.find(ipProperty.id) == iprpMap.end()) throw NWN::InvalidItemPropertyException();
   
   if (oItem.id < 0 || oItem.id > 0xffffffff) throw NWN::InvalidObjectException();
@@ -2647,7 +2647,7 @@ unlock(ambientSoundStop_mutex, "ambientSoundStop");
   
 };
 
-NWN::NWVector NWScriptI::angleToVector(Ice::Double fAngle, const Ice::Current& ice) {
+NWN::NWVector NWScriptI::angleToVector(Ice::Float fAngle, const Ice::Current& ice) {
   lock(angleToVector_mutex, "angleToVector");
   callCounter += 1;
   StackPushFloat(fAngle);
@@ -2662,7 +2662,7 @@ NWN::NWVector NWScriptI::angleToVector(Ice::Double fAngle, const Ice::Current& i
   return nv;
 };
 
-void NWScriptI::applyEffectAtLocation(NWN::DurationType tDurationType, const NWN::NWEffect& eEffect, const NWN::NWLocation& lLocation, Ice::Double fDuration, const Ice::Current& ice) {
+void NWScriptI::applyEffectAtLocation(NWN::DurationType tDurationType, const NWN::NWEffect& eEffect, const NWN::NWLocation& lLocation, Ice::Float fDuration, const Ice::Current& ice) {
   if (effectMap.find(eEffect.id) == effectMap.end()) throw NWN::InvalidEffectException();
   
   if (lLocation.area.id < 0) throw NWN::InvalidObjectException();
@@ -2688,7 +2688,7 @@ unlock(applyEffectAtLocation_mutex, "applyEffectAtLocation");
   
 };
 
-void NWScriptI::applyEffectToObject(NWN::DurationType tDurationType, const NWN::NWEffect& eEffect, const NWN::NWObject& oTarget, Ice::Double fDuration, const Ice::Current& ice) {
+void NWScriptI::applyEffectToObject(NWN::DurationType tDurationType, const NWN::NWEffect& eEffect, const NWN::NWObject& oTarget, Ice::Float fDuration, const Ice::Current& ice) {
   if (effectMap.find(eEffect.id) == effectMap.end()) throw NWN::InvalidEffectException();
   
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
@@ -2707,7 +2707,7 @@ unlock(applyEffectToObject_mutex, "applyEffectToObject");
   
 };
 
-Ice::Double NWScriptI::asin(Ice::Double fValue, const Ice::Current& ice) {
+Ice::Float NWScriptI::asin(Ice::Float fValue, const Ice::Current& ice) {
   lock(asin_mutex, "asin");
   callCounter += 1;
   StackPushFloat(fValue);
@@ -2907,7 +2907,7 @@ NWN::NWObject NWScriptI::copyObject(const NWN::NWObject& oSource, const NWN::NWL
   return no;
 };
 
-Ice::Double NWScriptI::cos(Ice::Double fValue, const Ice::Current& ice) {
+Ice::Float NWScriptI::cos(Ice::Float fValue, const Ice::Current& ice) {
   lock(cos_mutex, "cos");
   callCounter += 1;
   StackPushFloat(fValue);
@@ -2967,7 +2967,7 @@ NWN::NWObject NWScriptI::createObject(NWN::ObjectType tObjectType, const std::st
   return no;
 };
 
-NWN::NWObject NWScriptI::createTrapAtLocation(NWN::TrapType tTrapType, const NWN::NWLocation& lLocation, Ice::Double fSize, const std::string& sTag, NWN::StandardFaction tStandardFaction, const std::string& sOnDisarmScript, const std::string& sOnTrapTriggeredScript, const Ice::Current& ice) {
+NWN::NWObject NWScriptI::createTrapAtLocation(NWN::TrapType tTrapType, const NWN::NWLocation& lLocation, Ice::Float fSize, const std::string& sTag, NWN::StandardFaction tStandardFaction, const std::string& sOnDisarmScript, const std::string& sOnTrapTriggeredScript, const Ice::Current& ice) {
   if (lLocation.area.id < 0) throw NWN::InvalidObjectException();
   lock(createTrapAtLocation_mutex, "createTrapAtLocation");
   callCounter += 1;
@@ -3133,7 +3133,7 @@ Ice::Int NWScriptI::d8(Ice::Int nNumDice, const Ice::Current& ice) {
   return nRetVal;
 };
 
-void NWScriptI::dayToNight(const NWN::NWObject& oPlayer, Ice::Double fTransitionTime, const Ice::Current& ice) {
+void NWScriptI::dayToNight(const NWN::NWObject& oPlayer, Ice::Float fTransitionTime, const Ice::Current& ice) {
   if (oPlayer.id < 0 || oPlayer.id > 0xffffffff) throw NWN::InvalidObjectException();
   lock(dayToNight_mutex, "dayToNight");
   callCounter += 1;
@@ -3262,7 +3262,7 @@ unlock(destroyCampaignDatabase_mutex, "destroyCampaignDatabase");
   
 };
 
-void NWScriptI::destroyObject(const NWN::NWObject& oDestroy, Ice::Double fDelay, const Ice::Current& ice) {
+void NWScriptI::destroyObject(const NWN::NWObject& oDestroy, Ice::Float fDelay, const Ice::Current& ice) {
   if (oDestroy.id < 0 || oDestroy.id > 0xffffffff) throw NWN::InvalidObjectException();
   lock(destroyObject_mutex, "destroyObject");
   callCounter += 1;
@@ -4479,7 +4479,7 @@ NWN::NWEffect NWScriptI::effectHeal(Ice::Int nDamageToHeal, const Ice::Current& 
   return e;
 };
 
-NWN::NWEffect NWScriptI::effectHitPointChangeWhenDying(Ice::Double fHitPointChangePerRound, const Ice::Current& ice) {
+NWN::NWEffect NWScriptI::effectHitPointChangeWhenDying(Ice::Float fHitPointChangePerRound, const Ice::Current& ice) {
   lock(effectHitPointChangeWhenDying_mutex, "effectHitPointChangeWhenDying");
   callCounter += 1;
   StackPushFloat(fHitPointChangePerRound);
@@ -4866,7 +4866,7 @@ NWN::NWEffect NWScriptI::effectPolymorph(Ice::Int nPolymorphSelection, bool bLoc
   return e;
 };
 
-NWN::NWEffect NWScriptI::effectRegenerate(Ice::Int nAmount, Ice::Double fIntervalSeconds, const Ice::Current& ice) {
+NWN::NWEffect NWScriptI::effectRegenerate(Ice::Int nAmount, Ice::Float fIntervalSeconds, const Ice::Current& ice) {
   lock(effectRegenerate_mutex, "effectRegenerate");
   callCounter += 1;
   StackPushFloat(fIntervalSeconds);
@@ -5333,7 +5333,7 @@ NWN::NWEffect NWScriptI::effectStunned(const Ice::Current& ice) {
   return e;
 };
 
-NWN::NWEffect NWScriptI::effectSummonCreature(const std::string& sCreatureResref, Ice::Int nVisualEffectId, Ice::Double fDelaySeconds, bool bUseAppearAnimation, const Ice::Current& ice) {
+NWN::NWEffect NWScriptI::effectSummonCreature(const std::string& sCreatureResref, Ice::Int nVisualEffectId, Ice::Float fDelaySeconds, bool bUseAppearAnimation, const Ice::Current& ice) {
   lock(effectSummonCreature_mutex, "effectSummonCreature");
   callCounter += 1;
   StackPushInteger(bUseAppearAnimation == true ? 1 : 0);
@@ -5698,7 +5698,7 @@ NWN::NWEffect NWScriptI::extraordinaryEffect(const NWN::NWEffect& eEffect, const
   return e;
 };
 
-Ice::Double NWScriptI::fabs(Ice::Double fValue, const Ice::Current& ice) {
+Ice::Float NWScriptI::fabs(Ice::Float fValue, const Ice::Current& ice) {
   lock(fabs_mutex, "fabs");
   callCounter += 1;
   StackPushFloat(fValue);
@@ -5711,7 +5711,7 @@ Ice::Double NWScriptI::fabs(Ice::Double fValue, const Ice::Current& ice) {
   return fRetVal;
 };
 
-void NWScriptI::fadeFromBlack(const NWN::NWObject& oCreature, Ice::Double fSpeed, const Ice::Current& ice) {
+void NWScriptI::fadeFromBlack(const NWN::NWObject& oCreature, Ice::Float fSpeed, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
   lock(fadeFromBlack_mutex, "fadeFromBlack");
   callCounter += 1;
@@ -5724,7 +5724,7 @@ unlock(fadeFromBlack_mutex, "fadeFromBlack");
   
 };
 
-void NWScriptI::fadeToBlack(const NWN::NWObject& oCreature, Ice::Double fSpeed, const Ice::Current& ice) {
+void NWScriptI::fadeToBlack(const NWN::NWObject& oCreature, Ice::Float fSpeed, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
   lock(fadeToBlack_mutex, "fadeToBlack");
   callCounter += 1;
@@ -5737,7 +5737,7 @@ unlock(fadeToBlack_mutex, "fadeToBlack");
   
 };
 
-Ice::Double NWScriptI::feetToMeters(Ice::Double fFeet, const Ice::Current& ice) {
+Ice::Float NWScriptI::feetToMeters(Ice::Float fFeet, const Ice::Current& ice) {
   lock(feetToMeters_mutex, "feetToMeters");
   callCounter += 1;
   StackPushFloat(fFeet);
@@ -5765,7 +5765,7 @@ Ice::Int NWScriptI::findSubString(const std::string& sString, const std::string&
   return nRetVal;
 };
 
-Ice::Int NWScriptI::floatToInt(Ice::Double fFloat, const Ice::Current& ice) {
+Ice::Int NWScriptI::floatToInt(Ice::Float fFloat, const Ice::Current& ice) {
   lock(floatToInt_mutex, "floatToInt");
   callCounter += 1;
   StackPushFloat(fFloat);
@@ -5778,7 +5778,7 @@ Ice::Int NWScriptI::floatToInt(Ice::Double fFloat, const Ice::Current& ice) {
   return nRetVal;
 };
 
-std::string NWScriptI::floatToString(Ice::Double fFloat, Ice::Int nWidth, Ice::Int nDecimals, const Ice::Current& ice) {
+std::string NWScriptI::floatToString(Ice::Float fFloat, Ice::Int nWidth, Ice::Int nDecimals, const Ice::Current& ice) {
   lock(floatToString_mutex, "floatToString");
   callCounter += 1;
   StackPushInteger(nDecimals);
@@ -6273,7 +6273,7 @@ Ice::Int NWScriptI::getCalendarYear(const Ice::Current& ice) {
   return nRetVal;
 };
 
-Ice::Double NWScriptI::getCampaignFloat(const std::string& sCampaignName, const std::string& sVarName, const NWN::NWObject& oPlayer, const Ice::Current& ice) {
+Ice::Float NWScriptI::getCampaignFloat(const std::string& sCampaignName, const std::string& sVarName, const NWN::NWObject& oPlayer, const Ice::Current& ice) {
   if (oPlayer.id < 0 || oPlayer.id > 0xffffffff) throw NWN::InvalidObjectException();
   lock(getCampaignFloat_mutex, "getCampaignFloat");
   callCounter += 1;
@@ -6377,7 +6377,7 @@ Ice::Int NWScriptI::getCasterLevel(const NWN::NWObject& oCreature, const Ice::Cu
   return nRetVal;
 };
 
-Ice::Double NWScriptI::getChallengeRating(const NWN::NWObject& oCreature, const Ice::Current& ice) {
+Ice::Float NWScriptI::getChallengeRating(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
   lock(getChallengeRating_mutex, "getChallengeRating");
   callCounter += 1;
@@ -6551,7 +6551,7 @@ Ice::Int NWScriptI::getCurrentHitPoints(const NWN::NWObject& oObject, const Ice:
   return nRetVal;
 };
 
-Ice::Double NWScriptI::getCutsceneCameraMoveRate(const NWN::NWObject& oCreature, const Ice::Current& ice) {
+Ice::Float NWScriptI::getCutsceneCameraMoveRate(const NWN::NWObject& oCreature, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
   lock(getCutsceneCameraMoveRate_mutex, "getCutsceneCameraMoveRate");
   callCounter += 1;
@@ -6651,7 +6651,7 @@ Ice::Int NWScriptI::getDetectMode(const NWN::NWObject& oCreature, const Ice::Cur
   return nRetVal;
 };
 
-Ice::Double NWScriptI::getDialogSoundLength(Ice::Int nStrRef, const Ice::Current& ice) {
+Ice::Float NWScriptI::getDialogSoundLength(Ice::Int nStrRef, const Ice::Current& ice) {
   lock(getDialogSoundLength_mutex, "getDialogSoundLength");
   callCounter += 1;
   StackPushInteger(nStrRef);
@@ -6664,7 +6664,7 @@ Ice::Double NWScriptI::getDialogSoundLength(Ice::Int nStrRef, const Ice::Current
   return fRetVal;
 };
 
-Ice::Double NWScriptI::getDistanceBetween(const NWN::NWObject& oObjectA, const NWN::NWObject& oObjectB, const Ice::Current& ice) {
+Ice::Float NWScriptI::getDistanceBetween(const NWN::NWObject& oObjectA, const NWN::NWObject& oObjectB, const Ice::Current& ice) {
   if (oObjectA.id < 0 || oObjectA.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (oObjectB.id < 0 || oObjectB.id > 0xffffffff) throw NWN::InvalidObjectException();
   lock(getDistanceBetween_mutex, "getDistanceBetween");
@@ -6680,7 +6680,7 @@ Ice::Double NWScriptI::getDistanceBetween(const NWN::NWObject& oObjectA, const N
   return fRetVal;
 };
 
-Ice::Double NWScriptI::getDistanceBetweenLocations(const NWN::NWLocation& lLocationA, const NWN::NWLocation& lLocationB, const Ice::Current& ice) {
+Ice::Float NWScriptI::getDistanceBetweenLocations(const NWN::NWLocation& lLocationA, const NWN::NWLocation& lLocationB, const Ice::Current& ice) {
   if (lLocationA.area.id < 0) throw NWN::InvalidObjectException();
   if (lLocationB.area.id < 0) throw NWN::InvalidObjectException();
   lock(getDistanceBetweenLocations_mutex, "getDistanceBetweenLocations");
@@ -6710,7 +6710,7 @@ Ice::Double NWScriptI::getDistanceBetweenLocations(const NWN::NWLocation& lLocat
   return fRetVal;
 };
 
-Ice::Double NWScriptI::getDistanceToObject(const NWN::NWObject& oObject, const Ice::Current& ice) {
+Ice::Float NWScriptI::getDistanceToObject(const NWN::NWObject& oObject, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
   lock(getDistanceToObject_mutex, "getDistanceToObject");
   callCounter += 1;
@@ -6907,7 +6907,7 @@ NWN::NWObject NWScriptI::getExitingObject(const Ice::Current& ice) {
   return no;
 };
 
-Ice::Double NWScriptI::getFacing(const NWN::NWObject& oTarget, const Ice::Current& ice) {
+Ice::Float NWScriptI::getFacing(const NWN::NWObject& oTarget, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
   lock(getFacing_mutex, "getFacing");
   callCounter += 1;
@@ -6921,7 +6921,7 @@ Ice::Double NWScriptI::getFacing(const NWN::NWObject& oTarget, const Ice::Curren
   return fRetVal;
 };
 
-Ice::Double NWScriptI::getFacingFromLocation(const NWN::NWLocation& lLocation, const Ice::Current& ice) {
+Ice::Float NWScriptI::getFacingFromLocation(const NWN::NWLocation& lLocation, const Ice::Current& ice) {
   if (lLocation.area.id < 0) throw NWN::InvalidObjectException();
   lock(getFacingFromLocation_mutex, "getFacingFromLocation");
   callCounter += 1;
@@ -7329,7 +7329,7 @@ NWN::NWObject NWScriptI::getFirstObjectInArea(const NWN::NWObject& oArea, const 
   return no;
 };
 
-NWN::NWObject NWScriptI::getFirstObjectInShape(NWN::ShapeType tShapeType, Ice::Double fSize, const NWN::NWLocation& lTarget, bool bLineOfSight, Ice::Int nObjectFilter, const NWN::NWVector& vOrigin, const Ice::Current& ice) {
+NWN::NWObject NWScriptI::getFirstObjectInShape(NWN::ShapeType tShapeType, Ice::Float fSize, const NWN::NWLocation& lTarget, bool bLineOfSight, Ice::Int nObjectFilter, const NWN::NWVector& vOrigin, const Ice::Current& ice) {
   if (lTarget.area.id < 0) throw NWN::InvalidObjectException();
   lock(getFirstObjectInShape_mutex, "getFirstObjectInShape");
   callCounter += 1;
@@ -9071,7 +9071,7 @@ Ice::Int NWScriptI::getListenPatternNumber(const Ice::Current& ice) {
   return nRetVal;
 };
 
-Ice::Double NWScriptI::getLocalFloat(const NWN::NWObject& oObject, const std::string& sVarName, const Ice::Current& ice) {
+Ice::Float NWScriptI::getLocalFloat(const NWN::NWObject& oObject, const std::string& sVarName, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
   lock(getLocalFloat_mutex, "getLocalFloat");
   callCounter += 1;
@@ -9763,7 +9763,7 @@ NWN::NWObject NWScriptI::getNextObjectInArea(const NWN::NWObject& oArea, const I
   return no;
 };
 
-NWN::NWObject NWScriptI::getNextObjectInShape(NWN::ShapeType tShapeType, Ice::Double fSize, const NWN::NWLocation& lTarget, bool bLineOfSight, Ice::Int nObjectFilter, const NWN::NWVector& vOrigin, const Ice::Current& ice) {
+NWN::NWObject NWScriptI::getNextObjectInShape(NWN::ShapeType tShapeType, Ice::Float fSize, const NWN::NWLocation& lTarget, bool bLineOfSight, Ice::Int nObjectFilter, const NWN::NWVector& vOrigin, const Ice::Current& ice) {
   if (lTarget.area.id < 0) throw NWN::InvalidObjectException();
   lock(getNextObjectInShape_mutex, "getNextObjectInShape");
   callCounter += 1;
@@ -10505,7 +10505,7 @@ Ice::Int NWScriptI::getStoreMaxBuyPrice(const NWN::NWObject& oidStore, const Ice
   return nRetVal;
 };
 
-Ice::Double NWScriptI::getStrRefSoundDuration(Ice::Int nStrRef, const Ice::Current& ice) {
+Ice::Float NWScriptI::getStrRefSoundDuration(Ice::Int nStrRef, const Ice::Current& ice) {
   lock(getStrRefSoundDuration_mutex, "getStrRefSoundDuration");
   callCounter += 1;
   StackPushInteger(nStrRef);
@@ -11145,7 +11145,7 @@ unlock(giveXPToCreature_mutex, "giveXPToCreature");
   
 };
 
-Ice::Double NWScriptI::hoursToSeconds(Ice::Int nHours, const Ice::Current& ice) {
+Ice::Float NWScriptI::hoursToSeconds(Ice::Int nHours, const Ice::Current& ice) {
   lock(hoursToSeconds_mutex, "hoursToSeconds");
   callCounter += 1;
   StackPushInteger(nHours);
@@ -11186,7 +11186,7 @@ std::string NWScriptI::insertString(const std::string& sDestination, const std::
   return std::string(sRetVal);
 };
 
-Ice::Double NWScriptI::intToFloat(Ice::Int nInteger, const Ice::Current& ice) {
+Ice::Float NWScriptI::intToFloat(Ice::Int nInteger, const Ice::Current& ice) {
   lock(intToFloat_mutex, "intToFloat");
   callCounter += 1;
   StackPushInteger(nInteger);
@@ -13644,7 +13644,7 @@ Ice::Int NWScriptI::lineOfSightVector(const NWN::NWVector& vSource, const NWN::N
   return nRetVal;
 };
 
-NWN::NWLocation NWScriptI::location(const NWN::NWObject& oArea, const NWN::NWVector& vPosition, Ice::Double fOrientation, const Ice::Current& ice) {
+NWN::NWLocation NWScriptI::location(const NWN::NWObject& oArea, const NWN::NWVector& vPosition, Ice::Float fOrientation, const Ice::Current& ice) {
   if (oArea.id < 0 || oArea.id > 0xffffffff) throw NWN::InvalidObjectException();
   lock(location_mutex, "location");
   callCounter += 1;
@@ -13709,7 +13709,7 @@ unlock(lockCameraPitch_mutex, "lockCameraPitch");
   
 };
 
-Ice::Double NWScriptI::log(Ice::Double fValue, const Ice::Current& ice) {
+Ice::Float NWScriptI::log(Ice::Float fValue, const Ice::Current& ice) {
   lock(log_mutex, "log");
   callCounter += 1;
   StackPushFloat(fValue);
@@ -13894,7 +13894,7 @@ unlock(musicBattleStop_mutex, "musicBattleStop");
   
 };
 
-void NWScriptI::nightToDay(const NWN::NWObject& oPlayer, Ice::Double fTransitionTime, const Ice::Current& ice) {
+void NWScriptI::nightToDay(const NWN::NWObject& oPlayer, Ice::Float fTransitionTime, const Ice::Current& ice) {
   if (oPlayer.id < 0 || oPlayer.id > 0xffffffff) throw NWN::InvalidObjectException();
   lock(nightToDay_mutex, "nightToDay");
   callCounter += 1;
@@ -13951,7 +13951,7 @@ unlock(openStore_mutex, "openStore");
   
 };
 
-void NWScriptI::playAnimation(Ice::Int nAnimation, Ice::Double fSpeed, Ice::Double fSeconds, const Ice::Current& ice) {
+void NWScriptI::playAnimation(Ice::Int nAnimation, Ice::Float fSpeed, Ice::Float fSeconds, const Ice::Current& ice) {
   lock(playAnimation_mutex, "playAnimation");
   callCounter += 1;
   StackPushFloat(fSeconds);
@@ -14029,7 +14029,7 @@ unlock(popUpGUIPanel_mutex, "popUpGUIPanel");
   
 };
 
-Ice::Double NWScriptI::pow(Ice::Double fValue, Ice::Double fExponent, const Ice::Current& ice) {
+Ice::Float NWScriptI::pow(Ice::Float fValue, Ice::Float fExponent, const Ice::Current& ice) {
   lock(pow_mutex, "pow");
   callCounter += 1;
   StackPushFloat(fExponent);
@@ -14043,7 +14043,7 @@ Ice::Double NWScriptI::pow(Ice::Double fValue, Ice::Double fExponent, const Ice:
   return fRetVal;
 };
 
-void NWScriptI::printFloat(Ice::Double fFloat, Ice::Int nWidth, Ice::Int nDecimals, const Ice::Current& ice) {
+void NWScriptI::printFloat(Ice::Float fFloat, Ice::Int nWidth, Ice::Int nDecimals, const Ice::Current& ice) {
   lock(printFloat_mutex, "printFloat");
   callCounter += 1;
   StackPushInteger(nDecimals);
@@ -14316,7 +14316,7 @@ NWN::NWObject NWScriptI::retrieveCampaignObject(const std::string& sCampaignName
   return no;
 };
 
-Ice::Double NWScriptI::roundsToSeconds(Ice::Int nRounds, const Ice::Current& ice) {
+Ice::Float NWScriptI::roundsToSeconds(Ice::Int nRounds, const Ice::Current& ice) {
   lock(roundsToSeconds_mutex, "roundsToSeconds");
   callCounter += 1;
   StackPushInteger(nRounds);
@@ -14445,7 +14445,7 @@ unlock(setCalendar_mutex, "setCalendar");
   
 };
 
-void NWScriptI::setCameraFacing(Ice::Double fDirection, Ice::Double fDistance, Ice::Double fPitch, Ice::Int nTransitionType, const Ice::Current& ice) {
+void NWScriptI::setCameraFacing(Ice::Float fDirection, Ice::Float fDistance, Ice::Float fPitch, Ice::Int nTransitionType, const Ice::Current& ice) {
   lock(setCameraFacing_mutex, "setCameraFacing");
   callCounter += 1;
   StackPushInteger(nTransitionType);
@@ -14459,7 +14459,7 @@ unlock(setCameraFacing_mutex, "setCameraFacing");
   
 };
 
-void NWScriptI::setCameraHeight(const NWN::NWObject& oPlayer, Ice::Double fHeight, const Ice::Current& ice) {
+void NWScriptI::setCameraHeight(const NWN::NWObject& oPlayer, Ice::Float fHeight, const Ice::Current& ice) {
   if (oPlayer.id < 0 || oPlayer.id > 0xffffffff) throw NWN::InvalidObjectException();
   lock(setCameraHeight_mutex, "setCameraHeight");
   callCounter += 1;
@@ -14485,7 +14485,7 @@ unlock(setCameraMode_mutex, "setCameraMode");
   
 };
 
-void NWScriptI::setCampaignFloat(const std::string& sCampaignName, const std::string& sVarName, Ice::Double flFloat, const NWN::NWObject& oPlayer, const Ice::Current& ice) {
+void NWScriptI::setCampaignFloat(const std::string& sCampaignName, const std::string& sVarName, Ice::Float flFloat, const NWN::NWObject& oPlayer, const Ice::Current& ice) {
   if (oPlayer.id < 0 || oPlayer.id > 0xffffffff) throw NWN::InvalidObjectException();
   lock(setCampaignFloat_mutex, "setCampaignFloat");
   callCounter += 1;
@@ -14663,7 +14663,7 @@ unlock(setCustomToken_mutex, "setCustomToken");
   
 };
 
-void NWScriptI::setCutsceneCameraMoveRate(const NWN::NWObject& oCreature, Ice::Double fRate, const Ice::Current& ice) {
+void NWScriptI::setCutsceneCameraMoveRate(const NWN::NWObject& oCreature, Ice::Float fRate, const Ice::Current& ice) {
   if (oCreature.id < 0 || oCreature.id > 0xffffffff) throw NWN::InvalidObjectException();
   lock(setCutsceneCameraMoveRate_mutex, "setCutsceneCameraMoveRate");
   callCounter += 1;
@@ -14782,7 +14782,7 @@ unlock(setEncounterSpawnsMax_mutex, "setEncounterSpawnsMax");
   
 };
 
-void NWScriptI::setFacing(Ice::Double fDirection, const Ice::Current& ice) {
+void NWScriptI::setFacing(Ice::Float fDirection, const Ice::Current& ice) {
   lock(setFacing_mutex, "setFacing");
   callCounter += 1;
   StackPushFloat(fDirection);
@@ -14925,7 +14925,7 @@ unlock(setIsDestroyable_mutex, "setIsDestroyable");
   
 };
 
-void NWScriptI::setIsTemporaryEnemy(const NWN::NWObject& oTarget, const NWN::NWObject& oSource, bool bDecays, Ice::Double fDurationInSeconds, const Ice::Current& ice) {
+void NWScriptI::setIsTemporaryEnemy(const NWN::NWObject& oTarget, const NWN::NWObject& oSource, bool bDecays, Ice::Float fDurationInSeconds, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (oSource.id < 0 || oSource.id > 0xffffffff) throw NWN::InvalidObjectException();
   lock(setIsTemporaryEnemy_mutex, "setIsTemporaryEnemy");
@@ -14941,7 +14941,7 @@ unlock(setIsTemporaryEnemy_mutex, "setIsTemporaryEnemy");
   
 };
 
-void NWScriptI::setIsTemporaryFriend(const NWN::NWObject& oTarget, const NWN::NWObject& oSource, bool bDecays, Ice::Double fDurationInSeconds, const Ice::Current& ice) {
+void NWScriptI::setIsTemporaryFriend(const NWN::NWObject& oTarget, const NWN::NWObject& oSource, bool bDecays, Ice::Float fDurationInSeconds, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (oSource.id < 0 || oSource.id > 0xffffffff) throw NWN::InvalidObjectException();
   lock(setIsTemporaryFriend_mutex, "setIsTemporaryFriend");
@@ -14957,7 +14957,7 @@ unlock(setIsTemporaryFriend_mutex, "setIsTemporaryFriend");
   
 };
 
-void NWScriptI::setIsTemporaryNeutral(const NWN::NWObject& oTarget, const NWN::NWObject& oSource, bool bDecays, Ice::Double fDurationInSeconds, const Ice::Current& ice) {
+void NWScriptI::setIsTemporaryNeutral(const NWN::NWObject& oTarget, const NWN::NWObject& oSource, bool bDecays, Ice::Float fDurationInSeconds, const Ice::Current& ice) {
   if (oTarget.id < 0 || oTarget.id > 0xffffffff) throw NWN::InvalidObjectException();
   if (oSource.id < 0 || oSource.id > 0xffffffff) throw NWN::InvalidObjectException();
   lock(setIsTemporaryNeutral_mutex, "setIsTemporaryNeutral");
@@ -15052,7 +15052,7 @@ unlock(setListening_mutex, "setListening");
   
 };
 
-void NWScriptI::setLocalFloat(const NWN::NWObject& oObject, const std::string& sVarName, Ice::Double fValue, const Ice::Current& ice) {
+void NWScriptI::setLocalFloat(const NWN::NWObject& oObject, const std::string& sVarName, Ice::Float fValue, const Ice::Current& ice) {
   if (oObject.id < 0 || oObject.id > 0xffffffff) throw NWN::InvalidObjectException();
   lock(setLocalFloat_mutex, "setLocalFloat");
   callCounter += 1;
@@ -15767,7 +15767,7 @@ unlock(setXP_mutex, "setXP");
   
 };
 
-Ice::Double NWScriptI::sin(Ice::Double fValue, const Ice::Current& ice) {
+Ice::Float NWScriptI::sin(Ice::Float fValue, const Ice::Current& ice) {
   lock(sin_mutex, "sin");
   callCounter += 1;
   StackPushFloat(fValue);
@@ -15881,7 +15881,7 @@ unlock(speakStringByStrRef_mutex, "speakStringByStrRef");
   
 };
 
-Ice::Double NWScriptI::sqrt(Ice::Double fValue, const Ice::Current& ice) {
+Ice::Float NWScriptI::sqrt(Ice::Float fValue, const Ice::Current& ice) {
   lock(sqrt_mutex, "sqrt");
   callCounter += 1;
   StackPushFloat(fValue);
@@ -15945,7 +15945,7 @@ Ice::Int NWScriptI::storeCampaignObject(const std::string& sCampaignName, const 
   return nRetVal;
 };
 
-Ice::Double NWScriptI::stringToFloat(const std::string& sNumber, const Ice::Current& ice) {
+Ice::Float NWScriptI::stringToFloat(const std::string& sNumber, const Ice::Current& ice) {
   lock(stringToFloat_mutex, "stringToFloat");
   callCounter += 1;
   StackPushString(sNumber.c_str());
@@ -16049,7 +16049,7 @@ unlock(takeGoldFromCreature_mutex, "takeGoldFromCreature");
   
 };
 
-Ice::Double NWScriptI::tan(Ice::Double fValue, const Ice::Current& ice) {
+Ice::Float NWScriptI::tan(Ice::Float fValue, const Ice::Current& ice) {
   lock(tan_mutex, "tan");
   callCounter += 1;
   StackPushFloat(fValue);
@@ -16108,7 +16108,7 @@ NWN::AttackResult NWScriptI::touchAttackRanged(const NWN::NWObject& oTarget, boo
   
 };
 
-Ice::Double NWScriptI::turnsToSeconds(Ice::Int nTurns, const Ice::Current& ice) {
+Ice::Float NWScriptI::turnsToSeconds(Ice::Int nTurns, const Ice::Current& ice) {
   lock(turnsToSeconds_mutex, "turnsToSeconds");
   callCounter += 1;
   StackPushInteger(nTurns);
@@ -16133,7 +16133,7 @@ unlock(unpossessFamiliar_mutex, "unpossessFamiliar");
   
 };
 
-NWN::NWVector NWScriptI::vector(Ice::Double x, Ice::Double y, Ice::Double z, const Ice::Current& ice) {
+NWN::NWVector NWScriptI::vector(Ice::Float x, Ice::Float y, Ice::Float z, const Ice::Current& ice) {
   lock(vector_mutex, "vector");
   callCounter += 1;
   StackPushFloat(z);
@@ -16150,7 +16150,7 @@ NWN::NWVector NWScriptI::vector(Ice::Double x, Ice::Double y, Ice::Double z, con
   return nv;
 };
 
-Ice::Double NWScriptI::vectorMagnitude(const NWN::NWVector& vVector, const Ice::Current& ice) {
+Ice::Float NWScriptI::vectorMagnitude(const NWN::NWVector& vVector, const Ice::Current& ice) {
   lock(vectorMagnitude_mutex, "vectorMagnitude");
   callCounter += 1;
   Vector vvVector;
@@ -16182,7 +16182,7 @@ NWN::NWVector NWScriptI::vectorNormalize(const NWN::NWVector& vVector, const Ice
   return nv;
 };
 
-Ice::Double NWScriptI::vectorToAngle(const NWN::NWVector& vVector, const Ice::Current& ice) {
+Ice::Float NWScriptI::vectorToAngle(const NWN::NWVector& vVector, const Ice::Current& ice) {
   lock(vectorToAngle_mutex, "vectorToAngle");
   callCounter += 1;
   Vector vvVector;
@@ -16322,7 +16322,7 @@ unlock(writeTimestampedLogEntry_mutex, "writeTimestampedLogEntry");
   
 };
 
-Ice::Double NWScriptI::yardsToMeters(Ice::Double fYards, const Ice::Current& ice) {
+Ice::Float NWScriptI::yardsToMeters(Ice::Float fYards, const Ice::Current& ice) {
   lock(yardsToMeters_mutex, "yardsToMeters");
   callCounter += 1;
   StackPushFloat(fYards);
@@ -16408,7 +16408,7 @@ NWN::NWObjectSeq NWScriptI::allInFaction(const NWN::NWObject& memberOf, bool bPC
 };
 
 
-NWN::NWObjectSeq NWScriptI::allInShape(NWN::ShapeType shape, Ice::Double size,
+NWN::NWObjectSeq NWScriptI::allInShape(NWN::ShapeType shape, Ice::Float size,
     const NWN::NWLocation& location, bool lineOfSight, NWN::ObjectType objType,
     const NWN::NWVector& origin, const Ice::Current& ice) {
   NWN::NWObjectSeq p;
@@ -16586,14 +16586,14 @@ void NWScriptI::setItemPropertyInteger(const NWN::NWItemProperty& eff, Ice::Int 
   eff_ptr->IntList[idx] = value;
 };
 
-Ice::Double NWScriptI::getEffectDuration(const NWN::NWEffect& eff, const Ice::Current& ice) {
+Ice::Float NWScriptI::getEffectDuration(const NWN::NWEffect& eff, const Ice::Current& ice) {
   if (effectMap.find(eff.id) == effectMap.end())
     throw NWN::InvalidEffectException();
   CGameEffect *eff_ptr = effectMap.find(eff.id)->second;
 
   return eff_ptr->Duration;
 };
-Ice::Double NWScriptI::getItemPropertyDuration(const NWN::NWItemProperty& eff, const Ice::Current& ice) {
+Ice::Float NWScriptI::getItemPropertyDuration(const NWN::NWItemProperty& eff, const Ice::Current& ice) {
   if (iprpMap.find(eff.id) == iprpMap.end())
     throw NWN::InvalidEffectException();
   CGameEffect *eff_ptr = iprpMap.find(eff.id)->second;

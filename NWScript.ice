@@ -1,4 +1,4 @@
-// Generated on Tue Sep 08 21:33:55 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Tue Sep 08 21:46:55 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 // Not exported:
 //   getFirstEffect getFirstFactionMember getFirstItemInInventory getFirstItemProperty getFirstInPersistentObject getFirstObjectInArea getFirstObjectInShape getFirstPC
@@ -111,9 +111,9 @@ module NWN {
     Should be idempotent and non-mutable.
   **/
   struct NWVector {
-    double x;
-    double y;
-    double z;
+    float x;
+    float y;
+    float z;
   };
 
   /**
@@ -121,10 +121,10 @@ module NWN {
   **/
   struct NWLocation {
     NWObject area;
-    double x;
-    double y;
-    double z;
-    double facing;
+    float x;
+    float y;
+    float z;
+    float facing;
   };
 
   /**
@@ -257,8 +257,8 @@ module NWN {
     /**
       Gets this effects' duration.
     */
-    double getEffectDuration(NWEffect e) throws InvalidEffectException;
-    double getItemPropertyDuration(NWItemProperty e) throws InvalidEffectException;
+    float getEffectDuration(NWEffect e) throws InvalidEffectException;
+    float getItemPropertyDuration(NWItemProperty e) throws InvalidEffectException;
 
 
     /**
@@ -324,7 +324,7 @@ module NWN {
      * Returns a sequence of all objects in the given shape.
      * This simply wraps GetFirst/Next to be idempotent.
      */
-    idempotent NWObjectSeq allInShape(ShapeType tShapeType, double fSize,
+    idempotent NWObjectSeq allInShape(ShapeType tShapeType, float fSize,
       NWLocation lTarget, bool bLineOfSight, ObjectType tObjectType, NWVector vOrigin) throws NotInContextException;
 
     /**
@@ -476,17 +476,17 @@ module NWN {
      * - fFollowDistance: follow distance in metres<br>
      * * No return value<br>
     **/
-    void actionForceFollowObject(NWObject oFollow, double fFollowDistance) throws NotInContextException;
+    void actionForceFollowObject(NWObject oFollow, float fFollowDistance) throws NotInContextException;
 
     /**<br>
      * Force the action subject to move to lDestination.<br>
     **/
-    void actionForceMoveToLocation(NWLocation lDestination, bool bRun, double fTimeout) throws NotInContextException;
+    void actionForceMoveToLocation(NWLocation lDestination, bool bRun, float fTimeout) throws NotInContextException;
 
     /**<br>
      * Force the action subject to move to oMoveTo.<br>
     **/
-    void actionForceMoveToObject(NWObject oMoveTo, bool bRun, double fRange, double fTimeout) throws NotInContextException;
+    void actionForceMoveToObject(NWObject oMoveTo, bool bRun, float fRange, float fTimeout) throws NotInContextException;
 
     /**<br>
      * Give oItem to oGiveTo<br>
@@ -520,7 +520,7 @@ module NWN {
     /**<br>
      * Causes the action subject to move away from lMoveAwayFrom.<br>
     **/
-    void actionMoveAwayFromLocation(NWLocation lMoveAwayFrom, bool bRun, double fMoveAwayRange) throws NotInContextException;
+    void actionMoveAwayFromLocation(NWLocation lMoveAwayFrom, bool bRun, float fMoveAwayRange) throws NotInContextException;
 
     /**<br>
      * Cause the action subject to move to a certain distance away from oFleeFrom.<br>
@@ -533,7 +533,7 @@ module NWN {
      * * No return value, but if an error occurs the log file will contain<br>
      * "ActionMoveAwayFromObject failed."<br>
     **/
-    void actionMoveAwayFromObject(NWObject oFleeFrom, bool bRun, double fMoveAwayRange) throws NotInContextException;
+    void actionMoveAwayFromObject(NWObject oFleeFrom, bool bRun, float fMoveAwayRange) throws NotInContextException;
 
     /**<br>
      * The action subject will move to lDestination.<br>
@@ -554,7 +554,7 @@ module NWN {
      * * No return value, but if an error occurs the log file will contain<br>
      * "ActionMoveToObject failed."<br>
     **/
-    void actionMoveToObject(NWObject oMoveTo, bool bRun, double fRange) throws NotInContextException;
+    void actionMoveToObject(NWObject oMoveTo, bool bRun, float fRange) throws NotInContextException;
 
     /**<br>
      * Cause the action subject to open oDoor<br>
@@ -580,7 +580,7 @@ module NWN {
      * - fDurationSeconds: Duration of the animation (this is not used for Fire and<br>
      * Forget animations)<br>
     **/
-    void actionPlayAnimation(int nAnimation, double fSpeed, double fDurationSeconds) throws NotInContextException;
+    void actionPlayAnimation(int nAnimation, float fSpeed, float fDurationSeconds) throws NotInContextException;
 
     /**<br>
      * Put down oItem on the ground.<br>
@@ -693,7 +693,7 @@ module NWN {
     /**<br>
      * Do nothing for fSeconds seconds.<br>
     **/
-    void actionWait(double fSeconds) throws NotInContextException;
+    void actionWait(float fSeconds) throws NotInContextException;
 
     /**<br>
      * Try to send oTarget to a new server defined by sIPaddress.<br>
@@ -724,7 +724,7 @@ module NWN {
      * adds an item property to the specified item<br>
      * Only temporary and permanent duration types are allowed.<br>
     **/
-    void addItemProperty(DurationType tDurationType, NWItemProperty ipProperty, NWObject oItem, double fDuration) throws NotInContextException, InvalidItemPropertyException;
+    void addItemProperty(DurationType tDurationType, NWItemProperty ipProperty, NWObject oItem, float fDuration) throws NotInContextException, InvalidItemPropertyException;
 
     /**<br>
      * Add a journal quest entry to oCreature.<br>
@@ -832,17 +832,17 @@ module NWN {
     /**<br>
      * Convert fAngle to a vector<br>
     **/
-    idempotent NWVector angleToVector(double fAngle) throws NotInContextException;
+    idempotent NWVector angleToVector(float fAngle) throws NotInContextException;
 
     /**<br>
      * Apply eEffect at lLocation.<br>
     **/
-    void applyEffectAtLocation(DurationType tDurationType, NWEffect eEffect, NWLocation lLocation, double fDuration) throws NotInContextException, InvalidEffectException;
+    void applyEffectAtLocation(DurationType tDurationType, NWEffect eEffect, NWLocation lLocation, float fDuration) throws NotInContextException, InvalidEffectException;
 
     /**<br>
      * Apply eEffect to oTarget.<br>
     **/
-    void applyEffectToObject(DurationType tDurationType, NWEffect eEffect, NWObject oTarget, double fDuration) throws NotInContextException, InvalidEffectException;
+    void applyEffectToObject(DurationType tDurationType, NWEffect eEffect, NWObject oTarget, float fDuration) throws NotInContextException, InvalidEffectException;
 
     /**<br>
      * replace this function it does nothing.<br>
@@ -971,7 +971,7 @@ module NWN {
      * type specified will fire instead (as specified in the<br>
      * traps.2da).<br>
     **/
-    NWObject createTrapAtLocation(TrapType tTrapType, NWLocation lLocation, double fSize, string sTag, StandardFaction tStandardFaction, string sOnDisarmScript, string sOnTrapTriggeredScript) throws NotInContextException;
+    NWObject createTrapAtLocation(TrapType tTrapType, NWLocation lLocation, float fSize, string sTag, StandardFaction tStandardFaction, string sOnDisarmScript, string sOnTrapTriggeredScript) throws NotInContextException;
 
     /**<br>
      * Creates a Trap on the object specified.<br>
@@ -996,7 +996,7 @@ module NWN {
      * - oPlayer: which player to change the lighting for<br>
      * - fTransitionTime: how long the transition should take<br>
     **/
-    idempotent void dayToNight(NWObject oPlayer, double fTransitionTime) throws NotInContextException;
+    idempotent void dayToNight(NWObject oPlayer, float fTransitionTime) throws NotInContextException;
 
     /**<br>
      * Decrement the remaining uses per day for this creature by one.<br>
@@ -1055,7 +1055,7 @@ module NWN {
      * Destroy oObject (irrevocably).<br>
      * This will not work on modules and areas.<br>
     **/
-    void destroyObject(NWObject oDestroy, double fDelay) throws NotInContextException;
+    void destroyObject(NWObject oDestroy, float fDelay) throws NotInContextException;
 
     /**<br>
      * Perform nDoorAction on oTargetDoor.<br>
@@ -1386,7 +1386,7 @@ module NWN {
      * - fHitPointChangePerRound: this can be positive or negative, but not zero.<br>
      * * Returns an effect of type EFFECT_TYPE_INVALIDEFFECT if fHitPointChangePerRound is 0.<br>
     **/
-    idempotent NWEffect effectHitPointChangeWhenDying(double fHitPointChangePerRound) throws NotInContextException;
+    idempotent NWEffect effectHitPointChangeWhenDying(float fHitPointChangePerRound) throws NotInContextException;
 
     /**<br>
      * Create an Immunity effect.<br>
@@ -1493,7 +1493,7 @@ module NWN {
      * - nAmount: amount of damage to be regenerated per time interval<br>
      * - fIntervalSeconds: length of interval in seconds<br>
     **/
-    idempotent NWEffect effectRegenerate(int nAmount, double fIntervalSeconds) throws NotInContextException;
+    idempotent NWEffect effectRegenerate(int nAmount, float fIntervalSeconds) throws NotInContextException;
 
     /**<br>
      * Create a Resurrection effect. This should be applied as an instantaneous effect.<br>
@@ -1623,7 +1623,7 @@ module NWN {
      * summoned. If zero, it will just fade in somewhere near the target.  If the value is 1<br>
      * it will use the appear animation, and if it's 2 it will use appear2 (which doesn't exist for most creatures)<br>
     **/
-    idempotent NWEffect effectSummonCreature(string sCreatureResref, int nVisualEffectId, double fDelaySeconds, bool bUseAppearAnimation) throws NotInContextException;
+    idempotent NWEffect effectSummonCreature(string sCreatureResref, int nVisualEffectId, float fDelaySeconds, bool bUseAppearAnimation) throws NotInContextException;
 
     /**<br>
      * Create a Swarm effect.<br>
@@ -1731,13 +1731,13 @@ module NWN {
      * Fades the screen for the given creature/player from black to regular screen<br>
      * - oCreature: creature controlled by player that should fade from black<br>
     **/
-    idempotent void fadeFromBlack(NWObject oCreature, double fSpeed) throws NotInContextException;
+    idempotent void fadeFromBlack(NWObject oCreature, float fSpeed) throws NotInContextException;
 
     /**<br>
      * Fades the screen for the given creature/player from regular screen to black<br>
      * - oCreature: creature controlled by player that should fade to black<br>
     **/
-    idempotent void fadeToBlack(NWObject oCreature, double fSpeed) throws NotInContextException;
+    idempotent void fadeToBlack(NWObject oCreature, float fSpeed) throws NotInContextException;
 
     /**<br>
      * Display floaty text above the specified creature.<br>
@@ -1974,7 +1974,7 @@ module NWN {
      * The var name must be unique across the entire database, regardless of the variable type.<br>
      * If you want a variable to pertain to a specific player in the game, provide a player object.<br>
     **/
-    idempotent double getCampaignFloat(string sCampaignName, string sVarName, NWObject oPlayer) throws NotInContextException;
+    idempotent float getCampaignFloat(string sCampaignName, string sVarName, NWObject oPlayer) throws NotInContextException;
 
     /**<br>
      * This will read an int from the  specified campaign database<br>
@@ -2018,7 +2018,7 @@ module NWN {
      * Get oCreature's challenge rating.<br>
      * * Returns 0.0 if oCreature is invalid.<br>
     **/
-    idempotent double getChallengeRating(NWObject oCreature) throws NotInContextException;
+    idempotent float getChallengeRating(NWObject oCreature) throws NotInContextException;
 
     /**<br>
      * A creature can have up to three classes.  This function determines the<br>
@@ -2147,7 +2147,7 @@ module NWN {
      * of the cutscene 'camera man'.<br>
      * NOTE: This will be a value between 0.1, 2.0 (10%-200%)<br>
     **/
-    idempotent double getCutsceneCameraMoveRate(NWObject oCreature) throws NotInContextException;
+    idempotent float getCutsceneCameraMoveRate(NWObject oCreature) throws NotInContextException;
 
     /**<br>
      * Gets the current cutscene state of the player specified by oCreature.<br>
@@ -2200,24 +2200,24 @@ module NWN {
      * Gets the length of the specified wavefile, in seconds<br>
      * Only works for sounds used for dialog.<br>
     **/
-    idempotent double getDialogSoundLength(int nStrRef) throws NotInContextException;
+    idempotent float getDialogSoundLength(int nStrRef) throws NotInContextException;
 
     /**<br>
      * Get the distance in metres between oObjectA and oObjectB.<br>
      * * Return value if either object is invalid: 0.0f<br>
     **/
-    idempotent double getDistanceBetween(NWObject oObjectA, NWObject oObjectB) throws NotInContextException;
+    idempotent float getDistanceBetween(NWObject oObjectA, NWObject oObjectB) throws NotInContextException;
 
     /**<br>
      * Get the distance between lLocationA and lLocationB.<br>
     **/
-    idempotent double getDistanceBetweenLocations(NWLocation lLocationA, NWLocation lLocationB) throws NotInContextException;
+    idempotent float getDistanceBetweenLocations(NWLocation lLocationA, NWLocation lLocationB) throws NotInContextException;
 
     /**<br>
      * Get the distance from the caller to oObject in metres.<br>
      * * Return value on error: -1.0f<br>
     **/
-    idempotent double getDistanceToObject(NWObject oObject) throws NotInContextException;
+    idempotent float getDistanceToObject(NWObject oObject) throws NotInContextException;
 
     /**<br>
      * returns TRUE if the item CAN be dropped<br>
@@ -2300,7 +2300,7 @@ module NWN {
      * 0.0f and 360.0f<br>
      * * Return value on error: -1.0f<br>
     **/
-    idempotent double getFacing(NWObject oTarget) throws NotInContextException;
+    idempotent float getFacing(NWObject oTarget) throws NotInContextException;
 
     /**<br>
      * Get an integer between 0 and 100 (inclusive) that represents the average<br>
@@ -3167,7 +3167,7 @@ module NWN {
      * Get oObject's local float variable sVarName<br>
      * * Return value on error: 0.0f<br>
     **/
-    idempotent double getLocalFloat(NWObject oObject, string sVarName) throws NotInContextException;
+    idempotent float getLocalFloat(NWObject oObject, string sVarName) throws NotInContextException;
 
     /**<br>
      * Get oObject's local integer variable sVarName<br>
@@ -3751,7 +3751,7 @@ module NWN {
      * Get the duration (in seconds) of the sound attached to nStrRef<br>
      * * Returns 0.0f if no duration is stored or if no sound is attached<br>
     **/
-    idempotent double getStrRefSoundDuration(int nStrRef) throws NotInContextException;
+    idempotent float getStrRefSoundDuration(int nStrRef) throws NotInContextException;
 
     /**<br>
      * Get a string from the talk table using nStrRef.<br>
@@ -3998,7 +3998,7 @@ module NWN {
      * Convert nHours into a number of seconds<br>
      * The result will depend on how many minutes there are per hour (game-time)<br>
     **/
-    idempotent double hoursToSeconds(int nHours) throws NotInContextException;
+    idempotent float hoursToSeconds(int nHours) throws NotInContextException;
 
     /**<br>
      * Increment the remaining uses per day for this creature by one.<br>
@@ -5140,7 +5140,7 @@ module NWN {
      * - oPlayer: which player to change the lighting for<br>
      * - fTransitionTime: how long the transition should take<br>
     **/
-    idempotent void nightToDay(NWObject oPlayer, double fTransitionTime) throws NotInContextException;
+    idempotent void nightToDay(NWObject oPlayer, float fTransitionTime) throws NotInContextException;
 
     /**<br>
      * Open's this creature's inventory panel for this player<br>
@@ -5164,7 +5164,7 @@ module NWN {
      * - fSpeed<br>
      * - fSeconds<br>
     **/
-    void playAnimation(int nAnimation, double fSpeed, double fSeconds) throws NotInContextException;
+    void playAnimation(int nAnimation, float fSpeed, float fSeconds) throws NotInContextException;
 
     /**<br>
      * Play sSoundName<br>
@@ -5311,7 +5311,7 @@ module NWN {
      * Convert nRounds into a number of seconds<br>
      * A round is always 6.0 seconds<br>
     **/
-    idempotent double roundsToSeconds(int nRounds) throws NotInContextException;
+    idempotent float roundsToSeconds(int nRounds) throws NotInContextException;
 
     /**<br>
      * Sends szMessage to all the Dungeon Masters currently on the server.<br>
@@ -5406,13 +5406,13 @@ module NWN {
      * Distance 1-25<br>
      * Pitch 1-89<br>
     **/
-    idempotent void setCameraFacing(double fDirection, double fDistance, double fPitch, int nTransitionType) throws NotInContextException;
+    idempotent void setCameraFacing(float fDirection, float fDistance, float fPitch, int nTransitionType) throws NotInContextException;
 
     /**<br>
      * Forces this player's camera to be set to this height. Setting this value to zero will<br>
      * restore the camera to the racial default height.<br>
     **/
-    idempotent void setCameraHeight(NWObject oPlayer, double fHeight) throws NotInContextException;
+    idempotent void setCameraHeight(NWObject oPlayer, float fHeight) throws NotInContextException;
 
     /**<br>
      * Set the camera mode for oPlayer.<br>
@@ -5429,7 +5429,7 @@ module NWN {
      * The var name must be unique across the entire database, regardless of the variable type.<br>
      * If you want a variable to pertain to a specific player in the game, provide a player object.<br>
     **/
-    idempotent void setCampaignFloat(string sCampaignName, string sVarName, double flFloat, NWObject oPlayer) throws NotInContextException;
+    idempotent void setCampaignFloat(string sCampaignName, string sVarName, float flFloat, NWObject oPlayer) throws NotInContextException;
 
     /**<br>
      * This stores an int out to the specified campaign database<br>
@@ -5563,7 +5563,7 @@ module NWN {
      * camera man.<br>
      * NOTE: You can only set values between 0.1, 2.0 (10%-200%)<br>
     **/
-    idempotent void setCutsceneCameraMoveRate(NWObject oCreature, double fRate) throws NotInContextException;
+    idempotent void setCutsceneCameraMoveRate(NWObject oCreature, float fRate) throws NotInContextException;
 
     /**<br>
      * Sets the given creature into cutscene mode.  This prevents the player from<br>
@@ -5635,7 +5635,7 @@ module NWN {
      * DIRECTION_EAST, DIRECTION_NORTH, DIRECTION_WEST and DIRECTION_SOUTH are<br>
      * predefined. (0.0f=East, 90.0f=North, 180.0f=West, 270.0f=South)<br>
     **/
-    idempotent void setFacing(double fDirection) throws NotInContextException;
+    idempotent void setFacing(float fDirection) throws NotInContextException;
 
     /**<br>
      * Cause the caller to face vTarget<br>
@@ -5753,7 +5753,7 @@ module NWN {
      * over fDurationInSeconds. Enmity will only be in effect as long as<br>
      * (faction reputation + total personal reputation) <= REPUTATION_TYPE_ENEMY.<br>
     **/
-    idempotent void setIsTemporaryEnemy(NWObject oTarget, NWObject oSource, bool bDecays, double fDurationInSeconds) throws NotInContextException;
+    idempotent void setIsTemporaryEnemy(NWObject oTarget, NWObject oSource, bool bDecays, float fDurationInSeconds) throws NotInContextException;
 
     /**<br>
      * oSource will temporarily be friends towards oTarget.<br>
@@ -5770,7 +5770,7 @@ module NWN {
      * over fDurationInSeconds. Friendship will only be in effect as long as<br>
      * (faction reputation + total personal reputation) >= REPUTATION_TYPE_FRIEND.<br>
     **/
-    idempotent void setIsTemporaryFriend(NWObject oTarget, NWObject oSource, bool bDecays, double fDurationInSeconds) throws NotInContextException;
+    idempotent void setIsTemporaryFriend(NWObject oTarget, NWObject oSource, bool bDecays, float fDurationInSeconds) throws NotInContextException;
 
     /**<br>
      * Make oSource temporarily neutral to oTarget using personal reputation.<br>
@@ -5785,7 +5785,7 @@ module NWN {
      * (faction reputation + total personal reputation) > REPUTATION_TYPE_ENEMY and<br>
      * (faction reputation + total personal reputation) < REPUTATION_TYPE_FRIEND.<br>
     **/
-    idempotent void setIsTemporaryNeutral(NWObject oTarget, NWObject oSource, bool bDecays, double fDurationInSeconds) throws NotInContextException;
+    idempotent void setIsTemporaryNeutral(NWObject oTarget, NWObject oSource, bool bDecays, float fDurationInSeconds) throws NotInContextException;
 
     /**<br>
      * Sets charges left on an item.<br>
@@ -5837,7 +5837,7 @@ module NWN {
     /**<br>
      * Set oObject's local float variable sVarName to nValue<br>
     **/
-    idempotent void setLocalFloat(NWObject oObject, string sVarName, double fValue) throws NotInContextException;
+    idempotent void setLocalFloat(NWObject oObject, string sVarName, float fValue) throws NotInContextException;
 
     /**<br>
      * Set oObject's local integer variable sVarName to nValue<br>
@@ -6361,7 +6361,7 @@ module NWN {
      * Convert nTurns into a number of seconds<br>
      * A turn is always 60.0 seconds<br>
     **/
-    idempotent double turnsToSeconds(int nTurns) throws NotInContextException;
+    idempotent float turnsToSeconds(int nTurns) throws NotInContextException;
 
     /**<br>
      * This will cause a Player Creature to unpossess his/her familiar.  It will work if run<br>
@@ -6375,7 +6375,7 @@ module NWN {
      * distance between two points.<br>
      * * Return value on error: 0.0f<br>
     **/
-    idempotent double vectorMagnitude(NWVector vVector) throws NotInContextException;
+    idempotent float vectorMagnitude(NWVector vVector) throws NotInContextException;
 
     /**<br>
      * Normalize vVector<br>
@@ -6385,7 +6385,7 @@ module NWN {
     /**<br>
      * Convert vVector to an angle<br>
     **/
-    idempotent double vectorToAngle(NWVector vVector) throws NotInContextException;
+    idempotent float vectorToAngle(NWVector vVector) throws NotInContextException;
 
     /**<br>
      * Set eEffect to be versus a specific alignment.<br>

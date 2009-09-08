@@ -1,4 +1,4 @@
-// Generated on Tue Sep 08 21:33:56 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Tue Sep 08 21:46:55 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 #include "FunctionHooks.h"
 #include "NWNStructures.h"
@@ -17,8 +17,8 @@ class NWScriptI : public NWN::NWScript {
     int getItemPropertyInteger(const NWN::NWItemProperty&, Ice::Int, const Ice::Current&);
     void setItemPropertyInteger(const NWN::NWItemProperty&, Ice::Int, Ice::Int, const Ice::Current&);
 
-    Ice::Double getEffectDuration(const NWN::NWEffect&, const Ice::Current&);
-    Ice::Double getItemPropertyDuration(const NWN::NWItemProperty&, const Ice::Current&);
+    Ice::Float getEffectDuration(const NWN::NWEffect&, const Ice::Current&);
+    Ice::Float getItemPropertyDuration(const NWN::NWItemProperty&, const Ice::Current&);
 
     void setEffectTrueType(const NWN::NWEffect&, NWN::EffectTrueType, const Ice::Current&);
 
@@ -38,7 +38,7 @@ class NWScriptI : public NWN::NWScript {
     NWN::NWObjectSeq allInInventory(const NWN::NWObject&, const Ice::Current&);
     NWN::NWCreatureEquipped allEquipped(const NWN::NWObject&, const Ice::Current&);
     NWN::NWItemPropertySeq allItemProperties(const NWN::NWObject&, const Ice::Current&);
-    NWN::NWObjectSeq allInShape(NWN::ShapeType shape, Ice::Double size,
+    NWN::NWObjectSeq allInShape(NWN::ShapeType shape, Ice::Float size,
       const NWN::NWLocation& location, bool lineOfSight, NWN::ObjectType objType,
       const NWN::NWVector& origin, const Ice::Current&);
     NWN::NWObjectSeq allInFaction(const NWN::NWObject&, bool, const Ice::Current&);
@@ -48,7 +48,7 @@ class NWScriptI : public NWN::NWScript {
     bool getEffectExposed(const NWN::NWEffect&, const Ice::Current&);
     void setEffectExposed(const NWN::NWEffect&, bool, const Ice::Current&);
     virtual Ice::Int abs(Ice::Int nValue, const Ice::Current&);
-    virtual Ice::Double acos(Ice::Double fValue, const Ice::Current&);
+    virtual Ice::Float acos(Ice::Float fValue, const Ice::Current&);
     virtual void actionAttack(const NWN::NWObject& oAttackee, bool bPassive, const Ice::Current&);
     virtual void actionCastFakeSpellAtLocation(Ice::Int nSpell, const NWN::NWLocation& lTarget, NWN::ProjectilePathType tProjectilePathType, const Ice::Current&);
     virtual void actionCastFakeSpellAtObject(Ice::Int nSpell, const NWN::NWObject& oTarget, NWN::ProjectilePathType tProjectilePathType, const Ice::Current&);
@@ -61,22 +61,22 @@ class NWScriptI : public NWN::NWScript {
     virtual void actionEquipMostDamagingRanged(const NWN::NWObject& oVersus, const Ice::Current&);
     virtual void actionEquipMostEffectiveArmor(const Ice::Current&);
     virtual void actionExamine(const NWN::NWObject& oExamine, const Ice::Current&);
-    virtual void actionForceFollowObject(const NWN::NWObject& oFollow, Ice::Double fFollowDistance, const Ice::Current&);
-    virtual void actionForceMoveToLocation(const NWN::NWLocation& lDestination, bool bRun, Ice::Double fTimeout, const Ice::Current&);
-    virtual void actionForceMoveToObject(const NWN::NWObject& oMoveTo, bool bRun, Ice::Double fRange, Ice::Double fTimeout, const Ice::Current&);
+    virtual void actionForceFollowObject(const NWN::NWObject& oFollow, Ice::Float fFollowDistance, const Ice::Current&);
+    virtual void actionForceMoveToLocation(const NWN::NWLocation& lDestination, bool bRun, Ice::Float fTimeout, const Ice::Current&);
+    virtual void actionForceMoveToObject(const NWN::NWObject& oMoveTo, bool bRun, Ice::Float fRange, Ice::Float fTimeout, const Ice::Current&);
     virtual void actionGiveItem(const NWN::NWObject& oItem, const NWN::NWObject& oGiveTo, const Ice::Current&);
     virtual void actionInteractObject(const NWN::NWObject& oPlaceable, const Ice::Current&);
     virtual void actionJumpToLocation(const NWN::NWLocation& lLocation, const Ice::Current&);
     virtual void actionJumpToObject(const NWN::NWObject& oToJumpTo, bool bWalkStraightLineToPoint, const Ice::Current&);
     virtual void actionLockObject(const NWN::NWObject& oTarget, const Ice::Current&);
-    virtual void actionMoveAwayFromLocation(const NWN::NWLocation& lMoveAwayFrom, bool bRun, Ice::Double fMoveAwayRange, const Ice::Current&);
-    virtual void actionMoveAwayFromObject(const NWN::NWObject& oFleeFrom, bool bRun, Ice::Double fMoveAwayRange, const Ice::Current&);
+    virtual void actionMoveAwayFromLocation(const NWN::NWLocation& lMoveAwayFrom, bool bRun, Ice::Float fMoveAwayRange, const Ice::Current&);
+    virtual void actionMoveAwayFromObject(const NWN::NWObject& oFleeFrom, bool bRun, Ice::Float fMoveAwayRange, const Ice::Current&);
     virtual void actionMoveToLocation(const NWN::NWLocation& lDestination, bool bRun, const Ice::Current&);
-    virtual void actionMoveToObject(const NWN::NWObject& oMoveTo, bool bRun, Ice::Double fRange, const Ice::Current&);
+    virtual void actionMoveToObject(const NWN::NWObject& oMoveTo, bool bRun, Ice::Float fRange, const Ice::Current&);
     virtual void actionOpenDoor(const NWN::NWObject& oDoor, const Ice::Current&);
     virtual void actionPauseConversation(const Ice::Current&);
     virtual void actionPickUpItem(const NWN::NWObject& oItem, const Ice::Current&);
-    virtual void actionPlayAnimation(Ice::Int nAnimation, Ice::Double fSpeed, Ice::Double fDurationSeconds, const Ice::Current&);
+    virtual void actionPlayAnimation(Ice::Int nAnimation, Ice::Float fSpeed, Ice::Float fDurationSeconds, const Ice::Current&);
     virtual void actionPutDownItem(const NWN::NWObject& oItem, const Ice::Current&);
     virtual void actionRandomWalk(const Ice::Current&);
     virtual void actionRest(bool bCreatureToEnemyLineOfSightCheck, const Ice::Current&);
@@ -90,10 +90,10 @@ class NWScriptI : public NWN::NWScript {
     virtual void actionUnlockObject(const NWN::NWObject& oTarget, const Ice::Current&);
     virtual void actionUseFeat(Ice::Int nFeat, const NWN::NWObject& oTarget, const Ice::Current&);
     virtual void actionUseSkill(Ice::Int nSkill, const NWN::NWObject& oTarget, Ice::Int nSubSkill, const NWN::NWObject& oItemUsed, const Ice::Current&);
-    virtual void actionWait(Ice::Double fSeconds, const Ice::Current&);
+    virtual void actionWait(Ice::Float fSeconds, const Ice::Current&);
     virtual void activatePortal(const NWN::NWObject& oTarget, const std::string& sIPaddress, const std::string& sPassword, const std::string& sWaypointTag, bool bSeemless, const Ice::Current&);
     virtual void addHenchman(const NWN::NWObject& oMaster, const NWN::NWObject& oHenchman, const Ice::Current&);
-    virtual void addItemProperty(NWN::DurationType tDurationType, const NWN::NWItemProperty& ipProperty, const NWN::NWObject& oItem, Ice::Double fDuration, const Ice::Current&);
+    virtual void addItemProperty(NWN::DurationType tDurationType, const NWN::NWItemProperty& ipProperty, const NWN::NWObject& oItem, Ice::Float fDuration, const Ice::Current&);
     virtual void addJournalQuestEntry(const std::string& szPlotID, Ice::Int nState, const NWN::NWObject& oCreature, bool bAllPartyMembers, bool bAllPlayers, bool bAllowOverrideHigher, const Ice::Current&);
     virtual void addToParty(const NWN::NWObject& oPC, const NWN::NWObject& oPartyLeader, const Ice::Current&);
     virtual void adjustAlignment(const NWN::NWObject& oSubject, NWN::Alignment tAlignment, Ice::Int nShift, bool bAllPartyMembers, const Ice::Current&);
@@ -104,10 +104,10 @@ class NWScriptI : public NWN::NWScript {
     virtual void ambientSoundSetDayVolume(const NWN::NWObject& oArea, Ice::Int nVolume, const Ice::Current&);
     virtual void ambientSoundSetNightVolume(const NWN::NWObject& oArea, Ice::Int nVolume, const Ice::Current&);
     virtual void ambientSoundStop(const NWN::NWObject& oArea, const Ice::Current&);
-    virtual NWN::NWVector angleToVector(Ice::Double fAngle, const Ice::Current&);
-    virtual void applyEffectAtLocation(NWN::DurationType tDurationType, const NWN::NWEffect& eEffect, const NWN::NWLocation& lLocation, Ice::Double fDuration, const Ice::Current&);
-    virtual void applyEffectToObject(NWN::DurationType tDurationType, const NWN::NWEffect& eEffect, const NWN::NWObject& oTarget, Ice::Double fDuration, const Ice::Current&);
-    virtual Ice::Double asin(Ice::Double fValue, const Ice::Current&);
+    virtual NWN::NWVector angleToVector(Ice::Float fAngle, const Ice::Current&);
+    virtual void applyEffectAtLocation(NWN::DurationType tDurationType, const NWN::NWEffect& eEffect, const NWN::NWLocation& lLocation, Ice::Float fDuration, const Ice::Current&);
+    virtual void applyEffectToObject(NWN::DurationType tDurationType, const NWN::NWEffect& eEffect, const NWN::NWObject& oTarget, Ice::Float fDuration, const Ice::Current&);
+    virtual Ice::Float asin(Ice::Float fValue, const Ice::Current&);
     virtual NWN::NWItemProperty badBadReplaceMeThisDoesNothing(const Ice::Current&);
     virtual Ice::Int beginConversation(const std::string& sResRef, const NWN::NWObject& oObjectToDialog, const Ice::Current&);
     virtual void blackScreen(const NWN::NWObject& oCreature, const Ice::Current&);
@@ -119,10 +119,10 @@ class NWScriptI : public NWN::NWScript {
     virtual NWN::NWObject copyItem(const NWN::NWObject& oItem, const NWN::NWObject& oTargetInventory, bool bCopyVars, const Ice::Current&);
     virtual NWN::NWObject copyItemAndModify(const NWN::NWObject& oItem, Ice::Int nType, Ice::Int nIndex, Ice::Int nNewValue, bool bCopyVars, const Ice::Current&);
     virtual NWN::NWObject copyObject(const NWN::NWObject& oSource, const NWN::NWLocation& locLocation, const NWN::NWObject& oOwner, const std::string& sNewTag, const Ice::Current&);
-    virtual Ice::Double cos(Ice::Double fValue, const Ice::Current&);
+    virtual Ice::Float cos(Ice::Float fValue, const Ice::Current&);
     virtual NWN::NWObject createItemOnObject(const std::string& sItemTemplate, const NWN::NWObject& oTarget, Ice::Int nStackSize, const std::string& sNewTag, const Ice::Current&);
     virtual NWN::NWObject createObject(NWN::ObjectType tObjectType, const std::string& sTemplate, const NWN::NWLocation& lLocation, bool bUseAppearAnimation, const std::string& sNewTag, const Ice::Current&);
-    virtual NWN::NWObject createTrapAtLocation(NWN::TrapType tTrapType, const NWN::NWLocation& lLocation, Ice::Double fSize, const std::string& sTag, NWN::StandardFaction tStandardFaction, const std::string& sOnDisarmScript, const std::string& sOnTrapTriggeredScript, const Ice::Current&);
+    virtual NWN::NWObject createTrapAtLocation(NWN::TrapType tTrapType, const NWN::NWLocation& lLocation, Ice::Float fSize, const std::string& sTag, NWN::StandardFaction tStandardFaction, const std::string& sOnDisarmScript, const std::string& sOnTrapTriggeredScript, const Ice::Current&);
     virtual void createTrapOnObject(NWN::TrapType tTrapType, const NWN::NWObject& oObject, NWN::StandardFaction tStandardFaction, const std::string& sOnDisarmScript, const std::string& sOnTrapTriggeredScript, const Ice::Current&);
     virtual Ice::Int d10(Ice::Int nNumDice, const Ice::Current&);
     virtual Ice::Int d100(Ice::Int nNumDice, const Ice::Current&);
@@ -133,7 +133,7 @@ class NWScriptI : public NWN::NWScript {
     virtual Ice::Int d4(Ice::Int nNumDice, const Ice::Current&);
     virtual Ice::Int d6(Ice::Int nNumDice, const Ice::Current&);
     virtual Ice::Int d8(Ice::Int nNumDice, const Ice::Current&);
-    virtual void dayToNight(const NWN::NWObject& oPlayer, Ice::Double fTransitionTime, const Ice::Current&);
+    virtual void dayToNight(const NWN::NWObject& oPlayer, Ice::Float fTransitionTime, const Ice::Current&);
     virtual void decrementRemainingFeatUses(const NWN::NWObject& oCreature, Ice::Int nFeat, const Ice::Current&);
     virtual void decrementRemainingSpellUses(const NWN::NWObject& oCreature, Ice::Int nSpell, const Ice::Current&);
     virtual void deleteCampaignVariable(const std::string& sCampaignName, const std::string& sVarName, const NWN::NWObject& oPlayer, const Ice::Current&);
@@ -143,7 +143,7 @@ class NWScriptI : public NWN::NWScript {
     virtual void deleteLocalObject(const NWN::NWObject& oObject, const std::string& sVarName, const Ice::Current&);
     virtual void deleteLocalString(const NWN::NWObject& oObject, const std::string& sVarName, const Ice::Current&);
     virtual void destroyCampaignDatabase(const std::string& sCampaignName, const Ice::Current&);
-    virtual void destroyObject(const NWN::NWObject& oDestroy, Ice::Double fDelay, const Ice::Current&);
+    virtual void destroyObject(const NWN::NWObject& oDestroy, Ice::Float fDelay, const Ice::Current&);
     virtual void doDoorAction(const NWN::NWObject& oTargetDoor, NWN::DoorAction tDoorAction, const Ice::Current&);
     virtual void doPlaceableObjectAction(const NWN::NWObject& oPlaceable, NWN::PlaceableAction tPlaceableAction, const Ice::Current&);
     virtual void doSinglePlayerAutoSave(const Ice::Current&);
@@ -189,7 +189,7 @@ class NWScriptI : public NWN::NWScript {
     virtual NWN::NWEffect effectFrightened(const Ice::Current&);
     virtual NWN::NWEffect effectHaste(const Ice::Current&);
     virtual NWN::NWEffect effectHeal(Ice::Int nDamageToHeal, const Ice::Current&);
-    virtual NWN::NWEffect effectHitPointChangeWhenDying(Ice::Double fHitPointChangePerRound, const Ice::Current&);
+    virtual NWN::NWEffect effectHitPointChangeWhenDying(Ice::Float fHitPointChangePerRound, const Ice::Current&);
     virtual NWN::NWEffect effectImmunity(NWN::ImmunityType tImmunityType, const Ice::Current&);
     virtual NWN::NWEffect effectInvisibility(Ice::Int nInvisibilityType, const Ice::Current&);
     virtual NWN::NWEffect effectKnockdown(const Ice::Current&);
@@ -203,7 +203,7 @@ class NWScriptI : public NWN::NWScript {
     virtual NWN::NWEffect effectPetrify(const Ice::Current&);
     virtual NWN::NWEffect effectPoison(Ice::Int nPoisonType, const Ice::Current&);
     virtual NWN::NWEffect effectPolymorph(Ice::Int nPolymorphSelection, bool bLocked, const Ice::Current&);
-    virtual NWN::NWEffect effectRegenerate(Ice::Int nAmount, Ice::Double fIntervalSeconds, const Ice::Current&);
+    virtual NWN::NWEffect effectRegenerate(Ice::Int nAmount, Ice::Float fIntervalSeconds, const Ice::Current&);
     virtual NWN::NWEffect effectResurrection(const Ice::Current&);
     virtual NWN::NWEffect effectSanctuary(Ice::Int nDifficultyClass, const Ice::Current&);
     virtual NWN::NWEffect effectSavingThrowDecrease(Ice::Int nSave, Ice::Int nValue, NWN::SaveType tSaveType, const Ice::Current&);
@@ -220,7 +220,7 @@ class NWScriptI : public NWN::NWScript {
     virtual NWN::NWEffect effectSpellResistanceDecrease(Ice::Int nValue, const Ice::Current&);
     virtual NWN::NWEffect effectSpellResistanceIncrease(Ice::Int nValue, const Ice::Current&);
     virtual NWN::NWEffect effectStunned(const Ice::Current&);
-    virtual NWN::NWEffect effectSummonCreature(const std::string& sCreatureResref, Ice::Int nVisualEffectId, Ice::Double fDelaySeconds, bool bUseAppearAnimation, const Ice::Current&);
+    virtual NWN::NWEffect effectSummonCreature(const std::string& sCreatureResref, Ice::Int nVisualEffectId, Ice::Float fDelaySeconds, bool bUseAppearAnimation, const Ice::Current&);
     virtual NWN::NWEffect effectSwarm(bool bLooping, const std::string& sCreatureTemplate1, const std::string& sCreatureTemplate2, const std::string& sCreatureTemplate3, const std::string& sCreatureTemplate4, const Ice::Current&);
     virtual NWN::NWEffect effectTemporaryHitpoints(Ice::Int nHitPoints, const Ice::Current&);
     virtual NWN::NWEffect effectTimeStop(const Ice::Current&);
@@ -236,13 +236,13 @@ class NWScriptI : public NWN::NWScript {
     virtual void exportAllCharacters(const Ice::Current&);
     virtual void exportSingleCharacter(const NWN::NWObject& oPlayer, const Ice::Current&);
     virtual NWN::NWEffect extraordinaryEffect(const NWN::NWEffect& eEffect, const Ice::Current&);
-    virtual Ice::Double fabs(Ice::Double fValue, const Ice::Current&);
-    virtual void fadeFromBlack(const NWN::NWObject& oCreature, Ice::Double fSpeed, const Ice::Current&);
-    virtual void fadeToBlack(const NWN::NWObject& oCreature, Ice::Double fSpeed, const Ice::Current&);
-    virtual Ice::Double feetToMeters(Ice::Double fFeet, const Ice::Current&);
+    virtual Ice::Float fabs(Ice::Float fValue, const Ice::Current&);
+    virtual void fadeFromBlack(const NWN::NWObject& oCreature, Ice::Float fSpeed, const Ice::Current&);
+    virtual void fadeToBlack(const NWN::NWObject& oCreature, Ice::Float fSpeed, const Ice::Current&);
+    virtual Ice::Float feetToMeters(Ice::Float fFeet, const Ice::Current&);
     virtual Ice::Int findSubString(const std::string& sString, const std::string& sSubString, Ice::Int nStart, const Ice::Current&);
-    virtual Ice::Int floatToInt(Ice::Double fFloat, const Ice::Current&);
-    virtual std::string floatToString(Ice::Double fFloat, Ice::Int nWidth, Ice::Int nDecimals, const Ice::Current&);
+    virtual Ice::Int floatToInt(Ice::Float fFloat, const Ice::Current&);
+    virtual std::string floatToString(Ice::Float fFloat, Ice::Int nWidth, Ice::Int nDecimals, const Ice::Current&);
     virtual void floatingTextStrRefOnCreature(Ice::Int nStrRefToDisplay, const NWN::NWObject& oCreatureToFloatAbove, bool bBroadcastToFaction, const Ice::Current&);
     virtual void floatingTextStringOnCreature(const std::string& sStringToDisplay, const NWN::NWObject& oCreatureToFloatAbove, bool bBroadcastToFaction, const Ice::Current&);
     virtual void forceRest(const NWN::NWObject& oCreature, const Ice::Current&);
@@ -275,13 +275,13 @@ class NWScriptI : public NWN::NWScript {
     virtual Ice::Int getCalendarDay(const Ice::Current&);
     virtual Ice::Int getCalendarMonth(const Ice::Current&);
     virtual Ice::Int getCalendarYear(const Ice::Current&);
-    virtual Ice::Double getCampaignFloat(const std::string& sCampaignName, const std::string& sVarName, const NWN::NWObject& oPlayer, const Ice::Current&);
+    virtual Ice::Float getCampaignFloat(const std::string& sCampaignName, const std::string& sVarName, const NWN::NWObject& oPlayer, const Ice::Current&);
     virtual Ice::Int getCampaignInt(const std::string& sCampaignName, const std::string& sVarName, const NWN::NWObject& oPlayer, const Ice::Current&);
     virtual NWN::NWLocation getCampaignLocation(const std::string& sCampaignName, const std::string& sVarName, const NWN::NWObject& oPlayer, const Ice::Current&);
     virtual std::string getCampaignString(const std::string& sCampaignName, const std::string& sVarName, const NWN::NWObject& oPlayer, const Ice::Current&);
     virtual NWN::NWVector getCampaignVector(const std::string& sCampaignName, const std::string& sVarName, const NWN::NWObject& oPlayer, const Ice::Current&);
     virtual Ice::Int getCasterLevel(const NWN::NWObject& oCreature, const Ice::Current&);
-    virtual Ice::Double getChallengeRating(const NWN::NWObject& oCreature, const Ice::Current&);
+    virtual Ice::Float getChallengeRating(const NWN::NWObject& oCreature, const Ice::Current&);
     virtual Ice::Int getClassByPosition(Ice::Int nClassPosition, const NWN::NWObject& oCreature, const Ice::Current&);
     virtual NWN::NWObject getClickingObject(const Ice::Current&);
     virtual Ice::Int getColor(const NWN::NWObject& oObject, Ice::Int nColorChannel, const Ice::Current&);
@@ -293,17 +293,17 @@ class NWScriptI : public NWN::NWScript {
     virtual Ice::Int getCreatureWingType(const NWN::NWObject& oCreature, const Ice::Current&);
     virtual NWN::Action getCurrentAction(const NWN::NWObject& oObject, const Ice::Current&);
     virtual Ice::Int getCurrentHitPoints(const NWN::NWObject& oObject, const Ice::Current&);
-    virtual Ice::Double getCutsceneCameraMoveRate(const NWN::NWObject& oCreature, const Ice::Current&);
+    virtual Ice::Float getCutsceneCameraMoveRate(const NWN::NWObject& oCreature, const Ice::Current&);
     virtual bool getCutsceneMode(const NWN::NWObject& oCreature, const Ice::Current&);
     virtual Ice::Int getDamageDealtByType(NWN::DamageType tDamageType, const Ice::Current&);
     virtual Ice::Int getDefensiveCastingMode(const NWN::NWObject& oCreature, const Ice::Current&);
     virtual std::string getDeity(const NWN::NWObject& oCreature, const Ice::Current&);
     virtual std::string getDescription(const NWN::NWObject& oObject, bool bOriginalDescription, bool bIdentifiedDescription, const Ice::Current&);
     virtual Ice::Int getDetectMode(const NWN::NWObject& oCreature, const Ice::Current&);
-    virtual Ice::Double getDialogSoundLength(Ice::Int nStrRef, const Ice::Current&);
-    virtual Ice::Double getDistanceBetween(const NWN::NWObject& oObjectA, const NWN::NWObject& oObjectB, const Ice::Current&);
-    virtual Ice::Double getDistanceBetweenLocations(const NWN::NWLocation& lLocationA, const NWN::NWLocation& lLocationB, const Ice::Current&);
-    virtual Ice::Double getDistanceToObject(const NWN::NWObject& oObject, const Ice::Current&);
+    virtual Ice::Float getDialogSoundLength(Ice::Int nStrRef, const Ice::Current&);
+    virtual Ice::Float getDistanceBetween(const NWN::NWObject& oObjectA, const NWN::NWObject& oObjectB, const Ice::Current&);
+    virtual Ice::Float getDistanceBetweenLocations(const NWN::NWLocation& lLocationA, const NWN::NWLocation& lLocationB, const Ice::Current&);
+    virtual Ice::Float getDistanceToObject(const NWN::NWObject& oObject, const Ice::Current&);
     virtual bool getDroppableFlag(const NWN::NWObject& oItem, const Ice::Current&);
     virtual NWN::NWObject getEffectCreator(const NWN::NWEffect& eEffect, const Ice::Current&);
     virtual NWN::DurationType getEffectDurationType(const NWN::NWEffect& eEffect, const Ice::Current&);
@@ -316,8 +316,8 @@ class NWScriptI : public NWN::NWScript {
     virtual Ice::Int getEncounterSpawnsMax(const NWN::NWObject& oEncounter, const Ice::Current&);
     virtual NWN::NWObject getEnteringObject(const Ice::Current&);
     virtual NWN::NWObject getExitingObject(const Ice::Current&);
-    virtual Ice::Double getFacing(const NWN::NWObject& oTarget, const Ice::Current&);
-    virtual Ice::Double getFacingFromLocation(const NWN::NWLocation& lLocation, const Ice::Current&);
+    virtual Ice::Float getFacing(const NWN::NWObject& oTarget, const Ice::Current&);
+    virtual Ice::Float getFacingFromLocation(const NWN::NWLocation& lLocation, const Ice::Current&);
     virtual Ice::Int getFactionAverageGoodEvilAlignment(const NWN::NWObject& oFactionMember, const Ice::Current&);
     virtual Ice::Int getFactionAverageLawChaosAlignment(const NWN::NWObject& oFactionMember, const Ice::Current&);
     virtual Ice::Int getFactionAverageLevel(const NWN::NWObject& oFactionMember, const Ice::Current&);
@@ -341,7 +341,7 @@ class NWScriptI : public NWN::NWScript {
     virtual NWN::NWObject getFirstItemInInventory(const NWN::NWObject& oTarget, const Ice::Current&);
     virtual NWN::NWItemProperty getFirstItemProperty(const NWN::NWObject& oItem, const Ice::Current&);
     virtual NWN::NWObject getFirstObjectInArea(const NWN::NWObject& oArea, const Ice::Current&);
-    virtual NWN::NWObject getFirstObjectInShape(NWN::ShapeType tShapeType, Ice::Double fSize, const NWN::NWLocation& lTarget, bool bLineOfSight, Ice::Int nObjectFilter, const NWN::NWVector& vOrigin, const Ice::Current&);
+    virtual NWN::NWObject getFirstObjectInShape(NWN::ShapeType tShapeType, Ice::Float fSize, const NWN::NWLocation& lTarget, bool bLineOfSight, Ice::Int nObjectFilter, const NWN::NWVector& vOrigin, const Ice::Current&);
     virtual NWN::NWObject getFirstPC(const Ice::Current&);
     virtual Ice::Int getFogAmount(Ice::Int nFogType, const NWN::NWObject& oArea, const Ice::Current&);
     virtual Ice::Int getFogColor(Ice::Int nFogType, const NWN::NWObject& oArea, const Ice::Current&);
@@ -460,7 +460,7 @@ class NWScriptI : public NWN::NWScript {
     virtual Ice::Int getLevelByClass(Ice::Int nClassType, const NWN::NWObject& oCreature, const Ice::Current&);
     virtual Ice::Int getLevelByPosition(Ice::Int nClassPosition, const NWN::NWObject& oCreature, const Ice::Current&);
     virtual Ice::Int getListenPatternNumber(const Ice::Current&);
-    virtual Ice::Double getLocalFloat(const NWN::NWObject& oObject, const std::string& sVarName, const Ice::Current&);
+    virtual Ice::Float getLocalFloat(const NWN::NWObject& oObject, const std::string& sVarName, const Ice::Current&);
     virtual Ice::Int getLocalInt(const NWN::NWObject& oObject, const std::string& sVarName, const Ice::Current&);
     virtual NWN::NWLocation getLocalLocation(const NWN::NWObject& oObject, const std::string& sVarName, const Ice::Current&);
     virtual NWN::NWObject getLocalObject(const NWN::NWObject& oObject, const std::string& sVarName, const Ice::Current&);
@@ -502,7 +502,7 @@ class NWScriptI : public NWN::NWScript {
     virtual NWN::NWObject getNextItemInInventory(const NWN::NWObject& oTarget, const Ice::Current&);
     virtual NWN::NWItemProperty getNextItemProperty(const NWN::NWObject& oItem, const Ice::Current&);
     virtual NWN::NWObject getNextObjectInArea(const NWN::NWObject& oArea, const Ice::Current&);
-    virtual NWN::NWObject getNextObjectInShape(NWN::ShapeType tShapeType, Ice::Double fSize, const NWN::NWLocation& lTarget, bool bLineOfSight, Ice::Int nObjectFilter, const NWN::NWVector& vOrigin, const Ice::Current&);
+    virtual NWN::NWObject getNextObjectInShape(NWN::ShapeType tShapeType, Ice::Float fSize, const NWN::NWLocation& lTarget, bool bLineOfSight, Ice::Int nObjectFilter, const NWN::NWVector& vOrigin, const Ice::Current&);
     virtual NWN::NWObject getNextPC(const Ice::Current&);
     virtual Ice::Int getNumStackedItems(const NWN::NWObject& oItem, const Ice::Current&);
     virtual NWN::NWObject getObjectByTag(const std::string& sTag, Ice::Int nNth, const Ice::Current&);
@@ -551,7 +551,7 @@ class NWScriptI : public NWN::NWScript {
     virtual Ice::Int getStoreGold(const NWN::NWObject& oidStore, const Ice::Current&);
     virtual Ice::Int getStoreIdentifyCost(const NWN::NWObject& oidStore, const Ice::Current&);
     virtual Ice::Int getStoreMaxBuyPrice(const NWN::NWObject& oidStore, const Ice::Current&);
-    virtual Ice::Double getStrRefSoundDuration(Ice::Int nStrRef, const Ice::Current&);
+    virtual Ice::Float getStrRefSoundDuration(Ice::Int nStrRef, const Ice::Current&);
     virtual std::string getStringByStrRef(Ice::Int nStrRef, NWN::Gender tGender, const Ice::Current&);
     virtual std::string getStringLeft(const std::string& sString, Ice::Int nCount, const Ice::Current&);
     virtual Ice::Int getStringLength(const std::string& sString, const Ice::Current&);
@@ -595,10 +595,10 @@ class NWScriptI : public NWN::NWScript {
     virtual Ice::Int getXP(const NWN::NWObject& oCreature, const Ice::Current&);
     virtual void giveGoldToCreature(const NWN::NWObject& oCreature, Ice::Int nGP, const Ice::Current&);
     virtual void giveXPToCreature(const NWN::NWObject& oCreature, Ice::Int nXpAmount, const Ice::Current&);
-    virtual Ice::Double hoursToSeconds(Ice::Int nHours, const Ice::Current&);
+    virtual Ice::Float hoursToSeconds(Ice::Int nHours, const Ice::Current&);
     virtual void incrementRemainingFeatUses(const NWN::NWObject& oCreature, Ice::Int nFeat, const Ice::Current&);
     virtual std::string insertString(const std::string& sDestination, const std::string& sString, Ice::Int nPosition, const Ice::Current&);
-    virtual Ice::Double intToFloat(Ice::Int nInteger, const Ice::Current&);
+    virtual Ice::Float intToFloat(Ice::Int nInteger, const Ice::Current&);
     virtual std::string intToHexString(Ice::Int nInteger, const Ice::Current&);
     virtual std::string intToString(Ice::Int nInteger, const Ice::Current&);
     virtual bool isInConversation(const NWN::NWObject& oObject, const Ice::Current&);
@@ -685,11 +685,11 @@ class NWScriptI : public NWN::NWScript {
     virtual Ice::Int levelUpHenchman(const NWN::NWObject& oCreature, Ice::Int nClass, bool bReadyAllSpells, Ice::Int nPackage, const Ice::Current&);
     virtual Ice::Int lineOfSightObject(const NWN::NWObject& oSource, const NWN::NWObject& oTarget, const Ice::Current&);
     virtual Ice::Int lineOfSightVector(const NWN::NWVector& vSource, const NWN::NWVector& vTarget, const Ice::Current&);
-    virtual NWN::NWLocation location(const NWN::NWObject& oArea, const NWN::NWVector& vPosition, Ice::Double fOrientation, const Ice::Current&);
+    virtual NWN::NWLocation location(const NWN::NWObject& oArea, const NWN::NWVector& vPosition, Ice::Float fOrientation, const Ice::Current&);
     virtual void lockCameraDirection(const NWN::NWObject& oPlayer, bool bLocked, const Ice::Current&);
     virtual void lockCameraDistance(const NWN::NWObject& oPlayer, bool bLocked, const Ice::Current&);
     virtual void lockCameraPitch(const NWN::NWObject& oPlayer, bool bLocked, const Ice::Current&);
-    virtual Ice::Double log(Ice::Double fValue, const Ice::Current&);
+    virtual Ice::Float log(Ice::Float fValue, const Ice::Current&);
     virtual NWN::NWEffect magicalEffect(const NWN::NWEffect& eEffect, const Ice::Current&);
     virtual void musicBackgroundChangeDay(const NWN::NWObject& oArea, Ice::Int nTrack, const Ice::Current&);
     virtual void musicBackgroundChangeNight(const NWN::NWObject& oArea, Ice::Int nTrack, const Ice::Current&);
@@ -702,18 +702,18 @@ class NWScriptI : public NWN::NWScript {
     virtual void musicBattleChange(const NWN::NWObject& oArea, Ice::Int nTrack, const Ice::Current&);
     virtual void musicBattlePlay(const NWN::NWObject& oArea, const Ice::Current&);
     virtual void musicBattleStop(const NWN::NWObject& oArea, const Ice::Current&);
-    virtual void nightToDay(const NWN::NWObject& oPlayer, Ice::Double fTransitionTime, const Ice::Current&);
+    virtual void nightToDay(const NWN::NWObject& oPlayer, Ice::Float fTransitionTime, const Ice::Current&);
     virtual std::string objectToString(const NWN::NWObject& oObject, const Ice::Current&);
     virtual void openInventory(const NWN::NWObject& oCreature, const NWN::NWObject& oPlayer, const Ice::Current&);
     virtual void openStore(const NWN::NWObject& oStore, const NWN::NWObject& oPC, Ice::Int nBonusMarkUp, Ice::Int nBonusMarkDown, const Ice::Current&);
-    virtual void playAnimation(Ice::Int nAnimation, Ice::Double fSpeed, Ice::Double fSeconds, const Ice::Current&);
+    virtual void playAnimation(Ice::Int nAnimation, Ice::Float fSpeed, Ice::Float fSeconds, const Ice::Current&);
     virtual void playSound(const std::string& sSoundName, const Ice::Current&);
     virtual void playSoundByStrRef(Ice::Int nStrRef, Ice::Int nRunAsAction, const Ice::Current&);
     virtual void playVoiceChat(Ice::Int nVoiceChatID, const NWN::NWObject& oTarget, const Ice::Current&);
     virtual void popUpDeathGUIPanel(const NWN::NWObject& oPC, bool bRespawnButtonEnabled, bool bWaitForHelpButtonEnabled, Ice::Int nHelpStringReference, const std::string& sHelpString, const Ice::Current&);
     virtual void popUpGUIPanel(const NWN::NWObject& oPC, Ice::Int nGUIPanel, const Ice::Current&);
-    virtual Ice::Double pow(Ice::Double fValue, Ice::Double fExponent, const Ice::Current&);
-    virtual void printFloat(Ice::Double fFloat, Ice::Int nWidth, Ice::Int nDecimals, const Ice::Current&);
+    virtual Ice::Float pow(Ice::Float fValue, Ice::Float fExponent, const Ice::Current&);
+    virtual void printFloat(Ice::Float fFloat, Ice::Int nWidth, Ice::Int nDecimals, const Ice::Current&);
     virtual void printInteger(Ice::Int nInteger, const Ice::Current&);
     virtual void printObject(const NWN::NWObject& oObject, const Ice::Current&);
     virtual void printString(const std::string& sString, const Ice::Current&);
@@ -732,7 +732,7 @@ class NWScriptI : public NWN::NWScript {
     virtual void restoreBaseAttackBonus(const NWN::NWObject& oCreature, const Ice::Current&);
     virtual void restoreCameraFacing(const Ice::Current&);
     virtual NWN::NWObject retrieveCampaignObject(const std::string& sCampaignName, const std::string& sVarName, const NWN::NWLocation& locLocation, const NWN::NWObject& oOwner, const NWN::NWObject& oPlayer, const Ice::Current&);
-    virtual Ice::Double roundsToSeconds(Ice::Int nRounds, const Ice::Current&);
+    virtual Ice::Float roundsToSeconds(Ice::Int nRounds, const Ice::Current&);
     virtual void sendMessageToAllDMs(const std::string& szMessage, const Ice::Current&);
     virtual void sendMessageToPC(const NWN::NWObject& oPlayer, const std::string& szMessage, const Ice::Current&);
     virtual void sendMessageToPCByStrRef(const NWN::NWObject& oPlayer, Ice::Int nStrRef, const Ice::Current&);
@@ -742,10 +742,10 @@ class NWScriptI : public NWN::NWScript {
     virtual void setAssociateListenPatterns(const NWN::NWObject& oTarget, const Ice::Current&);
     virtual void setBaseAttackBonus(Ice::Int nBaseAttackBonus, const NWN::NWObject& oCreature, const Ice::Current&);
     virtual void setCalendar(Ice::Int nYear, Ice::Int nMonth, Ice::Int nDay, const Ice::Current&);
-    virtual void setCameraFacing(Ice::Double fDirection, Ice::Double fDistance, Ice::Double fPitch, Ice::Int nTransitionType, const Ice::Current&);
-    virtual void setCameraHeight(const NWN::NWObject& oPlayer, Ice::Double fHeight, const Ice::Current&);
+    virtual void setCameraFacing(Ice::Float fDirection, Ice::Float fDistance, Ice::Float fPitch, Ice::Int nTransitionType, const Ice::Current&);
+    virtual void setCameraHeight(const NWN::NWObject& oPlayer, Ice::Float fHeight, const Ice::Current&);
     virtual void setCameraMode(const NWN::NWObject& oPlayer, Ice::Int nCameraMode, const Ice::Current&);
-    virtual void setCampaignFloat(const std::string& sCampaignName, const std::string& sVarName, Ice::Double flFloat, const NWN::NWObject& oPlayer, const Ice::Current&);
+    virtual void setCampaignFloat(const std::string& sCampaignName, const std::string& sVarName, Ice::Float flFloat, const NWN::NWObject& oPlayer, const Ice::Current&);
     virtual void setCampaignInt(const std::string& sCampaignName, const std::string& sVarName, Ice::Int nInt, const NWN::NWObject& oPlayer, const Ice::Current&);
     virtual void setCampaignLocation(const std::string& sCampaignName, const std::string& sVarName, const NWN::NWLocation& locLocation, const NWN::NWObject& oPlayer, const Ice::Current&);
     virtual void setCampaignString(const std::string& sCampaignName, const std::string& sVarName, const std::string& sString, const NWN::NWObject& oPlayer, const Ice::Current&);
@@ -757,7 +757,7 @@ class NWScriptI : public NWN::NWScript {
     virtual void setCreatureTailType(Ice::Int nTailType, const NWN::NWObject& oCreature, const Ice::Current&);
     virtual void setCreatureWingType(Ice::Int nWingType, const NWN::NWObject& oCreature, const Ice::Current&);
     virtual void setCustomToken(Ice::Int nCustomTokenNumber, const std::string& sTokenValue, const Ice::Current&);
-    virtual void setCutsceneCameraMoveRate(const NWN::NWObject& oCreature, Ice::Double fRate, const Ice::Current&);
+    virtual void setCutsceneCameraMoveRate(const NWN::NWObject& oCreature, Ice::Float fRate, const Ice::Current&);
     virtual void setCutsceneMode(const NWN::NWObject& oCreature, bool bInCutscene, bool bLeftClickingEnabled, const Ice::Current&);
     virtual void setDeity(const NWN::NWObject& oCreature, const std::string& sDeity, const Ice::Current&);
     virtual void setDescription(const NWN::NWObject& oObject, const std::string& sNewDescription, bool bIdentifiedDescription, const Ice::Current&);
@@ -766,7 +766,7 @@ class NWScriptI : public NWN::NWScript {
     virtual void setEncounterDifficulty(Ice::Int nEncounterDifficulty, const NWN::NWObject& oEncounter, const Ice::Current&);
     virtual void setEncounterSpawnsCurrent(Ice::Int nNewValue, const NWN::NWObject& oEncounter, const Ice::Current&);
     virtual void setEncounterSpawnsMax(Ice::Int nNewValue, const NWN::NWObject& oEncounter, const Ice::Current&);
-    virtual void setFacing(Ice::Double fDirection, const Ice::Current&);
+    virtual void setFacing(Ice::Float fDirection, const Ice::Current&);
     virtual void setFacingPoint(const NWN::NWVector& vTarget, const Ice::Current&);
     virtual void setFogAmount(Ice::Int nFogType, Ice::Int nFogAmount, const NWN::NWObject& oArea, const Ice::Current&);
     virtual void setFogColor(Ice::Int nFogType, Ice::Int nFogColor, const NWN::NWObject& oArea, const Ice::Current&);
@@ -777,16 +777,16 @@ class NWScriptI : public NWN::NWScript {
     virtual void setImmortal(const NWN::NWObject& oCreature, bool bImmortal, const Ice::Current&);
     virtual void setInfiniteFlag(const NWN::NWObject& oItem, bool bInfinite, const Ice::Current&);
     virtual void setIsDestroyable(bool bDestroyable, bool bRaiseable, bool bSelectableWhenDead, const Ice::Current&);
-    virtual void setIsTemporaryEnemy(const NWN::NWObject& oTarget, const NWN::NWObject& oSource, bool bDecays, Ice::Double fDurationInSeconds, const Ice::Current&);
-    virtual void setIsTemporaryFriend(const NWN::NWObject& oTarget, const NWN::NWObject& oSource, bool bDecays, Ice::Double fDurationInSeconds, const Ice::Current&);
-    virtual void setIsTemporaryNeutral(const NWN::NWObject& oTarget, const NWN::NWObject& oSource, bool bDecays, Ice::Double fDurationInSeconds, const Ice::Current&);
+    virtual void setIsTemporaryEnemy(const NWN::NWObject& oTarget, const NWN::NWObject& oSource, bool bDecays, Ice::Float fDurationInSeconds, const Ice::Current&);
+    virtual void setIsTemporaryFriend(const NWN::NWObject& oTarget, const NWN::NWObject& oSource, bool bDecays, Ice::Float fDurationInSeconds, const Ice::Current&);
+    virtual void setIsTemporaryNeutral(const NWN::NWObject& oTarget, const NWN::NWObject& oSource, bool bDecays, Ice::Float fDurationInSeconds, const Ice::Current&);
     virtual void setItemCharges(const NWN::NWObject& oItem, Ice::Int nCharges, const Ice::Current&);
     virtual void setItemCursedFlag(const NWN::NWObject& oItem, bool bCursed, const Ice::Current&);
     virtual void setItemStackSize(const NWN::NWObject& oItem, Ice::Int nSize, const Ice::Current&);
     virtual void setKeyRequiredFeedback(const NWN::NWObject& oObject, const std::string& sFeedbackMessage, const Ice::Current&);
     virtual void setListenPattern(const NWN::NWObject& oObject, const std::string& sPattern, Ice::Int nNumber, const Ice::Current&);
     virtual void setListening(const NWN::NWObject& oObject, bool bValue, const Ice::Current&);
-    virtual void setLocalFloat(const NWN::NWObject& oObject, const std::string& sVarName, Ice::Double fValue, const Ice::Current&);
+    virtual void setLocalFloat(const NWN::NWObject& oObject, const std::string& sVarName, Ice::Float fValue, const Ice::Current&);
     virtual void setLocalInt(const NWN::NWObject& oObject, const std::string& sVarName, Ice::Int nValue, const Ice::Current&);
     virtual void setLocalLocation(const NWN::NWObject& oObject, const std::string& sVarName, const NWN::NWLocation& lValue, const Ice::Current&);
     virtual void setLocalObject(const NWN::NWObject& oObject, const std::string& sVarName, const NWN::NWObject& oValue, const Ice::Current&);
@@ -838,7 +838,7 @@ class NWScriptI : public NWN::NWScript {
     virtual void setWeather(const NWN::NWObject& oTarget, NWN::Weather tWeather, const Ice::Current&);
     virtual void setWillSavingThrow(const NWN::NWObject& oObject, Ice::Int nWillSave, const Ice::Current&);
     virtual void setXP(const NWN::NWObject& oCreature, Ice::Int nXpAmount, const Ice::Current&);
-    virtual Ice::Double sin(Ice::Double fValue, const Ice::Current&);
+    virtual Ice::Float sin(Ice::Float fValue, const Ice::Current&);
     virtual void soundObjectPlay(const NWN::NWObject& oSound, const Ice::Current&);
     virtual void soundObjectSetPosition(const NWN::NWObject& oSound, const NWN::NWVector& vPosition, const Ice::Current&);
     virtual void soundObjectSetVolume(const NWN::NWObject& oSound, Ice::Int nVolume, const Ice::Current&);
@@ -847,34 +847,34 @@ class NWScriptI : public NWN::NWScript {
     virtual void speakOneLinerConversation(const std::string& sDialogResRef, const NWN::NWObject& oTokenTarget, const Ice::Current&);
     virtual void speakString(const std::string& sStringToSpeak, NWN::TalkVolume tTalkVolume, const Ice::Current&);
     virtual void speakStringByStrRef(Ice::Int nStrRef, NWN::TalkVolume tTalkVolume, const Ice::Current&);
-    virtual Ice::Double sqrt(Ice::Double fValue, const Ice::Current&);
+    virtual Ice::Float sqrt(Ice::Float fValue, const Ice::Current&);
     virtual void startNewModule(const std::string& sModuleName, const Ice::Current&);
     virtual void stopFade(const NWN::NWObject& oCreature, const Ice::Current&);
     virtual void storeCameraFacing(const Ice::Current&);
     virtual Ice::Int storeCampaignObject(const std::string& sCampaignName, const std::string& sVarName, const NWN::NWObject& oObject, const NWN::NWObject& oPlayer, const Ice::Current&);
-    virtual Ice::Double stringToFloat(const std::string& sNumber, const Ice::Current&);
+    virtual Ice::Float stringToFloat(const std::string& sNumber, const Ice::Current&);
     virtual Ice::Int stringToInt(const std::string& sNumber, const Ice::Current&);
     virtual void summonAnimalCompanion(const NWN::NWObject& oMaster, const Ice::Current&);
     virtual void summonFamiliar(const NWN::NWObject& oMaster, const Ice::Current&);
     virtual NWN::NWEffect supernaturalEffect(const NWN::NWEffect& eEffect, const Ice::Current&);
     virtual void surrenderToEnemies(const Ice::Current&);
     virtual void takeGoldFromCreature(Ice::Int nAmount, const NWN::NWObject& oCreatureToTakeFrom, bool bDestroy, const Ice::Current&);
-    virtual Ice::Double tan(Ice::Double fValue, const Ice::Current&);
+    virtual Ice::Float tan(Ice::Float fValue, const Ice::Current&);
     virtual Ice::Int testStringAgainstPattern(const std::string& sPattern, const std::string& sStringToTest, const Ice::Current&);
     virtual NWN::AttackResult touchAttackMelee(const NWN::NWObject& oTarget, bool bDisplayFeedback, const Ice::Current&);
     virtual NWN::AttackResult touchAttackRanged(const NWN::NWObject& oTarget, bool bDisplayFeedback, const Ice::Current&);
-    virtual Ice::Double turnsToSeconds(Ice::Int nTurns, const Ice::Current&);
+    virtual Ice::Float turnsToSeconds(Ice::Int nTurns, const Ice::Current&);
     virtual void unpossessFamiliar(const NWN::NWObject& oCreature, const Ice::Current&);
-    virtual NWN::NWVector vector(Ice::Double x, Ice::Double y, Ice::Double z, const Ice::Current&);
-    virtual Ice::Double vectorMagnitude(const NWN::NWVector& vVector, const Ice::Current&);
+    virtual NWN::NWVector vector(Ice::Float x, Ice::Float y, Ice::Float z, const Ice::Current&);
+    virtual Ice::Float vectorMagnitude(const NWN::NWVector& vVector, const Ice::Current&);
     virtual NWN::NWVector vectorNormalize(const NWN::NWVector& vVector, const Ice::Current&);
-    virtual Ice::Double vectorToAngle(const NWN::NWVector& vVector, const Ice::Current&);
+    virtual Ice::Float vectorToAngle(const NWN::NWVector& vVector, const Ice::Current&);
     virtual NWN::NWEffect versusAlignmentEffect(const NWN::NWEffect& eEffect, Ice::Int nLawChaos, Ice::Int nGoodEvil, const Ice::Current&);
     virtual NWN::NWEffect versusRacialTypeEffect(const NWN::NWEffect& eEffect, NWN::RacialType tRacialType, const Ice::Current&);
     virtual NWN::NWEffect versusTrapEffect(const NWN::NWEffect& eEffect, const Ice::Current&);
     virtual NWN::SavingThrowResult willSave(const NWN::NWObject& oCreature, Ice::Int nDC, NWN::SaveType tSaveType, const NWN::NWObject& oSaveVersus, const Ice::Current&);
     virtual void writeTimestampedLogEntry(const std::string& sLogEntry, const Ice::Current&);
-    virtual Ice::Double yardsToMeters(Ice::Double fYards, const Ice::Current&);
+    virtual Ice::Float yardsToMeters(Ice::Float fYards, const Ice::Current&);
   private:
     void lock(IceUtil::Mutex&, const char*);
     void unlock(IceUtil::Mutex&, const char*);
