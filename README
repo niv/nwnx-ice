@@ -1,0 +1,144 @@
+nwnx_ice, Bernhard Stoeckner <elven@swordcoast.net>, and contributors
+based on nwnx_ruby by virusman
+
+2009
+
+Licenced under the GNU GPL Version 2 or, at your option, any later version.
+
+
+== General Information:
+
+nwnx_ice is a RPC server embedded in nwserver (through nwnx) that:
+- can deliver events to clients
+- allows calling NWScript functions from anywhere outside.
+
+This allows you to use any language supported by ICE (zeroc.com) to "script"
+your gameserver, as you would with NWScript normally.
+
+It works by directly accessing the NWScript VM stack, so no significant
+overhead is incurred (apart from the obvious networking latency).
+
+
+== About performance:
+
+Since there is marshalling and network transit involved, performance is NOT as
+good as native embedding. However, it is, given a sample implementation in
+Java, most of the time, better than native NWScript. Naive benchmarking offered
+performance figures in the numbers of 30000 to 50000 synchronous calls per
+second, which is more than enough if the backend application does some
+efficient caching of repeatedly accessed object properties.
+
+
+== About consts and enums:
+
+Most non-changing integer values are contained in enums. For example,
+DURATION_TYPE_* is contained in the DurationType enum.
+However, not all consts are are wrapped into enums. Spells, for example, are
+not immutable across installations (or even startups), and such would require
+recompilation of nwnx_ice if a new spell would be added.
+Where possible or feasible, enums have been used instead of simple integer
+values, in order to provide API consistency and ease of use (especially if
+you're using an editor with auto-completion).
+A good way to handle other values might be to generate mappings for yourself,
+or dynamically look up your custom-made 2da tables.
+
+
+== Compile & Install:
+
+You'll need the appropriate ice-dev libraries installed. Then type "make", and
+pray. Copy the resulting nwnx_ice.so to your nwn server directory where all the
+other nwnx libraries are, and modify your nwnx2.ini to contain the values as
+described in the provided sample nwnx2.ini.
+
+
+== Basic Usage:
+
+You can send ingame events (for example, "OnModulePlayerEnter") by modifying
+the event script in your module to make a function call to NWNX!ICE. It works
+as simple as including the (provided) inc_ice.nss, and calling
+
+  ICE_EVENT("your_event_name");
+
+If everything is set up properly, your backend will receive the string you
+passed to ICE_EVENT in the Client.event(nwscript, self, event, ice) method you
+provided.
+
+For convenience, it will pass a NWScript proxy to this method, over which you
+can call all exported NWScript functions. For a browsable list, see the
+generated slice documentation (make doc) or the slice definition file
+(NWScript.ice).
+
+To keep all exported NWScript calls atomic, all functions that would keep state
+serverside have not been exported. Instead, wrapping functions have been
+provided that export the same functionality in a immutable manner. Example:
+getFirstPC/getNextPC has been merged into getAllPCs, which will return a
+sequence/array/list (language-specific) of NWObjects. This ensures
+deterministic (even if unordered) behaviour.
+
+If your backend code throws an exception, it'll get serialized back to
+nwnx_ice, which will print it to stderr and try the same call again (and again
+(and again (and again))) until it completes successfully. Any players connected
+will time out, obviously. It is your responsibility to handle such things
+either gracefully, or write bug-free code.
+
+Client.event() expects ClientResult as return value. You can use that within
+NWScript as you wish, it has no deeper meaning than the predefined enum values.
+
+
+== AssignCommand/DelayCommand/ActionDoCommand, Tokens:
+
+The abovementioned NWScript functions expect a precompiled script closure as
+one of their arguments. This is not supported, so a workaround had to be found
+to enable equivalent functionality.
+
+Instead of hooking the bytecode compiler, a roundtrip is made to NWScript
+(through ExecuteScript("tokenscript", oTarget)), in which oTarget becomes
+OBECT_SELF, and a previously-stored code closure will be executed in oTargets'
+context.
+
+The supplied example code under java/ shows an implementation of this
+workaround.
+
+
+== Sample backend implementation:
+
+In java/ you'll find a sample implementation that will just about connect, and
+not do anything else.
+You'll need to generate the NWScript.ice slice bindings (by typing "make
+client"), and then compile all of it. To do that, you'll need the ICE java
+bindings installed.
+
+(in java/NWN/) $ javac -cp /usr/share/java/Ice.jar *.java
+(in java/)     $ javac -cp .:/usr/share/java/Ice.jar *.java
+
+Now run the example application, and start up your nwserver with nwnx_ice
+preloaded. If you've left the configured ports at their default values, it
+should start printing events as soon as the whole thing starts.
+
+(in java/)     $ java -cp .:/usr/share/java/Ice.jar Run
+
+You can use the provided nwnx_ice.mod for testing.
+
+
+== Troubleshooting/Errors:
+
+Q: NotInContextException?
+A: You are only allowed to call NWScript functions while nwserver is inside
+   Client.event - meaning, you can only call NWScript while you are inside
+   handling a game event - otherwise, the stack would get corrupted and you'd have
+   a segfault on your hands.
+
+Q: Effect/ItemPropertyInvalidException?
+A: nwnx_ice keeps track of all events created/accessed inside a event call. You
+   cannot pass effects/itemproperties between events, much like you can't set
+   local effect variables in plain NWScript. This is an engine limitation. If you
+   store a NWEffect struct in your backend between events, and try to access it
+   after that, nwnx_ice will throw that exception at you.
+
+Q: "Invalid enum value of type X passed: Y. Cannot continue, and it's your
+   fault!"
+A: Some NWScript call, that returns a enumeration, returned a value not
+   specified in the enumeration definition. This is an oversight, a bug. Please
+   report it.
+
+# vim: wrap linebreak textwidth=79

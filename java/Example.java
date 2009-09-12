@@ -25,7 +25,7 @@ class Example implements Observer {
 				public void e() throws NotInContextException {
 					c.getProxy().speakString("I can see " + name, TalkVolume.TalkVol);
 				}
-			}, 0.0);
+			});
 		}
 
 		} catch (NotInContextException e) {
