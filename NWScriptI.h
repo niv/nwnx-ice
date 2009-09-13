@@ -1,4 +1,4 @@
-// Generated on Tue Sep 08 21:46:55 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Sun Sep 13 17:41:28 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 #include "FunctionHooks.h"
 #include "NWNStructures.h"
@@ -34,6 +34,7 @@ class NWScriptI : public NWN::NWScript {
     NWN::NWObjectSeq allPCs(const Ice::Current&);
     NWN::NWEffectSeq allEffects(const NWN::NWObject&, const Ice::Current&);
     NWN::NWObjectSeq allInArea(const NWN::NWObject&, const Ice::Current&);
+    NWN::NWObjectSeq allInAreaOfType(const NWN::NWObject&, NWN::ObjectType, const Ice::Current&);
     NWN::NWObjectSeq allByTag(const std::string&, const Ice::Current&);
     NWN::NWObjectSeq allInInventory(const NWN::NWObject&, const Ice::Current&);
     NWN::NWCreatureEquipped allEquipped(const NWN::NWObject&, const Ice::Current&);

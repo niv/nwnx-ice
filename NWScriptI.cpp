@@ -1,4 +1,4 @@
-// Generated on Tue Sep 08 21:46:55 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Sun Sep 13 17:41:29 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 #include "NWScriptI.h"
 #include <iostream>
@@ -16374,6 +16374,19 @@ NWN::NWObjectSeq NWScriptI::allInArea(const NWN::NWObject& area, const Ice::Curr
   NWN::NWObject pc = getFirstObjectInArea(area, ice);
   while (getIsObjectValid(pc, ice)) {
     p.push_back(pc);
+    pc = getNextObjectInArea(area, ice);
+  }
+  innerUnlock("allInArea");
+  return p;
+};
+
+NWN::NWObjectSeq NWScriptI::allInAreaOfType(const NWN::NWObject& area, NWN::ObjectType ofType, const Ice::Current& ice) {
+  NWN::NWObjectSeq p;
+  innerLock("allInArea");
+  NWN::NWObject pc = getFirstObjectInArea(area, ice);
+  while (getIsObjectValid(pc, ice)) {
+    if (getObjectType(pc, ice) == ofType)
+      p.push_back(pc);
     pc = getNextObjectInArea(area, ice);
   }
   innerUnlock("allInArea");

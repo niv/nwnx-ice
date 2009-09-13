@@ -1,4 +1,4 @@
-// Generated on Tue Sep 08 21:46:55 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Sun Sep 13 17:41:28 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 // Not exported:
 //   getFirstEffect getFirstFactionMember getFirstItemInInventory getFirstItemProperty getFirstInPersistentObject getFirstObjectInArea getFirstObjectInShape getFirstPC
@@ -295,6 +295,13 @@ module NWN {
      * This simply wraps GetFirst/Next to be idempotent.
      */
     idempotent NWObjectSeq allInArea(NWObject area) throws NotInContextException;
+
+    /**
+     * Returns a sequence of all objects in the given area
+     * that have the given ObjectType.
+     * This simply wraps GetFirst/Next to be idempotent.
+     */
+    idempotent NWObjectSeq allInAreaOfType(NWObject area, ObjectType ofType) throws NotInContextException;
 
     /**
      * Returns a sequence of all objects with the given tag.
