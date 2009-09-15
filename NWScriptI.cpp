@@ -1,4 +1,4 @@
-// Generated on Sun Sep 13 17:41:29 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Tue Sep 15 17:29:34 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 #include "NWScriptI.h"
 #include <iostream>
@@ -6322,8 +6322,7 @@ NWN::NWLocation NWScriptI::getCampaignLocation(const std::string& sCampaignName,
   nl.x = pRetVal->X;
   nl.y = pRetVal->Y;
   nl.z = pRetVal->Z;
-  nl.facing = atan(pRetVal->OrientationY / pRetVal->OrientationX) * (180 / 3.1415927);
-  nl.facing += 180;
+  nl.facing = atan2(pRetVal->OrientationY, pRetVal->OrientationX) * (180 / 3.1415927);
   while (nl.facing > 360.0) nl.facing -= 360.0; while (nl.facing < 0.0) nl.facing += 360.0;
   unlock(getCampaignLocation_mutex, "getCampaignLocation");
   return nl;
@@ -8285,8 +8284,7 @@ NWN::NWLocation NWScriptI::getItemActivatedTargetLocation(const Ice::Current& ic
   nl.x = pRetVal->X;
   nl.y = pRetVal->Y;
   nl.z = pRetVal->Z;
-  nl.facing = atan(pRetVal->OrientationY / pRetVal->OrientationX) * (180 / 3.1415927);
-  nl.facing += 180;
+  nl.facing = atan2(pRetVal->OrientationY, pRetVal->OrientationX) * (180 / 3.1415927);
   while (nl.facing > 360.0) nl.facing -= 360.0; while (nl.facing < 0.0) nl.facing += 360.0;
   unlock(getItemActivatedTargetLocation_mutex, "getItemActivatedTargetLocation");
   return nl;
@@ -9117,8 +9115,7 @@ NWN::NWLocation NWScriptI::getLocalLocation(const NWN::NWObject& oObject, const 
   nl.x = pRetVal->X;
   nl.y = pRetVal->Y;
   nl.z = pRetVal->Z;
-  nl.facing = atan(pRetVal->OrientationY / pRetVal->OrientationX) * (180 / 3.1415927);
-  nl.facing += 180;
+  nl.facing = atan2(pRetVal->OrientationY, pRetVal->OrientationX) * (180 / 3.1415927);
   while (nl.facing > 360.0) nl.facing -= 360.0; while (nl.facing < 0.0) nl.facing += 360.0;
   unlock(getLocalLocation_mutex, "getLocalLocation");
   return nl;
@@ -9171,8 +9168,7 @@ NWN::NWLocation NWScriptI::getLocation(const NWN::NWObject& oObject, const Ice::
   nl.x = pRetVal->X;
   nl.y = pRetVal->Y;
   nl.z = pRetVal->Z;
-  nl.facing = atan(pRetVal->OrientationY / pRetVal->OrientationX) * (180 / 3.1415927);
-  nl.facing += 180;
+  nl.facing = atan2(pRetVal->OrientationY, pRetVal->OrientationX) * (180 / 3.1415927);
   while (nl.facing > 360.0) nl.facing -= 360.0; while (nl.facing < 0.0) nl.facing += 360.0;
   unlock(getLocation_mutex, "getLocation");
   return nl;
@@ -10378,8 +10374,7 @@ NWN::NWLocation NWScriptI::getSpellTargetLocation(const Ice::Current& ice) {
   nl.x = pRetVal->X;
   nl.y = pRetVal->Y;
   nl.z = pRetVal->Z;
-  nl.facing = atan(pRetVal->OrientationY / pRetVal->OrientationX) * (180 / 3.1415927);
-  nl.facing += 180;
+  nl.facing = atan2(pRetVal->OrientationY, pRetVal->OrientationX) * (180 / 3.1415927);
   while (nl.facing > 360.0) nl.facing -= 360.0; while (nl.facing < 0.0) nl.facing += 360.0;
   unlock(getSpellTargetLocation_mutex, "getSpellTargetLocation");
   return nl;
@@ -10428,8 +10423,7 @@ NWN::NWLocation NWScriptI::getStartingLocation(const Ice::Current& ice) {
   nl.x = pRetVal->X;
   nl.y = pRetVal->Y;
   nl.z = pRetVal->Z;
-  nl.facing = atan(pRetVal->OrientationY / pRetVal->OrientationX) * (180 / 3.1415927);
-  nl.facing += 180;
+  nl.facing = atan2(pRetVal->OrientationY, pRetVal->OrientationX) * (180 / 3.1415927);
   while (nl.facing > 360.0) nl.facing -= 360.0; while (nl.facing < 0.0) nl.facing += 360.0;
   unlock(getStartingLocation_mutex, "getStartingLocation");
   return nl;
@@ -13663,8 +13657,7 @@ NWN::NWLocation NWScriptI::location(const NWN::NWObject& oArea, const NWN::NWVec
   nl.x = pRetVal->X;
   nl.y = pRetVal->Y;
   nl.z = pRetVal->Z;
-  nl.facing = atan(pRetVal->OrientationY / pRetVal->OrientationX) * (180 / 3.1415927);
-  nl.facing += 180;
+  nl.facing = atan2(pRetVal->OrientationY, pRetVal->OrientationX) * (180 / 3.1415927);
   while (nl.facing > 360.0) nl.facing -= 360.0; while (nl.facing < 0.0) nl.facing += 360.0;
   unlock(location_mutex, "location");
   return nl;
