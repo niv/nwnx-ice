@@ -1,4 +1,4 @@
-// Generated on Tue Sep 15 17:29:34 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
+// Generated on Fri Sep 18 17:35:48 +0200 2009 from /home/elven/code/nwnx2-linux/trunk/plugins/ice/build/funcs.nss
 
 #include "NWScriptI.h"
 #include <iostream>
@@ -210,7 +210,7 @@ NWN::EffectType NWScriptI::enum_long_2_EffectType(long v) {
   if (v == 37) return NWN::SlowEffect;
   if (v == 18) return NWN::ArcaneSpellFailureEffect;
   if (v == 56) return NWN::InvisibilityEffect;
-  printf("Invalid enum value of type EffectType passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+  printf("Invalid enum value of type EffectType passed: %d. Cannot continue, and it's your fault!", v); exit(1);
 };
 long NWScriptI::enum_Weather_2_long(NWN::Weather k) {
   if (k == NWN::ClearWeather) return 0;
@@ -226,7 +226,7 @@ NWN::Weather NWScriptI::enum_long_2_Weather(long v) {
   if (v == -1) return NWN::InvalidWeather;
   if (v == 2) return NWN::SnowWeather;
   if (v == 3) return NWN::AreaDefaultsWeather;
-  printf("Invalid enum value of type Weather passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+  printf("Invalid enum value of type Weather passed: %d. Cannot continue, and it's your fault!", v); exit(1);
 };
 long NWScriptI::enum_TileSourceLightColor_2_long(NWN::TileSourceLightColor k) {
   if (k == NWN::PaleGreenTileSourceLightColor) return 5;
@@ -264,7 +264,7 @@ NWN::TileSourceLightColor NWScriptI::enum_long_2_TileSourceLightColor(long v) {
   if (v == 15) return NWN::PaleOrangeTileSourceLightColor;
   if (v == 4) return NWN::PaleDarkGreenTileSourceLightColor;
   if (v == 10) return NWN::PaleDarkPurpleTileSourceLightColor;
-  printf("Invalid enum value of type TileSourceLightColor passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+  printf("Invalid enum value of type TileSourceLightColor passed: %d. Cannot continue, and it's your fault!", v); exit(1);
 };
 long NWScriptI::enum_StandardFaction_2_long(NWN::StandardFaction k) {
   if (k == NWN::Hostile) return 0;
@@ -278,7 +278,7 @@ NWN::StandardFaction NWScriptI::enum_long_2_StandardFaction(long v) {
   if (v == 1) return NWN::Commoner;
   if (v == 2) return NWN::Merchant;
   if (v == 3) return NWN::Defender;
-  printf("Invalid enum value of type StandardFaction passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+  printf("Invalid enum value of type StandardFaction passed: %d. Cannot continue, and it's your fault!", v); exit(1);
 };
 long NWScriptI::enum_SavingThrowResult_2_long(NWN::SavingThrowResult k) {
   if (k == NWN::FailedRoll) return 0;
@@ -290,7 +290,7 @@ NWN::SavingThrowResult NWScriptI::enum_long_2_SavingThrowResult(long v) {
   if (v == 0) return NWN::FailedRoll;
   if (v == 1) return NWN::SucceededRoll;
   if (v == 3) return NWN::ImmuneToSaveType;
-  printf("Invalid enum value of type SavingThrowResult passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+  printf("Invalid enum value of type SavingThrowResult passed: %d. Cannot continue, and it's your fault!", v); exit(1);
 };
 long NWScriptI::enum_Action_2_long(NWN::Action k) {
   if (k == NWN::AnimalEmpathyAction) return 16;
@@ -356,7 +356,7 @@ NWN::Action NWScriptI::enum_long_2_Action(long v) {
   if (v == 4) return NWN::CastSpellAction;
   if (v == 43) return NWN::RandomWalkAction;
   if (v == 10) return NWN::FlagTrapAction;
-  printf("Invalid enum value of type Action passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+  printf("Invalid enum value of type Action passed: %d. Cannot continue, and it's your fault!", v); exit(1);
 };
 long NWScriptI::enum_ACModifyType_2_long(NWN::ACModifyType k) {
   if (k == NWN::ACDodgeBonus) return 0;
@@ -372,7 +372,7 @@ NWN::ACModifyType NWScriptI::enum_long_2_ACModifyType(long v) {
   if (v == 2) return NWN::ACArmorEnchantmentBonus;
   if (v == 3) return NWN::ACShieldEnchantmentBonus;
   if (v == 4) return NWN::ACDeflectionBonus;
-  printf("Invalid enum value of type ACModifyType passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+  printf("Invalid enum value of type ACModifyType passed: %d. Cannot continue, and it's your fault!", v); exit(1);
 };
 long NWScriptI::enum_Gender_2_long(NWN::Gender k) {
   if (k == NWN::MaleGender) return 0;
@@ -388,7 +388,7 @@ NWN::Gender NWScriptI::enum_long_2_Gender(long v) {
   if (v == 2) return NWN::BothGender;
   if (v == 3) return NWN::OtherGender;
   if (v == 4) return NWN::NoneGender;
-  printf("Invalid enum value of type Gender passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+  printf("Invalid enum value of type Gender passed: %d. Cannot continue, and it's your fault!", v); exit(1);
 };
 long NWScriptI::enum_IPRacialType_2_long(NWN::IPRacialType k) {
   if (k == NWN::ElementalIPRace) return 16;
@@ -442,7 +442,7 @@ NWN::IPRacialType NWScriptI::enum_long_2_IPRacialType(long v) {
   if (v == 15) return NWN::HumanoidReptilianIPRace;
   if (v == 4) return NWN::HalfelfIPRace;
   if (v == 10) return NWN::ConstructIPRace;
-  printf("Invalid enum value of type IPRacialType passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+  printf("Invalid enum value of type IPRacialType passed: %d. Cannot continue, and it's your fault!", v); exit(1);
 };
 long NWScriptI::enum_PlaceableAction_2_long(NWN::PlaceableAction k) {
   if (k == NWN::UsePlaceable) return 0;
@@ -456,7 +456,7 @@ NWN::PlaceableAction NWScriptI::enum_long_2_PlaceableAction(long v) {
   if (v == 1) return NWN::UnlockPlaceable;
   if (v == 2) return NWN::BashPlaceable;
   if (v == 4) return NWN::KnockPlaceable;
-  printf("Invalid enum value of type PlaceableAction passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+  printf("Invalid enum value of type PlaceableAction passed: %d. Cannot continue, and it's your fault!", v); exit(1);
 };
 long NWScriptI::enum_Ability_2_long(NWN::Ability k) {
   if (k == NWN::Charisma) return 5;
@@ -474,7 +474,7 @@ NWN::Ability NWScriptI::enum_long_2_Ability(long v) {
   if (v == 2) return NWN::Constitution;
   if (v == 3) return NWN::Intelligence;
   if (v == 4) return NWN::Wisdom;
-  printf("Invalid enum value of type Ability passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+  printf("Invalid enum value of type Ability passed: %d. Cannot continue, and it's your fault!", v); exit(1);
 };
 long NWScriptI::enum_IPSpellSchool_2_long(NWN::IPSpellSchool k) {
   if (k == NWN::IllusionIPSchool) return 5;
@@ -496,7 +496,7 @@ NWN::IPSpellSchool NWScriptI::enum_long_2_IPSpellSchool(long v) {
   if (v == 2) return NWN::DivinationIPSchool;
   if (v == 3) return NWN::EnchantmentIPSchool;
   if (v == 4) return NWN::EvocationIPSchool;
-  printf("Invalid enum value of type IPSpellSchool passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+  printf("Invalid enum value of type IPSpellSchool passed: %d. Cannot continue, and it's your fault!", v); exit(1);
 };
 long NWScriptI::enum_IPAlignGroup_2_long(NWN::IPAlignGroup k) {
   if (k == NWN::EvilAlignGroup) return 5;
@@ -514,7 +514,7 @@ NWN::IPAlignGroup NWScriptI::enum_long_2_IPAlignGroup(long v) {
   if (v == 2) return NWN::LawfulAlignGroup;
   if (v == 3) return NWN::ChaoticAlignGroup;
   if (v == 4) return NWN::GoodAlignGroup;
-  printf("Invalid enum value of type IPAlignGroup passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+  printf("Invalid enum value of type IPAlignGroup passed: %d. Cannot continue, and it's your fault!", v); exit(1);
 };
 long NWScriptI::enum_EffectSubType_2_long(NWN::EffectSubType k) {
   if (k == NWN::SupernaturalSubType) return 16;
@@ -528,7 +528,7 @@ NWN::EffectSubType NWScriptI::enum_long_2_EffectSubType(long v) {
   if (v == 0) return NWN::InvalidSubType;
   if (v == 24) return NWN::ExtraordinarySubType;
   if (v == 8) return NWN::MagicalSubType;
-  printf("Invalid enum value of type EffectSubType passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+  printf("Invalid enum value of type EffectSubType passed: %d. Cannot continue, and it's your fault!", v); exit(1);
 };
 long NWScriptI::enum_TileMainLightColor_2_long(NWN::TileMainLightColor k) {
   if (k == NWN::RedTileMainLightColor) return 27;
@@ -598,7 +598,7 @@ NWN::TileMainLightColor NWScriptI::enum_long_2_TileMainLightColor(long v) {
   if (v == 4) return NWN::PaleDarkYellowTileMainLightColor;
   if (v == 21) return NWN::DarkPurpleTileMainLightColor;
   if (v == 10) return NWN::PaleGreenTileMainLightColor;
-  printf("Invalid enum value of type TileMainLightColor passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+  printf("Invalid enum value of type TileMainLightColor passed: %d. Cannot continue, and it's your fault!", v); exit(1);
 };
 long NWScriptI::enum_DamagePower_2_long(NWN::DamagePower k) {
   if (k == NWN::PlusFifteenDamage) return 16;
@@ -648,7 +648,7 @@ NWN::DamagePower NWScriptI::enum_long_2_DamagePower(long v) {
   if (v == 4) return NWN::PlusFourDamage;
   if (v == 21) return NWN::PlusTwentyDamage;
   if (v == 10) return NWN::PlusNineDamage;
-  printf("Invalid enum value of type DamagePower passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+  printf("Invalid enum value of type DamagePower passed: %d. Cannot continue, and it's your fault!", v); exit(1);
 };
 long NWScriptI::enum_DamageType_2_long(NWN::DamageType k) {
   if (k == NWN::AcidDamage) return 16;
@@ -682,7 +682,7 @@ NWN::DamageType NWScriptI::enum_long_2_DamageType(long v) {
   if (v == 4096) return NWN::BaseDamage;
   if (v == 4) return NWN::SlashingDamage;
   if (v == 32) return NWN::ColdDamage;
-  printf("Invalid enum value of type DamageType passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+  printf("Invalid enum value of type DamageType passed: %d. Cannot continue, and it's your fault!", v); exit(1);
 };
 long NWScriptI::enum_SaveType_2_long(NWN::SaveType k) {
   if (k == NWN::GoodSaveType) return 16;
@@ -728,7 +728,7 @@ NWN::SaveType NWScriptI::enum_long_2_SaveType(long v) {
   if (v == 15) return NWN::SpellSaveType;
   if (v == 4) return NWN::FearSaveType;
   if (v == 10) return NWN::NegativeSaveType;
-  printf("Invalid enum value of type SaveType passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+  printf("Invalid enum value of type SaveType passed: %d. Cannot continue, and it's your fault!", v); exit(1);
 };
 long NWScriptI::enum_CombatMode_2_long(NWN::CombatMode k) {
   if (k == NWN::RapidShotCombatMode) return 5;
@@ -756,7 +756,7 @@ NWN::CombatMode NWScriptI::enum_long_2_CombatMode(long v) {
   if (v == 9) return NWN::DirtyFightingCombatMode;
   if (v == 4) return NWN::FlurryOfBlowsCombatMode;
   if (v == 10) return NWN::DefensiveStanceCombatMode;
-  printf("Invalid enum value of type CombatMode passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+  printf("Invalid enum value of type CombatMode passed: %d. Cannot continue, and it's your fault!", v); exit(1);
 };
 long NWScriptI::enum_IPTrapType_2_long(NWN::IPTrapType k) {
   if (k == NWN::FireIPTrap) return 5;
@@ -784,7 +784,7 @@ NWN::IPTrapType NWScriptI::enum_long_2_IPTrapType(long v) {
   if (v == 9) return NWN::AcidSplashIPTrap;
   if (v == 4) return NWN::BlobOfAcidIPTrap;
   if (v == 10) return NWN::SonicIPTrap;
-  printf("Invalid enum value of type IPTrapType passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+  printf("Invalid enum value of type IPTrapType passed: %d. Cannot continue, and it's your fault!", v); exit(1);
 };
 long NWScriptI::enum_EffectState_2_long(NWN::EffectState k) {
   if (k == NWN::DazedState) return 5;
@@ -808,7 +808,7 @@ NWN::EffectState NWScriptI::enum_long_2_EffectState(long v) {
   if (v == 3) return NWN::FrightenedState;
   if (v == 9) return NWN::SleepState;
   if (v == 4) return NWN::TurnedState;
-  printf("Invalid enum value of type EffectState passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+  printf("Invalid enum value of type EffectState passed: %d. Cannot continue, and it's your fault!", v); exit(1);
 };
 long NWScriptI::enum_CreatureSize_2_long(NWN::CreatureSize k) {
   if (k == NWN::HugeSize) return 5;
@@ -826,7 +826,7 @@ NWN::CreatureSize NWScriptI::enum_long_2_CreatureSize(long v) {
   if (v == 2) return NWN::SmallSize;
   if (v == 3) return NWN::MediumSize;
   if (v == 4) return NWN::LargeSize;
-  printf("Invalid enum value of type CreatureSize passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+  printf("Invalid enum value of type CreatureSize passed: %d. Cannot continue, and it's your fault!", v); exit(1);
 };
 long NWScriptI::enum_AssociateCommand_2_long(NWN::AssociateCommand k) {
   if (k == NWN::InventoryCommand) return -19;
@@ -876,7 +876,7 @@ NWN::AssociateCommand NWScriptI::enum_long_2_AssociateCommand(long v) {
   if (v == -9) return NWN::UnsummonAnimalCompanionCommand;
   if (v == -14) return NWN::MasterSawTrapCommand;
   if (v == -3) return NWN::AttackNearestCommand;
-  printf("Invalid enum value of type AssociateCommand passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+  printf("Invalid enum value of type AssociateCommand passed: %d. Cannot continue, and it's your fault!", v); exit(1);
 };
 long NWScriptI::enum_EffectTrueType_2_long(NWN::EffectTrueType k) {
   if (k == NWN::SwarmEffectType) return 85;
@@ -1068,7 +1068,7 @@ NWN::EffectTrueType NWScriptI::enum_long_2_EffectTrueType(long v) {
   if (v == 37) return NWN::AbilityDecreaseEffectType;
   if (v == 18) return NWN::EntangleEffectType;
   if (v == 56) return NWN::SkillDecreaseEffectType;
-  printf("Invalid enum value of type EffectTrueType passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+  printf("Invalid enum value of type EffectTrueType passed: %d. Cannot continue, and it's your fault!", v); exit(1);
 };
 long NWScriptI::enum_ObjectType_2_long(NWN::ObjectType k) {
   if (k == NWN::AOE) return 16;
@@ -1096,7 +1096,7 @@ NWN::ObjectType NWScriptI::enum_long_2_ObjectType(long v) {
   if (v == 64) return NWN::Placeable;
   if (v == 4) return NWN::Trigger;
   if (v == 32) return NWN::Waypoint;
-  printf("Invalid enum value of type ObjectType passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+  printf("Invalid enum value of type ObjectType passed: %d. Cannot continue, and it's your fault!", v); exit(1);
 };
 long NWScriptI::enum_DurationType_2_long(NWN::DurationType k) {
   if (k == NWN::Instant) return 0;
@@ -1110,7 +1110,7 @@ NWN::DurationType NWScriptI::enum_long_2_DurationType(long v) {
   if (v == 1) return NWN::Temporary;
   if (v == -1) return NWN::InvalidDuration;
   if (v == 2) return NWN::Permanent;
-  printf("Invalid enum value of type DurationType passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+  printf("Invalid enum value of type DurationType passed: %d. Cannot continue, and it's your fault!", v); exit(1);
 };
 long NWScriptI::enum_ActionMode_2_long(NWN::ActionMode k) {
   if (k == NWN::CounterspellMode) return 5;
@@ -1140,7 +1140,7 @@ NWN::ActionMode NWScriptI::enum_long_2_ActionMode(long v) {
   if (v == 9) return NWN::ImprovedExpertiseMode;
   if (v == 4) return NWN::ImprovedPowerAttackMode;
   if (v == 10) return NWN::DefensiveCastMode;
-  printf("Invalid enum value of type ActionMode passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+  printf("Invalid enum value of type ActionMode passed: %d. Cannot continue, and it's your fault!", v); exit(1);
 };
 long NWScriptI::enum_Alignment_2_long(NWN::Alignment k) {
   if (k == NWN::Evil) return 5;
@@ -1158,7 +1158,7 @@ NWN::Alignment NWScriptI::enum_long_2_Alignment(long v) {
   if (v == 2) return NWN::Lawful;
   if (v == 3) return NWN::Chaotic;
   if (v == 4) return NWN::Good;
-  printf("Invalid enum value of type Alignment passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+  printf("Invalid enum value of type Alignment passed: %d. Cannot continue, and it's your fault!", v); exit(1);
 };
 long NWScriptI::enum_TrapType_2_long(NWN::TrapType k) {
   if (k == NWN::StrongSonicTrap) return 38;
@@ -1260,7 +1260,7 @@ NWN::TrapType NWScriptI::enum_long_2_TrapType(long v) {
   if (v == 32) return NWN::MinorNegativeTrap;
   if (v == 21) return NWN::AverageElectricalTrap;
   if (v == 10) return NWN::StrongTangleTrap;
-  printf("Invalid enum value of type TrapType passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+  printf("Invalid enum value of type TrapType passed: %d. Cannot continue, and it's your fault!", v); exit(1);
 };
 long NWScriptI::enum_AttackBonus_2_long(NWN::AttackBonus k) {
   if (k == NWN::MiscBonus) return 0;
@@ -1272,7 +1272,7 @@ NWN::AttackBonus NWScriptI::enum_long_2_AttackBonus(long v) {
   if (v == 0) return NWN::MiscBonus;
   if (v == 1) return NWN::OnhandBonus;
   if (v == 2) return NWN::OffhandBonus;
-  printf("Invalid enum value of type AttackBonus passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+  printf("Invalid enum value of type AttackBonus passed: %d. Cannot continue, and it's your fault!", v); exit(1);
 };
 long NWScriptI::enum_IPMiscImmunityType_2_long(NWN::IPMiscImmunityType k) {
   if (k == NWN::FearIPImmunity) return 5;
@@ -1298,7 +1298,7 @@ NWN::IPMiscImmunityType NWScriptI::enum_long_2_IPMiscImmunityType(long v) {
   if (v == 3) return NWN::PoisonIPImmunity;
   if (v == 9) return NWN::DeathMagicIPImmunity;
   if (v == 4) return NWN::DiseaseIPImmunity;
-  printf("Invalid enum value of type IPMiscImmunityType passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+  printf("Invalid enum value of type IPMiscImmunityType passed: %d. Cannot continue, and it's your fault!", v); exit(1);
 };
 long NWScriptI::enum_RacialType_2_long(NWN::RacialType k) {
   if (k == NWN::ElementalRace) return 16;
@@ -1356,7 +1356,7 @@ NWN::RacialType NWScriptI::enum_long_2_RacialType(long v) {
   if (v == 15) return NWN::HumanoidReptilianRace;
   if (v == 4) return NWN::HalfelfRace;
   if (v == 10) return NWN::ConstructRace;
-  printf("Invalid enum value of type RacialType passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+  printf("Invalid enum value of type RacialType passed: %d. Cannot continue, and it's your fault!", v); exit(1);
 };
 long NWScriptI::enum_TalkVolume_2_long(NWN::TalkVolume k) {
   if (k == NWN::PartyVol) return 5;
@@ -1376,7 +1376,7 @@ NWN::TalkVolume NWScriptI::enum_long_2_TalkVolume(long v) {
   if (v == 2) return NWN::ShoutVol;
   if (v == 3) return NWN::SilentTalkVol;
   if (v == 4) return NWN::SilentShoutVol;
-  printf("Invalid enum value of type TalkVolume passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+  printf("Invalid enum value of type TalkVolume passed: %d. Cannot continue, and it's your fault!", v); exit(1);
 };
 long NWScriptI::enum_AssociateType_2_long(NWN::AssociateType k) {
   if (k == NWN::DominatedAssociate) return 5;
@@ -1394,7 +1394,7 @@ NWN::AssociateType NWScriptI::enum_long_2_AssociateType(long v) {
   if (v == 2) return NWN::AnimalCompanionAssociate;
   if (v == 3) return NWN::FamiliarAssociate;
   if (v == 4) return NWN::SummonedAssociate;
-  printf("Invalid enum value of type AssociateType passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+  printf("Invalid enum value of type AssociateType passed: %d. Cannot continue, and it's your fault!", v); exit(1);
 };
 long NWScriptI::enum_IPAlignment_2_long(NWN::IPAlignment k) {
   if (k == NWN::NeAlignment) return 5;
@@ -1418,7 +1418,7 @@ NWN::IPAlignment NWScriptI::enum_long_2_IPAlignment(long v) {
   if (v == 8) return NWN::CeAlignment;
   if (v == 3) return NWN::NgAlignment;
   if (v == 4) return NWN::TnAlignment;
-  printf("Invalid enum value of type IPAlignment passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+  printf("Invalid enum value of type IPAlignment passed: %d. Cannot continue, and it's your fault!", v); exit(1);
 };
 long NWScriptI::enum_Button_2_long(NWN::Button k) {
   if (k == NWN::SpellsButton) return 5;
@@ -1440,7 +1440,7 @@ NWN::Button NWScriptI::enum_long_2_Button(long v) {
   if (v == 2) return NWN::JournalButton;
   if (v == 3) return NWN::CharacterButton;
   if (v == 4) return NWN::OptionsButton;
-  printf("Invalid enum value of type Button passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+  printf("Invalid enum value of type Button passed: %d. Cannot continue, and it's your fault!", v); exit(1);
 };
 long NWScriptI::enum_SpecialAttack_2_long(NWN::SpecialAttack k) {
   if (k == NWN::ImprovedDisarmSpecialAttack) return 5;
@@ -1468,7 +1468,7 @@ NWN::SpecialAttack NWScriptI::enum_long_2_SpecialAttack(long v) {
   if (v == 9) return NWN::FlurryOfBlowsSpecialAttack;
   if (v == 4) return NWN::DisarmSpecialAttack;
   if (v == 10) return NWN::RapidShotSpecialAttack;
-  printf("Invalid enum value of type SpecialAttack passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+  printf("Invalid enum value of type SpecialAttack passed: %d. Cannot continue, and it's your fault!", v); exit(1);
 };
 long NWScriptI::enum_IPDamageType_2_long(NWN::IPDamageType k) {
   if (k == NWN::MagicalIPDamage) return 5;
@@ -1502,7 +1502,7 @@ NWN::IPDamageType NWScriptI::enum_long_2_IPDamageType(long v) {
   if (v == 9) return NWN::ElectricalIPDamage;
   if (v == 4) return NWN::PhysicalIPDamage;
   if (v == 10) return NWN::FireIPDamage;
-  printf("Invalid enum value of type IPDamageType passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+  printf("Invalid enum value of type IPDamageType passed: %d. Cannot continue, and it's your fault!", v); exit(1);
 };
 long NWScriptI::enum_PhenoType_2_long(NWN::PhenoType k) {
   if (k == NWN::Custom14PhenoType) return 16;
@@ -1548,7 +1548,7 @@ NWN::PhenoType NWScriptI::enum_long_2_PhenoType(long v) {
   if (v == 15) return NWN::Custom13PhenoType;
   if (v == 4) return NWN::Custom2PhenoType;
   if (v == 10) return NWN::Custom8PhenoType;
-  printf("Invalid enum value of type PhenoType passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+  printf("Invalid enum value of type PhenoType passed: %d. Cannot continue, and it's your fault!", v); exit(1);
 };
 long NWScriptI::enum_InventorySlot_2_long(NWN::InventorySlot k) {
   if (k == NWN::CreatureBiteSlot) return 16;
@@ -1590,7 +1590,7 @@ NWN::InventorySlot NWScriptI::enum_long_2_InventorySlot(long v) {
   if (v == 15) return NWN::CreatureRighthandSlot;
   if (v == 4) return NWN::RighthandSlot;
   if (v == 10) return NWN::BeltSlot;
-  printf("Invalid enum value of type InventorySlot passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+  printf("Invalid enum value of type InventorySlot passed: %d. Cannot continue, and it's your fault!", v); exit(1);
 };
 long NWScriptI::enum_DoorAction_2_long(NWN::DoorAction k) {
   if (k == NWN::OpenDoor) return 0;
@@ -1606,7 +1606,7 @@ NWN::DoorAction NWScriptI::enum_long_2_DoorAction(long v) {
   if (v == 2) return NWN::BashDoor;
   if (v == 3) return NWN::IgnoreDoor;
   if (v == 4) return NWN::KnockDoor;
-  printf("Invalid enum value of type DoorAction passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+  printf("Invalid enum value of type DoorAction passed: %d. Cannot continue, and it's your fault!", v); exit(1);
 };
 long NWScriptI::enum_ProjectilePathType_2_long(NWN::ProjectilePathType k) {
   if (k == NWN::DefaultPath) return 0;
@@ -1622,7 +1622,7 @@ NWN::ProjectilePathType NWScriptI::enum_long_2_ProjectilePathType(long v) {
   if (v == 2) return NWN::BallisticPath;
   if (v == 3) return NWN::HighBallisticPath;
   if (v == 4) return NWN::AcceleratingPath;
-  printf("Invalid enum value of type ProjectilePathType passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+  printf("Invalid enum value of type ProjectilePathType passed: %d. Cannot continue, and it's your fault!", v); exit(1);
 };
 long NWScriptI::enum_AILevel_2_long(NWN::AILevel k) {
   if (k == NWN::VeryLowAI) return 0;
@@ -1640,7 +1640,7 @@ NWN::AILevel NWScriptI::enum_long_2_AILevel(long v) {
   if (v == 2) return NWN::NormalAI;
   if (v == 3) return NWN::HighAI;
   if (v == 4) return NWN::VeryHighAI;
-  printf("Invalid enum value of type AILevel passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+  printf("Invalid enum value of type AILevel passed: %d. Cannot continue, and it's your fault!", v); exit(1);
 };
 long NWScriptI::enum_ShapeType_2_long(NWN::ShapeType k) {
   if (k == NWN::SpellCylinderShape) return 0;
@@ -1656,7 +1656,7 @@ NWN::ShapeType NWScriptI::enum_long_2_ShapeType(long v) {
   if (v == 2) return NWN::CubeShape;
   if (v == 3) return NWN::SpellConeShape;
   if (v == 4) return NWN::SphereShape;
-  printf("Invalid enum value of type ShapeType passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+  printf("Invalid enum value of type ShapeType passed: %d. Cannot continue, and it's your fault!", v); exit(1);
 };
 long NWScriptI::enum_AttackResult_2_long(NWN::AttackResult k) {
   if (k == NWN::MissedAttack) return 0;
@@ -1668,7 +1668,7 @@ NWN::AttackResult NWScriptI::enum_long_2_AttackResult(long v) {
   if (v == 0) return NWN::MissedAttack;
   if (v == 1) return NWN::HitAttack;
   if (v == 2) return NWN::CriticalHitAttack;
-  printf("Invalid enum value of type AttackResult passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+  printf("Invalid enum value of type AttackResult passed: %d. Cannot continue, and it's your fault!", v); exit(1);
 };
 long NWScriptI::enum_CreaturePart_2_long(NWN::CreaturePart k) {
   if (k == NWN::RightHandPart) return 16;
@@ -1712,7 +1712,7 @@ NWN::CreaturePart NWScriptI::enum_long_2_CreaturePart(long v) {
   if (v == 15) return NWN::LeftShoulderPart;
   if (v == 4) return NWN::LeftThighPart;
   if (v == 10) return NWN::RightForearmPart;
-  printf("Invalid enum value of type CreaturePart passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+  printf("Invalid enum value of type CreaturePart passed: %d. Cannot continue, and it's your fault!", v); exit(1);
 };
 long NWScriptI::enum_MetaMagic_2_long(NWN::MetaMagic k) {
   if (k == NWN::SilentMeta) return 16;
@@ -1734,7 +1734,7 @@ NWN::MetaMagic NWScriptI::enum_long_2_MetaMagic(long v) {
   if (v == 8) return NWN::QuickenMeta;
   if (v == 4) return NWN::MaximizeMeta;
   if (v == 32) return NWN::StillMeta;
-  printf("Invalid enum value of type MetaMagic passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+  printf("Invalid enum value of type MetaMagic passed: %d. Cannot continue, and it's your fault!", v); exit(1);
 };
 long NWScriptI::enum_SpellSchool_2_long(NWN::SpellSchool k) {
   if (k == NWN::EvocationSchool) return 5;
@@ -1758,7 +1758,7 @@ NWN::SpellSchool NWScriptI::enum_long_2_SpellSchool(long v) {
   if (v == 8) return NWN::TransmutationSchool;
   if (v == 3) return NWN::DivinationSchool;
   if (v == 4) return NWN::EnchantmentSchool;
-  printf("Invalid enum value of type SpellSchool passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+  printf("Invalid enum value of type SpellSchool passed: %d. Cannot continue, and it's your fault!", v); exit(1);
 };
 long NWScriptI::enum_MissChanceType_2_long(NWN::MissChanceType k) {
   if (k == NWN::MissChanceVSAll) return 0;
@@ -1770,7 +1770,7 @@ NWN::MissChanceType NWScriptI::enum_long_2_MissChanceType(long v) {
   if (v == 0) return NWN::MissChanceVSAll;
   if (v == 1) return NWN::MissChanceVSRanged;
   if (v == 2) return NWN::MissChanceVSMelee;
-  printf("Invalid enum value of type MissChanceType passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+  printf("Invalid enum value of type MissChanceType passed: %d. Cannot continue, and it's your fault!", v); exit(1);
 };
 long NWScriptI::enum_ImmunityType_2_long(NWN::ImmunityType k) {
   if (k == NWN::SkillDecreaseImmunity) return 27;
@@ -1842,7 +1842,7 @@ NWN::ImmunityType NWScriptI::enum_long_2_ImmunityType(long v) {
   if (v == 32) return NWN::DeathImmunity;
   if (v == 21) return NWN::DamageDecreaseImmunity;
   if (v == 10) return NWN::EntangleImmunity;
-  printf("Invalid enum value of type ImmunityType passed: %%d. Cannot continue, and it's your fault!", v); exit(1);
+  printf("Invalid enum value of type ImmunityType passed: %d. Cannot continue, and it's your fault!", v); exit(1);
 };
 Ice::Int NWScriptI::abs(Ice::Int nValue, const Ice::Current& ice) {
   lock(abs_mutex, "abs");
