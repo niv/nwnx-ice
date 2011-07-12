@@ -5,6 +5,13 @@ based on nwnx_ruby by virusman
 
 Licenced under the GNU GPL Version 2 or, at your option, any later version.
 
+== @deprecated!
+
+There is now nwnx_jvm in the main repository of nwnx2, which embeds the JVM
+directly into nwnx2. It is strongly suggested to use that instead of nwnx_ice
+due to massively improved performance characteristics. If you depend on
+Zeroc ICE, you can of course embed it there just as well.
+
 
 == General Information:
 
